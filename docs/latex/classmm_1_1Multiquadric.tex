@@ -1,0 +1,208 @@
+\doxysection{mm\+::Multiquadric\texorpdfstring{$<$}{<} scal\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1Multiquadric}{}\label{classmm_1_1Multiquadric}\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+
+
+{\ttfamily \#include $<$Multiquadric\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}}$>$\newline
+class mm\+::\+Multiquadric$<$ scal\+\_\+t $>$}
+\doxylink{classmm_1_1Multiquadric}{Multiquadric} Radial Basis Function. 
+
+Specifically, this class represents a function $ f(r^2) = \sqrt{1+r^2/\sigma^2} $ as a function of squared distance with shape parameter $\sigma $. This class satisfies the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Multiquadric<double>\ m(1.324);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ m(4.0);\ \ \ \ \ \textcolor{comment}{//\ value\ at\ 4.0\ (this\ is\ the\ squared\ radius)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ m(0.0,\ 2);\ \ \textcolor{comment}{//\ second\ derivative\ at\ 0.0}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{Multiquadric__fwd_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{Multiquadric__fwd_8hpp_source}{Multiquadric\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Multiquadric_a90ac1c37c4d4ea84af4be68e97cc89dd}{Multiquadric}} (\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_a58b78779118ba76863578f656432a486}{shape}}=1.\+0)
+\begin{DoxyCompactList}\small\item\em Creates a Multi\+Quadratic with shape parameter {\ttfamily shape}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_a58b78779118ba76863578f656432a486}{shape}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns shape parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Multiquadric_a5874ea026017d4a72b74871f837f864d}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_a58b78779118ba76863578f656432a486}{shape}})
+\begin{DoxyCompactList}\small\item\em Sets shape parameter to a new value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_a22103673a98279faeed33a6bee5c8e5f}{operator()}} (\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate derivative of this RBF wrt. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ }\\\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_a217e4824e0f7786133a75adff1f2e20c}{operator()}} (\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}, \mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ lap) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate Laplacian of this RBF wrt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_aa43d41d0e0d99686776e8cd67d2adfdf}{operator()}} (\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate at a given squared radial distance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type used for computations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1Multiquadric_a39696f427a2e3f8e731cce7d526dba97}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given basis function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric_acbd0720ad089bdca80156a87450aa653}{shape\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Shape parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1Multiquadric_a90ac1c37c4d4ea84af4be68e97cc89dd}\label{classmm_1_1Multiquadric_a90ac1c37c4d4ea84af4be68e97cc89dd} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!Multiquadric@{Multiquadric}}
+\index{Multiquadric@{Multiquadric}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{Multiquadric()}{Multiquadric()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::\+Multiquadric (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}}}]{shape = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+
+
+Creates a Multi\+Quadratic with shape parameter {\ttfamily shape}. 
+
+
+
+Definition at line \mbox{\hyperlink{Multiquadric_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{Multiquadric_8hpp_source}{Multiquadric.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Multiquadric_aa43d41d0e0d99686776e8cd67d2adfdf}\label{classmm_1_1Multiquadric_aa43d41d0e0d99686776e8cd67d2adfdf} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}}}]{r2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate at a given squared radial distance. 
+
+
+
+Definition at line \mbox{\hyperlink{Multiquadric_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{Multiquadric_8hpp_source}{Multiquadric.\+hpp}}.
+
+\Hypertarget{classmm_1_1Multiquadric_a22103673a98279faeed33a6bee5c8e5f}\label{classmm_1_1Multiquadric_a22103673a98279faeed33a6bee5c8e5f} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}}}]{r2,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{derivative }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate derivative of this RBF wrt. 
+
+{\ttfamily r2} at given point. 
+\begin{DoxyParams}{Parameters}
+{\em r2} & Squared radial distance. \\
+\hline
+{\em derivative} & Order of derivative to evaluate. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if derivative order is negative. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{Multiquadric_8hpp_source_l00022}{22}} of file \mbox{\hyperlink{Multiquadric_8hpp_source}{Multiquadric.\+hpp}}.
+
+\Hypertarget{classmm_1_1Multiquadric_a217e4824e0f7786133a75adff1f2e20c}\label{classmm_1_1Multiquadric_a217e4824e0f7786133a75adff1f2e20c} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}}}]{r2,  }\item[{\mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$}]{lap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate Laplacian of this RBF wrt. 
+
+{\ttfamily r} at given point. 
+\begin{DoxyParams}{Parameters}
+{\em r2} & Squared radial distance. \\
+\hline
+{\em lap} & Laplacian operator object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmm_1_1Multiquadric_a5874ea026017d4a72b74871f837f864d}\label{classmm_1_1Multiquadric_a5874ea026017d4a72b74871f837f864d} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}}}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets shape parameter to a new value. 
+
+
+
+Definition at line \mbox{\hyperlink{Multiquadric__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{Multiquadric__fwd_8hpp_source}{Multiquadric\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Multiquadric_a58b78779118ba76863578f656432a486}\label{classmm_1_1Multiquadric_a58b78779118ba76863578f656432a486} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!shape@{shape}}
+\index{shape@{shape}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns shape parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{Multiquadric__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{Multiquadric__fwd_8hpp_source}{Multiquadric\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1Multiquadric_a39696f427a2e3f8e731cce7d526dba97}\label{classmm_1_1Multiquadric_a39696f427a2e3f8e731cce7d526dba97} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic information about given basis function. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1Multiquadric_acbd0720ad089bdca80156a87450aa653}\label{classmm_1_1Multiquadric_acbd0720ad089bdca80156a87450aa653} 
+\index{mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}!shape\_@{shape\_}}
+\index{shape\_@{shape\_}!mm::Multiquadric$<$ scal\_t $>$@{mm::Multiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_}{shape\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Multiquadric_a470e0aa528820463acfa796410b4a829}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::shape\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shape parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{Multiquadric__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{Multiquadric__fwd_8hpp_source}{Multiquadric\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Multiquadric__fwd_8hpp}{Multiquadric\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Multiquadric_8hpp}{Multiquadric.\+hpp}}\end{DoxyCompactItemize}

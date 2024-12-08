@@ -1,0 +1,89 @@
+\doxysection{Stopwatch.\+cpp}
+\hypertarget{Stopwatch_8cpp_source}{}\label{Stopwatch_8cpp_source}\index{src/utils/Stopwatch.cpp@{src/utils/Stopwatch.cpp}}
+\mbox{\hyperlink{Stopwatch_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Stopwatch_8hpp}{medusa/bits/utils/Stopwatch.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00013}\mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{00013}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{Stopwatch::getID}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{it}}\ =\ std::find(\mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.begin(),\ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.end(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00015}00015\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{it}}\ !=\ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.end(),\ \textcolor{stringliteral}{"{}Label\ '\%s'\ not\ found.\ Available\ labels:\ \%s."{}},}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.c\_str(),\ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{it}}\ -\/\ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.begin();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00019}\mbox{\hyperlink{classmm_1_1Stopwatch_aee5f3ab53248b6693999e1e8b7edd0e1}{00019}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Stopwatch_aee5f3ab53248b6693999e1e8b7edd0e1}{Stopwatch::start}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i\ <\ static\_cast<int>}}(\mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.size());\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}start()\ for\ label\ '\%s'\ was\ called\ more\ than\ once"{}}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ before\ stop()\ call."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{times}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00029}00029\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ label\ not\ found}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.push\_back(\mbox{\hyperlink{classmm_1_1Gaussian}{label}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{times}}.push\_back(std::chrono::steady\_clock::now());}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{cumulative\_time}}.push\_back(0.0);}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{counts}}.push\_back(0);}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}.push\_back(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00037}\mbox{\hyperlink{classmm_1_1Stopwatch_a0fb692ab0a4227d3422868467cd93f0c}{00037}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a0fb692ab0a4227d3422868467cd93f0c}{Stopwatch::stop}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{getID}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00039}00039\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}[\textcolor{keywordtype}{id}],}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}stop()\ for\ label\ '\%s'\ was\ called"{}}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ more\ than\ once\ before\ start()\ call."{}},}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00043}00043\ \ \ \ \ ++\mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{counts}}[\mbox{\hyperlink{classmm_1_1Gaussian}{id}}];}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00044}00044\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{cumulative\_time}}[\mbox{\hyperlink{classmm_1_1Gaussian}{id}}]\ +=\ std::chrono::duration<double>(}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::now()}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{times}}[\mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{getID}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}})]).count();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00047}00047\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}[\mbox{\hyperlink{classmm_1_1Gaussian}{id}}]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00049}\mbox{\hyperlink{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78}{00049}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78}{Stopwatch::cumulativeTime}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}{isRunning}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}}),}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Stopwatch\ with\ label\ '\%s'\ is\ still\ running,\ \`{}stop()`\ must\ be\ called"{}}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ before\ results\ can\ be\ displayed."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{cumulative\_time}}[\mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{getID}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}})];}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00055}\mbox{\hyperlink{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0}{00055}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0}{Stopwatch::numLaps}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}{isRunning}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}}),}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Stopwatch\ with\ label\ '\%s'\ is\ still\ running,\ \`{}stop()`\ must\ be\ called"{}}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ before\ results\ can\ be\ displayed."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{counts}}[\mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{getID}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}})];}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00061}\mbox{\hyperlink{classmm_1_1Stopwatch_a4e33616c403af0583afc145bfff0b185}{00061}}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a4e33616c403af0583afc145bfff0b185}{Stopwatch::timePerLap}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00062}00062\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}{isRunning}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}}),}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Stopwatch\ with\ label\ '\%s'\ is\ still\ running,\ \`{}stop()`\ must\ be\ called"{}}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ before\ results\ can\ be\ displayed."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.c\_str());}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78}{cumulativeTime}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}})/\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0}{numLaps}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}}));}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00067}\mbox{\hyperlink{classmm_1_1Stopwatch_a2cf14b0abd99169dbf4464394977e151}{00067}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a2cf14b0abd99169dbf4464394977e151}{Stopwatch::clear}}()\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00068}00068\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{times}}.clear();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}.clear();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{counts}}.clear();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{cumulative\_time}}.clear();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}.clear();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00076}\mbox{\hyperlink{classmm_1_1Stopwatch_a0c09c17e1c72e955b657f95737ca36ee}{00076}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}})\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00077}00077\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{maxs}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}}.labels)\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{label}}.size()\ >\ \mbox{\hyperlink{classmm_1_1Gaussian}{maxs}})\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{maxs}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}.size();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}}.labels)\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ std::setw(\mbox{\hyperlink{classmm_1_1Gaussian}{maxs}})\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}}\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}}.timePerLap(\mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ <<\ \textcolor{stringliteral}{"{}\ [s]\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8cpp_source_l00089}00089\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

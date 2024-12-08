@@ -1,0 +1,47 @@
+<map id="include/medusa/bits/spatial_search/KDTree.hpp" name="include/medusa/bits/spatial_search/KDTree.hpp">
+<area shape="rect" id="Node000001" title="Implementation of KDTree." alt="" coords="558,5,756,45"/>
+<area shape="rect" id="Node000002" href="$KDTree__fwd_8hpp.html" title="Declaration of KDTree." alt="" coords="312,93,439,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="590,48,430,92,429,87,589,43"/>
+<area shape="rect" id="Node000007" href="$assert_8hpp.html" title="Implementation of custom assert and debug utilities." alt="" coords="554,255,760,280"/>
+<area shape="poly" id="edge26_Node000001_Node000007" title=" " alt="" coords="689,43,730,74,770,114,785,136,794,160,795,184,786,208,760,235,727,252,724,248,756,231,781,205,790,183,789,161,780,139,766,117,727,78,686,48"/>
+<area shape="rect" id="Node000017" href="$memutils_8hpp.html" title="Declaration of memory related utilities." alt="" coords="543,174,771,199"/>
+<area shape="poly" id="edge27_Node000001_Node000017" title=" " alt="" coords="660,45,660,160,654,160,654,45"/>
+<area shape="rect" id="Node000003" href="$Config_8hpp.html" title="Contains compile time settings for the project, such as Eigen plugins." alt="" coords="382,255,529,280"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,116,452,135,469,148,482,165,488,185,487,206,473,243,468,242,482,205,483,186,477,168,465,152,449,139,414,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="284,174,467,199"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="378,119,378,160,373,160,373,119"/>
+<area shape="rect" id="Node000006" href="$Range__fwd_8hpp.html" title="Declaration of Range." alt="" coords="73,167,260,207"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="346,121,230,164,228,159,344,116"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="28,255,92,280"/>
+<area shape="poly" id="edge19_Node000002_Node000016" title=" " alt="" coords="312,113,243,118,168,129,103,145,79,156,63,168,54,185,51,203,55,241,49,241,45,203,49,183,59,165,76,151,101,140,167,124,242,113,312,107"/>
+<area shape="poly" id="edge20_Node000002_Node000017" title=" " alt="" coords="417,116,603,168,602,173,416,121"/>
+<area shape="rect" id="Node000018" href="$PointCloud_8hpp.html" title="Implementation of KDTree storage class." alt="" coords="6,328,126,353"/>
+<area shape="poly" id="edge24_Node000002_Node000018" title=" " alt="" coords="312,114,240,120,160,131,90,147,63,157,44,169,21,194,10,219,9,246,18,279,29,299,44,317,40,320,25,302,13,281,4,247,5,217,17,191,40,165,60,152,88,142,159,125,239,115,312,108"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="255,401,318,427"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="443,282,312,394,309,390,440,278"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="236,204,401,248,399,254,235,209"/>
+<area shape="poly" id="edge17_Node000006_Node000004" title=" " alt="" coords="185,205,220,253,256,325,280,387,275,389,251,327,216,256,181,208"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="260,202,273,204,567,250,566,255,272,209,259,207"/>
+<area shape="rect" id="Node000014" href="$traits_8hpp.html" title="Type traits definition for vector and scalar fields." alt="" coords="122,255,206,280"/>
+<area shape="poly" id="edge15_Node000006_Node000014" title=" " alt="" coords="168,207,167,241,162,241,163,207"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="281,255,358,280"/>
+<area shape="poly" id="edge16_Node000006_Node000015" title=" " alt="" coords="204,204,286,246,284,251,202,209"/>
+<area shape="poly" id="edge18_Node000006_Node000016" title=" " alt="" coords="142,209,88,248,85,244,139,205"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="569,328,745,353"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="660,280,660,314,654,314,654,280"/>
+<area shape="rect" id="Node000009" href="$print_8hpp.html" title="Printing helpers for std types." alt="" coords="454,328,534,353"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="632,282,534,325,532,320,630,278"/>
+<area shape="poly" id="edge11_Node000009_Node000004" title=" " alt="" coords="462,356,332,400,330,395,460,351"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="442,401,522,427"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="495,354,489,388,484,387,490,353"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="546,401,602,427"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="509,351,553,390,549,394,505,355"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="627,401,687,427"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="521,351,619,393,617,398,519,356"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="363,401,418,427"/>
+<area shape="poly" id="edge14_Node000009_Node000013" title=" " alt="" coords="479,356,420,395,417,391,476,351"/>
+<area shape="poly" id="edge22_Node000017_Node000003" title=" " alt="" coords="629,202,498,252,496,247,627,197"/>
+<area shape="poly" id="edge23_Node000017_Node000007" title=" " alt="" coords="660,200,660,241,654,241,654,200"/>
+<area shape="poly" id="edge21_Node000017_Node000015" title=" " alt="" coords="608,202,372,257,371,251,607,197"/>
+<area shape="poly" id="edge25_Node000018_Node000004" title=" " alt="" coords="102,351,242,396,241,401,101,356"/>
+</map>

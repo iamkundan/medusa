@@ -1,0 +1,616 @@
+\doxysection{test/domains/\+NURBSShape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2NURBSShape_test_8cpp-example}{}\label{test_2domains_2NURBSShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{NURBSShape_8hpp}{medusa/bits/domains/NURBSShape.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NURBSShapeCurve1PatchConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ w(\{1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1\});}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ cp(\{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ -\/1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec1d>\ curve(cp,\ w,\ \{knots\},\ \{p\});}
+\DoxyCodeLine{\ \ \ \ NURBSShape<Vec3d,\ Vec1d>\ shape(\{curve\});}
+\DoxyCodeLine{\ \ \ \ shape.seed(123);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ shape.discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(sqrt(tree.query(pt,\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.01);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.01);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NURBSShapeCurve1PatchFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ w(\{1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1\});}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ cp(\{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ -\/1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec1d>\ curve(cp,\ w,\ \{knots\},\ \{p\});}
+\DoxyCodeLine{\ \ \ \ NURBSShape<Vec3d,\ Vec1d>\ shape(\{curve\});}
+\DoxyCodeLine{\ \ \ \ shape.seed(123);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ std::function<double(\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}})>\ func\_h\ =\ [h](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ x)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\ *\ (pow((x(0)\ -\/\ 0.5),\ 2)\ +\ x(1)\ *\ x(1));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ shape.discretizeBoundaryWithDensity(func\_h,\ 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ positions\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ positions.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pt\ =\ positions[i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dist\ =\ sqrt(tree.query(pt,\ 2).second[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ func\_h(pt);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.05);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NURBSShapeCurveMultiplePatchFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ Range<double>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\};}
+\DoxyCodeLine{\ \ \ \ Range<double>\ ws\{1,\ 1,\ 1,\ 1\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ cps1\{\{1,\ 1\},\ \{2,\ 3\},\ \{4,\ 4\},\ \{6,\ 1\}\};}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ cps2\{\{1,\ 1\},\ \{0,\ -\/3\},\ \{8,\ -\/2\},\ \{6,\ 1\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec2d,\ Vec1d>\ p1(cps1,\ \{ws\},\ \{knots\},\ \{p\});}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec2d,\ Vec1d>\ p2(cps2,\ \{ws\},\ \{knots\},\ \{p\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<NURBSPatch<Vec2d,\ Vec1d>>\ patches\{p1,\ p2\};}
+\DoxyCodeLine{\ \ \ \ NURBSShape<Vec2d,\ Vec1d>\ shape(patches);}
+\DoxyCodeLine{\ \ \ \ shape.seed(1337);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ shape.discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(sqrt(tree.query(pt,\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.01);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.01);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(domain.size(),\ 1200);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NURBSShapeSurface1PatchConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ p\ =\ std::array<int,\ 2>\{1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ std::array<Range<double>,\ 2>\{Range<double>(\{0,\ 0,\ 1,\ 1\}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ Range<double>(\{0,\ 0,\ 0,\ 0.25,\ 0.25,\ 0.5,\ 0.5,\ 0.75,\ 0.75,\ 1,\ 1,\ 1\})\};}
+\DoxyCodeLine{\ \ \ \ Range<Range<Vec<double,\ 4>>>\ wcp(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ 0.7071;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ 1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ 1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.02;}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec2d>\ surf(wcp,\ knots,\ p);}
+\DoxyCodeLine{\ \ \ \ NURBSShape<Vec3d,\ Vec2d>\ nsh(\{surf\});}
+\DoxyCodeLine{\ \ \ \ nsh.seed(123);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ nsh.discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(sqrt(tree.query(pt,\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.05);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NURBSShapeSurface1PatchFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ p\ =\ std::array<int,\ 2>\{1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ std::array<Range<double>,\ 2>\{Range<double>(\{0,\ 0,\ 1,\ 1\}),}
+\DoxyCodeLine{\ \ \ \ Range<double>(\{0,\ 0,\ 0,\ 0.25,\ 0.25,\ 0.5,\ 0.5,\ 0.75,\ 0.75,\ 1,\ 1,\ 1\})\};}
+\DoxyCodeLine{\ \ \ \ Range<Range<Vec<double,\ 4>>>\ wcp(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ 0.7071;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ 1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ 1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.02;}
+\DoxyCodeLine{\ \ \ \ std::function<double(\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}})>\ func\_h\ =\ [h](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ x)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\ *\ (pow((x(0)\ -\/\ 0.5),\ 2)\ +\ x(1)\ *\ x(1));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec2d>\ surf(wcp,\ knots,\ p);}
+\DoxyCodeLine{\ \ \ \ NURBSShape<Vec3d,\ Vec2d>\ nsh(\{surf\});}
+\DoxyCodeLine{\ \ \ \ nsh.seed(123);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ nsh.discretizeBoundaryWithDensity(func\_h,\ 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ positions\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ positions.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pt\ =\ positions[i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dist\ =\ sqrt(tree.query(pt,\ 2).second[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ func\_h(pt);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.2);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }tp\_data\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ numPatches\ =\ 32;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ numVertices\ =\ 306;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ teapotPatches[numPatches][16]\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ 1,\ \ \ 2,\ \ \ 3,\ \ \ 4,\ \ \ 5,\ \ \ 6,\ \ \ 7,\ \ \ 8,\ \ \ 9,\ \ 10,\ \ 11,\ \ 12,\ \ 13,\ \ 14,\ \ 15,\ \ 16\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \ 4,\ \ 17,\ \ 18,\ \ 19,\ \ \ 8,\ \ 20,\ \ 21,\ \ 22,\ \ 12,\ \ 23,\ \ 24,\ \ 25,\ \ 16,\ \ 26,\ \ 27,\ \ 28\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 19,\ \ 29,\ \ 30,\ \ 31,\ \ 22,\ \ 32,\ \ 33,\ \ 34,\ \ 25,\ \ 35,\ \ 36,\ \ 37,\ \ 28,\ \ 38,\ \ 39,\ \ 40\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 31,\ \ 41,\ \ 42,\ \ \ 1,\ \ 34,\ \ 43,\ \ 44,\ \ \ 5,\ \ 37,\ \ 45,\ \ 46,\ \ \ 9,\ \ 40,\ \ 47,\ \ 48,\ \ 13\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 13,\ \ 14,\ \ 15,\ \ 16,\ \ 49,\ \ 50,\ \ 51,\ \ 52,\ \ 53,\ \ 54,\ \ 55,\ \ 56,\ \ 57,\ \ 58,\ \ 59,\ \ 60\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 16,\ \ 26,\ \ 27,\ \ 28,\ \ 52,\ \ 61,\ \ 62,\ \ 63,\ \ 56,\ \ 64,\ \ 65,\ \ 66,\ \ 60,\ \ 67,\ \ 68,\ \ 69\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 28,\ \ 38,\ \ 39,\ \ 40,\ \ 63,\ \ 70,\ \ 71,\ \ 72,\ \ 66,\ \ 73,\ \ 74,\ \ 75,\ \ 69,\ \ 76,\ \ 77,\ \ 78\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 40,\ \ 47,\ \ 48,\ \ 13,\ \ 72,\ \ 79,\ \ 80,\ \ 49,\ \ 75,\ \ 81,\ \ 82,\ \ 53,\ \ 78,\ \ 83,\ \ 84,\ \ 57\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 57,\ \ 58,\ \ 59,\ \ 60,\ \ 85,\ \ 86,\ \ 87,\ \ 88,\ \ 89,\ \ 90,\ \ 91,\ \ 92,\ \ 93,\ \ 94,\ \ 95,\ \ 96\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 60,\ \ 67,\ \ 68,\ \ 69,\ \ 88,\ \ 97,\ \ 98,\ \ 99,\ \ 92,\ 100,\ 101,\ 102,\ \ 96,\ 103,\ 104,\ 105\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 69,\ \ 76,\ \ 77,\ \ 78,\ \ 99,\ 106,\ 107,\ 108,\ 102,\ 109,\ 110,\ 111,\ 105,\ 112,\ 113,\ 114\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 78,\ \ 83,\ \ 84,\ \ 57,\ 108,\ 115,\ 116,\ \ 85,\ 111,\ 117,\ 118,\ \ 89,\ 114,\ 119,\ 120,\ \ 93\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{121,\ 122,\ 123,\ 124,\ 125,\ 126,\ 127,\ 128,\ 129,\ 130,\ 131,\ 132,\ 133,\ 134,\ 135,\ 136\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{124,\ 137,\ 138,\ 121,\ 128,\ 139,\ 140,\ 125,\ 132,\ 141,\ 142,\ 129,\ 136,\ 143,\ 144,\ 133\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{133,\ 134,\ 135,\ 136,\ 145,\ 146,\ 147,\ 148,\ 149,\ 150,\ 151,\ 152,\ \ 69,\ 153,\ 154,\ 155\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{136,\ 143,\ 144,\ 133,\ 148,\ 156,\ 157,\ 145,\ 152,\ 158,\ 159,\ 149,\ 155,\ 160,\ 161,\ \ 69\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{162,\ 163,\ 164,\ 165,\ 166,\ 167,\ 168,\ 169,\ 170,\ 171,\ 172,\ 173,\ 174,\ 175,\ 176,\ 177\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{165,\ 178,\ 179,\ 162,\ 169,\ 180,\ 181,\ 166,\ 173,\ 182,\ 183,\ 170,\ 177,\ 184,\ 185,\ 174\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{174,\ 175,\ 176,\ 177,\ 186,\ 187,\ 188,\ 189,\ 190,\ 191,\ 192,\ 193,\ 194,\ 195,\ 196,\ 197\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{177,\ 184,\ 185,\ 174,\ 189,\ 198,\ 199,\ 186,\ 193,\ 200,\ 201,\ 190,\ 197,\ 202,\ 203,\ 194\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{204,\ 204,\ 204,\ 204,\ 207,\ 208,\ 209,\ 210,\ 211,\ 211,\ 211,\ 211,\ 212,\ 213,\ 214,\ 215\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{204,\ 204,\ 204,\ 204,\ 210,\ 217,\ 218,\ 219,\ 211,\ 211,\ 211,\ 211,\ 215,\ 220,\ 221,\ 222\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{204,\ 204,\ 204,\ 204,\ 219,\ 224,\ 225,\ 226,\ 211,\ 211,\ 211,\ 211,\ 222,\ 227,\ 228,\ 229\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{204,\ 204,\ 204,\ 204,\ 226,\ 230,\ 231,\ 207,\ 211,\ 211,\ 211,\ 211,\ 229,\ 232,\ 233,\ 212\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{212,\ 213,\ 214,\ 215,\ 234,\ 235,\ 236,\ 237,\ 238,\ 239,\ 240,\ 241,\ 242,\ 243,\ 244,\ 245\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{215,\ 220,\ 221,\ 222,\ 237,\ 246,\ 247,\ 248,\ 241,\ 249,\ 250,\ 251,\ 245,\ 252,\ 253,\ 254\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{222,\ 227,\ 228,\ 229,\ 248,\ 255,\ 256,\ 257,\ 251,\ 258,\ 259,\ 260,\ 254,\ 261,\ 262,\ 263\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{229,\ 232,\ 233,\ 212,\ 257,\ 264,\ 265,\ 234,\ 260,\ 266,\ 267,\ 238,\ 263,\ 268,\ 269,\ 242\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{270,\ 270,\ 270,\ 270,\ 279,\ 280,\ 281,\ 282,\ 275,\ 276,\ 277,\ 278,\ 271,\ 272,\ 273,\ 274\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{270,\ 270,\ 270,\ 270,\ 282,\ 289,\ 290,\ 291,\ 278,\ 286,\ 287,\ 288,\ 274,\ 283,\ 284,\ 285\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{270,\ 270,\ 270,\ 270,\ 291,\ 298,\ 299,\ 300,\ 288,\ 295,\ 296,\ 297,\ 285,\ 292,\ 293,\ 294\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{270,\ 270,\ 270,\ 270,\ 300,\ 305,\ 306,\ 279,\ 297,\ 303,\ 304,\ 275,\ 294,\ 301,\ 302,\ 271\}}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ teapotVertices[numVertices][3]\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4000,\ -\/0.7840,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7840,\ -\/1.4000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.4000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3375,\ \ 0.0000,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3375,\ -\/0.7490,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7490,\ -\/1.3375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.3375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4375,\ \ 0.0000,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4375,\ -\/0.8050,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8050,\ -\/1.4375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.4375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ -\/0.8400,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ -\/1.5000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.5000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7840,\ -\/1.4000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4000,\ -\/0.7840,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7490,\ -\/1.3375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3375,\ -\/0.7490,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3375,\ \ 0.0000,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8050,\ -\/1.4375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4375,\ -\/0.8050,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4375,\ \ 0.0000,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ -\/1.5000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ -\/0.8400,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4000,\ \ 0.7840,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7840,\ \ 1.4000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.4000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3375,\ \ 0.7490,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7490,\ \ 1.3375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.3375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4375,\ \ 0.8050,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8050,\ \ 1.4375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.4375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.8400,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ \ 1.5000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.5000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7840,\ \ 1.4000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4000,\ \ 0.7840,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7490,\ \ 1.3375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3375,\ \ 0.7490,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8050,\ \ 1.4375,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4375,\ \ 0.8050,\ \ 2.5312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ \ 1.5000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.8400,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7500,\ \ 0.0000,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7500,\ -\/0.9800,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.9800,\ -\/1.7500,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.7500,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ \ 0.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ -\/1.1200,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.1200,\ -\/2.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/2.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ \ 0.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ -\/1.1200,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.1200,\ -\/2.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/2.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.9800,\ -\/1.7500,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.7500,\ -\/0.9800,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.7500,\ \ 0.0000,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1200,\ -\/2.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ -\/1.1200,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 0.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1200,\ -\/2.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ -\/1.1200,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 0.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.7500,\ \ 0.9800,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.9800,\ \ 1.7500,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.7500,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 1.1200,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1200,\ \ 2.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 2.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 1.1200,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1200,\ \ 2.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 2.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.9800,\ \ 1.7500,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7500,\ \ 0.9800,\ \ 1.8750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.1200,\ \ 2.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ \ 1.1200,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.1200,\ \ 2.0000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ \ 1.1200,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ \ 0.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ -\/1.1200,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.1200,\ -\/2.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/2.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.0000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ -\/0.8400,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ -\/1.5000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.5000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.0000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ -\/0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ -\/1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1200,\ -\/2.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ -\/1.1200,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 0.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ -\/1.5000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ -\/0.8400,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.0000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ -\/1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ -\/0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.0000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 1.1200,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1200,\ \ 2.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 2.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.8400,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ \ 1.5000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.5000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ \ 1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.1200,\ \ 2.0000,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.0000,\ \ 1.1200,\ \ 0.4500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ \ 1.5000,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.8400,\ \ 0.2250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ \ 1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.6000,\ \ 0.0000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.6000,\ -\/0.3000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ -\/0.3000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.0000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.3000,\ \ 0.0000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.3000,\ -\/0.3000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.5000,\ -\/0.3000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.5000,\ \ 0.0000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ \ 0.0000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ -\/0.3000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ -\/0.3000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ \ 0.0000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ \ 0.0000,\ \ 1.8000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ -\/0.3000,\ \ 1.8000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ -\/0.3000,\ \ 1.8000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ \ 0.0000,\ \ 1.8000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.3000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.6000,\ \ 0.3000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.5000,\ \ 0.3000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.3000,\ \ 0.3000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ \ 0.3000,\ \ 2.2500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ \ 0.3000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ \ 0.3000,\ \ 1.8000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ \ 0.3000,\ \ 1.8000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ \ 0.0000,\ \ 1.5750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ -\/0.3000,\ \ 1.5750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ -\/0.3000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ \ 0.0000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.5000,\ \ 0.0000,\ \ 1.1250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.5000,\ -\/0.3000,\ \ 1.1250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.6500,\ -\/0.3000,\ \ 0.9375\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.6500,\ \ 0.0000,\ \ 0.9375\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ -\/0.3000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.9000,\ -\/0.3000,\ \ 0.6000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.9000,\ \ 0.0000,\ \ 0.6000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.0000,\ \ 0.3000,\ \ 1.3500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.7000,\ \ 0.3000,\ \ 1.5750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.6500,\ \ 0.3000,\ \ 0.9375\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.5000,\ \ 0.3000,\ \ 1.1250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.9000,\ \ 0.3000,\ \ 0.6000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2.0000,\ \ 0.3000,\ \ 0.9000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7000,\ \ 0.0000,\ \ 1.4250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7000,\ -\/0.6600,\ \ 1.4250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7000,\ -\/0.6600,\ \ 0.6000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7000,\ \ 0.0000,\ \ 0.6000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.6000,\ \ 0.0000,\ \ 1.4250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.6000,\ -\/0.6600,\ \ 1.4250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.1000,\ -\/0.6600,\ \ 0.8250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.1000,\ \ 0.0000,\ \ 0.8250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.3000,\ \ 0.0000,\ \ 2.1000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.3000,\ -\/0.2500,\ \ 2.1000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.4000,\ -\/0.2500,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.4000,\ \ 0.0000,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.7000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.7000,\ -\/0.2500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.3000,\ -\/0.2500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.3000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7000,\ \ 0.6600,\ \ 0.6000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.7000,\ \ 0.6600,\ \ 1.4250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.1000,\ \ 0.6600,\ \ 0.8250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.6000,\ \ 0.6600,\ \ 1.4250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.4000,\ \ 0.2500,\ \ 2.0250\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.3000,\ \ 0.2500,\ \ 2.1000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.3000,\ \ 0.2500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.7000,\ \ 0.2500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.8000,\ \ 0.0000,\ \ 2.4750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.8000,\ -\/0.2500,\ \ 2.4750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.5250,\ -\/0.2500,\ \ 2.4938\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.5250,\ \ 0.0000,\ \ 2.4938\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.9000,\ \ 0.0000,\ \ 2.4750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.9000,\ -\/0.1500,\ \ 2.4750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.4500,\ -\/0.1500,\ \ 2.5125\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.4500,\ \ 0.0000,\ \ 2.5125\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.8000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.8000,\ -\/0.1500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.2000,\ -\/0.1500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.2000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.5250,\ \ 0.2500,\ \ 2.4938\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.8000,\ \ 0.2500,\ \ 2.4750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.4500,\ \ 0.1500,\ \ 2.5125\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.9000,\ \ 0.1500,\ \ 2.4750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 3.2000,\ \ 0.1500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 2.8000,\ \ 0.1500,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.0000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/0.0020,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0020,\ \ 0.0000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8000,\ \ 0.0000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8000,\ -\/0.4500,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.4500,\ -\/0.8000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/0.8000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.0000,\ \ 2.8500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.2000,\ \ 0.0000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.2000,\ -\/0.1120,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.1120,\ -\/0.2000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/0.2000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.0020,\ \ 0.0000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.4500,\ -\/0.8000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8000,\ -\/0.4500,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8000,\ \ 0.0000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.1120,\ -\/0.2000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.2000,\ -\/0.1120,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.2000,\ \ 0.0000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.0020,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8000,\ \ 0.4500,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.4500,\ \ 0.8000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.8000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.2000,\ \ 0.1120,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.1120,\ \ 0.2000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.2000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.4500,\ \ 0.8000,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8000,\ \ 0.4500,\ \ 3.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.1120,\ \ 0.2000,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.2000,\ \ 0.1120,\ \ 2.7000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.4000,\ \ 0.0000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.4000,\ -\/0.2240,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.2240,\ -\/0.4000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/0.4000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3000,\ \ 0.0000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3000,\ -\/0.7280,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7280,\ -\/1.3000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.3000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3000,\ -\/0.7280,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7280,\ -\/1.3000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.3000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.2240,\ -\/0.4000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.4000,\ -\/0.2240,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.4000,\ \ 0.0000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7280,\ -\/1.3000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3000,\ -\/0.7280,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3000,\ \ 0.0000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7280,\ -\/1.3000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3000,\ -\/0.7280,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3000,\ \ 0.0000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.4000,\ \ 0.2240,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.2240,\ \ 0.4000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.4000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3000,\ \ 0.7280,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7280,\ \ 1.3000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.3000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.3000,\ \ 0.7280,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7280,\ \ 1.3000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.3000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.2240,\ \ 0.4000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.4000,\ \ 0.2240,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7280,\ \ 1.3000,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3000,\ \ 0.7280,\ \ 2.5500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7280,\ \ 1.3000,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.3000,\ \ 0.7280,\ \ 2.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 0.0000,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.0000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ \ 1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.0000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ \ 0.8400,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ \ 1.5000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.5000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4250,\ \ 0.0000,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4250,\ \ 0.7980,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7980,\ \ 1.4250,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ \ 1.4250,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ \ 1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.0000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ \ 1.5000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.8400,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ \ 0.0000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7980,\ \ 1.4250,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4250,\ \ 0.7980,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4250,\ \ 0.0000,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ -\/0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ -\/1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.5000,\ -\/0.8400,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.8400,\ -\/1.5000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.5000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.4250,\ -\/0.7980,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7980,\ -\/1.4250,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.0000,\ -\/1.4250,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ -\/1.5000,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ -\/0.8400,\ \ 0.1500\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.8400,\ -\/1.5000,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.5000,\ -\/0.8400,\ \ 0.0750\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 0.7980,\ -\/1.4250,\ \ 0.0000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\ 1.4250,\ -\/0.7980,\ \ 0.0000\}}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ tp\_data}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NURBSShapeSurfaceMultiplePatchFill)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<NURBSPatch<Vec3d,\ Vec2d>>\ patches;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::array<int,\ 2>\ p\{3,\ 3\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ std::array<Range<double>,\ 2>\{Range<double>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Range<double>\{0,\ 0,\ 0,\ 0,\ 1,\ 1,\ 1,\ 1\}\};}
+\DoxyCodeLine{\ \ \ \ Range<Range<double>>\ w;}
+\DoxyCodeLine{\ \ \ \ w.resize(4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ w[i].push\_back(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ tp\_data::numPatches;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<Range<Vec3d>>\ cp;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ cp.resize(4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 4;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ v\ =\ tp\_data::teapotVertices[tp\_data::teapotPatches[i][4\ *\ j\ +\ k]\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ vert(v[0],\ v[1],\ v[2]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cp[j].push\_back(vert);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ patches.push\_back(NURBSPatch<Vec3d,\ Vec2d>(cp,\ w,\ knots,\ p));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSShape<Vec3d,\ Vec2d>\ shape(patches);}
+\DoxyCodeLine{\ \ \ \ shape.seed(1337).boundaryProximity(1e-\/11);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.05;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill}}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ shape.discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(sqrt(tree.query(pt,\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.05);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.7);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

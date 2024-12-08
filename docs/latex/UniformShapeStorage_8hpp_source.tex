@@ -1,0 +1,35 @@
+\doxysection{Uniform\+Shape\+Storage.\+hpp}
+\hypertarget{UniformShapeStorage_8hpp_source}{}\label{UniformShapeStorage_8hpp_source}\index{include/medusa/bits/operators/UniformShapeStorage.hpp@{include/medusa/bits/operators/UniformShapeStorage.hpp}}
+\mbox{\hyperlink{UniformShapeStorage_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_OPERATORS\_UNIFORMSHAPESTORAGE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_OPERATORS\_UNIFORMSHAPESTORAGE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{UniformShapeStorage__fwd_8hpp}{UniformShapeStorage\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeStorage_8hpp}{ShapeStorage.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{printShapes_8hpp}{printShapes.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00016}00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ OpFamilies>}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00019}\mbox{\hyperlink{classmm_1_1UniformShapeStorage_a3e0dda109af09bdde9f7ae520971da21}{00019}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1UniformShapeStorage_a3e0dda109af09bdde9f7ae520971da21}{UniformShapeStorage<vec\_t,\ OpFamilies>::resize\_}}(\textcolor{keyword}{const}\ std::vector<int>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{support\_sizes}})\ \{}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00020}00020\ \ \ \ \ support\_size\_\ =\ (domain\_size\_\ >\ 0)\ ?\ \mbox{\hyperlink{classmm_1_1Gaussian}{support\_sizes}}[0]\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{support\_sizes}})\ \{}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(support\_size\_\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}},\ \textcolor{stringliteral}{"{}Not\ all\ support\ sizes\ are\ equal,\ got\ sizes\ \%d\ and\ \%d.\ "{}}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Use\ RaggedShapeStorage\ instead."{}},\ support\_size\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}});}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ Fills\ support\ with\ -\/1,\ to\ indicate\ which\ nodes\ have\ their\ shapes\ computed.}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00027}00027\ \ \ \ \ support\_.resize(domain\_size\_\ *\ support\_size\_,\ -\/1);}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00028}00028\ \ \ \ \ resize\_internal::resize\_storage\_<OpFamilies,\ num\_operators>::resize(}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ shapes\_,\ domain\_size\_\ *\ support\_size\_);}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00032}00032\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{UniformShapeStorage_8hpp_source_l00034}00034\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_OPERATORS\_UNIFORMSHAPESTORAGE\_HPP\_}}
+
+\end{DoxyCode}

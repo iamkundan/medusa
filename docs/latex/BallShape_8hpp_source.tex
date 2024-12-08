@@ -1,0 +1,142 @@
+\doxysection{Ball\+Shape.\+hpp}
+\hypertarget{BallShape_8hpp_source}{}\label{BallShape_8hpp_source}\index{include/medusa/bits/domains/BallShape.hpp@{include/medusa/bits/domains/BallShape.hpp}}
+\mbox{\hyperlink{BallShape_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_BALLSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_BALLSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{BallShape__fwd_8hpp}{BallShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GeneralFill_8hpp}{GeneralFill.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discretization__helpers_8hpp}{discretization\_helpers.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00016}00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00019}\mbox{\hyperlink{classmm_1_1BallShape_a21686ac29ea14bb00bf6e09c7ae69356}{00019}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1BallShape_a21686ac29ea14bb00bf6e09c7ae69356}{BallShape<vec\_t>::discretizeBoundaryWithStep}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ 0)\ type\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num}}\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}(2*\mbox{\hyperlink{structmm_1_1Pi}{Pi<scalar\_t>::value}}*radius\_/step);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{auto}\ points\ =\ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}{discretization\_helpers::SphereDiscretization<scalar\_t,\ dim>::construct}}(}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ radius\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{num}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(center\_+p,\ type,\ p.normalized());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00032}00032\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1BallShape_ab961824972fd2674c6164a0289d5eeee}{00033}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1BallShape_ab961824972fd2674c6164a0289d5eeee}{BallShape<vec\_t>::discretizeWithStep}}(}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ discretizeBoundaryWithStep(step,\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}}\ ==\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_points}}\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}(2*radius\_/step)\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ v\ :\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(bbox().first,\ bbox().second,\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_points}}\},\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.addInternalNode(v,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00042}00042\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ concentric\ circles\ with\ step\ dx.}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_circles}}\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}(radius\_\ /\ step);\ \ \textcolor{comment}{//\ not\ counting\ outer\ circle}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ dr\ =\ radius\_\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_circles}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.addInternalNode(center\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_circles}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}*dr;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_points}}\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}(\mbox{\hyperlink{structmm_1_1Pi}{Pi<scalar\_t>::value}}\ /\ std::asin(step/2.0/\mbox{\hyperlink{classmm_1_1Gaussian}{r}}));}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dfi}}\ =\ 2*\mbox{\hyperlink{structmm_1_1Pi}{Pi<scalar\_t>::value}}\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_points}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_of\_points}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.addInternalNode(center\_\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{std::cos(\mbox{\hyperlink{classmm_1_1Gaussian}{j}}*\mbox{\hyperlink{classmm_1_1Gaussian}{dfi}}),\ std::sin(\mbox{\hyperlink{classmm_1_1Gaussian}{j}}*\mbox{\hyperlink{classmm_1_1Gaussian}{dfi}})\}),}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00056}00056\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ >=\ 3)\ \{\ \ \textcolor{comment}{//\ Call\ default\ fill\ engine\ (could\ do\ concentric\ n-\/dim\ spheres).}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}This\ domain\ does\ not\ support\ filling\ with\ density,\ "{}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}use\ a\ GeneralSurfaceFill\ engine\ instead."{}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00063}00063\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00064}\mbox{\hyperlink{classmm_1_1BallShape_a5bc02e5ef2e10d2032c6c15bff26cfc1}{00064}}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1BallShape_a5bc02e5ef2e10d2032c6c15bff26cfc1}{BallShape<vec\_t>::print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}BallShape("{}}\ <<\ center\_.transpose()\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ radius\_\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00068}00068\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00069}00069\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00070}\mbox{\hyperlink{classmm_1_1BallShape_a035b7a7d8d68134e41de6402b4649a4b}{00070}}\ \mbox{\hyperlink{classmm_1_1BallShape_a035b7a7d8d68134e41de6402b4649a4b}{BallShape<vec\_t>::discretizeBoundaryWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ 0)\ type\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 1)\ \{\ \ \textcolor{comment}{//\ always\ only\ two\ points}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\{center\_[0]\ -\/\ radius\_\},\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(-\/1.0));}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\{center\_[0]\ +\ radius\_\},\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(1.0));}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00077}00077\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}}\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_alpha}}\ =\ 2*\mbox{\hyperlink{structmm_1_1Pi}{Pi<scalar\_t>::value}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{alphas}}\ =\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}}\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_alpha}})\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ dr(center\_\ +\ radius\_\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{std::cos(\mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}}),\ std::sin(\mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}})\}));}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}}\ +=\ 2*std::asin(\mbox{\hyperlink{classmm_1_1Gaussian}{r}}/2.0/radius\_);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{alphas}}.push\_back(\mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{shrink}}\ =\ 2*\mbox{\hyperlink{structmm_1_1Pi}{Pi<scalar\_t>::value}}\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{cur\_alpha}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{alphas}}.size()-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ a\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{alphas}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{shrink}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ normal\ =\ \{std::cos(a),\ std::sin(a)\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(center\_\ +\ radius\_\ *\ normal,\ type,\ normal);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00093}00093\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ define\ modified\ density}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr2upper}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ (1\ +\ v.squaredNorm());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ \{2*v[0]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ 2*v[1]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ (1-\/v.squaredNorm())/\mbox{\hyperlink{classmm_1_1Gaussian}{d}}\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}/2\ *\ dr(center\_\ +\ radius\_\ *\ p)\ /\ radius\_;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{BallShape<Vec<scalar\_t,\ 2>}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{circ}}(0.0,\ 1.0);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{GeneralFill<Vec<scalar\_t,\ 2>}}>\ fill;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ fill.seed(0).proximityTolerance(0.99);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{circ}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr2upper}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ (1\ +\ v.squaredNorm());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ \{2*v[0]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ 2*v[1]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ (1-\/v.squaredNorm())/\mbox{\hyperlink{classmm_1_1Gaussian}{d}}\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(center\_\ +\ radius\_*p,\ type,\ p.normalized());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.boundary())\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ \{v[0],\ v[1],\ 0\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(center\_\ +\ radius\_*p,\ type,\ p.normalized());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ lower\ hemisphere}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr2lower}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ (1\ +\ v.squaredNorm());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ \{2*v[0]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ 2*v[1]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ -\/(1-\/v.squaredNorm())/\mbox{\hyperlink{classmm_1_1Gaussian}{d}}\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}/2\ *\ dr(center\_\ +\ radius\_\ *\ p)\ /\ radius\_;}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{circ}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr2lower}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ (1\ +\ v.squaredNorm());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ \{2*v[0]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ 2*v[1]/\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ -\/(1-\/v.squaredNorm())/\mbox{\hyperlink{classmm_1_1Gaussian}{d}}\};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(center\_\ +\ radius\_*p,\ type,\ p.normalized());}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00132}00132\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}This\ domain\ does\ not\ support\ filling\ with\ density,\ "{}}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}use\ a\ GeneralSurfaceFill\ engine\ instead."{}});}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00135}00135\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}};}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00137}00137\ \}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00139}00139\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{BallShape_8hpp_source_l00141}00141\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_BALLSHAPE\_HPP\_}}
+
+\end{DoxyCode}

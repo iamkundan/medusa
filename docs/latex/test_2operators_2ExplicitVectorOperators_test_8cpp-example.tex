@@ -1,0 +1,395 @@
+\doxysection{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}
+\hypertarget{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{}\label{test_2operators_2ExplicitVectorOperators_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ExplicitVectorOperators_8hpp}{medusa/bits/operators/ExplicitVectorOperators.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{UniformShapeStorage_8hpp}{medusa/bits/operators/UniformShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{computeShapes_8hpp}{medusa/bits/operators/computeShapes.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials__fwd_8hpp}{medusa/bits/approximations/Monomials\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RBFBasis_8hpp}{medusa/bits/approximations/RBFBasis.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WeightFunction__fwd_8hpp}{medusa/bits/approximations/WeightFunction\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Gaussian__fwd_8hpp}{medusa/bits/approximations/Gaussian\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WLS_8hpp}{medusa/bits/approximations/WLS.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp}{medusa/bits/approximations/JacobiSVDWrapper\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RaggedShapeStorage_8hpp}{medusa/bits/operators/RaggedShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeStorage_8hpp}{medusa/bits/operators/ShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{VectorField_8hpp}{medusa/bits/types/VectorField.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ExplicitOperators_8hpp}{medusa/bits/operators/ExplicitOperators.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\{}
+\DoxyCodeLine{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ a\ =\ \{1.2,\ 3.4,\ -\/0.7\};}
+\DoxyCodeLine{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ b\ =\ \{-\/0.5,\ 2.4,\ 0.8\};}
+\DoxyCodeLine{Eigen::Matrix3d\ M;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ f(v)\ =\ M*v\ +\ a\ +\ sin(v)}}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{Vec<double,\ dim>\ f(\textcolor{keyword}{const}\ Vec<double,\ dim>\&\ v)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ M.topLeftCorner<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}},\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>()*v\ +\ a.head<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>()\ +\ std::sin(b.head<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>().dot(v))*v;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{Vec<double,\ dim>\ df(\textcolor{keyword}{const}\ Vec<double,\ dim>\&\ v,\ \textcolor{keywordtype}{int}\ var)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ f\ =\ b[var]*std::cos(b.head<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>().dot(v));}
+\DoxyCodeLine{\ \ \ \ Vec<double,\ dim>\ r\ =\ M.col(var).head<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>()\ +\ f*v;}
+\DoxyCodeLine{\ \ \ \ r[var]\ +=\ std::sin(b.head<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>().dot(v));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{Vec<double,\ dim>\ ddf(\textcolor{keyword}{const}\ Vec<double,\ dim>\&\ v,\ \textcolor{keywordtype}{int}\ varmin,\ \textcolor{keywordtype}{int}\ varmax)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ bv\ =\ b.head<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}>().dot(v);}
+\DoxyCodeLine{\ \ \ \ Vec<double,\ dim>\ r\ =\ -\/b[varmin]*b[varmax]*std::sin(bv)*v;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (varmin\ ==\ varmax)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ r[varmin]\ +=\ 2*b[varmax]\ *\ std::cos(bv);}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ r[varmin]\ +=\ b[varmax]\ *\ std::cos(bv);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ r[varmax]\ +=\ b[varmin]\ *\ std::cos(bv);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\textcolor{keyword}{class\ }ExplicitVecOp\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ UniformShapeStorage<Vec<double,\ dim>>\ storage;}
+\DoxyCodeLine{\ \ \ \ ExplicitVectorOperators<\textcolor{keyword}{decltype}(storage)>\ op;}
+\DoxyCodeLine{\ \ \ \ Range<Vec<double,\ dim>>\ pos;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ type;}
+\DoxyCodeLine{\ \ \ \ Range<Vec<double,\ dim>>\ field;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ up\ operators}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ BoxShape<Vec<double,\ dim>>\ box(2.23,\ 2.34);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ DomainDiscretization<Vec<double,\ dim>>\ d\ =\ box.discretizeWithStep(0.02);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos\ =\ d.positions();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ type\ =\ d.types();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ num\_cl\ =\ 1;\ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++i)\ num\_cl\ *=\ 3;\ \ \textcolor{comment}{//\ num\_cl\ =\ 3\string^dim}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ d.findSupport(FindClosest(num\_cl));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ WLS<Monomials<Vec<double,\ dim>>,\ NoWeight<Vec<double,\ dim>>,\ ScaleToFarthest>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ wls(Monomials<Vec<double,\ dim>>::tensorBasis(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple_aeac6b6014a78699acc51ee0134d41a8b}{sh::operator\_tuple<sh::all,\ dim>::type}}\ operators\{\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ storage.resize(d.supportSizes());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}}(d,\ wls,\ d.all(),\ operators,\ \&storage);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.setShapes(storage);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ up\ test\ field}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ M\ <<\ 2.4,\ 1.4,\ -\/0.3,\ 2.8,\ -\/1.9,\ 0.4,\ -\/0.3,\ 2.4,\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ x\ :\ pos)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ field.push\_back(f<dim>(x));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ ExplicitVecOp<1>\ ExplicitVecOp1d;}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ ExplicitVecOp<2>\ ExplicitVecOp2d;}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ ExplicitVecOp<3>\ ExplicitVecOp3d;}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp1d,\ Grad)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 1,\ 1>\ grad\ =\ op.grad(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ expected\ =\ df<1>(pos[i],\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[0],\ grad(0,\ 0),\ 1e-\/4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp1d,\ Div)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ div\ =\ op.div(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ expected\ =\ df<1>(pos[i],\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[0],\ div,\ 1e-\/4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp1d,\ Lap)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ lap\ =\ op.lap(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ expected\ =\ ddf<1>(pos[i],\ 0,\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[0],\ lap[0],\ 1e-\/4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp1d,\ GradDiv)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ gd\ =\ op.graddiv(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ expected\ =\ ddf<1>(pos[i],\ 0,\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[0],\ gd[0],\ 1e-\/4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp2d,\ Grad)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 2,\ 2>\ grad\ =\ op.grad(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 2;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ expected\ =\ df<2>(pos[i],\ j);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 2;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[k],\ grad(k,\ j),\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp2d,\ Div)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ div\ =\ op.div(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ e1\ =\ df<2>(pos[i],\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ e2\ =\ df<2>(pos[i],\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(e1[0]\ +\ e2[1],\ div,\ 2e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp2d,\ Lap)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ lap\ =\ op.lap(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ expected\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 2;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ expected\ +=\ ddf<2>(pos[i],\ k,\ k);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT((expected-\/lap).norm(),\ 5e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp2d,\ GradDiv)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ gd\ =\ op.graddiv(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ expected\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 2;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 2;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expected[j]\ +=\ ddf<2>(pos[i],\ j,\ k)[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT((expected-\/gd).norm(),\ 5e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp3d,\ Grad)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 3,\ 3>\ grad\ =\ op.grad(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 3;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ expected\ =\ df<3>(pos[i],\ j);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 3;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[k],\ grad(k,\ j),\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp3d,\ Div)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ div\ =\ op.div(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ e1\ =\ df<3>(pos[i],\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ e2\ =\ df<3>(pos[i],\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ e3\ =\ df<3>(pos[i],\ 2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(e1[0]\ +\ e2[1]\ +\ e3[2],\ div,\ 2e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp3d,\ Curl)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ rot\ =\ op.curl(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ expected\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ ux\ =\ df<3>(pos[i],\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ uy\ =\ df<3>(pos[i],\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ uz\ =\ df<3>(pos[i],\ 2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ expected[0]\ =\ uy[2]\ -\/\ uz[1];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ expected[1]\ =\ uz[0]\ -\/\ ux[2];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ expected[2]\ =\ ux[1]\ -\/\ uy[0];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 3;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[k],\ rot[k],\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp3d,\ Lap)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ lap\ =\ op.lap(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ expected\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 3;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ expected\ +=\ ddf<3>(pos[i],\ k,\ k);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT((expected-\/lap).norm(),\ 5e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ExplicitVecOp3d,\ GradDiv)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type[i]\ <\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ gd\ =\ op.graddiv(field,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ expected\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 3;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 3;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expected[j]\ +=\ ddf<3>(pos[i],\ j,\ k)[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT((expected-\/gd).norm(),\ 5e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(ExplicitVecOp,\ GradDifferentDimension)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Tests\ computing\ gradient\ of\ vector\ field\ with\ different\ dimension\ than\ domain\ dimension.}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ box.discretizeWithStep(0.25);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Gaussians<Vec3d>,\ GaussianWeight<Vec3d>,\ ScaleToFarthest>\ wls(\{9,\ 30.0\},\ \{1.0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes(wls);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1eb8281f90ddea362c030944bfa58543}{VectorField1d}}\ vf(N);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ vf(i,\ 0)\ =\ domain.pos(i,\ 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ eop\ =\ storage.explicitOperators();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ evop\ =\ storage.explicitVectorOperators();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ egrad\ =\ eop.grad(vf.c(0),\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ evgrad\ =\ evop.grad(vf,\ i).transpose();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(evgrad,\ egrad);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ CustomExplicitVector)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0.0,\ 0.0\},\ \{1.0,\ 1.0\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.02);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }Dx\ :\ Der1<2>\ \{\ Dx()\ :\ Der1(0)\ \{\}\ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }Dy\ :\ Der1<2>\ \{\ Dy()\ :\ Der1(1)\ \{\}\ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes<std::tuple<Dx,\ Dy,\ Lap<2>>>(wls);}
+\DoxyCodeLine{\ \ \ \ ExplicitVectorOperators<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{\ \ \ \ VectorField<std::complex<double>,\ 3>\ field(d.size());}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c(2.4,\ -\/0.3);}
+\DoxyCodeLine{\ \ \ \ field.setConstant(c);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 3>\ lap\ =\ op.apply<Lap<2>>(field,\ 52);}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 3>\ dx\ =\ op.apply<Dx>(field,\ 34);}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 3>\ dy\ =\ op.apply<Dy>(field,\ 32);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(lap.norm(),\ 1e-\/11);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(dx.norm(),\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(dy.norm(),\ 1e-\/13);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ VectorNeumannSin)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ rectangle\ domain\ for\ testing\ fill\ it\ uniformly}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain\ =\ box.discretizeWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ You\ need\ asymmetry\ in\ selecting\ the\ support\ so\ that\ the\ derivation\ is}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ is\ dependant\ on\ the\ central\ point}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ supp\_size\ =\ 4;}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(supp\_size));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec1d>,\ GaussianWeight<Vec1d>>\ mls(1,\ 30*dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{sh::d1}}>(mls,\ domain.interior());}
+\DoxyCodeLine{\ \ \ \ ExplicitVectorOperators<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ scalar\ field\ of\ sin(x)}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ field(domain.size(),\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ !=\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ field[i]\ =\ \{std::sin(domain.pos(i,\ 0))\};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tmp\ =\ std::cos(domain.pos(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp\ =\ op.neumann(field,\ i,\ \{1\},\ tmp)[0];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(tmp,\ field[i][0],\ field[i][0]\ *\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ VectorBoundaryDeathTest)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ rectangle\ domain\ for\ testing\ fill\ it\ uniformly}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.2;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain\ =\ box.discretizeWithStep(dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ supp\_size\ =\ 3;}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(supp\_size));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec1d>,\ GaussianWeight<Vec1d>>\ mls(1,\ 30*dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{sh::d1}}>(mls,\ domain.interior());}
+\DoxyCodeLine{\ \ \ \ ExplicitVectorOperators<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Create\ scalar\ field}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ field(domain.size(),\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ !=\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ field[i]\ =\ \{std::sin(domain.pos(i,\ 0))\};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DEATH(op.neumann(field,\ i,\ \{1\},\ 0.0),\ \textcolor{stringliteral}{"{}no\ effect\ on\ the\ flux\ in\ direction"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ ExplicitVectorComplexNumbers)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0.0,\ 0.0\},\ \{1.0,\ 1.0\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.02);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes(wls);}
+\DoxyCodeLine{\ \ \ \ ExplicitVectorOperators<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ VectorField<std::complex<double>,\ 2>\ field(d.size());}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c1(1.2,\ -\/0.4);}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c2(-\/1.7,\ 0.2);}
+\DoxyCodeLine{\ \ \ \ field\ =\ Vec<std::complex<double>,\ 2>(c1,\ c2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c(2.4,\ -\/0.3);}
+\DoxyCodeLine{\ \ \ \ field.setConstant(c);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 2>\ lap\ =\ op.lap(field,\ 2);}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 2>\ neu\ =\ op.neumann(field,\ 0,\ \{-\/1,\ 3\},\ std::complex<double>(0.0));}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix2cd\ grad\ =\ op.grad(field,\ 0);}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ div\ =\ op.div(field,\ 0);}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 2>\ gd\ =\ op.graddiv(field,\ 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(lap.norm(),\ 1e-\/11);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(gd.norm(),\ 1e-\/11);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((neu-\/Eigen::Vector2cd(c,\ c)).norm(),\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(grad.norm(),\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(std::abs(div),\ 1e-\/13);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ DISABLED\_ExplicitVectorOperatorsUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0.0,\ 0.0\},\ \{1.0,\ 1.0\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.02);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes(wls);}
+\DoxyCodeLine{\ \ \ \ ExplicitVectorOperators<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ op\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(d.size());\ \ \textcolor{comment}{//\ constant\ scalar\ field,\ value\ 1.34\ at\ each\ point}}
+\DoxyCodeLine{\ \ \ \ v\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(12.4,\ -\/3.4);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ val\ =\ op.lap(v,\ 2);\ \ \textcolor{comment}{//\ laplace\ at\ point\ d.pos(2);}}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix2d\ grad\ =\ op.grad(v,\ 4);\ \ \textcolor{comment}{//\ gradient\ at\ point\ d.pos(4);}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ div\ =\ op.div(v,\ 3);\ \ \textcolor{comment}{//\ divergence\ at\ points\ d.pos(3);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ VectorField<std::complex<double>,\ 3>\ complex\_field(d.size());\ \ \textcolor{comment}{//\ 3d\ complex\ field}}
+\DoxyCodeLine{\ \ \ \ complex\_field.setConstant(std::complex<double>(2.5,\ -\/7.1));}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<std::complex<double>,\ 3,\ 2>\ cgrad\ =\ op.grad(complex\_field,\ 1);}
+\DoxyCodeLine{\ \ \ \ (void)\ div;\ (void)\ val;\ (void)\ cgrad;\ (void)\ grad;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

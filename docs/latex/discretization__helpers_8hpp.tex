@@ -1,0 +1,52 @@
+\doxysection{include/medusa/bits/domains/discretization\+\_\+helpers.hpp File Reference}
+\hypertarget{discretization__helpers_8hpp}{}\label{discretization__helpers_8hpp}\index{include/medusa/bits/domains/discretization\_helpers.hpp@{include/medusa/bits/domains/discretization\_helpers.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Contains helpers for discretizing various geometric objects. 
+
+
+
+Definition in file \mbox{\hyperlink{discretization__helpers_8hpp_source}{discretization\+\_\+helpers.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Range.\+hpp$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Core$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+Include dependency graph for discretization\+\_\+helpers.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{discretization__helpers_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{discretization__helpers_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization}{mm\+::discretization\+\_\+helpers\+::\+Sphere\+Discretization$<$ scalar\+\_\+t, dim $>$}}
+\begin{DoxyCompactList}\small\item\em Discretizes a sphere with given radius uniformly with {\ttfamily num\+\_\+points} points on the great circle. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_3_01scalar__t_00_012_01_4}{mm\+::discretization\+\_\+helpers\+::\+Sphere\+Discretization$<$ scalar\+\_\+t, 2 $>$}}
+\begin{DoxyCompactList}\small\item\em Two-\/dimensional base case of the discretization. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_3_01scalar__t_00_011_01_4}{mm\+::discretization\+\_\+helpers\+::\+Sphere\+Discretization$<$ scalar\+\_\+t, 1 $>$}}
+\begin{DoxyCompactList}\small\item\em One-\/dimensional base case of the discretization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1discretization__helpers}{mm\+::discretization\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace containing helpers for discretizing various geometric objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{mm\+::discretization\+\_\+helpers\+::discretize\+Line\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{q}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{delta\+\_\+r}})
+\begin{DoxyCompactList}\small\item\em Returns nodes lying on the line segment {\ttfamily pq} with approximate distances {\ttfamily delta\+\_\+r}. \end{DoxyCompactList}\end{DoxyCompactItemize}

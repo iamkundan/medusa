@@ -1,0 +1,60 @@
+\doxysection{include/medusa/bits/types/\+Range\+\_\+fwd.hpp File Reference}
+\hypertarget{Range__fwd_8hpp}{}\label{Range__fwd_8hpp}\index{include/medusa/bits/types/Range\_fwd.hpp@{include/medusa/bits/types/Range\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declaration of Range. 
+
+
+
+Definition in file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+{\ttfamily \#include "{}traits.\+hpp"{}}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iosfwd$>$}\newline
+Include dependency graph for Range\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Range__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Range__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range$<$ T, Allocator $>$}}
+\begin{DoxyCompactList}\small\item\em An extension of {\ttfamily std\+::vector\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>}} to support additional useful operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{mm\+::\+Range$<$ T, Allocator $>$\+::\+Range\+View}}
+\begin{DoxyCompactList}\small\item\em This class represents a non contiguous view to a \doxylink{classmm_1_1Range}{Range}, allowing for read and write operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Range_1_1ConstRangeView}{mm\+::\+Range$<$ T, Allocator $>$\+::\+Const\+Range\+View}}
+\begin{DoxyCompactList}\small\item\em This class represents a non contiguous view to a \doxylink{classmm_1_1Range}{Range}, allowing for read-\/only operations. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type_3_01Range_3_01T_01_4_01_4}{mm\+::scalar\+\_\+type$<$ Range$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1scalar__type}{scalar\+\_\+type} trait definition for \doxylink{classmm_1_1Range}{Range}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type_3_01Range_3_01T_01_4_01_4}{mm\+::vector\+\_\+type$<$ Range$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1vector__type}{vector\+\_\+type} trait definition for \doxylink{classmm_1_1Range}{Range}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type_3_01std_1_1vector_3_01T_01_4_01_4}{mm\+::scalar\+\_\+type$<$ std\+::vector$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1scalar__type}{scalar\+\_\+type} trait definition for std\+::vector. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type_3_01std_1_1vector_3_01T_01_4_01_4}{mm\+::vector\+\_\+type$<$ std\+::vector$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1vector__type}{vector\+\_\+type} trait definition for std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ }\\std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \mbox{\hyperlink{namespacemm_abe6d3e2e992f087629e7f2af0d081311}{mm\+::operator+}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{v1}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{v2}})
+\begin{DoxyCompactList}\small\item\em Concatenate two vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}

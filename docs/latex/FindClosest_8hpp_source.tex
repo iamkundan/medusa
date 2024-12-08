@@ -1,0 +1,63 @@
+\doxysection{Find\+Closest.\+hpp}
+\hypertarget{FindClosest_8hpp_source}{}\label{FindClosest_8hpp_source}\index{include/medusa/bits/domains/FindClosest.hpp@{include/medusa/bits/domains/FindClosest.hpp}}
+\mbox{\hyperlink{FindClosest_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_FINDCLOSEST\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_FINDCLOSEST\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{FindClosest__fwd_8hpp}{FindClosest\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTree_8hpp}{medusa/bits/spatial\_search/KDTree.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00020}00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ domain\_t>}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00021}\mbox{\hyperlink{classmm_1_1FindClosest_ae73e6b4226cb1844b6974e7ff6231e12}{00021}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1FindClosest_ae73e6b4226cb1844b6974e7ff6231e12}{FindClosest::operator()}}(domain\_t\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{comment}{//\ TODO(jureslak):\ speed\ up\ if\ search\ among\ is\ empty}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}\ =\ \mbox{\hyperlink{classmm_1_1FindClosest_ab4b00552be30da193119830ac4719eb1}{for\_which\_}};}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}.empty())\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.all();}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}\ =\ \mbox{\hyperlink{classmm_1_1FindClosest_af3777cab9ca532b73374cbe0a76e9e92}{search\_among\_}};}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}\ =\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<int>::seq}}(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());\ \ \textcolor{comment}{//\ include\ potential\ ghost\ nodes}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.positions().empty(),\ \textcolor{stringliteral}{"{}Cannot\ find\ support\ in\ an\ empty\ domain."{}});}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\_size}}\ >\ 0,\ \textcolor{stringliteral}{"{}Support\ size\ must\ be\ greater\ than\ 0,\ got\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\_size}});}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\_size}}\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.size(),}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Support\ size\ (\%d)\ cannot\ exceed\ number\ of\ points\ that\ we\ are\ searching\ among\ (\%d)."{}},}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\_size}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.size());}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}.empty(),\ \textcolor{stringliteral}{"{}Set\ of\ nodes\ for\ which\ to\ find\ the\ support\ is\ empty.\ "{}}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}There\ appear\ to\ be\ no\ nodes\ in\ domain\ discretization."{}});}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.empty(),\ \textcolor{stringliteral}{"{}Set\ of\ nodes\ to\ search\ among\ is\ empty.\ "{}}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}There\ appear\ to\ be\ no\ nodes\ in\ domain\ discretization."{}});}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ x\ \&\&\ x\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ in\ forNodes."{}},}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x,\ 0,\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ x\ \&\&\ x\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ in\ "{}}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}searchAmong."{}},\ x,\ 0,\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00047}00047\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTree<typename\ domain\_t::vector\_t>}}\ tree(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.positions()[\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}]);}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1FindClosest_a215dce4a8a0fe7f3cd19f086f4f59bbc}{force\_self\_}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ ss\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}[tree.query(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}}),\ \mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\_size}}).first];}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ !=\ ss[0])\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\};}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(\mbox{\hyperlink{classmm_1_1Gaussian}{i}}).insert(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(\mbox{\hyperlink{classmm_1_1Gaussian}{i}}).end(),\ ss.begin(),\ ss.end()-\/1);}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ ss;}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00058}00058\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}[tree.query(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}}),\ \mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\_size}}).first];}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00065}00065\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{FindClosest_8hpp_source_l00067}00067\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_FINDCLOSEST\_HPP\_}}
+
+\end{DoxyCode}

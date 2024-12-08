@@ -1,0 +1,52 @@
+<map id="include/medusa/bits/domains/BoxShape_fwd.hpp" name="include/medusa/bits/domains/BoxShape_fwd.hpp">
+<area shape="rect" id="Node000001" title="Declaration of class for box shaped domains." alt="" coords="696,5,905,45"/>
+<area shape="rect" id="Node000002" href="$Config_8hpp.html" title="Contains compile time settings for the project, such as Eigen plugins." alt="" coords="705,255,851,280"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="809,45,821,117,822,162,815,207,797,245,793,242,810,206,817,162,816,117,803,46"/>
+<area shape="rect" id="Node000004" href="$DomainShape__fwd_8hpp.html" title="Declaration of base class for domain shapes." alt="" coords="597,93,767,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="773,48,712,88,709,84,770,43"/>
+<area shape="rect" id="Node000014" href="$Vec__fwd_8hpp.html" title="Declaration of Vec." alt="" coords="905,167,1075,207"/>
+<area shape="poly" id="edge30_Node000001_Node000014" title=" " alt="" coords="827,43,888,91,961,156,958,160,884,95,824,48"/>
+<area shape="rect" id="Node000019" href="$Range__fwd_8hpp.html" title="Declaration of Range." alt="" coords="129,167,315,207"/>
+<area shape="poly" id="edge23_Node000001_Node000019" title=" " alt="" coords="733,48,304,166,303,160,732,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="353,401,416,427"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="764,282,711,318,639,356,584,375,528,390,430,409,429,404,526,385,582,370,637,351,708,314,761,278"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="725,116,762,135,779,148,792,165,799,185,800,205,791,242,786,241,795,205,794,186,788,168,775,152,759,139,723,121"/>
+<area shape="rect" id="Node000005" href="$memutils_8hpp.html" title="Declaration of memory related utilities." alt="" coords="340,174,568,199"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="650,121,501,172,499,167,648,116"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="5,401,65,427"/>
+<area shape="poly" id="edge20_Node000004_Node000012" title=" " alt="" coords="596,114,304,133,171,149,125,158,100,169,78,191,62,218,50,248,42,279,35,339,36,387,30,387,30,339,37,278,45,246,57,216,74,188,96,164,123,153,170,143,304,127,596,108"/>
+<area shape="poly" id="edge16_Node000004_Node000014" title=" " alt="" coords="727,116,904,161,902,166,726,121"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="82,255,146,280"/>
+<area shape="poly" id="edge19_Node000004_Node000016" title=" " alt="" coords="596,113,463,119,312,130,184,147,141,157,118,169,109,184,105,203,109,241,104,242,100,203,104,183,115,165,139,152,183,142,312,125,462,114,596,108"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="592,174,668,199"/>
+<area shape="poly" id="edge21_Node000004_Node000017" title=" " alt="" coords="677,120,648,164,643,161,672,117"/>
+<area shape="rect" id="Node000018" title=" " alt="" coords="692,174,779,199"/>
+<area shape="poly" id="edge22_Node000004_Node000018" title=" " alt="" coords="692,117,722,161,717,164,688,120"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="502,197,718,249,717,254,500,202"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="333,255,410,280"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="444,201,395,247,392,243,440,198"/>
+<area shape="rect" id="Node000007" href="$assert_8hpp.html" title="Implementation of custom assert and debug utilities." alt="" coords="435,255,641,280"/>
+<area shape="poly" id="edge8_Node000005_Node000007" title=" " alt="" coords="468,198,517,243,514,247,465,201"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="450,328,626,353"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="541,280,541,314,535,314,535,280"/>
+<area shape="rect" id="Node000009" href="$print_8hpp.html" title="Printing helpers for std types." alt="" coords="178,328,258,353"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="487,283,272,330,271,325,486,277"/>
+<area shape="poly" id="edge12_Node000009_Node000003" title=" " alt="" coords="246,351,346,393,344,398,244,356"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="90,401,170,427"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="206,355,157,395,153,390,202,351"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="194,401,250,427"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="221,354,223,388,218,388,216,354"/>
+<area shape="poly" id="edge14_Node000009_Node000012" title=" " alt="" coords="190,356,79,399,77,394,188,351"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="275,401,329,427"/>
+<area shape="poly" id="edge15_Node000009_Node000013" title=" " alt="" coords="233,351,279,390,276,394,230,355"/>
+<area shape="poly" id="edge17_Node000014_Node000002" title=" " alt="" coords="940,209,823,252,821,247,938,204"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="944,255,1036,280"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="993,207,993,241,987,241,987,207"/>
+<area shape="poly" id="edge24_Node000019_Node000002" title=" " alt="" coords="316,202,328,204,691,253,691,258,327,209,315,207"/>
+<area shape="poly" id="edge28_Node000019_Node000003" title=" " alt="" coords="238,205,370,388,366,392,233,208"/>
+<area shape="poly" id="edge27_Node000019_Node000006" title=" " alt="" coords="259,204,338,246,336,250,257,209"/>
+<area shape="poly" id="edge25_Node000019_Node000007" title=" " alt="" coords="298,204,479,249,478,254,297,209"/>
+<area shape="poly" id="edge29_Node000019_Node000016" title=" " alt="" coords="197,209,143,248,140,244,194,205"/>
+<area shape="rect" id="Node000020" href="$traits_8hpp.html" title="Type traits definition for vector and scalar fields." alt="" coords="173,255,257,280"/>
+<area shape="poly" id="edge26_Node000019_Node000020" title=" " alt="" coords="223,207,220,241,215,241,218,207"/>
+</map>

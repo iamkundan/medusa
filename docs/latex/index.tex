@@ -1,0 +1,37 @@
+\chapter{Medusa}
+\hypertarget{index}{}\label{index}\index{Medusa@{Medusa}}
+ \doxysection*{Main page}
+
+
+
+This is the technical API documentation of the Medusa library. For an overview of the library visit \href{http://e6.ijs.si/medusa/}{\texttt{ our page}} or the \href{http://e6.ijs.si/medusa/wiki/}{\texttt{ wiki}}.
+
+The source code is available through our \href{https://gitlab.com/e62Lab/medusa}{\texttt{ Gitlab repository}}.  Our code has all kind of safety assertions built in, and may therefore run slower than expected. These assertions help catch errors during development phase of the PDE solution. After you have verified the correctness of your implementation, the {\ttfamily NDEBUG} definition can be specified to the compiled (by using e. g. {\ttfamily -\/DNDEBUG}) to get better execution times. 
+
+\doxysubsection*{Getting started}
+
+ If you are running a linux system (e.\+g. Ubuntu), run the usual clone, build, test sequence\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ git\ g++\ cmake\ libhdf5-\/dev}
+\DoxyCodeLine{git\ clone\ git@gitlab.com:e62Lab/medusa.git\ -\/-\/branch\ master\ -\/-\/single-\/branch}
+\DoxyCodeLine{cd\ medusa}
+\DoxyCodeLine{mkdir\ -\/p\ build\ \&\&\ cd\ build}
+\DoxyCodeLine{cmake\ ..}
+\DoxyCodeLine{make\ medusa\_run\_tests}
+
+\end{DoxyCode}
+ to set up the library.
+
+For building on other systems and troubleshooting refer to the \href{http://e6.ijs.si/medusa/wiki/index.php/How_to_build}{\texttt{ Installation and building guide}}
+
+See \href{http://e6.ijs.si/medusa/wiki/index.php/Including_this_library_in_your_project}{\texttt{ this page}} for instructions on using this library in your project.
+
+\doxysubsection*{Concepts}
+
+ Some concepts used by Medusa library, such as scalar/vector field, approximation engine, RBFs, etc. are described on page \doxysectlink{concepts}{Concepts}{0}. Users can often supply their own classes instead of the ones included in Medusa for various operations, as long as they conform to the specified interface.
+
+\doxysubsection*{Examples}
+
+ For first time users, we wrote a \href{http://e6.ijs.si/medusa/tutorial}{\texttt{ tutorial}} on using Medusa to solve the Poisson equation. If you wish to dive into more field-\/specific examples, feel free to browse the \href{https://gitlab.com/e62Lab/medusa/tree/master/examples/}{\texttt{ {\ttfamily medusa/examples}}} folder included in the repository. Each example can be run from {\ttfamily build/} directory or as a standalone executable. Scripts for plotting are also included. More information on the philosophy of examples and how to run them can be found \href{http://www-e6.ijs.si/medusa/wiki/index.php/Philosophy_of_examples_and_how_to_run_them}{\texttt{ here}}. Some examples of solution of basic PDEs using Medusa have additional explanation on the \href{http://e6.ijs.si/medusa/wiki/index.php/Medusa\#Examples}{\texttt{ wiki}}, where you can also find additional use cases.
+
+Finally, some basic examples are located in folder {\ttfamily medusa/test/end2end} which also serve as unit tests.  

@@ -1,0 +1,69 @@
+\doxysection{test/domains/cad\+\_\+helpers\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2cad_helpers_test_8cpp-example}{}\label{test_2domains_2cad_helpers_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cad__helpers_8hpp}{medusa/bits/domains/cad\_helpers.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Range__fwd_8hpp}{medusa/bits/types/Range\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }cad\_helpers\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ B\_splineEvaluate)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ 1,\ 2,\ 3,\ 3,\ 4,\ 4,\ 4\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ cp(\{\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0,\ 1),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1,\ 1),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3,\ 4),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(4,\ 2),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(5,\ 3),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(6,\ 4),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(7,\ 3)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(2.4,\ p,\ cp,\ knots,\ 4);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3.98,\ 2.52)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(1.2,\ p,\ cp,\ knots,\ 3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(2.38,\ 3)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(0.4,\ p,\ cp,\ knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.8,\ 1.24)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(3.9,\ p,\ cp,\ knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(6.8,\ 3.18)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(0.0,\ p,\ cp,\ knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0,\ 1)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(4.0,\ p,\ cp,\ knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(7,\ 3)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ B\_splineDerivative)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ 1,\ 2,\ 3,\ 3,\ 4,\ 4,\ 4\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ cp(\{\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0,\ 1),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1,\ 1),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3,\ 4),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(4,\ 2),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(5,\ 3),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(6,\ 4),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(7,\ 3)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ d\_knots;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ d\_cp;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{cad\_helpers::generate\_b\_spline\_derivative}}(p,\ cp,\ knots,\ d\_cp,\ d\_knots);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(3.5,\ p\ -\/\ 1,\ d\_cp,\ d\_knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(2,\ 0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(0.0,\ p\ -\/\ 1,\ d\_cp,\ d\_knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(2,\ 0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(1.5,\ p\ -\/\ 1,\ d\_cp,\ d\_knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1.5,\ 0.5)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(4.0,\ p\ -\/\ 1,\ d\_cp,\ d\_knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(2,\ -\/2)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(2.5,\ p\ -\/\ 1,\ d\_cp,\ d\_knots);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1.5,\ 0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ cad\_helpers}}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

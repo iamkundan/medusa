@@ -1,0 +1,443 @@
+\doxysection{mm\+::XML Class Reference}
+\hypertarget{classmm_1_1XML}{}\label{classmm_1_1XML}\index{mm::XML@{mm::XML}}
+
+
+{\ttfamily \#include $<$XML\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Class for reading and storing values to \doxylink{classmm_1_1XML}{XML} files. 
+
+The whole \doxylink{classmm_1_1XML}{XML} file is stored in memory, along with the created document nodes. This class aims to provide simplified support for reading attributes from \doxylink{classmm_1_1XML}{XML} files, usually meant to be used as configurations, similar to {\ttfamily Boost.\+Property\+Tree}. It uses the \href{http://rapidxml.sourceforge.net}{\texttt{ Rapid\+Xml}} \doxylink{classmm_1_1XML}{XML} library for parsing. For any specifics on parsing \doxylink{classmm_1_1XML}{XML} files, refer to \href{http://rapidxml.sourceforge.net/manual.html}{\texttt{ Rapid\+Xml documentation}}.
+
+The intended use is very simple\+: {\ttfamily .get\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}("{}element1.\+element2.\+attribute"{})} returns the value of the {\ttfamily attribute}, nested in {\ttfamily element2} inside {\ttfamily element1} inside \doxylink{classmm_1_1XML}{XML} root element. The complementary {\ttfamily .set("{}element3.\+attribute"{}, 34.\+4)} sets the attribute to {\ttfamily 34.\+4}.
+
+\begin{DoxyWarning}{Warning}
+The attribute path does not contain the root \doxylink{classmm_1_1XML}{XML} element for brevity, as \doxylink{classmm_1_1XML}{XML} standard requires each document to have unique root element and that part of the path would have always been the same.
+\end{DoxyWarning}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}{XML}}\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (xml.exists(\textcolor{stringliteral}{"{}element1.attr"{}}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}element1.attr"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cout\ <<\ a\ <<\ std::endl;\ \ \textcolor{comment}{//\ do\ something\ with\ a}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}test.abc.xyz"{}},\ 12.4543);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}test.abc.xyz"{}});\ \ \textcolor{comment}{//\ r\ is\ 12.4543}}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}element1.attr"{}},\ 12,\ \textcolor{keyword}{true});\ \ \textcolor{comment}{//\ specify\ \`{}overwrite\ =\ true`\ to\ change\ existing\ values}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ xml\ <<\ std::endl;\ \ \textcolor{comment}{//\ outputs\ the\ loaded\ xml\ contents\ to\ screen}}
+\DoxyCodeLine{\ \ \ \ xml.load(\textcolor{stringliteral}{"{}test/testdata/another\_file.xml"{}});}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{XML__fwd_8hpp_source_l00040}{40}} of file \mbox{\hyperlink{XML__fwd_8hpp_source}{XML\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}{XML}} ()=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classmm_1_1XML}{XML} reader linked to no document. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1XML_a62cdde80df2a0f8d7c5c016d541f6bd7}{XML}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1XML}{XML}} \&)
+\begin{DoxyCompactList}\small\item\em Creates a copy of the \doxylink{classmm_1_1XML}{XML} document. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1XML_a1809727c8144039a7016afe6c7cc6d36}{XML}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classmm_1_1XML}{XML} reader by reading the file given by {\ttfamily filename}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1XML_a388d1a25b2a66452a23c062f3fd655f3}{load}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Loads \doxylink{classmm_1_1XML}{XML} document from a file given by {\ttfamily filename}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1XML_a919cc32ed509e410174fc987b4242f35}{exists}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if the an attribute specified by {\ttfamily path} exists and {\ttfamily false} otherwise. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db}{get}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads a values from an attribute specified by {\ttfamily path}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1XML_a9ead3434b3644a4d560f49eeeac6be68}{set}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Saves a value to the attribute pointed to by {\ttfamily path}. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ \mbox{\hyperlink{classmm_1_1XML_a1194b74b5b5da70eed10e6260a32a77e}{get\+All}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns all pairs {\ttfamily (path, attribute\+\_\+value)}. \end{DoxyCompactList}\item 
+rapidxml\+::xml\+\_\+document$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{char}} $>$ \& \mbox{\hyperlink{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c}{document\+Root}} ()
+\begin{DoxyCompactList}\small\item\em Access to underlying \doxylink{classmm_1_1XML}{XML} root element from Rapid\+Xml library. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} rapidxml\+::xml\+\_\+document$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{char}} $>$ \& \mbox{\hyperlink{classmm_1_1XML_a2f9727ed7d5f1537910ea7b78971b47c}{document\+Root}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c}{XML\+::document\+Root}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1XML_a0f6bc7e006bf03a23629f83fe9456efd}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1XML}{XML}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{xml}})
+\begin{DoxyCompactList}\small\item\em Prints the contents of currently loaded \doxylink{classmm_1_1XML}{XML} document. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1XML_a2d9abc594c526470adf2d85a51925f74}{load\+File\+Helper}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&file)
+\begin{DoxyCompactList}\small\item\em Function for opening files, called by \doxylink{classmm_1_1XML_a1809727c8144039a7016afe6c7cc6d36}{XML\+::\+XML(const std\+::string\&)} and \doxylink{classmm_1_1XML_a388d1a25b2a66452a23c062f3fd655f3}{XML\+::load()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1XML_a9bdbd54d4ab0b27158ba588f517039e0}{load\+From\+Stored\+Contents}} ()
+\begin{DoxyCompactList}\small\item\em Loads the \doxylink{classmm_1_1XML}{XML} document from a stored null-\/terminated {\ttfamily file\+\_\+contents}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1XML_a52e5f082527be9313ddd69c2d39e8e91}{get\+String}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attribute\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads the contents of the attribute specified by {\ttfamily path} as a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1XML_a3aee76d208933dbacd9696c9ea359cb0}{set\+String}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attribute\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{content}})
+\begin{DoxyCompactList}\small\item\em Writes the contents of string {\ttfamily content} to the attribute specified by {\ttfamily path}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1XML_a1bc4871658ff04ad294eb9435f97d09a}{get\+All\+Recursive}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} rapidxml\+::xml\+\_\+node$<$$>$ \texorpdfstring{$\ast$}{*}node, std\+::string \mbox{\hyperlink{classmm_1_1Gaussian}{path}}, std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{all\+\_\+attr}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Fills the {\ttfamily all\+\_\+attr} array with all pairs {\ttfamily (path, value)} pairs that are descendants of node {\ttfamily node} at path {\ttfamily path}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::pair$<$ std\+::vector$<$ std\+::string $>$, std\+::string $>$ \mbox{\hyperlink{classmm_1_1XML_a7a88aed0996c65e2b3816473f1427d4a}{split\+Path}} (std\+::string \mbox{\hyperlink{classmm_1_1Gaussian}{path}})
+\begin{DoxyCompactList}\small\item\em Splits dot separated path into elements path and attribute name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{classmm_1_1XML_aa0749a07271c15f29170b1c4da28d594}{join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}})
+\begin{DoxyCompactList}\small\item\em Join a path into dot separated string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{char}} $>$ \mbox{\hyperlink{classmm_1_1XML_ad0b619975565fa2e39cddc8d09873a70}{file\+\_\+contents}}
+\begin{DoxyCompactList}\small\item\em Whole \doxylink{classmm_1_1XML}{XML} file contents. \end{DoxyCompactList}\item 
+rapidxml\+::xml\+\_\+document$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{char}} $>$ \mbox{\hyperlink{classmm_1_1XML_ac0a61d4678b680e20102f15436acfe41}{doc}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1XML}{XML} document root. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}\label{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c} 
+\index{mm::XML@{mm::XML}!XML@{XML}}
+\index{XML@{XML}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{XML()}{XML()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily mm\+::\+XML\+::\+XML (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Creates an \doxylink{classmm_1_1XML}{XML} reader linked to no document. 
+
+\Hypertarget{classmm_1_1XML_a62cdde80df2a0f8d7c5c016d541f6bd7}\label{classmm_1_1XML_a62cdde80df2a0f8d7c5c016d541f6bd7} 
+\index{mm::XML@{mm::XML}!XML@{XML}}
+\index{XML@{XML}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{XML()}{XML()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily mm\+::\+XML\+::\+XML (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1XML}{XML}} \&}]{xml }\end{DoxyParamCaption})}
+
+
+
+Creates a copy of the \doxylink{classmm_1_1XML}{XML} document. 
+
+\begin{DoxyNote}{Note}
+This re-\/parses the whole document. It should be used sparingly, and \doxylink{classmm_1_1XML}{XML} configurations can usually be passed around as {\ttfamily const \&} to avoid this. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a1809727c8144039a7016afe6c7cc6d36}\label{classmm_1_1XML_a1809727c8144039a7016afe6c7cc6d36} 
+\index{mm::XML@{mm::XML}!XML@{XML}}
+\index{XML@{XML}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{XML()}{XML()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily mm\+::\+XML\+::\+XML (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classmm_1_1XML}{XML} reader by reading the file given by {\ttfamily filename}. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c}\label{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c} 
+\index{mm::XML@{mm::XML}!documentRoot@{documentRoot}}
+\index{documentRoot@{documentRoot}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{documentRoot()}{documentRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily rapidxml\+::xml\+\_\+document$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{char}} $>$ \& mm\+::\+XML\+::document\+Root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Access to underlying \doxylink{classmm_1_1XML}{XML} root element from Rapid\+Xml library. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a2f9727ed7d5f1537910ea7b78971b47c}\label{classmm_1_1XML_a2f9727ed7d5f1537910ea7b78971b47c} 
+\index{mm::XML@{mm::XML}!documentRoot@{documentRoot}}
+\index{documentRoot@{documentRoot}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{documentRoot()}{documentRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} rapidxml\+::xml\+\_\+document$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{char}} $>$ \& mm\+::\+XML\+::document\+Root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Const version of \doxylink{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c}{XML\+::document\+Root}. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00046}{46}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a919cc32ed509e410174fc987b4242f35}\label{classmm_1_1XML_a919cc32ed509e410174fc987b4242f35} 
+\index{mm::XML@{mm::XML}!exists@{exists}}
+\index{exists@{exists}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{exists()}{exists()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+XML\+::exists (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{path }\end{DoxyParamCaption}) const}
+
+
+
+Returns {\ttfamily true} if the an attribute specified by {\ttfamily path} exists and {\ttfamily false} otherwise. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00164}{164}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db}\label{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db} 
+\index{mm::XML@{mm::XML}!get@{get}}
+\index{get@{get}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} mm\+::\+XML\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{path }\end{DoxyParamCaption}) const}
+
+
+
+Reads a values from an attribute specified by {\ttfamily path}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to which the attribute value should be converted. This is done using the stream extraction operator {\ttfamily \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}} for type {\ttfamily T}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Dot separated path to the attribute, excluding the root \doxylink{classmm_1_1XML}{XML} tag. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the attribute converted to type {\ttfamily T}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the attribute does not exist. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{XML_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{XML_8hpp_source}{XML.\+hpp}}.
+
+\Hypertarget{classmm_1_1XML_a1194b74b5b5da70eed10e6260a32a77e}\label{classmm_1_1XML_a1194b74b5b5da70eed10e6260a32a77e} 
+\index{mm::XML@{mm::XML}!getAll@{getAll}}
+\index{getAll@{getAll}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{getAll()}{getAll()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ mm\+::\+XML\+::get\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns all pairs {\ttfamily (path, attribute\+\_\+value)}. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00148}{148}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a1bc4871658ff04ad294eb9435f97d09a}\label{classmm_1_1XML_a1bc4871658ff04ad294eb9435f97d09a} 
+\index{mm::XML@{mm::XML}!getAllRecursive@{getAllRecursive}}
+\index{getAllRecursive@{getAllRecursive}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{getAllRecursive()}{getAllRecursive()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+XML\+::get\+All\+Recursive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} rapidxml\+::xml\+\_\+node$<$$>$ \texorpdfstring{$\ast$}{*}}]{node,  }\item[{std\+::string}]{path,  }\item[{std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ \&}]{all\+\_\+attr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fills the {\ttfamily all\+\_\+attr} array with all pairs {\ttfamily (path, value)} pairs that are descendants of node {\ttfamily node} at path {\ttfamily path}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em node} & Current node, whose descendants will be searched. \\
+\hline
+\mbox{\texttt{ in}}  & {\em path} & Path of the given {\ttfamily node}. \\
+\hline
+\mbox{\texttt{ out}}  & {\em all\+\_\+attr} & Container to be filled with {\ttfamily (path, value)} pairs. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00154}{154}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a52e5f082527be9313ddd69c2d39e8e91}\label{classmm_1_1XML_a52e5f082527be9313ddd69c2d39e8e91} 
+\index{mm::XML@{mm::XML}!getString@{getString}}
+\index{getString@{getString}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{getString()}{getString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*} mm\+::\+XML\+::get\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&}]{path,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attribute\+\_\+name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Reads the contents of the attribute specified by {\ttfamily path} as a string. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00087}{87}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_aa0749a07271c15f29170b1c4da28d594}\label{classmm_1_1XML_aa0749a07271c15f29170b1c4da28d594} 
+\index{mm::XML@{mm::XML}!join@{join}}
+\index{join@{join}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily std\+::string mm\+::\+XML\+::join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Join a path into dot separated string. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00077}{77}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a388d1a25b2a66452a23c062f3fd655f3}\label{classmm_1_1XML_a388d1a25b2a66452a23c062f3fd655f3} 
+\index{mm::XML@{mm::XML}!load@{load}}
+\index{load@{load}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+XML\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Loads \doxylink{classmm_1_1XML}{XML} document from a file given by {\ttfamily filename}. 
+
+Any previous data held in this object instance is lost. 
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00044}{44}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a2d9abc594c526470adf2d85a51925f74}\label{classmm_1_1XML_a2d9abc594c526470adf2d85a51925f74} 
+\index{mm::XML@{mm::XML}!loadFileHelper@{loadFileHelper}}
+\index{loadFileHelper@{loadFileHelper}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{loadFileHelper()}{loadFileHelper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+XML\+::load\+File\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function for opening files, called by \doxylink{classmm_1_1XML_a1809727c8144039a7016afe6c7cc6d36}{XML\+::\+XML(const std\+::string\&)} and \doxylink{classmm_1_1XML_a388d1a25b2a66452a23c062f3fd655f3}{XML\+::load()}. 
+
+The file is opened in this function and closed after this function finishes. 
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if anything is wrong when accessing or reading the file. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00016}{16}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a9bdbd54d4ab0b27158ba588f517039e0}\label{classmm_1_1XML_a9bdbd54d4ab0b27158ba588f517039e0} 
+\index{mm::XML@{mm::XML}!loadFromStoredContents@{loadFromStoredContents}}
+\index{loadFromStoredContents@{loadFromStoredContents}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{loadFromStoredContents()}{loadFromStoredContents()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+XML\+::load\+From\+Stored\+Contents (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads the \doxylink{classmm_1_1XML}{XML} document from a stored null-\/terminated {\ttfamily file\+\_\+contents}. 
+
+This modifies the {\ttfamily file\+\_\+contents} buffer, so the function is not idempotent. 
+\begin{DoxyExceptions}{Exceptions}
+{\em rapidxml\+::parse\+\_\+error} & Exception is thrown if the string stored in {\ttfamily file\+\_\+contents} cannot be parsed to a valid \doxylink{classmm_1_1XML}{XML} document. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00028}{28}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a9ead3434b3644a4d560f49eeeac6be68}\label{classmm_1_1XML_a9ead3434b3644a4d560f49eeeac6be68} 
+\index{mm::XML@{mm::XML}!set@{set}}
+\index{set@{set}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+XML\+::set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{path,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Saves a value to the attribute pointed to by {\ttfamily path}. 
+
+If the attribute or path does not exist it is created. 
+\begin{DoxyParams}{Parameters}
+{\em path} & Dot separated path to the attribute, excluding root \doxylink{classmm_1_1XML}{XML} tag. It the path does not exist, it is created on the fly. \\
+\hline
+{\em value} & Value to save. It is converted to string before saving using the stream insertion operator {\ttfamily \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}} for type {\ttfamily T}. \\
+\hline
+{\em overwrite} & If {\ttfamily true}, possible existing value is overwritten, otherwise an assertion is triggered. Defaults to {\ttfamily false}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+If overwrite is false, assertion fails if the attribute exists. This is the default behaviour. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{XML_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{XML_8hpp_source}{XML.\+hpp}}.
+
+\Hypertarget{classmm_1_1XML_a3aee76d208933dbacd9696c9ea359cb0}\label{classmm_1_1XML_a3aee76d208933dbacd9696c9ea359cb0} 
+\index{mm::XML@{mm::XML}!setString@{setString}}
+\index{setString@{setString}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{setString()}{setString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+XML\+::set\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&}]{path,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attribute\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Writes the contents of string {\ttfamily content} to the attribute specified by {\ttfamily path}. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00101}{101}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{classmm_1_1XML_a7a88aed0996c65e2b3816473f1427d4a}\label{classmm_1_1XML_a7a88aed0996c65e2b3816473f1427d4a} 
+\index{mm::XML@{mm::XML}!splitPath@{splitPath}}
+\index{splitPath@{splitPath}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{splitPath()}{splitPath()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::vector$<$ std\+::string $>$, std\+::string $>$ mm\+::\+XML\+::split\+Path (\begin{DoxyParamCaption}\item[{std\+::string}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Splits dot separated path into elements path and attribute name. 
+
+\begin{DoxyReturn}{Returns}
+Pair {\ttfamily \{\{sequence\+\_\+of\+\_\+elements\}, attribute\+\_\+name\}} representing the path. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00055}{55}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1XML_a0f6bc7e006bf03a23629f83fe9456efd}\label{classmm_1_1XML_a0f6bc7e006bf03a23629f83fe9456efd} 
+\index{mm::XML@{mm::XML}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1XML}{XML}} \&}]{xml }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Prints the contents of currently loaded \doxylink{classmm_1_1XML}{XML} document. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1XML_ac0a61d4678b680e20102f15436acfe41}\label{classmm_1_1XML_ac0a61d4678b680e20102f15436acfe41} 
+\index{mm::XML@{mm::XML}!doc@{doc}}
+\index{doc@{doc}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{doc}{doc}}
+{\footnotesize\ttfamily rapidxml\+::xml\+\_\+document$<$\mbox{\hyperlink{classmm_1_1Gaussian}{char}}$>$ mm\+::\+XML\+::doc\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{classmm_1_1XML}{XML} document root. 
+
+
+
+Definition at line \mbox{\hyperlink{XML__fwd_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{XML__fwd_8hpp_source}{XML\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1XML_ad0b619975565fa2e39cddc8d09873a70}\label{classmm_1_1XML_ad0b619975565fa2e39cddc8d09873a70} 
+\index{mm::XML@{mm::XML}!file\_contents@{file\_contents}}
+\index{file\_contents@{file\_contents}!mm::XML@{mm::XML}}
+\doxysubsubsection{\texorpdfstring{file\_contents}{file\_contents}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmm_1_1Gaussian}{char}}$>$ mm\+::\+XML\+::file\+\_\+contents\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Whole \doxylink{classmm_1_1XML}{XML} file contents. 
+
+
+
+Definition at line \mbox{\hyperlink{XML__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{XML__fwd_8hpp_source}{XML\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/io/\mbox{\hyperlink{XML__fwd_8hpp}{XML\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/io/\mbox{\hyperlink{XML_8hpp}{XML.\+hpp}}\item 
+src/io/\mbox{\hyperlink{XML_8cpp}{XML.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,458 @@
+\doxysection{mm\+::Basic\+Relax Class Reference}
+\hypertarget{classmm_1_1BasicRelax}{}\label{classmm_1_1BasicRelax}\index{mm::BasicRelax@{mm::BasicRelax}}
+
+
+{\ttfamily \#include $<$Basic\+Relax\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Redistributes nodes towards more uniform distribution by minimizing potential between nodes. 
+
+The engine first finds {\ttfamily num\+\_\+neighbours} closest neighbours. Then it translates each point according to the repelling "{}force"{} induced by its neighbours, where it also takes into account target potential. The force is determined by summing the gradients of potentials in surrounding nodes, where amplitude is determined based on distance to the closest neighbour and supplied target density function. The algorithm uses also a primitive Simulated Annealing, i.\+e. the relax movement magnitude is multiplied with an annealing factor that is linearly dropping from initial\+\_\+heat to final\+\_\+heat.
+
+The Engine supports two call types\+: with supplied distribution function relax(func), where it tries to satisfy the user supplied nodal density function. This can be achieved only when there is the total number of domain nodes the same as integral of density function over the domain. If there is too much nodes a volatile relax might occur. If there is not enough nodes the relax might become lazy. The best use of this mode is in combination with fill\+Distribution Engines, check test for examples.
+
+Without distribution, where nodes always move towards less populated area regardless anything. The relax magnitude is simply determined from annealing factor and distance to the closest node. A simple and stable approach, however, note that this relax always converges towards uniformly distributed nodes.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ sh.discretizeBoundaryWithStep(fill\_density(\{r,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;\ fill\_engine.seed(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax\_engine;}
+\DoxyCodeLine{\ \ \ \ relax\_engine.iterations(50).initialHeat(1).finalHeat(0.05).boundaryProjectionThreshold(0.75)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{BasicRelax::PROJECT\_IN\_DIRECTION}}).numNeighbours(5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.fill(fill\_engine,\ fill\_density);}
+\DoxyCodeLine{\ \ \ \ domain.relax(relax\_engine,\ fill\_density);}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Basic\+Relax\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{classmm_1_1BasicRelax__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a779e0ee991a93a3ceef7c15335214854}{only\+Nodes}} (\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1Gaussian}{nodes}})
+\begin{DoxyCompactList}\small\item\em Move only given nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a767e071093475a5a7ba8f4305b0410bb}{initial\+Heat}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{in}})
+\begin{DoxyCompactList}\small\item\em Sets initial heat. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_abbb9ab1af3e7597dfb2da735b77619e8}{final\+Heat}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{in}})
+\begin{DoxyCompactList}\small\item\em Sets final heat. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_afbec16426f7fe60cebcd97f43897cf5c}{num\+Neighbours}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{neighbours}})
+\begin{DoxyCompactList}\small\item\em Sets num neighbours. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a8d4b382691505b6298b46e7b14642494}{potential\+Order}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} order)
+\begin{DoxyCompactList}\small\item\em Sets order of repulsing potential. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}{iterations}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} iterations)
+\begin{DoxyCompactList}\small\item\em Sets number of iterations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a4fa13a5223bf28227000a9517ad742f3}{rebuild\+Tree\+After}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}{iterations}})
+\begin{DoxyCompactList}\small\item\em Sets rebuild tree frequency. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a45fec9472d9ccfba6005c13b714f92bc}{projection\+Type}} (\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{Projection\+Type}} \mbox{\hyperlink{classmm_1_1Gaussian}{in}})
+\begin{DoxyCompactList}\small\item\em Determines how to handle nodes that escape during relaxation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& \mbox{\hyperlink{classmm_1_1BasicRelax_a6a0d3d9c18e38c11de3e3a9233ae9a6d}{boundary\+Projection\+Threshold}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{in}})
+\begin{DoxyCompactList}\small\item\em Sets threshold for adding nodes on boundary, i.\+e. if node $d_1$ and $d_2$ are distances to closest boundary nodes, do not add node on boundary if $d_1/d_2 < boundary_projection_threshold $. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} domain\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1BasicRelax_a88f547db8a2ea2b1c662b6dc11057369}{operator()}} (domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Runs the relax on the selected domain with constant distribution equals to domain characteristic distance. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} domain\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1BasicRelax_a429be9da201b358d81c077045255ee09}{operator()}} (domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{r}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Runs the relax on the selected domain with constant density. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} domain\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{radius\+\_\+func\+\_\+type}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1BasicRelax_aab94fff4aa61eed91f638798dc3953be}{operator()}} (domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{radius\+\_\+func\+\_\+type}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{r\+\_\+func}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Runs the procedure of a given domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{Projection\+Type}} \{ \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a9cba8855c66ddbfc7769282ceaf48e87}{DO\+\_\+\+NOT\+\_\+\+PROJECT}}
+, \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{PROJECT\+\_\+\+IN\+\_\+\+DIRECTION}}
+, \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695aa27f8899840416e18ae6be1172712f3b}{PROJECT\+\_\+\+BETWEEN\+\_\+\+CLOSEST}}
+ \}
+\begin{DoxyCompactList}\small\item\em Indicating type of projection used when a relax node goes out of the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1BasicRelax_ab3d2afcee1b0617a428dfa002e749b26}{num\+\_\+neighbours}} = 1
+\begin{DoxyCompactList}\small\item\em Number of nodes to consider when calculating the potential. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1BasicRelax_ad49fc5ee6414873bb491eb3888e847e4}{num\+\_\+iterations}} = 50
+\begin{DoxyCompactList}\small\item\em Number of iterations performed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1BasicRelax_a82137f81f9060ab3468d6f9c8709efa9}{initial\+\_\+heat}} = 1
+\begin{DoxyCompactList}\small\item\em Initial heat, usually between 0 and 5. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1BasicRelax_acf63d67279761f418b021d8de496aed1}{final\+\_\+heat}} = 0
+\begin{DoxyCompactList}\small\item\em Heat at the end of the relax, usually around 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1BasicRelax_a83640d548d2e0be47968a56a0bb37eed}{potential\+\_\+order}} = 2
+\begin{DoxyCompactList}\small\item\em Order of repulsing potential. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1BasicRelax_a5a0cba7fbe60728375baf0347230e7d8}{rebuild\+\_\+tree\+\_\+after}} = 1
+\begin{DoxyCompactList}\small\item\em How often engine rebuild search tree, 1 is perfect but slow. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1BasicRelax_a86e9a4f4fc113a241efd1a5c4a6cb782}{nodes\+\_\+}}
+\begin{DoxyCompactList}\small\item\em List of nodes to process. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{Projection\+Type}} \mbox{\hyperlink{classmm_1_1BasicRelax_aa054d3465d9b5190b5ef67b779d8dba1}{projection\+\_\+type}} = \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a9cba8855c66ddbfc7769282ceaf48e87}{DO\+\_\+\+NOT\+\_\+\+PROJECT}}
+\begin{DoxyCompactList}\small\item\em On boundary projection method. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1BasicRelax_af307d1fd61c9dec303b9429f599df8e2}{boundary\+\_\+projection\+\_\+threshold}} = 0.\+75
+\begin{DoxyCompactList}\small\item\em Threshold for projecting nodes on boundary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}\label{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695} 
+\index{mm::BasicRelax@{mm::BasicRelax}!ProjectionType@{ProjectionType}}
+\index{ProjectionType@{ProjectionType}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{ProjectionType}{ProjectionType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{enum}} \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{mm\+::\+Basic\+Relax\+::\+Projection\+Type}}}
+
+
+
+Indicating type of projection used when a relax node goes out of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DO\_NOT\_PROJECT@{DO\_NOT\_PROJECT}!mm::BasicRelax@{mm::BasicRelax}}\index{mm::BasicRelax@{mm::BasicRelax}!DO\_NOT\_PROJECT@{DO\_NOT\_PROJECT}}}\Hypertarget{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a9cba8855c66ddbfc7769282ceaf48e87}\label{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a9cba8855c66ddbfc7769282ceaf48e87} 
+DO\+\_\+\+NOT\+\_\+\+PROJECT&Escaped nodes are frozen outside the domain till the end of relax and then removed. This is good option for violent and unstable relaxations. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PROJECT\_IN\_DIRECTION@{PROJECT\_IN\_DIRECTION}!mm::BasicRelax@{mm::BasicRelax}}\index{mm::BasicRelax@{mm::BasicRelax}!PROJECT\_IN\_DIRECTION@{PROJECT\_IN\_DIRECTION}}}\Hypertarget{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}\label{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85} 
+PROJECT\+\_\+\+IN\+\_\+\+DIRECTION&Project on boundary in relax movement direction. In general produces better distribution on boundaries, but the approximated normals can be bad. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PROJECT\_BETWEEN\_CLOSEST@{PROJECT\_BETWEEN\_CLOSEST}!mm::BasicRelax@{mm::BasicRelax}}\index{mm::BasicRelax@{mm::BasicRelax}!PROJECT\_BETWEEN\_CLOSEST@{PROJECT\_BETWEEN\_CLOSEST}}}\Hypertarget{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695aa27f8899840416e18ae6be1172712f3b}\label{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695aa27f8899840416e18ae6be1172712f3b} 
+PROJECT\+\_\+\+BETWEEN\+\_\+\+CLOSEST&Project between two closest boundary nodes – this one might result in divergent behaviour, when both closest nodes are on one side, leading in huge gaps on the boundary. However, when there are enough boundary nodes in the first place, this works very well. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1BasicRelax_a6a0d3d9c18e38c11de3e3a9233ae9a6d}\label{classmm_1_1BasicRelax_a6a0d3d9c18e38c11de3e3a9233ae9a6d} 
+\index{mm::BasicRelax@{mm::BasicRelax}!boundaryProjectionThreshold@{boundaryProjectionThreshold}}
+\index{boundaryProjectionThreshold@{boundaryProjectionThreshold}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{boundaryProjectionThreshold()}{boundaryProjectionThreshold()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::boundary\+Projection\+Threshold (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{in }\end{DoxyParamCaption})}
+
+
+
+Sets threshold for adding nodes on boundary, i.\+e. if node $d_1$ and $d_2$ are distances to closest boundary nodes, do not add node on boundary if $d_1/d_2 < boundary_projection_threshold $. 
+
+If threshold is 0 all nodes are added, if it is greater than 1 no nodes are added. 
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_abbb9ab1af3e7597dfb2da735b77619e8}\label{classmm_1_1BasicRelax_abbb9ab1af3e7597dfb2da735b77619e8} 
+\index{mm::BasicRelax@{mm::BasicRelax}!finalHeat@{finalHeat}}
+\index{finalHeat@{finalHeat}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{finalHeat()}{finalHeat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::final\+Heat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{in }\end{DoxyParamCaption})}
+
+
+
+Sets final heat. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a767e071093475a5a7ba8f4305b0410bb}\label{classmm_1_1BasicRelax_a767e071093475a5a7ba8f4305b0410bb} 
+\index{mm::BasicRelax@{mm::BasicRelax}!initialHeat@{initialHeat}}
+\index{initialHeat@{initialHeat}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{initialHeat()}{initialHeat()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::initial\+Heat (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{in }\end{DoxyParamCaption})}
+
+
+
+Sets initial heat. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & Initial heat, usually between 0 and 5, higher heat means more volatile movement. High initial heat may cause divergence and erratic behaviour. Setting too small initial heat might results in lazy relaxation. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}\label{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d} 
+\index{mm::BasicRelax@{mm::BasicRelax}!iterations@{iterations}}
+\index{iterations@{iterations}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{iterations()}{iterations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::iterations (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{iterations }\end{DoxyParamCaption})}
+
+
+
+Sets number of iterations. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_afbec16426f7fe60cebcd97f43897cf5c}\label{classmm_1_1BasicRelax_afbec16426f7fe60cebcd97f43897cf5c} 
+\index{mm::BasicRelax@{mm::BasicRelax}!numNeighbours@{numNeighbours}}
+\index{numNeighbours@{numNeighbours}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{numNeighbours()}{numNeighbours()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::num\+Neighbours (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{neighbours }\end{DoxyParamCaption})}
+
+
+
+Sets num neighbours. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a779e0ee991a93a3ceef7c15335214854}\label{classmm_1_1BasicRelax_a779e0ee991a93a3ceef7c15335214854} 
+\index{mm::BasicRelax@{mm::BasicRelax}!onlyNodes@{onlyNodes}}
+\index{onlyNodes@{onlyNodes}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{onlyNodes()}{onlyNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::only\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$}]{nodes }\end{DoxyParamCaption})}
+
+
+
+Move only given nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a88f547db8a2ea2b1c662b6dc11057369}\label{classmm_1_1BasicRelax_a88f547db8a2ea2b1c662b6dc11057369} 
+\index{mm::BasicRelax@{mm::BasicRelax}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} domain\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Basic\+Relax\+::operator() (\begin{DoxyParamCaption}\item[{domain\+\_\+t \&}]{domain }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Runs the relax on the selected domain with constant distribution equals to domain characteristic distance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em domain} & domain to process \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00127}{127}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_aab94fff4aa61eed91f638798dc3953be}\label{classmm_1_1BasicRelax_aab94fff4aa61eed91f638798dc3953be} 
+\index{mm::BasicRelax@{mm::BasicRelax}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} domain\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{radius\+\_\+func\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Basic\+Relax\+::operator() (\begin{DoxyParamCaption}\item[{domain\+\_\+t \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{radius\+\_\+func\+\_\+type}} \&}]{r\+\_\+func }\end{DoxyParamCaption}) const}
+
+
+
+Runs the procedure of a given domain. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{BasicRelax_8hpp_source}{Basic\+Relax.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a429be9da201b358d81c077045255ee09}\label{classmm_1_1BasicRelax_a429be9da201b358d81c077045255ee09} 
+\index{mm::BasicRelax@{mm::BasicRelax}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} domain\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Basic\+Relax\+::operator() (\begin{DoxyParamCaption}\item[{domain\+\_\+t \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{r }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Runs the relax on the selected domain with constant density. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em domain} & domain to process \\
+\hline
+{\em r} & constant density \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00138}{138}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a8d4b382691505b6298b46e7b14642494}\label{classmm_1_1BasicRelax_a8d4b382691505b6298b46e7b14642494} 
+\index{mm::BasicRelax@{mm::BasicRelax}!potentialOrder@{potentialOrder}}
+\index{potentialOrder@{potentialOrder}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{potentialOrder()}{potentialOrder()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::potential\+Order (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{order }\end{DoxyParamCaption})}
+
+
+
+Sets order of repulsing potential. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00041}{41}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a45fec9472d9ccfba6005c13b714f92bc}\label{classmm_1_1BasicRelax_a45fec9472d9ccfba6005c13b714f92bc} 
+\index{mm::BasicRelax@{mm::BasicRelax}!projectionType@{projectionType}}
+\index{projectionType@{projectionType}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{projectionType()}{projectionType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::projection\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{Projection\+Type}}}]{in }\end{DoxyParamCaption})}
+
+
+
+Determines how to handle nodes that escape during relaxation. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00022}{22}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a4fa13a5223bf28227000a9517ad742f3}\label{classmm_1_1BasicRelax_a4fa13a5223bf28227000a9517ad742f3} 
+\index{mm::BasicRelax@{mm::BasicRelax}!rebuildTreeAfter@{rebuildTreeAfter}}
+\index{rebuildTreeAfter@{rebuildTreeAfter}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{rebuildTreeAfter()}{rebuildTreeAfter()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}} \& mm\+::\+Basic\+Relax\+::rebuild\+Tree\+After (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{iterations }\end{DoxyParamCaption})}
+
+
+
+Sets rebuild tree frequency. 
+
+Ir rebuild\textquotesingle{}s tree every {\ttfamily in} iterations. {\ttfamily in = 1} is perfect but slow. Using higher values results in better performance at the cost of accuracy. 
+
+Definition at line \mbox{\hyperlink{BasicRelax_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{BasicRelax_8cpp_source}{Basic\+Relax.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1BasicRelax_af307d1fd61c9dec303b9429f599df8e2}\label{classmm_1_1BasicRelax_af307d1fd61c9dec303b9429f599df8e2} 
+\index{mm::BasicRelax@{mm::BasicRelax}!boundary\_projection\_threshold@{boundary\_projection\_threshold}}
+\index{boundary\_projection\_threshold@{boundary\_projection\_threshold}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{boundary\_projection\_threshold}{boundary\_projection\_threshold}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Basic\+Relax\+::boundary\+\_\+projection\+\_\+threshold = 0.\+75\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Threshold for projecting nodes on boundary. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_acf63d67279761f418b021d8de496aed1}\label{classmm_1_1BasicRelax_acf63d67279761f418b021d8de496aed1} 
+\index{mm::BasicRelax@{mm::BasicRelax}!final\_heat@{final\_heat}}
+\index{final\_heat@{final\_heat}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{final\_heat}{final\_heat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Basic\+Relax\+::final\+\_\+heat = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Heat at the end of the relax, usually around 0. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a82137f81f9060ab3468d6f9c8709efa9}\label{classmm_1_1BasicRelax_a82137f81f9060ab3468d6f9c8709efa9} 
+\index{mm::BasicRelax@{mm::BasicRelax}!initial\_heat@{initial\_heat}}
+\index{initial\_heat@{initial\_heat}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{initial\_heat}{initial\_heat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Basic\+Relax\+::initial\+\_\+heat = 1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initial heat, usually between 0 and 5. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00069}{69}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a86e9a4f4fc113a241efd1a5c4a6cb782}\label{classmm_1_1BasicRelax_a86e9a4f4fc113a241efd1a5c4a6cb782} 
+\index{mm::BasicRelax@{mm::BasicRelax}!nodes\_@{nodes\_}}
+\index{nodes\_@{nodes\_}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{nodes\_}{nodes\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ mm\+::\+Basic\+Relax\+::nodes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+List of nodes to process. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00073}{73}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_ad49fc5ee6414873bb491eb3888e847e4}\label{classmm_1_1BasicRelax_ad49fc5ee6414873bb491eb3888e847e4} 
+\index{mm::BasicRelax@{mm::BasicRelax}!num\_iterations@{num\_iterations}}
+\index{num\_iterations@{num\_iterations}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{num\_iterations}{num\_iterations}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Basic\+Relax\+::num\+\_\+iterations = 50\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of iterations performed. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_ab3d2afcee1b0617a428dfa002e749b26}\label{classmm_1_1BasicRelax_ab3d2afcee1b0617a428dfa002e749b26} 
+\index{mm::BasicRelax@{mm::BasicRelax}!num\_neighbours@{num\_neighbours}}
+\index{num\_neighbours@{num\_neighbours}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{num\_neighbours}{num\_neighbours}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Basic\+Relax\+::num\+\_\+neighbours = 1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of nodes to consider when calculating the potential. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a83640d548d2e0be47968a56a0bb37eed}\label{classmm_1_1BasicRelax_a83640d548d2e0be47968a56a0bb37eed} 
+\index{mm::BasicRelax@{mm::BasicRelax}!potential\_order@{potential\_order}}
+\index{potential\_order@{potential\_order}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{potential\_order}{potential\_order}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Basic\+Relax\+::potential\+\_\+order = 2\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Order of repulsing potential. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_aa054d3465d9b5190b5ef67b779d8dba1}\label{classmm_1_1BasicRelax_aa054d3465d9b5190b5ef67b779d8dba1} 
+\index{mm::BasicRelax@{mm::BasicRelax}!projection\_type@{projection\_type}}
+\index{projection\_type@{projection\_type}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{projection\_type}{projection\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{Projection\+Type}} mm\+::\+Basic\+Relax\+::projection\+\_\+type = \mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a9cba8855c66ddbfc7769282ceaf48e87}{DO\+\_\+\+NOT\+\_\+\+PROJECT}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+On boundary projection method. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1BasicRelax_a5a0cba7fbe60728375baf0347230e7d8}\label{classmm_1_1BasicRelax_a5a0cba7fbe60728375baf0347230e7d8} 
+\index{mm::BasicRelax@{mm::BasicRelax}!rebuild\_tree\_after@{rebuild\_tree\_after}}
+\index{rebuild\_tree\_after@{rebuild\_tree\_after}!mm::BasicRelax@{mm::BasicRelax}}
+\doxysubsubsection{\texorpdfstring{rebuild\_tree\_after}{rebuild\_tree\_after}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Basic\+Relax\+::rebuild\+\_\+tree\+\_\+after = 1\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+How often engine rebuild search tree, 1 is perfect but slow. 
+
+
+
+Definition at line \mbox{\hyperlink{BasicRelax__fwd_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{BasicRelax__fwd_8hpp_source}{Basic\+Relax\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{BasicRelax__fwd_8hpp}{Basic\+Relax\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{BasicRelax_8hpp}{Basic\+Relax.\+hpp}}\item 
+src/domains/\mbox{\hyperlink{BasicRelax_8cpp}{Basic\+Relax.\+cpp}}\end{DoxyCompactItemize}

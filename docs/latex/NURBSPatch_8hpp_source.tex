@@ -1,0 +1,440 @@
+\doxysection{NURBSPatch.\+hpp}
+\hypertarget{NURBSPatch_8hpp_source}{}\label{NURBSPatch_8hpp_source}\index{include/medusa/bits/domains/NURBSPatch.hpp@{include/medusa/bits/domains/NURBSPatch.hpp}}
+\mbox{\hyperlink{NURBSPatch_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_NURBSPATCH\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_NURBSPATCH\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{NURBSPatch__fwd_8hpp}{NURBSPatch\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{cad__helpers_8hpp}{medusa/bits/domains/cad\_helpers.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1NURBSPatch_ae103ba49c8eb66e68d5ff0556c22f35d}{00017}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_ae103ba49c8eb66e68d5ff0556c22f35d}{NURBSPatch<vec\_t,\ param\_vec\_t>::NURBSPatch}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NdRange<proj\_vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{wcp}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<\mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}},\ param\_dim>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{ks}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<int,\ param\_dim>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{in\_p}})\ :}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ weighted\_control\_points\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{wcp}}\ \},\ knots\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{ks}}\ \},\ p\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{in\_p}}\ \},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der\_structure\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{nullptr}}\ \}\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1NURBSPatch_a4fd76e1c4f5b6f67cef392d44a09d405a5144e606fc3ec8a8ba326c5d9d97d86d}{param\_dim}}\ <=\ 2,\ \textcolor{stringliteral}{"{}Only\ NURBS\ curves\ and\ surfaces\ are\ currently\ supported."{}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00025}00025\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00026}\mbox{\hyperlink{classmm_1_1NURBSPatch_a03dcb96f389adfc663599d4ccb84b9a4}{00026}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_ae103ba49c8eb66e68d5ff0556c22f35d}{NURBSPatch<vec\_t,\ param\_vec\_t>::NURBSPatch}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NdRange<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{cp}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NdRange<double>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<\mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}},\ param\_dim>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{ks}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::array<int,\ param\_dim>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{in\_p}})\ :}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ knots\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{ks}}\ \},\ p\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{in\_p}}\ \},\ der\_structure\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{nullptr}}\ \}\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1NURBSPatch_a4fd76e1c4f5b6f67cef392d44a09d405a5144e606fc3ec8a8ba326c5d9d97d86d}{param\_dim}}\ <=\ 2,\ \textcolor{stringliteral}{"{}Only\ NURBS\ curves\ and\ surfaces\ are\ currently\ supported."{}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch_ac6ffef50c08de6398e1978cb8670043e}{weighted\_control\_points}}\ =\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00033}00033\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cpToWcp}}(\mbox{\hyperlink{classmm_1_1Gaussian}{cp}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00036}00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1NURBSPatch_aca620d661d881ce486a9e40c62b93982}{00037}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_ae103ba49c8eb66e68d5ff0556c22f35d}{NURBSPatch<vec\_t,\ param\_vec\_t>::NURBSPatch}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NURBSPatch<vec\_t,\ param\_vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{patch}})\ \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ :\ weighted\_control\_points\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{patch}}.weighted\_control\_points\ \},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ knots\{\ \mbox{\hyperlink{classmm_1_1Gaussian}{patch}}.knots\ \},\ p\ \{\ patch.p\ \}\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{if}\ (patch.der\_structure\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ der\_structure\ =\ std::unique\_ptr<std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>>(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>(*patch.der\_structure));}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00043}00043\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00046}00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1NURBSPatch_a409e31ae97a12b1536012a929a3d2918}{00047}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NURBSPatch<vec\_t,\ param\_vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a409e31ae97a12b1536012a929a3d2918}{NURBSPatch<vec\_t,\ param\_vec\_t>::operator=}}(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NURBSPatch<vec\_t,\ param\_vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00049}00049\ \ \ \ \ weighted\_control\_points\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}}.weighted\_control\_points;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00050}00050\ \ \ \ \ p\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}}.p;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00051}00051\ \ \ \ \ knots\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}}.knots;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{other}}.der\_structure\ ==\ \textcolor{keyword}{nullptr}\ \&\&\ der\_structure\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ der\_structure\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00055}00055\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{other}}.der\_structure\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ der\_structure\ =\ std::unique\_ptr<std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>>(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>(*\mbox{\hyperlink{classmm_1_1Gaussian}{other}}.der\_structure));}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00058}00058\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00063}00063\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00064}\mbox{\hyperlink{classmm_1_1NURBSPatch_a27765526a45c32e93287128fb59b6947}{00064}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a27765526a45c32e93287128fb59b6947}{NURBSPatch<vec\_t,\ param\_vec\_t>::computeDerivativeStructure}}()\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00065}00065\ \ \ \ \ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::computeDerivativeStructure}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00068}00068\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00069}\mbox{\hyperlink{classmm_1_1NURBSPatch_ade0f21f639bd5f5e2e0be26a56bc7a50}{00069}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_ade0f21f639bd5f5e2e0be26a56bc7a50}{NURBSPatch<vec\_t,\ param\_vec\_t>::evaluate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t,\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{scalar\_t}}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch_ac5551678e012265208c020cf311f07a3}{proj\_vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{weighted\_pt}}\ =\ evaluateWeighted(t);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ Project\ into\ the\ desired\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{weighted\_pt}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{weighted\_pt}}(proj\_dim\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00076}00076\ \ \ \ \ *\mbox{\hyperlink{classmm_1_1Gaussian}{w}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{weighted\_pt}}(proj\_dim\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00078}00078\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00080}00080\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00081}\mbox{\hyperlink{classmm_1_1NURBSPatch_a7c54add03b6c5bde35b8e9c3db1e33c1}{00081}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_ade0f21f639bd5f5e2e0be26a56bc7a50}{NURBSPatch<vec\_t,\ param\_vec\_t>::evaluate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{return}\ evaluate(t,\ \&\mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00086}00086\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00087}00087\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_ac5551678e012265208c020cf311f07a3}{NURBSPatch<vec\_t,\ param\_vec\_t>::proj\_vec\_t}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00088}\mbox{\hyperlink{classmm_1_1NURBSPatch_a5e8c71f43dbce24e54d335c49f4d438f}{00088}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5e8c71f43dbce24e54d335c49f4d438f}{NURBSPatch<vec\_t,\ param\_vec\_t>::evaluateWeighted}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::evaluateWeighted}}(*\textcolor{keyword}{this},\ t);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00090}00090\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00092}00092\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00093}00093\ Eigen::Matrix<typename\ NURBSPatch<vec\_t,\ param\_vec\_t>::scalar\_t,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::dim}},\ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::param\_dim}}>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00095}\mbox{\hyperlink{classmm_1_1NURBSPatch_af482b4fafd557ec303798b33bb06dc32}{00095}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_af482b4fafd557ec303798b33bb06dc32}{NURBSPatch<vec\_t,\ param\_vec\_t>::jacobian}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{scalar\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::jacobian}}(*\textcolor{keyword}{this},\ t,\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00098}00098\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00100}00100\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00101}00101\ Eigen::Matrix<typename\ NURBSPatch<vec\_t,\ param\_vec\_t>::scalar\_t,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::dim}},\ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::param\_dim}}>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00103}\mbox{\hyperlink{classmm_1_1NURBSPatch_aaf9f241ca5f79c400decd304da2eb3ee}{00103}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_af482b4fafd557ec303798b33bb06dc32}{NURBSPatch<vec\_t,\ param\_vec\_t>::jacobian}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00104}00104\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00105}00105\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}}\ =\ evaluate(t,\ \&\mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{return}\ jacobian(t,\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00107}00107\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00109}00109\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00110}00110\ std::pair<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ Eigen::Matrix<}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{NURBSPatch<vec\_t,\ param\_vec\_t>::scalar\_t}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::dim}},\ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::param\_dim}}>>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00114}\mbox{\hyperlink{classmm_1_1NURBSPatch_a8488a812c1d0b9dd824de076e1b6ba51}{00114}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a8488a812c1d0b9dd824de076e1b6ba51}{NURBSPatch<vec\_t,\ param\_vec\_t>::evaluatePointAndJacobian}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00116}00116\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}}\ =\ evaluate(t,\ \&\mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00117}00117\ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ param\_dim>\ \mbox{\hyperlink{classmm_1_1Gaussian}{jm}}\ =\ jacobian(t,\ \mbox{\hyperlink{classmm_1_1Gaussian}{pt}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{return}\ std::pair<vec\_t,\ Eigen::Matrix<scalar\_t,\ dim,\ param\_dim>>(\mbox{\hyperlink{classmm_1_1Gaussian}{pt}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{jm}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00119}00119\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00121}00121\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00122}\mbox{\hyperlink{classmm_1_1NURBSPatch_adede8c1ed4a44bcd1c612c4ecc73addb}{00122}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<param\_vec\_t>}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_adede8c1ed4a44bcd1c612c4ecc73addb}{NURBSPatch<vec\_t,\ param\_vec\_t>::getDomain}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00123}00123\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\ beg,\ end;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ param\_dim;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ beg(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ knots[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}].front();}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00126}00126\ \ \ \ \ \ \ \ \ end(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ knots[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}].back();}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00127}00127\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<param\_vec\_t>}}(beg,\ end);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00130}00130\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00132}00132\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00133}00133\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<NURBSPatch<vec\_t,\ Vec<typename\ NURBSPatch<vec\_t,\ param\_vec\_t>::scalar\_t}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00134}00134\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::param\_dim}}\ -\/\ 1>>>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00135}\mbox{\hyperlink{classmm_1_1NURBSPatch_aa432c3c5b79376bf0c1356644837c681}{00135}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSPatch_aa432c3c5b79376bf0c1356644837c681}{NURBSPatch<vec\_t,\ param\_vec\_t>::getBoundaries}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::getBoundaries}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00137}00137\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00139}00139\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00140}\mbox{\hyperlink{classmm_1_1NURBSPatch_af16f4750f9f3b38f46671e297cb7917b}{00140}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch_af16f4750f9f3b38f46671e297cb7917b}{NURBSPatch<vec\_t,\ param\_vec\_t>::getPatchParameterFromBoundaryParameter}}(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ param\_dim\ -\/\ 1>}}\&\ t,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a5c0d2eb6c5fd52898cbca270a2607def}{scalar\_t}}\ epsilon)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00143}00143\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ getPatchParameterFromBoundaryParameter}}(*\textcolor{keyword}{this},\ t,\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ epsilon);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00144}00144\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00146}00146\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00147}00147\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<typename\ NURBSPatch<vec\_t,\ param\_vec\_t>::scalar\_t}},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00148}\mbox{\hyperlink{classmm_1_1NURBSPatch_a831a33ce0b9c9a0a2767b13a685a95ea}{00148}}\ \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch<vec\_t,\ param\_vec\_t>::param\_dim}}\ -\/\ 1>\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a831a33ce0b9c9a0a2767b13a685a95ea}{NURBSPatch<vec\_t,\ param\_vec\_t>::}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00149}00149\ \mbox{\hyperlink{classmm_1_1NURBSPatch_a831a33ce0b9c9a0a2767b13a685a95ea}{\ \ \ \ getBoundaryParameterFromPatchParameter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}\&\ t,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ param\_vec\_t>::}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00151}00151\ \mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ getBoundaryParameterFromPatchParameter}}(*\textcolor{keyword}{this},\ t,\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00152}00152\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00155}00155\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00156}00156\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}{nurbs\_patch\_internal::NURBSPatchHelper}}<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}},\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{classmm_1_1Gaussian}{typename}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}::\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ 2>>\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00157}00157\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<typename\ vec\_t::scalar\_t,\ 2>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00158}00158\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00159}00159\ \ \ \ \ \textcolor{keyword}{enum}\ \{\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ =\ vec\_t::dim,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00160}00160\ \ \ \ \ \ \ \ \ proj\_dim\ =\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00161}00161\ \ \ \ \ \ \ \ \ param\_dim\ =\ param\_vec\_t::dim\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00162}00162\ \ \ \ \ \textcolor{keyword}{typedef}\ Vec<scalar\_t,\ proj\_dim>\ proj\_vec\_t;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00164}00164\ \ \ \ \ \textcolor{keyword}{static}\ Range<Range<proj\_vec\_t>>\ cpToWcp(\textcolor{keyword}{const}\ Range<Range<vec\_t>>\&\ cp,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Range<double>>\&\ w)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00166}00166\ \ \ \ \ \ \ \ \ Range<Range<proj\_vec\_t>>\ weighted\_control\_points;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00167}00167\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00168}00168\ \ \ \ \ \ \ \ \ weighted\_control\_points.resize(cp.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ cp.size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ weighted\_control\_points[i].resize(cp[i].size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cp[i].size();\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ proj\_vec\_t\ temp;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ y\ =\ 0;\ y\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ y++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp(y)\ =\ w[i][j]\ *\ cp[i][j](y);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp(proj\_dim\ -\/\ 1)\ =\ w[i][j];}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ weighted\_control\_points[i][j]\ =\ temp;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ weighted\_control\_points;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00184}00184\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00186}00186\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ computeDerivativeStructure(NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (patch.der\_structure\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00191}00191\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ control\ points\ for\ the\ second\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00192}00192\ \ \ \ \ \ \ \ \ Range<Range<proj\_vec\_t>>\ v\_der\_wcp(patch.weighted\_control\_points.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ patch.weighted\_control\_points.size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{cad\_helpers::generate\_b\_spline\_derivative\_control\_points}}(patch.p[1],}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ patch.weighted\_control\_points[i],\ patch.knots[1],\ v\_der\_wcp[i]);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ knots\ for\ the\ second\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00199}00199\ \ \ \ \ \ \ \ \ Range<scalar\_t>\ v\_der\_knots;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{cad\_helpers::generate\_b\_spline\_derivative\_knots}}(patch.knots[1],\ v\_der\_knots);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ control\ points\ for\ the\ first\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Not\ efficient,\ but\ good\ enough,\ since\ the\ number\ of\ control\ points\ is\ usually}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sufficiently\ small.\ Optimization\ would\ require\ an\ additional\ data\ structure.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00205}00205\ \ \ \ \ \ \ \ \ Range<Range<proj\_vec\_t>>\ u\_der\_wcp\_initial(patch.weighted\_control\_points[0].size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ patch.weighted\_control\_points[0].size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ Range<proj\_vec\_t>\ temp\_range(patch.weighted\_control\_points.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ patch.weighted\_control\_points.size();\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp\_range[j]\ =\ patch.weighted\_control\_points[j][i];}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{cad\_helpers::generate\_b\_spline\_derivative\_control\_points}}(patch.p[0],\ temp\_range,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ patch.knots[0],\ u\_der\_wcp\_initial[i]);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00215}00215\ \ \ \ \ \ \ \ \ Range<Range<proj\_vec\_t>>\ u\_der\_wcp(patch.weighted\_control\_points.size()\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ patch.weighted\_control\_points.size()\ -\/\ 1;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ u\_der\_wcp[i].resize(patch.weighted\_control\_points[0].size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ patch.weighted\_control\_points[0].size();\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ u\_der\_wcp[i][j]\ =\ u\_der\_wcp\_initial[j][i];}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00222}00222\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ knots\ for\ the\ first\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00224}00224\ \ \ \ \ \ \ \ \ Range<scalar\_t>\ u\_der\_knots;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{cad\_helpers::generate\_b\_spline\_derivative\_knots}}(patch.knots[0],\ u\_der\_knots);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Construct\ pair\ of\ derivative\ surfaces.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00228}00228\ \ \ \ \ \ \ \ \ patch.der\_structure\ =}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>>(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ param\_vec\_t>(u\_der\_wcp,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::array<Range<scalar\_t>,\ param\_dim>\{u\_der\_knots,\ patch.knots[1]\},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::array<int,\ param\_dim>\{patch.p[0]\ -\/\ 1,\ patch.p[1]\}),}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ param\_vec\_t>(v\_der\_wcp,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::array<Range<scalar\_t>,\ param\_dim>\{patch.knots[0],\ v\_der\_knots\},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::array<int,\ param\_dim>\{patch.p[0],\ patch.p[1]\ -\/\ 1\})\});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00237}00237\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00239}00239\ \ \ \ \ \textcolor{keyword}{static}\ proj\_vec\_t\ evaluateWeighted(\textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ param\_vec\_t\&\ t)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ can\ maybe\ be\ calculated\ faster.\ We\ are\ especially\ limited\ by\ evaluating\ in}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ arbitrary\ points,\ since\ NURBS\ evaluation\ can\ be\ done\ much\ faster\ on\ a\ grid.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Evaluate\ along\ the\ second\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00245}00245\ \ \ \ \ \ \ \ \ Range<proj\_vec\_t>\ secondary\_control\_points(patch.weighted\_control\_points.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ patch.weighted\_control\_points.size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ secondary\_control\_points[i]\ =\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(t(1),\ patch.p[1],}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ patch.weighted\_control\_points[i],\ patch.knots[1]);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00249}00249\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Evaluate\ along\ the\ first\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(t(0),\ patch.p[0],\ secondary\_control\_points,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ patch.knots[0]);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00254}00254\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00256}00256\ \ \ \ \ \textcolor{keyword}{static}\ Eigen::Matrix<scalar\_t,\ dim,\ param\_dim>\ jacobian(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,\ \textcolor{keyword}{const}\ param\_vec\_t\&\ t,\ \textcolor{keyword}{const}\ vec\_t\&\ pt,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\&\ w)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(patch.der\_structure\ !=\ \textcolor{keyword}{nullptr},\ \textcolor{stringliteral}{"{}Derivative\ structure\ not\ initialised,\ "{}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}call\ initDerivative()\ before\ calling\ this\ function."{}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Evaluate\ point\ on\ the\ first\ derivative\ NURBS\ surface.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00263}00263\ \ \ \ \ \ \ \ \ proj\_vec\_t\ der\_u\_pt\ =\ (*patch.der\_structure)[0].evaluateWeighted(t);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00264}00264\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ first\ partial\ derivative.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00266}00266\ \ \ \ \ \ \ \ \ vec\_t\ der\_u;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ der\_u(i)\ =\ (der\_u\_pt(i)\ -\/\ der\_u\_pt(proj\_dim\ -\/\ 1)\ *\ pt(i))\ /\ w;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00270}00270\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Evaluate\ point\ on\ the\ first\ derivative\ NURBS\ surface.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00272}00272\ \ \ \ \ \ \ \ \ proj\_vec\_t\ der\_v\_pt\ =\ (*patch.der\_structure)[1].evaluateWeighted(t);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ second\ partial\ derivative.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00275}00275\ \ \ \ \ \ \ \ \ vec\_t\ der\_v;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ der\_v(i)\ =\ (der\_v\_pt(i)\ -\/\ der\_v\_pt(proj\_dim\ -\/\ 1)\ *\ pt(i))\ /\ w;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00279}00279\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Construct\ Jacobian\ matrix.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00281}00281\ \ \ \ \ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ 2>\ jm;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00283}00283\ \ \ \ \ \ \ \ \ jm.col(0)\ <<\ der\_u;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00284}00284\ \ \ \ \ \ \ \ \ jm.col(1)\ <<\ der\_v;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00285}00285\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00287}00287\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00289}00289\ \ \ \ \ \textcolor{keyword}{static}\ Range<NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>>\ getBoundaries(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Boundaries\ along\ the\ v\ direction.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00292}00292\ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>\ b1(patch.weighted\_control\_points.front(),}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{patch.knots[1]\},\ \{patch.p[1]\});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00294}00294\ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>\ b2(patch.weighted\_control\_points.back(),}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{patch.knots[1]\},\ \{patch.p[1]\});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00296}00296\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00297}00297\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Recalculate\ the\ range\ of\ control\ to\ use\ along\ the\ first\ dimension.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00298}00298\ \ \ \ \ \ \ \ \ Range<proj\_vec\_t>\ wcp\_front(patch.weighted\_control\_points.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00299}00299\ \ \ \ \ \ \ \ \ Range<proj\_vec\_t>\ wcp\_back(patch.weighted\_control\_points.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ patch.weighted\_control\_points.size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ wcp\_front[i]\ =\ patch.weighted\_control\_points[i].front();}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ wcp\_back[i]\ =\ patch.weighted\_control\_points[i].back();}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Boundaries\ along\ the\ u\ direction.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00306}00306\ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>\ b3(wcp\_front,\ \{patch.knots[0]\},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{patch.p[0]\});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00308}00308\ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>\ b4(wcp\_back,\ \{patch.knots[0]\},}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{patch.p[0]\});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Range<NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>>\{b1,\ b2,\ b3,\ b4\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00312}00312\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00313}00313\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00314}00314\ \ \ \ \ \textcolor{keyword}{static}\ param\_vec\_t\ getPatchParameterFromBoundaryParameter(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,\ \textcolor{keyword}{const}\ Vec<scalar\_t,\ param\_dim\ -\/\ 1>\&\ t,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ epsilon)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00317}00317\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ eps\_1\ =\ epsilon\ *\ (patch.knots[0].back()\ -\/\ patch.knots[0].front());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00318}00318\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ eps\_2\ =\ epsilon\ *\ (patch.knots[1].back()\ -\/\ patch.knots[1].front());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \textcolor{keywordflow}{return}\ Vec<scalar\_t,\ 2>(patch.knots[0].front()\ +\ eps\_1,\ t(0));}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 1)\ \textcolor{keywordflow}{return}\ Vec<scalar\_t,\ 2>(patch.knots[0].back()\ -\/\ eps\_1,\ t(0));}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00322}00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 2)\ \textcolor{keywordflow}{return}\ Vec<scalar\_t,\ 2>(t(0),\ patch.knots[1].front()\ +\ eps\_2);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00323}00323\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 3)\ \textcolor{keywordflow}{return}\ Vec<scalar\_t,\ 2>(t(0),\ patch.knots[1].back()\ -\/\ eps\_2);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00325}00325\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Invalid\ boundary\ index,\ should\ be\ 0\ <=\ i\ <=\ 3,\ got\ \%d."{}},\ i);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00327}00327\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00329}00329\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>\ getBoundaryParameterFromPatchParameter(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,\ \textcolor{keyword}{const}\ param\_vec\_t\&\ t,\ \textcolor{keywordtype}{int}\ i)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00331}00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0\ ||\ i\ ==\ 1)\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>(t(1));}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00332}00332\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 2\ ||\ i\ ==\ 3)\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>(t(0));}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00334}00334\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Invalid\ edge\ index,\ should\ be\ 0\ <=\ i\ <=\ 3,\ got\ \%d."{}},\ i);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00335}00335\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00336}00336\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00337}00337\ \};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00338}00338\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00339}00339\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00340}00340\ \textcolor{keyword}{struct\ }nurbs\_patch\_internal::NURBSPatchHelper<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<typename\ vec\_t::\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ 1>>\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00341}00341\ \ \ \ \ \textcolor{keyword}{typedef}\ Vec<typename\ vec\_t::scalar\_t,\ 1>\ param\_vec\_t;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00342}00342\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00343}00343\ \ \ \ \ \textcolor{keyword}{enum}\ \{\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ =\ vec\_t::dim,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00344}00344\ \ \ \ \ \ \ \ \ proj\_dim\ =\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ +\ 1,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00345}00345\ \ \ \ \ \ \ \ \ param\_dim\ =\ param\_vec\_t::dim\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00346}00346\ \ \ \ \ \textcolor{keyword}{typedef}\ Vec<scalar\_t,\ proj\_dim>\ proj\_vec\_t;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00348}00348\ \ \ \ \ \textcolor{keyword}{static}\ Range<proj\_vec\_t>\ cpToWcp(\textcolor{keyword}{const}\ Range<vec\_t>\&\ cp,\ \textcolor{keyword}{const}\ Range<double>\&\ w)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00349}00349\ \ \ \ \ \ \ \ \ Range<proj\_vec\_t>\ weighted\_control\_points;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00350}00350\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00351}00351\ \ \ \ \ \ \ \ \ weighted\_control\_points.resize(cp.size());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00352}00352\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ cp.size();\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00353}00353\ \ \ \ \ \ \ \ \ \ \ \ \ proj\_vec\_t\ temp;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ temp(j)\ =\ w[i]\ *\ cp[i](j);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00357}00357\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00358}00358\ \ \ \ \ \ \ \ \ \ \ \ \ temp(proj\_dim\ -\/\ 1)\ =\ w[i];}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00360}00360\ \ \ \ \ \ \ \ \ \ \ \ \ weighted\_control\_points[i]\ =\ temp;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00361}00361\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ weighted\_control\_points;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00364}00364\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00366}00366\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ computeDerivativeStructure(NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00367}00367\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (patch.der\_structure\ !=\ \textcolor{keyword}{nullptr}\ ||\ patch.p[0]\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00368}00368\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00369}00369\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00370}00370\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00371}00371\ \ \ \ \ \ \ \ \ Range<proj\_vec\_t>\ derivative\_weighted\_control\_points;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00372}00372\ \ \ \ \ \ \ \ \ Range<scalar\_t>\ derivative\_knots;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00373}00373\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{cad\_helpers::generate\_b\_spline\_derivative}}(patch.p[0],\ patch.weighted\_control\_points,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00374}00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ patch.knots[0],\ derivative\_weighted\_control\_points,\ derivative\_knots);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00375}00375\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00376}00376\ \ \ \ \ \ \ \ \ patch.der\_structure\ =}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00377}00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>>(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00378}00378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}\ std::array<NURBSPatch<vec\_t,\ param\_vec\_t>,\ param\_dim>\{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00379}00379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ param\_vec\_t>(derivative\_weighted\_control\_points,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00380}00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{derivative\_knots\},\ \{patch.p[0]\ -\/\ 1\})\});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00381}00381\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00383}00383\ \ \ \ \ \textcolor{keyword}{static}\ proj\_vec\_t\ evaluateWeighted(\textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00384}00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ param\_vec\_t\&\ t)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00385}00385\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{cad\_helpers::evaluate\_b\_spline}}(t(0),\ patch.p[0],\ patch.weighted\_control\_points,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00386}00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ patch.knots[0]);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00387}00387\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00388}00388\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00389}00389\ \ \ \ \ \textcolor{keyword}{static}\ Eigen::Matrix<scalar\_t,\ dim,\ param\_dim>\ jacobian(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00390}00390\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,\ \textcolor{keyword}{const}\ param\_vec\_t\&\ t,\ \textcolor{keyword}{const}\ vec\_t\&\ pt,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00391}00391\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\&\ w)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00392}00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (patch.p[0]\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00393}00393\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vec\_t();}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00394}00394\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00395}00395\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(patch.der\_structure\ !=\ \textcolor{keyword}{nullptr},\ \textcolor{stringliteral}{"{}Derivative\ structure\ not\ initialised,\ "{}}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00396}00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}call\ initDerivative()\ before\ calling\ this\ function."{}});}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00397}00397\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00398}00398\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Evaluate\ point\ on\ the\ derivative\ NURBS.}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00399}00399\ \ \ \ \ \ \ \ \ proj\_vec\_t\ der\_pt\ =\ (*patch.der\_structure)[0].evaluateWeighted(t);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00400}00400\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00401}00401\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ Jacobian}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00402}00402\ \ \ \ \ \ \ \ \ vec\_t\ jacobian;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00403}00403\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00404}00404\ \ \ \ \ \ \ \ \ \ \ \ \ jacobian(i)\ =\ (der\_pt(i)\ -\/\ der\_pt(proj\_dim\ -\/\ 1)\ *\ pt(i))\ /\ w;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00405}00405\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00406}00406\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00407}00407\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jacobian;}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00408}00408\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00409}00409\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00410}00410\ \ \ \ \ \textcolor{keyword}{static}\ Range<NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>>\ getBoundaries(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{NURBSPatch<vec\_t,\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>>(\{\},\ \{\},\ \{\}),}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00413}00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NURBSPatch<vec\_t,\ Vec<scalar\_t,\ param\_dim\ -\/\ 1>>(\{\},\ \{\},\ \{\})\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00414}00414\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00416}00416\ \ \ \ \ \textcolor{keyword}{static}\ param\_vec\_t\ getPatchParameterFromBoundaryParameter(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,\ \textcolor{keyword}{const}\ Vec<scalar\_t,\ param\_dim\ -\/\ 1>\&\ t,}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ epsilon)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00419}00419\ \ \ \ \ \ \ \ \ BoxShape<param\_vec\_t>\ dom\ =\ patch.getDomain();}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00420}00420\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ eps\ =\ epsilon\ *\ (patch.knots[0].back()\ -\/\ patch.knots[0].front());}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00421}00421\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00422}00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \textcolor{keywordflow}{return}\ dom.beg()\ +\ param\_vec\_t(eps);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00423}00423\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 1)\ \textcolor{keywordflow}{return}\ dom.end()\ -\/\ param\_vec\_t(eps);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00424}00424\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00425}00425\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Invalid\ boundary\ index,\ should\ be\ 0\ <=\ i\ <=\ 1,\ got\ \%d."{}},\ i);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00426}00426\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00427}00427\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00428}00428\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00429}00429\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}},\ param\_dim\ -\/\ 1>\ getBoundaryParameterFromPatchParameter(}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ NURBSPatch<vec\_t,\ param\_vec\_t>\&\ patch,\ \textcolor{keyword}{const}\ param\_vec\_t\&\ t,\ \textcolor{keywordtype}{int}\ i)\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0\ ||\ i\ ==\ 1)\ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00432}00432\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00433}00433\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Invalid\ edge\ index,\ should\ be\ 0\ <=\ i\ <=\ 1,\ got\ \%d."{}},\ i);}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00435}00435\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00436}00436\ \};}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00438}00438\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00439}00439\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00440}00440\ }
+\DoxyCodeLine{\Hypertarget{NURBSPatch_8hpp_source_l00441}00441\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_NURBSPATCH\_HPP\_}}
+
+\end{DoxyCode}

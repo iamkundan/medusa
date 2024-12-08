@@ -1,0 +1,496 @@
+\doxysection{mm\+::Vector\+Field\texorpdfstring{$<$}{<} Scalar, dimension \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1VectorField}{}\label{classmm_1_1VectorField}\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+
+
+{\ttfamily \#include $<$Vector\+Field\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$\newline
+class mm\+::\+Vector\+Field$<$ Scalar, dimension $>$}
+Represents a discretization of a vector field, a finite collection of vectors. 
+
+The vector field is stored in a Col\+Major fashion. This type is fully compatible with Eigen types and can use the same API. It also supports iteration over columns.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Scalar} & \\
+\hline
+{\em dimension} & Dimensionality of the vector field.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 7;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ s\ =\ v.size();\ \ \textcolor{comment}{//\ returns\ the\ number\ of\ elements}}
+\DoxyCodeLine{\ \ \ \ assert(s\ ==\ v.dim*n);}
+\DoxyCodeLine{\ \ \ \ assert(n\ ==\ v.rows());}
+\DoxyCodeLine{\ \ \ \ v\ =\ 0.0;\ \ \textcolor{comment}{//\ set\ to\ constant\ value}}
+\DoxyCodeLine{\ \ \ \ v\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3.8,\ 5.6);\ \ \textcolor{comment}{//\ set\ to\ constant\ vector}}
+\DoxyCodeLine{\ \ \ \ v(4,\ 0)\ =\ -\/1.2;\ \ \textcolor{comment}{//\ set\ one\ coefficient}}
+\DoxyCodeLine{\ \ \ \ v[3][1]\ =\ 4.5;\ \ \textcolor{comment}{//\ set\ one\ coefficient,\ alternative\ syntax}}
+\DoxyCodeLine{\ \ \ \ v[4]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3.4,\ 5.2);\ \ \textcolor{comment}{//\ set\ one\ vector}}
+\DoxyCodeLine{\ \ \ \ v[\{1,\ 3,\ 4\}]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(-\/4.5,\ 2.5);\ \ \textcolor{comment}{//\ set\ a\ subfield\ to\ a\ constant\ vector}}
+\DoxyCodeLine{\ \ \ \ v[\{0,\ 6,\ 2\}]\ =\ 0.0;\ \ \textcolor{comment}{//\ set\ a\ subfield\ to\ a\ constant\ scalar}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e}{c}}\ =\ v.c(0);\ \ \textcolor{comment}{//\ get\ all\ first\ components}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ you\ can\ do\ any\ matrix\ operators\ with\ the\ vector\ field:}}
+\DoxyCodeLine{\ \ \ \ v\ *=\ -\/2.4;}
+\DoxyCodeLine{\ \ \ \ v\ +=\ v;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ v\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ convert\ to\ and\ from\ linear\ representation}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ x\ =\ v.asLinear();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{VectorField3d}}\ v2\ =\ VectorField3d::fromLinear(x);\ \ \textcolor{comment}{//\ equal\ to\ v}}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxyWarning}{Warning}
+The {\ttfamily .size()} method inherited from Eigen returns the number of all elements, e. g. number of vectors multiplied by the dimension. Use {\ttfamily .rows()} method to get only the number of vectors in the vector field. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Vector\+Field\texorpdfstring{$<$}{<} Scalar, dimension \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classmm_1_1VectorField__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Vector\+Field\texorpdfstring{$<$}{<} Scalar, dimension \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classmm_1_1VectorField__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1VectorField_a3e25e3eb78e49773611f36b219688287}{Vector\+Field}} (\mbox{\hyperlink{classmm_1_1Gaussian}{void}})
+\begin{DoxyCompactList}\small\item\em Construct a vector field of size 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1VectorField_aa972ddc5313f8d699c8d7d1fe6960423}{Vector\+Field}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \&)=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField_a292f150fd807f6675f058dfc100dd99d}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \&)=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default copy assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1VectorField_a8bad63cb2354918187383b72b3ad3a8e}{Vector\+Field}} (\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \&\&) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField_ab1be3de236b2b564458550447a03f6f2}{operator=}} (\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \&\&) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default move assignment. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ }\\\mbox{\hyperlink{classmm_1_1VectorField_a3d3b00540f67c6368407fc00ca763597}{Vector\+Field}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em Allows construction of \doxylink{classmm_1_1VectorField}{Vector\+Field} from Eigen expressions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ }\\\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField_acbb3420d4e4ee37143c3d94fd5c3ecb0}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em Assignments of Eigen expressions to \doxylink{classmm_1_1VectorField}{Vector\+Field}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Size\+Type}} $>$ }\\\mbox{\hyperlink{classmm_1_1VectorField_ad70714e58095839b50e48e6496ceb250}{Vector\+Field}} (\mbox{\hyperlink{classmm_1_1Gaussian}{Size\+Type}} \mbox{\hyperlink{classmm_1_1Gaussian}{N}})
+\begin{DoxyCompactList}\small\item\em Construct a vector field on {\ttfamily N} points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField_af39bc2f5e367c2d165ca2a38bbf42439}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \&v)
+\begin{DoxyCompactList}\small\item\em Assigns vector field to be a constant vector {\ttfamily v}. \end{DoxyCompactList}\item 
+Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField_a8de4fc822664e9afa473c3c16d6d41b6}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Return a single row as a vector, non-\/const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Const\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField_a40385e27cff031c2ce68b9aa3a070db8}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return a single row as a vector, const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField_ac243a2eb656bcb4e9eae8467fa275e17}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Return a single row as a vector, non-\/const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Const\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField_acbc35c8696dd786108e7119b4a922c8e}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return a single row as a vector, const version. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Base\+::\+Col\+Xpr \mbox{\hyperlink{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e}{c}} (\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Return the {\ttfamily i}-\/th component of this vector field. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Base\+::\+Const\+Col\+Xpr \mbox{\hyperlink{classmm_1_1VectorField_a3e632632e3660da330753dcceaf6ec4b}{c}} (\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e}{Vector\+Field\+::c()}. \end{DoxyCompactList}\item 
+Eigen\+::\+Indexed\+View$<$ \mbox{\hyperlink{classmm_1_1VectorField_aee1aa89c7e3e3fc87b10105a1df56179}{Base}}, \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}, Eigen\+::internal\+::\+All\+Range$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ $>$ \mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1VectorField_ae974acba1ddfc623cec6a245072fb331}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{row\+Indices}})
+\begin{DoxyCompactList}\small\item\em Return an indexed view to a subset of vectors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1VectorField_1_1VectorFieldView}{Vector\+Field\+View}} \mbox{\hyperlink{classmm_1_1VectorField_a69d7890860dbb0bc75d5f083f4b0f365}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes)
+\begin{DoxyCompactList}\small\item\em Returns an indexed view to a subset of vectors, that can be assigned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField_a1d81d6142a6e8aa411508a9fd298267d}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to the first coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField_afcf3b39c4a82003bd6b41c733886f2ab}{begin}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Pointer to the first coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField_a4b6b40f152e5df10308aa4a6a2e1c08f}{end}} ()
+\begin{DoxyCompactList}\small\item\em Pointer to the last coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField_a93733beecacedd82f62a95c8b40906d5}{end}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Const pointer to the last coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField_ad3b21f111084fbcc057d463562bfb72c}{cbegin}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1VectorField_a1d81d6142a6e8aa411508a9fd298267d}{begin}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField_a18cd6dd4dae6ca98f5589d2772dc7df0}{cend}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1VectorField_a4b6b40f152e5df10308aa4a6a2e1c08f}{end}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \mbox{\hyperlink{classmm_1_1VectorField_a2f1d966bdbc4c67380fda5da310b0cf8}{from\+Linear}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Plain\+Object\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em Construct \doxylink{classmm_1_1VectorField}{Vector\+Field} from its linear representation, obtained from \doxylink{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}{as\+Linear()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \mbox{\hyperlink{classmm_1_1VectorField_a0a3baf0d31b35a45ea38baefb6d424f7}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar data type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, Eigen\+::\+Dynamic, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \mbox{\hyperlink{classmm_1_1VectorField_aee1aa89c7e3e3fc87b10105a1df56179}{Base}}
+\begin{DoxyCompactList}\small\item\em Base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1VectorField_1_1VectorFieldView}{Vector\+Field\+View}}
+\begin{DoxyCompactList}\small\item\em Represents a non contiguous view to a vector field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1VectorField_a3e25e3eb78e49773611f36b219688287}\label{classmm_1_1VectorField_a3e25e3eb78e49773611f36b219688287} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!VectorField@{VectorField}}
+\index{VectorField@{VectorField}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{VectorField()}{VectorField()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Vector\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{void}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a vector field of size 0. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_aa972ddc5313f8d699c8d7d1fe6960423}\label{classmm_1_1VectorField_aa972ddc5313f8d699c8d7d1fe6960423} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!VectorField@{VectorField}}
+\index{VectorField@{VectorField}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{VectorField()}{VectorField()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Vector\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default copy constructor. 
+
+\Hypertarget{classmm_1_1VectorField_a8bad63cb2354918187383b72b3ad3a8e}\label{classmm_1_1VectorField_a8bad63cb2354918187383b72b3ad3a8e} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!VectorField@{VectorField}}
+\index{VectorField@{VectorField}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{VectorField()}{VectorField()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Vector\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+Default move constructor. 
+
+\Hypertarget{classmm_1_1VectorField_a3d3b00540f67c6368407fc00ca763597}\label{classmm_1_1VectorField_a3d3b00540f67c6368407fc00ca763597} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!VectorField@{VectorField}}
+\index{VectorField@{VectorField}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{VectorField()}{VectorField()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Vector\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Allows construction of \doxylink{classmm_1_1VectorField}{Vector\+Field} from Eigen expressions. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{VectorField_8hpp_source}{Vector\+Field.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_ad70714e58095839b50e48e6496ceb250}\label{classmm_1_1VectorField_ad70714e58095839b50e48e6496ceb250} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!VectorField@{VectorField}}
+\index{VectorField@{VectorField}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{VectorField()}{VectorField()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Size\+Type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Vector\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Size\+Type}}}]{N }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a vector field on {\ttfamily N} points. 
+
+Allocates the appropriate space, the values are initialized as specified by Eigen\textquotesingle{}s default initialization. 
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1VectorField_a1d81d6142a6e8aa411508a9fd298267d}\label{classmm_1_1VectorField_a1d81d6142a6e8aa411508a9fd298267d} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!begin@{begin}}
+\index{begin@{begin}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to the first coefficient. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00132}{132}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_afcf3b39c4a82003bd6b41c733886f2ab}\label{classmm_1_1VectorField_afcf3b39c4a82003bd6b41c733886f2ab} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!begin@{begin}}
+\index{begin@{begin}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to the first coefficient. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e}\label{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!c@{c}}
+\index{c@{c}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{c()}{c()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Base\+::\+Col\+Xpr \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::c (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the {\ttfamily i}-\/th component of this vector field. 
+
+The result of this function can be treated as a scalar field. 
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00116}{116}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a3e632632e3660da330753dcceaf6ec4b}\label{classmm_1_1VectorField_a3e632632e3660da330753dcceaf6ec4b} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!c@{c}}
+\index{c@{c}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{c()}{c()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Base\+::\+Const\+Col\+Xpr \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::c (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const version of \doxylink{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e}{Vector\+Field\+::c()}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1VectorField_ad360c94bf058086040efc659804c349e}{c} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00118}{118}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_ad3b21f111084fbcc057d463562bfb72c}\label{classmm_1_1VectorField_ad3b21f111084fbcc057d463562bfb72c} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::cbegin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const version of \doxylink{classmm_1_1VectorField_a1d81d6142a6e8aa411508a9fd298267d}{begin}. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00142}{142}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a18cd6dd4dae6ca98f5589d2772dc7df0}\label{classmm_1_1VectorField_a18cd6dd4dae6ca98f5589d2772dc7df0} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!cend@{cend}}
+\index{cend@{cend}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::cend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const version of \doxylink{classmm_1_1VectorField_a4b6b40f152e5df10308aa4a6a2e1c08f}{end}. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00144}{144}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a4b6b40f152e5df10308aa4a6a2e1c08f}\label{classmm_1_1VectorField_a4b6b40f152e5df10308aa4a6a2e1c08f} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!end@{end}}
+\index{end@{end}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to the last coefficient. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00137}{137}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a93733beecacedd82f62a95c8b40906d5}\label{classmm_1_1VectorField_a93733beecacedd82f62a95c8b40906d5} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!end@{end}}
+\index{end@{end}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const pointer to the last coefficient. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a2f1d966bdbc4c67380fda5da310b0cf8}\label{classmm_1_1VectorField_a2f1d966bdbc4c67380fda5da310b0cf8} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!fromLinear@{fromLinear}}
+\index{fromLinear@{fromLinear}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{fromLinear()}{fromLinear()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::from\+Linear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Plain\+Object\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Construct \doxylink{classmm_1_1VectorField}{Vector\+Field} from its linear representation, obtained from \doxylink{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}{as\+Linear()}. 
+
+\Hypertarget{classmm_1_1VectorField_ae974acba1ddfc623cec6a245072fb331}\label{classmm_1_1VectorField_ae974acba1ddfc623cec6a245072fb331} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+Eigen\+::\+Indexed\+View$<$ \mbox{\hyperlink{classmm_1_1VectorField_aee1aa89c7e3e3fc87b10105a1df56179}{Base}}, \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}, Eigen\+::internal\+::\+All\+Range$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ $>$ \mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{row\+Indices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return an indexed view to a subset of vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00122}{122}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_ac243a2eb656bcb4e9eae8467fa275e17}\label{classmm_1_1VectorField_ac243a2eb656bcb4e9eae8467fa275e17} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a single row as a vector, non-\/const version. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00104}{104}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_acbc35c8696dd786108e7119b4a922c8e}\label{classmm_1_1VectorField_acbc35c8696dd786108e7119b4a922c8e} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Const\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a single row as a vector, const version. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00108}{108}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_acbb3420d4e4ee37143c3d94fd5c3ecb0}\label{classmm_1_1VectorField_acbb3420d4e4ee37143c3d94fd5c3ecb0} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Assignments of Eigen expressions to \doxylink{classmm_1_1VectorField}{Vector\+Field}. 
+
+\Hypertarget{classmm_1_1VectorField_af39bc2f5e367c2d165ca2a38bbf42439}\label{classmm_1_1VectorField_af39bc2f5e367c2d165ca2a38bbf42439} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \& \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Assigns vector field to be a constant vector {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{VectorField_8hpp_source}{Vector\+Field.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a292f150fd807f6675f058dfc100dd99d}\label{classmm_1_1VectorField_a292f150fd807f6675f058dfc100dd99d} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default copy assignment. 
+
+\Hypertarget{classmm_1_1VectorField_ab1be3de236b2b564458550447a03f6f2}\label{classmm_1_1VectorField_ab1be3de236b2b564458550447a03f6f2} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}} \& \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+Default move assignment. 
+
+\Hypertarget{classmm_1_1VectorField_a69d7890860dbb0bc75d5f083f4b0f365}\label{classmm_1_1VectorField_a69d7890860dbb0bc75d5f083f4b0f365} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1VectorField_1_1VectorFieldView}{Vector\+Field\+View}} \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an indexed view to a subset of vectors, that can be assigned. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00127}{127}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a8de4fc822664e9afa473c3c16d6d41b6}\label{classmm_1_1VectorField_a8de4fc822664e9afa473c3c16d6d41b6} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a single row as a vector, non-\/const version. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1VectorField_a40385e27cff031c2ce68b9aa3a070db8}\label{classmm_1_1VectorField_a40385e27cff031c2ce68b9aa3a070db8} 
+\index{mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::VectorField$<$ Scalar, dimension $>$@{mm::VectorField$<$ Scalar, dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Transpose$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Base\+::\+Const\+Row\+Xpr $>$ \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Eigen\+::\+Index}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a single row as a vector, const version. 
+
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00098}{98}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/types/\mbox{\hyperlink{VectorField__fwd_8hpp}{Vector\+Field\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/types/\mbox{\hyperlink{VectorField_8hpp}{Vector\+Field.\+hpp}}\end{DoxyCompactItemize}

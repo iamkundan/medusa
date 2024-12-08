@@ -1,0 +1,41 @@
+\doxysection{Stopwatch.\+hpp}
+\hypertarget{Stopwatch_8hpp_source}{}\label{Stopwatch_8hpp_source}\index{include/medusa/bits/utils/Stopwatch.hpp@{include/medusa/bits/utils/Stopwatch.hpp}}
+\mbox{\hyperlink{Stopwatch_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_UTILS\_STOPWATCH\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_UTILS\_STOPWATCH\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00017}00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1Stopwatch}{00031}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}}\ \{}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00032}\mbox{\hyperlink{classmm_1_1Stopwatch_a48cc9a578551ca8e904bbc25c587bb9f}{00032}}\ \ \ \ \ \textcolor{keyword}{typedef}\ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classmm_1_1Stopwatch_a48cc9a578551ca8e904bbc25c587bb9f}{time\_type}};\ \ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{00033}}\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}};\ \ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{00034}}\ \ \ \ \ std::vector<double>\ \mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{cumulative\_time}};\ \ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00035}\mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{00035}}\ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{counts}};\ \ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00036}\mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{00036}}\ \ \ \ \ std::vector<time\_type>\ \mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{times}};\ \ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{00037}}\ \ \ \ \ std::vector<bool>\ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}};\ \ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{getID}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00042}00042\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Stopwatch_aee5f3ab53248b6693999e1e8b7edd0e1}{start}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a0fb692ab0a4227d3422868467cd93f0c}{stop}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78}{cumulativeTime}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0}{numLaps}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a4e33616c403af0583afc145bfff0b185}{timePerLap}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00058}\mbox{\hyperlink{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}{00058}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}{isRunning}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\_running}}[\mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{getID}}(\mbox{\hyperlink{classmm_1_1Gaussian}{label}})];\ \}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Stopwatch_a2cf14b0abd99169dbf4464394977e151}{clear}}();}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1Stopwatch_a0c09c17e1c72e955b657f95737ca36ee}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}});}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00063}00063\ \};}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00065}00065\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{Stopwatch_8hpp_source_l00067}00067\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_UTILS\_STOPWATCH\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,45 @@
+\doxysection{include/medusa/bits/domains/discretization\+\_\+helpers\+\_\+advanced.hpp File Reference}
+\hypertarget{discretization__helpers__advanced_8hpp}{}\label{discretization__helpers__advanced_8hpp}\index{include/medusa/bits/domains/discretization\_helpers\_advanced.hpp@{include/medusa/bits/domains/discretization\_helpers\_advanced.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Contains helpers for discretizing various geometric objects that need more advanced parts of Medusa to work. 
+
+
+
+Definition in file \mbox{\hyperlink{discretization__helpers__advanced_8hpp_source}{discretization\+\_\+helpers\+\_\+advanced.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/domains/\+Polygon\+Shape.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/domains/\+General\+Fill.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Range.\+hpp$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Geometry$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for discretization\+\_\+helpers\+\_\+advanced.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{discretization__helpers__advanced_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{discretization__helpers__advanced_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1discretization__helpers}{mm\+::discretization\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace containing helpers for discretizing various geometric objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{mm\+::discretization\+\_\+helpers\+::discretize\+Triangle\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p1, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p2, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p3, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&normal, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{only\+\_\+interior}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Discretize a triangle in 3D space with given density. \end{DoxyCompactList}\end{DoxyCompactItemize}

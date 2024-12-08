@@ -1,0 +1,145 @@
+\chapter{Concepts}
+\hypertarget{concepts}{}\label{concepts}\index{Concepts@{Concepts}}
+Concepts are general patterns that certain classes follow or require their members to follow.
+
+The most important ones are described below.\hypertarget{concepts_rbf-concept}{}\doxysection{\texorpdfstring{Radial Basis Function concept}{Radial Basis Function concept}}\label{concepts_rbf-concept}
+This concept represents a radial basis function as a function of squared radial distance from the origin, ie. a function $f$ mapping \[ r^2 \mapsto f(r^2) \]
+
+The only requirements are that the class is default constructible, has a {\ttfamily scalar\+\_\+t} member type, that denotes the type used for numerical computations (eg. {\ttfamily double}) and has the operators\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily scalar\+\_\+t operator()(scalar\+\_\+t r2) const} evaluates function at given squared radial distance
+\item {\ttfamily scalar\+\_\+t operator()(scalar\+\_\+t r2, int derivative) const} evaluates given derivative wrt. {\ttfamily r2} at given squared radial distance
+\item {\ttfamily template \texorpdfstring{$<$}{<}int dim\texorpdfstring{$>$}{>} scalar\+\_\+t operator()(scalar\+\_\+t r2, \doxylink{structmm_1_1Lap}{Lap}\texorpdfstring{$<$}{<}dim\texorpdfstring{$>$}{>}) const} evaluates Laplacian wrt. {\ttfamily r} at given squared radial distance
+\end{DoxyItemize}
+
+Classes \doxylink{classmm_1_1Gaussian}{Gaussian}, \doxylink{classmm_1_1Multiquadric}{Multiquadric}, \doxylink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric} and \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} satisfy this concept.\hypertarget{concepts_scale-concept}{}\doxysection{\texorpdfstring{Scale function concept}{Scale function concept}}\label{concepts_scale-concept}
+This represents a scaling function that computes the appropriate scaling to the local support domain. It requires a class to implement a single method
+
+
+\begin{DoxyItemize}
+\item {\ttfamily template\texorpdfstring{$<$}{<}vec\+\_\+t\texorpdfstring{$>$}{>} static typename vec\+\_\+t\+::scalar\+\_\+t scale(const vec\+\_\+t\& p, const std\+::vector\texorpdfstring{$<$}{<}vec\+\_\+t\texorpdfstring{$>$}{>}\& support)}
+\end{DoxyItemize}
+
+which returns local scale of this neighbourhood. For a neighbourhood of {\ttfamily \{0, -\/h, h\}}, {\ttfamily h} would be the appropriate local scale. Support nodes are assumed to be ordered by distance from {\ttfamily p}.
+
+Classes \doxylink{classmm_1_1NoScale}{No\+Scale}, \doxylink{classmm_1_1ScaleToClosest}{Scale\+To\+Closest}, \doxylink{classmm_1_1ScaleToFarthest}{Scale\+To\+Farthest} satisfy this concept.\hypertarget{concepts_weight-concept}{}\doxysection{\texorpdfstring{Weight function concept}{Weight function concept}}\label{concepts_weight-concept}
+This concept represents a weight function used for weighted least squares solving. The function returns a non-\/negative scalar for all inputs.
+
+Classes satisfying this concept must be default constructible and provide member types {\ttfamily scalar\+\_\+t}, {\ttfamily vector\+\_\+t}, and static value {\ttfamily dim}, representing types used for numerical computation, and dimensionality of the function domain. Additionally, this method must be provided\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily scalar\+\_\+t operator()(const vector\+\_\+t\& point) const}
+\end{DoxyItemize}
+
+which evaluates the weight function.
+
+Classes \doxylink{classmm_1_1NoWeight}{No\+Weight} and \doxylink{classmm_1_1RBFWeight}{RBFWeight} satisfy this concept. Specific instance of \doxylink{classmm_1_1RBFWeight}{RBFWeight}, namely Gaussian\+Weight is defined for \doxylink{classmm_1_1Gaussian}{Gaussian} RBFs, because of common usage.\hypertarget{concepts_basis-concept}{}\doxysection{\texorpdfstring{Basis function concept}{Basis function concept}}\label{concepts_basis-concept}
+This concept represents a (local or global) basis over a neighbourhood of points.
+
+Classes satisfying this concept must be default constructible and provide member types {\ttfamily scalar\+\_\+t}, {\ttfamily vector\+\_\+t}, and static value {\ttfamily dim}, representing types used for numerical computation, and dimensionality of the function domain. Additionally, these four methods must be provided\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily scalar\+\_\+t eval(int index, const vector\+\_\+t\& point, const std\+::vector\texorpdfstring{$<$}{<}vector\+\_\+t\texorpdfstring{$>$}{>}\& support) const}
+\item {\ttfamily template \texorpdfstring{$<$}{<}typename operator\+\_\+t\texorpdfstring{$>$}{>} scalar\+\_\+t eval\+Op(int index, const vector\+\_\+t\& point, const operator\+\_\+t\& op, const std\+::vector\texorpdfstring{$<$}{<}vector\+\_\+t\texorpdfstring{$>$}{>}\& support, scalar\+\_\+t scale) const}
+\item {\ttfamily scalar\+\_\+t eval\+At0(int index, const std\+::vector\texorpdfstring{$<$}{<}vector\+\_\+t\texorpdfstring{$>$}{>}\& support) const;}
+\item {\ttfamily template \texorpdfstring{$<$}{<}typename operator\+\_\+t\texorpdfstring{$>$}{>} scalar\+\_\+t eval\+Op\+At0(int index, const operator\+\_\+t\& op, const std\+::vector\texorpdfstring{$<$}{<}vector\+\_\+t\texorpdfstring{$>$}{>}\& support) const;}
+\end{DoxyItemize}
+
+allowing evaluation of {\ttfamily i}-\/th basis member in given point or at 0 and arbitrary operators. The special methods for evaluation at 0 are commonly used in approximation computations and are usually simpler and faster than general methods, which are not needed in that case. Support nodes are assumed to be ordered by distance from {\ttfamily p}.
+
+Classes \doxylink{classmm_1_1Monomials}{Monomials} and \doxylink{classmm_1_1RBFBasis}{RBFBasis} satisfy this concept.\hypertarget{concepts_operator-family-concept}{}\doxysection{\texorpdfstring{Operator family concept}{Operator family concept}}\label{concepts_operator-family-concept}
+An operator family is a (finite) collection of operators. Each operator family must have an {\ttfamily operator\+\_\+t} type, defining the type of operators in the family. For convenience when printing, methods {\ttfamily name} and {\ttfamily type\+\_\+name} must be defined, giving human readable names. Additionally, a collection of all operators in the family must be available through {\ttfamily operators} method, its size is given by {\ttfamily size()}, and the index of an operator in this family can be computed using the {\ttfamily index} method.
+
+In summary, the following methods must be defined\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily std\+::string name() const;}
+\item {\ttfamily static int size();}
+\item {\ttfamily static std\+::string type\+\_\+name();}
+\item {\ttfamily static std\+::array\texorpdfstring{$<$}{<}operator\+\_\+t, size\texorpdfstring{$>$}{>} operators();} // can return other iterables
+\item {\ttfamily static int index(operator\+\_\+t o);} // can take const \&
+\end{DoxyItemize}
+
+The first four are used by \doxylink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{compute\+Shapes} to compute approximations, while the last one is used by \doxylink{classmm_1_1ExplicitOperators}{Explicit\+Operators} and \doxylink{classmm_1_1ImplicitOperators}{Implicit\+Operators} to get the index of operator in storage. The {\ttfamily index} method must also be compatible with {\ttfamily operators}, in the sense that for the list of operators {\ttfamily o}, returned by {\ttfamily operators}, it must hold that {\ttfamily index(o\mbox{[}i\mbox{]}) == i} for each {\ttfamily i}, i.\+e. the operators must be given in order by the {\ttfamily operators} method.
+
+The \doxylink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{compute\+Shapes} method only computes approximations for families of operators, however, inheriting from the {\ttfamily \doxylink{structmm_1_1Operator}{Operator}} class will introduce all the required methods for 1-\/element families.
+
+Classes \doxylink{structmm_1_1Der1s}{Der1s}, \doxylink{structmm_1_1Der2s}{Der2s}, \doxylink{structmm_1_1Lap}{Lap}, \doxylink{structmm_1_1Der1}{Der1}, \doxylink{structmm_1_1Der2}{Der2}, \doxylink{structmm_1_1Derivative}{Derivative}, Biharmonic satisfy this concept.\hypertarget{concepts_operator-concept}{}\doxysection{\texorpdfstring{Operator concept}{Operator concept}}\label{concepts_operator-concept}
+This concept represents a (differential) operator, which can be applied to basis functions (see the \doxysectlink{concepts_basis-concept}{Basis function concept}{1} above) and for which approximations can be computed using approximation engines (see \doxysectlink{concepts_approx-concept}{Approximation engine concept}{1} below).
+
+The basis itself can know how to compute the given operator, but if it does not, the appropriate one of two methods that are required by this concept will be implemented.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily template \texorpdfstring{$<$}{<}typename basis\+\_\+t\texorpdfstring{$>$}{>} typename basis\+\_\+t\+::scalar\+\_\+t apply(         const basis\+\_\+t\& basis, int index, typename basis\+\_\+t\+::vector\+\_\+t point,         const std\+::vector$<$typename basis\+\_\+t\+::vector\+\_\+t$>$\& support,         typename basis\+\_\+t\+::scalar\+\_\+t scale) const;}
+\item {\ttfamily template \texorpdfstring{$<$}{<}typename basis\+\_\+t\texorpdfstring{$>$}{>} typename basis\+\_\+t\+::scalar\+\_\+t apply\+At0(         const basis\+\_\+t\& basis, int index,         const std\+::vector$<$typename basis\+\_\+t\+::vector\+\_\+t$>$\& support,         typename basis\+\_\+t\+::scalar\+\_\+t scale) const;}
+\end{DoxyItemize}
+
+These methods should implement applying the operator to {\ttfamily i}-\/th member of the basis. Support nodes are assumed to be ordered by distance from the central point ({\ttfamily point} or {\ttfamily 0}). See Operators class for more details. Additionally, the operator must define the {\ttfamily std\+::string name() const;} method for printing.
+
+This allows implementation of custom operators in such a way, that if you only use {\ttfamily MQ} basis functions, you operator only need to know how to be applied specifically to {\ttfamily MQ} basis. Custom operator approximation can be obtained using \doxylink{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67}{Shape\+Storage\+::get} and used with \doxylink{classmm_1_1ExplicitOperators_a80067a958aab068b1a851e3726ae87fa}{Explicit\+Operators\+::apply}, \doxylink{classmm_1_1ImplicitOperators_aedcb630e4775c080a54209b172185b7a}{Implicit\+Operators\+::apply}, \doxylink{classmm_1_1ExplicitVectorOperators_ab59e210d9c8d912822fb8ce6ad2941d0}{Explicit\+Vector\+Operators\+::apply}, \doxylink{classmm_1_1ImplicitVectorOperators_a4aee2a76c9c66890e3c6e404e392839f}{Implicit\+Vector\+Operators\+::apply}.\hypertarget{concepts_approx-concept}{}\doxysection{\texorpdfstring{Approximation engine concept}{Approximation engine concept}}\label{concepts_approx-concept}
+This concept represents an approximation engine for approximating differential operators in neighborhood of points.
+
+Given a point $p$ with neighbours $p_1, \dots, p_n$, called {\itshape support}, an operator $\mathcal{L}$ is approximated as \[ (\mathcal{L}{u})(p) \approx \sum_{i=1}^n w_i u(p_i). \] The weights $w_i$ are called stencil weights of the {\itshape shape function} for operator $\mathcal{L}$ at points $p$.
+
+Approximation engines are classes that compute operator and function approximations. \doxylink{structmm_1_1Operator}{Operator} approximations are often called "{}stencil weights"{} or "{}shape function"{}. They must provide member types {\ttfamily scalar\+\_\+t} and {\ttfamily vector\+\_\+t}, and static value {\ttfamily dim}, representing types used for numerical computation and dimensionality of the function domain. Additionally, these three methods must be provided\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily void compute(const vector\+\_\+t\& point, const std\+::vector\texorpdfstring{$<$}{<}vector\+\_\+t\texorpdfstring{$>$}{>}\& support)},
+\item {\ttfamily Eigen\+::\+Matrix\texorpdfstring{$<$}{<}scalar\+\_\+t, Eigen\+::\+Dynamic, 1\texorpdfstring{$>$}{>} get\+Shape() const} and
+\item {\ttfamily template \texorpdfstring{$<$}{<}operator\+\_\+t\texorpdfstring{$>$}{>} Eigen\+::\+Matrix\texorpdfstring{$<$}{<}scalar\+\_\+t, Eigen\+::\+Dynamic, 1\texorpdfstring{$>$}{>} get\+Shape(const operator\+\_\+t\& op) const}
+\item {\ttfamily Function\+Type get\+Approximant(const vector\+\_\+t\& point, const std\+::vector\texorpdfstring{$<$}{<}vector\+\_\+t\texorpdfstring{$>$}{>}\& support, const Eigen\+::\+Matrix\+Base\texorpdfstring{$<$}{<}Derived\texorpdfstring{$>$}{>}\& values) const}
+\end{DoxyItemize}
+
+The compute step prepares the engine for approximation of operators around point {\ttfamily point} with given support {\ttfamily support} and is usually computationally more intense. Support nodes are assumed to be ordered by distance from {\ttfamily point}. The {\ttfamily get\+Shape()} step computes the shape for given basic differential operator or the evaluation operator (first overload). The {\ttfamily get\+Approximant} method returns the function approximant around given point.
+
+Typical usage is illustrated below\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1Gaussian}{ApproximationEngine}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{engine}}(...);}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}}\ =\ 0.1;}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1Gaussian}{engine}}.compute(\{0.0,\ 0.0\},\ \{\{0.0,\ 0.0\},\ \{-\/h,\ 0.0\},\ \{h,\ 0.0\},\ \{0.0,\ h\},\ \{0.0,\ -\/h\}\});}
+\DoxyCodeLine{VectorXd\ shape\ =\ engine.getShape();}
+\DoxyCodeLine{VectorXd\ shape\ =\ engine.getShape(Lap());\ \ \textcolor{comment}{//\ shape\ for\ Laplacian}}
+
+\end{DoxyCode}
+
+
+Classes \doxylink{classmm_1_1WLS}{WLS} and \doxylink{classmm_1_1RBFFD}{RBFFD} satisfy this concept.\hypertarget{concepts_ss-concept}{}\doxysection{\texorpdfstring{Shape storage concept}{Shape storage concept}}\label{concepts_ss-concept}
+This concept represents classes used for storing computed shape functions for different domain nodes. Their intention os to store the shape functions more compactly than if stored in {\ttfamily vector\texorpdfstring{$<$}{<}vector\texorpdfstring{$<$}{<}double\texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>}}.
+
+Classes \doxylink{classmm_1_1UniformShapeStorage}{Uniform\+Shape\+Storage} and \doxylink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage} satisfy this concept. See also \doxylink{classmm_1_1ShapeStorage}{Shape\+Storage} for CRTP inheritable interface.
+
+Typical usage\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{UniformShapeStorage<Vec3d,\ std::tuple<Lap<3>}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der1s<3>}}>>\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ sizes\ =\ \{5,\ 5,\ 5,\ 5,\ 5,\ 5\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(sizes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ storage.size();\ \ \textcolor{comment}{//\ 6}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ lap(5);}
+\DoxyCodeLine{\ \ \ \ lap\ <<\ 1.2,\ 3.4,\ 5.6,\ 7.8,\ 9.0;\ \ \textcolor{comment}{//\ compute\ the\ shapes}}
+\DoxyCodeLine{\ \ \ \ storage.setLaplace(2,\ lap);\ \ \textcolor{comment}{//\ set\ lap\ as\ laplace\ shape\ for\ node\ 2.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ storage.laplace(2,\ 3);\ \ \textcolor{comment}{//\ returns\ 7.8}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ storage.d1(1,\ 3);\ \ \textcolor{comment}{//\ d/dy\ shape\ in\ node\ 3\ (returns\ 0,\ because\ it\ is\ not\ set\ yet)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ storage\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+\hypertarget{concepts_linsolve-concept}{}\doxysection{\texorpdfstring{Linear solver concept}{Linear solver concept}}\label{concepts_linsolve-concept}
+This class represents a linear solver and follows the Eigen\textquotesingle{}s \href{https://eigen.tuxfamily.org/dox/group__TutorialLinearAlgebra.html}{\texttt{ Linear algebra and decompositions}}. The linear solver class must be default constructible and have two methods
+
+
+\begin{DoxyItemize}
+\item {\ttfamily void compute(const Matrix\& M)}
+\item {\ttfamily Vector solve(const Vector\& rhs)}
+\end{DoxyItemize}
+
+The class \doxylink{classmm_1_1JacobiSVDWrapper}{Jacobi\+SVDWrapper} and most Eigen\textquotesingle{}s decompositions follow this concept. 

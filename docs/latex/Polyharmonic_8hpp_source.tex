@@ -1,0 +1,51 @@
+\doxysection{Polyharmonic.\+hpp}
+\hypertarget{Polyharmonic_8hpp_source}{}\label{Polyharmonic_8hpp_source}\index{include/medusa/bits/approximations/Polyharmonic.hpp@{include/medusa/bits/approximations/Polyharmonic.hpp}}
+\mbox{\hyperlink{Polyharmonic_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_POLYHARMONIC\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_POLYHARMONIC\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Polyharmonic__fwd_8hpp}{Polyharmonic\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00014}00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scal\_t,\ \textcolor{keywordtype}{int}\ k>}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00015}\mbox{\hyperlink{classmm_1_1Polyharmonic_af60138fa1d2a3446d87b61fcc3f1db8c}{00015}}\ \mbox{\hyperlink{classmm_1_1Polyharmonic_af60138fa1d2a3446d87b61fcc3f1db8c}{Polyharmonic<scal\_t,\ k>::Polyharmonic}}()\ :\ order\_(\mbox{\hyperlink{classmm_1_1Gaussian}{k}})\ \{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00016}00016\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Polyharmonic_aff1b78156adaae8ef15fa2584e99e6dd}{order\_}}\ >\ 0,\ \textcolor{stringliteral}{"{}Order\ must\ be\ supplied\ if\ compile\ type\ order\ is\ -\/1."{}});}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00017}00017\ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00019}00019\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scal\_t,\ \textcolor{keywordtype}{int}\ k>}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00020}\mbox{\hyperlink{classmm_1_1Polyharmonic_afb657c97fd9322bd6e3ac0ddc8e362d1}{00020}}\ \mbox{\hyperlink{classmm_1_1Polyharmonic_af60138fa1d2a3446d87b61fcc3f1db8c}{Polyharmonic<scal\_t,\ k>::Polyharmonic}}(\textcolor{keywordtype}{int}\ order)\ :\ order\_((\mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ <\ 0)\ ?\ order\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}})\ \{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00021}00021\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Polyharmonic_a66e14fcde19a256573a75b7bac770801}{order}}\ \%\ 2\ ==\ 1,\ \textcolor{stringliteral}{"{}Order\ must\ be\ odd,\ got\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1Polyharmonic_a66e14fcde19a256573a75b7bac770801}{order}});}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scal\_t,\ \textcolor{keywordtype}{int}\ k>}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00025}\mbox{\hyperlink{classmm_1_1Polyharmonic_aef8e84786f5b8bd677c150bf27cfc13b}{00025}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Polyharmonic_aef8e84786f5b8bd677c150bf27cfc13b}{Polyharmonic<scal\_t,\ k>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00026}00026\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}\ >=\ 0,\ \textcolor{stringliteral}{"{}Derivative\ of\ negative\ order\ \%d\ requested."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}});}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}\ <\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/15)\ \{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00029}00029\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Polyharmonic_a1cdf60aec6b7e4d979e567b7f0c8eadd}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ std::sqrt(\mbox{\hyperlink{group__utils_gae3d8a1c01beb160c653056f1141e0952}{ipowneg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ order\_\ -\/\ 2*\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}));}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{while}\ (-\/-\/\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}\ >=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ *=\ (order\_/2.0\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}});}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00033}00033\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}};}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00037}00037\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scal\_t,\ \textcolor{keywordtype}{int}\ k>}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00038}00038\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00039}00039\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Polyharmonic_aef8e84786f5b8bd677c150bf27cfc13b}{Polyharmonic<scal\_t,\ k>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dimension>}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00040}00040\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(order\_\ >\ 2,\ \textcolor{stringliteral}{"{}Order\ must\ be\ >\ 2\ to\ compute\ the\ Laplacian,\ got\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}\ +\ order\_\ -\/\ 2)*order\_*\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(std::sqrt(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}),\ order\_\ -\/\ 2);}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00046}00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ S,\ \textcolor{keywordtype}{int}\ K>}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1Polyharmonic_aa14f6157a47e40ad97bed86272736d20}{00047}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Polyharmonic<S,\ K>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}})\ \{}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Polyharmonic\ RBF\ of\ order\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}.order\_\ <<\ \textcolor{charliteral}{'.'};}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00051}00051\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{Polyharmonic_8hpp_source_l00053}00053\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_POLYHARMONIC\_HPP\_}}
+
+\end{DoxyCode}

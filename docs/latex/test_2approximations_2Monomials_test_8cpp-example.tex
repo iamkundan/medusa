@@ -1,0 +1,241 @@
+\doxysection{test/approximations/\+Monomials\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2Monomials_test_8cpp-example}{}\label{test_2approximations_2Monomials_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials_8hpp}{medusa/bits/approximations/Monomials.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{medusa/bits/approximations/Operators.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ MonomialsTensorBaiss)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ basis\ =\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p\ =\ \{0.3,\ 2.3\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Values}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(1,\ basis.eval(0,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[1],\ basis.eval(1,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[1]\ *\ p[1],\ basis.eval(2,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[0],\ basis.eval(3,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[1],\ basis.eval(4,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[1]\ *\ p[1],\ basis.eval(5,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[0],\ basis.eval(6,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[0]\ *\ p[1],\ basis.eval(7,\ p));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[0]\ *\ p[1]\ *\ p[1],\ basis.eval(8,\ p));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ Monomials1D)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec1d>\ basis(9);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(10,\ basis.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ points\ =\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}(-\/1.0),\ \{1.0\},\ 20);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Values}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(1,\ basis.eval(0,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(p[0],\ basis.eval(1,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[0],\ basis.eval(2,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ First\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(0,\ basis.evalOp(0,\ p,\ Der1<1>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(1,\ basis.evalOp(1,\ p,\ Der1<1>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(2\ *\ p[0],\ basis.evalOp(2,\ p,\ Der1<1>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Second\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(0,\ basis.evalOp(0,\ p,\ Der2<1>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(0,\ basis.evalOp(1,\ p,\ Der2<1>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(2,\ basis.evalOp(2,\ p,\ Der2<1>(0)));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ Monomials2DAtZero)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ basis(\{\{2,\ 3\},\ \{0,\ 0\},\ \{1,\ 2\},\ \{1,\ 0\}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalAt0(0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ basis.evalAt0(1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalAt0(2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalAt0(3));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2*3*2,\ basis.evalOpAt0(0,\ Derivative<2>(\{2,\ 3\})));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalOpAt0(1,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalOpAt0(2,\ Derivative<2>(\{2,\ 2\})));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalOpAt0(2,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ basis.evalOpAt0(2,\ Derivative<2>(\{1,\ 2\})));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ basis.evalOpAt0(3,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ basis.evalOpAt0(3,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ find\_idx(\textcolor{keyword}{const}\ Eigen::Matrix<int,\ dim,\ Eigen::Dynamic>\&\ powers,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<int,\ dim,\ 1>\&\ mon)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ -\/1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ powers.cols();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_FALSE(powers.col(i)\ ==\ mon\ \&\&\ idx\ !=\ -\/1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers.col(i)\ ==\ mon)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NE(idx,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ idx;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ Monomials2D)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ basis(9);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(55,\ basis.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ find\_idx(basis.powers(),\ \{0,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ find\_idx(basis.powers(),\ \{1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ find\_idx(basis.powers(),\ \{0,\ 1\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ xx\ =\ find\_idx(basis.powers(),\ \{2,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ xy\ =\ find\_idx(basis.powers(),\ \{1,\ 1\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ yy\ =\ find\_idx(basis.powers(),\ \{0,\ 2\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(-\/1.0),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1.0),\ \{30,\ 30\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Values}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[1],\ basis.eval(y,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0],\ basis.eval(x,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[1]\ *\ p[1],\ basis.eval(yy,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0]\ *\ p[1],\ basis.eval(xy,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0]\ *\ p[0],\ basis.eval(xx,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ x\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(y,\ p,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(1,\ basis.evalOp(x,\ p,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(yy,\ p,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[1],\ basis.evalOp(xy,\ p,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(2\ *\ p[0],\ basis.evalOp(xx,\ p,\ Der1<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ y\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der1<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(1,\ basis.evalOp(y,\ p,\ Der1<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(x,\ p,\ Der1<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(2\ *\ p[1],\ basis.evalOp(yy,\ p,\ Der1<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0],\ basis.evalOp(xy,\ p,\ Der1<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xx,\ p,\ Der1<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ xx\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der2<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(y,\ p,\ Der2<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(x,\ p,\ Der2<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(yy,\ p,\ Der2<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xy,\ p,\ Der2<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(2,\ basis.evalOp(xx,\ p,\ Der2<2>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ yy\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(y,\ p,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(x,\ p,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(2,\ basis.evalOp(yy,\ p,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xy,\ p,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xx,\ p,\ Der2<2>(1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ xy\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(y,\ p,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(x,\ p,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(yy,\ p,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(1,\ basis.evalOp(xy,\ p,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xx,\ p,\ Der2<2>(0,\ 1)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ laplacian}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(basis.evalOp(c,\ \ p,\ Der2<2>(0))\ +\ basis.evalOp(c,\ \ p,\ Der2<2>(1)),\ basis.evalOp(c,\ \ p,\ Lap<2>()));\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(basis.evalOp(y,\ \ p,\ Der2<2>(0))\ +\ basis.evalOp(y,\ \ p,\ Der2<2>(1)),\ basis.evalOp(y,\ \ p,\ Lap<2>()));\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(basis.evalOp(x,\ \ p,\ Der2<2>(0))\ +\ basis.evalOp(x,\ \ p,\ Der2<2>(1)),\ basis.evalOp(x,\ \ p,\ Lap<2>()));\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(basis.evalOp(yy,\ p,\ Der2<2>(0))\ +\ basis.evalOp(yy,\ p,\ Der2<2>(1)),\ basis.evalOp(yy,\ p,\ Lap<2>()));\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(basis.evalOp(xy,\ p,\ Der2<2>(0))\ +\ basis.evalOp(xy,\ p,\ Der2<2>(1)),\ basis.evalOp(xy,\ p,\ Lap<2>()));\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(basis.evalOp(xx,\ p,\ Der2<2>(0))\ +\ basis.evalOp(xx,\ p,\ Der2<2>(1)),\ basis.evalOp(xx,\ p,\ Lap<2>()));\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ Monomials3D)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec3d>\ basis(4);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(35,\ basis.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ find\_idx(basis.powers(),\ \{0,\ 0,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ x\ =\ find\_idx(basis.powers(),\ \{1,\ 0,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ find\_idx(basis.powers(),\ \{0,\ 1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ z\ =\ find\_idx(basis.powers(),\ \{0,\ 0,\ 1\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ xx\ =\ find\_idx(basis.powers(),\ \{2,\ 0,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ xy\ =\ find\_idx(basis.powers(),\ \{1,\ 1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ xz\ =\ find\_idx(basis.powers(),\ \{1,\ 0,\ 1\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ yy\ =\ find\_idx(basis.powers(),\ \{0,\ 2,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ yz\ =\ find\_idx(basis.powers(),\ \{0,\ 1,\ 1\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ zz\ =\ find\_idx(basis.powers(),\ \{0,\ 0,\ 2\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points\ =\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1.0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1.0),\ \{20,\ 20,\ 20\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Values}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(1,\ basis.eval(c,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[2],\ basis.eval(z,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[1],\ basis.eval(y,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0],\ basis.eval(x,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[2]\ *\ p[2],\ basis.eval(zz,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[2]\ *\ p[1],\ basis.eval(yz,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[1]\ *\ p[1],\ basis.eval(yy,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0]\ *\ p[2],\ basis.eval(xz,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0]\ *\ p[1],\ basis.eval(xy,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[0]\ *\ p[0],\ basis.eval(xx,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ x\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(z,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(y,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(1,\ basis.evalOp(x,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(zz,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(yz,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(yy,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[2],\ basis.evalOp(xz,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(p[1],\ basis.evalOp(xy,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(2\ *\ p[0],\ basis.evalOp(xx,\ p,\ Der1<3>(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ yz\ derivatives}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(c,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(z,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(y,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(x,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(zz,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(1,\ basis.evalOp(yz,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(yy,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xz,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xy,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_DOUBLE\_EQ(0,\ basis.evalOp(xx,\ p,\ Der2<3>(1,\ 2)));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(c,\ \ p,\ Der2<3>(0))\ +\ basis.evalOp(c,\ \ p,\ Der2<3>(1))\ +\ basis.evalOp(c,\ \ p,\ Der2<3>(2)),\ basis.evalOp(c,\ \ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(z,\ \ p,\ Der2<3>(0))\ +\ basis.evalOp(z,\ \ p,\ Der2<3>(1))\ +\ basis.evalOp(z,\ \ p,\ Der2<3>(2)),\ basis.evalOp(z,\ \ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(y,\ \ p,\ Der2<3>(0))\ +\ basis.evalOp(y,\ \ p,\ Der2<3>(1))\ +\ basis.evalOp(y,\ \ p,\ Der2<3>(2)),\ basis.evalOp(y,\ \ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(x,\ \ p,\ Der2<3>(0))\ +\ basis.evalOp(x,\ \ p,\ Der2<3>(1))\ +\ basis.evalOp(x,\ \ p,\ Der2<3>(2)),\ basis.evalOp(x,\ \ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(zz,\ p,\ Der2<3>(0))\ +\ basis.evalOp(zz,\ p,\ Der2<3>(1))\ +\ basis.evalOp(zz,\ p,\ Der2<3>(2)),\ basis.evalOp(zz,\ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(yz,\ p,\ Der2<3>(0))\ +\ basis.evalOp(yz,\ p,\ Der2<3>(1))\ +\ basis.evalOp(yz,\ p,\ Der2<3>(2)),\ basis.evalOp(yz,\ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(yy,\ p,\ Der2<3>(0))\ +\ basis.evalOp(yy,\ p,\ Der2<3>(1))\ +\ basis.evalOp(yy,\ p,\ Der2<3>(2)),\ basis.evalOp(yy,\ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(xz,\ p,\ Der2<3>(0))\ +\ basis.evalOp(xz,\ p,\ Der2<3>(1))\ +\ basis.evalOp(xz,\ p,\ Der2<3>(2)),\ basis.evalOp(xz,\ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(xy,\ p,\ Der2<3>(0))\ +\ basis.evalOp(xy,\ p,\ Der2<3>(1))\ +\ basis.evalOp(xy,\ p,\ Der2<3>(2)),\ basis.evalOp(xy,\ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(basis.evalOp(xx,\ p,\ Der2<3>(0))\ +\ basis.evalOp(xx,\ p,\ Der2<3>(1))\ +\ basis.evalOp(xx,\ p,\ Der2<3>(2)),\ basis.evalOp(xx,\ p,\ Lap<3>()),\ 1e-\/14);\ \ \textcolor{comment}{//\ NOLINT}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ MonomialsManual)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ basis(\{\{0,\ 2\},\ \{1,\ 2\},\ \{3,\ 1\},\ \{0,\ 0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ points\ =\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(-\/1.0),\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1.0),\ \{20,\ 20\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(p[1]\ *\ p[1],\ basis.eval(0,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[1]\ *\ p[1],\ basis.eval(1,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(p[0]\ *\ p[0]\ *\ p[0]\ *\ p[1],\ basis.eval(2,\ p));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(1,\ basis.eval(3,\ p));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ MonomialsEmpty)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ empty;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ empty.size());}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec1d>\ empty1(-\/1);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ empty1.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec3d>::tensorBasis}}(-\/1).size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Appoximations,\ DISABLED\_MonomialsUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ basis(2);\ \ \textcolor{comment}{//\ \{1,\ y,\ x,\ y\string^2,\ xy,\ x\string^2\}}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ basis\ <<\ std::endl;\ \ \textcolor{comment}{//\ Monomials\ 2D:\ [0,\ 0;\ 0,\ 1;\ 1,\ 0;\ 0,\ 2;\ 1,\ 1;\ 2,\ 0],\ ...}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ basis.eval(2,\ \{0.3,\ -\/2.4\});\ \ \textcolor{comment}{//\ value\ =\ 0.3}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ basis\ =\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(1);\ \ \textcolor{comment}{//\ tensor\ basis\ \{1,\ x,\ y,\ xy\}}}
+\DoxyCodeLine{\ \ \ \ basis\ =\ Monomials<Vec2d>(\{\{1,\ 0\},\ \{2,\ 3\}\});\ \ \textcolor{comment}{//\ from\ powers}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Evaluate\ derivative\ or\ any\ other\ supported\ operator.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ basis.evalOp(1,\ \{0.3,\ -\/2.4\},\ Derivative<2>(\{2,\ 1\}));\ \ \textcolor{comment}{//\ der\ =\ 2*3*(-\/2.4)\string^2}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2*3*(-\/2.4)*(-\/2.4),\ der);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0.3,\ value);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

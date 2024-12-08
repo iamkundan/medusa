@@ -1,0 +1,361 @@
+\doxysection{mm\+::KDTree\+Mutable\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1KDTreeMutable}{}\label{classmm_1_1KDTreeMutable}\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+
+
+{\ttfamily \#include $<$KDTree\+Mutable\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+KDTree\+Mutable$<$ vec\+\_\+t $>$}
+A \href{https://en.wikipedia.org/wiki/K-d_tree}{\texttt{ k-\/d tree}} data structure that supports dynamic insertions and lazy-\/removal. 
+
+This class is a wrapper around \href{https://github.com/jlblancoc/nanoflann}{\texttt{ nanoflann}} k-\/d tree implementation. For specific behavior please refer to \href{http://jlblancoc.github.io/nanoflann/classnanoflann_1_1KDTreeSingleIndexDynamicAdaptor.html}{\texttt{ nanoflann docs}}.
+
+If dynamic structure is not needed, a faster static \doxylink{classmm_1_1KDTree}{KDTree} structure can be used.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points\ =\ \{\{5,\ 4,\ 0\},\ \{4,\ 2,\ 1\},\ \{7,\ 6,\ 9\},\ \{2,\ 2,\ 1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 0,\ 5\},\ \{5,\ 7,\ 0\},\ \{3,\ 3,\ 8\},\ \{9,\ 7,\ 3\},\ \{2,\ 2,\ 6\},\ \{2,\ 0,\ 6\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec3d>\ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}}(points);\ \ \textcolor{comment}{//\ \ Build\ kd-\/tree}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ closest;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ Get\ 3\ points\ closest\ to\ \{4.1,\ 3,\ 0.5\}}}
+\DoxyCodeLine{\ \ \ \ std::tie(closest,\ distances)\ =\ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}}.query(\{4.1,\ 3,\ 0.5\},\ 3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ Insertion\ and\ removal}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ new\_point\ =\ \{2,\ 30,\ 45\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}}.insert(new\_point);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}}.remove(2);\ \ \textcolor{comment}{//\ remove\ by\ index\ (assigned\ at\ insertion)}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}}\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1KDTree}{KDTree}, \doxylink{classmm_1_1KDGrid}{KDGrid}, \doxylink{classmm_1_1GeneralFill}{General\+Fill}, Find\+Support 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1KDTreeMutable_a8e937bd8fb1e185b633619160e44aac2}{KDTree\+Mutable}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&points)
+\begin{DoxyCompactList}\small\item\em Constructor that builds the search tree for the given points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1KDTreeMutable_a5423400c3e90c884185e997d2f16633c}{KDTree\+Mutable}} ()
+\begin{DoxyCompactList}\small\item\em Creates an empty k-\/d tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_a1862605933ec05c3795347aefeaf8da9}{reset}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&points)
+\begin{DoxyCompactList}\small\item\em Grows a new tree with new points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_ab4666557545aeb297da4216a3836a481}{insert}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point)
+\begin{DoxyCompactList}\small\item\em Insert a point into the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_afb7f354e71cba4ef7ebc41610608683d}{insert}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&points)
+\begin{DoxyCompactList}\small\item\em Inserts a sequence of points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_a45ea4bffa9c06f795c4957a394f733f3}{exists\+Point\+In\+Sphere}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p, \mbox{\hyperlink{classmm_1_1KDTreeMutable_af5350e496b28ab4645310e5aaec66597}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r}})
+\begin{DoxyCompactList}\small\item\em Check if any point exists in sphere centered at {\ttfamily p} with radius {\ttfamily r}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_af8471e0ce29d2df621b65c33a5ddd9b4}{remove}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index)
+\begin{DoxyCompactList}\small\item\em Removes a point with given index from the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_a0037bba29a4a30bba856cae3b7b6a8f2}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns number of points in the tree. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$, \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ \mbox{\hyperlink{classmm_1_1KDTreeMutable_a7d1e2bf462498b33fb22a64a8e4a2beb}{query}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{k}}=1)
+\begin{DoxyCompactList}\small\item\em Find {\ttfamily k} nearest neighbors to given point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1KDTreeMutable_a4b4b9efc6d9cd8df4377a3a19005f254a4223520d1a9aee5499a95d5d7fee9628}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the space. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_aa60b720c0208dc2fc77325fdbd7eecdb}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{vector\+\_\+t\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_af5350e496b28ab4645310e5aaec66597}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1KDTreeMutable_a12dccdb41fd8c22c84870dcd27b28684}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} nanoflann\+::\+KDTree\+Single\+Index\+Dynamic\+Adaptor$<$ nanoflann\+::\+L2\+\_\+\+Simple\+\_\+\+Adaptor$<$ \mbox{\hyperlink{classmm_1_1KDTreeMutable_af5350e496b28ab4645310e5aaec66597}{scalar\+\_\+t}}, \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{kdtree\+\_\+internal\+::\+Point\+Cloud}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ $>$, \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{kdtree\+\_\+internal\+::\+Point\+Cloud}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$, \mbox{\hyperlink{classmm_1_1KDTreeMutable_a4b4b9efc6d9cd8df4377a3a19005f254a4223520d1a9aee5499a95d5d7fee9628}{dim}} $>$ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac922e655679a205d78eeccfec74e2c3d}{kd\+\_\+tree\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Tree type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{kdtree\+\_\+internal\+::\+Point\+Cloud}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1KDTreeMutable_a1fa14af20fb16430eb6f1bab7fd6dc93}{points\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Points, contained in the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_a6117e058e44072b48c96448e49858d27}{size\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Number of points in the tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1KDTreeMutable_ac922e655679a205d78eeccfec74e2c3d}{kd\+\_\+tree\+\_\+t}} \mbox{\hyperlink{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}{tree}}
+\begin{DoxyCompactList}\small\item\em Actual tree build over points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1KDTreeMutable_a4b4b9efc6d9cd8df4377a3a19005f254}\label{classmm_1_1KDTreeMutable_a4b4b9efc6d9cd8df4377a3a19005f254} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the space. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1KDTreeMutable_a4b4b9efc6d9cd8df4377a3a19005f254a4223520d1a9aee5499a95d5d7fee9628}\label{classmm_1_1KDTreeMutable_a4b4b9efc6d9cd8df4377a3a19005f254a4223520d1a9aee5499a95d5d7fee9628} 
+dim&Dimensionality of the space. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1KDTreeMutable_a8e937bd8fb1e185b633619160e44aac2}\label{classmm_1_1KDTreeMutable_a8e937bd8fb1e185b633619160e44aac2} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!KDTreeMutable@{KDTreeMutable}}
+\index{KDTreeMutable@{KDTreeMutable}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{KDTreeMutable()}{KDTreeMutable()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+KDTree\+Mutable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor that builds the search tree for the given points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & A collection of points. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_a5423400c3e90c884185e997d2f16633c}\label{classmm_1_1KDTreeMutable_a5423400c3e90c884185e997d2f16633c} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!KDTreeMutable@{KDTreeMutable}}
+\index{KDTreeMutable@{KDTreeMutable}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{KDTreeMutable()}{KDTreeMutable()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+KDTree\+Mutable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an empty k-\/d tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1KDTreeMutable_a45ea4bffa9c06f795c4957a394f733f3}\label{classmm_1_1KDTreeMutable_a45ea4bffa9c06f795c4957a394f733f3} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!existsPointInSphere@{existsPointInSphere}}
+\index{existsPointInSphere@{existsPointInSphere}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{existsPointInSphere()}{existsPointInSphere()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::exists\+Point\+In\+Sphere (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{p,  }\item[{\mbox{\hyperlink{classmm_1_1KDTreeMutable_af5350e496b28ab4645310e5aaec66597}{scalar\+\_\+t}}}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if any point exists in sphere centered at {\ttfamily p} with radius {\ttfamily r}. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00088}{88}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_afb7f354e71cba4ef7ebc41610608683d}\label{classmm_1_1KDTreeMutable_afb7f354e71cba4ef7ebc41610608683d} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!insert@{insert}}
+\index{insert@{insert}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{points }\end{DoxyParamCaption})}
+
+
+
+Inserts a sequence of points. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{KDTreeMutable_8hpp_source}{KDTree\+Mutable.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_ab4666557545aeb297da4216a3836a481}\label{classmm_1_1KDTreeMutable_ab4666557545aeb297da4216a3836a481} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!insert@{insert}}
+\index{insert@{insert}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point }\end{DoxyParamCaption})}
+
+
+
+Insert a point into the tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Point to be inserted into the tree. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable_8hpp_source_l00024}{24}} of file \mbox{\hyperlink{KDTreeMutable_8hpp_source}{KDTree\+Mutable.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_a7d1e2bf462498b33fb22a64a8e4a2beb}\label{classmm_1_1KDTreeMutable_a7d1e2bf462498b33fb22a64a8e4a2beb} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!query@{query}}
+\index{query@{query}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{query()}{query()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::pair$<$ \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$, \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::query (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{k = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Find {\ttfamily k} nearest neighbors to given point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Find closest points to this point. \\
+\hline
+{\em k} & How many nearest points to find.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair of two vectors of size {\ttfamily k} containing indices of nearest neighbors and squared distances to said neighbors. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if there are not enough points in the tree. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{KDTreeMutable_8hpp_source}{KDTree\+Mutable.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_af8471e0ce29d2df621b65c33a5ddd9b4}\label{classmm_1_1KDTreeMutable_af8471e0ce29d2df621b65c33a5ddd9b4} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!remove@{remove}}
+\index{remove@{remove}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a point with given index from the tree. 
+
+The indexes of the points are given sequentially at insertion and do not change. The removal is lazy and point still takes up memory. 
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00098}{98}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_a1862605933ec05c3795347aefeaf8da9}\label{classmm_1_1KDTreeMutable_a1862605933ec05c3795347aefeaf8da9} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!reset@{reset}}
+\index{reset@{reset}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Grows a new tree with new points. 
+
+This function deletes the old points and the old tree and builds a new one with the given points.
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & A new container of points. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00073}{73}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_a0037bba29a4a30bba856cae3b7b6a8f2}\label{classmm_1_1KDTreeMutable_a0037bba29a4a30bba856cae3b7b6a8f2} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!size@{size}}
+\index{size@{size}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns number of points in the tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00103}{103}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1KDTreeMutable_a12dccdb41fd8c22c84870dcd27b28684}\label{classmm_1_1KDTreeMutable_a12dccdb41fd8c22c84870dcd27b28684} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{KDTreeMutable_8hpp_source}{KDTree\+Mutable.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1KDTreeMutable_a1fa14af20fb16430eb6f1bab7fd6dc93}\label{classmm_1_1KDTreeMutable_a1fa14af20fb16430eb6f1bab7fd6dc93} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!points\_@{points\_}}
+\index{points\_@{points\_}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{points\_}{points\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{kdtree\+\_\+internal\+::\+Point\+Cloud}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::points\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Points, contained in the tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_a6117e058e44072b48c96448e49858d27}\label{classmm_1_1KDTreeMutable_a6117e058e44072b48c96448e49858d27} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!size\_@{size\_}}
+\index{size\_@{size\_}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of points in the tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef}\label{classmm_1_1KDTreeMutable_ac57d09be695dc7aca31a2e5baf76a3ef} 
+\index{mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}!tree@{tree}}
+\index{tree@{tree}!mm::KDTreeMutable$<$ vec\_t $>$@{mm::KDTreeMutable$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{tree}{tree}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1KDTreeMutable_ac922e655679a205d78eeccfec74e2c3d}{kd\+\_\+tree\+\_\+t}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::tree\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Actual tree build over points. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{KDTreeMutable__fwd_8hpp_source}{KDTree\+Mutable\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{HalfLinksRefine__fwd_8hpp}{Half\+Links\+Refine\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/spatial\+\_\+search/\mbox{\hyperlink{KDTreeMutable__fwd_8hpp}{KDTree\+Mutable\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/spatial\+\_\+search/\mbox{\hyperlink{KDTreeMutable_8hpp}{KDTree\+Mutable.\+hpp}}\end{DoxyCompactItemize}

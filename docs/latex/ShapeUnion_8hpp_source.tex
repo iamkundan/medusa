@@ -1,0 +1,69 @@
+\doxysection{Shape\+Union.\+hpp}
+\hypertarget{ShapeUnion_8hpp_source}{}\label{ShapeUnion_8hpp_source}\index{include/medusa/bits/domains/ShapeUnion.hpp@{include/medusa/bits/domains/ShapeUnion.hpp}}
+\mbox{\hyperlink{ShapeUnion_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_SHAPEUNION\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_SHAPEUNION\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeUnion__fwd_8hpp}{ShapeUnion\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1ShapeUnion_a7b48c3a1f3ce6a683a520c945f6e85d1}{00017}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeUnion_a7b48c3a1f3ce6a683a520c945f6e85d1}{ShapeUnion<vec\_t>::discretizeBoundaryWithStep}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeBoundaryWithStep(step,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeBoundaryWithStep(step,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.add(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00025}\mbox{\hyperlink{classmm_1_1ShapeUnion_ad2ce07a737acd3772ad311632acedbbc}{00025}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeUnion_ad2ce07a737acd3772ad311632acedbbc}{ShapeUnion<vec\_t>::discretizeWithStep}}(}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeWithStep(step,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeWithStep(step,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.add(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00032}00032\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1ShapeUnion_a242b5d7c0632d64b28588644c7236de5}{00033}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeUnion_a242b5d7c0632d64b28588644c7236de5}{ShapeUnion<vec\_t>::discretizeBoundaryWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,\ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeBoundaryWithDensity(dr,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeBoundaryWithDensity(dr,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.add(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00038}00038\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00040}00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1ShapeUnion_ad3e5c8a11388b1d081fb355e3b8a6cd0}{00041}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeUnion_ad3e5c8a11388b1d081fb355e3b8a6cd0}{ShapeUnion<vec\_t>::discretizeWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeWithDensity(dr,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeWithDensity(dr,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.add(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00049}00049\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00050}\mbox{\hyperlink{classmm_1_1ShapeUnion_a453f71df81d771025c9a4fa3df27546e}{00050}}\ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1ShapeUnion_a453f71df81d771025c9a4fa3df27546e}{ShapeUnion<vec\_t>::bbox}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{lo}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{lo1}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi1}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{lo2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi2}};}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00052}00052\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{lo1}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi1}})\ =\ sh1-\/>bbox();}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00053}00053\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{lo2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi2}})\ =\ sh2-\/>bbox();}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{lo}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ std::min(\mbox{\hyperlink{classmm_1_1Gaussian}{lo1}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ \mbox{\hyperlink{classmm_1_1Gaussian}{lo2}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hi}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ std::max(\mbox{\hyperlink{classmm_1_1Gaussian}{hi1}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi2}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]);}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{lo}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{hi}}\};}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00061}00061\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00062}\mbox{\hyperlink{classmm_1_1ShapeUnion_ae389ea42bd925f9d76c0a11e4a79d8a8}{00062}}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1ShapeUnion_ae389ea42bd925f9d76c0a11e4a79d8a8}{ShapeUnion<vec\_t>::print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}ShapeUnion("{}}\ <<\ *sh1\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ *sh2\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00066}00066\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{ShapeUnion_8hpp_source_l00068}00068\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_SHAPEUNION\_HPP\_}}
+
+\end{DoxyCode}

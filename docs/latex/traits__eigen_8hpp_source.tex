@@ -1,0 +1,28 @@
+\doxysection{traits\+\_\+eigen.\+hpp}
+\hypertarget{traits__eigen_8hpp_source}{}\label{traits__eigen_8hpp_source}\index{include/medusa/bits/types/traits\_eigen.hpp@{include/medusa/bits/types/traits\_eigen.hpp}}
+\mbox{\hyperlink{traits__eigen_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_TYPES\_TRAITS\_EIGEN\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_TYPES\_TRAITS\_EIGEN\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{traits_8hpp}{traits.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \_Scalar,\ \textcolor{keywordtype}{int}\ \_Rows,\ \textcolor{keywordtype}{int}\ \_Cols,\ \textcolor{keywordtype}{int}\ \_Options,\ \textcolor{keywordtype}{int}\ \_MaxRows,\ \textcolor{keywordtype}{int}\ \_MaxCols>}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00017}\mbox{\hyperlink{structmm_1_1scalar__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Options805de53c82fcd4aed23e43162f0a89b7}{00017}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\_type}}<Eigen::\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}<\_Scalar,\ \_Rows,\ \_Cols,\ \_Options,\ \_MaxRows,\ \_MaxCols>>\ \{}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00018}\mbox{\hyperlink{structmm_1_1scalar__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Options805de53c82fcd4aed23e43162f0a89b7_a5e02c06b31b7a90233cd8a2bcb2660a3}{00018}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{\_Scalar}}\ \mbox{\hyperlink{structmm_1_1scalar__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Options805de53c82fcd4aed23e43162f0a89b7_a5e02c06b31b7a90233cd8a2bcb2660a3}{type}};\ \ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00019}00019\ \};}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00022}00022\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \_Scalar,\ \textcolor{keywordtype}{int}\ \_Rows,\ \textcolor{keywordtype}{int}\ \_Cols,\ \textcolor{keywordtype}{int}\ \_Options,\ \textcolor{keywordtype}{int}\ \_MaxRows,\ \textcolor{keywordtype}{int}\ \_MaxCols>}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00023}\mbox{\hyperlink{structmm_1_1vector__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Optionse6a0acf3820feabb43dfce994ead47ec}{00023}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1vector__type}{vector\_type}}<Eigen::\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}<\_Scalar,\ \_Rows,\ \_Cols,\ \_Options,\ \_MaxRows,\ \_MaxCols>>\ \{}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00024}\mbox{\hyperlink{structmm_1_1vector__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Optionse6a0acf3820feabb43dfce994ead47ec_a11f8febfb9b496d2ad0d91f417e33012}{00024}}\ \ \ \ \ \textcolor{keyword}{typedef}\ Eigen::Matrix<\_Scalar,\ \_Cols,\ 1>\ \mbox{\hyperlink{structmm_1_1vector__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Optionse6a0acf3820feabb43dfce994ead47ec_a11f8febfb9b496d2ad0d91f417e33012}{type}};\ \ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00025}00025\ \};}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00027}00027\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{traits__eigen_8hpp_source_l00029}00029\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_TYPES\_TRAITS\_EIGEN\_HPP\_}}
+
+\end{DoxyCode}

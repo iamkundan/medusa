@@ -1,0 +1,69 @@
+\doxysection{CSV.\+cpp}
+\hypertarget{CSV_8cpp_source}{}\label{CSV_8cpp_source}\index{src/io/CSV.cpp@{src/io/CSV.cpp}}
+\mbox{\hyperlink{CSV_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CSV_8hpp}{medusa/bits/io/CSV.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00010}\mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{00010}}\ std::vector<double>\ \mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{CSV::read}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00011}00011\ \ \ \ \ std::ifstream\ \mbox{\hyperlink{classmm_1_1Gaussian}{f}}(filename);}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00012}00012\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{f}}.good(),\ \textcolor{stringliteral}{"{}Error\ opening\ CSV\ file\ '\%s':\ \%s."{}},\ filename,\ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00014}00014\ \ \ \ \ std::vector<double>\ data;}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00015}00015\ \ \ \ \ std::string\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}};}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{getline}}(\mbox{\hyperlink{classmm_1_1Gaussian}{f}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}))\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ data.push\_back(std::stod(\mbox{\hyperlink{classmm_1_1Gaussian}{s}}));}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}(\textcolor{keyword}{const}\ std::invalid\_argument\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Failed\ parsing\ '\%s'\ to\ double."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}});}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00026}\mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{00026}}\ std::vector<std::vector<double>>\ \mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{CSV::read2d}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00027}00027\ \ \ \ \ std::ifstream\ \mbox{\hyperlink{classmm_1_1Gaussian}{f}}(filename);}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{f}}.good(),\ \textcolor{stringliteral}{"{}Error\ opening\ CSV\ file\ '\%s':\ \%s."{}},\ filename,\ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00030}00030\ \ \ \ \ std::vector<std::vector<std::string>>\ \mbox{\hyperlink{classmm_1_1Gaussian}{lines}};}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00031}00031\ \ \ \ \ std::string\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}};}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{getline}}(\mbox{\hyperlink{classmm_1_1Gaussian}{f}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}))\ \mbox{\hyperlink{classmm_1_1Gaussian}{lines}}.push\_back(\mbox{\hyperlink{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}{split}}(\mbox{\hyperlink{classmm_1_1Gaussian}{s}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}));}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{lines}}.size();}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{lines}}[0].size();}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{lines}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}].size()\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ \textcolor{stringliteral}{"{}Not\ all\ rows\ in\ CSV\ file\ have\ the\ same\ number\ of\ "{}}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}elements,\ row\ 1\ has\ \%d\ and\ row\ \%d\ has\ \%d."{}},}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{lines}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}].size());}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00042}00042\ \ \ \ \ std::vector<std::vector<double>>\ data(\mbox{\hyperlink{classmm_1_1Gaussian}{m}},\ std::vector<double>(\mbox{\hyperlink{classmm_1_1Gaussian}{n}}));}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}][\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ =\ std::stod(\mbox{\hyperlink{classmm_1_1Gaussian}{lines}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}][\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]);}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}(\textcolor{keyword}{const}\ std::invalid\_argument\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Failed\ parsing\ '\%s'\ to\ double."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{lines}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}][\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]);}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00055}\mbox{\hyperlink{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}{00055}}\ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}{CSV::split}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}})\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00056}00056\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}};}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ =\ 0,\ pos\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ pos\ =\ str.find(\mbox{\hyperlink{classmm_1_1Gaussian}{separator}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}});}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ ==\ std::string::npos)\ pos\ =\ str.length();}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}}.emplace\_back(str.substr(\mbox{\hyperlink{classmm_1_1Gaussian}{prev}},\ pos-\/\mbox{\hyperlink{classmm_1_1Gaussian}{prev}}));}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ =\ pos\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00063}00063\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (pos\ <\ str.length()\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ <\ str.length());}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ ==\ str.length())\ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}}.emplace\_back(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}};}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{CSV_8cpp_source_l00068}00068\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

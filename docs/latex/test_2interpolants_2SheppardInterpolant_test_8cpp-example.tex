@@ -1,0 +1,241 @@
+\doxysection{test/interpolants/\+Sheppard\+Interpolant\+\_\+test.\+cpp}
+\hypertarget{test_2interpolants_2SheppardInterpolant_test_8cpp-example}{}\label{test_2interpolants_2SheppardInterpolant_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Sheppard__fwd_8hpp}{medusa/bits/interpolants/Sheppard\_fwd.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolant1D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 4;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ num\_closest\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ Closest\ neighbors.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec1d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point;}
+\DoxyCodeLine{\ \ \ \ point.setConstant(1.5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ num\_closest);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.5,\ value,\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolant2D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 4;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Rectangle\ corners.}}
+\DoxyCodeLine{\ \ \ \ pos[0]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ pos[1]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{1,\ 0\};}
+\DoxyCodeLine{\ \ \ \ pos[2]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{1,\ 1\};}
+\DoxyCodeLine{\ \ \ \ pos[3]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{0,\ 1\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Values\ in\ corners.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec2d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Test\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_points\ =\ 30;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ x\ =\ Eigen::ArrayXf::LinSpaced(N\_points,\ 0,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ y\ =\ x;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Exclude\ corners.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ N\_points\ -\/\ 1;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 1;\ j\ <\ N\_points\ -\/\ 1;\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ point\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{x(i),\ y(j)\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Interpolant\ value.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Expected\ value.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Range<double>\ w(N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ w\_sum\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ N;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w[k]\ =\ 1\ /\ (point\ -\/\ pos[k]).squaredNorm();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\_sum\ +=\ w[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ expected\_value\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ N;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expected\_value\ +=\ w[k]\ *\ values[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ expected\_value\ /=\ w\_sum;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected\_value,\ value,\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Test\ corner\ values.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(pos[i],\ N);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(values[i],\ value,\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolant3D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 3;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Tetrahedron\ side\ corners.}}
+\DoxyCodeLine{\ \ \ \ pos[0]\ =\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{1,\ 0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ pos[1]\ =\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{0,\ 1,\ 0\};}
+\DoxyCodeLine{\ \ \ \ pos[2]\ =\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{0,\ 0,\ 1\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Values\ in\ corners.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec3d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value\ at\ tetrahedron\ top.}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ point\{0,\ 0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ 3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1,\ value,\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value\ on\ the\ side.}}
+\DoxyCodeLine{\ \ \ \ point\ =\ 0.2\ *\ (pos[1]\ +\ pos[2]);}
+\DoxyCodeLine{\ \ \ \ value\ =\ interpolant(point,\ 2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.5,\ value,\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolantPower)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ num\_closest\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ Closest\ neighbors.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i\ +\ 2;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec1d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point\{0.75\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ power\ =\ 1;\ power\ <\ 10;\ power++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ num\_closest,\ power);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Expected\ value.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<double>\ w(N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ w\_sum\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ N;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ w[k]\ =\ 1.0\ /\ std::pow((point\ -\/\ pos[k]).norm(),\ power);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ w\_sum\ +=\ w[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ expected\_value\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ N;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ expected\_value\ +=\ w[k]\ *\ values[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ expected\_value\ /=\ w\_sum;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected\_value,\ value,\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolantSingleNeighbor)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ num\_closest\ =\ 1;\ \ \ \ \ \ \textcolor{comment}{//\ Closest\ neighbors.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos[i]\ =\ 5\ *\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i\ +\ 2;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec1d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point\{2.0\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ num\_closest);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(values[0],\ value,\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ point.setConstant(2.6);}
+\DoxyCodeLine{\ \ \ \ value\ =\ interpolant(point,\ num\_closest);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(values[1],\ value,\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolantRegularization)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ num\_closest\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ Closest\ neighbors.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i\ +\ 2;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec1d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point\{0.75\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ reg\ =\ 0.0;\ reg\ <\ 20.0;\ reg\ +=\ 3.0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ num\_closest,\ 2,\ reg);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Expected\ value.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<double>\ w(N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ w\_sum\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ N;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ w[k]\ =\ 1.0\ /\ ((point\ -\/\ pos[k]).squaredNorm()\ +\ reg);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ w\_sum\ +=\ w[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ expected\_value\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ N;\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ expected\_value\ +=\ w[k]\ *\ values[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ expected\_value\ /=\ w\_sum;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected\_value,\ value,\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Interpolants,\ SheppardInterpolantConfusionDistance)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ num\_closest\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ Closest\ neighbors.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ values(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ i\ +\ 2;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec1d,\ double>\ interpolant(pos,\ values);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ conf\_dist\ =\ 0.1;\ conf\_dist\ >\ 1e-\/14;\ conf\_dist\ /=\ 10)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point\ =\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{conf\_dist\}\ -\/\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{1e-\/15\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ num\_closest,\ 2,\ 0,\ conf\_dist);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(values[0],\ value,\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

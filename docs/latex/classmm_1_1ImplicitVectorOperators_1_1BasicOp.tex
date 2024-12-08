@@ -1,0 +1,257 @@
+\doxysection{mm\+::Implicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type \texorpdfstring{$>$}{>}\+::Basic\+Op\texorpdfstring{$<$}{<} op\+\_\+family\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{}\label{classmm_1_1ImplicitVectorOperators_1_1BasicOp}\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}}$>$\newline
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}}$>$\newline
+class mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Basic\+Op$<$ op\+\_\+family\+\_\+t $>$}
+Class representing basic operators. 
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00191}{191}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Implicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type \texorpdfstring{$>$}{>}\+::Basic\+Op\texorpdfstring{$<$}{<} op\+\_\+family\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1ImplicitVectorOperators_1_1BasicOp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Implicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type \texorpdfstring{$>$}{>}\+::Basic\+Op\texorpdfstring{$<$}{<} op\+\_\+family\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1ImplicitVectorOperators_1_1BasicOp__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ac8a3d2871f34c90f05106c7d52150123}{Basic\+Op}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}} \&\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581}{op}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821}{node}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643}{row}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} op\+\_\+family\+\_\+t\+::operator\+\_\+t \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aa59a89a5b67c9515de9280e3300ff8a3}{o}})
+\begin{DoxyCompactList}\small\item\em Construct given basic operator \textquotesingle{}o\textquotesingle{}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ad051e7e364a2c9d0ff923db8a57a206b}{eval}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate this operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ad0d74fc096cc9108dae13c9dc3823295}{eval}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Eval with {\ttfamily alpha = 1.\+0}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a53300d4dc451e9cd5e054dfec734cb59}{operator\texorpdfstring{$\ast$}{*}}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}})
+\begin{DoxyCompactList}\small\item\em Multiply this operation by a scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a43ce209c5d7fdadb8e81c8027d88c1a9}{operator+}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1Gaussian}{right}})
+\begin{DoxyCompactList}\small\item\em Combine this operation with another row operation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_adaf7d05fcfc889a92c9d6063ec16deb1}{operator+}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase}{Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{other\+\_\+derived\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{right}})
+\begin{DoxyCompactList}\small\item\em Combine tho operation with another operation. Both operations are evaluated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a74cfabdf42c4e5c765e0b08d49a5ed77}{operator-\/}} ()
+\begin{DoxyCompactList}\small\item\em Multiply this operation by {\ttfamily -\/1}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aea93963763d196308c412ffbf7da285e}{Implicit\+Vector\+Operators}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}} \& \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581}{op}}
+\begin{DoxyCompactList}\small\item\em Reference to underlying operators. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821}{node}}
+\begin{DoxyCompactList}\small\item\em Index of the point for which to apply the operation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643}{row}}
+\begin{DoxyCompactList}\small\item\em Matrix row to which the operation should be applied (without offset). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+op\+\_\+family\+\_\+t\+::operator\+\_\+t \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aa59a89a5b67c9515de9280e3300ff8a3}{o}}
+\begin{DoxyCompactList}\small\item\em Basic operator with precomputed shape functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ac8a3d2871f34c90f05106c7d52150123}\label{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ac8a3d2871f34c90f05106c7d52150123} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!BasicOp@{BasicOp}}
+\index{BasicOp@{BasicOp}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{BasicOp()}{BasicOp()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\+::\+Basic\+Op$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$\+::\+Basic\+Op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}} \&}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{row,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} op\+\_\+family\+\_\+t\+::operator\+\_\+t}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct given basic operator \textquotesingle{}o\textquotesingle{}. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00197}{197}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ad0d74fc096cc9108dae13c9dc3823295}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ad0d74fc096cc9108dae13c9dc3823295} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!eval@{eval}}
+\index{eval@{eval}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Eval with {\ttfamily alpha = 1.\+0}. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00149}{149}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ad051e7e364a2c9d0ff923db8a57a206b}\label{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ad051e7e364a2c9d0ff923db8a57a206b} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!eval@{eval}}
+\index{eval@{eval}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ac8a3d2871f34c90f05106c7d52150123}{\+::\+Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}}}]{alpha }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate this operator. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00200}{200}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a53300d4dc451e9cd5e054dfec734cb59}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a53300d4dc451e9cd5e054dfec734cb59} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}}}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Multiply this operation by a scalar. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00153}{153}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_adaf7d05fcfc889a92c9d6063ec16deb1}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_adaf7d05fcfc889a92c9d6063ec16deb1} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase}{Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{other\+\_\+derived\+\_\+t}} $>$ \&}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Combine tho operation with another operation. Both operations are evaluated. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00160}{160}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a43ce209c5d7fdadb8e81c8027d88c1a9}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a43ce209c5d7fdadb8e81c8027d88c1a9} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}}}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Combine this operation with another row operation. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00155}{155}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a74cfabdf42c4e5c765e0b08d49a5ed77}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a74cfabdf42c4e5c765e0b08d49a5ed77} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::operator-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Multiply this operation by {\ttfamily -\/1}. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00157}{157}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aea93963763d196308c412ffbf7da285e}\label{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aea93963763d196308c412ffbf7da285e} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!ImplicitVectorOperators@{ImplicitVectorOperators}}
+\index{ImplicitVectorOperators@{ImplicitVectorOperators}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{ImplicitVectorOperators}{ImplicitVectorOperators}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{friend}} \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00192}{192}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!node@{node}}
+\index{node@{node}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{node}{node}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::node\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Index of the point for which to apply the operation. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aa59a89a5b67c9515de9280e3300ff8a3}\label{classmm_1_1ImplicitVectorOperators_1_1BasicOp_aa59a89a5b67c9515de9280e3300ff8a3} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!o@{o}}
+\index{o@{o}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{o}{o}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$ \\
+op\+\_\+family\+\_\+t\+::operator\+\_\+t \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp_ac8a3d2871f34c90f05106c7d52150123}{\+::\+Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$\+::o\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Basic operator with precomputed shape functions. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00194}{194}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!op@{op}}
+\index{op@{op}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{op}{op}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}\& \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::op\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Reference to underlying operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00133}{133}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}!row@{row}}
+\index{row@{row}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::BasicOp$<$ op\_family\_t $>$}}
+\doxysubsubsection{\texorpdfstring{row}{row}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{Basic\+Op}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} $>$  $>$\+::row\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Matrix row to which the operation should be applied (without offset). 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00135}{135}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

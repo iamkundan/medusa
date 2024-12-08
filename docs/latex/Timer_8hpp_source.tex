@@ -1,0 +1,49 @@
+\doxysection{Timer.\+hpp}
+\hypertarget{Timer_8hpp_source}{}\label{Timer_8hpp_source}\index{include/medusa/bits/utils/Timer.hpp@{include/medusa/bits/utils/Timer.hpp}}
+\mbox{\hyperlink{Timer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_UTILS\_TIMER\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_UTILS\_TIMER\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00017}00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1Timer}{00029}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1Timer}{Timer}}\ \{}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00030}00030\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{00031}}\ \ \ \ \ \textcolor{keyword}{typedef}\ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\_type}};\ \ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00032}\mbox{\hyperlink{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9}{00032}}\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9}{labels\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1Timer_a66578f64b1a0dbe0a318b16da7675e0c}{00033}}\ \ \ \ \ std::vector<time\_type>\ \mbox{\hyperlink{classmm_1_1Timer_a66578f64b1a0dbe0a318b16da7675e0c}{times\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Timer_aeb827f3efc08d7df289bb43a88d9e303}{showTimings}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{from}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{to}},\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ =\ std::cout)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Timer_a17414b39363d124f1ec1c077034d5d73}{getID}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00040}00040\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\_type}}\ \mbox{\hyperlink{classmm_1_1Timer_ac4d75309008a1fc9111739b6b2d5753f}{timeAt}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00041}00041\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Timer_a9a30f5d1827f4e088757dddcf1cceed3}{addCheckPoint}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}});}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Timer_aeb827f3efc08d7df289bb43a88d9e303}{showTimings}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ =\ std::cout)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Timer_aeb827f3efc08d7df289bb43a88d9e303}{showTimings}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{from}},\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{to}},}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ =\ std::cout)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00057}00057\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\_type}}\ \mbox{\hyperlink{classmm_1_1Timer_ac4d75309008a1fc9111739b6b2d5753f}{timeAt}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{label}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Timer_a43ea0de701680d29a9d20e09d41b66d7}{duration}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{from}},\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{to}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Timer_a4f0e7aee0f334e4ea4db5b7912f3eb40}{durationToNow}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{from}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00063}\mbox{\hyperlink{classmm_1_1Timer_a55c68a21d1a7ae23b9b768db735144be}{00063}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Timer_a55c68a21d1a7ae23b9b768db735144be}{size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9}{labels\_}}.size();\ \}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00065}\mbox{\hyperlink{classmm_1_1Timer_a6312e3bd3a84eacd54c4a597c2cf19fe}{00065}}\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classmm_1_1Timer_a6312e3bd3a84eacd54c4a597c2cf19fe}{labels}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9}{labels\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00067}\mbox{\hyperlink{classmm_1_1Timer_ab9a5acc6ce4fe6f2e82f1a8c94ebe50e}{00067}}\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<time\_type>\&\ \mbox{\hyperlink{classmm_1_1Timer_ab9a5acc6ce4fe6f2e82f1a8c94ebe50e}{times}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Timer_a66578f64b1a0dbe0a318b16da7675e0c}{times\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Timer_a4298a11b593fb678e260cf3f0a654672}{clear}}();}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00072}\mbox{\hyperlink{classmm_1_1Timer_a8e125e38ee1ec31b73d2e322c1ec93f2}{00072}}\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1Timer_a8e125e38ee1ec31b73d2e322c1ec93f2}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Timer}{Timer}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{timer}})\ \{}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{timer}}.showTimings(\mbox{\hyperlink{classmm_1_1Gaussian}{os}});}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00076}00076\ \};}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00078}00078\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{Timer_8hpp_source_l00080}00080\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_UTILS\_TIMER\_HPP\_}}
+
+\end{DoxyCode}

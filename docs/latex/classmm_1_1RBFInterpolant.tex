@@ -1,0 +1,295 @@
+\doxysection{mm\+::RBFInterpolant\texorpdfstring{$<$}{<} RBFType, vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1RBFInterpolant}{}\label{classmm_1_1RBFInterpolant}\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+
+
+{\ttfamily \#include $<$RBFInterpolant\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+RBFInterpolant$<$ RBFType, vec\+\_\+t $>$}
+Class representing a RBF Interpolant over a set of nodes of the form. 
+
+\[
+   u(p) = \sum_{i=1}^n \alpha_i \phi\left(\left\|\frac{p - p_i}{s}\right\|\right) +
+          \sum_{i=1}^s \beta_i q_i\left(\frac{p - p_c}{s} \right),
+\] where $\phi$ is the RBF and $q_i$ are monomials.
+
+\begin{DoxyNote}{Note}
+This class does not compute the interpolant, that is done by \doxylink{classmm_1_1RBFFD_a4ca2a5e49274e723bbe851b8bcdd4be9}{RBFFD\+::get\+Approximant}. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFFD}{RBFFD} 
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em basis\+\_\+t} & Radial basis function used. Must satisfy the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}. \\
+\hline
+{\em vec\+\_\+t} & Vector type used.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{0,\ -\/h\},\ \{h,\ 0\},\ \{-\/h,\ 0\}\};}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ values(pts.size());\ values\ <<\ 0.1,\ 0.1,\ 0.1,\ 0.2,\ 0.0;\ \ \textcolor{comment}{//\ linear\ function\ in\ x}}
+\DoxyCodeLine{\ \ \ \ RBFFD<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}},\ ScaleToFarthest>\ approx(1.0,\ 2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ appr\ =\ approx.getApproximant(\{0,\ 0\},\ pts,\ values);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ appr(\{h/2,\ 0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ lap\ =\ appr(\{h/2,\ 0\},\ Lap<2>());}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a86dc7cf0be088eca49133a36dc1e10f0}{RBFInterpolant}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_ab3d572ac3ea683ae5e211d7822b79c72}{rbf\+\_\+t}} \&rbf, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{mon}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583}{point}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a66ce7337d6f8d343ca574c9158caaf15}{scale}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&\mbox{\hyperlink{classmm_1_1RBFInterpolant_a523b14603fe5ab12809733ecd0712be3}{coefficients}})
+\begin{DoxyCompactList}\small\item\em Construct a RBF interpolant with known coefficients. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a67108ed828871db3e2da2e17e866f5be}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583}{point}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate the interpolant at given {\ttfamily point}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a732ed9416bb6d4e4f6898fe6d68e493f}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583}{point}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&op) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate an operator applied to the interpolant at given {\ttfamily point}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583}{point}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the center point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a66ce7337d6f8d343ca574c9158caaf15}{scale}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the scale. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \& \mbox{\hyperlink{classmm_1_1RBFInterpolant_a523b14603fe5ab12809733ecd0712be3}{coefficients}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the coefficient vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_ab3d572ac3ea683ae5e211d7822b79c72}{rbf\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Radial basis function type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_ab3d572ac3ea683ae5e211d7822b79c72}{rbf\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a90b544eeef85d4194e2da38790398d3e}{rbf\+\_\+}}
+\begin{DoxyCompactList}\small\item\em RBF used for interpolation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a0e569fcb708afb7959f2e0d162da2105}{mon\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Augmenting monomials. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5a3586d03825e265b02cc21aa9d6fd48}{point\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Center point. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_aa3570f0f6a29c6d65dd6faaabb729983}{support\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Local scaled stencil points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a35f85e2c956ff7be2c7cdf4cfe17fb19}{scale\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Scale. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a0f9cd35dc60b55544ab5d11c3be6ccf6}{coefficients\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Coefficients (for scaled fn.) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1RBFInterpolant_a86dc7cf0be088eca49133a36dc1e10f0}\label{classmm_1_1RBFInterpolant_a86dc7cf0be088eca49133a36dc1e10f0} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!RBFInterpolant@{RBFInterpolant}}
+\index{RBFInterpolant@{RBFInterpolant}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{RBFInterpolant()}{RBFInterpolant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+RBFInterpolant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_ab3d572ac3ea683ae5e211d7822b79c72}{rbf\+\_\+t}} \&}]{rbf,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{mon,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}}]{scale,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{coefficients }\end{DoxyParamCaption})}
+
+
+
+Construct a RBF interpolant with known coefficients. 
+
+The interpolant is of the form  \[
+   u(p) = \sum_{i=1}^n \alpha_i \phi\left(\left\|\frac{p - p_i}{s}\right\|\right) +
+          \sum_{i=1}^s \beta_i q_i\left(\frac{p - p_c}{s} \right),
+\] where $\phi$ is the RBF and $q_i$ are monomials. 
+\begin{DoxyParams}{Parameters}
+{\em rbf} & Radial basis function $\phi$, must satisfy the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}. \\
+\hline
+{\em mon} & Monomial basis $q_i$. \\
+\hline
+{\em point} & Center point $p_c$ of the RBF interpolation (used for monomial shift). \\
+\hline
+{\em support} & Nonscaled stencil of the \doxylink{classmm_1_1RBFFD}{RBFFD} approximation. \\
+\hline
+{\em scale} & Scale $s$ used in \doxylink{classmm_1_1RBFFD}{RBFFD} computation, see \doxysectlink{concepts_scale-concept}{Scale function concept}{1}. \\
+\hline
+{\em coefficients} & The $n+s$ coefficients $\alpha_i, \beta_i$ of the approximation. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{RBFInterpolant_8hpp_source}{RBFInterpolant.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1RBFInterpolant_a523b14603fe5ab12809733ecd0712be3}\label{classmm_1_1RBFInterpolant_a523b14603fe5ab12809733ecd0712be3} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!coefficients@{coefficients}}
+\index{coefficients@{coefficients}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{coefficients()}{coefficients()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \& \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::coefficients (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the coefficient vector. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a67108ed828871db3e2da2e17e866f5be}\label{classmm_1_1RBFInterpolant_a67108ed828871db3e2da2e17e866f5be} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \&}]{point }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate the interpolant at given {\ttfamily point}. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{RBFInterpolant_8hpp_source}{RBFInterpolant.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a732ed9416bb6d4e4f6898fe6d68e493f}\label{classmm_1_1RBFInterpolant_a732ed9416bb6d4e4f6898fe6d68e493f} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&}]{op }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate an operator applied to the interpolant at given {\ttfamily point}. 
+
+\Hypertarget{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583}\label{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!point@{point}}
+\index{point@{point}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{point()}{point()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the center point. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00076}{76}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a66ce7337d6f8d343ca574c9158caaf15}\label{classmm_1_1RBFInterpolant_a66ce7337d6f8d343ca574c9158caaf15} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!scale@{scale}}
+\index{scale@{scale}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the scale. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1RBFInterpolant_a0f9cd35dc60b55544ab5d11c3be6ccf6}\label{classmm_1_1RBFInterpolant_a0f9cd35dc60b55544ab5d11c3be6ccf6} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!coefficients\_@{coefficients\_}}
+\index{coefficients\_@{coefficients\_}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{coefficients\_}{coefficients\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+Eigen\+::\+Matrix$<$\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1$>$ \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::coefficients\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Coefficients (for scaled fn.) 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a0e569fcb708afb7959f2e0d162da2105}\label{classmm_1_1RBFInterpolant_a0e569fcb708afb7959f2e0d162da2105} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!mon\_@{mon\_}}
+\index{mon\_@{mon\_}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{mon\_}{mon\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::mon\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Augmenting monomials. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a5a3586d03825e265b02cc21aa9d6fd48}\label{classmm_1_1RBFInterpolant_a5a3586d03825e265b02cc21aa9d6fd48} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!point\_@{point\_}}
+\index{point\_@{point\_}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{point\_}{point\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::point\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Center point. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a90b544eeef85d4194e2da38790398d3e}\label{classmm_1_1RBFInterpolant_a90b544eeef85d4194e2da38790398d3e} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!rbf\_@{rbf\_}}
+\index{rbf\_@{rbf\_}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf\_}{rbf\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_ab3d572ac3ea683ae5e211d7822b79c72}{rbf\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+RBF used for interpolation. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_a35f85e2c956ff7be2c7cdf4cfe17fb19}\label{classmm_1_1RBFInterpolant_a35f85e2c956ff7be2c7cdf4cfe17fb19} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!scale\_@{scale\_}}
+\index{scale\_@{scale\_}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{scale\_}{scale\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::scale\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Scale. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFInterpolant_aa3570f0f6a29c6d65dd6faaabb729983}\label{classmm_1_1RBFInterpolant_aa3570f0f6a29c6d65dd6faaabb729983} 
+\index{mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}!support\_@{support\_}}
+\index{support\_@{support\_}!mm::RBFInterpolant$<$ RBFType, vec\_t $>$@{mm::RBFInterpolant$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{support\_}{support\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::vector$<$\mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1RBFInterpolant}{mm\+::\+RBFInterpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Local scaled stencil points. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{RBFInterpolant__fwd_8hpp_source}{RBFInterpolant\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{RBFInterpolant__fwd_8hpp}{RBFInterpolant\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{RBFInterpolant_8hpp}{RBFInterpolant.\+hpp}}\end{DoxyCompactItemize}

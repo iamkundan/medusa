@@ -1,0 +1,39 @@
+\doxysection{test/utils/\+Timer\+\_\+test.\+cpp}
+\hypertarget{test_2utils_2Timer_test_8cpp-example}{}\label{test_2utils_2Timer_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Timer_8hpp}{medusa/bits/utils/Timer.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ TimerDuration)\ \{}
+\DoxyCodeLine{\ \ \ \ Timer\ t;}
+\DoxyCodeLine{\ \ \ \ t.addCheckPoint(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ t.addCheckPoint(\textcolor{stringliteral}{"{}b"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ t.duration(\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(diff,\ 0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ diff2\ =\ t.durationToNow(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(diff,\ diff2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(diff2,\ 0);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ DISABLED\_TimerUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Timer\ timer;}
+\DoxyCodeLine{\ \ \ \ timer.addCheckPoint(\textcolor{stringliteral}{"{}beg"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//...\ code\ ...}}
+\DoxyCodeLine{\ \ \ \ timer.addCheckPoint(\textcolor{stringliteral}{"{}mid"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ...more\ code\ ...}}
+\DoxyCodeLine{\ \ \ \ timer.addCheckPoint(\textcolor{stringliteral}{"{}end"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ timer.showTimings(\textcolor{stringliteral}{"{}beg"{}},\ \textcolor{stringliteral}{"{}mid"{}});\ \ \textcolor{comment}{//\ shows\ time\ between\ two\ checkpoints}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ timer\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ t\ =\ timer.duration(\textcolor{stringliteral}{"{}beg"{}},\ \textcolor{stringliteral}{"{}end"{}});\ \ \textcolor{comment}{//\ time\ difference\ in\ seconds}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ t\ <<\ std::endl;\ \ \textcolor{comment}{//\ not\ unused}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

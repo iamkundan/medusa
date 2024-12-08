@@ -1,0 +1,52 @@
+\doxysection{include/medusa/bits/integrators/\+RKExplicit.hpp File Reference}
+\hypertarget{RKExplicit_8hpp}{}\label{RKExplicit_8hpp}\index{include/medusa/bits/integrators/RKExplicit.hpp@{include/medusa/bits/integrators/RKExplicit.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Runge-\/\+Kutta integrator implementation. 
+
+
+
+Definition in file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+
+{\ttfamily \#include "{}RKExplicit\+\_\+fwd.\+hpp"{}}\newline
+Include dependency graph for RKExplicit.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{RKExplicit_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{RKExplicit_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1integrators}{mm\+::integrators}}
+\begin{DoxyCompactList}\small\item\em Namespace containing most known methods for integrating ODEs. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit}{mm\+::integrators\+::\+Explicit}}
+\begin{DoxyCompactList}\small\item\em Namespace containing factory functions for explicit single step integrators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 4 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}{mm\+::integrators\+::\+Explicit\+::\+RK4}} ()
+\begin{DoxyCompactList}\small\item\em Standard RK4 4th order method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 4 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abad60192a42922b08007a211456cf63b}{mm\+::integrators\+::\+Explicit\+::\+RK38}} ()
+\begin{DoxyCompactList}\small\item\em 3/8 rule 4th order method \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 1 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41}{mm\+::integrators\+::\+Explicit\+::\+Euler}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacemm_1_1integrators_1_1Explicit}{Explicit} Euler\textquotesingle{}s method, 1st order. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 2 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_ad4f85bedfd1b7034ff9731850bc54c44}{mm\+::integrators\+::\+Explicit\+::\+Midpoint}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacemm_1_1integrators_1_1Explicit}{Explicit} midpoint rule, 2nd order. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 3 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_aea93a4d7f0c48d41498bffc1fca18374}{mm\+::integrators\+::\+Explicit\+::\+RK3}} ()
+\begin{DoxyCompactList}\small\item\em Kutta\textquotesingle{}s third order method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 6 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a86b89bf5170783c654147da521cf4288}{mm\+::integrators\+::\+Explicit\+::\+Fehlberg5}} ()
+\begin{DoxyCompactList}\small\item\em Fifth order method appearing in Fehlberg\textquotesingle{}s method. \end{DoxyCompactList}\end{DoxyCompactItemize}

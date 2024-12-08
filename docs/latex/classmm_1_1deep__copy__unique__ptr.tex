@@ -1,0 +1,207 @@
+\doxysection{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1deep__copy__unique__ptr}{}\label{classmm_1_1deep__copy__unique__ptr}\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+
+
+{\ttfamily \#include $<$memutils.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}}$>$\newline
+class mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr$<$ T $>$}
+Unique pointer with polymorphic deep copy semantics. 
+
+It is copy constructible and copy assignable. Copy construction creates a new pointer, containing a clone of the object, the original pointer pointed to. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Value type. Must be polymorphically cloneable, i.\+e. have a virtual {\ttfamily clone} method as example below.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{class\ }A\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ a;}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ A(\textcolor{keywordtype}{int}\ a)\ :\ a(a)\ \{\}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \string~A()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ f()\ \{\ \textcolor{keywordflow}{return}\ a;\ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ A*\ clone()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ A(*\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }B\ :\ \textcolor{keyword}{public}\ A\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ b;}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ B(\textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b)\ :\ A(a),\ b(b)\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ f()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ b;\ \}}
+\DoxyCodeLine{\ \ \ \ B*\ clone()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ B(*\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pa(\textcolor{keyword}{new}\ A(3));}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pb(\textcolor{keyword}{new}\ B(1,\ 2));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ pa-\/>f());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pb-\/>f());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pc\ =\ pb;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pc-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb.reset(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pc-\/>f());}
+\DoxyCodeLine{\ \ \ \ pa\ =\ deep\_copy\_unique\_ptr<A>(*pc);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pa-\/>f());}
+\DoxyCodeLine{\ \ \ \ pa\ =\ deep\_copy\_unique\_ptr<A>(\textcolor{keyword}{static\_cast<}A\textcolor{keyword}{>}(*pc));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ pa-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb\ =\ pc;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pb-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb\ =\ B(7,\ 5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5,\ pb-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb\ =\ std::move(pc);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pb-\/>f());}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pd(std::move(pb));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pd-\/>f());}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classmm_1_1deep__copy__unique__ptr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classmm_1_1deep__copy__unique__ptr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_ad8d5281e381cdd41d6c8e7caada1d965}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&v)
+\begin{DoxyCompactList}\small\item\em Construct by polymorphically cloning a given value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_af3198ddef976723879e550cd001e8de8}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \&o)
+\begin{DoxyCompactList}\small\item\em Copy by cloning the value of {\ttfamily o}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a68400e12e67c37719b2870bd53184ba0}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} (\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \&\&o) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}
+\begin{DoxyCompactList}\small\item\em Move construct as {\ttfamily unique\+\_\+ptr}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \& \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a967f86e7785684a186cf31e3e0a8316b}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&v)
+\begin{DoxyCompactList}\small\item\em Copy assign by cloning a given value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \& \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a3026da8f4e5db21093aa3a7f64e382ab}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \&o)
+\begin{DoxyCompactList}\small\item\em Copy assign by cloning the value of {\ttfamily o}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \& \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a5a80155474fc6392834997b92de10238}{operator=}} (\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \&\&o) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}
+\begin{DoxyCompactList}\small\item\em Move assign as {\ttfamily unique\+\_\+ptr} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1deep__copy__unique__ptr_ad8d5281e381cdd41d6c8e7caada1d965}\label{classmm_1_1deep__copy__unique__ptr_ad8d5281e381cdd41d6c8e7caada1d965} 
+\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}!deep\_copy\_unique\_ptr@{deep\_copy\_unique\_ptr}}
+\index{deep\_copy\_unique\_ptr@{deep\_copy\_unique\_ptr}!mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{deep\_copy\_unique\_ptr()}{deep\_copy\_unique\_ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct by polymorphically cloning a given value. 
+
+
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+\Hypertarget{classmm_1_1deep__copy__unique__ptr_af3198ddef976723879e550cd001e8de8}\label{classmm_1_1deep__copy__unique__ptr_af3198ddef976723879e550cd001e8de8} 
+\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}!deep\_copy\_unique\_ptr@{deep\_copy\_unique\_ptr}}
+\index{deep\_copy\_unique\_ptr@{deep\_copy\_unique\_ptr}!mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{deep\_copy\_unique\_ptr()}{deep\_copy\_unique\_ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy by cloning the value of {\ttfamily o}. 
+
+
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+\Hypertarget{classmm_1_1deep__copy__unique__ptr_a68400e12e67c37719b2870bd53184ba0}\label{classmm_1_1deep__copy__unique__ptr_a68400e12e67c37719b2870bd53184ba0} 
+\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}!deep\_copy\_unique\_ptr@{deep\_copy\_unique\_ptr}}
+\index{deep\_copy\_unique\_ptr@{deep\_copy\_unique\_ptr}!mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{deep\_copy\_unique\_ptr()}{deep\_copy\_unique\_ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Move construct as {\ttfamily unique\+\_\+ptr}. 
+
+
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1deep__copy__unique__ptr_a3026da8f4e5db21093aa3a7f64e382ab}\label{classmm_1_1deep__copy__unique__ptr_a3026da8f4e5db21093aa3a7f64e382ab} 
+\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \& \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assign by cloning the value of {\ttfamily o}. 
+
+
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+\Hypertarget{classmm_1_1deep__copy__unique__ptr_a967f86e7785684a186cf31e3e0a8316b}\label{classmm_1_1deep__copy__unique__ptr_a967f86e7785684a186cf31e3e0a8316b} 
+\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \& \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy assign by cloning a given value. 
+
+
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+\Hypertarget{classmm_1_1deep__copy__unique__ptr_a5a80155474fc6392834997b92de10238}\label{classmm_1_1deep__copy__unique__ptr_a5a80155474fc6392834997b92de10238} 
+\index{mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::deep\_copy\_unique\_ptr$<$ T $>$@{mm::deep\_copy\_unique\_ptr$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}} \& \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Move assign as {\ttfamily unique\+\_\+ptr} 
+
+
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{DomainShape__fwd_8hpp}{Domain\+Shape\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/utils/\mbox{\hyperlink{memutils_8hpp}{memutils.\+hpp}}\end{DoxyCompactItemize}

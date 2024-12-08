@@ -1,0 +1,164 @@
+\doxysection{mm\+::Grid\+Fill\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1GridFill}{}\label{classmm_1_1GridFill}\index{mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}}
+
+
+{\ttfamily \#include $<$Grid\+Fill\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+Grid\+Fill$<$ vec\+\_\+t $>$}
+Discretizes the domain using {\ttfamily n}-\/dimensional grid with given endpoints and spacing {\ttfamily h}. 
+
+Only nodes that are inside the domain and at least {\ttfamily h} away from existing nodes are added. Gaps may appear at the boundary and \doxylink{classmm_1_1BasicRelax}{Basic\+Relax} can be used to smooth them.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ sh\ =\ BoxShape<Vec2d>(-\/1,\ 1)\ -\/\ BallShape<Vec2d>(0,\ 0.5);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(sh);}
+\DoxyCodeLine{\ \ \ \ domain.fill(GridFill<Vec2d>(-\/1,\ 1),\ 0.5);}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1GeneralFill}{General\+Fill}, \doxylink{classmm_1_1BasicRelax}{Basic\+Relax} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{GridFill__fwd_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{GridFill__fwd_8hpp_source}{Grid\+Fill\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1GridFill_a8e95c449cefa783f8016b6dcae3bbe81}{Grid\+Fill}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{bot}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{top}})
+\begin{DoxyCompactList}\small\item\em Prepare to fill domain within {\ttfamily \mbox{[}bot, top\mbox{]}} bounding box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GridFill_ad6f8be5995f8548ed543a795a0422b03}{operator()}} (\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{scalar\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Fills domain with a grid node distribution with spacing {\ttfamily h}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198ea7f1b32acaca3a459256f0c828f86205d}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type;. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GridFill_a4a37d410dd1cf05aac11650f4db9ae7d}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{bot}}
+\begin{DoxyCompactList}\small\item\em Bottom left corner of the box to fill. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{top}}
+\begin{DoxyCompactList}\small\item\em Top right corner of the box to fill. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198e}\label{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198e} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}}\index{mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198ea7f1b32acaca3a459256f0c828f86205d}\label{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198ea7f1b32acaca3a459256f0c828f86205d} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{GridFill__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{GridFill__fwd_8hpp_source}{Grid\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1GridFill_a8e95c449cefa783f8016b6dcae3bbe81}\label{classmm_1_1GridFill_a8e95c449cefa783f8016b6dcae3bbe81} 
+\index{mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}!GridFill@{GridFill}}
+\index{GridFill@{GridFill}!mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{GridFill()}{GridFill()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GridFill}{mm\+::\+Grid\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+Grid\+Fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{bot,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{top }\end{DoxyParamCaption})}
+
+
+
+Prepare to fill domain within {\ttfamily \mbox{[}bot, top\mbox{]}} bounding box. 
+
+
+
+Definition at line \mbox{\hyperlink{GridFill_8hpp_source_l00018}{18}} of file \mbox{\hyperlink{GridFill_8hpp_source}{Grid\+Fill.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1GridFill_ad6f8be5995f8548ed543a795a0422b03}\label{classmm_1_1GridFill_ad6f8be5995f8548ed543a795a0422b03} 
+\index{mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GridFill}{mm\+::\+Grid\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{scalar\+\_\+t}} \&}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Fills domain with a grid node distribution with spacing {\ttfamily h}. 
+
+Newly added nodes are at least {\ttfamily h} away from all previous nodes. 
+\begin{DoxyParams}{Parameters}
+{\em domain} & Domain to fill with nodes. Can be partially filled. \\
+\hline
+{\em h} & Nodal spacing. \\
+\hline
+{\em type} & Type of the nodes. If 0 the engines default value is used. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The resulting distribution can be rough near the boundary. Consider using relaxation techniques or different fill engines, if this is a problem. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{GridFill_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{GridFill_8hpp_source}{Grid\+Fill.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}\label{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a} 
+\index{mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}!bot@{bot}}
+\index{bot@{bot}!mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{bot}{bot}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GridFill}{mm\+::\+Grid\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::bot\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bottom left corner of the box to fill. 
+
+
+
+Definition at line \mbox{\hyperlink{GridFill__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{GridFill__fwd_8hpp_source}{Grid\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}\label{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756} 
+\index{mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}!top@{top}}
+\index{top@{top}!mm::GridFill$<$ vec\_t $>$@{mm::GridFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{top}{top}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GridFill}{mm\+::\+Grid\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::top\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Top right corner of the box to fill. 
+
+
+
+Definition at line \mbox{\hyperlink{GridFill__fwd_8hpp_source_l00039}{39}} of file \mbox{\hyperlink{GridFill__fwd_8hpp_source}{Grid\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{GridFill__fwd_8hpp}{Grid\+Fill\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{GridFill_8hpp}{Grid\+Fill.\+hpp}}\end{DoxyCompactItemize}

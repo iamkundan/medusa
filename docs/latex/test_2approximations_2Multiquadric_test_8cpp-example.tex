@@ -1,0 +1,38 @@
+\doxysection{test/approximations/\+Multiquadric\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2Multiquadric_test_8cpp-example}{}\label{test_2approximations_2Multiquadric_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Multiquadric_8hpp}{medusa/bits/approximations/Multiquadric.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ MultiQuadraticEvaluate)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 1/0.66;}
+\DoxyCodeLine{\ \ \ \ Multiquadric<double>\ mq(s);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r1\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r2\ =\ 1.17;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1,\ mq(r1),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.2286789653933200,\ mq(r2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.21780000000000000,\ mq(r1,\ 1),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.17726355389365580,\ mq(r2,\ 1),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.0474368400000000,\ mq(r1,\ 2),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.025574107170419560,\ mq(r2,\ 2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.01047023439346170,\ mq(r2,\ 6),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ DISABLED\_MultiQuadraticUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Multiquadric<double>\ m(1.324);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ m(4.0);\ \ \ \ \ \textcolor{comment}{//\ value\ at\ 4.0\ (this\ is\ the\ squared\ radius)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ m(0.0,\ 2);\ \ \textcolor{comment}{//\ second\ derivative\ at\ 0.0}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ m\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ val\ <<\ der;\ \ \textcolor{comment}{//\ to\ not\ be\ unused}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

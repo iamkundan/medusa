@@ -1,0 +1,85 @@
+\doxysection{test/utils/\+Stopwatch\+\_\+test.\+cpp}
+\hypertarget{test_2utils_2Stopwatch_test_8cpp-example}{}\label{test_2utils_2Stopwatch_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Stopwatch_8hpp}{medusa/bits/utils/Stopwatch.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ Stopwatch)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ max\_timer\_error\ =\ 1e-\/4;}
+\DoxyCodeLine{\ \ \ \ Stopwatch\ t;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Same\ as\ Timer.duration\ test.}}
+\DoxyCodeLine{\ \ \ \ std::chrono::milliseconds\ sleep\_time(1);}
+\DoxyCodeLine{\ \ \ \ std::chrono::steady\_clock::time\_point\ t1,\ t2;}
+\DoxyCodeLine{\ \ \ \ t1\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{\ \ \ \ t.start(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ t.stop(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ t2\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{\ \ \ \ std::chrono::duration<double>\ time\_span\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ std::chrono::duration\_cast<std::chrono::duration<double>>(t2\ -\/\ t1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ diff\ =\ t.cumulativeTime(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(diff,\ 0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(diff,\ time\_span.count());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(t.numLaps(\textcolor{stringliteral}{"{}a"{}}),\ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Testing\ loop.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\_loops\ =\ 10;}
+\DoxyCodeLine{\ \ \ \ t1\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n\_loops;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.start(\textcolor{stringliteral}{"{}b"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(sleep\_time);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.stop(\textcolor{stringliteral}{"{}b"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ t2\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{\ \ \ \ time\_span\ =\ std::chrono::duration\_cast<std::chrono::duration<double>>(t2\ -\/\ t1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ per\_lap\_ref\ =\ time\_span.count()\ /\ n\_loops;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(n\_loops,\ t.numLaps(\textcolor{stringliteral}{"{}b"{}}));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ per\_lap\ =\ t.timePerLap(\textcolor{stringliteral}{"{}b"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(per\_lap,\ per\_lap\_ref);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(per\_lap\_ref\ -\/\ per\_lap,\ max\_timer\_error);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Testing\ loop\ -\/\ two\ stopwatches.\ The\ enclosing\ one\ is\ assumed}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ to\ be\ correct\ since\ the\ previous\ test\ did\ pass.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n\_loops;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.start(\textcolor{stringliteral}{"{}d"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.start(\textcolor{stringliteral}{"{}c"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(sleep\_time);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.stop(\textcolor{stringliteral}{"{}c"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.start(\textcolor{stringliteral}{"{}c"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(sleep\_time);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.stop(\textcolor{stringliteral}{"{}c"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t.stop(\textcolor{stringliteral}{"{}d"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2\ *\ n\_loops,\ t.numLaps(\textcolor{stringliteral}{"{}c"{}}));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ per\_lap\_ref\_2\ =\ t.timePerLap(\textcolor{stringliteral}{"{}d"{}})\ /\ 2;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ per\_lap\_2\ =\ t.timePerLap(\textcolor{stringliteral}{"{}c"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(per\_lap\_2,\ per\_lap\_ref\_2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(per\_lap\_ref\_2\ -\/\ per\_lap\_2,\ 2\ *\ max\_timer\_error);}
+\DoxyCodeLine{\ \ \ \ t.clear();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ DISABLED\_StopwatchUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Stopwatch\ s;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ NOT\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.start(\textcolor{stringliteral}{"{}section1"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.stop(\textcolor{stringliteral}{"{}section1"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ NOT\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.start(\textcolor{stringliteral}{"{}section2"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.stop(\textcolor{stringliteral}{"{}section2"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ s.cumulativeTime(\textcolor{stringliteral}{"{}section1"{}});\ \ \textcolor{comment}{//\ Returns\ cumulative\ time.}}
+\DoxyCodeLine{\ \ \ \ s.numLaps(\textcolor{stringliteral}{"{}section1"{}});\ \ \textcolor{comment}{//\ Returns\ number\ of\ laps\ counted.}}
+\DoxyCodeLine{\ \ \ \ s.timePerLap(\textcolor{stringliteral}{"{}section1"{}});\ \ \textcolor{comment}{//\ Returns\ average\ time\ per\ lap.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ s\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

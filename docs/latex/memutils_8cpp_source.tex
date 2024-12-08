@@ -1,0 +1,25 @@
+\doxysection{memutils.\+cpp}
+\hypertarget{memutils_8cpp_source}{}\label{memutils_8cpp_source}\index{src/utils/memutils.cpp@{src/utils/memutils.cpp}}
+\mbox{\hyperlink{memutils_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{memutils_8hpp}{medusa/bits/utils/memutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00010}\mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{00010}}\ std::string\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(std::size\_t\ \mbox{\hyperlink{classmm_1_1Gaussian}{bytes}})\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00011}00011\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{amount}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{bytes}};}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00012}00012\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Gaussian}{suffix}}\ =\ \{\textcolor{stringliteral}{"{}B"{}},\ \textcolor{stringliteral}{"{}kB"{}},\ \textcolor{stringliteral}{"{}MB"{}},\ \textcolor{stringliteral}{"{}GB"{}}\};}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ 4;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{amount}}\ <\ 100)\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{ss\ <<\ static\_cast<int>}}(\mbox{\hyperlink{classmm_1_1Gaussian}{amount}}*10+0.5)\ /\ 10.0\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{suffix}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{amount}}\ /=\ 1000;}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}More\ than\ your\ mem."{}};}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{memutils_8cpp_source_l00024}00024\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

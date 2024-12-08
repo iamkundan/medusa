@@ -1,0 +1,47 @@
+\doxysection{include/medusa/bits/utils/memutils.hpp File Reference}
+\hypertarget{memutils_8hpp}{}\label{memutils_8hpp}\index{include/medusa/bits/utils/memutils.hpp@{include/medusa/bits/utils/memutils.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declaration of memory related utilities. 
+
+
+
+Definition in file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+Include dependency graph for memutils.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{memutils_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{memutils_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Unique pointer with polymorphic deep copy semantics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mm\+::mem2str}} (std\+::size\+\_\+t \mbox{\hyperlink{classmm_1_1Gaussian}{bytes}})
+\begin{DoxyCompactList}\small\item\em Simple function to help format memory amounts for printing. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\std\+::size\+\_\+t \mbox{\hyperlink{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}{mm\+::mem\+\_\+used}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v)
+\begin{DoxyCompactList}\small\item\em Returns number of bytes the container uses in memory. \end{DoxyCompactList}\end{DoxyCompactItemize}

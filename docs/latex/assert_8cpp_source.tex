@@ -1,0 +1,27 @@
+\doxysection{assert.\+cpp}
+\hypertarget{assert_8cpp_source}{}\label{assert_8cpp_source}\index{src/utils/assert.cpp@{src/utils/assert.cpp}}
+\mbox{\hyperlink{assert_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00010}00010\ \textcolor{keyword}{namespace\ }assert\_internal\ \{}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00012}\mbox{\hyperlink{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}{00012}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}{assert\_handler\_implementation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{condition}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{func\_name}},}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{line}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{message}},\ tfm::FormatListRef\ \mbox{\hyperlink{classmm_1_1Gaussian}{format\_list}})\ \{}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00014}00014\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[37;1m"{}};\ \ \textcolor{comment}{//\ white\ bold}}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00015}00015\ \ \ \ \ tfm::format(std::cerr,\ \textcolor{stringliteral}{"{}\%s:\%d:\ \%s:\ Assertion\ \`{}\%s'\ failed\ with\ message:\(\backslash\)n"{}},}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ file,\ \mbox{\hyperlink{classmm_1_1Gaussian}{line}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{func\_name}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{condition}});}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00017}00017\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[31;1m"{}};\ \ \textcolor{comment}{//\ red\ bold}}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00018}00018\ \ \ \ \ tfm::vformat(std::cerr,\ \mbox{\hyperlink{classmm_1_1Gaussian}{message}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{format\_list}});}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00019}00019\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[37;0m\(\backslash\)n"{}};\ \ \textcolor{comment}{//\ no\ color}}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00020}00020\ \ \ \ \ std::cerr.flush();}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00024}00024\ \}\ \ \textcolor{comment}{//\ namespace\ assert\_internal}}
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{assert_8cpp_source_l00026}00026\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

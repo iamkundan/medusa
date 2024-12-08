@@ -1,0 +1,201 @@
+\doxysection{test/types/\+Vector\+Field\+\_\+test.\+cpp}
+\hypertarget{test_2types_2VectorField_test_8cpp-example}{}\label{test_2types_2VectorField_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{VectorField_8hpp}{medusa/bits/types/VectorField.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ VectorFieldConstruct)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ v\ =\ -\/3.4;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(-\/3.4,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(-\/3.4,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ a(v.rows());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(a.rows()*a.cols(),\ a.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ b(v);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((b-\/v).isZero(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ x;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ c(x.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ x.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ v\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(4.1,\ 5.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(4.1,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(5.5,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ componentwise\ access}}
+\DoxyCodeLine{\ \ \ \ v.c(1)\ =\ v.c(0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(4.1,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(4.1,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ VectorFieldAccess)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ v.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ v[2][1]\ =\ 4;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(4.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ v(4,\ 0)\ =\ -\/5.2;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(4.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 4)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(-\/5.2,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ v[0]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(2.4,\ -\/1.3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(2.4,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(-\/1.3,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(4.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (i\ ==\ 4)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(-\/5.2,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ VectorFieldMuliIndexAccess)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{VectorField3d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ v.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ idx\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ v[idx]\ =\ 4;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 1\ ||\ i\ ==\ 2\ ||\ i\ ==\ 3)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(4.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(4.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(4.0,\ v(i,\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ v[idx]\ =\ \{2.3,\ -\/4.55,\ 3.212\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 1\ ||\ i\ ==\ 2\ ||\ i\ ==\ 3)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(2.3,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(-\/4.55,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(3.212,\ v(i,\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ v(idx).setConstant(5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 1\ ||\ i\ ==\ 2\ ||\ i\ ==\ 3)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(5.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(5.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(5.0,\ v(i,\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0.0,\ v(i,\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ VectorFieldElement)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{VectorField3d}}\ v(5);}
+\DoxyCodeLine{\ \ \ \ v.setZero();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ v[3].cols());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ v[3].rows());}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ c(3,\ 4.2,\ -\/3.4);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ a\ =\ v[2]\ +\ c;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(c,\ a);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ VectorFieldLinearization)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 8;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{VectorField3d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ v.setRandom();}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ x\ =\ v.asLinear();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{VectorField3d}}\ v2\ =\ VectorField3d::fromLinear(x);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((v2-\/v).isZero(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ VectorFieldIterate)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 3;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ v.setRandom();}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ coef;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ coef.push\_back(v(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ coef.push\_back(v(i,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ coef2;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ x\ :\ v)\ coef2.push\_back(x);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(coef,\ coef2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ DISABLED\_VectorFieldUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 7;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(n);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ s\ =\ v.size();\ \ \textcolor{comment}{//\ returns\ the\ number\ of\ elements}}
+\DoxyCodeLine{\ \ \ \ assert(s\ ==\ v.dim*n);}
+\DoxyCodeLine{\ \ \ \ assert(n\ ==\ v.rows());}
+\DoxyCodeLine{\ \ \ \ v\ =\ 0.0;\ \ \textcolor{comment}{//\ set\ to\ constant\ value}}
+\DoxyCodeLine{\ \ \ \ v\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3.8,\ 5.6);\ \ \textcolor{comment}{//\ set\ to\ constant\ vector}}
+\DoxyCodeLine{\ \ \ \ v(4,\ 0)\ =\ -\/1.2;\ \ \textcolor{comment}{//\ set\ one\ coefficient}}
+\DoxyCodeLine{\ \ \ \ v[3][1]\ =\ 4.5;\ \ \textcolor{comment}{//\ set\ one\ coefficient,\ alternative\ syntax}}
+\DoxyCodeLine{\ \ \ \ v[4]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3.4,\ 5.2);\ \ \textcolor{comment}{//\ set\ one\ vector}}
+\DoxyCodeLine{\ \ \ \ v[\{1,\ 3,\ 4\}]\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(-\/4.5,\ 2.5);\ \ \textcolor{comment}{//\ set\ a\ subfield\ to\ a\ constant\ vector}}
+\DoxyCodeLine{\ \ \ \ v[\{0,\ 6,\ 2\}]\ =\ 0.0;\ \ \textcolor{comment}{//\ set\ a\ subfield\ to\ a\ constant\ scalar}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ c\ =\ v.c(0);\ \ \textcolor{comment}{//\ get\ all\ first\ components}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ you\ can\ do\ any\ matrix\ operators\ with\ the\ vector\ field:}}
+\DoxyCodeLine{\ \ \ \ v\ *=\ -\/2.4;}
+\DoxyCodeLine{\ \ \ \ v\ +=\ v;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ v\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ convert\ to\ and\ from\ linear\ representation}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ x\ =\ v.asLinear();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{VectorField3d}}\ v2\ =\ VectorField3d::fromLinear(x);\ \ \textcolor{comment}{//\ equal\ to\ v}}
+\DoxyCodeLine{\ \ \ \ (void)\ s;\ \ \textcolor{comment}{//\ unused}}
+\DoxyCodeLine{\ \ \ \ (void)\ c;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

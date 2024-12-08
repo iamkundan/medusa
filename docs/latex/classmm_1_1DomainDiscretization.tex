@@ -1,0 +1,1706 @@
+\doxysection{mm\+::Domain\+Discretization\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1DomainDiscretization}{}\label{classmm_1_1DomainDiscretization}\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+
+
+{\ttfamily \#include $<$Domain\+Discretization\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+Domain\+Discretization$<$ vec\+\_\+t $>$}
+Class representing domain discretization along with an associated \doxylink{classmm_1_1DomainShape}{shape}. 
+
+Domain discretization consists of points in the interior and on the boundary. Each point has an associated type, with types of internal points being positive and types of boundary points being negative. Boundary points also have an outer unit normal normal associated with them.
+
+Domains can be \doxylink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{added} and \doxylink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{subtracted}, nodes can be \doxylink{classmm_1_1DomainDiscretization_a3bb3a5e1d7ee168d9f5db5d8b3a86714}{added} and \doxylink{classmm_1_1DomainDiscretization_a138e02d051cbdf55d4196acfcd7f955a}{removed} (removal currently at O(\+N) cost). Support / stencil indices can be \doxylink{classmm_1_1DomainDiscretization_a42f6af1738aba241b489b75358168e36}{stored} and \doxylink{classmm_1_1DomainDiscretization_a37372a1dac0ca2b59303f1b8409099eb}{accessed}.
+
+Additionally, domain interiors can be \doxylink{classmm_1_1GeneralFill}{filled}, \doxylink{classmm_1_1BasicRelax}{regularized} and used when \doxylink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{computing shapes}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(\{0.0,\ 0.3\},\ \{0.4,\ 2.7\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ b.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ d.dim\ <<\ std::endl;\ \ \textcolor{comment}{//\ dimension\ of\ the\ domain}}
+\DoxyCodeLine{\ \ \ \ d.size();\ \ \textcolor{comment}{//\ number\ of\ points}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ d.pos(i);\ \ \textcolor{comment}{//\ position\ of\ node\ i}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (d.type(i)\ <\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ d.normal(i);\ \ \textcolor{comment}{//\ boundary\ nodes\ have\ normals}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ d.boundary();\ \ \textcolor{comment}{//\ indices\ of\ boundary\ nodes}}
+\DoxyCodeLine{\ \ \ \ d.interior();\ \ \textcolor{comment}{//\ indices\ of\ interior\ nodes}}
+\DoxyCodeLine{\ \ \ \ d.shape();\ \ \textcolor{comment}{//\ get\ geometric\ shape\ of\ the\ domain}}
+\DoxyCodeLine{\ \ \ \ d.addBoundaryNode(\{0.001,\ 0.3\},\ -\/2,\ \{-\/1,\ 0\});\ \ \textcolor{comment}{//\ add\ new\ boundary\ point}}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(\{0.25,\ 0.75\},\ 2);\ \ \textcolor{comment}{//\ add\ new\ internal\ point}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ c.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ d\ -\/=\ d2;\ \ \textcolor{comment}{//\ subtract\ or\ add\ discretizations}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ d\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainShape}{Domain\+Shape}, \doxylink{classmm_1_1FindClosest}{Find\+Closest} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Domain\+Discretization\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1DomainDiscretization__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization_afb4bf83dec55dd13ec53e8817156d7f6}{Domain\+Discretization}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape}})
+\begin{DoxyCompactList}\small\item\em Construct an empty discretization for a given shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae0cbaa1b9e65c4c18f1be7660084dcd5}{positions}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns positions of all nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ac53a2efd03ffe06d5d6da303cc166212}{pos}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the position of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a6e5326626d47fa078ead37e714a138de}{pos}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Returns writeable position of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a4f6c7c299576acc64041f9c4413b68df}{pos}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily j}-\/th coordinate of the position of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_aea73b0296050370bb0738371318a3c5a}{supports}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns support indices for all nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a37372a1dac0ca2b59303f1b8409099eb}{support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns support indices for {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab2bba4c98ba79c1cf110da49f23da98d}{support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Returns writeable array of support indices for {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_aa79adbfeaa2957205b4deccea2624f4d}{support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily j}-\/th support node of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a778c7399dd0d3c7f740675a8d980cb71}{support\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns positions of support nodes of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a12f24200315916877a82cbc2b6febd5f}{support\+Node}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns position of {\ttfamily j}-\/th support node of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0ea41367473eda51743e826a7c0344ba}{dr}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns Euclidean distance to the second support node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab1e7ec7f31e83ac5453e4804d9670770}{support\+Size}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns size of {\ttfamily i}-\/th node support. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab6b9350725fd7e17defb07038a40f9fb}{support\+Sizes}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a vector of support sizes for each node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_aac47787bb3119eb4d21d880b959cc72a}{types}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns types of all nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae34afed927cfd8ade9893488738a28cf}{types}} ()
+\begin{DoxyCompactList}\small\item\em Returns mutable types of all nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns type of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_af25992790d6f41edd7302c8fdd69a01a}{type}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Returns writeable type of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns geometric shape of the underlying domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a5e94cbb6a059cbbe28bac30e7bf258e9}{bmap}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns boundary map. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae01b46bc385dbcd23698eba53d97dc0e}{bmap}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns index of node {\ttfamily node} among only boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_aa2c4f121739c09b3396d856851a4ffc7}{normals}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns normals of all boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a810dee1d648cca557ccc85861f225711}{normal}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns outside unit normal of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a944837da00ccc517790c1873707a1a48}{normal}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Returns writable outside unit normal of {\ttfamily i}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e}{boundary}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns indexes of all boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0652465dfe89ec24c69b5f07a11d2af1}{interior}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns indexes of all internal nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a925d8467dd1e1fd9a79afe7a034a1c24}{all}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns indexes of all nodes, i.\+e. {\ttfamily \{0, 1, ..., N-\/1\}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_acf5e94e606f28bd3fd9622f90dc9a0c0}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily N}, the number of nodes in this discretization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a3bb3a5e1d7ee168d9f5db5d8b3a86714}{add\+Internal\+Node}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}})
+\begin{DoxyCompactList}\small\item\em Adds a single interior node with specified type to this discretization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a2a1362dc171d52ae74b60e5b17cafd90}{add\+Boundary\+Node}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1DomainDiscretization_a810dee1d648cca557ccc85861f225711}{normal}})
+\begin{DoxyCompactList}\small\item\em Adds a boundary node with given type and normal to the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a2cabad777df086163eb6fca5f0a972d2}{add\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Add nodes from another discretization to this discretization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ad0e1b045029a9d9068ce7dc21b288eaf}{change\+To\+Boundary}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1DomainDiscretization_a810dee1d648cca557ccc85861f225711}{normal}})
+\begin{DoxyCompactList}\small\item\em Changes node {\ttfamily i} to boundary point with given {\ttfamily type} and {\ttfamily normal}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9ae3f5476b3800d0725627316fd17917}{change\+To\+Interior}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}})
+\begin{DoxyCompactList}\small\item\em Changes node {\ttfamily i} to interior point with given {\ttfamily type}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes}} (\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}}=0)
+\begin{DoxyCompactList}\small\item\em Overload of \doxylink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes} with constant {\ttfamily h} and adds ghost nodes to all boundary nodes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a2e96f3436745e87487eb0b93d28b715f}{add\+Ghost\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}}=0)
+\begin{DoxyCompactList}\small\item\em Overload of \doxylink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes} which adds ghost nodes to all boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0d2f52ea1763157564db655a5ec3dc8e}{add\+Ghost\+Nodes}} (\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes)
+\begin{DoxyCompactList}\small\item\em Overload of \doxylink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes} with constant {\ttfamily h}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a540ce78daf54b1eff265b79e23733e33}{add\+Ghost\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes)
+\begin{DoxyCompactList}\small\item\em Add ghost or fictitious nodes to some boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_af225a0517cdfcea9803af121bd1e9db2}{shuffle\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{permutation}})
+\begin{DoxyCompactList}\small\item\em Shuffles node order according to given permutation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{compare\+\_\+t}}  = std\+::less$<$std\+::pair$<$vec\+\_\+t, int$>$$>$$>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a242040c59e452e1e965be964b9a93b7e}{reorder\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{compare\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{cmp}}=\mbox{\hyperlink{classmm_1_1Gaussian}{compare\+\_\+t}}())
+\begin{DoxyCompactList}\small\item\em Reorders nodes according to the compare function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{add}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Merges given discretization to the current discretization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a4ceb9d50764ba5f5a0bea942f00d9e35}{operator+=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em \doxylink{structmm_1_1Operator}{Operator} version of \doxylink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{Domain\+Discretization\+::add}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{subtract}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Subtracts given discretized domain from {\ttfamily \texorpdfstring{$\ast$}{*}this}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a7c8ea453fbaa901b210efbf1525e01fa}{operator-\/=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em \doxylink{structmm_1_1Operator}{Operator} version of \doxylink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{Domain\+Discretization\+::subtract}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ad896ddd07e02f47fe9d1b1422d06f157}{translate}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&a)
+\begin{DoxyCompactList}\small\item\em Translate the domain by a given vector {\ttfamily a}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ac3dde61e9b9f412799a9d63e71d87a9c}{rotate}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7}{dim}}, \mbox{\hyperlink{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7}{dim}} $>$ \&Q)
+\begin{DoxyCompactList}\small\item\em Transform the domain by given orthogonal matrix {\ttfamily Q}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a51e2f455e13234545b91071cc9642282}{rotate}} (\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{angle}})
+\begin{DoxyCompactList}\small\item\em 2D version of \doxylink{classmm_1_1DomainDiscretization_ac3dde61e9b9f412799a9d63e71d87a9c}{rotate} accepting an angle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a59b983dd5353373d18483e17e3534dd3}{assert\+\_\+is\+\_\+valid}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Checks if domain is in valid state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae1ef733d3a4df749eb7cc3e4fc7b6eb7}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all data about this discretization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a138e02d051cbdf55d4196acfcd7f955a}{remove\+Nodes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{to\+\_\+remove}})
+\begin{DoxyCompactList}\small\item\em Remove nodes with given indices. This removes their types and potential normals as well. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab1c6e011a874ce5445b78fce68046688}{remove\+Internal\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Removes all internal nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_aaf055ac09a73a6c6f748733d62c4bef4}{remove\+Boundary\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em Removes all boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if {\ttfamily point} is inside the domain. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{search}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em A discrete version of \doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains} using given boundary discretization. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a63f526d04830d57e4a56d65a9a94363e}{contains}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{search}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if {\ttfamily point} is inside the domain. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae61cc022298f0ca37c50aad3eff299a2}{make\+Discrete\+Contains\+Structure}} (\mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{search}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Fills the search structure {\ttfamily search} with boundary points for use with {\ttfamily \doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains()}} or {\ttfamily \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains()}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a42f6af1738aba241b489b75358168e36}{find\+Support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{callable}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Enables more readable calls to support engines. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_af303984912fd34c5e68e976d3e987971}{find\+Support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{callable}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1DomainDiscretization_a42f6af1738aba241b489b75358168e36}{Domain\+Discretization\+::find\+Support}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}{fill}} (\mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{callable}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Enables more readable calls to fill engines. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ac64b7dff8f6a36b6476a5c08cb8273c8}{fill}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{callable}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}{Domain\+Discretization\+::fill}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a71449bf9ac8a84a809a1c82a937f0dc0}{relax}} (\mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{callable}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Enables more readable calls to relax engines. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0c3b26a2226b15ab5411a00be8765eb3}{relax}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{callable}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Const version of \doxylink{classmm_1_1DomainDiscretization_a71449bf9ac8a84a809a1c82a937f0dc0}{Domain\+Discretization\+::relax}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{sh\+::shape\+\_\+flags}} mask = sh\+::all, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple}{sh\+::operator\+\_\+tuple}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{mask}}, vec\+\_\+t\+::dim $>$\mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{\+::type}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{compute\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes=\{\}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Compute shapes, specified with shape flags, for this domain with given approximation for given indexes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_ad2609e402ec5b0227f22186eb4376d80}{compute\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes=\{\}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Compute shapes for default constructable families. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a089d1f9c06786918bc95c275fd996421}{compute\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} operators, \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes=\{\}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Compute shapes for non-\/default constructable families. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{hdf5\+\_\+file}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a045288a2c0f7c8434923e7cc31111774}{load}} (\mbox{\hyperlink{classmm_1_1Gaussian}{hdf5\+\_\+file}} \&file, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Load discretization from a HD5 file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a43706f918fcad46a0762f00a687fc31e}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector data type used in computations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::\+Scalar \mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar data type used in computation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_a6212d295b0a24162b1ada801db1367df}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a4721b173c6e36f278228d00f751e0ab0}{positions\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Positions of internal discretization points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_add06024e017abbb8091d6e49c2d1b762}{support\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Attribute used to store support points of each node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a1542b60b9ee01342b08585bc25e6a3f7}{types\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Storing types of nodes aligned with positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_af7536f606e0b127a77deb850e599f94b}{boundary\+\_\+map\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Mapping index of a boundary node among all nodes, to its index among boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_ab558de86643a93f5699a4cd1dfd91354}{normals\+\_\+}}
+\begin{DoxyCompactList}\small\item\em List of normals of boundary nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a25327efebbd0596bf01743502344e6ab}{shape\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Geometric shape of the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae61b7e62d7b79828ad335a215bfd4823}{add\+Node}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{type}})
+\begin{DoxyCompactList}\small\item\em Helper for adding points to the domain, which keeps the object consistent. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization_aeecf18492d6b29e04e4edfc4f53da657}{chop\+Off}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{relevant}})
+\begin{DoxyCompactList}\small\item\em Remove a portion of this domain which is contained in {\ttfamily d} or is only {\ttfamily dx} away. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1DomainDiscretization_ae0b85b8926072d1778417fcda750f6bf}{output\+\_\+report}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}=std\+::cout) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Outputs a simple report about out domain, like number of nodes, support size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1}\label{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7}\label{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1DomainDiscretization_afb4bf83dec55dd13ec53e8817156d7f6}\label{classmm_1_1DomainDiscretization_afb4bf83dec55dd13ec53e8817156d7f6} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!DomainDiscretization@{DomainDiscretization}}
+\index{DomainDiscretization@{DomainDiscretization}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{DomainDiscretization()}{DomainDiscretization()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+Domain\+Discretization (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct an empty discretization for a given shape. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00239}{239}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}\label{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!add@{add}}
+\index{add@{add}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d }\end{DoxyParamCaption})}
+
+
+
+Merges given discretization to the current discretization. 
+
+The shape of current domain changes to become the union of {\ttfamily \doxylink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape()}} and {\ttfamily d.\+shape()}. The discretization {\ttfamily d} is added to {\ttfamily \texorpdfstring{$\ast$}{*}this}. Types of nodes are preserved. This makes it possible to set custom types before the {\ttfamily +=} operation and refer to those types in the union as well.
+
+Example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect\ =\ BoxShape<Vec2d>(\{-\/1,\ -\/1\},\ \{1,\ 1\}).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ rect.types()[rect.interior()]\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ circ\ =\ BallShape<Vec2d>(\{0,\ 0\},\ 0.7).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ circ.types()[circ.boundary()]\ =\ -\/5;\ \ \ \textcolor{comment}{//\ -\/1\ to\ -\/4\ taken\ by\ rectangle\ sides}}
+\DoxyCodeLine{\ \ \ \ circ\ +=\ rect;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ (circ.types()\ ==\ 2).\mbox{\hyperlink{classmm_1_1DomainDiscretization_acf5e94e606f28bd3fd9622f90dc9a0c0}{size}}()\ <<\ std::endl;\ \ \textcolor{comment}{//\ nonzero\ number\ is\ printed}}
+
+\end{DoxyCodeInclude}
+
+
+More specifically, when performing {\ttfamily d1 += d2}, first, boundary nodes in {\ttfamily d2} that are contained in {\ttfamily d1} are removed. Then, all nodes from {\ttfamily d1} that are included in {\ttfamily d2} are removed. Additionally, nodes from {\ttfamily d1} are removed if they are too close to any of the nodes in {\ttfamily d2}. The threshold {\ttfamily dx} for point {\ttfamily p} in {\ttfamily d1} is computed by finding the closest neighbour to {\ttfamily p} among the remaining nodes of {\ttfamily d1} and then finding its closest neighbour among those same nodes. A factor of the distance between these last two nodes is taken as {\ttfamily dx}. The remaining nodes in d2 are then added to d1.
+
+See the images below for visualization of the add operation.  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{add_bnd.png}}
+\end{DoxyImageNoCaption}
+  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{add_full.png}}
+\end{DoxyImageNoCaption}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ShapeUnion}{Shape\+Union}, \doxylink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{subtract} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00274}{274}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a2a1362dc171d52ae74b60e5b17cafd90}\label{classmm_1_1DomainDiscretization_a2a1362dc171d52ae74b60e5b17cafd90} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addBoundaryNode@{addBoundaryNode}}
+\index{addBoundaryNode@{addBoundaryNode}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addBoundaryNode()}{addBoundaryNode()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Boundary\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{normal }\end{DoxyParamCaption})}
+
+
+
+Adds a boundary node with given type and normal to the domain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Coordinates of the node to add. \\
+\hline
+{\em type} & Type of the point, must be negative. \\
+\hline
+{\em normal} & Outside unit normal to the boundary at point {\ttfamily point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The index of the new node. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a3bb3a5e1d7ee168d9f5db5d8b3a86714}{add\+Internal\+Node} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00056}{56}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a540ce78daf54b1eff265b79e23733e33}\label{classmm_1_1DomainDiscretization_a540ce78daf54b1eff265b79e23733e33} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addGhostNodes@{addGhostNodes}}
+\index{addGhostNodes@{addGhostNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addGhostNodes()}{addGhostNodes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Ghost\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}}}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption})}
+
+
+
+Add ghost or fictitious nodes to some boundary nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em h} & Nodal spacing function. The ghost node associated with some boundary node {\ttfamily p} and with normal {\ttfamily n} is added at position {\ttfamily p + h(p)\texorpdfstring{$\ast$}{*}n}. \\
+\hline
+{\em type} & Type of the added ghost node. The usual choice is type {\ttfamily 0}, making them neither internal nor boundary. This means that shapes in these nodes will not be computed, nor will their supports be found, however, they can appear as support nodes of other domain nodes. Note that this means that their support size is 0, which has to be taken into account when preallocating matrix sizes for implicit solving. If a positive number is chosen for {\ttfamily type}, the nodes are added as internal nodes and appear in the \doxylink{classmm_1_1DomainDiscretization_a0652465dfe89ec24c69b5f07a11d2af1}{interior} index list. Similarly, if {\ttfamily type} is negative, they are added as boundary nodes with normal {\ttfamily n} and appear in the \doxylink{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e}{boundary} index list. \\
+\hline
+{\em indexes} & A list of indexes for which to add boundary nodes. If not given, all boundary indices as given by \doxylink{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e}{boundary} are assumed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of indices of the size of the original domain, mapping each node index to the index of its corresponding ghost node, or -\/1, if it has no corresponding ghost node. Precisely the slots with indices in {\ttfamily indexes} have an entry not equal to {\ttfamily -\/1}.
+\end{DoxyReturn}
+This method can be useful when solving PDEs implicitly with Neumann boundary conditions, see the \href{http://e6.ijs.si/medusa/wiki/index.php/Ghost_nodes}{\texttt{ Ghost nodes}} example and the snippet below\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ 3D\ Poisson\ problem\ with\ mixed\ BC}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ sh(0,\ 1);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ sh.discretizeBoundaryWithStep(step);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dir\ =\ domain.positions().filter([](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ p[0]\ >\ 0;\ \});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ neu\ =\ domain.positions().filter([](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ p[0]\ <=\ 0;\ \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec3d>\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}{fill}};\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}{fill}}.seed(20);}
+\DoxyCodeLine{\ \ \ \ domain.fill(\mbox{\hyperlink{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}{fill}},\ step);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Add\ ghost\ nodes\ and\ remember\ the\ mapping\ from\ boundary\ to\ ghost\ nodes.}}
+\DoxyCodeLine{\ \ \ \ Range<int>\ gh\ =\ domain.addGhostNodes(step,\ 0,\ neu);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ By\ default,\ support\ is\ found\ for\ non-\/zero\ nodes,\ searching\ among\ all\ nodes}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 25;}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(n));}
+\DoxyCodeLine{\ \ \ \ RBFFD<Polyharmonic<double,\ 3>,\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}},\ ScaleToClosest>\ approx(\{\},\ 2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Approximations\ are\ computed\ for\ non-\/zero\ nodes.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes(approx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Matrix\ size\ is\ equal\ to\ the\ count\ of\ all\ nodes.}}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ M(N,\ N);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Warning:\ support\ size\ vector\ contains\ zeros\ in\ ghost\ nodes,\ but\ we\ want\ matrix\ to\ allocate}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ storage\ for\ ghost\ nodes\ as\ well.}}
+\DoxyCodeLine{\ \ \ \ M.reserve(Range<int>(N,\ n));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ storage.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.\mbox{\hyperlink{classmm_1_1DomainDiscretization_a0652465dfe89ec24c69b5f07a11d2af1}{interior}}())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.lap(i)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ dir)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ neu)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.neumann(i,\ domain.normal(i))\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.lap(i,\ gh[i])\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseLU<\textcolor{keyword}{decltype}(M)>\ solver;}
+\DoxyCodeLine{\ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ u\ =\ solver.solve(rhs);}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxyWarning}{Warning}
+Support nodes are not computed for ghost nodes, but ghost nodes are included in other nodes\textquotesingle{} supports. This means that support size in ghost nodes will be zero, also when returned by \doxylink{classmm_1_1ShapeStorage_af5acb712018e86ba012610c7cd4c75a8}{Shape\+Storage\+::support\+Sizes}, however, the matrix rows for ghost nodes must still be preallocated.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a3bb3a5e1d7ee168d9f5db5d8b3a86714}{add\+Internal\+Node}, \doxylink{classmm_1_1DomainDiscretization_a2a1362dc171d52ae74b60e5b17cafd90}{add\+Boundary\+Node} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00155}{155}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a2e96f3436745e87487eb0b93d28b715f}\label{classmm_1_1DomainDiscretization_a2e96f3436745e87487eb0b93d28b715f} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addGhostNodes@{addGhostNodes}}
+\index{addGhostNodes@{addGhostNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addGhostNodes()}{addGhostNodes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Ghost\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}}}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Overload of \doxylink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes} which adds ghost nodes to all boundary nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00149}{149}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a0d2f52ea1763157564db655a5ec3dc8e}\label{classmm_1_1DomainDiscretization_a0d2f52ea1763157564db655a5ec3dc8e} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addGhostNodes@{addGhostNodes}}
+\index{addGhostNodes@{addGhostNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addGhostNodes()}{addGhostNodes()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Ghost\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}}}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption})}
+
+
+
+Overload of \doxylink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes} with constant {\ttfamily h}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00142}{142}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}\label{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addGhostNodes@{addGhostNodes}}
+\index{addGhostNodes@{addGhostNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addGhostNodes()}{addGhostNodes()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Ghost\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}}}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Overload of \doxylink{classmm_1_1DomainDiscretization_aad00224761e7b3c0ab1957760ccf9615}{add\+Ghost\+Nodes} with constant {\ttfamily h} and adds ghost nodes to all boundary nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00137}{137}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a3bb3a5e1d7ee168d9f5db5d8b3a86714}\label{classmm_1_1DomainDiscretization_a3bb3a5e1d7ee168d9f5db5d8b3a86714} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addInternalNode@{addInternalNode}}
+\index{addInternalNode@{addInternalNode}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addInternalNode()}{addInternalNode()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Internal\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type }\end{DoxyParamCaption})}
+
+
+
+Adds a single interior node with specified type to this discretization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Coordinates of the node to add. \\
+\hline
+{\em type} & Type of the node to add. Must be positive. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The index of the new node. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a2a1362dc171d52ae74b60e5b17cafd90}{add\+Boundary\+Node} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae61b7e62d7b79828ad335a215bfd4823}\label{classmm_1_1DomainDiscretization_ae61b7e62d7b79828ad335a215bfd4823} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addNode@{addNode}}
+\index{addNode@{addNode}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addNode()}{addNode()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper for adding points to the domain, which keeps the object consistent. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a2cabad777df086163eb6fca5f0a972d2}\label{classmm_1_1DomainDiscretization_a2cabad777df086163eb6fca5f0a972d2} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!addNodes@{addNodes}}
+\index{addNodes@{addNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{addNodes()}{addNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d }\end{DoxyParamCaption})}
+
+
+
+Add nodes from another discretization to this discretization. 
+
+The shape of the domain is not changed. Returns indices of newly added nodes. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00104}{104}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a925d8467dd1e1fd9a79afe7a034a1c24}\label{classmm_1_1DomainDiscretization_a925d8467dd1e1fd9a79afe7a034a1c24} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!all@{all}}
+\index{all@{all}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{all()}{all()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns indexes of all nodes, i.\+e. {\ttfamily \{0, 1, ..., N-\/1\}}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00186}{186}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a59b983dd5353373d18483e17e3534dd3}\label{classmm_1_1DomainDiscretization_a59b983dd5353373d18483e17e3534dd3} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!assert\_is\_valid@{assert\_is\_valid}}
+\index{assert\_is\_valid@{assert\_is\_valid}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{assert\_is\_valid()}{assert\_is\_valid()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::assert\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks if domain is in valid state. 
+
+This includes that all points are contained in the domain, that all boundary nodes have a normal, etc... 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00179}{179}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a5e94cbb6a059cbbe28bac30e7bf258e9}\label{classmm_1_1DomainDiscretization_a5e94cbb6a059cbbe28bac30e7bf258e9} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!bmap@{bmap}}
+\index{bmap@{bmap}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{bmap()}{bmap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::bmap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns boundary map. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_af7536f606e0b127a77deb850e599f94b}{boundary\+\_\+map\+\_\+} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00165}{165}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae01b46bc385dbcd23698eba53d97dc0e}\label{classmm_1_1DomainDiscretization_ae01b46bc385dbcd23698eba53d97dc0e} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!bmap@{bmap}}
+\index{bmap@{bmap}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{bmap()}{bmap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::bmap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns index of node {\ttfamily node} among only boundary nodes. 
+
+The returned index is in range {\ttfamily \mbox{[}0, \doxylink{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e}{boundary()}.\doxylink{classmm_1_1DomainDiscretization_acf5e94e606f28bd3fd9622f90dc9a0c0}{size()})} if {\ttfamily node} is a boundary node, and {\ttfamily -\/1} otherwise. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00170}{170}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e}\label{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!boundary@{boundary}}
+\index{boundary@{boundary}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{boundary()}{boundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns indexes of all boundary nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00182}{182}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ad0e1b045029a9d9068ce7dc21b288eaf}\label{classmm_1_1DomainDiscretization_ad0e1b045029a9d9068ce7dc21b288eaf} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!changeToBoundary@{changeToBoundary}}
+\index{changeToBoundary@{changeToBoundary}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{changeToBoundary()}{changeToBoundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::change\+To\+Boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{normal }\end{DoxyParamCaption})}
+
+
+
+Changes node {\ttfamily i} to boundary point with given {\ttfamily type} and {\ttfamily normal}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a9ae3f5476b3800d0725627316fd17917}\label{classmm_1_1DomainDiscretization_a9ae3f5476b3800d0725627316fd17917} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!changeToInterior@{changeToInterior}}
+\index{changeToInterior@{changeToInterior}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{changeToInterior()}{changeToInterior()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::change\+To\+Interior (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type }\end{DoxyParamCaption})}
+
+
+
+Changes node {\ttfamily i} to interior point with given {\ttfamily type}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00088}{88}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aeecf18492d6b29e04e4edfc4f53da657}\label{classmm_1_1DomainDiscretization_aeecf18492d6b29e04e4edfc4f53da657} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!chopOff@{chopOff}}
+\index{chopOff@{chopOff}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{chopOff()}{chopOff()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::chop\+Off (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&}]{relevant }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Remove a portion of this domain which is contained in {\ttfamily d} or is only {\ttfamily dx} away. 
+
+The {\ttfamily dx} is computed locally from the discretization of {\ttfamily d}. No nodes are added.
+
+Helper for \doxylink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{add} and \doxylink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{subtract} methods.
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & The discretization of the domain which specifies which part to chop off. \\
+\hline
+{\em relevant} & Only the nodes with indices in {\ttfamily relevant} are used for computing the local {\ttfamily dx}. This is mostly a performance improvement which allows to construct a smaller k-\/d tree. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00243}{243}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae1ef733d3a4df749eb7cc3e4fc7b6eb7}\label{classmm_1_1DomainDiscretization_ae1ef733d3a4df749eb7cc3e4fc7b6eb7} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!clear@{clear}}
+\index{clear@{clear}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clears all data about this discretization. 
+
+The state of the object is as if it were newly constructed using {\ttfamily \doxylink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape()}}. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00170}{170}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}\label{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!computeShapes@{computeShapes}}
+\index{computeShapes@{computeShapes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{computeShapes()}{computeShapes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{sh\+::shape\+\_\+flags}} mask = sh\+::all, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple}{sh\+::operator\+\_\+tuple}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{mask}}, vec\+\_\+t\+::dim $>$\mbox{\hyperlink{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}{\+::type}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::compute\+Shapes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}}}]{approx,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes = {\ttfamily \{\}} }\end{DoxyParamCaption}) const}
+
+
+
+Compute shapes, specified with shape flags, for this domain with given approximation for given indexes. 
+
+For complete documentation, se \doxylink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm\+::compute\+Shapes} function. \Hypertarget{classmm_1_1DomainDiscretization_ad2609e402ec5b0227f22186eb4376d80}\label{classmm_1_1DomainDiscretization_ad2609e402ec5b0227f22186eb4376d80} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!computeShapes@{computeShapes}}
+\index{computeShapes@{computeShapes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{computeShapes()}{computeShapes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::compute\+Shapes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}}}]{approx,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes = {\ttfamily \{\}} }\end{DoxyParamCaption}) const}
+
+
+
+Compute shapes for default constructable families. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{compute\+Shapes} 
+\end{DoxySeeAlso}
+\Hypertarget{classmm_1_1DomainDiscretization_a089d1f9c06786918bc95c275fd996421}\label{classmm_1_1DomainDiscretization_a089d1f9c06786918bc95c275fd996421} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!computeShapes@{computeShapes}}
+\index{computeShapes@{computeShapes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{computeShapes()}{computeShapes()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::compute\+Shapes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Operator\+Tuple}}}]{operators,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}}}]{approx,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes = {\ttfamily \{\}} }\end{DoxyParamCaption}) const}
+
+
+
+Compute shapes for non-\/default constructable families. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{compute\+Shapes} 
+\end{DoxySeeAlso}
+\Hypertarget{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}\label{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!contains@{contains}}
+\index{contains@{contains}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::contains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point }\end{DoxyParamCaption}) const}
+
+
+
+Returns {\ttfamily true} if {\ttfamily point} is inside the domain. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if domain shape does not have a \doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains} method. In that case, \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains} might be more appropriate. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainShape_a4f96c68c043097a2421a968827330a31}{Domain\+Shape\+::has\+Contains}, \doxylink{classmm_1_1DomainShape_ae86a4850e8eee2b8f1d7d2f019b158fe}{Domain\+Shape\+::contains}, \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{Domain\+Discretization\+::discrete\+Contains} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00315}{315}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a63f526d04830d57e4a56d65a9a94363e}\label{classmm_1_1DomainDiscretization_a63f526d04830d57e4a56d65a9a94363e} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!contains@{contains}}
+\index{contains@{contains}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::contains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} \&}]{search }\end{DoxyParamCaption}) const}
+
+
+
+Returns {\ttfamily true} if {\ttfamily point} is inside the domain. 
+
+If possible, this function uses analytical \doxylink{classmm_1_1DomainShape_ae86a4850e8eee2b8f1d7d2f019b158fe}{Domain\+Shape\+::contains}, otherwise, it falls back to \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains}. For parameter explanations see \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains}. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains}, \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains}, \doxylink{classmm_1_1DomainShape_a4f96c68c043097a2421a968827330a31}{Domain\+Shape\+::has\+Contains}, \doxylink{classmm_1_1DomainShape_ae86a4850e8eee2b8f1d7d2f019b158fe}{Domain\+Shape\+::contains} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00335}{335}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}\label{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!discreteContains@{discreteContains}}
+\index{discreteContains@{discreteContains}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discreteContains()}{discreteContains()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discrete\+Contains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} \&}]{search }\end{DoxyParamCaption}) const}
+
+
+
+A discrete version of \doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains} using given boundary discretization. 
+
+A point {\ttfamily p} is defined to be contained in the domain, iff the dot product {\ttfamily (p-\/q).n} is negative, where {\ttfamily q} is the nearest boundary point and {\ttfamily n} is its outer normal. This works sufficiently well, but can fail if boundary discretization is too sparse. 
+\begin{DoxyParams}{Parameters}
+{\em point} & The point being tested. \\
+\hline
+{\em search} & Nearest neighbour search structure containing boundary points in the same order as defined by {\ttfamily boundary\+\_\+map\+\_\+}. Such suitable structure is returned by \doxylink{classmm_1_1DomainDiscretization_ae61cc022298f0ca37c50aad3eff299a2}{make\+Discrete\+Contains\+Structure}.\\
+\hline
+\end{DoxyParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ box(\{0,\ 0,\ 0\},\ \{2,\ 2,\ 2\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ circ(\{0,\ 0,\ 0\},\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape}}\ =\ box\ -\/\ circ;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discr\ =\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape}}.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ search;}
+\DoxyCodeLine{\ \ \ \ discr.makeDiscreteContainsStructure(search);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(discr.discreteContains(\{1.2,\ 1.2,\ 1.2\},\ search));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(discr.discreteContains(\{0,\ 0,\ 0\},\ search));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ discreteContains\ might\ fail\ near\ the\ shape\ boundary}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(discr.discreteContains(\{2,\ 2,\ 2\},\ search));}
+
+\end{DoxyCodeInclude}
+ \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains}, \doxylink{classmm_1_1DomainDiscretization_ae61cc022298f0ca37c50aad3eff299a2}{make\+Discrete\+Contains\+Structure} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00323}{323}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a0ea41367473eda51743e826a7c0344ba}\label{classmm_1_1DomainDiscretization_a0ea41367473eda51743e826a7c0344ba} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!dr@{dr}}
+\index{dr@{dr}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{dr()}{dr()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::dr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns Euclidean distance to the second support node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00148}{148}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}\label{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!fill@{fill}}
+\index{fill@{fill}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&}]{callable,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables more readable calls to fill engines. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00459}{459}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ac64b7dff8f6a36b6476a5c08cb8273c8}\label{classmm_1_1DomainDiscretization_ac64b7dff8f6a36b6476a5c08cb8273c8} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!fill@{fill}}
+\index{fill@{fill}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&}]{callable,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const version of \doxylink{classmm_1_1DomainDiscretization_a68608e388a12dbd5a360f8299a22b982}{Domain\+Discretization\+::fill}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00461}{461}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a42f6af1738aba241b489b75358168e36}\label{classmm_1_1DomainDiscretization_a42f6af1738aba241b489b75358168e36} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!findSupport@{findSupport}}
+\index{findSupport@{findSupport}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{findSupport()}{findSupport()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::find\+Support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&}]{callable,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables more readable calls to support engines. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00455}{455}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_af303984912fd34c5e68e976d3e987971}\label{classmm_1_1DomainDiscretization_af303984912fd34c5e68e976d3e987971} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!findSupport@{findSupport}}
+\index{findSupport@{findSupport}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{findSupport()}{findSupport()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::find\+Support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&}]{callable,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const version of \doxylink{classmm_1_1DomainDiscretization_a42f6af1738aba241b489b75358168e36}{Domain\+Discretization\+::find\+Support}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00457}{457}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a0652465dfe89ec24c69b5f07a11d2af1}\label{classmm_1_1DomainDiscretization_a0652465dfe89ec24c69b5f07a11d2af1} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!interior@{interior}}
+\index{interior@{interior}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{interior()}{interior()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::interior (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns indexes of all internal nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00184}{184}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a045288a2c0f7c8434923e7cc31111774}\label{classmm_1_1DomainDiscretization_a045288a2c0f7c8434923e7cc31111774} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!load@{load}}
+\index{load@{load}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{hdf5\+\_\+file}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hdf5\+\_\+file}} \&}]{file,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load discretization from a HD5 file. 
+
+This function looks for datasets named {\ttfamily pos}, {\ttfamily types}, {\ttfamily normals} and {\ttfamily bmap}. {\ttfamily pos} should be a {\ttfamily dim x N} dataset of doubles {\ttfamily types} and {\ttfamily bmap} should be a {\ttfamily N} datasets of ints {\ttfamily normals} should be a {\ttfamily dim x B} dataset of doubles, where {\ttfamily B} is the number of boundary nodes. This format is produced by the \doxylink{classmm_1_1HDF_aceed7a68e16d0299737e183d81bb5600}{HDF\+::write\+Domain} function.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Load\ domain\ from\ file\ \`{}test\_domain\_load.h5`.\ It\ is\ stored\ in\ the\ \`{}domain`\ group.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Shape\ of\ \`{}d`\ is\ UnknownShape.}}
+\DoxyCodeLine{\ \ \ \ HDF\ file(\textcolor{stringliteral}{"{}test/testdata/test\_domain\_load.h5"{}},\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}{HDF::READONLY}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a045288a2c0f7c8434923e7cc31111774}{DomainDiscretization<Vec2d>::load}}(file,\ \textcolor{stringliteral}{"{}domain"{}});}
+
+\end{DoxyCodeInclude}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & \doxylink{classmm_1_1HDF}{HDF} object containing the discretization. \\
+\hline
+{\em name} & Name of the folder where discretization is stored.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aceed7a68e16d0299737e183d81bb5600}{HDF\+::write\+Domain} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00354}{354}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae61cc022298f0ca37c50aad3eff299a2}\label{classmm_1_1DomainDiscretization_ae61cc022298f0ca37c50aad3eff299a2} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!makeDiscreteContainsStructure@{makeDiscreteContainsStructure}}
+\index{makeDiscreteContainsStructure@{makeDiscreteContainsStructure}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{makeDiscreteContainsStructure()}{makeDiscreteContainsStructure()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::make\+Discrete\+Contains\+Structure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+structure\+\_\+t}} \&}]{search }\end{DoxyParamCaption}) const}
+
+
+
+Fills the search structure {\ttfamily search} with boundary points for use with {\ttfamily \doxylink{classmm_1_1DomainDiscretization_ab4502f5d23e8404f4527aa502c32309e}{contains()}} or {\ttfamily \doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains()}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em search} & A search structure to be used. Its contents are overwritten. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_ab3b3aea74a7e3737dba1bae981cd713b}{discrete\+Contains} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00342}{342}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a944837da00ccc517790c1873707a1a48}\label{classmm_1_1DomainDiscretization_a944837da00ccc517790c1873707a1a48} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!normal@{normal}}
+\index{normal@{normal}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{normal()}{normal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::normal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption})}
+
+
+
+Returns writable outside unit normal of {\ttfamily i}-\/th node. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a810dee1d648cca557ccc85861f225711}{normal} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00031}{31}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a810dee1d648cca557ccc85861f225711}\label{classmm_1_1DomainDiscretization_a810dee1d648cca557ccc85861f225711} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!normal@{normal}}
+\index{normal@{normal}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{normal()}{normal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::normal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Returns outside unit normal of {\ttfamily i}-\/th node. 
+
+The node must be a boundary node. 
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the noe is not a boundary node, i.\+e. {\ttfamily \doxylink{classmm_1_1DomainDiscretization_af25992790d6f41edd7302c8fdd69a01a}{type(i)} \texorpdfstring{$<$}{<} 0} must hold. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00040}{40}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aa2c4f121739c09b3396d856851a4ffc7}\label{classmm_1_1DomainDiscretization_aa2c4f121739c09b3396d856851a4ffc7} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!normals@{normals}}
+\index{normals@{normals}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{normals()}{normals()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::normals (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns normals of all boundary nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00172}{172}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a4ceb9d50764ba5f5a0bea942f00d9e35}\label{classmm_1_1DomainDiscretization_a4ceb9d50764ba5f5a0bea942f00d9e35} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{structmm_1_1Operator}{Operator} version of \doxylink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{Domain\+Discretization\+::add}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{add} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00331}{331}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a7c8ea453fbaa901b210efbf1525e01fa}\label{classmm_1_1DomainDiscretization_a7c8ea453fbaa901b210efbf1525e01fa} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator-\/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{structmm_1_1Operator}{Operator} version of \doxylink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{Domain\+Discretization\+::subtract}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}{subtract} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00361}{361}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae0b85b8926072d1778417fcda750f6bf}\label{classmm_1_1DomainDiscretization_ae0b85b8926072d1778417fcda750f6bf} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!output\_report@{output\_report}}
+\index{output\_report@{output\_report}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{output\_report()}{output\_report()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::output\+\_\+report (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Outputs a simple report about out domain, like number of nodes, support size. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00209}{209}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a6e5326626d47fa078ead37e714a138de}\label{classmm_1_1DomainDiscretization_a6e5326626d47fa078ead37e714a138de} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!pos@{pos}}
+\index{pos@{pos}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{pos()}{pos()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::pos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns writeable position of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00131}{131}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ac53a2efd03ffe06d5d6da303cc166212}\label{classmm_1_1DomainDiscretization_ac53a2efd03ffe06d5d6da303cc166212} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!pos@{pos}}
+\index{pos@{pos}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{pos()}{pos()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::pos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the position of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00129}{129}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a4f6c7c299576acc64041f9c4413b68df}\label{classmm_1_1DomainDiscretization_a4f6c7c299576acc64041f9c4413b68df} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!pos@{pos}}
+\index{pos@{pos}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{pos()}{pos()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::pos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily j}-\/th coordinate of the position of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00133}{133}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae0cbaa1b9e65c4c18f1be7660084dcd5}\label{classmm_1_1DomainDiscretization_ae0cbaa1b9e65c4c18f1be7660084dcd5} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!positions@{positions}}
+\index{positions@{positions}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{positions()}{positions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::positions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns positions of all nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00127}{127}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a71449bf9ac8a84a809a1c82a937f0dc0}\label{classmm_1_1DomainDiscretization_a71449bf9ac8a84a809a1c82a937f0dc0} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!relax@{relax}}
+\index{relax@{relax}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{relax()}{relax()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::relax (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&}]{callable,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables more readable calls to relax engines. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00463}{463}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a0c3b26a2226b15ab5411a00be8765eb3}\label{classmm_1_1DomainDiscretization_a0c3b26a2226b15ab5411a00be8765eb3} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!relax@{relax}}
+\index{relax@{relax}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{relax()}{relax()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} , typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::relax (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{callable\+\_\+t}} \&}]{callable,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Const version of \doxylink{classmm_1_1DomainDiscretization_a71449bf9ac8a84a809a1c82a937f0dc0}{Domain\+Discretization\+::relax}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00465}{465}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aaf055ac09a73a6c6f748733d62c4bef4}\label{classmm_1_1DomainDiscretization_aaf055ac09a73a6c6f748733d62c4bef4} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!removeBoundaryNodes@{removeBoundaryNodes}}
+\index{removeBoundaryNodes@{removeBoundaryNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{removeBoundaryNodes()}{removeBoundaryNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::remove\+Boundary\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes all boundary nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00391}{391}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ab1c6e011a874ce5445b78fce68046688}\label{classmm_1_1DomainDiscretization_ab1c6e011a874ce5445b78fce68046688} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!removeInternalNodes@{removeInternalNodes}}
+\index{removeInternalNodes@{removeInternalNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{removeInternalNodes()}{removeInternalNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::remove\+Internal\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes all internal nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00388}{388}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a138e02d051cbdf55d4196acfcd7f955a}\label{classmm_1_1DomainDiscretization_a138e02d051cbdf55d4196acfcd7f955a} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!removeNodes@{removeNodes}}
+\index{removeNodes@{removeNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{removeNodes()}{removeNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::remove\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&}]{to\+\_\+remove }\end{DoxyParamCaption})}
+
+
+
+Remove nodes with given indices. This removes their types and potential normals as well. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00117}{117}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a242040c59e452e1e965be964b9a93b7e}\label{classmm_1_1DomainDiscretization_a242040c59e452e1e965be964b9a93b7e} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!reorderNodes@{reorderNodes}}
+\index{reorderNodes@{reorderNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{reorderNodes()}{reorderNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{compare\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{template}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::reorder\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{compare\+\_\+t}} \&}]{cmp = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{compare\+\_\+t}}()} }\end{DoxyParamCaption})}
+
+
+
+Reorders nodes according to the compare function. 
+
+This can be useful to make the matrix of the implicit system have a nicer structure. Sorts lexicographically (i.\+e. by x-\/coordinate first) by default. 
+\begin{DoxyParams}{Parameters}
+{\em cmp} & A compare function for elements of type {\ttfamily std\+::pair\texorpdfstring{$<$}{<}vec\+\_\+t, int\texorpdfstring{$>$}{>}} as passed to {\ttfamily std\+::sort}. The first value in the pair is the coordinate of the point and the second is its index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The permutation used to shuffle the nodes. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_af225a0517cdfcea9803af121bd1e9db2}{shuffle\+Nodes} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00441}{441}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ac3dde61e9b9f412799a9d63e71d87a9c}\label{classmm_1_1DomainDiscretization_ac3dde61e9b9f412799a9d63e71d87a9c} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!rotate@{rotate}}
+\index{rotate@{rotate}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7}{dim}}, \mbox{\hyperlink{classmm_1_1DomainDiscretization_a86064e79950ed63db1c90f04cf64acb1a10fd4d5f4755b7d3fbdfbb6038dc11e7}{dim}} $>$ \&}]{Q }\end{DoxyParamCaption})}
+
+
+
+Transform the domain by given orthogonal matrix {\ttfamily Q}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00420}{420}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a51e2f455e13234545b91071cc9642282}\label{classmm_1_1DomainDiscretization_a51e2f455e13234545b91071cc9642282} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!rotate@{rotate}}
+\index{rotate@{rotate}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a81fb4c460a2f036086fba9a9581cd6b8}{scalar\+\_\+t}}}]{angle }\end{DoxyParamCaption})}
+
+
+
+2D version of \doxylink{classmm_1_1DomainDiscretization_ac3dde61e9b9f412799a9d63e71d87a9c}{rotate} accepting an angle. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00431}{431}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}\label{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!shape@{shape}}
+\index{shape@{shape}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns geometric shape of the underlying domain. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00162}{162}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_af225a0517cdfcea9803af121bd1e9db2}\label{classmm_1_1DomainDiscretization_af225a0517cdfcea9803af121bd1e9db2} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!shuffleNodes@{shuffleNodes}}
+\index{shuffleNodes@{shuffleNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shuffleNodes()}{shuffleNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::shuffle\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{permutation }\end{DoxyParamCaption})}
+
+
+
+Shuffles node order according to given permutation. 
+
+This also modifies the support indices and all other necessary data. For given list {\ttfamily I = \{4, 3, 2, 0, 1\}} and original positions {\ttfamily P = \{a, b, c, d, e\}}, the new list of positions would be {\ttfamily \{e, d, c, a, b\}}, i.\+e. {\ttfamily P = P(\+I)}. This means that {\ttfamily old\+\_\+domain.\+pos(p\mbox{[}i\mbox{]}) == new\+\_\+domain.\+pos(i)} holds for all nodes. 
+\begin{DoxyParams}{Parameters}
+{\em permutation} & A list of {\ttfamily n} integers containing each number from {\ttfamily 0} to {\ttfamily n-\/1} exactly once. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if {\ttfamily permutation} is not a permutation. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00453}{453}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_acf5e94e606f28bd3fd9622f90dc9a0c0}\label{classmm_1_1DomainDiscretization_acf5e94e606f28bd3fd9622f90dc9a0c0} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!size@{size}}
+\index{size@{size}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily N}, the number of nodes in this discretization. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00189}{189}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184}\label{classmm_1_1DomainDiscretization_a210e4bf7082864e4bf6e6f64080ab184} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!subtract@{subtract}}
+\index{subtract@{subtract}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{subtract()}{subtract()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::subtract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d }\end{DoxyParamCaption})}
+
+
+
+Subtracts given discretized domain from {\ttfamily \texorpdfstring{$\ast$}{*}this}. 
+
+The shape of current domain changes to become the difference of {\ttfamily \doxylink{classmm_1_1DomainDiscretization_a0d65ae1a80ede327be0864878f09d7d8}{shape()}} and {\ttfamily d.\+shape()}. The discretization nodes that are now outside of domain are removed and the appropriate boundary nodes from {\ttfamily d} are added. Types of nodes are preserved. This makes it possible to set custom types before the {\ttfamily -\/=} operation and refer to those types in the difference as well.
+
+Example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect\ =\ BoxShape<Vec2d>(\{-\/1,\ -\/1\},\ \{1,\ 1\}).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ circ\ =\ BallShape<Vec2d>(\{0,\ 0\},\ 0.7).discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{\ \ \ \ circ.types()[circ.boundary()]\ =\ -\/5;\ \ \ \textcolor{comment}{//\ -\/1\ to\ -\/4\ taken\ by\ rectangle\ sides}}
+\DoxyCodeLine{\ \ \ \ rect\ -\/=\ circ;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ (rect.types()\ ==\ -\/5).\mbox{\hyperlink{classmm_1_1DomainDiscretization_acf5e94e606f28bd3fd9622f90dc9a0c0}{size}}()\ <<\ std::endl;\ \ \textcolor{comment}{//\ nonzero\ number\ is\ printed}}
+
+\end{DoxyCodeInclude}
+
+
+More specifically, when performing {\ttfamily d1 -\/= d2}, nodes in d1 that are contained in {\ttfamily d2} or less than {\ttfamily dx} away from {\ttfamily d2} are removed. The local spacing {\ttfamily dx} for a point {\ttfamily p} in {\ttfamily d1} is computed by first finding the nearest boundary node in {\ttfamily d2} and then taking a fraction of the distance to its nearest boundary node. Boundary nodes from {\ttfamily d2} that are contained in {\ttfamily d1} are also added, with inverted normals.
+
+See the images below for visualization of the subtract operation.  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{sub_bnd.png}}
+\end{DoxyImageNoCaption}
+  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{sub_full.png}}
+\end{DoxyImageNoCaption}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ShapeDifference}{Shape\+Difference}, \doxylink{classmm_1_1DomainDiscretization_afdf066978668c1b7cb276945e91eb158}{add} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00298}{298}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ab2bba4c98ba79c1cf110da49f23da98d}\label{classmm_1_1DomainDiscretization_ab2bba4c98ba79c1cf110da49f23da98d} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!support@{support}}
+\index{support@{support}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns writeable array of support indices for {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00140}{140}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a37372a1dac0ca2b59303f1b8409099eb}\label{classmm_1_1DomainDiscretization_a37372a1dac0ca2b59303f1b8409099eb} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!support@{support}}
+\index{support@{support}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns support indices for {\ttfamily i}-\/th node. 
+
+Indices are ordered by distance to support nodes, with the first being the closest, usually the node itself. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00138}{138}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aa79adbfeaa2957205b4deccea2624f4d}\label{classmm_1_1DomainDiscretization_aa79adbfeaa2957205b4deccea2624f4d} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!support@{support}}
+\index{support@{support}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily j}-\/th support node of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00142}{142}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a12f24200315916877a82cbc2b6febd5f}\label{classmm_1_1DomainDiscretization_a12f24200315916877a82cbc2b6febd5f} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!supportNode@{supportNode}}
+\index{supportNode@{supportNode}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{supportNode()}{supportNode()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns position of {\ttfamily j}-\/th support node of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00146}{146}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a778c7399dd0d3c7f740675a8d980cb71}\label{classmm_1_1DomainDiscretization_a778c7399dd0d3c7f740675a8d980cb71} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!supportNodes@{supportNodes}}
+\index{supportNodes@{supportNodes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{supportNodes()}{supportNodes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns positions of support nodes of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00144}{144}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aea73b0296050370bb0738371318a3c5a}\label{classmm_1_1DomainDiscretization_aea73b0296050370bb0738371318a3c5a} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!supports@{supports}}
+\index{supports@{supports}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{supports()}{supports()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::supports (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns support indices for all nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00135}{135}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ab1e7ec7f31e83ac5453e4804d9670770}\label{classmm_1_1DomainDiscretization_ab1e7ec7f31e83ac5453e4804d9670770} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!supportSize@{supportSize}}
+\index{supportSize@{supportSize}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{supportSize()}{supportSize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns size of {\ttfamily i}-\/th node support. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00150}{150}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ab6b9350725fd7e17defb07038a40f9fb}\label{classmm_1_1DomainDiscretization_ab6b9350725fd7e17defb07038a40f9fb} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!supportSizes@{supportSizes}}
+\index{supportSizes@{supportSizes}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{supportSizes()}{supportSizes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support\+Sizes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns a vector of support sizes for each node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ad896ddd07e02f47fe9d1b1422d06f157}\label{classmm_1_1DomainDiscretization_ad896ddd07e02f47fe9d1b1422d06f157} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!translate@{translate}}
+\index{translate@{translate}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::translate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{a }\end{DoxyParamCaption})}
+
+
+
+Translate the domain by a given vector {\ttfamily a}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization_8hpp_source_l00411}{411}} of file \mbox{\hyperlink{DomainDiscretization_8hpp_source}{Domain\+Discretization.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_af25992790d6f41edd7302c8fdd69a01a}\label{classmm_1_1DomainDiscretization_af25992790d6f41edd7302c8fdd69a01a} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!type@{type}}
+\index{type@{type}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{type()}{type()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns writeable type of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00160}{160}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961}\label{classmm_1_1DomainDiscretization_a9cf00f853cea67af174474e575cfa961} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!type@{type}}
+\index{type@{type}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{type()}{type()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns type of {\ttfamily i}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00158}{158}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ae34afed927cfd8ade9893488738a28cf}\label{classmm_1_1DomainDiscretization_ae34afed927cfd8ade9893488738a28cf} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!types@{types}}
+\index{types@{types}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{types()}{types()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns mutable types of all nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00156}{156}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_aac47787bb3119eb4d21d880b959cc72a}\label{classmm_1_1DomainDiscretization_aac47787bb3119eb4d21d880b959cc72a} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!types@{types}}
+\index{types@{types}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{types()}{types()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \& \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns types of all nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00154}{154}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1DomainDiscretization_a6212d295b0a24162b1ada801db1367df}\label{classmm_1_1DomainDiscretization_a6212d295b0a24162b1ada801db1367df} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given domain. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{compute\+Shapes} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1DomainDiscretization_af7536f606e0b127a77deb850e599f94b}\label{classmm_1_1DomainDiscretization_af7536f606e0b127a77deb850e599f94b} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!boundary\_map\_@{boundary\_map\_}}
+\index{boundary\_map\_@{boundary\_map\_}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{boundary\_map\_}{boundary\_map\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::boundary\+\_\+map\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Mapping index of a boundary node among all nodes, to its index among boundary nodes. 
+
+Indices of internal nodes are set to {\ttfamily -\/1}. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a4721b173c6e36f278228d00f751e0ab0}{positions\_}}\ =\ \ \ \ \{p1,\ p2,\ p3,\ p4,\ p5\};}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a1542b60b9ee01342b08585bc25e6a3f7}{types\_}}\ =\ \ \ \ \ \ \ \ \{\ 2,\ -\/1,\ \ 2,\ \ 1,\ -\/1\};}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_af7536f606e0b127a77deb850e599f94b}{boundary\_map\_}}\ =\ \{-\/1,\ \ 0,\ -\/1,\ -\/1,\ 1\};}
+
+\end{DoxyCode}
+ Nodes {\ttfamily p2} and {\ttfamily p5} are the first and the second boundary nodes. There are no guarantees on the order of nodes. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_ab558de86643a93f5699a4cd1dfd91354}\label{classmm_1_1DomainDiscretization_ab558de86643a93f5699a4cd1dfd91354} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!normals\_@{normals\_}}
+\index{normals\_@{normals\_}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{normals\_}{normals\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::normals\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of normals of boundary nodes. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a4721b173c6e36f278228d00f751e0ab0}{positions\_}}\ =\ \ \ \ \{p1,\ p2,\ p3,\ p4,\ p5\};}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a1542b60b9ee01342b08585bc25e6a3f7}{types\_}}\ =\ \ \ \ \ \ \ \ \{\ 2,\ -\/1,\ \ 2,\ \ 1,\ -\/1\};}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_af7536f606e0b127a77deb850e599f94b}{boundary\_map\_}}\ =\ \{-\/1,\ \ 0,\ -\/1,\ -\/1,\ 1\};}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_aa2c4f121739c09b3396d856851a4ffc7}{normals}}\ =\ \{n1,\ n2\};}
+
+\end{DoxyCode}
+ Normal {\ttfamily n1} is the normal of node {\ttfamily p2} and normal {\ttfamily n2} is the normal of {\ttfamily p5}. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00097}{97}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a4721b173c6e36f278228d00f751e0ab0}\label{classmm_1_1DomainDiscretization_a4721b173c6e36f278228d00f751e0ab0} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!positions\_@{positions\_}}
+\index{positions\_@{positions\_}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{positions\_}{positions\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::positions\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Positions of internal discretization points. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a25327efebbd0596bf01743502344e6ab}\label{classmm_1_1DomainDiscretization_a25327efebbd0596bf01743502344e6ab} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!shape\_@{shape\_}}
+\index{shape\_@{shape\_}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_}{shape\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$\mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::shape\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Geometric shape of the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00100}{100}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_add06024e017abbb8091d6e49c2d1b762}\label{classmm_1_1DomainDiscretization_add06024e017abbb8091d6e49c2d1b762} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!support\_@{support\_}}
+\index{support\_@{support\_}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{support\_}{support\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ $>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::support\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Attribute used to store support points of each node. 
+
+For each node {\ttfamily i}, {\ttfamily support\mbox{[}i\mbox{]}} is list of indices of {\ttfamily i}\textquotesingle{}s support ordered by distance from {\ttfamily i}. The first element in the {\ttfamily i}-\/th list is usually {\ttfamily i} followed by one or more others. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00060}{60}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainDiscretization_a1542b60b9ee01342b08585bc25e6a3f7}\label{classmm_1_1DomainDiscretization_a1542b60b9ee01342b08585bc25e6a3f7} 
+\index{mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}!types\_@{types\_}}
+\index{types\_@{types\_}!mm::DomainDiscretization$<$ vec\_t $>$@{mm::DomainDiscretization$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{types\_}{types\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::types\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Storing types of nodes aligned with positions. 
+
+{\bfseries{Negative types are reserved for boundary nodes, positive for interior. Zero type is not used.}} Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a4721b173c6e36f278228d00f751e0ab0}{positions\_}}\ =\ \{p1,\ p2,\ p3,\ p4,\ p5\};}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1DomainDiscretization_a1542b60b9ee01342b08585bc25e6a3f7}{types\_}}\ =\ \ \ \ \ \{\ 2,\ -\/1,\ \ 2,\ \ 1,\ -\/1\};}
+
+\end{DoxyCode}
+ Nodes {\ttfamily p2} and {\ttfamily p5} are of type {\ttfamily -\/1}, {\ttfamily p1} and {\ttfamily p3} of type {\ttfamily 2} and so on. 
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{DomainDiscretization__fwd_8hpp}{Domain\+Discretization\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{DomainDiscretization_8hpp}{Domain\+Discretization.\+hpp}}\item 
+src/domains/\mbox{\hyperlink{DomainDiscretization_8cpp}{Domain\+Discretization.\+cpp}}\end{DoxyCompactItemize}

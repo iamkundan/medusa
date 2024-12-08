@@ -1,0 +1,66 @@
+\doxysection{test/utils/memutils\+\_\+test.\+cpp}
+\hypertarget{test_2utils_2memutils_test_8cpp-example}{}\label{test_2utils_2memutils_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{memutils_8hpp}{medusa/bits/utils/memutils.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }A\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ a;}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ A(\textcolor{keywordtype}{int}\ a)\ :\ a(a)\ \{\}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \string~A()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ f()\ \{\ \textcolor{keywordflow}{return}\ a;\ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ A*\ clone()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ A(*\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }B\ :\ \textcolor{keyword}{public}\ A\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ b;}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ B(\textcolor{keywordtype}{int}\ a,\ \textcolor{keywordtype}{int}\ b)\ :\ A(a),\ b(b)\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ f()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ b;\ \}}
+\DoxyCodeLine{\ \ \ \ B*\ clone()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ B(*\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ MemDeep\_copy\_unique\_ptr)\ \{}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pa(\textcolor{keyword}{new}\ A(3));}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pb(\textcolor{keyword}{new}\ B(1,\ 2));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ pa-\/>f());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pb-\/>f());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pc\ =\ pb;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pc-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb.reset(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pc-\/>f());}
+\DoxyCodeLine{\ \ \ \ pa\ =\ deep\_copy\_unique\_ptr<A>(*pc);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pa-\/>f());}
+\DoxyCodeLine{\ \ \ \ pa\ =\ deep\_copy\_unique\_ptr<A>(\textcolor{keyword}{static\_cast<}A\textcolor{keyword}{>}(*pc));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ pa-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb\ =\ pc;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pb-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb\ =\ B(7,\ 5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5,\ pb-\/>f());}
+\DoxyCodeLine{\ \ \ \ pb\ =\ std::move(pc);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pb-\/>f());}
+\DoxyCodeLine{\ \ \ \ deep\_copy\_unique\_ptr<A>\ pd(std::move(pb));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ pd-\/>f());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ MemMem2str)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}16\ B"{}},\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(16));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}1.6\ kB"{}},\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(1600));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}1.7\ kB"{}},\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(1682));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}1\ MB"{}},\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(1024\ *\ 1024));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}5.9\ GB"{}},\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(5.5\ *\ 1024\ *\ 1024\ *\ 1024)));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}5.6\ GB"{}},\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(5.6\ *\ 1000\ *\ 1000\ *\ 1000)));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,270 @@
+\doxysection{mm\+::Find\+Balanced\+Support Class Reference}
+\hypertarget{classmm_1_1FindBalancedSupport}{}\label{classmm_1_1FindBalancedSupport}\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+
+
+{\ttfamily \#include $<$Find\+Balanced\+Support\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Class representing the engine for finding directionally balanced supports. 
+
+The support is directionally balanced, if it has nodes in all axis aligned hyper-\/quadrants centered around a node. It the node is a boundary node, then the same must be satisfied for half space, defined by the normal.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_adbd3d12e46760ae8aff20b92ae5a7b7f}{FindBalancedSupport}}\ find\_support(min\_ss,\ max\_ss);}
+\DoxyCodeLine{\ \ \ \ find\_support.forNodes(\{0,\ 1,\ 2\}).\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449}{searchAmong}}(\{3,\ 4,\ 5,\ 6,\ 7,\ 8\});}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(find\_support);}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source}{Find\+Balanced\+Support\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Find\+Balanced\+Support\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classmm_1_1FindBalancedSupport__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1FindBalancedSupport_adbd3d12e46760ae8aff20b92ae5a7b7f}{Find\+Balanced\+Support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}{min\+\_\+support}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}{max\+\_\+support}})
+\begin{DoxyCompactList}\small\item\em Constructs an engine with given min and max support sizes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a49201c96edcb78825d11fbee11837939}{for\+Nodes}} (\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{for\+\_\+which}})
+\begin{DoxyCompactList}\small\item\em Find support only for these nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449}{search\+Among}} (\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+among}})
+\begin{DoxyCompactList}\small\item\em Search only among given nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& \mbox{\hyperlink{classmm_1_1FindBalancedSupport_abba4c9707f249d5168ea762e41d94bfe}{min\+Support\+Size}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} size)
+\begin{DoxyCompactList}\small\item\em Set minimum support size. This overrides the size set in constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a42e8a8f06515555952e3489bf26834a3}{max\+Support\+Size}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} size)
+\begin{DoxyCompactList}\small\item\em Set maximal support size. This overrides the size set in constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a13fd90710239e0ce7446bef98ae1086c}{operator()}} (domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Find support for nodes in domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{kdtree\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a6c9aa4575140e8aacf7d3fdc9e25061f}{balanced\+Support}} (domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{kdtree\+\_\+t}} \&tree, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{min\+\_\+support\+\_\+size}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{max\+\_\+support\+\_\+size}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+among}})
+\begin{DoxyCompactList}\small\item\em Finds support for a given node {\ttfamily i}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}{min\+\_\+support}}
+\begin{DoxyCompactList}\small\item\em Minimal support size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}{max\+\_\+support}}
+\begin{DoxyCompactList}\small\item\em Maximal support size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1af218948727d97842deaa065392a500}{for\+\_\+which\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Find support only for these nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_aa7c1011b219b8bd3ec8f014818fce09f}{search\+\_\+among\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Search only among these nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} vec\+\_\+t\+::scalar\+\_\+t, vec\+\_\+t\+::dim, vec\+\_\+t\+::dim-\/1 $>$ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54}{get\+Frame}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&normal)
+\begin{DoxyCompactList}\small\item\em Gets orthonormal basis of vectors perpendicular to {\ttfamily normal}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}{mark\+\_\+quadrant}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&dx, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1Gaussian}{tol}}, std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{octants\+\_\+covered}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} vec\+\_\+t\+::scalar\+\_\+t, vec\+\_\+t\+::dim, -\/1 $>$ \&basis)
+\begin{DoxyCompactList}\small\item\em Marks a quadrant in which dx resides as occupied. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1FindBalancedSupport_adbd3d12e46760ae8aff20b92ae5a7b7f}\label{classmm_1_1FindBalancedSupport_adbd3d12e46760ae8aff20b92ae5a7b7f} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!FindBalancedSupport@{FindBalancedSupport}}
+\index{FindBalancedSupport@{FindBalancedSupport}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{FindBalancedSupport()}{FindBalancedSupport()}}
+{\footnotesize\ttfamily mm\+::\+Find\+Balanced\+Support\+::\+Find\+Balanced\+Support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{min\+\_\+support,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{max\+\_\+support }\end{DoxyParamCaption})}
+
+
+
+Constructs an engine with given min and max support sizes. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{FindBalancedSupport_8cpp_source}{Find\+Balanced\+Support.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1FindBalancedSupport_a6c9aa4575140e8aacf7d3fdc9e25061f}\label{classmm_1_1FindBalancedSupport_a6c9aa4575140e8aacf7d3fdc9e25061f} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!balancedSupport@{balancedSupport}}
+\index{balancedSupport@{balancedSupport}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{balancedSupport()}{balancedSupport()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{kdtree\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ mm\+::\+Find\+Balanced\+Support\+::balanced\+Support (\begin{DoxyParamCaption}\item[{domain\+\_\+t \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{kdtree\+\_\+t}} \&}]{tree,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{min\+\_\+support\+\_\+size,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{max\+\_\+support\+\_\+size,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&}]{search\+\_\+among }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Finds support for a given node {\ttfamily i}. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8hpp_source_l00082}{82}} of file \mbox{\hyperlink{FindBalancedSupport_8hpp_source}{Find\+Balanced\+Support.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a49201c96edcb78825d11fbee11837939}\label{classmm_1_1FindBalancedSupport_a49201c96edcb78825d11fbee11837939} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!forNodes@{forNodes}}
+\index{forNodes@{forNodes}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{forNodes()}{forNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& mm\+::\+Find\+Balanced\+Support\+::for\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}}]{for\+\_\+which }\end{DoxyParamCaption})}
+
+
+
+Find support only for these nodes. 
+
+If not given, finds support for all non-\/zero type domain nodes, as defined by \doxylink{classmm_1_1DomainDiscretization_a925d8467dd1e1fd9a79afe7a034a1c24}{domain.all()}. 
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8cpp_source_l00013}{13}} of file \mbox{\hyperlink{FindBalancedSupport_8cpp_source}{Find\+Balanced\+Support.\+cpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54}\label{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!getFrame@{getFrame}}
+\index{getFrame@{getFrame}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{getFrame()}{getFrame()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} vec\+\_\+t\+::scalar\+\_\+t, vec\+\_\+t\+::dim, vec\+\_\+t\+::dim-\/1 $>$ mm\+::\+Find\+Balanced\+Support\+::get\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Gets orthonormal basis of vectors perpendicular to {\ttfamily normal}. 
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}\label{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!mark\_quadrant@{mark\_quadrant}}
+\index{mark\_quadrant@{mark\_quadrant}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{mark\_quadrant()}{mark\_quadrant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+Find\+Balanced\+Support\+::mark\+\_\+quadrant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{dx,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} vec\+\_\+t\+::scalar\+\_\+t}]{tol,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} $>$ \&}]{octants\+\_\+covered,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} vec\+\_\+t\+::scalar\+\_\+t, vec\+\_\+t\+::dim, -\/1 $>$ \&}]{basis }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Marks a quadrant in which dx resides as occupied. 
+
+Returns {\ttfamily true} if this quadrant is newly occupied and {\ttfamily false} otherwise. 
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{FindBalancedSupport_8hpp_source}{Find\+Balanced\+Support.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a42e8a8f06515555952e3489bf26834a3}\label{classmm_1_1FindBalancedSupport_a42e8a8f06515555952e3489bf26834a3} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!maxSupportSize@{maxSupportSize}}
+\index{maxSupportSize@{maxSupportSize}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{maxSupportSize()}{maxSupportSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& mm\+::\+Find\+Balanced\+Support\+::max\+Support\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{size }\end{DoxyParamCaption})}
+
+
+
+Set maximal support size. This overrides the size set in constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8cpp_source_l00027}{27}} of file \mbox{\hyperlink{FindBalancedSupport_8cpp_source}{Find\+Balanced\+Support.\+cpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_abba4c9707f249d5168ea762e41d94bfe}\label{classmm_1_1FindBalancedSupport_abba4c9707f249d5168ea762e41d94bfe} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!minSupportSize@{minSupportSize}}
+\index{minSupportSize@{minSupportSize}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{minSupportSize()}{minSupportSize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& mm\+::\+Find\+Balanced\+Support\+::min\+Support\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{size }\end{DoxyParamCaption})}
+
+
+
+Set minimum support size. This overrides the size set in constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{FindBalancedSupport_8cpp_source}{Find\+Balanced\+Support.\+cpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a13fd90710239e0ce7446bef98ae1086c}\label{classmm_1_1FindBalancedSupport_a13fd90710239e0ce7446bef98ae1086c} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Find\+Balanced\+Support\+::operator() (\begin{DoxyParamCaption}\item[{domain\+\_\+t \&}]{domain }\end{DoxyParamCaption}) const}
+
+
+
+Find support for nodes in domain. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{FindBalancedSupport_8hpp_source}{Find\+Balanced\+Support.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449}\label{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!searchAmong@{searchAmong}}
+\index{searchAmong@{searchAmong}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{searchAmong()}{searchAmong()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}} \& mm\+::\+Find\+Balanced\+Support\+::search\+Among (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}}]{search\+\_\+among }\end{DoxyParamCaption})}
+
+
+
+Search only among given nodes. 
+
+If not given, searches among all nodes, including zero-\/type nodes. 
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{FindBalancedSupport_8cpp_source}{Find\+Balanced\+Support.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1FindBalancedSupport_a1af218948727d97842deaa065392a500}\label{classmm_1_1FindBalancedSupport_a1af218948727d97842deaa065392a500} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!for\_which\_@{for\_which\_}}
+\index{for\_which\_@{for\_which\_}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{for\_which\_}{for\_which\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ mm\+::\+Find\+Balanced\+Support\+::for\+\_\+which\+\_\+}
+
+
+
+Find support only for these nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source_l00031}{31}} of file \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source}{Find\+Balanced\+Support\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}\label{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!max\_support@{max\_support}}
+\index{max\_support@{max\_support}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{max\_support}{max\_support}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Find\+Balanced\+Support\+::max\+\_\+support}
+
+
+
+Maximal support size. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source}{Find\+Balanced\+Support\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}\label{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!min\_support@{min\_support}}
+\index{min\_support@{min\_support}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{min\_support}{min\_support}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Find\+Balanced\+Support\+::min\+\_\+support}
+
+
+
+Minimal support size. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source}{Find\+Balanced\+Support\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindBalancedSupport_aa7c1011b219b8bd3ec8f014818fce09f}\label{classmm_1_1FindBalancedSupport_aa7c1011b219b8bd3ec8f014818fce09f} 
+\index{mm::FindBalancedSupport@{mm::FindBalancedSupport}!search\_among\_@{search\_among\_}}
+\index{search\_among\_@{search\_among\_}!mm::FindBalancedSupport@{mm::FindBalancedSupport}}
+\doxysubsubsection{\texorpdfstring{search\_among\_}{search\_among\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ mm\+::\+Find\+Balanced\+Support\+::search\+\_\+among\+\_\+}
+
+
+
+Search only among these nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{FindBalancedSupport__fwd_8hpp_source}{Find\+Balanced\+Support\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{FindBalancedSupport__fwd_8hpp}{Find\+Balanced\+Support\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{FindBalancedSupport_8hpp}{Find\+Balanced\+Support.\+hpp}}\item 
+src/domains/\mbox{\hyperlink{FindBalancedSupport_8cpp}{Find\+Balanced\+Support.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,503 @@
+\doxysection{mm\+::Grid\texorpdfstring{$<$}{<} T, dimension, Index\+Type, Index\+ArrayT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1Grid}{}\label{classmm_1_1Grid}\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+
+
+{\ttfamily \#include $<$Grid\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} = std\+::array$<$\+Index\+Type, dimension$>$$>$\newline
+class mm\+::\+Grid$<$ T, dimension, Index\+Type, Index\+Array\+T $>$}
+Class representing a simple n-\/dimensional grid structure, which supports indexing and storing values. 
+
+The values are stored in row-\/major order.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of the values stored in the grid. \\
+\hline
+{\em dimension} & Dimension of the grid. \\
+\hline
+{\em Index\+Type} & Type used for indexing.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Grid<double,\ 4>\ grid(\{2,\ 2,\ 2,\ 2\});}
+\DoxyCodeLine{\ \ \ \ grid(\{0,\ 1,\ 0,\ 0\})\ =\ -\/3;}
+\DoxyCodeLine{\ \ \ \ grid(\{0,\ 0,\ 1,\ 0\})\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2*2*2*2,\ grid.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((std::array<int,\ 4>(\{2,\ 2,\ 2,\ 2\})),\ grid.sizes());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ grid.size(2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ grid(\{0,\ 1,\ 0,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ grid(\{0,\ 0,\ 1,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ grid\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1KDGrid}{KDGrid} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Grid_a1aaed177bebf595d6055db08d484efa8}{Grid}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&\mbox{\hyperlink{classmm_1_1Grid_ac4d8c5a8b2ba194db82af2e86a8a3c0b}{sizes}})
+\begin{DoxyCompactList}\small\item\em Construct a zero initialized grid with given sizes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Grid_adf575f82fdc321ca56a8610a4fbcea2e}{Grid}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&\mbox{\hyperlink{classmm_1_1Grid_ac4d8c5a8b2ba194db82af2e86a8a3c0b}{sizes}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&value)
+\begin{DoxyCompactList}\small\item\em Construct a grid with given sizes initialized to {\ttfamily value}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid_ac4d8c5a8b2ba194db82af2e86a8a3c0b}{sizes}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get grid sizes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid_aebf34d030cecfdd1445ec513fab31318}{size}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get side in i-\/th dimension. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid_ad5c6cef1dfb6b0b969f33f4d81a2b846}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get total number of elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \& \mbox{\hyperlink{classmm_1_1Grid_a5191b55aac7a6fafd53b4a92158cb1b7}{data}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get read-\/only access to linear data. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \& \mbox{\hyperlink{classmm_1_1Grid_af89328b806582def99573f79fedd4707}{data}} ()
+\begin{DoxyCompactList}\small\item\em Get read-\/write access to linear data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&index) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Readonly access to the grid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid_a9631b296ff2acea325436ab90a969944}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&index)
+\begin{DoxyCompactList}\small\item\em Read-\/write access to the grid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \&index) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Readonly access to the grid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid_a9558c2438436547d5c03c03b22ce5c12}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \&index)
+\begin{DoxyCompactList}\small\item\em Read-\/write access to the grid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid_add8fa9e4936bf1fef3e432cd3ca53442}{linear\+Index}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&index) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Compute linear index from given multi-\/index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid_a8570c34869430895c4e093670c42f025}{multi\+Index}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \&index) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Compute multi-\/index from given linear index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Grid_af7f44b03c8b44ddbd6ffabe5ae33a60e}{in\+Bounds}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&index) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Check if given index in in bounds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1Grid_a5656dbd66f03166e03c141df62ca1035aabbaf5fbcabaea23dbcdf3699609c2d1}{dim}} = dimension
+ \}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1Grid_ada5fdbe7d713e0f4210c6694b2791ecd}{value\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Type of the values stored in the grid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}}
+\begin{DoxyCompactList}\small\item\em Type of the index used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}}
+\begin{DoxyCompactList}\small\item\em Multiindex type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{U}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} D, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{I}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{IA}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1Grid_ab93c27a80d78e1f16f2b7d1fc6e09249}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid}{Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{U}}, \mbox{\hyperlink{classmm_1_1Gaussian}{D}}, \mbox{\hyperlink{classmm_1_1Gaussian}{I}}, \mbox{\hyperlink{classmm_1_1Gaussian}{IA}} $>$ \&grid)
+\begin{DoxyCompactList}\small\item\em Output some information about given grid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid_abf83454419f8ade980b0ea558c80b633}{compute\+Size}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&\mbox{\hyperlink{classmm_1_1Grid_ac4d8c5a8b2ba194db82af2e86a8a3c0b}{sizes}})
+\begin{DoxyCompactList}\small\item\em Compute the number of elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Grid_ac01e32a8dfcc1f5766e335c51a919c36}{in\+Bounds}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{bounds}})
+\begin{DoxyCompactList}\small\item\em Check if index is in given bounds. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid_aaee1676de50808fc91e0f7e8cc3b220b}{linear\+Index}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{bounds}})
+\begin{DoxyCompactList}\small\item\em Compute the linear index with respect to given bounds. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid_ad7235e47353e9de7be12d4fa4be413e8}{multi\+Index}} (\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{bounds}})
+\begin{DoxyCompactList}\small\item\em Compute the multi-\/index with respect to given bounds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid_a3ccd9bcd1c550d98e7b1cb4fa6bdad96}{sizes\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Boundary of the grid in all dimensions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} \mbox{\hyperlink{classmm_1_1Grid_a028a596e273d5f2eecf3a0bdca8463c0}{size\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Total number of grid cells. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \mbox{\hyperlink{classmm_1_1Grid_af8d897afc797c14b70e70603306a7569}{data\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Data stored in the grid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1Grid_a5656dbd66f03166e03c141df62ca1035}\label{classmm_1_1Grid_a5656dbd66f03166e03c141df62ca1035} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!dim@{dim}}}\Hypertarget{classmm_1_1Grid_a5656dbd66f03166e03c141df62ca1035aabbaf5fbcabaea23dbcdf3699609c2d1}\label{classmm_1_1Grid_a5656dbd66f03166e03c141df62ca1035aabbaf5fbcabaea23dbcdf3699609c2d1} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00040}{40}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1Grid_a1aaed177bebf595d6055db08d484efa8}\label{classmm_1_1Grid_a1aaed177bebf595d6055db08d484efa8} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!Grid@{Grid}}
+\index{Grid@{Grid}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::\+Grid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{sizes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a zero initialized grid with given sizes. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_adf575f82fdc321ca56a8610a4fbcea2e}\label{classmm_1_1Grid_adf575f82fdc321ca56a8610a4fbcea2e} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!Grid@{Grid}}
+\index{Grid@{Grid}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::\+Grid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{sizes,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a grid with given sizes initialized to {\ttfamily value}. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00052}{52}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Grid_abf83454419f8ade980b0ea558c80b633}\label{classmm_1_1Grid_abf83454419f8ade980b0ea558c80b633} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!computeSize@{computeSize}}
+\index{computeSize@{computeSize}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{computeSize()}{computeSize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::compute\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{sizes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Compute the number of elements. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_af89328b806582def99573f79fedd4707}\label{classmm_1_1Grid_af89328b806582def99573f79fedd4707} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!data@{data}}
+\index{data@{data}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \& \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get read-\/write access to linear data. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00065}{65}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a5191b55aac7a6fafd53b4a92158cb1b7}\label{classmm_1_1Grid_a5191b55aac7a6fafd53b4a92158cb1b7} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!data@{data}}
+\index{data@{data}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \& \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get read-\/only access to linear data. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_af7f44b03c8b44ddbd6ffabe5ae33a60e}\label{classmm_1_1Grid_af7f44b03c8b44ddbd6ffabe5ae33a60e} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!inBounds@{inBounds}}
+\index{inBounds@{inBounds}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{inBounds()}{inBounds()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::in\+Bounds (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if given index in in bounds. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_ac01e32a8dfcc1f5766e335c51a919c36}\label{classmm_1_1Grid_ac01e32a8dfcc1f5766e335c51a919c36} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!inBounds@{inBounds}}
+\index{inBounds@{inBounds}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{inBounds()}{inBounds()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::in\+Bounds (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{bounds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Check if index is in given bounds. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_add8fa9e4936bf1fef3e432cd3ca53442}\label{classmm_1_1Grid_add8fa9e4936bf1fef3e432cd3ca53442} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!linearIndex@{linearIndex}}
+\index{linearIndex@{linearIndex}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{linearIndex()}{linearIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::linear\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute linear index from given multi-\/index. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1Grid_a8570c34869430895c4e093670c42f025}{multi\+Index} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_aaee1676de50808fc91e0f7e8cc3b220b}\label{classmm_1_1Grid_aaee1676de50808fc91e0f7e8cc3b220b} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!linearIndex@{linearIndex}}
+\index{linearIndex@{linearIndex}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{linearIndex()}{linearIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::linear\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{bounds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Compute the linear index with respect to given bounds. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a8570c34869430895c4e093670c42f025}\label{classmm_1_1Grid_a8570c34869430895c4e093670c42f025} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!multiIndex@{multiIndex}}
+\index{multiIndex@{multiIndex}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{multiIndex()}{multiIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::multi\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute multi-\/index from given linear index. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1Grid_add8fa9e4936bf1fef3e432cd3ca53442}{linear\+Index} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00082}{82}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_ad7235e47353e9de7be12d4fa4be413e8}\label{classmm_1_1Grid_ad7235e47353e9de7be12d4fa4be413e8} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!multiIndex@{multiIndex}}
+\index{multiIndex@{multiIndex}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{multiIndex()}{multiIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::multi\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{bounds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Compute the multi-\/index with respect to given bounds. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a9631b296ff2acea325436ab90a969944}\label{classmm_1_1Grid_a9631b296ff2acea325436ab90a969944} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/write access to the grid. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if index if out of bounds. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c}\label{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Readonly access to the grid. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if index if out of bounds. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00023}{23}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a9558c2438436547d5c03c03b22ce5c12}\label{classmm_1_1Grid_a9558c2438436547d5c03c03b22ce5c12} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/write access to the grid. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if index if out of bounds. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2}\label{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \& \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \&}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Readonly access to the grid. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if index if out of bounds. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_ad5c6cef1dfb6b0b969f33f4d81a2b846}\label{classmm_1_1Grid_ad5c6cef1dfb6b0b969f33f4d81a2b846} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!size@{size}}
+\index{size@{size}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get total number of elements. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00060}{60}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_aebf34d030cecfdd1445ec513fab31318}\label{classmm_1_1Grid_aebf34d030cecfdd1445ec513fab31318} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!size@{size}}
+\index{size@{size}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get side in i-\/th dimension. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{Grid_8hpp_source}{Grid.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_ac4d8c5a8b2ba194db82af2e86a8a3c0b}\label{classmm_1_1Grid_ac4d8c5a8b2ba194db82af2e86a8a3c0b} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!sizes@{sizes}}
+\index{sizes@{sizes}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{sizes()}{sizes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::sizes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get grid sizes. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00056}{56}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1Grid_ab93c27a80d78e1f16f2b7d1fc6e09249}\label{classmm_1_1Grid_ab93c27a80d78e1f16f2b7d1fc6e09249} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{U}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} D, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{I}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{IA}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Grid}{Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{U}}, \mbox{\hyperlink{classmm_1_1Gaussian}{D}}, \mbox{\hyperlink{classmm_1_1Gaussian}{I}}, \mbox{\hyperlink{classmm_1_1Gaussian}{IA}} $>$ \&}]{grid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output some information about given grid. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1Grid_af8d897afc797c14b70e70603306a7569}\label{classmm_1_1Grid_af8d897afc797c14b70e70603306a7569} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!data\_@{data\_}}
+\index{data\_@{data\_}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+std\+::vector$<$\mbox{\hyperlink{classmm_1_1Gaussian}{T}}$>$ \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Data stored in the grid. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a028a596e273d5f2eecf3a0bdca8463c0}\label{classmm_1_1Grid_a028a596e273d5f2eecf3a0bdca8463c0} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!size\_@{size\_}}
+\index{size\_@{size\_}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Total number of grid cells. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Grid_a3ccd9bcd1c550d98e7b1cb4fa6bdad96}\label{classmm_1_1Grid_a3ccd9bcd1c550d98e7b1cb4fa6bdad96} 
+\index{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}!sizes\_@{sizes\_}}
+\index{sizes\_@{sizes\_}!mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$@{mm::Grid$<$ T, dimension, IndexType, IndexArrayT $>$}}
+\doxysubsubsection{\texorpdfstring{sizes\_}{sizes\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}  = int, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}}  = std\+::array$<$\+Index\+Type, dimension$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Index\+Array}} \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+Type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Index\+ArrayT}} $>$\+::sizes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Boundary of the grid in all dimensions. 
+
+
+
+Definition at line \mbox{\hyperlink{Grid__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{Grid__fwd_8hpp_source}{Grid\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/spatial\+\_\+search/\mbox{\hyperlink{Grid__fwd_8hpp}{Grid\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/spatial\+\_\+search/\mbox{\hyperlink{Grid_8hpp}{Grid.\+hpp}}\end{DoxyCompactItemize}

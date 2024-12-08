@@ -1,0 +1,66 @@
+\doxysection{randutils.\+hpp}
+\hypertarget{randutils_8hpp_source}{}\label{randutils_8hpp_source}\index{include/medusa/bits/utils/randutils.hpp@{include/medusa/bits/utils/randutils.hpp}}
+\mbox{\hyperlink{randutils_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_UTILS\_RANDUTILS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_UTILS\_RANDUTILS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00017}00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00025}\mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{00025}}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\_seed}}()\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ std::random\_device\ \mbox{\hyperlink{classmm_1_1Gaussian}{rd}};}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{rd}}();}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00029}00029\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (std::exception\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}})\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::system\_clock::now().time\_since\_epoch().count();}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00034}00034\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ URNG>}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00035}00035\ T\ \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(\textcolor{keyword}{const}\ Range<T>\&\ elements,\ \textcolor{keyword}{const}\ Range<double>\&\ weights,\ \textcolor{keywordtype}{bool}\ normed,}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ URNG\&\ generator);}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00050}00050\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00051}\mbox{\hyperlink{group__utils_ga767cde18341d7425bdd92c2dcd6302c8}{00051}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<double>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{weights}}\ =\ \{\},}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ normed\ =\ \textcolor{keyword}{false})\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00053}00053\ \ \ \ \ std::mt19937\ generator(\mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\_seed}}());}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(elements,\ weights,\ normed,\ generator);}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00058}00058\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ URNG>}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00059}\mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{00059}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<double>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{weights}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{normed}},}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{generator}})\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<double>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{weights}};}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}.assign(\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}.size(),\ 1.0\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}}.size());}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00066}00066\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}.size()\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}}.size(),}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Weights\ not\ specified\ for\ all\ elements.\ Got\ \%d\ weights\ but\ \%d\ elements."{}},}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{weights}}.size(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}}.size());}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmm_1_1Gaussian}{normed}})\ \{\ \ \textcolor{comment}{//\ must\ be\ 0.0\ so\ that\ the\ inferred\ type\ is\ double}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{sum}}\ =\ std::accumulate(\mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}.end(),\ 0.0);}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}})\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}}\ /=\ \mbox{\hyperlink{classmm_1_1Gaussian}{sum}};}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00073}00073\ \ \ \ \ std::uniform\_real\_distribution<double>\ \mbox{\hyperlink{classmm_1_1Gaussian}{uniform}}(0,\ 1);}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{uniform}}(\mbox{\hyperlink{classmm_1_1Gaussian}{generator}});}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}}.size();\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ x\ -\/=\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_weights}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00079}00079\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Should\ never\ get\ here,\ you\ might\ have\ claimed\ the\ weights\ "{}}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}are\ normalized,\ but\ weren't."{}});}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{elements}}[0];}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00082}00082\ \}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00084}00084\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{randutils_8hpp_source_l00086}00086\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_UTILS\_RANDUTILS\_HPP\_}}
+
+\end{DoxyCode}

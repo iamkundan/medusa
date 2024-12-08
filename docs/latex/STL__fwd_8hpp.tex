@@ -1,0 +1,52 @@
+\doxysection{include/medusa/bits/io/\+STL\+\_\+fwd.hpp File Reference}
+\hypertarget{STL__fwd_8hpp}{}\label{STL__fwd_8hpp}\index{include/medusa/bits/io/STL\_fwd.hpp@{include/medusa/bits/io/STL\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Support for reading stereolithography files. 
+
+
+
+Definition in file \mbox{\hyperlink{STL__fwd_8hpp_source}{STL\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$iosfwd$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+Include dependency graph for STL\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{STL__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{STL__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1STL}{mm\+::\+STL}}
+\begin{DoxyCompactList}\small\item\em Support for reading stereolithography files\+: \href{https://en.wikipedia.org/wiki/STL_(file_format)}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+STL\+\_\+(file\+\_\+format)}} \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1STL_1_1Point}{mm\+::\+STL\+::\+Point}}
+\begin{DoxyCompactList}\small\item\em Holds one 3d \doxylink{structmm_1_1STL_1_1Point}{Point} in a \doxylink{classmm_1_1STL}{STL} file. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{mm\+::\+STL\+::\+Triangle}}
+\begin{DoxyCompactList}\small\item\em Holds one \doxylink{classmm_1_1STL}{STL} triangle, which consists of three points, a normal and an attribute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{namespacemm_a42e0898079f0c953ff8d42caec038fdf}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1STL_1_1Point}{STL\+::\+Point}} \&p)
+\begin{DoxyCompactList}\small\item\em Print a \doxylink{classmm_1_1STL}{STL} point. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacemm_a3f2b6e33c627ad6940c0bb11348501f4}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{STL\+::\+Triangle}} \&v)
+\begin{DoxyCompactList}\small\item\em Print a \doxylink{classmm_1_1STL}{STL} triangle. \end{DoxyCompactList}\end{DoxyCompactItemize}

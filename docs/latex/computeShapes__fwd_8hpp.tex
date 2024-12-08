@@ -1,0 +1,40 @@
+\doxysection{include/medusa/bits/operators/compute\+Shapes\+\_\+fwd.hpp File Reference}
+\hypertarget{computeShapes__fwd_8hpp}{}\label{computeShapes__fwd_8hpp}\index{include/medusa/bits/operators/computeShapes\_fwd.hpp@{include/medusa/bits/operators/computeShapes\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declarations of shape function computation utilities. 
+
+
+
+Definition in file \mbox{\hyperlink{computeShapes__fwd_8hpp_source}{compute\+Shapes\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/operators/shape\+\_\+flags.\+hpp$>$}\newline
+{\ttfamily \#include $<$iosfwd$>$}\newline
+Include dependency graph for compute\+Shapes\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{computeShapes__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{computeShapes__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} shape\+\_\+storage\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} ... Op\+Families$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm\+::compute\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} approx\+\_\+t\+::vector\+\_\+t $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::tuple$<$ Op\+Families... $>$ \&operators, shape\+\_\+storage\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{storage}})
+\begin{DoxyCompactList}\small\item\em Computes shape functions (stencil weights) for given nodes using support domains from {\ttfamily domain} and approximations provided by {\ttfamily approx}. \end{DoxyCompactList}\end{DoxyCompactItemize}

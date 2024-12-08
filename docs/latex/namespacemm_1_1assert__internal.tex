@@ -1,0 +1,59 @@
+\doxysection{mm\+::assert\+\_\+internal Namespace Reference}
+\hypertarget{namespacemm_1_1assert__internal}{}\label{namespacemm_1_1assert__internal}\index{mm::assert\_internal@{mm::assert\_internal}}
+
+
+\doxysubsection{Detailed Description}
+Namespace holding custom assert implementation. \doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}{assert\+\_\+handler\+\_\+implementation}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{condition}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{line}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{message}}, tfm\+::\+Format\+List\+Ref \mbox{\hyperlink{classmm_1_1Gaussian}{format\+\_\+list}})
+\begin{DoxyCompactList}\small\item\em Actual assert implementation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{namespacemm_1_1assert__internal_a96d2bd0bb276ed878d078bc585e46647}{assert\+\_\+handler}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{condition}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{line}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{message}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Assert handler that unpacks varargs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemm_1_1assert__internal_a96d2bd0bb276ed878d078bc585e46647}\label{namespacemm_1_1assert__internal_a96d2bd0bb276ed878d078bc585e46647} 
+\index{mm::assert\_internal@{mm::assert\_internal}!assert\_handler@{assert\_handler}}
+\index{assert\_handler@{assert\_handler}!mm::assert\_internal@{mm::assert\_internal}}
+\doxysubsubsection{\texorpdfstring{assert\_handler()}{assert\_handler()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::assert\+\_\+internal\+::assert\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{condition,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{file,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{func\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{line,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{message,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Assert handler that unpacks varargs. 
+
+
+
+Definition at line \mbox{\hyperlink{assert_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}\label{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee} 
+\index{mm::assert\_internal@{mm::assert\_internal}!assert\_handler\_implementation@{assert\_handler\_implementation}}
+\index{assert\_handler\_implementation@{assert\_handler\_implementation}!mm::assert\_internal@{mm::assert\_internal}}
+\doxysubsubsection{\texorpdfstring{assert\_handler\_implementation()}{assert\_handler\_implementation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::assert\+\_\+internal\+::assert\+\_\+handler\+\_\+implementation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{condition,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{file,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{func\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{line,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{message,  }\item[{tfm\+::\+Format\+List\+Ref}]{format\+\_\+list }\end{DoxyParamCaption})}
+
+
+
+Actual assert implementation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em condition} & Condition to test, e.\+g. {\ttfamily n \texorpdfstring{$>$}{>} 0}. \\
+\hline
+{\em file} & File where the assertion failed. \\
+\hline
+{\em func\+\_\+name} & Function name where the assertion failed. \\
+\hline
+{\em line} & Line on which the assertion failed. \\
+\hline
+{\em message} & Message as specified in the {\ttfamily assert\+\_\+msg} macro. \\
+\hline
+{\em format\+\_\+list} & List of format field values to pass to {\ttfamily tinyformat\+::format} function. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{assert_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{assert_8cpp_source}{assert.\+cpp}}.
+

@@ -1,0 +1,70 @@
+\doxysection{mm\+::STL Class Reference}
+\hypertarget{classmm_1_1STL}{}\label{classmm_1_1STL}\index{mm::STL@{mm::STL}}
+
+
+{\ttfamily \#include $<$STL\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Support for reading stereolithography files\+: \href{https://en.wikipedia.org/wiki/STL_(file_format)}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+STL\+\_\+(file\+\_\+format)}} 
+
+\begin{DoxyNote}{Note}
+Reading headers from \doxylink{classmm_1_1STL}{STL} files is currently not supported.
+\end{DoxyNote}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ std::vector<STL::Triangle>\ stl\ =\ \mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{STL::read}}(\textcolor{stringliteral}{"{}test/testdata/tetrahedron.stl"{}});}
+\DoxyCodeLine{\ \ \ \ std::stringstream\ ss;\ ss\ <<\ stl;}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{STL__fwd_8hpp_source_l00026}{26}} of file \mbox{\hyperlink{STL__fwd_8hpp_source}{STL\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{Triangle}} $>$ \mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{read}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Read a binary \doxylink{classmm_1_1STL}{STL} file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1STL_1_1Point}{Point}}
+\begin{DoxyCompactList}\small\item\em Holds one 3d \doxylink{structmm_1_1STL_1_1Point}{Point} in a \doxylink{classmm_1_1STL}{STL} file. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{Triangle}}
+\begin{DoxyCompactList}\small\item\em Holds one \doxylink{classmm_1_1STL}{STL} triangle, which consists of three points, a normal and an attribute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}\label{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2} 
+\index{mm::STL@{mm::STL}!read@{read}}
+\index{read@{read}!mm::STL@{mm::STL}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{STL\+::\+Triangle}} $>$ mm\+::\+STL\+::read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Read a binary \doxylink{classmm_1_1STL}{STL} file. 
+
+Ascii files are currently not supported. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & path to the file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of triangles. 
+\end{DoxyReturn}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2STLShape_test_8cpp-example}{test/domains/\+STLShape\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2io_2STL_test_8cpp-example}{test/io/\+STL\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{STL_8cpp_source_l00014}{14}} of file \mbox{\hyperlink{STL_8cpp_source}{STL.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/io/\mbox{\hyperlink{STL__fwd_8hpp}{STL\+\_\+fwd.\+hpp}}\item 
+src/io/\mbox{\hyperlink{STL_8cpp}{STL.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,43 @@
+\doxysection{Polytope\+Shape\+\_\+fwd.\+hpp}
+\hypertarget{PolytopeShape__fwd_8hpp_source}{}\label{PolytopeShape__fwd_8hpp_source}\index{include/medusa/bits/domains/PolytopeShape\_fwd.hpp@{include/medusa/bits/domains/PolytopeShape\_fwd.hpp}}
+\mbox{\hyperlink{PolytopeShape__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_POLYTOPESHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_POLYTOPESHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape__fwd_8hpp}{DomainShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{PolygonShape__fwd_8hpp}{PolygonShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00034}00034\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00035}\mbox{\hyperlink{classmm_1_1PolytopeShape}{00035}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1PolytopeShape}{PolytopeShape}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<vec\_t>\ \{}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{static\_assert}(vec\_t::dim\ ==\ 2\ ||\ vec\_t::dim\ ==\ 3,\ \textcolor{stringliteral}{"{}Only\ available\ in\ 2\ and\ 3\ dimensions"{}});}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00037}00037\ \};}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00039}00039\ \textcolor{comment}{//\ This\ must\ be\ hidden\ during\ a\ doxygen\ run\ due\ to\ a\ bug\ in\ processing\ const\ declarations\ with}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00040}00040\ \textcolor{comment}{//\ differently\ named\ template\ parameters.}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00041}00041\ \textcolor{comment}{//\ See\ https://github.com/doxygen/doxygen/issues/8178}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00042}00042\ \textcolor{preprocessor}{\#ifndef\ DOXYGEN\_RUN}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00048}00048\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00049}00049\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1PolytopeShape}{PolytopeShape}}<\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}},\ 2>>\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmm_1_1PolygonShape}{PolygonShape}}<Vec<Scalar,\ 2>>\ \{}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{using\ }base\_t\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{PolygonShape<Vec<Scalar,\ 2>}}>;}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1Gaussian}{typename}}\ base\_t::PolygonShape;}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00052}00052\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00053}00053\ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolytopeShape}{PolytopeShape}}(\textcolor{keyword}{const}\ base\_t\&\ shape)\ :\ base\_t(shape)\ \{\}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00054}00054\ \};}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00055}00055\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00057}00057\ \textcolor{comment}{//\ This\ must\ be\ hidden\ during\ a\ doxygen\ run\ due\ to\ a\ bug\ in\ processing\ forward\ declarations.}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00058}00058\ \textcolor{comment}{//\ See\ https://github.com/doxygen/doxygen/issues/8177}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00059}00059\ \textcolor{preprocessor}{\#ifndef\ DOXYGEN\_RUN}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00060}00060\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00061}00061\ \textcolor{keyword}{class\ }PolytopeShape<\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}<Scalar,\ 3>>;\ \ \ \textcolor{comment}{//\ You\ must\ include\ PolyhedronShape.hpp\ for\ the\ definition.}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00062}00062\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00064}00064\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{PolytopeShape__fwd_8hpp_source_l00066}00066\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_POLYTOPESHAPE\_FWD\_HPP\_}}
+
+\end{DoxyCode}

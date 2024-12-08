@@ -1,0 +1,90 @@
+\doxysection{Polyhedron\+Shape.\+hpp}
+\hypertarget{PolyhedronShape_8hpp_source}{}\label{PolyhedronShape_8hpp_source}\index{include/medusa/bits/domains/PolyhedronShape.hpp@{include/medusa/bits/domains/PolyhedronShape.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_POLYHEDRONSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_POLYHEDRONSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{PolyhedronShape__fwd_8hpp}{PolyhedronShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTreeMutable_8hpp}{medusa/bits/spatial\_search/KDTreeMutable.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00010}00010\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00011}\mbox{\hyperlink{classmm_1_1PolyhedronShape_a405ed22893a609c10194b46cc91d1e69}{00011}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1PolyhedronShape_a405ed22893a609c10194b46cc91d1e69}{PolyhedronShape<vec\_t>::discretizeBoundaryWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,\ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vexists}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{fexists}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{cexists}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00014}00014\ \ \ \ \ Mesh::Property\_map<VI,\ Vector>\ \mbox{\hyperlink{classmm_1_1Gaussian}{vnormals}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00015}00015\ \ \ \ \ Mesh::Property\_map<FI,\ Vector>\ \mbox{\hyperlink{classmm_1_1Gaussian}{fnormals}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00016}00016\ \ \ \ \ Mesh::Property\_map<FI,\ CGAL::Color>\ \mbox{\hyperlink{classmm_1_1Gaussian}{fcolors}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00017}00017\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{vnormals}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vexists}})\ =\ surface.property\_map<\mbox{\hyperlink{classmm_1_1PolyhedronShape_ab814110a0fd8de9ac89e102805dca90d}{VI}},\ \mbox{\hyperlink{classmm_1_1PolyhedronShape_aa4623cfd8df128f717b9d12b1344b9cd}{Vector}}>(\textcolor{stringliteral}{"{}v:normals"{}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vexists}},\ \textcolor{stringliteral}{"{}Vertex\ normals\ were\ not\ computed."{}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00019}00019\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{fnormals}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{fexists}})\ =\ surface.property\_map<\mbox{\hyperlink{classmm_1_1PolyhedronShape_a37434a46f1fa2c3225c430453830544d}{FI}},\ \mbox{\hyperlink{classmm_1_1PolyhedronShape_aa4623cfd8df128f717b9d12b1344b9cd}{Vector}}>(\textcolor{stringliteral}{"{}f:normals"{}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{fexists}},\ \textcolor{stringliteral}{"{}Face\ normals\ were\ not\ computed."{}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00021}00021\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{fcolors}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{cexists}})\ =\ surface.property\_map<\mbox{\hyperlink{classmm_1_1PolyhedronShape_a37434a46f1fa2c3225c430453830544d}{FI}},\ CGAL::Color>(\textcolor{stringliteral}{"{}f:color"{}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{get\_face\_type}}\ =\ [\&](\mbox{\hyperlink{classmm_1_1PolyhedronShape_a37434a46f1fa2c3225c430453830544d}{FI}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face}})\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{cexists}}\ \&\&\ type\ ==\ 0)\ ?}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rgb2type(\mbox{\hyperlink{classmm_1_1Gaussian}{fcolors}}[\mbox{\hyperlink{classmm_1_1Gaussian}{face}}].\mbox{\hyperlink{classmm_1_1Gaussian}{r}}(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{fcolors}}[\mbox{\hyperlink{classmm_1_1Gaussian}{face}}].\mbox{\hyperlink{classmm_1_1Gaussian}{g}}(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{fcolors}}[\mbox{\hyperlink{classmm_1_1Gaussian}{face}}].\mbox{\hyperlink{classmm_1_1Gaussian}{b}}())\ :}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/1;}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00026}00026\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTreeMutable<vec\_t>}}\ tree;}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::DomainDiscretization<vec\_t>}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{add\_point}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p,\ \textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}})\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tree.existsPointInSphere(p,\ dr(p)))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ tree.insert(p);}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.addBoundaryNode(p,\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00033}00033\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{comment}{//\ Discretize\ vertices.}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1PolyhedronShape_ab814110a0fd8de9ac89e102805dca90d}{VI}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ :\ surface.vertices())\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face\_type}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{get\_face\_type}}(surface.face(surface.halfedge(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}})));}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vnormals}}[\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}];}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{add\_point}}(getPoint(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{face\_type}},\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{n}}.x(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}.y(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}.z()\});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{comment}{//\ Discretize\ edges.}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{for}\ (Mesh::edge\_index\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ :\ surface.edges())\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_a37434a46f1fa2c3225c430453830544d}{FI}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face1}}\ =\ surface.face(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}.halfedge());}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_a37434a46f1fa2c3225c430453830544d}{FI}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face2}}\ =\ surface.face(surface.opposite(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}.halfedge()));}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_aa4623cfd8df128f717b9d12b1344b9cd}{Vector}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal1}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{fnormals}}[\mbox{\hyperlink{classmm_1_1Gaussian}{face1}}];}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_aa4623cfd8df128f717b9d12b1344b9cd}{Vector}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{fnormals}}[\mbox{\hyperlink{classmm_1_1Gaussian}{face2}}];}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n1}}\ =\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{normal1}}.x(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal1}}.y(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal1}}.z()\};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}}\ =\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{normal2}}.x(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal2}}.y(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal2}}.z()\};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ (\mbox{\hyperlink{classmm_1_1Gaussian}{n1}}\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face\_type}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{get\_face\_type}}(\mbox{\hyperlink{classmm_1_1Gaussian}{face1}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p1\ =\ getPoint(surface.vertex(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}},\ 0));}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p2\ =\ getPoint(surface.vertex(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}},\ 1));}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p\ :\ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretization\_helpers::discretizeLineWithDensity}}(p1,\ p2,\ dr))\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{add\_point}}(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{face\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ Discretize\ faces.}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1PolyhedronShape_a37434a46f1fa2c3225c430453830544d}{FI}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face}}\ :\ surface.faces())\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{range}}\ =\ surface.vertices\_around\_face(surface.halfedge(\mbox{\hyperlink{classmm_1_1Gaussian}{face}}));}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{range}}.size()\ ==\ 3,\ \textcolor{stringliteral}{"{}All\ faces\ must\ be\ triangles."{}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{it}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{range}}.begin();}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_ab814110a0fd8de9ac89e102805dca90d}{VI}}\ p1\ =\ *\mbox{\hyperlink{classmm_1_1Gaussian}{it}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classmm_1_1Gaussian}{it}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_ab814110a0fd8de9ac89e102805dca90d}{VI}}\ p2\ =\ *\mbox{\hyperlink{classmm_1_1Gaussian}{it}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classmm_1_1Gaussian}{it}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_ab814110a0fd8de9ac89e102805dca90d}{VI}}\ p3\ =\ *\mbox{\hyperlink{classmm_1_1Gaussian}{it}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{face\_type}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{get\_face\_type}}(\mbox{\hyperlink{classmm_1_1Gaussian}{face}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1PolyhedronShape_aa4623cfd8df128f717b9d12b1344b9cd}{Vector}}\ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{fnormals}}[\mbox{\hyperlink{classmm_1_1Gaussian}{face}}];}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \{normal.x(),\ normal.y(),\ normal.z()\};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{classmm_1_1Gaussian}{points\_on\_surface}}\ =}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{discretization\_helpers::discretizeTriangleWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ getPoint(p1),\ getPoint(p2),\ getPoint(p3),\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ dr);}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{points\_on\_surface}})\ \{}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{add\_point}}(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{face\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00078}00078\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00082}00082\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{PolyhedronShape_8hpp_source_l00084}00084\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_POLYHEDRONSHAPE\_HPP\_}}
+
+\end{DoxyCode}

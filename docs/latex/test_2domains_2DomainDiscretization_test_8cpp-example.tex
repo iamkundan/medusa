@@ -1,0 +1,520 @@
+\doxysection{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2DomainDiscretization_test_8cpp-example}{}\label{test_2domains_2DomainDiscretization_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF_8hpp}{medusa/bits/io/HDF.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ AddNodes)\ \{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ sh;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d(sh);}
+\DoxyCodeLine{\ \ \ \ d.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ d.addInternalNode(\{-\/2,\ 3\},\ 3);}
+\DoxyCodeLine{\ \ \ \ d.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ idx);}
+\DoxyCodeLine{\ \ \ \ idx\ =\ d.addBoundaryNode(\{0,\ 1\},\ -\/2,\ \{-\/1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ d.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ idx);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ChangeNodes)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain(UnknownShape<Vec1d>\{\});}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(0,\ -\/1,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(1,\ 2);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(2,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(3,\ 3);}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(4,\ -\/5,\ 1);}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_DEATH(domain.changeToBoundary(-\/1,\ 0,\ 0,\ 0),\ "{}"{});}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_DEATH(domain.changeToInterior(-\/1,\ 0,\ 0),\ "{}"{});}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_DEATH(domain.changeToBoundary(0,\ 0,\ 0,\ 0),\ "{}"{});}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_DEATH(domain.changeToInterior(1,\ 0,\ 0),\ "{}"{});}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_DEATH(domain.changeToBoundary(1,\ 0,\ 1,\ 0),\ "{}"{});}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_DEATH(domain.changeToInterior(0,\ 0,\ -\/1),\ "{}"{});}}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec1d>\ normals\ =\ \{\{-\/1\},\ \{1\}\};}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec1d>\ positions\ =\ \{\{0\},\ \{1\}\};}
+\DoxyCodeLine{\ \ \ \ domain.changeToBoundary(1,\ 0,\ -\/1,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ domain.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(normals[0],\ domain.normal(1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(positions[0],\ domain.pos(1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/1,\ domain.type(1));}
+\DoxyCodeLine{\ \ \ \ domain.changeToInterior(0,\ 1,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(positions[1],\ domain.pos(0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ domain.type(0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(normals[0],\ domain.normal(1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(normals[1],\ domain.normal(4));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ Accessors)\ \{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ sh;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d(sh);}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pos\ =\ \{\{-\/2.3,\ 3.4\},\ \{-\/2.1,\ 3.4\},\ \{0,\ 1.4\},\ \{-\/1.4,\ 0.001\}\};}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ types\ =\ \{2,\ -\/3,\ 1,\ -\/1\};}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ normals\ =\ \{\{-\/1.0,\ 0\},\ \{0.0,\ 1.0\}\};}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(pos[0],\ types[0]);}
+\DoxyCodeLine{\ \ \ \ d.addBoundaryNode(pos[1],\ types[1],\ normals[0]);}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(pos[2],\ types[2]);}
+\DoxyCodeLine{\ \ \ \ d.addBoundaryNode(pos[3],\ types[3],\ normals[1]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(4,\ d.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(pos,\ d.positions());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(pos[2],\ d.pos(2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(pos[2][1],\ d.pos(2,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(types,\ d.types());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(types[2],\ d.type(2));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ expected\ =\ \{0,\ 2\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ d.interior());}
+\DoxyCodeLine{\ \ \ \ expected\ =\ \{1,\ 3\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ d.boundary());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(normals[0],\ d.normal(1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(normals[1],\ d.normal(3));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ expected\ =\ \{0,\ 0,\ 0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ d.supportSizes());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<int>>\ supports\ =\ \{\{0,\ 1\},\ \{1,\ 0\},\ \{2,\ 0,\ 1\},\ \{3,\ 2\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ ++i)\ d.support(i)\ =\ supports[i];}
+\DoxyCodeLine{\ \ \ \ expected\ =\ \{2,\ 2,\ 3,\ 2\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ d.supportSizes());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ d.supportSize(0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ d.supportSize(2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(supports[3],\ d.support(3));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(supports[2][1],\ d.support(2,\ 1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(pos[supports[2][1]],\ d.supportNode(2,\ 1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ((pos[0]\ -\/\ pos[1]).norm(),\ d.dr(1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ((pos[0]\ -\/\ pos[1]).norm(),\ d.dr(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ Reorder)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain(UnknownShape<Vec1d>\{\});}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(-\/1,\ -\/1,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(2,\ 2);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(1,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(3,\ 3);}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(5,\ -\/5,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(5));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain\_old\ =\ domain;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ p\ =\ domain.reorderNodes();}
+\DoxyCodeLine{\ \ \ \ domain.assert\_is\_valid();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_LT(domain.pos(i-\/1,\ 0),\ domain.pos(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.pos(p[i]),\ domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.type(p[i]),\ domain.type(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (domain.type(i)\ <\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.normal(p[i]),\ domain.normal(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.supportNodes(p[i]),\ domain.supportNodes(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ReorderFn)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain(UnknownShape<Vec1d>\{\});}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(-\/1,\ -\/1,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(2,\ 2);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(1,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(3,\ 3);}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(5,\ -\/5,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(5));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain\_old\ =\ domain;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ p\ =\ domain.reorderNodes(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](\textcolor{keyword}{const}\ std::pair<Vec1d,\ int>\&\ a,\ \textcolor{keyword}{const}\ std::pair<Vec1d,\ int>\&\ b)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ a.first[0]\ >\ b.first[0];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\ \ \ \ domain.assert\_is\_valid();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_GT(domain.pos(i-\/1,\ 0),\ domain.pos(i,\ 0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.pos(p[i]),\ domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.type(p[i]),\ domain.type(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (domain.type(i)\ <\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.normal(p[i]),\ domain.normal(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.supportNodes(p[i]),\ domain.supportNodes(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ Shuffle)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain(UnknownShape<Vec1d>\{\});}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(-\/1,\ -\/1,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(2,\ 2);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(1,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(3,\ 3);}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(5,\ -\/5,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(5));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain\_old\ =\ domain;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ p\ =\ \{4,\ 3,\ 2,\ 0,\ 1\};}
+\DoxyCodeLine{\ \ \ \ domain.shuffleNodes(p);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.pos(p[i]),\ domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.type(p[i]),\ domain.type(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (domain.type(i)\ <\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.normal(p[i]),\ domain.normal(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(domain\_old.supportNodes(p[i]),\ domain.supportNodes(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ GhostNodes)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain(UnknownShape<Vec1d>\{\});}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(0,\ -\/1,\ -\/1);}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(1,\ -\/1,\ 1);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(0.5,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ Range<int>\ gh\ =\ domain.addGhostNodes(0.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n2\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(n+2,\ n2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}(\{3,\ 4,\ -\/1\}),\ gh);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/0.5,\ domain.pos(gh[0],\ 0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1.5,\ domain.pos(gh[1],\ 0));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ gh2\ =\ domain.addGhostNodes([](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ (p[0]\ >\ 0)\ ?\ 1\ :\ -\/1;\ \},\ -\/2,\ \{1\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n3\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(n3-\/1,\ gh2[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ domain.pos(n3-\/1,\ 0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/2,\ domain.type(n3-\/1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ domain.normal(n3-\/1)[0]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeAdd)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect(BoxShape<Vec2d>(\{0,\ 0\},\ \{2,\ 1\}));}
+\DoxyCodeLine{\ \ \ \ rect.addInternalNode(\{1,\ 0.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{1.5,\ 0\},\ -\/1,\ \{1,\ 0.8\});}
+\DoxyCodeLine{\ \ \ \ rect.addInternalNode(\{1.5,\ 0.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{2,\ 0.5\},\ -\/1,\ \{0.7,\ 1\});}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{0,\ 0.5\},\ -\/1,\ \{-\/1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ rect.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ union\_test(BallShape<Vec2d>(\{2,\ 1\},\ 1));}
+\DoxyCodeLine{\ \ \ \ union\_test.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{2\ -\/\ std::sqrt(2)\ /\ 2,\ 1\ -\/\ std::sqrt(2)\ /\ 2\},\ -\/1,\ \{1,\ -\/1\});}
+\DoxyCodeLine{\ \ \ \ union\_test.addInternalNode(\{1.5,\ 0.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{3,\ 1\},\ -\/1,\ \{0.4,\ 6.5\});}
+\DoxyCodeLine{\ \ \ \ union\_test.addInternalNode(\{2,\ 1.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{2,\ 0\},\ -\/1,\ \{0,\ -\/1\});}
+\DoxyCodeLine{\ \ \ \ union\_test.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ union\_test\ +=\ rect;}
+\DoxyCodeLine{\ \ \ \ union\_test.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ ShapeUnion<Vec2d>\ sh\ =\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }ShapeUnion<Vec2d>\&\textcolor{keyword}{>}(union\_test.shape());}
+\DoxyCodeLine{\ \ \ \ (void)\ sh;\ \ \textcolor{comment}{//\ Try\ casting\ sh\ to\ assert\ correct\ type.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\_boundary\ =\ \{\{3,\ 1\},\ \{1.5,\ 0\},\ \{0,\ 0.5\}\};}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ boundary\ =\ union\_test.positions()[union\_test.boundary()];}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_boundary,\ boundary);}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\_interior\ =\ \{\{2,\ 1.5\},\ \{1,\ 0.5\},\ \{1.5,\ 0.5\}\};}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ interior\ =\ union\_test.positions()[union\_test.interior()];}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_interior,\ interior);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeAddDisjoint)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d1\ =\ BoxShape<Vec2d>(\{0,\ 0\},\ \{1,\ 1\}).discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d2\ =\ BoxShape<Vec2d>(\{2,\ 2\},\ \{3,\ 3\}).discretizeWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ d1int\ =\ d1.interior().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ d1bnd\ =\ d1.boundary().size();}
+\DoxyCodeLine{\ \ \ \ d1\ +=\ d2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d1int+d2.interior().size(),\ d1.interior().size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d1bnd+d2.boundary().size(),\ d1.boundary().size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeAdd1D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec1d>\ b1(0.5,\ 0.5);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec1d>\ b2(0,\ 0.25);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain1\ =\ b1.discretizeBoundaryWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain2\ =\ b2.discretizeBoundaryWithStep(dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain1\ +=\ domain2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ expected\_pos\ =\ \{\{1\},\ \{-\/0.25\}\};}
+\DoxyCodeLine{\ \ \ \ Range<int>\ expected\_types\ =\ \{-\/1,\ -\/1\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_types,\ domain1.types());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_pos,\ domain1.positions());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeAddLarge)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 2*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}/60;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect\ =\ BoxShape<Vec2d>(\{-\/1,\ -\/1\},\ \{1,\ 1\}).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ circ\ =\ BallShape<Vec2d>(\{0,\ 0\},\ 0.7).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ rsize\ =\ rect.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ csize\ =\ circ.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ cbnd\ =\ circ.boundary();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ cbsize\ =\ cbnd.size();}
+\DoxyCodeLine{\ \ \ \ circ.types()\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ circ.types()[cbnd]\ =\ -\/7;}
+\DoxyCodeLine{\ \ \ \ rect\ +=\ circ;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(rect.size(),\ rsize+csize);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(rect.size(),\ csize);}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(rect.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rect.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ dx\ =\ std::min(dx,\ std::sqrt(tree.query(rect.pos(i),\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(dx,\ 0.099);\ \ \textcolor{comment}{//\ due\ to\ amortisation\ in\ circle\ and\ box\ boundary\ discretizations}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(csize\ -\/\ cbsize,\ (rect.types()\ ==\ 5).size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeSubtract)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect(BoxShape<Vec2d>(\{0,\ 0\},\ \{2,\ 1\}));}
+\DoxyCodeLine{\ \ \ \ rect.addInternalNode(\{1,\ 0.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{1.5,\ 0\},\ -\/1,\ \{0,\ -\/1\});}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{1.5,\ 1\},\ -\/1,\ \{0,\ 0.8\});}
+\DoxyCodeLine{\ \ \ \ rect.addInternalNode(\{1.5,\ 0.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{2,\ 0.5\},\ -\/1,\ \{0.7,\ 1\});}
+\DoxyCodeLine{\ \ \ \ rect.addBoundaryNode(\{0,\ 0.5\},\ -\/1,\ \{-\/1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ rect.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ union\_test(BallShape<Vec2d>(\{2,\ 1\},\ 1));}
+\DoxyCodeLine{\ \ \ \ union\_test.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{2\ -\/\ std::sqrt(2)\ /\ 2,\ 1\ -\/\ std::sqrt(2)\ /\ 2\},\ -\/1,\ \{1,\ -\/1\});}
+\DoxyCodeLine{\ \ \ \ union\_test.addInternalNode(\{1.5,\ 0.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{3,\ 1\},\ -\/1,\ \{0.4,\ 6.5\});}
+\DoxyCodeLine{\ \ \ \ union\_test.addInternalNode(\{2,\ 1.5\},\ 1);}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{2,\ 0\},\ -\/1,\ \{0,\ -\/1\});}
+\DoxyCodeLine{\ \ \ \ union\_test.addBoundaryNode(\{2,\ 2\},\ -\/1,\ \{0,\ 1\});}
+\DoxyCodeLine{\ \ \ \ union\_test.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ union\_test\ -\/=\ rect;}
+\DoxyCodeLine{\ \ \ \ ShapeDifference<Vec2d>\ sh\ =\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }ShapeDifference<Vec2d>\&\textcolor{keyword}{>}(union\_test.shape());}
+\DoxyCodeLine{\ \ \ \ (void)\ sh;\ \ \textcolor{comment}{//\ Try\ casting\ sh\ to\ assert\ correct\ type.}}
+\DoxyCodeLine{\ \ \ \ union\_test.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\_boundary\ =\ \{\{3,\ 1\},\ \{2,\ 2\},\ \{1.5,\ 1\},\ \{2,\ 0.5\}\};}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ boundary\ =\ union\_test.positions()[union\_test.boundary()];}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_boundary,\ boundary);}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\_interior\ =\ \{\{2,\ 1.5\}\};}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ interior\ =\ union\_test.positions()[union\_test.interior()];}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_interior,\ interior);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeSubtractDisjoint)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d1\ =\ BoxShape<Vec2d>(\{0,\ 0\},\ \{1,\ 1\}).discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d2\ =\ BoxShape<Vec2d>(\{2,\ 2\},\ \{3,\ 3\}).discretizeWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ d1int\ =\ d1.interior().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ d1bnd\ =\ d1.boundary().size();}
+\DoxyCodeLine{\ \ \ \ d1\ -\/=\ d2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d1int,\ d1.interior().size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d1bnd,\ d1.boundary().size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeSubtractLarge)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 2*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}/60;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect\ =\ BoxShape<Vec2d>(\{-\/1,\ -\/1\},\ \{1,\ 1\}).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ circ\ =\ BallShape<Vec2d>(\{0,\ 0\},\ 0.7).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ rsize\ =\ rect.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ cbnd\ =\ circ.boundary();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ cbsize\ =\ cbnd.size();}
+\DoxyCodeLine{\ \ \ \ circ.types()\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ circ.types()[cbnd]\ =\ -\/7;}
+\DoxyCodeLine{\ \ \ \ rect\ -\/=\ circ;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(rect.size(),\ rsize);}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(circ.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ circ.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ dx\ =\ std::min(dx,\ std::sqrt(tree.query(circ.pos(i),\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(dx,\ 0.099);\ \ \textcolor{comment}{//\ due\ to\ amortisation\ in\ circle\ and\ box\ boundary\ discretizations}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(cbsize,\ (rect.types()\ ==\ -\/7).size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ProjectPointToBoundary1d)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec1d>\ circ(\{2.2\},\ 0.7);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discr\ =\ circ.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ positions\ =\ discr.positions();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ success;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ added\_point;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ hint(1.5);}
+\DoxyCodeLine{\ \ \ \ std::tie(success,\ added\_point)\ =\ discr.shape().projectPointToBoundary(hint,\ \{-\/1\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(success);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(positions,\ discr.positions());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ProjectPointToBoundary2d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ precision\ =\ 1e-\/5;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ center(2.2,\ 1.3);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ circ(center,\ 0.7);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discr\ =\ circ.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ success;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ added\_point;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ hint\ =\ \{1.5,\ 0.8\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ normal\ =\ (hint-\/center).normalized();}
+\DoxyCodeLine{\ \ \ \ std::tie(success,\ added\_point)\ =\ discr.\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}().projectPointToBoundary(hint,\ normal);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(success);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.6303909089,\ added\_point[0],\ precision);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.8931363635,\ added\_point[1],\ precision);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hint\ =\ \{2.8,\ 1.6\};}
+\DoxyCodeLine{\ \ \ \ normal\ =\ (hint-\/center).normalized();}
+\DoxyCodeLine{\ \ \ \ std::tie(success,\ added\_point)\ =\ discr.shape().projectPointToBoundary(hint,\ normal);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(success);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(2.826098822,\ added\_point[0],\ precision);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.613049411,\ added\_point[1],\ precision);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hint\ =\ \{-\/2.8,\ 1.6\};}
+\DoxyCodeLine{\ \ \ \ normal\ =\ \{0,\ 1\};}
+\DoxyCodeLine{\ \ \ \ std::tie(success,\ added\_point)\ =\ discr.shape().projectPointToBoundary(hint,\ normal);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(success);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ProjectPointToBoundary3d)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ circ(\{0,\ 0,\ 0\},\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discr\ =\ circ.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ precision\ =\ 1e-\/2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ success;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ added\_point;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ hint\ =\ \{0.8,\ 0.01,\ -\/0.01\};}
+\DoxyCodeLine{\ \ \ \ std::tie(success,\ added\_point)\ =\ discr.\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}().projectPointToBoundary(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ hint,\ hint.normalized());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(success);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.99947,\ added\_point[0],\ precision);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.0117135,\ added\_point[1],\ precision);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.0105922,\ added\_point[2],\ precision);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(added\_point.squaredNorm(),\ 1,\ precision);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ LoadTest)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Load\ domain\ from\ file\ \`{}test\_domain\_load.h5`.\ It\ is\ stored\ in\ the\ \`{}domain`\ group.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Shape\ of\ \`{}d`\ is\ UnknownShape.}}
+\DoxyCodeLine{\ \ \ \ HDF\ file(\textcolor{stringliteral}{"{}test/testdata/test\_domain\_load.h5"{}},\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}{HDF::READONLY}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a045288a2c0f7c8434923e7cc31111774}{DomainDiscretization<Vec2d>::load}}(file,\ \textcolor{stringliteral}{"{}domain"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ expected\ =\ b.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected.positions(),\ d.positions());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected.types(),\ d.types());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected.bmap(),\ d.bmap());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected.normals(),\ d.normals());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscreteContainsTest)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ box(\{0,\ 0,\ 0\},\ \{2,\ 2,\ 2\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ circ(\{0,\ 0,\ 0\},\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shape\ =\ box\ -\/\ circ;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discr\ =\ shape.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ search;}
+\DoxyCodeLine{\ \ \ \ discr.makeDiscreteContainsStructure(search);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(discr.discreteContains(\{1.2,\ 1.2,\ 1.2\},\ search));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(discr.discreteContains(\{0,\ 0,\ 0\},\ search));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ discreteContains\ might\ fail\ near\ the\ shape\ boundary}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(discr.discreteContains(\{2,\ 2,\ 2\},\ search));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points(\{\{1.5,\ 1.5,\ 1.5\},\ \{1.9,\ 1.9,\ 1.9\},\ \{3,\ 3,\ 3\},\ \{2.1,\ 2.1,\ 2.1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.1,\ 1.7,\ 0.6\},\ \{1.8,\ 0.2,\ 0.1\},\ \{3.1,\ 16.0,\ 0.0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(discr.discreteContains(p,\ search),\ discr.contains(p,\ search));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{DomainDiscretization<Vec2d>\ test\_bool\_op(\textcolor{keywordtype}{bool}\ with\_interior,\ \textcolor{keywordtype}{bool}\ add)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sA(\{0,\ 0\},\ 2);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sB(\{3,\ 0\},\ 2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ A\ =\ with\_interior\ ?\ sA.discretizeWithStep(h)\ :\ sA.discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ B\ =\ with\_interior\ ?\ sB.discretizeWithStep(h)\ :\ sB.discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ See\ plot\_domain\_bool\_op.m\ for\ plotting.}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn("{}apos"{},\ A.positions())}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn("{}at"{},\ A.types())}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn("{}bpos"{},\ B.positions())}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn("{}bt"{},\ B.types())}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (add)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ A\ +=\ B;}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ A\ -\/=\ B;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn("{}abpos"{},\ A.positions())}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn("{}abt"{},\ A.types())}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ A;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeAddOnlyBnd)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ A\ =\ test\_bool\_op(\textcolor{keyword}{false},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ A.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_LT(A.type(i),\ 0)\ <<\ format(\textcolor{stringliteral}{"{}Node\ \%d\ (\%s)\ is\ not\ a\ boundary\ node."{}},\ i,\ A.pos(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeAddFullDomain)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ A\ =\ test\_bool\_op(\textcolor{keyword}{true},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeSubOnlyBnd)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ A\ =\ test\_bool\_op(\textcolor{keyword}{false},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ A.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_LT(A.type(i),\ 0)\ <<\ format(\textcolor{stringliteral}{"{}Node\ \%d\ (\%s)\ is\ not\ a\ boundary\ node."{}},\ i,\ A.pos(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeSubFullDomain)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ A\ =\ test\_bool\_op(\textcolor{keyword}{true},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DISABLED\_DomainDiscretizationUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(\{0.0,\ 0.3\},\ \{0.4,\ 2.7\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ b.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ d.dim\ <<\ std::endl;\ \ \textcolor{comment}{//\ dimension\ of\ the\ domain}}
+\DoxyCodeLine{\ \ \ \ d.size();\ \ \textcolor{comment}{//\ number\ of\ points}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ d.pos(i);\ \ \textcolor{comment}{//\ position\ of\ node\ i}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (d.type(i)\ <\ 0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ d.normal(i);\ \ \textcolor{comment}{//\ boundary\ nodes\ have\ normals}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ d.boundary();\ \ \textcolor{comment}{//\ indices\ of\ boundary\ nodes}}
+\DoxyCodeLine{\ \ \ \ d.interior();\ \ \textcolor{comment}{//\ indices\ of\ interior\ nodes}}
+\DoxyCodeLine{\ \ \ \ d.shape();\ \ \textcolor{comment}{//\ get\ geometric\ shape\ of\ the\ domain}}
+\DoxyCodeLine{\ \ \ \ d.addBoundaryNode(\{0.001,\ 0.3\},\ -\/2,\ \{-\/1,\ 0\});\ \ \textcolor{comment}{//\ add\ new\ boundary\ point}}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(\{0.25,\ 0.75\},\ 2);\ \ \textcolor{comment}{//\ add\ new\ internal\ point}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ c.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ d\ -\/=\ d2;\ \ \textcolor{comment}{//\ subtract\ or\ add\ discretizations}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ d\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DISABLED\_DomainDiscretizationSubtractUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect\ =\ BoxShape<Vec2d>(\{-\/1,\ -\/1\},\ \{1,\ 1\}).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ circ\ =\ BallShape<Vec2d>(\{0,\ 0\},\ 0.7).discretizeBoundaryWithStep(h);}
+\DoxyCodeLine{\ \ \ \ circ.types()[circ.boundary()]\ =\ -\/5;\ \ \ \textcolor{comment}{//\ -\/1\ to\ -\/4\ taken\ by\ rectangle\ sides}}
+\DoxyCodeLine{\ \ \ \ rect\ -\/=\ circ;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ (rect.types()\ ==\ -\/5).size()\ <<\ std::endl;\ \ \textcolor{comment}{//\ nonzero\ number\ is\ printed}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DISABLED\_DomainDiscretizationAddUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ rect\ =\ BoxShape<Vec2d>(\{-\/1,\ -\/1\},\ \{1,\ 1\}).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ rect.types()[rect.interior()]\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ circ\ =\ BallShape<Vec2d>(\{0,\ 0\},\ 0.7).discretizeWithStep(h);}
+\DoxyCodeLine{\ \ \ \ circ.types()[circ.boundary()]\ =\ -\/5;\ \ \ \textcolor{comment}{//\ -\/1\ to\ -\/4\ taken\ by\ rectangle\ sides}}
+\DoxyCodeLine{\ \ \ \ circ\ +=\ rect;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ (circ.types()\ ==\ 2).size()\ <<\ std::endl;\ \ \textcolor{comment}{//\ nonzero\ number\ is\ printed}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

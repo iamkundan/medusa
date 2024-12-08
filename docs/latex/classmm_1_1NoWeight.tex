@@ -1,0 +1,104 @@
+\doxysection{mm\+::No\+Weight\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1NoWeight}{}\label{classmm_1_1NoWeight}\index{mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}}
+
+
+{\ttfamily \#include $<$Weight\+Function\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+No\+Weight$<$ vec\+\_\+t $>$}
+Class representing no weight function, i.\+e. a constant 1. 
+
+Used in \doxylink{classmm_1_1WLS}{WLS} computations of shape functions. This class satisfies the \doxysectlink{concepts_weight-concept}{Weight function concept}{1}. Usage example\+: see \doxylink{classmm_1_1WLS}{WLS}. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFWeight}{RBFWeight}, \doxylink{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8}{Gaussian\+Weight}, \doxylink{namespacemm_a88dc351475468bd33170f2770f7192e9}{MQWeight}, \doxylink{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f}{IMQWeight}, \doxylink{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73}{PHWeight} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1NoWeight_a77e0b040a2a7df4c8c7d3f71040b63f6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1NoWeight_a8dcd5ca72e7a16fbc55c08b0d084f180}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight_a2d4d67f2708fce160c8d4fb05515f6c5}{vector\+\_\+t}} \&) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate weight function at {\ttfamily point}. Returns {\ttfamily 1}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1NoWeight_a6ed72fc309684e957d890d969ffbbfb1aba98048b8fb07cd47a716bf216a50df3}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1NoWeight_a2d4d67f2708fce160c8d4fb05515f6c5}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{vector\+\_\+t\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1NoWeight_a77e0b040a2a7df4c8c7d3f71040b63f6}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1NoWeight_a41971098357395c19744b53cbaa4f924}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight}{No\+Weight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given weight function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1NoWeight_a6ed72fc309684e957d890d969ffbbfb1}\label{classmm_1_1NoWeight_a6ed72fc309684e957d890d969ffbbfb1} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}}\index{mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1NoWeight_a6ed72fc309684e957d890d969ffbbfb1aba98048b8fb07cd47a716bf216a50df3}\label{classmm_1_1NoWeight_a6ed72fc309684e957d890d969ffbbfb1aba98048b8fb07cd47a716bf216a50df3} 
+dim&Dimensionality of the function domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1NoWeight_a8dcd5ca72e7a16fbc55c08b0d084f180}\label{classmm_1_1NoWeight_a8dcd5ca72e7a16fbc55c08b0d084f180} 
+\index{mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1NoWeight_a77e0b040a2a7df4c8c7d3f71040b63f6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1NoWeight}{mm\+::\+No\+Weight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight_a2d4d67f2708fce160c8d4fb05515f6c5}{vector\+\_\+t}} \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate weight function at {\ttfamily point}. Returns {\ttfamily 1}. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1NoWeight_a41971098357395c19744b53cbaa4f924}\label{classmm_1_1NoWeight_a41971098357395c19744b53cbaa4f924} 
+\index{mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::NoWeight$<$ vec\_t $>$@{mm::NoWeight$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight}{No\+Weight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given weight function. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{WeightFunction__fwd_8hpp}{Weight\+Function\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

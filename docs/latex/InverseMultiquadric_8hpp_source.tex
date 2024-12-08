@@ -1,0 +1,53 @@
+\doxysection{Inverse\+Multiquadric.\+hpp}
+\hypertarget{InverseMultiquadric_8hpp_source}{}\label{InverseMultiquadric_8hpp_source}\index{include/medusa/bits/approximations/InverseMultiquadric.hpp@{include/medusa/bits/approximations/InverseMultiquadric.hpp}}
+\mbox{\hyperlink{InverseMultiquadric_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_INVERSEMULTIQUADRIC\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_INVERSEMULTIQUADRIC\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{InverseMultiquadric__fwd_8hpp}{InverseMultiquadric\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a5b79ff60e8577050e42b36209472004a}{00017}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a5b79ff60e8577050e42b36209472004a}{InverseMultiquadric<scal\_t>::InverseMultiquadric}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ shape)\ :\ shape\_(shape)\ \{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{shape\_}}\ >\ 0,\ \textcolor{stringliteral}{"{}Shape\ should\ be\ greater\ than\ 0,\ got\ \%s."{}},\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{shape\_}});}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00021}00021\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00022}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{00022}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{InverseMultiquadric<scal\_t>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}\ >=\ 0,\ \textcolor{stringliteral}{"{}Derivative\ of\ negative\ order\ \%d\ requested."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}});}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{f}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}};}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00025}00025\ \ \ \ \ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ c\ =\ -\/0.5;}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ c\ *=\ (-\/0.5\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ c\ /\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}},\ 2*\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}})\ /\ std::sqrt(\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(\mbox{\hyperlink{classmm_1_1Gaussian}{f}}+1,\ 2*\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00033}00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00034}00034\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00035}00035\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{InverseMultiquadric<scal\_t>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dimension>}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{f}}\ =\ 1.0/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}};}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{inverse}}\ =\ 1.0\ /\ std::sqrt(1+\mbox{\hyperlink{classmm_1_1Gaussian}{f}}*\mbox{\hyperlink{classmm_1_1Gaussian}{r2}});}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{return}\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}}*\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(\mbox{\hyperlink{classmm_1_1Gaussian}{inverse}},\ 3)\ +\ 3*\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}}*\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(\mbox{\hyperlink{classmm_1_1Gaussian}{inverse}},\ 5);}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00042}00042\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00043}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a9bddcba1ef819f4271e0d4bfb3600bd3}{00043}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{InverseMultiquadric<scal\_t>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{return}\ 1.0\ /\ std::sqrt(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00048}00048\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ S>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00049}\mbox{\hyperlink{namespacemm_a1d84d8f250c68e4346fdceb328396268}{00049}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{InverseMultiquadric<S>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}})\ \{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}InverseMultiquadric\ RBFs\ with\ shape\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}.\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}();}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00053}00053\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric_8hpp_source_l00055}00055\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_INVERSEMULTIQUADRIC\_HPP\_}}
+
+\end{DoxyCode}

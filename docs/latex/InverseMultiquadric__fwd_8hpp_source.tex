@@ -1,0 +1,45 @@
+\doxysection{Inverse\+Multiquadric\+\_\+fwd.\+hpp}
+\hypertarget{InverseMultiquadric__fwd_8hpp_source}{}\label{InverseMultiquadric__fwd_8hpp_source}\index{include/medusa/bits/approximations/InverseMultiquadric\_fwd.hpp@{include/medusa/bits/approximations/InverseMultiquadric\_fwd.hpp}}
+\mbox{\hyperlink{InverseMultiquadric__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_INVERSEMULTIQUADRIC\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_INVERSEMULTIQUADRIC\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Operators__fwd_8hpp}{Operators\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1InverseMultiquadric}{00029}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1InverseMultiquadric}{InverseMultiquadric}}\ \{}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00030}00030\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{00031}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00033}00033\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{00034}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{shape\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00036}00036\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00038}00038\ \ \ \ \ \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{InverseMultiquadric}}(\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}}\ =\ 1);}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{00041}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{shape\_}}\ ;\}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00044}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_afe9ac43d26ec5960ffef3fa4128fd0cc}{00044}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_afe9ac43d26ec5960ffef3fa4128fd0cc}{setShape}}(\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}})\ \{\mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{shape\_}}\ =\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}};\}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{operator()}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00060}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a39476baad5cd6ad4f171f6a3ae6a725c}{00060}}\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a39476baad5cd6ad4f171f6a3ae6a725c}{operator()}}(\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dimension>}}\ lap)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00063}00063\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{operator()}}(\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00067}\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a18aa235566801c0250158cac5b63137d}{00067}}\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a18aa235566801c0250158cac5b63137d}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{InverseMultiquadric<V>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}});}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00068}00068\ \};}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00071}00071\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{InverseMultiquadric__fwd_8hpp_source_l00073}00073\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_INVERSEMULTIQUADRIC\_FWD\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,49 @@
+\doxysection{XML.\+hpp}
+\hypertarget{XML_8hpp_source}{}\label{XML_8hpp_source}\index{include/medusa/bits/io/XML.hpp@{include/medusa/bits/io/XML.hpp}}
+\mbox{\hyperlink{XML_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_IO\_XML\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_IO\_XML\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{XML__fwd_8hpp}{XML\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db}{00017}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ \mbox{\hyperlink{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db}{XML::get}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00018}00018\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00019}00019\ \ \ \ \ std::string\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00020}00020\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}})\ =\ \mbox{\hyperlink{classmm_1_1XML_a7a88aed0996c65e2b3816473f1427d4a}{splitPath}}(\mbox{\hyperlink{classmm_1_1Gaussian}{path}});}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{char}*\ value\ =\ \mbox{\hyperlink{classmm_1_1XML_a52e5f082527be9313ddd69c2d39e8e91}{getString}}(\mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}});}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00022}00022\ \ \ \ \ std::stringstream\ ss(value);}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00024}00024\ \ \ \ \ ss\ >>\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00030}\mbox{\hyperlink{namespacemm_a68b8507de8c6b561ecfbd2c0ae44a3ed}{00030}}\ std::string\ XML::get<std::string>(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00032}00032\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1XML_a9ead3434b3644a4d560f49eeeac6be68}{00033}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a9ead3434b3644a4d560f49eeeac6be68}{XML::set}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ value,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}})\ \{}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00034}00034\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00035}00035\ \ \ \ \ std::string\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}};}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00036}00036\ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}})\ =\ \mbox{\hyperlink{classmm_1_1XML_a7a88aed0996c65e2b3816473f1427d4a}{splitPath}}(\mbox{\hyperlink{classmm_1_1Gaussian}{path}});}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}})\ \{}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1XML_a919cc32ed509e410174fc987b4242f35}{exists}}(\mbox{\hyperlink{classmm_1_1Gaussian}{path}}),\ \textcolor{stringliteral}{"{}Attribute\ on\ path\ '\%s'\ already\ exists\ with\ value\ '\%s'.\ "{}}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Set\ overwrite=true\ to\ overwrite\ its\ value."{}},}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{path}},\ \mbox{\hyperlink{classmm_1_1XML_a52e5f082527be9313ddd69c2d39e8e91}{getString}}(\mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}}));}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00042}00042\ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00043}00043\ \ \ \ \ ss\ <<\ std::setprecision(16)\ <<\ value;}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00044}00044\ \ \ \ \ \mbox{\hyperlink{classmm_1_1XML_a3aee76d208933dbacd9696c9ea359cb0}{setString}}(\mbox{\hyperlink{classmm_1_1Gaussian}{path\_elements}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}},\ ss.str());}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00047}00047\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{XML_8hpp_source_l00049}00049\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_IO\_XML\_HPP\_}}
+
+\end{DoxyCode}

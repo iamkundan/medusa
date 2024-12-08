@@ -1,0 +1,1848 @@
+\doxysection{mm\+::HDF Class Reference}
+\hypertarget{classmm_1_1HDF}{}\label{classmm_1_1HDF}\index{mm::HDF@{mm::HDF}}
+
+
+{\ttfamily \#include $<$HDF\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Simplified \href{https://portal.hdfgroup.org/display/support}{\texttt{ HDF5}} I/O utilities. 
+
+This class is a wrapper around the \href{https://portal.hdfgroup.org/pages/viewpage.action?pageId=50073943}{\texttt{ HDF5 C library}}, for simplified reading and writing.
+
+This class represents a \doxylink{classmm_1_1HDF}{HDF} reader and writer\+: it knows which file (open or closed) and which group (open or closed) are the ones that are to be read from/written to. Any calls to {\ttfamily read\texorpdfstring{$\ast$}{*}} or {\ttfamily write\texorpdfstring{$\ast$}{*}} methods write to that group in that file. The file and group can be opened, closed or changed during the lifetime of the object, with user\textquotesingle{}s responsibility being that they are open when writing to/reading from it.
+
+In addition \doxylink{classmm_1_1HDF_a668345f283a7978e2ff29ae7a3ddd532}{atomic()} method can be used to perform {\ttfamily open/read/close} or {\ttfamily open/write/close} cycle in one line.
+
+Raw C identifiers are exposed with \doxylink{classmm_1_1HDF_a281c665e78ad019ef759a458f11fcc14}{get\+File\+ID()} and \doxylink{classmm_1_1HDF_ad626bf0cd3c550b3ee8b6762ffaa1139}{get\+Group\+ID()} methods and can be used to perform any action not directly supported by this class.
+
+All {\ttfamily write} methods create the datasets or attributes required. They also have an {\ttfamily overwrite} parameter which is set to {\ttfamily false} by default. This means that any attempt to write to an existing object will fail an assertion to prevent accidental deletions of existing data. This can be disabled by setting {\ttfamily overwrite = true}, allowing one to overwrite existing data.
+
+All open objects are closed upon destruction.
+
+\begin{DoxyNote}{Note}
+To enable support for Eigen types, \doxylink{HDF__Eigen_8hpp}{HDF\+\_\+\+Eigen.\+hpp} must be included.
+\end{DoxyNote}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ open\ new\ empty\ file\ and\ group\ '/'\ automatically}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1HDF_a771742b048ea253941145c751bc18bb5}{HDF}}\ hdf(\textcolor{stringliteral}{"{}test/testdata/filename.h5"{}},\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864ae870386227e0ea1075b5bf20f0ec0e78}{HDF::DESTROY}});}
+\DoxyCodeLine{\ \ \ \ hdf.writeStringAttribute(\textcolor{stringliteral}{"{}text"{}},\ \textcolor{stringliteral}{"{}This\ is\ the\ content"{}});\ \ \textcolor{comment}{//\ written\ to\ group\ '/'}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hdf.openGroup(\textcolor{stringliteral}{"{}group1"{}});}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ a\ =\ \{1.2,\ -\/4.5,\ 4.5\};}
+\DoxyCodeLine{\ \ \ \ hdf.writeDoubleArray(\textcolor{stringliteral}{"{}a"{}},\ a);}
+\DoxyCodeLine{\ \ \ \ hdf.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hdf.reopen();\ \ \textcolor{comment}{//\ reopen\ previously\ closed\ file\ and\ group}}
+\DoxyCodeLine{\ \ \ \ hdf.openGroup(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\ \ \ \ std::string\ s\ =\ hdf.readStringAttribute(\textcolor{stringliteral}{"{}text"{}});}
+\DoxyCodeLine{\ \ \ \ hdf.writeStringAttribute(\textcolor{stringliteral}{"{}text"{}},\ \textcolor{stringliteral}{"{}New\ content"{}},\ \textcolor{keyword}{true});\ \ \textcolor{comment}{//\ enable\ overwrite}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hdf.setFilename(\textcolor{stringliteral}{"{}test/testdata/new\_file.h5"{}});}
+\DoxyCodeLine{\ \ \ \ hdf.setGroupName(\textcolor{stringliteral}{"{}group\_name"{}});\ \ \textcolor{comment}{//\ set\ current\ group\ name\ and\ filename,\ but\ do\ not\ open\ yet}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ b(5,\ a);\ \ \textcolor{comment}{//\ written\ as\ dataset\ of\ size\ 5x3}}
+\DoxyCodeLine{\ \ \ \ hdf.atomic().writeFloat2DArray(\textcolor{stringliteral}{"{}b"{}},\ b);\ \ \textcolor{comment}{//\ opens,\ writes\ and\ closes,\ the\ value\ is\ cast\ to\ float}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M(5,\ 3);}
+\DoxyCodeLine{\ \ \ \ M\ <<\ 1,\ 2,\ 3,\ 4,\ 5,\ 6,\ 7,\ 8,\ 9,\ 10,\ 11,\ 12,\ 13,\ 14,\ 15;}
+\DoxyCodeLine{\ \ \ \ hdf.atomic().writeEigen(\textcolor{stringliteral}{"{}M"{}},\ M);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ M2\ =\ hdf.atomic().readEigen(\textcolor{stringliteral}{"{}M"{}});\ \ \textcolor{comment}{//\ opens,\ reads,\ closes}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ hdf\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Timer,\ DomainDiscretization\ and\ XML\ classes\ can\ also\ be\ written\ directly}}
+
+\end{DoxyCodeInclude}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2poisson_explicit_8cpp-example}{test/end2end/poisson\+\_\+explicit.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1HDF_a771742b048ea253941145c751bc18bb5}{HDF}} ()
+\begin{DoxyCompactList}\small\item\em Construct an empty \doxylink{classmm_1_1HDF}{HDF} reader. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1HDF_a75166f464d65448133dc3f04a7db10fd}{HDF}} (std\+::string \mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}}, \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}}=\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}})
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmm_1_1HDF}{HDF} reader and open {\ttfamily filename} with given {\ttfamily mode}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1HDF_a84334baae42998e406bfedcec4a527f9}{\texorpdfstring{$\sim$}{\string~}\+HDF}} ()
+\begin{DoxyCompactList}\small\item\em Closes all opened objects, by using \doxylink{classmm_1_1HDF_a67bc7ee075f4ecbbb010cfbfd96f274d}{close()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a15e5ce2f8904cd892b4783d67165c6a3}{open}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{group\+\_\+name}}="{}/"{}, \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}}=\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}})
+\begin{DoxyCompactList}\small\item\em Opens given file and group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ac80fe028289043c00a951b4776dd76a6}{open\+File}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}}, \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}}=\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}})
+\begin{DoxyCompactList}\small\item\em Opens a given file with a given mode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a95df5aa60a40599492c86a961514dd88}{reopen\+File}} (\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}}=\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}})
+\begin{DoxyCompactList}\small\item\em Reopens the current file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a00d94f28dad076707904a7e70081aafd}{open\+Group}} (std\+::string \mbox{\hyperlink{classmm_1_1Gaussian}{group\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Open given group, closing any previously opened \doxylink{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}{group()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a662a421877fb89d8c1fddb597345de40}{reopen\+Group}} ()
+\begin{DoxyCompactList}\small\item\em Reopens current group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a8313e377cf908797e1b49fa262200e77}{reopen}} (\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}}=\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}})
+\begin{DoxyCompactList}\small\item\em Reopens current file and group. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1HDF_afd9bbb6c47496b6b71a5fe7134f564bf}{is\+File\+Open}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} is currently specified file is open and {\ttfamily false} otherwise. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1HDF_ae37b71eb77b4b99fde3c461962dfa99f}{is\+Group\+Open}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} is currently specified group is open and {\ttfamily false} otherwise. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a1a1b0111bb3fd13970db7ea4b13065f8}{flush}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Flush opened file, if it is open. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a820cd073547c2a8fd9a80bf1b466283d}{close\+Group}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Closes current group, if open. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a62c1fd0aea41dcf736b2678e8b7ba853}{close\+File}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Closes current file and all objects associated with it (e.\+g. the group), if open. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a67bc7ee075f4ecbbb010cfbfd96f274d}{close}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Closes all open objects. Alias of \doxylink{classmm_1_1HDF_a62c1fd0aea41dcf736b2678e8b7ba853}{close\+File()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \& \mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get current filename. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \& \mbox{\hyperlink{classmm_1_1HDF_aa16a711f2ca136413a7a795993b0def2}{file\+Name}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Alias of \doxylink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a3ef8dd63065f34c221d4e8fa96ce869f}{set\+Filename}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}})
+\begin{DoxyCompactList}\small\item\em Sets new filename without opening the new file. Any previously opened file is closed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a2cd20e625413b6863f325c77ff9800d8}{set\+File\+Name}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}})
+\begin{DoxyCompactList}\small\item\em Alias of \doxylink{classmm_1_1HDF_a3ef8dd63065f34c221d4e8fa96ce869f}{set\+Filename()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \& \mbox{\hyperlink{classmm_1_1HDF_a8e4dc0f50aa79d982ba46bab92d05e1e}{group\+Name}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get current group name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_afd25f69567511cf5508cfc415c28b0af}{set\+Group\+Name}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{group\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Set new group name without opening the new group. Any previously opened group is closed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read attribute given by {\ttfamily attr\+\_\+name}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}{write\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \&type, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Writes given attribute with given value and type to file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\std\+::pair$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{hsize\+\_\+t}} $>$, std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a0af87385a9ec8730bf2ffe7045f8977e}{read\+Linear\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into linear {\ttfamily dim}-\/D array. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \mbox{\hyperlink{classmm_1_1HDF_a83c9832c477f0b99c02a5b5898c265f3}{read1\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read 1D dataset given by {\ttfamily dataset\+\_\+name}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 2D array of vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a281a6095e3d998c12442195f59a5214d}{read3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 3D array of vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a39b2ad9eba12d8c838bfacb5f73a870e}{write\+Linear\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*}value, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::array$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{hsize\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&sizes, \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} type, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Writes a {\ttfamily dim}-\/dimensional dataset stored in 1D array in col-\/major fashion. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_afe608d32823976d96697fbb1bc5dce0d}{write1\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} type, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Writes given 1D array with given value and type to file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}{write2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} type, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Writes given 2D array of given value and type to file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a2e03fb3046f2f05acd64d0de8c3bdd29}{write3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} type, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Writes given 3D array of given value and type to file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1HDF_a00d79e0ca535bc82356955949e95028d}{read\+Int\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads {\ttfamily int} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1HDF_ae5df1048fd690a8a4e64d106912d8ce0}{read\+Bool\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads {\ttfamily bool} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1HDF_ac39e7cdcf358cafe89161d04ab99b6c8}{read\+Double\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads {\ttfamily double} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{float}} \mbox{\hyperlink{classmm_1_1HDF_ad3842776a124bf3aaea096b3da377a0a}{read\+Float\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads {\ttfamily float} attribute. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classmm_1_1HDF_acd0947dc9d965ec9caa3618bd68b87ce}{read\+String\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads non-\/null-\/terminated {\ttfamily string} attribute. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classmm_1_1HDF_a58e4818db5b4f2e526dcf4f41f34f886}{read\+Null\+Terminated\+String\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads null-\/terminated {\ttfamily string} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ad0eb0f439cd8be3794e9fa8958feb385}{write\+Int\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write {\ttfamily int} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a00addaef461ee6200bf707016c7b22ed}{write\+Bool\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write {\ttfamily bool} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a16966c27e9a73048065a0718beb1ddbc}{write\+Double\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{double}} value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write {\ttfamily double} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a74fcf20d17aa81d0af27213be1d73c51}{write\+Float\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{float}} value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write {\ttfamily float} attribute. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a4adb77a3a72bc4370990e6f60296f8f9}{write\+String\+Attribute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write {\ttfamily string} attribute. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1HDF_a801107c0ac35e467d657384a352f709e}{read\+Int\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into vector of {\ttfamily int}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \mbox{\hyperlink{classmm_1_1HDF_a255e40c9960937e39af36ec3398d072a}{read\+Double\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into vector of {\ttfamily double}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ \mbox{\hyperlink{classmm_1_1HDF_a11844665086d9ec27ea696b873f762ed}{read\+Float\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into vector of {\ttfamily float}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a571287d5f1534822004e7a79f74ba990}{write\+Int\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 1D array of {\ttfamily int}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_af659dd072651bb2fc07b8921649319a6}{write\+Double\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 1D array of {\ttfamily double}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ae8ec2e82ca101ea89b71e3448c89f2e0}{write\+Float\+Array}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 1D array of {\ttfamily floats}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a43cd2ab867426b7ff1cc3585db0683d1}{read\+Int2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 2D vector of {\ttfamily int}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_aa1eacb99e2b4d3bd720a22e19cac1016}{read\+Double2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 2D vector of {\ttfamily double}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a31695f4e56e549f8b05bf143f7e0ddf3}{read\+Float2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 2D vector of {\ttfamily float}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ae5d767e34db6e05a6a6320826945928c}{write\+Int2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 2D array of {\ttfamily int}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ab0c4b2b2f0c1d7c21b0f4284e2ed086b}{write\+Double2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 2D array of {\ttfamily double}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ad3e6a0d48df9ad997d8679161161738e}{write\+Float2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 2D array of {\ttfamily float}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a416af0728ceb2b59878aa75e3d1a541e}{read\+Int3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 3D vector of {\ttfamily int}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_a407fa255d479936432d79e1b33c906cd}{read\+Double3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 3D vector of {\ttfamily double}s. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ $>$ $>$ \mbox{\hyperlink{classmm_1_1HDF_afa4162e5a1b0b08e7fb2bbe171a39d02}{read\+Float3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read given dataset into 3D vector of {\ttfamily float}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a51861514844f26680065d442f185b495}{write\+Int3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 3D array of {\ttfamily int}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a8506cf21ee873f7e975e893343dbebe4}{write\+Double3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 3D array of {\ttfamily double}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_ab413434396deba16d91c9737211e2513}{write\+Float3\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given value as a 3D array of {\ttfamily float}s. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}  = double$>$ }\\Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, -\/1, -\/1, 0, -\/1, -\/1 $>$ \mbox{\hyperlink{classmm_1_1HDF_a0ff56f6a9afa2c199c8cc9eacae5b586}{read\+Eigen}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Reads data as an Eigen matrix of type {\ttfamily scalar\+\_\+t}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a05f8a45b96ac4971761574da3db4a461}{write\+Eigen}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&value, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Write given Eigen expression as a 2D array of its type (either {\ttfamily int}, {\ttfamily double} or {\ttfamily float}). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Sparse\+Matrix\+Type}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a9a028edc4dc5ac2c750ee70c5f64fe44}{write\+Sparse\+Matrix}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&name, \mbox{\hyperlink{classmm_1_1Gaussian}{Sparse\+Matrix\+Type}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{matrix}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{one\+\_\+based}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Writes a sparse matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_aceed7a68e16d0299737e183d81bb5600}{write\+Domain}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&name, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Writes given domain discretization to file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{timer\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a1680453dacc1e441c20c0dc0275da160}{write\+Timer}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&name, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{timer\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{timer}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Writes given timer to file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{conf\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a136b97558d4eae6c52a385c8b5c4a32a}{write\+XML}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&name, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{conf\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{conf}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Writes given \doxylink{classmm_1_1XML}{XML} object to file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1HDF}{HDF}} \mbox{\hyperlink{classmm_1_1HDF_a668345f283a7978e2ff29ae7a3ddd532}{atomic}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Allows for "{}atomic"{} read and write operations to HDF5 files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \mbox{\hyperlink{classmm_1_1HDF_a281c665e78ad019ef759a458f11fcc14}{get\+File\+ID}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return raw \doxylink{classmm_1_1HDF}{HDF} C file identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \mbox{\hyperlink{classmm_1_1HDF_ad626bf0cd3c550b3ee8b6762ffaa1139}{get\+Group\+ID}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return raw \doxylink{classmm_1_1HDF}{HDF} C group identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmm_1_1HDF_1_1Members}{Members}} \mbox{\hyperlink{classmm_1_1HDF_abe5f43f1a4e67bd8359cb05f7cd60748}{members}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an object with categorized names of all members of current group. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmm_1_1HDF_afa2169eaa6820bfbfdd7f647e5c5ea8b}{groups}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns names of all subgroups in current group in alphabetical order. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmm_1_1HDF_a375939dd275579e248844385701438f8}{datasets}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns names of all datasets in current group in alphabetical order. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \+: unsigned \{ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}} = 256
+, \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864ae870386227e0ea1075b5bf20f0ec0e78}{DESTROY}} = 128
+, \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}{READONLY}} = 64
+ \}
+\begin{DoxyCompactList}\small\item\em Possible file opening modes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1HDF_1_1Members}{Members}}
+\begin{DoxyCompactList}\small\item\em Holds categorized names for all members of a group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1HDF_a8e6d60c084ba46ab44d99d642d1376db}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1HDF}{HDF}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{hdf}})
+\begin{DoxyCompactList}\small\item\em Output basic info about \doxylink{classmm_1_1HDF}{HDF} reader, such as current group and file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a1383b80b852512f010b58b70609cbf06}{write2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&, \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, std\+::false\+\_\+type) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for static\+\_\+assert for Eigen due to different {\ttfamily size} method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1HDF_a71557b9bd4e53e4e027da93cd075492a}{write2\+DArray}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&, \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, std\+::true\+\_\+type) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for static\+\_\+assert for Eigen due to different {\ttfamily size} method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{classmm_1_1HDF_a4f3239b1709b1e76587ee27e02e9bc9e}{str}} (\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}})
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{HDF\+::\+Mode} enum to string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \mbox{\hyperlink{classmm_1_1HDF_a5946ecfa4f62cce639a48833ab2604bc}{open\+File\+Helper}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename}}, \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}} \mbox{\hyperlink{classmm_1_1Gaussian}{mode}})
+\begin{DoxyCompactList}\small\item\em Opens given file with given mode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{herr\+\_\+t}} \mbox{\hyperlink{classmm_1_1HDF_a2423ebba1c27aa56dc255dd573f58324}{member\+Iterate\+Callback}} (\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{loc\+\_\+id}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}name, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{H5\+L\+\_\+info\+\_\+t}} \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em Callback required by \doxylink{classmm_1_1HDF}{HDF} {\ttfamily Literate} function when getting a list of members. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classmm_1_1HDF_ad9a1e3f20af3cce2516d5f19663ca210}{filename\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Current file name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classmm_1_1HDF_a39f36e07f141bdbdd16f5af09b7db3d3}{group\+\_\+name\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Current group name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \mbox{\hyperlink{classmm_1_1HDF_a5a04f252371bdfe2f8ea5b31164bd7f2}{file}}
+\begin{DoxyCompactList}\small\item\em Currently open file identifier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \mbox{\hyperlink{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}{group}}
+\begin{DoxyCompactList}\small\item\em Currently open group identifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}\label{classmm_1_1HDF_acfcc499efe6a179903803e6793087864} 
+\index{mm::HDF@{mm::HDF}!Mode@{Mode}}
+\index{Mode@{Mode}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{enum}} \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{mm\+::\+HDF\+::\+Mode}} \+: \mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}}}
+
+
+
+Possible file opening modes. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{APPEND@{APPEND}!mm::HDF@{mm::HDF}}\index{mm::HDF@{mm::HDF}!APPEND@{APPEND}}}\Hypertarget{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}\label{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6} 
+APPEND&Appends to the existing contents, if any exist. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DESTROY@{DESTROY}!mm::HDF@{mm::HDF}}\index{mm::HDF@{mm::HDF}!DESTROY@{DESTROY}}}\Hypertarget{classmm_1_1HDF_acfcc499efe6a179903803e6793087864ae870386227e0ea1075b5bf20f0ec0e78}\label{classmm_1_1HDF_acfcc499efe6a179903803e6793087864ae870386227e0ea1075b5bf20f0ec0e78} 
+DESTROY&Removes old contents, if any exist. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{READONLY@{READONLY}!mm::HDF@{mm::HDF}}\index{mm::HDF@{mm::HDF}!READONLY@{READONLY}}}\Hypertarget{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}\label{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314} 
+READONLY&Read only open, the file must exist. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1HDF_a771742b048ea253941145c751bc18bb5}\label{classmm_1_1HDF_a771742b048ea253941145c751bc18bb5} 
+\index{mm::HDF@{mm::HDF}!HDF@{HDF}}
+\index{HDF@{HDF}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{HDF()}{HDF()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily mm\+::\+HDF\+::\+HDF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an empty \doxylink{classmm_1_1HDF}{HDF} reader. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00095}{95}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a75166f464d65448133dc3f04a7db10fd}\label{classmm_1_1HDF_a75166f464d65448133dc3f04a7db10fd} 
+\index{mm::HDF@{mm::HDF}!HDF@{HDF}}
+\index{HDF@{HDF}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{HDF()}{HDF()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily mm\+::\+HDF\+::\+HDF (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a \doxylink{classmm_1_1HDF}{HDF} reader and open {\ttfamily filename} with given {\ttfamily mode}. 
+
+It also opens group {\ttfamily /} by default, so it is immediately ready for reading / writing. 
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if mode was {\ttfamily READONLY} and the file can not be read. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00101}{101}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a84334baae42998e406bfedcec4a527f9}\label{classmm_1_1HDF_a84334baae42998e406bfedcec4a527f9} 
+\index{mm::HDF@{mm::HDF}!````~HDF@{\texorpdfstring{$\sim$}{\string~}HDF}}
+\index{````~HDF@{\texorpdfstring{$\sim$}{\string~}HDF}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HDF()}{\string~HDF()}}
+{\footnotesize\ttfamily mm\+::\+HDF\+::\texorpdfstring{$\sim$}{\string~}\+HDF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Closes all opened objects, by using \doxylink{classmm_1_1HDF_a67bc7ee075f4ecbbb010cfbfd96f274d}{close()}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a67bc7ee075f4ecbbb010cfbfd96f274d}{close} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00107}{107}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1HDF_a668345f283a7978e2ff29ae7a3ddd532}\label{classmm_1_1HDF_a668345f283a7978e2ff29ae7a3ddd532} 
+\index{mm::HDF@{mm::HDF}!atomic@{atomic}}
+\index{atomic@{atomic}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{atomic()}{atomic()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1HDF}{HDF}} mm\+::\+HDF\+::atomic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Allows for "{}atomic"{} read and write operations to HDF5 files. 
+
+This means that read and write functions open the file and group, before reading/writing and close them afterwards. The filename and group name must be set before use. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a3ef8dd63065f34c221d4e8fa96ce869f}{set\+Filename}, \doxylink{classmm_1_1HDF_afd25f69567511cf5508cfc415c28b0af}{set\+Group\+Name} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00250}{250}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a67bc7ee075f4ecbbb010cfbfd96f274d}\label{classmm_1_1HDF_a67bc7ee075f4ecbbb010cfbfd96f274d} 
+\index{mm::HDF@{mm::HDF}!close@{close}}
+\index{close@{close}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Closes all open objects. Alias of \doxylink{classmm_1_1HDF_a62c1fd0aea41dcf736b2678e8b7ba853}{close\+File()}. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00164}{164}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a62c1fd0aea41dcf736b2678e8b7ba853}\label{classmm_1_1HDF_a62c1fd0aea41dcf736b2678e8b7ba853} 
+\index{mm::HDF@{mm::HDF}!closeFile@{closeFile}}
+\index{closeFile@{closeFile}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{closeFile()}{closeFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::close\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Closes current file and all objects associated with it (e.\+g. the group), if open. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00243}{243}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a820cd073547c2a8fd9a80bf1b466283d}\label{classmm_1_1HDF_a820cd073547c2a8fd9a80bf1b466283d} 
+\index{mm::HDF@{mm::HDF}!closeGroup@{closeGroup}}
+\index{closeGroup@{closeGroup}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{closeGroup()}{closeGroup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::close\+Group (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Closes current group, if open. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00236}{236}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a375939dd275579e248844385701438f8}\label{classmm_1_1HDF_a375939dd275579e248844385701438f8} 
+\index{mm::HDF@{mm::HDF}!datasets@{datasets}}
+\index{datasets@{datasets}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{datasets()}{datasets()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ mm\+::\+HDF\+::datasets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns names of all datasets in current group in alphabetical order. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_abe5f43f1a4e67bd8359cb05f7cd60748}{members} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00558}{558}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}\label{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300} 
+\index{mm::HDF@{mm::HDF}!filename@{filename}}
+\index{filename@{filename}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{filename()}{filename()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \& mm\+::\+HDF\+::filename (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current filename. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00166}{166}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_aa16a711f2ca136413a7a795993b0def2}\label{classmm_1_1HDF_aa16a711f2ca136413a7a795993b0def2} 
+\index{mm::HDF@{mm::HDF}!fileName@{fileName}}
+\index{fileName@{fileName}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{fileName()}{fileName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \& mm\+::\+HDF\+::file\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Alias of \doxylink{classmm_1_1HDF_a1b5cfa2a8d63f6211bfec6d728243300}{filename()}. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00168}{168}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a1a1b0111bb3fd13970db7ea4b13065f8}\label{classmm_1_1HDF_a1a1b0111bb3fd13970db7ea4b13065f8} 
+\index{mm::HDF@{mm::HDF}!flush@{flush}}
+\index{flush@{flush}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Flush opened file, if it is open. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00229}{229}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a281c665e78ad019ef759a458f11fcc14}\label{classmm_1_1HDF_a281c665e78ad019ef759a458f11fcc14} 
+\index{mm::HDF@{mm::HDF}!getFileID@{getFileID}}
+\index{getFileID@{getFileID}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{getFileID()}{getFileID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} mm\+::\+HDF\+::get\+File\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return raw \doxylink{classmm_1_1HDF}{HDF} C file identifier. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00523}{523}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ad626bf0cd3c550b3ee8b6762ffaa1139}\label{classmm_1_1HDF_ad626bf0cd3c550b3ee8b6762ffaa1139} 
+\index{mm::HDF@{mm::HDF}!getGroupID@{getGroupID}}
+\index{getGroupID@{getGroupID}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{getGroupID()}{getGroupID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} mm\+::\+HDF\+::get\+Group\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return raw \doxylink{classmm_1_1HDF}{HDF} C group identifier. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00525}{525}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a8e4dc0f50aa79d982ba46bab92d05e1e}\label{classmm_1_1HDF_a8e4dc0f50aa79d982ba46bab92d05e1e} 
+\index{mm::HDF@{mm::HDF}!groupName@{groupName}}
+\index{groupName@{groupName}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{groupName()}{groupName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \& mm\+::\+HDF\+::group\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current group name. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00174}{174}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_afa2169eaa6820bfbfdd7f647e5c5ea8b}\label{classmm_1_1HDF_afa2169eaa6820bfbfdd7f647e5c5ea8b} 
+\index{mm::HDF@{mm::HDF}!groups@{groups}}
+\index{groups@{groups}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{groups()}{groups()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ mm\+::\+HDF\+::groups (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns names of all subgroups in current group in alphabetical order. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_abe5f43f1a4e67bd8359cb05f7cd60748}{members} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00555}{555}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_afd9bbb6c47496b6b71a5fe7134f564bf}\label{classmm_1_1HDF_afd9bbb6c47496b6b71a5fe7134f564bf} 
+\index{mm::HDF@{mm::HDF}!isFileOpen@{isFileOpen}}
+\index{isFileOpen@{isFileOpen}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{isFileOpen()}{isFileOpen()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+HDF\+::is\+File\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily true} is currently specified file is open and {\ttfamily false} otherwise. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00154}{154}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ae37b71eb77b4b99fde3c461962dfa99f}\label{classmm_1_1HDF_ae37b71eb77b4b99fde3c461962dfa99f} 
+\index{mm::HDF@{mm::HDF}!isGroupOpen@{isGroupOpen}}
+\index{isGroupOpen@{isGroupOpen}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{isGroupOpen()}{isGroupOpen()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+HDF\+::is\+Group\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily true} is currently specified group is open and {\ttfamily false} otherwise. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00156}{156}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a2423ebba1c27aa56dc255dd573f58324}\label{classmm_1_1HDF_a2423ebba1c27aa56dc255dd573f58324} 
+\index{mm::HDF@{mm::HDF}!memberIterateCallback@{memberIterateCallback}}
+\index{memberIterateCallback@{memberIterateCallback}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{memberIterateCallback()}{memberIterateCallback()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{herr\+\_\+t}} mm\+::\+HDF\+::member\+Iterate\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{loc\+\_\+id,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}}]{name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{H5\+L\+\_\+info\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \texorpdfstring{$\ast$}{*}}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Callback required by \doxylink{classmm_1_1HDF}{HDF} {\ttfamily Literate} function when getting a list of members. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00277}{277}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_abe5f43f1a4e67bd8359cb05f7cd60748}\label{classmm_1_1HDF_abe5f43f1a4e67bd8359cb05f7cd60748} 
+\index{mm::HDF@{mm::HDF}!members@{members}}
+\index{members@{members}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{members()}{members()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmm_1_1HDF_1_1Members}{HDF\+::\+Members}} mm\+::\+HDF\+::members (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns an object with categorized names of all members of current group. 
+
+The names within each category are guaranteed to be in alphabetical order. 
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00298}{298}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a15e5ce2f8904cd892b4783d67165c6a3}\label{classmm_1_1HDF_a15e5ce2f8904cd892b4783d67165c6a3} 
+\index{mm::HDF@{mm::HDF}!open@{open}}
+\index{open@{open}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::open (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{group\+\_\+name = {\ttfamily "{}/"{}},  }\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Opens given file and group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file to open. \\
+\hline
+{\em group\+\_\+name} & Name of the group to open. \\
+\hline
+{\em mode} & Specifies the mode to open the file in, see \doxylink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{HDF\+::\+Mode}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00120}{120}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ac80fe028289043c00a951b4776dd76a6}\label{classmm_1_1HDF_ac80fe028289043c00a951b4776dd76a6} 
+\index{mm::HDF@{mm::HDF}!openFile@{openFile}}
+\index{openFile@{openFile}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{openFile()}{openFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::open\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Opens a given file with a given mode. 
+
+Any previously opened file is closed. No group is opened. 
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00130}{130}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a5946ecfa4f62cce639a48833ab2604bc}\label{classmm_1_1HDF_a5946ecfa4f62cce639a48833ab2604bc} 
+\index{mm::HDF@{mm::HDF}!openFileHelper@{openFileHelper}}
+\index{openFileHelper@{openFileHelper}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{openFileHelper()}{openFileHelper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} mm\+::\+HDF\+::open\+File\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{HDF\+::\+Mode}}}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Opens given file with given mode. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15e5ce2f8904cd892b4783d67165c6a3}{open}, \doxylink{classmm_1_1HDF_ac80fe028289043c00a951b4776dd76a6}{open\+File}, \doxylink{classmm_1_1HDF_a00d94f28dad076707904a7e70081aafd}{open\+Group} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00021}{21}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a00d94f28dad076707904a7e70081aafd}\label{classmm_1_1HDF_a00d94f28dad076707904a7e70081aafd} 
+\index{mm::HDF@{mm::HDF}!openGroup@{openGroup}}
+\index{openGroup@{openGroup}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{openGroup()}{openGroup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::open\+Group (\begin{DoxyParamCaption}\item[{std\+::string}]{group\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Open given group, closing any previously opened \doxylink{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}{group()}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group\+\_\+name} & Name of the group to open. The name must be {\ttfamily /} separated and can be either absolute or relative. Absolute names such as {\ttfamily /a/b/c} open groups staring from {\ttfamily /} group and relative names such as {\ttfamily a/b/c} open groups staring from current group. The groups are created automatically if they do not exist. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00048}{48}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a83c9832c477f0b99c02a5b5898c265f3}\label{classmm_1_1HDF_a83c9832c477f0b99c02a5b5898c265f3} 
+\index{mm::HDF@{mm::HDF}!read1DArray@{read1DArray}}
+\index{read1DArray@{read1DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{read1DArray()}{read1DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ mm\+::\+HDF\+::read1\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read 1D dataset given by {\ttfamily dataset\+\_\+name}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector containing all dataset elements. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the dataset does not exists or cannot be read. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyWarning}{Warning}
+If the element type is not compatible with type {\ttfamily T}, the function will still attempt to read it the behavior is undefined. Most often the return value is garbage. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00095}{95}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}\label{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd} 
+\index{mm::HDF@{mm::HDF}!read2DArray@{read2DArray}}
+\index{read2DArray@{read2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{read2DArray()}{read2DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ $>$ mm\+::\+HDF\+::read2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 2D array of vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of vectors containing all dataset elements. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the dataset does not exists or cannot be read. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyWarning}{Warning}
+If the element type is not compatible with type {\ttfamily T}, the function will still attempt to read it the behavior is undefined. Most often the return value is garbage. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00105}{105}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a281a6095e3d998c12442195f59a5214d}\label{classmm_1_1HDF_a281a6095e3d998c12442195f59a5214d} 
+\index{mm::HDF@{mm::HDF}!read3DArray@{read3DArray}}
+\index{read3DArray@{read3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{read3DArray()}{read3DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ $>$ $>$ mm\+::\+HDF\+::read3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 3D array of vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of vectors containing all dataset elements. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the dataset does not exists or cannot be read. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyWarning}{Warning}
+If the element type is not compatible with type {\ttfamily T}, the function will still attempt to read it the behavior is undefined. Most often the return value is garbage. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00123}{123}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}\label{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced} 
+\index{mm::HDF@{mm::HDF}!readAttribute@{readAttribute}}
+\index{readAttribute@{readAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readAttribute()}{readAttribute()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} mm\+::\+HDF\+::read\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read attribute given by {\ttfamily attr\+\_\+name}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type to which to read the attribute. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em attr\+\_\+name} & Name of the attribute \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Attribute value, converted to type {\ttfamily T}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the attribute does not exists or cannot be read. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyWarning}{Warning}
+If the attribute type is not compatible with type {\ttfamily T}, the function will still attempt to read it the behavior is undefined. Most often the return value is garbage. 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+This function is specialized for {\ttfamily std\+::string}. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ae5df1048fd690a8a4e64d106912d8ce0}\label{classmm_1_1HDF_ae5df1048fd690a8a4e64d106912d8ce0} 
+\index{mm::HDF@{mm::HDF}!readBoolAttribute@{readBoolAttribute}}
+\index{readBoolAttribute@{readBoolAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readBoolAttribute()}{readBoolAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+HDF\+::read\+Bool\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads {\ttfamily bool} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00122}{122}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_aa1eacb99e2b4d3bd720a22e19cac1016}\label{classmm_1_1HDF_aa1eacb99e2b4d3bd720a22e19cac1016} 
+\index{mm::HDF@{mm::HDF}!readDouble2DArray@{readDouble2DArray}}
+\index{readDouble2DArray@{readDouble2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readDouble2DArray()}{readDouble2DArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ mm\+::\+HDF\+::read\+Double2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 2D vector of {\ttfamily double}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00206}{206}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a407fa255d479936432d79e1b33c906cd}\label{classmm_1_1HDF_a407fa255d479936432d79e1b33c906cd} 
+\index{mm::HDF@{mm::HDF}!readDouble3DArray@{readDouble3DArray}}
+\index{readDouble3DArray@{readDouble3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readDouble3DArray()}{readDouble3DArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ $>$ mm\+::\+HDF\+::read\+Double3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 3D vector of {\ttfamily double}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00220}{220}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a255e40c9960937e39af36ec3398d072a}\label{classmm_1_1HDF_a255e40c9960937e39af36ec3398d072a} 
+\index{mm::HDF@{mm::HDF}!readDoubleArray@{readDoubleArray}}
+\index{readDoubleArray@{readDoubleArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readDoubleArray()}{readDoubleArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ mm\+::\+HDF\+::read\+Double\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into vector of {\ttfamily double}s. 
+
+\begin{DoxySeeAlso}{See also}
+read\+Array 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00194}{194}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_ac39e7cdcf358cafe89161d04ab99b6c8}\label{classmm_1_1HDF_ac39e7cdcf358cafe89161d04ab99b6c8} 
+\index{mm::HDF@{mm::HDF}!readDoubleAttribute@{readDoubleAttribute}}
+\index{readDoubleAttribute@{readDoubleAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readDoubleAttribute()}{readDoubleAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+HDF\+::read\+Double\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads {\ttfamily double} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00126}{126}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a0ff56f6a9afa2c199c8cc9eacae5b586}\label{classmm_1_1HDF_a0ff56f6a9afa2c199c8cc9eacae5b586} 
+\index{mm::HDF@{mm::HDF}!readEigen@{readEigen}}
+\index{readEigen@{readEigen}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readEigen()}{readEigen()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}  = double$>$ \\
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, -\/1, -\/1, 0, -\/1, -\/1 $>$ mm\+::\+HDF\+::read\+Eigen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads data as an Eigen matrix of type {\ttfamily scalar\+\_\+t}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em scalar\+\_\+t} & The of the data to read. Set to {\ttfamily double} by default. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset to read from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+If the supplied data type does not match the actual type of the data, the behavior is undefined. Most likely, the returned matrix will have garbage contents. 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+To use this function, the file \doxylink{HDF__Eigen_8hpp}{HDF\+\_\+\+Eigen.\+hpp} must be included. 
+\end{DoxyNote}
+\Hypertarget{classmm_1_1HDF_a31695f4e56e549f8b05bf143f7e0ddf3}\label{classmm_1_1HDF_a31695f4e56e549f8b05bf143f7e0ddf3} 
+\index{mm::HDF@{mm::HDF}!readFloat2DArray@{readFloat2DArray}}
+\index{readFloat2DArray@{readFloat2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readFloat2DArray()}{readFloat2DArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ $>$ mm\+::\+HDF\+::read\+Float2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 2D vector of {\ttfamily float}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00210}{210}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_afa4162e5a1b0b08e7fb2bbe171a39d02}\label{classmm_1_1HDF_afa4162e5a1b0b08e7fb2bbe171a39d02} 
+\index{mm::HDF@{mm::HDF}!readFloat3DArray@{readFloat3DArray}}
+\index{readFloat3DArray@{readFloat3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readFloat3DArray()}{readFloat3DArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ $>$ $>$ mm\+::\+HDF\+::read\+Float3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 3D vector of {\ttfamily float}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00225}{225}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a11844665086d9ec27ea696b873f762ed}\label{classmm_1_1HDF_a11844665086d9ec27ea696b873f762ed} 
+\index{mm::HDF@{mm::HDF}!readFloatArray@{readFloatArray}}
+\index{readFloatArray@{readFloatArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readFloatArray()}{readFloatArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ mm\+::\+HDF\+::read\+Float\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into vector of {\ttfamily float}s. 
+
+\begin{DoxySeeAlso}{See also}
+read\+Array 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00198}{198}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_ad3842776a124bf3aaea096b3da377a0a}\label{classmm_1_1HDF_ad3842776a124bf3aaea096b3da377a0a} 
+\index{mm::HDF@{mm::HDF}!readFloatAttribute@{readFloatAttribute}}
+\index{readFloatAttribute@{readFloatAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readFloatAttribute()}{readFloatAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{float}} mm\+::\+HDF\+::read\+Float\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads {\ttfamily float} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00130}{130}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a43cd2ab867426b7ff1cc3585db0683d1}\label{classmm_1_1HDF_a43cd2ab867426b7ff1cc3585db0683d1} 
+\index{mm::HDF@{mm::HDF}!readInt2DArray@{readInt2DArray}}
+\index{readInt2DArray@{readInt2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readInt2DArray()}{readInt2DArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ mm\+::\+HDF\+::read\+Int2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 2D vector of {\ttfamily int}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00202}{202}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a416af0728ceb2b59878aa75e3d1a541e}\label{classmm_1_1HDF_a416af0728ceb2b59878aa75e3d1a541e} 
+\index{mm::HDF@{mm::HDF}!readInt3DArray@{readInt3DArray}}
+\index{readInt3DArray@{readInt3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readInt3DArray()}{readInt3DArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ $>$ $>$ mm\+::\+HDF\+::read\+Int3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into 3D vector of {\ttfamily int}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a15ef7c92c023d9a58e27bec09d5aeccd}{read2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00215}{215}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a801107c0ac35e467d657384a352f709e}\label{classmm_1_1HDF_a801107c0ac35e467d657384a352f709e} 
+\index{mm::HDF@{mm::HDF}!readIntArray@{readIntArray}}
+\index{readIntArray@{readIntArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readIntArray()}{readIntArray()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ mm\+::\+HDF\+::read\+Int\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into vector of {\ttfamily int}s. 
+
+\begin{DoxySeeAlso}{See also}
+read\+Array 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00190}{190}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a00d79e0ca535bc82356955949e95028d}\label{classmm_1_1HDF_a00d79e0ca535bc82356955949e95028d} 
+\index{mm::HDF@{mm::HDF}!readIntAttribute@{readIntAttribute}}
+\index{readIntAttribute@{readIntAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readIntAttribute()}{readIntAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+HDF\+::read\+Int\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads {\ttfamily int} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00118}{118}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a0af87385a9ec8730bf2ffe7045f8977e}\label{classmm_1_1HDF_a0af87385a9ec8730bf2ffe7045f8977e} 
+\index{mm::HDF@{mm::HDF}!readLinearArray@{readLinearArray}}
+\index{readLinearArray@{readLinearArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readLinearArray()}{readLinearArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+std\+::pair$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{hsize\+\_\+t}} $>$, std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ $>$ mm\+::\+HDF\+::read\+Linear\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Read given dataset into linear {\ttfamily dim}-\/D array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector containing all dataset elements in col-\/major fashion. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if the dataset does not exists or cannot be read. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyWarning}{Warning}
+If the element type is not compatible with type {\ttfamily T}, the function will still attempt to read it the behavior is undefined. Most often the return value is garbage. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a58e4818db5b4f2e526dcf4f41f34f886}\label{classmm_1_1HDF_a58e4818db5b4f2e526dcf4f41f34f886} 
+\index{mm::HDF@{mm::HDF}!readNullTerminatedStringAttribute@{readNullTerminatedStringAttribute}}
+\index{readNullTerminatedStringAttribute@{readNullTerminatedStringAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readNullTerminatedStringAttribute()}{readNullTerminatedStringAttribute()}}
+{\footnotesize\ttfamily std\+::string mm\+::\+HDF\+::read\+Null\+Terminated\+String\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads null-\/terminated {\ttfamily string} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00113}{113}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_acd0947dc9d965ec9caa3618bd68b87ce}\label{classmm_1_1HDF_acd0947dc9d965ec9caa3618bd68b87ce} 
+\index{mm::HDF@{mm::HDF}!readStringAttribute@{readStringAttribute}}
+\index{readStringAttribute@{readStringAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{readStringAttribute()}{readStringAttribute()}}
+{\footnotesize\ttfamily std\+::string mm\+::\+HDF\+::read\+String\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Reads non-\/null-\/terminated {\ttfamily string} attribute. 
+
+Any null characters are read as part of the string. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{read\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00134}{134}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a8313e377cf908797e1b49fa262200e77}\label{classmm_1_1HDF_a8313e377cf908797e1b49fa262200e77} 
+\index{mm::HDF@{mm::HDF}!reopen@{reopen}}
+\index{reopen@{reopen}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{reopen()}{reopen()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::reopen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reopens current file and group. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00152}{152}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a95df5aa60a40599492c86a961514dd88}\label{classmm_1_1HDF_a95df5aa60a40599492c86a961514dd88} 
+\index{mm::HDF@{mm::HDF}!reopenFile@{reopenFile}}
+\index{reopenFile@{reopenFile}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{reopenFile()}{reopenFile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::reopen\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a00b7e331489fa2cc90ae85b6f0b403f6}{APPEND}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reopens the current file. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00137}{137}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a662a421877fb89d8c1fddb597345de40}\label{classmm_1_1HDF_a662a421877fb89d8c1fddb597345de40} 
+\index{mm::HDF@{mm::HDF}!reopenGroup@{reopenGroup}}
+\index{reopenGroup@{reopenGroup}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{reopenGroup()}{reopenGroup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::reopen\+Group (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reopens current group. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00148}{148}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a3ef8dd63065f34c221d4e8fa96ce869f}\label{classmm_1_1HDF_a3ef8dd63065f34c221d4e8fa96ce869f} 
+\index{mm::HDF@{mm::HDF}!setFilename@{setFilename}}
+\index{setFilename@{setFilename}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{setFilename()}{setFilename()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::set\+Filename (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets new filename without opening the new file. Any previously opened file is closed. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00170}{170}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a2cd20e625413b6863f325c77ff9800d8}\label{classmm_1_1HDF_a2cd20e625413b6863f325c77ff9800d8} 
+\index{mm::HDF@{mm::HDF}!setFileName@{setFileName}}
+\index{setFileName@{setFileName}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{setFileName()}{setFileName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::set\+File\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Alias of \doxylink{classmm_1_1HDF_a3ef8dd63065f34c221d4e8fa96ce869f}{set\+Filename()}. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00172}{172}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_afd25f69567511cf5508cfc415c28b0af}\label{classmm_1_1HDF_afd25f69567511cf5508cfc415c28b0af} 
+\index{mm::HDF@{mm::HDF}!setGroupName@{setGroupName}}
+\index{setGroupName@{setGroupName}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{setGroupName()}{setGroupName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::set\+Group\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{group\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Set new group name without opening the new group. Any previously opened group is closed. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00262}{262}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a4f3239b1709b1e76587ee27e02e9bc9e}\label{classmm_1_1HDF_a4f3239b1709b1e76587ee27e02e9bc9e} 
+\index{mm::HDF@{mm::HDF}!str@{str}}
+\index{str@{str}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily std\+::string mm\+::\+HDF\+::str (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{HDF\+::\+Mode}}}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Convert \doxylink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864}{HDF\+::\+Mode} enum to string. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_afe608d32823976d96697fbb1bc5dce0d}\label{classmm_1_1HDF_afe608d32823976d96697fbb1bc5dce0d} 
+\index{mm::HDF@{mm::HDF}!write1DArray@{write1DArray}}
+\index{write1DArray@{write1DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{write1DArray()}{write1DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write1\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite }\end{DoxyParamCaption}) const}
+
+
+
+Writes given 1D array with given value and type to file. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to which the elements of value are converted to. \\
+\hline
+{\em array\+\_\+t} & Type of the given array. It must support {\ttfamily operator\mbox{[}\mbox{]}} and {\ttfamily .size()}. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the attribute. \\
+\hline
+{\em value} & Value to be written \\
+\hline
+{\em type} & HDF5 type of the elements to be written. \\
+\hline
+{\em overwrite} & If overwriting existing datasets is allowed. If an attribute with the same name is attempted to be written, it must have the same dimensions and type as current value. Otherwise the overwrite will fail. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00190}{190}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a1383b80b852512f010b58b70609cbf06}\label{classmm_1_1HDF_a1383b80b852512f010b58b70609cbf06} 
+\index{mm::HDF@{mm::HDF}!write2DArray@{write2DArray}}
+\index{write2DArray@{write2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{write2DArray()}{write2DArray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite,  }\item[{std\+::false\+\_\+type}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Overload for static\+\_\+assert for Eigen due to different {\ttfamily size} method. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00199}{199}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a71557b9bd4e53e4e027da93cd075492a}\label{classmm_1_1HDF_a71557b9bd4e53e4e027da93cd075492a} 
+\index{mm::HDF@{mm::HDF}!write2DArray@{write2DArray}}
+\index{write2DArray@{write2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{write2DArray()}{write2DArray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{,  }\item[{std\+::true\+\_\+type}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Overload for static\+\_\+assert for Eigen due to different {\ttfamily size} method. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00309}{309}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}\label{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1} 
+\index{mm::HDF@{mm::HDF}!write2DArray@{write2DArray}}
+\index{write2DArray@{write2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{write2DArray()}{write2DArray()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes given 2D array of given value and type to file. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of {\ttfamily array\+\_\+t} elements \\
+\hline
+{\em array\+\_\+t} & Type of the given 2D array. It must support {\ttfamily .size()}, {\ttfamily \mbox{[}i\mbox{]}.size()} and {\ttfamily \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}} operations. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+{\em value} & Value to be written. \\
+\hline
+{\em type} & HDF5 type of the elements to be written. \\
+\hline
+{\em overwrite} & If overwriting existing datasets is allowed. If an attribute with the same name is attempted to be written, it must have the same dimensions and type as current value. Otherwise the overwrite will fail. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00296}{296}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a2e03fb3046f2f05acd64d0de8c3bdd29}\label{classmm_1_1HDF_a2e03fb3046f2f05acd64d0de8c3bdd29} 
+\index{mm::HDF@{mm::HDF}!write3DArray@{write3DArray}}
+\index{write3DArray@{write3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{write3DArray()}{write3DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite }\end{DoxyParamCaption}) const}
+
+
+
+Writes given 3D array of given value and type to file. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of {\ttfamily array\+\_\+t} elements \\
+\hline
+{\em array\+\_\+t} & Type of the given 2D array. It must support {\ttfamily .size()}, {\ttfamily \mbox{[}i\mbox{]}.size()}, {\ttfamily \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}}, {\ttfamily \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}.size()} and {\ttfamily \mbox{[}i\mbox{]}\mbox{[}j\mbox{]}\mbox{[}k\mbox{]}} operations. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+{\em value} & Value to be written. \\
+\hline
+{\em type} & HDF5 type of the elements to be written. \\
+\hline
+{\em overwrite} & If overwriting existing datasets is allowed. If an attribute with the same name is attempted to be written, it must have the same dimensions and type as current value. Otherwise the overwrite will fail. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00216}{216}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}\label{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8} 
+\index{mm::HDF@{mm::HDF}!writeAttribute@{writeAttribute}}
+\index{writeAttribute@{writeAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeAttribute()}{writeAttribute()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} \&}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Writes given attribute with given value and type to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attr\+\_\+name} & Name of the attribute. \\
+\hline
+{\em value} & Value to be written \\
+\hline
+{\em type} & HDF5 type of the attribute to be written. \\
+\hline
+{\em overwrite} & If overwriting existing attributes is allowed. If an attribute with the same name is attempted to be written, the existing attribute is deleted and a new one is created instead. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a00addaef461ee6200bf707016c7b22ed}\label{classmm_1_1HDF_a00addaef461ee6200bf707016c7b22ed} 
+\index{mm::HDF@{mm::HDF}!writeBoolAttribute@{writeBoolAttribute}}
+\index{writeBoolAttribute@{writeBoolAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeBoolAttribute()}{writeBoolAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Bool\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write {\ttfamily bool} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}{write\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00142}{142}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_aceed7a68e16d0299737e183d81bb5600}\label{classmm_1_1HDF_aceed7a68e16d0299737e183d81bb5600} 
+\index{mm::HDF@{mm::HDF}!writeDomain@{writeDomain}}
+\index{writeDomain@{writeDomain}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeDomain()}{writeDomain()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} domain\+\_\+t \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Writes given domain discretization to file. 
+
+A group with given name is created and 4 datasets and 1 attribute are stored inside\+:
+\begin{DoxyItemize}
+\item {\ttfamily N}\+: int attribute storing number of nodes in the domain,
+\item {\ttfamily pos}\+: {\ttfamily N x dim} double array of positions,
+\item {\ttfamily types}\+: int array of length {\ttfamily N} representing domain types,
+\item {\ttfamily bmap}\+: int array of length {\ttfamily N} mapping nodes to boundary nodes (see \doxylink{classmm_1_1DomainDiscretization_a5e94cbb6a059cbbe28bac30e7bf258e9}{Domain\+Discretization\+::bmap}),
+\item {\ttfamily normals}\+: double array of domain normals for boundary nodes. After the function exists, the same group is opened as before the call.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the group in which the domain is stored. \\
+\hline
+{\em domain} & Domain to write to file. \\
+\hline
+{\em overwrite} & If {\ttfamily true}, allows overwriting of existing entries. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainDiscretization}{Domain\+Discretization} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00332}{332}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ab0c4b2b2f0c1d7c21b0f4284e2ed086b}\label{classmm_1_1HDF_ab0c4b2b2f0c1d7c21b0f4284e2ed086b} 
+\index{mm::HDF@{mm::HDF}!writeDouble2DArray@{writeDouble2DArray}}
+\index{writeDouble2DArray@{writeDouble2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeDouble2DArray()}{writeDouble2DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Double2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 2D array of {\ttfamily double}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}{write2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00264}{264}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a8506cf21ee873f7e975e893343dbebe4}\label{classmm_1_1HDF_a8506cf21ee873f7e975e893343dbebe4} 
+\index{mm::HDF@{mm::HDF}!writeDouble3DArray@{writeDouble3DArray}}
+\index{writeDouble3DArray@{writeDouble3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeDouble3DArray()}{writeDouble3DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Double3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 3D array of {\ttfamily double}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a2e03fb3046f2f05acd64d0de8c3bdd29}{write3\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00282}{282}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_af659dd072651bb2fc07b8921649319a6}\label{classmm_1_1HDF_af659dd072651bb2fc07b8921649319a6} 
+\index{mm::HDF@{mm::HDF}!writeDoubleArray@{writeDoubleArray}}
+\index{writeDoubleArray@{writeDoubleArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeDoubleArray()}{writeDoubleArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Double\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 1D array of {\ttfamily double}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_afe608d32823976d96697fbb1bc5dce0d}{write1\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00246}{246}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a16966c27e9a73048065a0718beb1ddbc}\label{classmm_1_1HDF_a16966c27e9a73048065a0718beb1ddbc} 
+\index{mm::HDF@{mm::HDF}!writeDoubleAttribute@{writeDoubleAttribute}}
+\index{writeDoubleAttribute@{writeDoubleAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeDoubleAttribute()}{writeDoubleAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Double\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write {\ttfamily double} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}{write\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00146}{146}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a05f8a45b96ac4971761574da3db4a461}\label{classmm_1_1HDF_a05f8a45b96ac4971761574da3db4a461} 
+\index{mm::HDF@{mm::HDF}!writeEigen@{writeEigen}}
+\index{writeEigen@{writeEigen}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeEigen()}{writeEigen()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Eigen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given Eigen expression as a 2D array of its type (either {\ttfamily int}, {\ttfamily double} or {\ttfamily float}). 
+
+\begin{DoxyNote}{Note}
+To use this function, the file \doxylink{HDF__Eigen_8hpp}{HDF\+\_\+\+Eigen.\+hpp} must be included. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{HDF__Eigen_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{HDF__Eigen_8hpp_source}{HDF\+\_\+\+Eigen.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ad3e6a0d48df9ad997d8679161161738e}\label{classmm_1_1HDF_ad3e6a0d48df9ad997d8679161161738e} 
+\index{mm::HDF@{mm::HDF}!writeFloat2DArray@{writeFloat2DArray}}
+\index{writeFloat2DArray@{writeFloat2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeFloat2DArray()}{writeFloat2DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Float2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 2D array of {\ttfamily float}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}{write2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00270}{270}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ab413434396deba16d91c9737211e2513}\label{classmm_1_1HDF_ab413434396deba16d91c9737211e2513} 
+\index{mm::HDF@{mm::HDF}!writeFloat3DArray@{writeFloat3DArray}}
+\index{writeFloat3DArray@{writeFloat3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeFloat3DArray()}{writeFloat3DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Float3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 3D array of {\ttfamily float}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a2e03fb3046f2f05acd64d0de8c3bdd29}{write3\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00288}{288}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ae8ec2e82ca101ea89b71e3448c89f2e0}\label{classmm_1_1HDF_ae8ec2e82ca101ea89b71e3448c89f2e0} 
+\index{mm::HDF@{mm::HDF}!writeFloatArray@{writeFloatArray}}
+\index{writeFloatArray@{writeFloatArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeFloatArray()}{writeFloatArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Float\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 1D array of {\ttfamily floats}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_afe608d32823976d96697fbb1bc5dce0d}{write1\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00252}{252}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a74fcf20d17aa81d0af27213be1d73c51}\label{classmm_1_1HDF_a74fcf20d17aa81d0af27213be1d73c51} 
+\index{mm::HDF@{mm::HDF}!writeFloatAttribute@{writeFloatAttribute}}
+\index{writeFloatAttribute@{writeFloatAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeFloatAttribute()}{writeFloatAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Float\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{float}}}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write {\ttfamily float} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}{write\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00150}{150}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_ae5d767e34db6e05a6a6320826945928c}\label{classmm_1_1HDF_ae5d767e34db6e05a6a6320826945928c} 
+\index{mm::HDF@{mm::HDF}!writeInt2DArray@{writeInt2DArray}}
+\index{writeInt2DArray@{writeInt2DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeInt2DArray()}{writeInt2DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Int2\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 2D array of {\ttfamily int}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}{write2\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00258}{258}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a51861514844f26680065d442f185b495}\label{classmm_1_1HDF_a51861514844f26680065d442f185b495} 
+\index{mm::HDF@{mm::HDF}!writeInt3DArray@{writeInt3DArray}}
+\index{writeInt3DArray@{writeInt3DArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeInt3DArray()}{writeInt3DArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Int3\+DArray (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 3D array of {\ttfamily int}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a2e03fb3046f2f05acd64d0de8c3bdd29}{write3\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00276}{276}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a571287d5f1534822004e7a79f74ba990}\label{classmm_1_1HDF_a571287d5f1534822004e7a79f74ba990} 
+\index{mm::HDF@{mm::HDF}!writeIntArray@{writeIntArray}}
+\index{writeIntArray@{writeIntArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeIntArray()}{writeIntArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Int\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{array\+\_\+t}} \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write given value as a 1D array of {\ttfamily int}s. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_afe608d32823976d96697fbb1bc5dce0d}{write1\+DArray} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00240}{240}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ad0eb0f439cd8be3794e9fa8958feb385}\label{classmm_1_1HDF_ad0eb0f439cd8be3794e9fa8958feb385} 
+\index{mm::HDF@{mm::HDF}!writeIntAttribute@{writeIntAttribute}}
+\index{writeIntAttribute@{writeIntAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeIntAttribute()}{writeIntAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Int\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write {\ttfamily int} attribute. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}{write\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00138}{138}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a39b2ad9eba12d8c838bfacb5f73a870e}\label{classmm_1_1HDF_a39b2ad9eba12d8c838bfacb5f73a870e} 
+\index{mm::HDF@{mm::HDF}!writeLinearArray@{writeLinearArray}}
+\index{writeLinearArray@{writeLinearArray}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeLinearArray()}{writeLinearArray()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Linear\+Array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{dataset\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*}}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::array$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{hsize\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{sizes,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}}}]{type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite }\end{DoxyParamCaption}) const}
+
+
+
+Writes a {\ttfamily dim}-\/dimensional dataset stored in 1D array in col-\/major fashion. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em dim} & Dimension (\doxylink{classmm_1_1HDF}{HDF} rank) of the dataset, 2 for matrices, 3 for tensors. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dataset\+\_\+name} & Name of the dataset. \\
+\hline
+{\em value} & Pointer to values to be written, stored in a linear col-\/major fashion. The number of values should be equal to the product of {\ttfamily sizes}. \\
+\hline
+{\em sizes} & Sizes of the dataset along each dimension. \\
+\hline
+{\em type} & HDF5 type of the dataset. \\
+\hline
+{\em overwrite} & See \doxylink{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}{write2\+DArray()} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00144}{144}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a9a028edc4dc5ac2c750ee70c5f64fe44}\label{classmm_1_1HDF_a9a028edc4dc5ac2c750ee70c5f64fe44} 
+\index{mm::HDF@{mm::HDF}!writeSparseMatrix@{writeSparseMatrix}}
+\index{writeSparseMatrix@{writeSparseMatrix}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeSparseMatrix()}{writeSparseMatrix()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Sparse\+Matrix\+Type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Sparse\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Sparse\+Matrix\+Type}} \&}]{matrix,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{one\+\_\+based = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{true}}},  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Writes a sparse matrix. 
+
+Matrix {\ttfamily matrix} is written as a {\ttfamily N x 3} matrix, where the columns represent vectors {\ttfamily I}, {\ttfamily J}, {\ttfamily V}, such that {\ttfamily M(I(i), J(i)) = V(i)}. Matrix values are stored as doubles of native size. \begin{DoxyWarning}{Warning}
+By default, the indexes of the matrix elements are saved in 1-\/based format. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Attribute name. \\
+\hline
+{\em matrix} & A sparse matrix. \\
+\hline
+{\em one\+\_\+based} & Whether to store the indices as one or zero based. One based indexes are ready to be read by Matlab\textquotesingle{}s {\ttfamily spconvert}. \\
+\hline
+{\em overwrite} & See \doxylink{classmm_1_1HDF_a85f0ed1c003fc61f8a08807aa73803d1}{write2\+DArray()}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00316}{316}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a4adb77a3a72bc4370990e6f60296f8f9}\label{classmm_1_1HDF_a4adb77a3a72bc4370990e6f60296f8f9} 
+\index{mm::HDF@{mm::HDF}!writeStringAttribute@{writeStringAttribute}}
+\index{writeStringAttribute@{writeStringAttribute}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeStringAttribute()}{writeStringAttribute()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+String\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{value,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption}) const}
+
+
+
+Write {\ttfamily string} attribute. 
+
+The string is written as an non-\/null-\/terminater array of bytes. It may contain null characters in the middle. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_a25dba5e348bf639ba1f3eaf71264e2c8}{write\+Attribute} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00154}{154}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{classmm_1_1HDF_a1680453dacc1e441c20c0dc0275da160}\label{classmm_1_1HDF_a1680453dacc1e441c20c0dc0275da160} 
+\index{mm::HDF@{mm::HDF}!writeTimer@{writeTimer}}
+\index{writeTimer@{writeTimer}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeTimer()}{writeTimer()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{timer\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+Timer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{timer\+\_\+t}} \&}]{timer,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Writes given timer to file. 
+
+A group with given name is created and durations (in seconds) between consecutive labels are writen as double attributes named {\ttfamily label1-\/label2}. Additionally, total time between first and last label (in seconds) is stored in the double attribute named {\ttfamily total}. After the function exists, the same group is opened as before the call. If timer has 0 labels, only the group is created. If timer has one label, attribute {\ttfamily total} with value {\ttfamily 0.\+0} is written. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the group in which the timer is stored. \\
+\hline
+{\em timer} & \doxylink{classmm_1_1Timer}{Timer} to write to file. \\
+\hline
+{\em overwrite} & If {\ttfamily true}, allows overwriting of existing entries. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1Timer}{Timer} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00346}{346}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a136b97558d4eae6c52a385c8b5c4a32a}\label{classmm_1_1HDF_a136b97558d4eae6c52a385c8b5c4a32a} 
+\index{mm::HDF@{mm::HDF}!writeXML@{writeXML}}
+\index{writeXML@{writeXML}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{writeXML()}{writeXML()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{conf\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+HDF\+::write\+XML (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{conf\+\_\+t}} \&}]{conf,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{overwrite = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Writes given \doxylink{classmm_1_1XML}{XML} object to file. 
+
+All attributes in the file, given by \doxylink{classmm_1_1XML_a1194b74b5b5da70eed10e6260a32a77e}{XML\+::get\+All}, are written in their dot-\/separated full-\/path format. They are written either as doubles (if whole value can be parsed as a {\ttfamily double}) or strings otherwise. After the function exists, the same group is opened as before the call. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the group in which the \doxylink{classmm_1_1XML}{XML} attributes are stored. \\
+\hline
+{\em conf} & \doxylink{classmm_1_1XML}{XML} object. \\
+\hline
+{\em overwrite} & If {\ttfamily true}, allows overwriting of existing entries. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1XML}{XML} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8hpp_source_l00294}{294}} of file \mbox{\hyperlink{HDF_8hpp_source}{HDF.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1HDF_a8e6d60c084ba46ab44d99d642d1376db}\label{classmm_1_1HDF_a8e6d60c084ba46ab44d99d642d1376db} 
+\index{mm::HDF@{mm::HDF}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1HDF}{HDF}} \&}]{hdf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about \doxylink{classmm_1_1HDF}{HDF} reader, such as current group and file. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00561}{561}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1HDF_a5a04f252371bdfe2f8ea5b31164bd7f2}\label{classmm_1_1HDF_a5a04f252371bdfe2f8ea5b31164bd7f2} 
+\index{mm::HDF@{mm::HDF}!file@{file}}
+\index{file@{file}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{file}{file}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} mm\+::\+HDF\+::file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Currently open file identifier. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00079}{79}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_ad9a1e3f20af3cce2516d5f19663ca210}\label{classmm_1_1HDF_ad9a1e3f20af3cce2516d5f19663ca210} 
+\index{mm::HDF@{mm::HDF}!filename\_@{filename\_}}
+\index{filename\_@{filename\_}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{filename\_}{filename\_}}
+{\footnotesize\ttfamily std\+::string mm\+::\+HDF\+::filename\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Current file name. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00076}{76}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}\label{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b} 
+\index{mm::HDF@{mm::HDF}!group@{group}}
+\index{group@{group}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{group}{group}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{hid\+\_\+t}} mm\+::\+HDF\+::group\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Currently open group identifier. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1HDF_a39f36e07f141bdbdd16f5af09b7db3d3}\label{classmm_1_1HDF_a39f36e07f141bdbdd16f5af09b7db3d3} 
+\index{mm::HDF@{mm::HDF}!group\_name\_@{group\_name\_}}
+\index{group\_name\_@{group\_name\_}!mm::HDF@{mm::HDF}}
+\doxysubsubsection{\texorpdfstring{group\_name\_}{group\_name\_}}
+{\footnotesize\ttfamily std\+::string mm\+::\+HDF\+::group\+\_\+name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Current group name. 
+
+
+
+Definition at line \mbox{\hyperlink{HDF__fwd_8hpp_source_l00077}{77}} of file \mbox{\hyperlink{HDF__fwd_8hpp_source}{HDF\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/io/\mbox{\hyperlink{HDF__fwd_8hpp}{HDF\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/io/\mbox{\hyperlink{HDF_8hpp}{HDF.\+hpp}}\item 
+include/medusa/bits/io/\mbox{\hyperlink{HDF__Eigen_8hpp}{HDF\+\_\+\+Eigen.\+hpp}}\item 
+src/io/\mbox{\hyperlink{HDF_8cpp}{HDF.\+cpp}}\end{DoxyCompactItemize}

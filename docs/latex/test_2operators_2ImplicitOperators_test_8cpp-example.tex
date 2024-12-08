@@ -1,0 +1,441 @@
+\doxysection{test/operators/\+Implicit\+Operators\+\_\+test.\+cpp}
+\hypertarget{test_2operators_2ImplicitOperators_test_8cpp-example}{}\label{test_2operators_2ImplicitOperators_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp}{medusa/bits/approximations/JacobiSVDWrapper\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials_8hpp}{medusa/bits/approximations/Monomials.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WeightFunction__fwd_8hpp}{medusa/bits/approximations/WeightFunction\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Gaussian__fwd_8hpp}{medusa/bits/approximations/Gaussian\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WLS_8hpp}{medusa/bits/approximations/WLS.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{computeShapes_8hpp}{medusa/bits/operators/computeShapes.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ImplicitOperators_8hpp}{medusa/bits/operators/ImplicitOperators.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RaggedShapeStorage_8hpp}{medusa/bits/operators/RaggedShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{UniformShapeStorage_8hpp}{medusa/bits/operators/UniformShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec__fwd_8hpp}{medusa/bits/types/Vec\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeStorage_8hpp}{medusa/bits/operators/ShapeStorage.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/LU>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/SparseCore>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/IterativeLinearSolvers>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }ImplicitOp\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ UniformShapeStorage<Vec2d>\ shapes;}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs;}
+\DoxyCodeLine{\ \ \ \ ImplicitOperators<\textcolor{keyword}{decltype}(shapes),\ \textcolor{keyword}{decltype}(M),\ \textcolor{keyword}{decltype}(rhs)>\ op;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ImplicitOp()\ :\ M(3,\ 3),\ rhs(3)\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.resize(\{3,\ 3,\ 3\});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setSupport(0,\ \{0,\ 1,\ 2\});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setSupport(1,\ \{0,\ 1,\ 2\});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setSupport(2,\ \{0,\ 1,\ 2\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ M.setZero();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Vector3d\ s0(1.2,\ 1.3,\ 1.4),\ s1(-\/14,\ -\/15,\ -\/16),\ s2(100,\ 110,\ 120);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setLaplace(0,\ s0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setLaplace(1,\ s1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setLaplace(2,\ s2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Vector3d\ d0(1200,\ 1300,\ 1400),\ d1(-\/14000,\ -\/15000,\ -\/16000),\ d2(0.01,\ 0.011,\ 0.012);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD1(0,\ 0,\ d0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD1(0,\ 1,\ d1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD1(0,\ 2,\ d2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD1(1,\ 0,\ 2*d0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD1(1,\ 1,\ 2*d1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD1(1,\ 2,\ 2*d2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Vector3d\ dd0(0.5,\ 0.6,\ 0.7),\ dd1(-\/1.4,\ -\/1.5,\ -\/1.6),\ dd2(-\/25,\ -\/26,\ -\/27);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(0,\ 0,\ 0,\ dd0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(0,\ 0,\ 1,\ dd1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(0,\ 0,\ 2,\ dd2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(0,\ 1,\ 0,\ 2*dd0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(0,\ 1,\ 1,\ 2*dd1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(0,\ 1,\ 2,\ 2*dd2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(1,\ 1,\ 0,\ 3*dd0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(1,\ 1,\ 1,\ 3*dd1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.setD2(1,\ 1,\ 2,\ 3*dd2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op\ =\ shapes.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignTwice)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ expectedM(0,\ 0)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ op.value(0)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ expectedM(0,\ 0)\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ op.value(0)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignCombined)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ v\ =\ 4.2;}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ op.value(1)\ +\ v\ *\ op.lap(1)\ +\ op.value(1)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ expectedM.row(1)\ +=\ v\ *\ shapes.laplace(1);}
+\DoxyCodeLine{\ \ \ \ expectedM(1,\ 1)\ +=\ 2;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[1]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignValue)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ v\ =\ 4.2,\ f\ =\ -\/3.4;}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ expectedM(1,\ 1)\ =\ f;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[1]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ f*op.value(1)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignLap)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ v\ =\ 4.2;}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ expectedM.row(0)\ =\ shapes.laplace(0);}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.lap(0)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignGrad)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ v\ =\ 4.2;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ direction(3.4,\ 2.4);}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ expectedM.row(0)\ =\ direction[0]*shapes.d1(0,\ 0)\ +\ direction[1]*shapes.d1(1,\ 0);}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.grad(0,\ direction)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignD1)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ v\ =\ 4.2;}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ expectedM.row(0)\ =\ shapes.d1(0,\ 0);\ \ \textcolor{comment}{//\ dx\ in\ node\ 0}}
+\DoxyCodeLine{\ \ \ \ expectedM.row(1)\ =\ shapes.d1(1,\ 1);\ \ \textcolor{comment}{//\ dy\ in\ node\ 1}}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[1]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.der1(0,\ 0)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.der1(1,\ 1)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignD2)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ v\ =\ 4.2;}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix3d\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector3d\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ expectedM.row(0)\ =\ shapes.d2(0,\ 0,\ 0);\ \ \textcolor{comment}{//\ dxdx\ in\ node\ 0}}
+\DoxyCodeLine{\ \ \ \ expectedM.row(1)\ =\ shapes.d2(0,\ 1,\ 1);\ \ \textcolor{comment}{//\ dxdy\ in\ node\ 1}}
+\DoxyCodeLine{\ \ \ \ expectedM.row(2)\ =\ shapes.d2(1,\ 1,\ 2);\ \ \textcolor{comment}{//\ dydy\ in\ node\ 2}}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[1]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[2]\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.der2(0,\ 0,\ 0)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.der2(1,\ 0,\ 1)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ op.der2(2,\ 1,\ 1)\ =\ v;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedM\ -\/\ M).lpNorm<1>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ AssignDeath)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(op.lap(0)\ +\ op.lap(1)\ =\ 5,\ \textcolor{stringliteral}{"{}Cannot\ add\ together\ terms\ for\ different\ matrix\ rows"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(ImplicitOp,\ Syntax)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ n\ =\ 7;}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ newM(n,\ 3);\ newM.setZero();}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ newRhs(n);\ newRhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ op.setProblem(newM,\ newRhs,\ 0,\ 0);}
+\DoxyCodeLine{\ \ \ \ op.lap(0)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ 1.0*op.lap(0,\ 1)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ 0.0*op.lap(0,\ 2)\ +\ op.lap(0,\ 2)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ op.lap(0,\ 3)\ +\ 0.0*op.lap(0,\ 3)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ 0.25*op.lap(0,\ 4)\ +\ 0.75*op.lap(0,\ 4)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ -\/op.lap(0,\ 5)\ +\ 2.0*op.lap(0,\ 5)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ 2.0*op.lap(0,\ 6)\ +\ -\/op.lap(0,\ 6)\ =\ 1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(newM.row(i),\ newM.row(0));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(newRhs.row(i),\ newRhs.row(0));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ ImplicitComplexNumbers)\ \{}
+\DoxyCodeLine{\ \ \ \ UniformShapeStorage<Vec1d>\ shapes;}
+\DoxyCodeLine{\ \ \ \ shapes.resize(\{2,\ 2\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shapes.setSupport(0,\ \{0,\ 1\});}
+\DoxyCodeLine{\ \ \ \ shapes.setSupport(1,\ \{0,\ 1\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector2d\ s0(-\/0.12,\ 2.42),\ s1(0.34,\ 23.3);}
+\DoxyCodeLine{\ \ \ \ shapes.setLaplace(0,\ s0);}
+\DoxyCodeLine{\ \ \ \ shapes.setLaplace(1,\ s1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix2cd\ M;\ M.setZero();}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector2cd\ rhs;\ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c1(1.2,\ -\/3.4),\ c2(0.7,\ 8.9),\ c3(-\/5.6,\ 2.3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ 1.6;}
+\DoxyCodeLine{\ \ \ \ c1*op.lap(0)\ +\ c2*op.value(0)\ =\ c3;}
+\DoxyCodeLine{\ \ \ \ op.lap(1)\ +\ c1*op.lap(1)\ +\ x*op.lap(1)\ =\ c3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix2cd\ expectedM\ =\ M;}
+\DoxyCodeLine{\ \ \ \ Eigen::Vector2cd\ expectedRhs\ =\ rhs;}
+\DoxyCodeLine{\ \ \ \ expectedM.row(0)\ =\ c1*s0;}
+\DoxyCodeLine{\ \ \ \ expectedM(0,\ 0)\ +=\ c2;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[0]\ =\ c3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ expectedM.row(1)\ =\ (c1+1.0+x)*s1;}
+\DoxyCodeLine{\ \ \ \ expectedRhs[1]\ =\ c3;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((expectedM\ -\/\ M).lpNorm<1>(),\ 3e-\/16);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ (expectedRhs\ -\/\ rhs).lpNorm<1>());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ Implicit1DLaplaceDense)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Solve\ 1-\/D\ boundary\ value\ problem}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ u''(x)\ =\ x;\ u(0)\ =\ 1,\ u(1)\ =\ -\/2}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ with\ solution\ u(x)\ =\ 1/6\ (6\ -\/\ 19\ x\ +\ x\string^3)}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec1d>>\ wls(4);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(5));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}>(wls,\ domain.interior());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M\ =\ Eigen::MatrixXd::Zero(N,\ N);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.lap(i)\ =\ domain.pos(i,\ 0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.boundary())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ (domain.pos(i,\ 0)\ ==\ 0)\ ?\ 1\ :\ -\/2;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sol\ =\ M.lu().solve(rhs);}
+\DoxyCodeLine{\ \ \ \ std::function<double(\textcolor{keywordtype}{double})>\ analytic\ =\ [](\textcolor{keywordtype}{double}\ x)\ \{\ \textcolor{keywordflow}{return}\ 1/6.0\ *\ (6\ -\/\ 19\ *\ x\ +\ x*x*x);\ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(sol[i],\ analytic(domain.pos(i,\ 0)),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ Implicit2dLaplaceSparse)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Solve\ boundary\ value\ problem}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ laplace\ u\ =\ 0,\ u\ on\ edge\ =\ 1}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ with\ solution\ u\ ==\ 1}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ box.discretizeWithStep(0.2);}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ wls(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}>(wls,\ domain.interior());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ M(N,\ N);}
+\DoxyCodeLine{\ \ \ \ M.reserve(shapes.supportSizes());}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.lap(i)\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.boundary())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::BiCGSTAB<Eigen::SparseMatrix<double,\ Eigen::RowMajor>>\ solver;}
+\DoxyCodeLine{\ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sol\ =\ solver.solve(rhs);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(sol[i],\ 1.0,\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ Implicit2dGradOfScalar)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Solve\ problem\ for\ S\ unknown\ scalar\ field:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ grad\ S\ .\ v\ +\ laplace\ S\ =\ phi}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ grad\ S\ .\ (y,\ x)\ +\ alfa\ laplace\ S\ =\ 4\ (alfa\ +\ xy)\ +\ e\string^x(2\ x\ cos(2y)\ -\/\ (3\ alfa\ -\/\ y)\ sin(2y))}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ on\ [0,\ 1]\ x\ [0,\ 1]\ with\ BC:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ S(x,\ 0)\ =\ x\string^2}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ S(x,\ 1)\ =\ 1\ +\ x\string^2\ +\ sin(2)\ e\string^x}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ S(0,\ y)\ =\ y\string^2\ +\ sin(2y)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ S(1,\ y)\ =\ 1\ +\ y\string^2\ +\ e\ *\ sin(2y)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ with\ solution:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ S(x,\ y)\ =\ e\string^x\ sin(2y)\ +\ x\string^2\ +\ y\string^2}}
+\DoxyCodeLine{\ \ \ \ std::function<\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}})>\ analytical\ =\ []\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::exp(p[0])\ *\ std::sin(2*p[1])\ +\ p[0]*p[0]\ +\ p[1]*p[1];}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Prepare\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ box.discretizeWithStep(0.05);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Prepare\ operators\ and\ matrix}}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ GaussianWeight<Vec2d>>\ mls(2,\ 15.0\ /\ N);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}|\mbox{\hyperlink{namespacemm_1_1sh_af1ffab29de3e3b7db0b950f75374c30b}{sh::grad}}>(mls,\ domain.interior());}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ M(N,\ N);}
+\DoxyCodeLine{\ \ \ \ M.reserve(shapes.supportSizes());}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ alpha\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ domain.pos(i,\ 0),\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.grad(i,\ \{y,\ x\})\ +\ alpha\ *\ op.lap(i)\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4*(alpha\ +\ x*y)\ +\ std::exp(x)\ *\ (2*x*std::cos(2*y)\ -\/\ (3*alpha\ -\/\ y)*std::sin(2*y));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ boundary\ conditions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ y*y\ +\ std::sin(2*y);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 1\ +\ y*y\ +\ std::exp(1)\ *\ std::sin(2*y);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/3)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ domain.pos(i,\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ x*x;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/4)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ domain.pos(i,\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 1\ +\ x*x\ +\ std::sin(2)\ *\ std::exp(x);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sparse\ solve}}
+\DoxyCodeLine{\ \ \ \ Eigen::BiCGSTAB<Eigen::SparseMatrix<double,\ Eigen::RowMajor>>\ solver;}
+\DoxyCodeLine{\ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sol\ =\ solver.solve(rhs);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ correct\ =\ analytical(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(sol[i],\ correct[0],\ 5e-\/4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ ImplicitDer1)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Solve\ problem\ for\ F\ unknown\ vector\ field:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ f''(x)\ =\ 6x,\ f'(1)\ =\ 1,\ f(0)\ =\ 2}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ with\ solution:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ f(x)\ =\ 2\ -\/\ 2x\ +\ x\string^3}}
+\DoxyCodeLine{\ \ \ \ std::function<\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}(\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}})>\ analytical\ =\ []\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}(2\ -\/\ 2*p[0]\ +\ p[0]*p[0]*p[0]);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Prepare\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.02;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain\ =\ box.discretizeWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ support\_size\ =\ 3;}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(support\_size));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Prepare\ operators\ and\ matrix}}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec1d>,\ GaussianWeight<Vec1d>>\ wls(2,\ 15.0\ /\ N);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{sh::d1}}|\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}>(wls);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M\ =\ Eigen::MatrixXd::Zero(N,\ N);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs\ =\ Eigen::VectorXd::Zero(N);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ImplicitOperators<\textcolor{keyword}{decltype}(storage),\ \textcolor{keyword}{decltype}(M),\ \textcolor{keyword}{decltype}(rhs)>\ op(storage,\ M,\ rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ equation\ on\ interior}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.lap(i)\ =\ 6*domain.pos(i,\ 0);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ boundary\ conditions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.der1(i,\ 0)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sol\ =\ M.lu().solve(rhs);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ correct\ =\ analytical(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_NEAR(sol[i],\ correct[0],\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ DISABLED\_ImplicitOperatorsUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Prepare\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ box.discretizeWithStep(0.05);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Prepare\ operators\ and\ matrix}}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ GaussianWeight<Vec2d>>\ mls(2,\ 15.0\ /\ N);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ domain.computeShapes(mls,\ domain.interior());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ M(N,\ N);}
+\DoxyCodeLine{\ \ \ \ M.reserve(shapes.supportSizes());}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ op\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ alpha\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ domain.pos(i,\ 0),\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.grad(i,\ \{y,\ x\})\ +\ alpha\ *\ op.lap(i)\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 4*(alpha\ +\ x*y)\ +\ std::exp(x)\ *\ (2*x*std::cos(2*y)\ -\/\ (3*alpha\ -\/\ y)*std::sin(2*y));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Set\ boundary\ conditions}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/1)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ y*y\ +\ std::sin(2*y);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 1\ +\ y*y\ +\ std::exp(1)\ *\ std::sin(2*y);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/3)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ domain.pos(i,\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ x*x;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ -\/4)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ domain.pos(i,\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 1\ +\ x*x\ +\ std::sin(2)\ *\ std::exp(x);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

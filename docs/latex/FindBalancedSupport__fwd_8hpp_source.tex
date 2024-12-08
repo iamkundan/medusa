@@ -1,0 +1,51 @@
+\doxysection{Find\+Balanced\+Support\+\_\+fwd.\+hpp}
+\hypertarget{FindBalancedSupport__fwd_8hpp_source}{}\label{FindBalancedSupport__fwd_8hpp_source}\index{include/medusa/bits/domains/FindBalancedSupport\_fwd.hpp@{include/medusa/bits/domains/FindBalancedSupport\_fwd.hpp}}
+\mbox{\hyperlink{FindBalancedSupport__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_FINDBALANCEDSUPPORT\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_FINDBALANCEDSUPPORT\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}Eigen/Core"{}}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range__fwd_8hpp}{medusa/bits/types/Range\_fwd.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00027}\mbox{\hyperlink{classmm_1_1FindBalancedSupport}{00027}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00028}00028\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}{00029}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}{min\_support}};\ \ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}{00030}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}{max\_support}};\ \ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1af218948727d97842deaa065392a500}{00031}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1af218948727d97842deaa065392a500}{for\_which\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00032}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_aa7c1011b219b8bd3ec8f014818fce09f}{00032}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_aa7c1011b219b8bd3ec8f014818fce09f}{search\_among\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00034}00034\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}{min\_support}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}{max\_support}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00041}00041\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a49201c96edcb78825d11fbee11837939}{forNodes}}(\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449}{searchAmong}}(\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_abba4c9707f249d5168ea762e41d94bfe}{minSupportSize}}(\textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a42e8a8f06515555952e3489bf26834a3}{maxSupportSize}}(\textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ domain\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a13fd90710239e0ce7446bef98ae1086c}{operator()}}(domain\_t\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ domain\_t,\ \textcolor{keyword}{typename}\ kdtree\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a6c9aa4575140e8aacf7d3fdc9e25061f}{balancedSupport}}(}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ domain\_t\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{kdtree\_t}}\&\ tree,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{min\_support\_size}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_support\_size}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00062}00062\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00064}00064\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{static}\ Eigen::Matrix<\textcolor{keyword}{typename}\ vec\_t::scalar\_t,\ vec\_t::dim,\ vec\_t::dim-\/1>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00066}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54}{00066}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54}{getFrame}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ normal);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}{mark\_quadrant}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ dx,\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Gaussian}{tol}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<bool>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ vec\_t::dim,\ -\/1>\&\ basis);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00076}00076\ \};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00078}00078\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport__fwd_8hpp_source_l00080}00080\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_FINDBALANCEDSUPPORT\_FWD\_HPP\_}}
+
+\end{DoxyCode}

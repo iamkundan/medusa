@@ -1,0 +1,125 @@
+\doxysection{mm\+::Scalar\+Field\texorpdfstring{$<$}{<} Scalar \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1ScalarField}{}\label{classmm_1_1ScalarField}\index{mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}}
+
+
+{\ttfamily \#include $<$Scalar\+Field\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}$>$\newline
+class mm\+::\+Scalar\+Field$<$ Scalar $>$}
+Represents a discretization of a scalar field, a finite collection of scalars. 
+
+This type is fully compatible with Eigen types and can use the same API. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Scalar} & Type of elements in the field.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ field(4);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ set\ to\ scalar\ and\ multi\ index\ access}}
+\DoxyCodeLine{\ \ \ \ field\ =\ -\/3.0;}
+\DoxyCodeLine{\ \ \ \ field[\{0,\ 2,\ 3\}]\ =\ 5.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ usual\ mathematical\ operations}}
+\DoxyCodeLine{\ \ \ \ field\ *=\ 2.5;}
+\DoxyCodeLine{\ \ \ \ field\ +=\ field;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ field\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Scalar\+Field\texorpdfstring{$<$}{<} Scalar \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classmm_1_1ScalarField__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Scalar\+Field\texorpdfstring{$<$}{<} Scalar \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classmm_1_1ScalarField__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ }\\\mbox{\hyperlink{classmm_1_1ScalarField_abc14bec7d211c6e3cd6aa1db18707dec}{Scalar\+Field}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em This constructor allows construction of \doxylink{classmm_1_1ScalarField}{Scalar\+Field} from Eigen expressions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ }\\\mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}} \& \mbox{\hyperlink{classmm_1_1ScalarField_a7146111251bcf9641a7a352129e5290b}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em This method allows assignments of Eigen expressions to \doxylink{classmm_1_1ScalarField}{Scalar\+Field}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}} \mbox{\hyperlink{classmm_1_1ScalarField_a429256919dc84f749d2c8f09af79913f}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes)
+\begin{DoxyCompactList}\small\item\em Multiindex view to given \doxylink{classmm_1_1ScalarField}{Scalar\+Field}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \mbox{\hyperlink{classmm_1_1ScalarField_a79c5a8fadaab1c5ee9e2720bb492020d}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar data type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1ScalarField_a188795f118f719010f1606b3bb807c9a}{Base}}
+\begin{DoxyCompactList}\small\item\em Base class typedef. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}}
+\begin{DoxyCompactList}\small\item\em Represents a non contiguous view to a scalar field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ScalarField_abc14bec7d211c6e3cd6aa1db18707dec}\label{classmm_1_1ScalarField_abc14bec7d211c6e3cd6aa1db18707dec} 
+\index{mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}!ScalarField@{ScalarField}}
+\index{ScalarField@{ScalarField}!mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}}
+\doxysubsubsection{\texorpdfstring{ScalarField()}{ScalarField()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+This constructor allows construction of \doxylink{classmm_1_1ScalarField}{Scalar\+Field} from Eigen expressions. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ScalarField_a7146111251bcf9641a7a352129e5290b}\label{classmm_1_1ScalarField_a7146111251bcf9641a7a352129e5290b} 
+\index{mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}} \& \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+This method allows assignments of Eigen expressions to \doxylink{classmm_1_1ScalarField}{Scalar\+Field}. 
+
+\Hypertarget{classmm_1_1ScalarField_a429256919dc84f749d2c8f09af79913f}\label{classmm_1_1ScalarField_a429256919dc84f749d2c8f09af79913f} 
+\index{mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::ScalarField$<$ Scalar $>$@{mm::ScalarField$<$ Scalar $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}} \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiindex view to given \doxylink{classmm_1_1ScalarField}{Scalar\+Field}. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/types/\mbox{\hyperlink{ScalarField__fwd_8hpp}{Scalar\+Field\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

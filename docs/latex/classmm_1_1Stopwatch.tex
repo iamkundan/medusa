@@ -1,0 +1,298 @@
+\doxysection{mm\+::Stopwatch Class Reference}
+\hypertarget{classmm_1_1Stopwatch}{}\label{classmm_1_1Stopwatch}\index{mm::Stopwatch@{mm::Stopwatch}}
+
+
+{\ttfamily \#include $<$Stopwatch.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+A simple stopwatch class\+: time sections of code that execute repeatedly and get average execution time. 
+
+\doxylink{classmm_1_1Stopwatch}{Stopwatch} keeps track of cumulative time spent between all calls to {\ttfamily start(label)}, {\ttfamily stop(label)} pairs for the same {\ttfamily label}, number of laps (calls of start/stop pairs), and cumulative time per lap.
+
+For timing execution time between various checkpoints, use the \doxylink{classmm_1_1Timer}{Timer} class.
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Stopwatch\ s;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 10;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ NOT\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.start(\textcolor{stringliteral}{"{}section1"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.stop(\textcolor{stringliteral}{"{}section1"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ NOT\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.start(\textcolor{stringliteral}{"{}section2"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ ...\ code:\ timed\ \ ...}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s.stop(\textcolor{stringliteral}{"{}section2"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ s.cumulativeTime(\textcolor{stringliteral}{"{}section1"{}});\ \ \textcolor{comment}{//\ Returns\ cumulative\ time.}}
+\DoxyCodeLine{\ \ \ \ s.numLaps(\textcolor{stringliteral}{"{}section1"{}});\ \ \textcolor{comment}{//\ Returns\ number\ of\ laps\ counted.}}
+\DoxyCodeLine{\ \ \ \ s.timePerLap(\textcolor{stringliteral}{"{}section1"{}});\ \ \textcolor{comment}{//\ Returns\ average\ time\ per\ lap.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ s\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1Timer}{Timer} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00031}{31}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Stopwatch_aee5f3ab53248b6693999e1e8b7edd0e1}{start}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}})
+\begin{DoxyCompactList}\small\item\em Starts the stopwatch with a given label. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Stopwatch_a0fb692ab0a4227d3422868467cd93f0c}{stop}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}})
+\begin{DoxyCompactList}\small\item\em Stops the stopwatch with a given label. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78}{cumulative\+Time}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns total time of all laps for a given label. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0}{num\+Laps}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns number of laps for a given label. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Stopwatch_a4e33616c403af0583afc145bfff0b185}{time\+Per\+Lap}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns average time spent per lap. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}{is\+Running}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns if stopwatch with a given label is currently running. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Stopwatch_a2cf14b0abd99169dbf4464394977e151}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all stopwatch related data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Stopwatch_a0c09c17e1c72e955b657f95737ca36ee}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}})
+\begin{DoxyCompactList}\small\item\em Output average lap times for all labels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classmm_1_1Stopwatch_a48cc9a578551ca8e904bbc25c587bb9f}{time\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Time type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}{get\+ID}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the ID of stopwatch with a given label. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}{labels}}
+\begin{DoxyCompactList}\small\item\em List of stopwatch labels. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \mbox{\hyperlink{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}{cumulative\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em List of cumulative times for each stopwatch. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}{counts}}
+\begin{DoxyCompactList}\small\item\em List of lap counts for each stopwatch. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Stopwatch_a48cc9a578551ca8e904bbc25c587bb9f}{time\+\_\+type}} $>$ \mbox{\hyperlink{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}{times}}
+\begin{DoxyCompactList}\small\item\em List of times for each stopwatch. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} $>$ \mbox{\hyperlink{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}{currently\+\_\+running}}
+\begin{DoxyCompactList}\small\item\em For tracking when stopwatch is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Stopwatch_a2cf14b0abd99169dbf4464394977e151}\label{classmm_1_1Stopwatch_a2cf14b0abd99169dbf4464394977e151} 
+\index{mm::Stopwatch@{mm::Stopwatch}!clear@{clear}}
+\index{clear@{clear}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Stopwatch\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all stopwatch related data. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00067}{67}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78}\label{classmm_1_1Stopwatch_aa25dbc4bc8ce73868cdd16a77aebbf78} 
+\index{mm::Stopwatch@{mm::Stopwatch}!cumulativeTime@{cumulativeTime}}
+\index{cumulativeTime@{cumulativeTime}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{cumulativeTime()}{cumulativeTime()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Stopwatch\+::cumulative\+Time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const}
+
+
+
+Returns total time of all laps for a given label. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805}\label{classmm_1_1Stopwatch_a805efe28c2c8322ae814577ce2480805} 
+\index{mm::Stopwatch@{mm::Stopwatch}!getID@{getID}}
+\index{getID@{getID}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Stopwatch\+::get\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Returns the ID of stopwatch with a given label. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00013}{13}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81}\label{classmm_1_1Stopwatch_ad64f480831be905524b7a5c884153a81} 
+\index{mm::Stopwatch@{mm::Stopwatch}!isRunning@{isRunning}}
+\index{isRunning@{isRunning}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{isRunning()}{isRunning()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+Stopwatch\+::is\+Running (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns if stopwatch with a given label is currently running. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0}\label{classmm_1_1Stopwatch_a0bd33affb1a6f7882d0935ca00e164f0} 
+\index{mm::Stopwatch@{mm::Stopwatch}!numLaps@{numLaps}}
+\index{numLaps@{numLaps}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{numLaps()}{numLaps()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Stopwatch\+::num\+Laps (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const}
+
+
+
+Returns number of laps for a given label. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00055}{55}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_aee5f3ab53248b6693999e1e8b7edd0e1}\label{classmm_1_1Stopwatch_aee5f3ab53248b6693999e1e8b7edd0e1} 
+\index{mm::Stopwatch@{mm::Stopwatch}!start@{start}}
+\index{start@{start}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Stopwatch\+::start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption})}
+
+
+
+Starts the stopwatch with a given label. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00019}{19}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_a0fb692ab0a4227d3422868467cd93f0c}\label{classmm_1_1Stopwatch_a0fb692ab0a4227d3422868467cd93f0c} 
+\index{mm::Stopwatch@{mm::Stopwatch}!stop@{stop}}
+\index{stop@{stop}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Stopwatch\+::stop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption})}
+
+
+
+Stops the stopwatch with a given label. 
+
+Updates cumulative time and number of laps information for the given label. Individual lap durations are not saved. 
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00037}{37}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_a4e33616c403af0583afc145bfff0b185}\label{classmm_1_1Stopwatch_a4e33616c403af0583afc145bfff0b185} 
+\index{mm::Stopwatch@{mm::Stopwatch}!timePerLap@{timePerLap}}
+\index{timePerLap@{timePerLap}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{timePerLap()}{timePerLap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Stopwatch\+::time\+Per\+Lap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const}
+
+
+
+Returns average time spent per lap. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00061}{61}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1Stopwatch_a0c09c17e1c72e955b657f95737ca36ee}\label{classmm_1_1Stopwatch_a0c09c17e1c72e955b657f95737ca36ee} 
+\index{mm::Stopwatch@{mm::Stopwatch}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}} \&}]{stopwatch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output average lap times for all labels. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00076}{76}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5}\label{classmm_1_1Stopwatch_a197f5ed06aab4822a88ad39314fe8cd5} 
+\index{mm::Stopwatch@{mm::Stopwatch}!counts@{counts}}
+\index{counts@{counts}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{counts}{counts}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ mm\+::\+Stopwatch\+::counts\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+List of lap counts for each stopwatch. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a}\label{classmm_1_1Stopwatch_aee377f97d38ae7ef4afeaeda0f559e9a} 
+\index{mm::Stopwatch@{mm::Stopwatch}!cumulative\_time@{cumulative\_time}}
+\index{cumulative\_time@{cumulative\_time}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{cumulative\_time}{cumulative\_time}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}$>$ mm\+::\+Stopwatch\+::cumulative\+\_\+time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+List of cumulative times for each stopwatch. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93}\label{classmm_1_1Stopwatch_ad48123fe47d14cada10f9b2d61920b93} 
+\index{mm::Stopwatch@{mm::Stopwatch}!currently\_running@{currently\_running}}
+\index{currently\_running@{currently\_running}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{currently\_running}{currently\_running}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}$>$ mm\+::\+Stopwatch\+::currently\+\_\+running\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+For tracking when stopwatch is running. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc}\label{classmm_1_1Stopwatch_a77e498192cd1bc9e64265049c82424bc} 
+\index{mm::Stopwatch@{mm::Stopwatch}!labels@{labels}}
+\index{labels@{labels}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{labels}{labels}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ mm\+::\+Stopwatch\+::labels\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+List of stopwatch labels. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+\Hypertarget{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558}\label{classmm_1_1Stopwatch_aefb7f02e85ac56b5ccf53bd9ff360558} 
+\index{mm::Stopwatch@{mm::Stopwatch}!times@{times}}
+\index{times@{times}!mm::Stopwatch@{mm::Stopwatch}}
+\doxysubsubsection{\texorpdfstring{times}{times}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmm_1_1Stopwatch_a48cc9a578551ca8e904bbc25c587bb9f}{time\+\_\+type}}$>$ mm\+::\+Stopwatch\+::times\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+List of times for each stopwatch. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Stopwatch_8hpp_source}{Stopwatch.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/utils/\mbox{\hyperlink{Stopwatch_8hpp}{Stopwatch.\+hpp}}\item 
+src/utils/\mbox{\hyperlink{Stopwatch_8cpp}{Stopwatch.\+cpp}}\end{DoxyCompactItemize}

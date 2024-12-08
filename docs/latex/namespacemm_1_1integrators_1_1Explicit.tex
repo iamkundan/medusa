@@ -1,0 +1,181 @@
+\doxysection{mm\+::integrators\+::Explicit Namespace Reference}
+\hypertarget{namespacemm_1_1integrators_1_1Explicit}{}\label{namespacemm_1_1integrators_1_1Explicit}\index{mm::integrators::Explicit@{mm::integrators::Explicit}}
+
+
+\doxysubsection{Detailed Description}
+Namespace containing factory functions for explicit single step integrators. 
+
+Factory functions are provided for the most common ones, such as Euler\textquotesingle{}s method, Midpoint rule, RK4, ...
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ std::function<Eigen::VectorXd(\textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ Eigen::VectorXd\&)>\ \mbox{\hyperlink{classmm_1_1Gaussian}{func}}\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](\mbox{\hyperlink{classmm_1_1Gaussian}{double}},\ \textcolor{keyword}{const}\ Eigen::VectorXd\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/y;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ \mbox{\hyperlink{classmm_1_1Gaussian}{y0}}(1);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{y0}}\ <<\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{tmax}}\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dt}}\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ integrator\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}{integrators::Explicit::RK4}}().solve(\mbox{\hyperlink{classmm_1_1Gaussian}{func}},\ 0.0,\ \mbox{\hyperlink{classmm_1_1Gaussian}{tmax}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{dt}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{y0}});}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ integrator\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ step\ :\ integrator)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ You\ can\ use\ read\ write\ access\ to:}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ step.value();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ step.time();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ check\ if\ this\ is\ the\ last\ step:}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ step.is\_last();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Aditionally,\ one\ can\ iterate\ manually}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ step\ =\ integrator.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (step)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something\ with\ step}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++step;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ value\ =\ step.value();\ \ \textcolor{comment}{//\ do\ something\ with\ value}}
+
+\end{DoxyCodeInclude}
+ \doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 4 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}{RK4}} ()
+\begin{DoxyCompactList}\small\item\em Standard RK4 4th order method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 4 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abad60192a42922b08007a211456cf63b}{RK38}} ()
+\begin{DoxyCompactList}\small\item\em 3/8 rule 4th order method \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 1 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41}{Euler}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacemm_1_1integrators_1_1Explicit}{Explicit} Euler\textquotesingle{}s method, 1st order. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 2 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_ad4f85bedfd1b7034ff9731850bc54c44}{Midpoint}} ()
+\begin{DoxyCompactList}\small\item\em \doxylink{namespacemm_1_1integrators_1_1Explicit}{Explicit} midpoint rule, 2nd order. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 3 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_aea93a4d7f0c48d41498bffc1fca18374}{RK3}} ()
+\begin{DoxyCompactList}\small\item\em Kutta\textquotesingle{}s third order method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 6 $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a86b89bf5170783c654147da521cf4288}{Fehlberg5}} ()
+\begin{DoxyCompactList}\small\item\em Fifth order method appearing in Fehlberg\textquotesingle{}s method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} order, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}  = double$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, order $>$ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_add2e3fd798a19bdfcaa19a988dd7d706}{of\+\_\+order}} ()
+\begin{DoxyCompactList}\small\item\em Returns Runge Kutta explicit method of requested order with given floating point type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41}\label{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!Euler@{Euler}}
+\index{Euler@{Euler}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{Euler()}{Euler()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 1 $>$ mm\+::integrators\+::\+Explicit\+::\+Euler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxylink{namespacemm_1_1integrators_1_1Explicit}{Explicit} Euler\textquotesingle{}s method, 1st order. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2diffusion_explicit_8cpp-example}{test/end2end/diffusion\+\_\+explicit.\+cpp}}, and \mbox{\hyperlink{test_2integrators_2RKExplicit_test_8cpp-example}{test/integrators/\+RKExplicit\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_a86b89bf5170783c654147da521cf4288}\label{namespacemm_1_1integrators_1_1Explicit_a86b89bf5170783c654147da521cf4288} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!Fehlberg5@{Fehlberg5}}
+\index{Fehlberg5@{Fehlberg5}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{Fehlberg5()}{Fehlberg5()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 6 $>$ mm\+::integrators\+::\+Explicit\+::\+Fehlberg5 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fifth order method appearing in Fehlberg\textquotesingle{}s method. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2integrators_2AdamsBashforth_test_8cpp-example}{test/integrators/\+Adams\+Bashforth\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit_8hpp_source_l00079}{79}} of file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_ad4f85bedfd1b7034ff9731850bc54c44}\label{namespacemm_1_1integrators_1_1Explicit_ad4f85bedfd1b7034ff9731850bc54c44} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!Midpoint@{Midpoint}}
+\index{Midpoint@{Midpoint}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{Midpoint()}{Midpoint()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 2 $>$ mm\+::integrators\+::\+Explicit\+::\+Midpoint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxylink{namespacemm_1_1integrators_1_1Explicit}{Explicit} midpoint rule, 2nd order. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2integrators_2RKExplicit_test_8cpp-example}{test/integrators/\+RKExplicit\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit_8hpp_source_l00055}{55}} of file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_add2e3fd798a19bdfcaa19a988dd7d706}\label{namespacemm_1_1integrators_1_1Explicit_add2e3fd798a19bdfcaa19a988dd7d706} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!of\_order@{of\_order}}
+\index{of\_order@{of\_order}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{of\_order()}{of\_order()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} order, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}  = double$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, order $>$ mm\+::integrators\+::\+Explicit\+::of\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns Runge Kutta explicit method of requested order with given floating point type. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00293}{293}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_aea93a4d7f0c48d41498bffc1fca18374}\label{namespacemm_1_1integrators_1_1Explicit_aea93a4d7f0c48d41498bffc1fca18374} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!RK3@{RK3}}
+\index{RK3@{RK3}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{RK3()}{RK3()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 3 $>$ mm\+::integrators\+::\+Explicit\+::\+RK3 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Kutta\textquotesingle{}s third order method. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2integrators_2RKExplicit_test_8cpp-example}{test/integrators/\+RKExplicit\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_abad60192a42922b08007a211456cf63b}\label{namespacemm_1_1integrators_1_1Explicit_abad60192a42922b08007a211456cf63b} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!RK38@{RK38}}
+\index{RK38@{RK38}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{RK38()}{RK38()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 4 $>$ mm\+::integrators\+::\+Explicit\+::\+RK38 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+3/8 rule 4th order method 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2integrators_2RKExplicit_test_8cpp-example}{test/integrators/\+RKExplicit\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+
+\Hypertarget{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}\label{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27} 
+\index{mm::integrators::Explicit@{mm::integrators::Explicit}!RK4@{RK4}}
+\index{RK4@{RK4}!mm::integrators::Explicit@{mm::integrators::Explicit}}
+\doxysubsubsection{\texorpdfstring{RK4()}{RK4()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, 4 $>$ mm\+::integrators\+::\+Explicit\+::\+RK4 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Standard RK4 4th order method. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2integrators_2RKExplicit_test_8cpp-example}{test/integrators/\+RKExplicit\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{RKExplicit_8hpp_source}{RKExplicit.\+hpp}}.
+

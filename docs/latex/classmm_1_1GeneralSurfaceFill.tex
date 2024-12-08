@@ -1,0 +1,403 @@
+\doxysection{mm\+::General\+Surface\+Fill\texorpdfstring{$<$}{<} vec\+\_\+t, param\+\_\+vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1GeneralSurfaceFill}{}\label{classmm_1_1GeneralSurfaceFill}\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+
+
+{\ttfamily \#include $<$General\+Surface\+Fill\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}}$>$\newline
+class mm\+::\+General\+Surface\+Fill$<$ vec\+\_\+t, param\+\_\+vec\+\_\+t $>$}
+Implements general {\ttfamily n}-\/d node placing algorithm for parametrically given {\ttfamily d}-\/d surfaces, as described in \href{https://arxiv.org/abs/2005.08767}{\texttt{ https\+://arxiv.\+org/abs/2005.\+08767}}. 
+
+If you specifically use this algorithm, we would appreciate if you cite the above publication.
+
+Given a regular parametrization surface $ \vec r: \Lambda \subseteq \mathbb{R}^d \to \partial \Omega \subseteq \mathbb{R}^n$, and a spacing function $ h: \partial \Omega \to (0, \infty)$ the algorithm fills the domain discretization with points spaced approximately $h$ apart.
+
+The algorithm starts from existing nodes in the parametrization function\textquotesingle{}s domain, usually one random node. They are processed in a queue and for each node, new candidates are generated around it on a circle. The circle\textquotesingle{}s radius is determined in way that when the new candidates are mapped by the parametrization function, their distance from the initial node is approximately equal to the supplied density function. This is done using the first degree Taylor polynomial. Candidates are then checked and some are accepted and added to the queue. This is repeated until no more nodes can be generated or the maximal number of points has been reached.
+
+Usage example (filling the surface of a torus)\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ parametrization\ function.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ torus\_r\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 10.0,\ b\ =\ 25.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}((a\ *\ cos(t(1))\ +\ b)\ *\ cos(t(0)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (a\ *\ cos(t(1))\ +\ b)\ *\ sin(t(0)),\ a\ *\ sin(t(1)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ Jacobian\ of\ parametrization\ function.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ torus\_jacobian\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 10.0,\ b\ =\ 25.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/\ (a\ *\ cos(t(1))\ +\ b)\ *\ sin(t(0)),\ (a\ *\ cos(t(1))\ +\ b)\ *\ cos(t(0)),\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(1)\ <<\ -\/\ a\ *\ sin(t(1))\ *\ cos(t(0)),\ -\/\ a\ *\ sin(t(1))\ *\ sin(t(0)),\ a\ *\ cos(t(1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ density\ function.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ gradient\_h\ =\ [](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ p)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\_0\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_0\ +\ (p[0]\ +\ p[1]\ +\ p[2])\ /\ 500.0;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ domain.}}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec3d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec3d,\ Vec2d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ param\_domain\_shape(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{0.0,\ 0.0\},\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ param\_domain(param\_domain\_shape);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_domain,\ torus\_r,\ torus\_jacobian,\ gradient\_h);}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxyWarning}{Warning}
+If \doxylink{classmm_1_1GeneralFill}{General\+Fill} is not working after filling the boundary, normals might be turned on the inside; see \doxylink{group__domains_compute_normal}{compute\+\_\+normal} for more information. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ad1e673ac25077de04236f9c6060f804d}{max\+Points}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a9c2387e4c8d31c1a3061084ae017d3db}{max\+\_\+points}})
+\begin{DoxyCompactList}\small\item\em Maximal number of points generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a14925fbd0db7c9841fd6a04b7d5f10e6}{seed}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} seed)
+\begin{DoxyCompactList}\small\item\em Set custom seed for the random number generator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a4571404464ce8c250ef5f7ca6061894a}{proximity\+Tolerance}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a0c10d90f00a29f87ca9def48b72ca90f}{zeta}})
+\begin{DoxyCompactList}\small\item\em Set proximity tolerance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a02071f27b30af1a9a1f8a9da43e0d7ab}{num\+Samples}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_aaad45e438f27d7ecf3800b18e2d4c106}{n\+\_\+samples}})
+\begin{DoxyCompactList}\small\item\em Controls the number of generated candidates from each point. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a761ceb78485ceeb011fbd1606feb5cdc}{operator()}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+jacobian}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} \&tree, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Fills the parametrically given surface with a quality node distribution according to the {\ttfamily spacing\+\_\+function}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ab1ebfc6e8eeb0870bb5b85816bb9b2f1}{fill\+Parametrization}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} \&tree, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Version with single function returning a pair of point and jacobian. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a9949738409e73d432c6e789f98ac9202}{operator()}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+jacobian}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Fills given surface according to the nodal spacing function {\ttfamily spacing\+\_\+function}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a416aa825a5b580404353ab87920ffee0}{operator()}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+jacobian}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for constant function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a3e4056fbb6e7761f1a2b8796d741a005}{operator()}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+domain\+\_\+shape}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+jacobian}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for Shape instead of \doxylink{classmm_1_1DomainDiscretization}{Domain\+Discretization}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a11489476c2c0af876ebbe73a0d998430}{operator()}} (\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+domain\+\_\+shape}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+function}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+jacobian}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for constant function and Shape instead of \doxylink{classmm_1_1DomainDiscretization}{Domain\+Discretization}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728dab55c83a5eef57233e2be6c3f867a2ca2}{dim}} = vec\+\_\+t\+::dim
+, \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728da43ff880b687a28226a491dd8b0c30e41}{param\+\_\+dim}} = param\+\_\+vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domains. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Domain discretization type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Parametric domain discretization type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} param\+\_\+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae0eb43873103410ed709368ec3a51e0d}{param\+\_\+scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Parametric domain scalar type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a9c2387e4c8d31c1a3061084ae017d3db}{max\+\_\+points}} = 5000000
+\begin{DoxyCompactList}\small\item\em Maximal number of points generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a300a8671eebbf691a1a0aad7e0f524fa}{seed\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Seed for the random number generator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_aaad45e438f27d7ecf3800b18e2d4c106}{n\+\_\+samples}} = 15
+\begin{DoxyCompactList}\small\item\em Number of samples. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a0c10d90f00a29f87ca9def48b72ca90f}{zeta}} = 1 -\/ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/10
+\begin{DoxyCompactList}\small\item\em Proximity tolerance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728d}\label{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728d} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domains. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728dab55c83a5eef57233e2be6c3f867a2ca2}\label{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728dab55c83a5eef57233e2be6c3f867a2ca2} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{param\_dim@{param\_dim}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!param\_dim@{param\_dim}}}\Hypertarget{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728da43ff880b687a28226a491dd8b0c30e41}\label{classmm_1_1GeneralSurfaceFill_a55f25e8dd77ef5619dabd4a80b2e728da43ff880b687a28226a491dd8b0c30e41} 
+param\+\_\+dim&Dimensionality of the parametric domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a669b10a127b49a859814c8c675b40d25}\label{classmm_1_1GeneralSurfaceFill_a669b10a127b49a859814c8c675b40d25} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!GeneralSurfaceFill@{GeneralSurfaceFill}}
+\index{GeneralSurfaceFill@{GeneralSurfaceFill}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{GeneralSurfaceFill()}{GeneralSurfaceFill()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::\+General\+Surface\+Fill (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source_l00023}{23}} of file \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source}{General\+Surface\+Fill.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1GeneralSurfaceFill_ab1ebfc6e8eeb0870bb5b85816bb9b2f1}\label{classmm_1_1GeneralSurfaceFill_ab1ebfc6e8eeb0870bb5b85816bb9b2f1} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!fillParametrization@{fillParametrization}}
+\index{fillParametrization@{fillParametrization}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{fillParametrization()}{fillParametrization()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::fill\+Parametrization (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&}]{param\+\_\+domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&}]{param,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&}]{spacing\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} \&}]{tree,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Version with single function returning a pair of point and jacobian. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source}{General\+Surface\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_ad1e673ac25077de04236f9c6060f804d}\label{classmm_1_1GeneralSurfaceFill_ad1e673ac25077de04236f9c6060f804d} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!maxPoints@{maxPoints}}
+\index{maxPoints@{maxPoints}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{maxPoints()}{maxPoints()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::max\+Points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{max\+\_\+points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Maximal number of points generated. 
+
+\begin{DoxyWarning}{Warning}
+The actual upper bound for number of points generated is max\+Points $\pm$ num\+Samples. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00073}{73}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a02071f27b30af1a9a1f8a9da43e0d7ab}\label{classmm_1_1GeneralSurfaceFill_a02071f27b30af1a9a1f8a9da43e0d7ab} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!numSamples@{numSamples}}
+\index{numSamples@{numSamples}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{numSamples()}{numSamples()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::num\+Samples (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{n\+\_\+samples }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Controls the number of generated candidates from each point. 
+
+For 2-\/D it is the actual number of candidates, for 3-\/D it is the number of candidates on the great circle. Its value is ignored in 1-\/D. 
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a11489476c2c0af876ebbe73a0d998430}\label{classmm_1_1GeneralSurfaceFill_a11489476c2c0af876ebbe73a0d998430} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \&}]{param\+\_\+domain\+\_\+shape,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&}]{param\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&}]{param\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \&}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload for constant function and Shape instead of \doxylink{classmm_1_1DomainDiscretization}{Domain\+Discretization}. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a3e4056fbb6e7761f1a2b8796d741a005}\label{classmm_1_1GeneralSurfaceFill_a3e4056fbb6e7761f1a2b8796d741a005} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \&}]{param\+\_\+domain\+\_\+shape,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&}]{param\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&}]{param\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&}]{spacing\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Overload for Shape instead of \doxylink{classmm_1_1DomainDiscretization}{Domain\+Discretization}. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source}{General\+Surface\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a416aa825a5b580404353ab87920ffee0}\label{classmm_1_1GeneralSurfaceFill_a416aa825a5b580404353ab87920ffee0} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&}]{param\+\_\+domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&}]{param\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&}]{param\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \&}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload for constant function. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00124}{124}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a9949738409e73d432c6e789f98ac9202}\label{classmm_1_1GeneralSurfaceFill_a9949738409e73d432c6e789f98ac9202} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&}]{param\+\_\+domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&}]{param\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&}]{param\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&}]{spacing\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Fills given surface according to the nodal spacing function {\ttfamily spacing\+\_\+function}. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source}{General\+Surface\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a761ceb78485ceeb011fbd1606feb5cdc}\label{classmm_1_1GeneralSurfaceFill_a761ceb78485ceeb011fbd1606feb5cdc} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a2d6fd02fbb8dbaaef0c2f526d1940b60}{domain\+\_\+t}} \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_a8213afb8112f5e020f0e0531617a5cec}{param\+\_\+domain\+\_\+t}} \&}]{param\+\_\+domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+func\+\_\+t}} \&}]{param\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{jm\+\_\+func\+\_\+t}} \&}]{param\+\_\+jacobian,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{spacing\+\_\+func\+\_\+t}} \&}]{spacing\+\_\+function,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+t}} \&}]{tree,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Fills the parametrically given surface with a quality node distribution according to the {\ttfamily spacing\+\_\+function}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em domain} & Domain $\Omega$ to fill with nodes. Can be partially filled. \\
+\hline
+{\em param\+\_\+domain} & Domain $\Lambda$ of the parametrization function. Can be partially filled with parameters, which are taken as seeds. It is assumed that all parameters have a corresponding node in {\ttfamily domain} (but domain can contain other nodes as well). \\
+\hline
+{\em param\+\_\+function} & Parametrization function $\vec r$. \\
+\hline
+{\em param\+\_\+jacobian} & Jacobian matrix $\nabla \vec r$ of the parametrization function. Must have full rank. \\
+\hline
+{\em spacing\+\_\+function} & Nodal spacing function $h$. \\
+\hline
+{\em tree} & Search structure on domain. This can be used if the domain already has some nodes, such as when filling different patches separately. \\
+\hline
+{\em type} & Type of the nodes. If 0, the engines default value is used.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Header {\ttfamily  \#include \texorpdfstring{$<$}{<}\doxylink{GeneralSurfaceFill_8hpp}{medusa/bits/domains/\+General\+Surface\+Fill.\+hpp}\texorpdfstring{$>$}{>}} must be included additionally to {\ttfamily  \#include \texorpdfstring{$<$}{<}\doxylink{Medusa__fwd_8hpp}{medusa/\+Medusa\+\_\+fwd.\+hpp}\texorpdfstring{$>$}{>}}. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source}{General\+Surface\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a4571404464ce8c250ef5f7ca6061894a}\label{classmm_1_1GeneralSurfaceFill_a4571404464ce8c250ef5f7ca6061894a} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!proximityTolerance@{proximityTolerance}}
+\index{proximityTolerance@{proximityTolerance}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{proximityTolerance()}{proximityTolerance()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::proximity\+Tolerance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}}}]{zeta }\end{DoxyParamCaption})}
+
+
+
+Set proximity tolerance. 
+
+A new candidate mush be at least {\ttfamily zeta\texorpdfstring{$\ast$}{*}h(p)} away. It should hold that {\ttfamily 0 \texorpdfstring{$<$}{<} zeta \texorpdfstring{$<$}{<} 1}. 
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source_l00149}{149}} of file \mbox{\hyperlink{GeneralSurfaceFill_8hpp_source}{General\+Surface\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a14925fbd0db7c9841fd6a04b7d5f10e6}\label{classmm_1_1GeneralSurfaceFill_a14925fbd0db7c9841fd6a04b7d5f10e6} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!seed@{seed}}
+\index{seed@{seed}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{seed()}{seed()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}} \& \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::seed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{seed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set custom seed for the random number generator. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a9c2387e4c8d31c1a3061084ae017d3db}\label{classmm_1_1GeneralSurfaceFill_a9c2387e4c8d31c1a3061084ae017d3db} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!max\_points@{max\_points}}
+\index{max\_points@{max\_points}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{max\_points}{max\_points}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::max\+\_\+points = 5000000\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximal number of points generated. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00061}{61}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_aaad45e438f27d7ecf3800b18e2d4c106}\label{classmm_1_1GeneralSurfaceFill_aaad45e438f27d7ecf3800b18e2d4c106} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!n\_samples@{n\_samples}}
+\index{n\_samples@{n\_samples}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{n\_samples}{n\_samples}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::n\+\_\+samples = 15\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of samples. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a300a8671eebbf691a1a0aad7e0f524fa}\label{classmm_1_1GeneralSurfaceFill_a300a8671eebbf691a1a0aad7e0f524fa} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!seed\_@{seed\_}}
+\index{seed\_@{seed\_}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{seed\_}{seed\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::seed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Seed for the random number generator. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00062}{62}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GeneralSurfaceFill_a0c10d90f00a29f87ca9def48b72ca90f}\label{classmm_1_1GeneralSurfaceFill_a0c10d90f00a29f87ca9def48b72ca90f} 
+\index{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}!zeta@{zeta}}
+\index{zeta@{zeta}!mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$@{mm::GeneralSurfaceFill$<$ vec\_t, param\_vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{zeta}{zeta}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GeneralSurfaceFill_ae45adba132d2c7343aa109b7afe8f211}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{mm\+::\+General\+Surface\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}} $>$\+::zeta = 1 -\/ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/10\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Proximity tolerance. 
+
+
+
+Definition at line \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source_l00064}{64}} of file \mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp_source}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{GeneralSurfaceFill__fwd_8hpp}{General\+Surface\+Fill\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{GeneralSurfaceFill_8hpp}{General\+Surface\+Fill.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,251 @@
+\doxysection{include/medusa/bits/types/\+Matrix\+Base\+Addons.hpp File Reference}
+\hypertarget{MatrixBaseAddons_8hpp}{}\label{MatrixBaseAddons_8hpp}\index{include/medusa/bits/types/MatrixBaseAddons.hpp@{include/medusa/bits/types/MatrixBaseAddons.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Plugins for {\ttfamily Eigen\+::\+Matrix\+Base} class. 
+
+This extensions add lexicographical compare to vectors, so that they can be sorted. They also add comparisons to scalars, returning the set of indices, for which the comparison holds. Some member typedefs are added as well. 
+
+Definition in file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef Scalar \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of the elements, alias of {\ttfamily Scalar}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} = Rows\+At\+Compile\+Time \texorpdfstring{$\ast$}{*} Cols\+At\+Compile\+Time
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Other\+Derived $>$ }\\bool \mbox{\hyperlink{MatrixBaseAddons_8hpp_a259fbdf39b924b26ebb74c136728adac}{operator$<$}} (const Matrix\+Base$<$ Other\+Derived $>$ \&arg) const
+\begin{DoxyCompactList}\small\item\em Lexicographical compare of vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Other\+Derived $>$ }\\bool \mbox{\hyperlink{MatrixBaseAddons_8hpp_aa301eb78f5555b46646d6132e795b418}{operator$>$}} (const Matrix\+Base$<$ Other\+Derived $>$ \&arg) const
+\begin{DoxyCompactList}\small\item\em Lexicographical compare of vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Other\+Derived $>$ }\\bool \mbox{\hyperlink{MatrixBaseAddons_8hpp_acedac61ef0c556f74c88eeb05aabaaf8}{operator$<$=}} (const Matrix\+Base$<$ Other\+Derived $>$ \&arg) const
+\begin{DoxyCompactList}\small\item\em Lexicographical compare of vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Other\+Derived $>$ }\\bool \mbox{\hyperlink{MatrixBaseAddons_8hpp_a433c226134d0a73abbcdb5a6ab425c7f}{operator$>$=}} (const Matrix\+Base$<$ Other\+Derived $>$ \&arg) const
+\begin{DoxyCompactList}\small\item\em Lexicographical compare of vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Pred $>$ }\\\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}} (const Pred \&pred) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes for which predicate returns {\ttfamily true}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a0178ac0356bb53083a69f29a54e6e9ab}{operator$<$}} (const Scalar \&v) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are lower than {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a2f131be87dbd42b8cc74a1fdc6e2d0a7}{operator$>$}} (const Scalar \&v) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are greater than {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a5bfbfe29521fa9a07a1d335cfa4cd420}{operator$<$=}} (const Scalar \&v) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are lower or equal than {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a8603ec394a75be7abe608e19ccdb8d9d}{operator$>$=}} (const Scalar \&v) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are greater or equal than {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_ad406c6c2683a1862782c4a215dfa08b9}{operator==}} (const Scalar \&v) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes for which their elements compare equal to a. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a2ff9a9921273b1539bae4847189548e0}{operator!=}} (const Scalar \&v) const
+\begin{DoxyCompactList}\small\item\em Returns list of indexes for which their elements compare not equal to a. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}\label{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!scalar\_t@{scalar\_t}}
+\index{scalar\_t@{scalar\_t}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{scalar\_t}{scalar\_t}}
+{\footnotesize\ttfamily typedef Scalar \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}}
+
+
+
+Type of the elements, alias of {\ttfamily Scalar}. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4}\label{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!dim@{dim}}}\Hypertarget{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}\label{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f} 
+dim&Number of elements of this matrix. Negative if dynamic \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00013}{13}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}\label{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!filter@{filter}}
+\index{filter@{filter}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{filter()}{filter()}}
+{\footnotesize\ttfamily template$<$class Pred $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} filter (\begin{DoxyParamCaption}\item[{const Pred \&}]{pred }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes for which predicate returns {\ttfamily true}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Pred} & Any callable object, e.\+g. lambda func, functional, class with {\ttfamily operator()} defined. \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a2ff9a9921273b1539bae4847189548e0}\label{MatrixBaseAddons_8hpp_a2ff9a9921273b1539bae4847189548e0} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} operator!= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes for which their elements compare not equal to a. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a259fbdf39b924b26ebb74c136728adac}\label{MatrixBaseAddons_8hpp_a259fbdf39b924b26ebb74c136728adac} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Other\+Derived $>$ \\
+bool operator$<$ (\begin{DoxyParamCaption}\item[{const Matrix\+Base$<$ Other\+Derived $>$ \&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Lexicographical compare of vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a0178ac0356bb53083a69f29a54e6e9ab}\label{MatrixBaseAddons_8hpp_a0178ac0356bb53083a69f29a54e6e9ab} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} operator$<$ (\begin{DoxyParamCaption}\item[{const Scalar \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are lower than {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_acedac61ef0c556f74c88eeb05aabaaf8}\label{MatrixBaseAddons_8hpp_acedac61ef0c556f74c88eeb05aabaaf8} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Other\+Derived $>$ \\
+bool operator$<$= (\begin{DoxyParamCaption}\item[{const Matrix\+Base$<$ Other\+Derived $>$ \&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Lexicographical compare of vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a5bfbfe29521fa9a07a1d335cfa4cd420}\label{MatrixBaseAddons_8hpp_a5bfbfe29521fa9a07a1d335cfa4cd420} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} operator$<$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are lower or equal than {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_ad406c6c2683a1862782c4a215dfa08b9}\label{MatrixBaseAddons_8hpp_ad406c6c2683a1862782c4a215dfa08b9} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator==@{operator==}}
+\index{operator==@{operator==}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} operator== (\begin{DoxyParamCaption}\item[{const Scalar \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes for which their elements compare equal to a. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2STL_test_8cpp-example}{test/io/\+STL\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00086}{86}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_aa301eb78f5555b46646d6132e795b418}\label{MatrixBaseAddons_8hpp_aa301eb78f5555b46646d6132e795b418} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Other\+Derived $>$ \\
+bool operator$>$ (\begin{DoxyParamCaption}\item[{const Matrix\+Base$<$ Other\+Derived $>$ \&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Lexicographical compare of vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a2f131be87dbd42b8cc74a1fdc6e2d0a7}\label{MatrixBaseAddons_8hpp_a2f131be87dbd42b8cc74a1fdc6e2d0a7} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} operator$>$ (\begin{DoxyParamCaption}\item[{const Scalar \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are greater than {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00062}{62}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a433c226134d0a73abbcdb5a6ab425c7f}\label{MatrixBaseAddons_8hpp_a433c226134d0a73abbcdb5a6ab425c7f} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Other\+Derived $>$ \\
+bool operator$>$= (\begin{DoxyParamCaption}\item[{const Matrix\+Base$<$ Other\+Derived $>$ \&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Lexicographical compare of vectors. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixBaseAddons_8hpp_a8603ec394a75be7abe608e19ccdb8d9d}\label{MatrixBaseAddons_8hpp_a8603ec394a75be7abe608e19ccdb8d9d} 
+\index{MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!MatrixBaseAddons.hpp@{MatrixBaseAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}} operator$>$= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are greater or equal than {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixBaseAddons_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{MatrixBaseAddons_8hpp_source}{Matrix\+Base\+Addons.\+hpp}}.
+

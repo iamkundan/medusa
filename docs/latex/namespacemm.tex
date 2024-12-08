@@ -1,0 +1,1415 @@
+\doxysection{mm Namespace Reference}
+\hypertarget{namespacemm}{}\label{namespacemm}\index{mm@{mm}}
+
+
+\doxysubsection{Detailed Description}
+Root namespace for the whole library. \doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm_1_1assert__internal}{assert\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Namespace holding custom assert implementation. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1cad__helpers}{cad\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace for helper functions used in CAD. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1discretization__helpers}{discretization\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace containing helpers for discretizing various geometric objects. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1integrators}{integrators}}
+\begin{DoxyCompactList}\small\item\em Namespace containing most known methods for integrating ODEs. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1kdtree__internal}{kdtree\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Implementation details of \doxylink{classmm_1_1KDTree}{KDTree}, contains intermediate storage class. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1nurbs__patch__internal}{nurbs\+\_\+patch\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Implementation details of \doxylink{classmm_1_1NURBSPatch}{NURBSPatch}, contains structures for partial class specialization. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1nurbs__shape__internal}{nurbs\+\_\+shape\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Implementation details of \doxylink{classmm_1_1NURBSShape}{NURBSShape}, contains structures for partial class specialization. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1operators__internal}{operators\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Implementation details for analytical operators. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1resize__internal}{resize\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Contains a helper for resizing storage. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1sh}{sh}}
+\begin{DoxyCompactList}\small\item\em Namespace holding masks for shapes. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1surface__fill__internal}{surface\+\_\+fill\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Internal implementations needed by \doxylink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1AdamsBashforth}{Adams\+Bashforth}}
+\begin{DoxyCompactList}\small\item\em Class representing an \doxylink{classmm_1_1AdamsBashforth}{Adams\+Bashforth} method, an explicit linear multistep method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1BallShape}{Ball\+Shape}}
+\begin{DoxyCompactList}\small\item\em Class for working with ball shaped domains. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1BasicRelax}{Basic\+Relax}}
+\begin{DoxyCompactList}\small\item\em Redistributes nodes towards more uniform distribution by minimizing potential between nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1BoxShape}{Box\+Shape}}
+\begin{DoxyCompactList}\small\item\em Class for working with box shaped domains. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1CSV}{CSV}}
+\begin{DoxyCompactList}\small\item\em Implements support for basic \doxylink{classmm_1_1CSV}{CSV} I/O. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}
+\begin{DoxyCompactList}\small\item\em Unique pointer with polymorphic deep copy semantics. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der1}{Der1}}
+\begin{DoxyCompactList}\small\item\em Represents a first derivative wrt. {\ttfamily var}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der1s}{Der1s}}
+\begin{DoxyCompactList}\small\item\em Represents a family of all first derivatives. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der2}{Der2}}
+\begin{DoxyCompactList}\small\item\em Represents a second derivative wrt. {\ttfamily var1} and {\ttfamily var2}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der2s}{Der2s}}
+\begin{DoxyCompactList}\small\item\em Represents a family of all second derivatives. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Derivative}{Derivative}}
+\begin{DoxyCompactList}\small\item\em Represents a general derivative $\frac{\partial^{|\alpha|}}{\partial x^\alpha}$. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}
+\begin{DoxyCompactList}\small\item\em Class representing domain discretization along with an associated \doxylink{classmm_1_1DomainShape}{shape}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}
+\begin{DoxyCompactList}\small\item\em Base class for geometric shapes of domains. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}
+\begin{DoxyCompactList}\small\item\em A class for evaluating typical operators needed in spatial discretization. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}
+\begin{DoxyCompactList}\small\item\em A class for evaluating typical operators needed in spatial discretization. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{Find\+Balanced\+Support}}
+\begin{DoxyCompactList}\small\item\em Class representing the engine for finding directionally balanced supports. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}}
+\begin{DoxyCompactList}\small\item\em Class representing the engine for finding supports consisting of closest nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1Gaussian}{Gaussian} Radial Basis Function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1GeneralFill}{General\+Fill}}
+\begin{DoxyCompactList}\small\item\em Implements general {\ttfamily n}-\/d node placing algorithm, as described in \href{https://arxiv.org/abs/1812.03160}{\texttt{ https\+://arxiv.\+org/abs/1812.\+03160}} If you specifically use this algorithm, we would appreciate if you cite the above publication. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1GeneralSurfaceFill}{General\+Surface\+Fill}}
+\begin{DoxyCompactList}\small\item\em Implements general {\ttfamily n}-\/d node placing algorithm for parametrically given {\ttfamily d}-\/d surfaces, as described in \href{https://arxiv.org/abs/2005.08767}{\texttt{ https\+://arxiv.\+org/abs/2005.\+08767}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}}
+\begin{DoxyCompactList}\small\item\em Implements general {\ttfamily n}-\/d node placing algorithm, as described in \href{https://arxiv.org/abs/1906.00636}{\texttt{ https\+://arxiv.\+org/abs/1906.\+00636}} This node generation algorithm simulates dropping grains with variable radius in a box. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Grid}{Grid}}
+\begin{DoxyCompactList}\small\item\em Class representing a simple n-\/dimensional grid structure, which supports indexing and storing values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1GridFill}{Grid\+Fill}}
+\begin{DoxyCompactList}\small\item\em Discretizes the domain using {\ttfamily n}-\/dimensional grid with given endpoints and spacing {\ttfamily h}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1HalfLinksRefine}{Half\+Links\+Refine}}
+\begin{DoxyCompactList}\small\item\em Refine a region of nodes {\ttfamily region} by connecting every node in {\ttfamily region} to its support domain and generating new nodes at half distances. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1HDF}{HDF}}
+\begin{DoxyCompactList}\small\item\em Simplified \href{https://portal.hdfgroup.org/display/support}{\texttt{ HDF5}} I/O utilities. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators}{Implicit\+Operators}}
+\begin{DoxyCompactList}\small\item\em This class represents implicit operators that fill given matrix \doxylink{classmm_1_1ImplicitOperators_afff142f20c1c2e60aaa59979562211e3}{M} and right hand side \doxylink{classmm_1_1ImplicitOperators_abff1c9239c5b68ae3e9ac8776002e058}{rhs} with appropriate coefficients approximating differential operators with shape functions from given shape storage \doxylink{classmm_1_1ImplicitOperators_a7c1549b19bdb03fb2f1a327c5bf04142}{ss}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}
+\begin{DoxyCompactList}\small\item\em This class represents implicit vector operators that fill given matrix \doxylink{classmm_1_1ImplicitVectorOperators_ae9519c74815de424a5d88b097b677f87}{M} and right hand side \doxylink{classmm_1_1ImplicitVectorOperators_a2d458b9fb8127458854493459927b6ad}{rhs} with appropriate coefficients approximating differential operators with shape functions from given shape storage \doxylink{classmm_1_1ImplicitVectorOperators_acd44e9a6cc6c91978fa1eadb14071729}{ss}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}
+\begin{DoxyCompactList}\small\item\em Inverse \doxylink{classmm_1_1Multiquadric}{Multiquadric} Radial Basis Function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1JacobiSVDWrapper}{Jacobi\+SVDWrapper}}
+\begin{DoxyCompactList}\small\item\em Extends Eigen\textquotesingle{}s Jacobi\+SVD to compute thin {\ttfamily U} and thin {\ttfamily V} by default. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1KDGrid}{KDGrid}}
+\begin{DoxyCompactList}\small\item\em Search structure over given d-\/dimensional box with given cell size. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1KDTree}{KDTree}}
+\begin{DoxyCompactList}\small\item\em Class representing a static \href{https://en.wikipedia.org/wiki/K-d_tree}{\texttt{ k-\/d tree}} data structure. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1KDTreeMutable}{KDTree\+Mutable}}
+\begin{DoxyCompactList}\small\item\em A \href{https://en.wikipedia.org/wiki/K-d_tree}{\texttt{ k-\/d tree}} data structure that supports dynamic insertions and lazy-\/removal. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Lap}{Lap}}
+\begin{DoxyCompactList}\small\item\em Represents the Laplacian operator. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}
+\begin{DoxyCompactList}\small\item\em A class representing Monomial basis. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1Multiquadric}{Multiquadric} Radial Basis Function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1NoScale}{No\+Scale}}
+\begin{DoxyCompactList}\small\item\em Scale function that indicates no scaling is performed. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1NoWeight}{No\+Weight}}
+\begin{DoxyCompactList}\small\item\em Class representing no weight function, i.\+e. a constant 1. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1NURBSPatch}{NURBSPatch}}
+\begin{DoxyCompactList}\small\item\em Class representing a single NURBS patch in an arbitrary dimensional space, defined on an arbitrary dimensional domain and generated by a tensor product of NURBS curves. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}
+\begin{DoxyCompactList}\small\item\em Class representing a shape made out of NURBS patches in an arbitrary dimensional space. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Operator}{Operator}}
+\begin{DoxyCompactList}\small\item\em Base class for a differential operator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Pi}{Pi}}
+\begin{DoxyCompactList}\small\item\em Value of \doxylink{structmm_1_1Pi}{Pi} in type {\ttfamily T}. Usage\+: \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1PolygonShape}{Polygon\+Shape}}
+\begin{DoxyCompactList}\small\item\em Shape representing a simple (i.\+e. non self intersecting) nonempty polygon in 2D, which is given as a sequence of points. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} Radial Basis Function of odd order. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1PolyhedronShape}{Polyhedron\+Shape}}
+\begin{DoxyCompactList}\small\item\em A polyhedron represented by a closed triangular mesh. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1PolytopeShape}{Polytope\+Shape}}
+\begin{DoxyCompactList}\small\item\em Shape representing a simple nonempty polytope (i.\+e., non-\/self intersecting polygon in 2D and polyhedron in 3D.). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage}}
+\begin{DoxyCompactList}\small\item\em Efficiently stores shape functions of different lengths. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Range}{Range}}
+\begin{DoxyCompactList}\small\item\em An extension of {\ttfamily std\+::vector\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>}} to support additional useful operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}
+\begin{DoxyCompactList}\small\item\em Represents a basis of Radial Basis Functions over a local neighbourhood. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFFD}{RBFFD}}
+\begin{DoxyCompactList}\small\item\em Computes a RBF-\/\+FD approximation of given operator over local neighbourhood. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFInterpolant}{RBFInterpolant}}
+\begin{DoxyCompactList}\small\item\em Class representing a RBF Interpolant over a set of nodes of the form. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}
+\begin{DoxyCompactList}\small\item\em Represents a weight function constructed from a Radial Basis function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}
+\begin{DoxyCompactList}\small\item\em Class representing an explicit Runge-\/\+Kutta method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RotatedShape}{Rotated\+Shape}}
+\begin{DoxyCompactList}\small\item\em Class for working with rotated (or mirrored) domain shapes. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Type trait for scalar fields to obtain their underlying scalar type. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Options805de53c82fcd4aed23e43162f0a89b7}{scalar\+\_\+type$<$ Eigen\+::\+Matrix$<$ \+\_\+\+Scalar, \+\_\+\+Rows, \+\_\+\+Cols, \+\_\+\+Options, \+\_\+\+Max\+Rows, \+\_\+\+Max\+Cols $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1scalar__type}{scalar\+\_\+type} trait definition for Eigen Matrix. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type_3_01Range_3_01T_01_4_01_4}{scalar\+\_\+type$<$ Range$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1scalar__type}{scalar\+\_\+type} trait definition for \doxylink{classmm_1_1Range}{Range}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type_3_01ScalarField_3_01T_01_4_01_4}{scalar\+\_\+type$<$ Scalar\+Field$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1scalar__type}{scalar\+\_\+type} trait definition for \doxylink{classmm_1_1ScalarField}{Scalar\+Field}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1scalar__type_3_01std_1_1vector_3_01T_01_4_01_4}{scalar\+\_\+type$<$ std\+::vector$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1scalar__type}{scalar\+\_\+type} trait definition for std\+::vector. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}
+\begin{DoxyCompactList}\small\item\em Represents a discretization of a scalar field, a finite collection of scalars. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ScaleToClosest}{Scale\+To\+Closest}}
+\begin{DoxyCompactList}\small\item\em Scale function that scales to the closest neighbor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ScaleToFarthest}{Scale\+To\+Farthest}}
+\begin{DoxyCompactList}\small\item\em Scale function that scales to the farthest neighbor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ShapeDifference}{Shape\+Difference}}
+\begin{DoxyCompactList}\small\item\em A class representing a set-\/difference of two shapes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}
+\begin{DoxyCompactList}\small\item\em Shape storage base class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ShapeUnion}{Shape\+Union}}
+\begin{DoxyCompactList}\small\item\em Class representing a union of two shapes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1SheppardInterpolant}{Sheppard\+Interpolant}}
+\begin{DoxyCompactList}\small\item\em Scattered interpolant using a slightly modified Sheppard\textquotesingle{}s interpolation (inverse distance weighting). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1STL}{STL}}
+\begin{DoxyCompactList}\small\item\em Support for reading stereolithography files\+: \href{https://en.wikipedia.org/wiki/STL_(file_format)}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+STL\+\_\+(file\+\_\+format)}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1STLShape}{STLShape}}
+\begin{DoxyCompactList}\small\item\em Class representing an object given by the \doxylink{classmm_1_1STL}{STL} file. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}}
+\begin{DoxyCompactList}\small\item\em A simple stopwatch class\+: time sections of code that execute repeatedly and get average execution time. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Timer}{Timer}}
+\begin{DoxyCompactList}\small\item\em Simple timer class\+: add checkpoints throughout the code and measure execution time between them. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1TranslatedShape}{Translated\+Shape}}
+\begin{DoxyCompactList}\small\item\em Class for working with translated domain shapes. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type}{tuple\+\_\+has\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- declaration. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01T_00_01Ts_8_8_8_01_4_01_4}{tuple\+\_\+has\+\_\+type$<$ T, std\+::tuple$<$ T, Ts... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- success. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01U_00_01Ts_8_8_8_01_4_01_4}{tuple\+\_\+has\+\_\+type$<$ T, std\+::tuple$<$ U, Ts... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- unsuccessful, continue searching. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_4_01_4}{tuple\+\_\+has\+\_\+type$<$ T, std\+::tuple$<$$>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- failed case. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__index}{tuple\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Returns the first index of type {\ttfamily T} in {\ttfamily Tuple}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4}{tuple\+\_\+index$<$ T, std\+::tuple$<$ T, Types... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Succesful match. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4}{tuple\+\_\+index$<$ T, std\+::tuple$<$ U, Types... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Unsuccessful match and recursive search. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1UniformShapeStorage}{Uniform\+Shape\+Storage}}
+\begin{DoxyCompactList}\small\item\em Efficiently stores shape functions of uniform length. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1UnknownShape}{Unknown\+Shape}}
+\begin{DoxyCompactList}\small\item\em This class represents an unknown domain shape. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Type trait for vector fields to obtain their underlying vector type. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Optionse6a0acf3820feabb43dfce994ead47ec}{vector\+\_\+type$<$ Eigen\+::\+Matrix$<$ \+\_\+\+Scalar, \+\_\+\+Rows, \+\_\+\+Cols, \+\_\+\+Options, \+\_\+\+Max\+Rows, \+\_\+\+Max\+Cols $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1vector__type}{vector\+\_\+type} trait definition for Eigen Matrix. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type_3_01Range_3_01T_01_4_01_4}{vector\+\_\+type$<$ Range$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1vector__type}{vector\+\_\+type} trait definition for \doxylink{classmm_1_1Range}{Range}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type_3_01std_1_1vector_3_01T_01_4_01_4}{vector\+\_\+type$<$ std\+::vector$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1vector__type}{vector\+\_\+type} trait definition for std\+::vector. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1vector__type_3_01VectorField_3_01Scalar_00_01dim_01_4_01_4}{vector\+\_\+type$<$ Vector\+Field$<$ Scalar, dim $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmm_1_1vector__type}{vector\+\_\+type} trait definition for \doxylink{classmm_1_1VectorField}{Vector\+Field}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}
+\begin{DoxyCompactList}\small\item\em Represents a discretization of a vector field, a finite collection of vectors. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1WLS}{WLS}}
+\begin{DoxyCompactList}\small\item\em A class for generating approximations using Weighted Least Squares over local neighborhoods. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1WLSApproximant}{WLSApproximant}}
+\begin{DoxyCompactList}\small\item\em Class representing the function that is a \doxylink{classmm_1_1WLS}{WLS} approximant using some basis function over some points. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1XML}{XML}}
+\begin{DoxyCompactList}\small\item\em Class for reading and storing values to \doxylink{classmm_1_1XML}{XML} files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_aa44443d58b627c2cadda61d71976eabc}{Gaussians}} = \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF basis using \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a02a16e36e4344e236ac7203e3825286b}{MQs}} = \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF basis using \doxylink{classmm_1_1Multiquadric}{Multiquadric} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a53f91864c99c804c019c8bd6e0c75204}{IMQs}} = \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF basis using \doxylink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} K = -\/1$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a7dafd5114bd440120e542afffa012552}{PHs}} = \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t, K $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF basis using \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8}{Gaussian\+Weight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a88dc351475468bd33170f2770f7192e9}{MQWeight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1Multiquadric}{Multiquadric} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f}{IMQWeight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73}{PHWeight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t, -\/1 $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{Scalar\+Fieldd}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for \doxylink{classmm_1_1ScalarField}{Scalar\+Field} of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{float}} $>$ \mbox{\hyperlink{namespacemm_aab70649d11f59cae514a1f3bbcc61918}{Scalar\+Fieldf}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for \doxylink{classmm_1_1ScalarField}{Scalar\+Field} of floats. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}} = Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1, Eigen\+::\+Col\+Major\texorpdfstring{$\vert$}{|}Eigen\+::\+Auto\+Align, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$
+\begin{DoxyCompactList}\small\item\em Fixed size vector type, representing a mathematical 1d/2d/3d vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 1 $>$ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for 1d vector of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 2 $>$ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for 2d vector of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 3 $>$ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for 3d vector of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ std\+::complex$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$, 1 $>$ \mbox{\hyperlink{namespacemm_a4615f49cc707663f977b8f239f45723f}{Vec1cd}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for 1d vector of complex doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ std\+::complex$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$, 2 $>$ \mbox{\hyperlink{namespacemm_a2cf19a8905b02a5adee8d2f7a4c843d8}{Vec2cd}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for 2d vector of complex doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ std\+::complex$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$, 3 $>$ \mbox{\hyperlink{namespacemm_a954fc47911319fe75a4926b8e437f795}{Vec3cd}}
+\begin{DoxyCompactList}\small\item\em Convenience typedef for 3d vector of complex doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 1 $>$ \mbox{\hyperlink{namespacemm_a1eb8281f90ddea362c030944bfa58543}{Vector\+Field1d}}
+\begin{DoxyCompactList}\small\item\em One dimensional vector field of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 2 $>$ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{Vector\+Field2d}}
+\begin{DoxyCompactList}\small\item\em Two dimensional vector field of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 3 $>$ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{Vector\+Field3d}}
+\begin{DoxyCompactList}\small\item\em Three dimensional vector field of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Class representing a collection of indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{b}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a1d84d8f250c68e4346fdceb328396268}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{b}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given basis function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a85158831b079038550d8fd0381388a72}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given Monomial basis. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_ab0f8ecfcfd505c291353d3fb4e7678ca}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{b}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given basis function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a4b0d58b7d51281c7c45e6a0135a18c6f}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Operator}{Operator}}$<$ Derived $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output info about given operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} d$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a4699b62fb3d203c80084f61fdb9a8eb0}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der1s}{Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output info about Der1s$<$d$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} d$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a2dc5c9c1b9e1c660870b42bc6b0b1849}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der2s}{Der2s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output info about Der2s$<$d$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} K$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a182bcb240c51b26c29dbf8dc64350c8d}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, K $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{b}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a58e90db021a5cd2f16bbfaf4597f85ec}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given basis. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a09883ae3d31b3f94247577aea9f5ae00}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFFD}{RBFFD}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{e}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given approximation engine. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_aed6b4f0ba39dbf4f88f8d32e702a50e5}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{w}})
+\begin{DoxyCompactList}\small\item\em Output info about given weight function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a70bcb2267ff9f5b9701a7c3dc5714164}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight}{No\+Weight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given weight function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a0ffbed372f662f3c5474b94db9186b0c}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS}{WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{wls}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given \doxylink{classmm_1_1WLS}{WLS} class. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a1d0a8e633864dc5885558c8cdb6f94c4}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given domain. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_ab96aae1d55a5eddc0e183571a3feb29d}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Output info about given shape to ostream. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a1019d6288fbc4be5dd7ec1311c7a9278}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1AdamsBashforth}{Adams\+Bashforth}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{method}})
+\begin{DoxyCompactList}\small\item\em Output the method\textquotesingle{}s tableau for debugging. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_ae2b8cacd4ca28b2c34d25d792ce40192}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{method}})
+\begin{DoxyCompactList}\small\item\em Output the method\textquotesingle{}s tableau for debugging. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacemm_a42e0898079f0c953ff8d42caec038fdf}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1STL_1_1Point}{STL\+::\+Point}} \&p)
+\begin{DoxyCompactList}\small\item\em Print a \doxylink{classmm_1_1STL}{STL} point. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacemm_a3f2b6e33c627ad6940c0bb11348501f4}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{STL\+::\+Triangle}} \&v)
+\begin{DoxyCompactList}\small\item\em Print a \doxylink{classmm_1_1STL}{STL} triangle. \end{DoxyCompactList}\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{namespacemm_a68b8507de8c6b561ecfbd2c0ae44a3ed}{XML\+::get$<$ std\+::string $>$}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{path}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em String specialization. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} shape\+\_\+storage\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} ... Op\+Families$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{compute\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} approx\+\_\+t\+::vector\+\_\+t $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::tuple$<$ Op\+Families... $>$ \&operators, shape\+\_\+storage\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{storage}})
+\begin{DoxyCompactList}\small\item\em Computes shape functions (stencil weights) for given nodes using support domains from {\ttfamily domain} and approximations provided by {\ttfamily approx}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a758cae5968f6747c2c04f3bec951e454}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic information about given operators. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a1505895fdd102b836b3034886e829e55}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic info about given operators. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_af9ff8359fae0be0525e8b8ebb38bde88}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitOperators}{Implicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic info about given operators. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_adfed60939acb4b1422ba6163331b3ffe}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic info about given operators. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{D}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a00414321e80b138a4e841042d5f54f79}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{D}}, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ \&shapes)
+\begin{DoxyCompactList}\small\item\em Output basic info about this shape storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a5cc2e78c5c88a4d353fb9989cef166aa}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1KDTree}{KDTree}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&tree)
+\begin{DoxyCompactList}\small\item\em Output basic info about given tree. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a71e41ba1887eb27a9b2d302c0771c441}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&tree)
+\begin{DoxyCompactList}\small\item\em Output basic info about given tree. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ }\\std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \mbox{\hyperlink{namespacemm_abe6d3e2e992f087629e7f2af0d081311}{operator+}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{v1}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{v2}})
+\begin{DoxyCompactList}\small\item\em Concatenate two vectors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_a48aee295207b24394af5ed5ae764c662}{print\+\_\+red}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Prints given text in bold red. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_a65013f9a5275282cc4cf6db2c19f8821}{print\+\_\+white}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Prints given text in bold white. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_a905c807069c1eab6b4eccc51a2b9ed36}{print\+\_\+green}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Prints given text in bold green. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}} (std\+::size\+\_\+t \mbox{\hyperlink{classmm_1_1Gaussian}{bytes}})
+\begin{DoxyCompactList}\small\item\em Simple function to help format memory amounts for printing. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\std\+::size\+\_\+t \mbox{\hyperlink{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}{mem\+\_\+used}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v)
+\begin{DoxyCompactList}\small\item\em Returns number of bytes the container uses in memory. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x)
+\begin{DoxyCompactList}\small\item\em Ceils a floating point to an integer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga8b0dd3e08714a12183860dc7db758344}{ifloor}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x)
+\begin{DoxyCompactList}\small\item\em Floors a floating point to an integer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} exponent$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{base}})
+\begin{DoxyCompactList}\small\item\em Compile time integer power, returns {\ttfamily base} raised to power {\ttfamily exponent}. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{group__utils_gada89027c55d5aae2be895470686604bd}{ipow$<$ 0 $>$}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}})
+\begin{DoxyCompactList}\small\item\em Compile time integer power (base case 0) \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga0ebab8125b045c2fccfb7f3a5541549f}{ipow}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1Gaussian}{b}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{e}})
+\begin{DoxyCompactList}\small\item\em Compute non-\/negative integer power {\ttfamily b\texorpdfstring{$^\wedge$}{\string^}e}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_gae3d8a1c01beb160c653056f1141e0952}{ipowneg}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1Gaussian}{b}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{e}})
+\begin{DoxyCompactList}\small\item\em Compute possibly negative integer power {\ttfamily b\texorpdfstring{$^\wedge$}{\string^}e}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{namespacemm_a572700036a7cbccd80820b07857efe99}{signum}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x, std\+::false\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Signum overload for unsigned types. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{namespacemm_a716cabd1f0ea3302690c3da4e4252267}{signum}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x, std\+::true\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Signum overload for unsigned types. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga43f4adaf63b966eac55d56a6ebdbfd0b}{signum}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x)
+\begin{DoxyCompactList}\small\item\em Signum function\+: determines a sign of a number {\ttfamily x}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{group__utils_ga3d998a49d777996d2276aa160c9dc769}{increment\+Counter}} (\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{limit}})
+\begin{DoxyCompactList}\small\item\em Increments a multi-\/dimensional counter with given limits. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{group__utils_ga3fecc80024c00b0c3f60929257e95d0a}{increment\+Counter}} (\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{low}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{high}})
+\begin{DoxyCompactList}\small\item\em Increments a multi-\/dimensional counter with given upper and lower limits. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{group__utils_gac53466280b26b3e911ab80c2f831ae49}{increment\+Cyclic\+Counter}} (\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{low}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{high}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&size)
+\begin{DoxyCompactList}\small\item\em Increments a multi-\/dimensional counter with given upper and lower limits and global upper size, looping around to 0 if needed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&beg, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&end, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&counts, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \mbox{\hyperlink{classmm_1_1Gaussian}{include\+\_\+boundary}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Multidimensional clone of Matlab\textquotesingle{}s linspace function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \mbox{\hyperlink{group__utils_ga0b52c30d4c5eb4798e587d225e8387d0}{linspace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&beg, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&end, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&counts, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{include\+\_\+boundary}})
+\begin{DoxyCompactList}\small\item\em Overload for bool argument of {\ttfamily include\+\_\+boundary}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \mbox{\hyperlink{group__utils_ga195465f9e61f7feb1b9f8a3f6bb1a9fa}{linspace}} (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} beg, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} end, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{count}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{include\+\_\+boundary}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Overload for 1 dimension. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{function\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{output\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} verbose = false$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{group__utils_ga8314f17be8625c08f12fef72280c1375}{bisection}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{function\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{f}}, \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{lo}}, \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{hi}}, \mbox{\hyperlink{classmm_1_1Gaussian}{output\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{target}}=0.\+0, \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{tolerance}}=1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/4, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{max\+\_\+iter}}=40)
+\begin{DoxyCompactList}\small\item\em Solves {\ttfamily f(x) = target} using bisection. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\+\_\+seed}} ()
+\begin{DoxyCompactList}\small\item\em Return a random seed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\+\_\+choice}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{weights}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}, \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{generator}})
+\begin{DoxyCompactList}\small\item\em Overload for custom generator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga767cde18341d7425bdd92c2dcd6302c8}{random\+\_\+choice}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{weights}}=\{\}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Randomly returns one of the specified elements with distribution according to given weights. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{delim}})
+\begin{DoxyCompactList}\small\item\em Splits string by {\ttfamily delim}, returning a vector of tokens (including empty). \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespacemm_ae00b97fbaf06976c5c4c7eae4bb6e637}{split}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}}, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{delim}})
+\begin{DoxyCompactList}\small\item\em Overload for {\ttfamily char}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{parts}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{joiner}})
+\begin{DoxyCompactList}\small\item\em Joins a vector of strings back together. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacemm_aef4c1e4e8bed3ae431728e2dbc033e60}{join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{parts}}, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{joiner}})
+\begin{DoxyCompactList}\small\item\em Overload for {\ttfamily char}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v)
+\begin{DoxyCompactList}\small\item\em Sorts a container inplace. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& \mbox{\hyperlink{group__utils_ga15a96934ce3c6759364373dc668a87a7}{sort}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{pred}})
+\begin{DoxyCompactList}\small\item\em Sorts a container inplace according to ordering defined by {\ttfamily pred}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{sorted}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} v)
+\begin{DoxyCompactList}\small\item\em Returns a sorted copy of container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_ga480725fbe71063bba9ed7be987075fd2}{sorted}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} v, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{pred}})
+\begin{DoxyCompactList}\small\item\em Returns a sorted copy of container ordered according to {\ttfamily pred}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{pad}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{container}}, \mbox{\hyperlink{classmm_1_1Gaussian}{T}} value)
+\begin{DoxyCompactList}\small\item\em Pads a ragged array with given value. \end{DoxyCompactList}\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{namespacemm_a7426072393faa2594e0ee38231669426}{HDF\+::read\+Attribute$<$ std\+::string $>$}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{attr\+\_\+name}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Specialization for {\ttfamily std\+::string}. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacemm_aadaf0deaa03f64058b68dda3f8dbd911}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1XML}{XML}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{xml}})
+\begin{DoxyCompactList}\small\item\em Prints the contents of currently loaded \doxylink{classmm_1_1XML}{XML} document. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacemm_add87a6e89d563732bf964b973503d443}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{stopwatch}})
+\begin{DoxyCompactList}\small\item\em Output average lap times for all labels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+IOFormat \mbox{\hyperlink{namespacemm_a6de6600cc8973ce82b321288cc7385e0}{Clean\+Fmt}}
+\begin{DoxyCompactList}\small\item\em Clean readable multiline aligned format. \end{DoxyCompactList}\item 
+Eigen\+::\+IOFormat \mbox{\hyperlink{namespacemm_a9c939ede62b2307cbc35d6fbcac1f71b}{Inline\+Fmt}}
+\begin{DoxyCompactList}\small\item\em Readable inline format. \end{DoxyCompactList}\item 
+Eigen\+::\+IOFormat \mbox{\hyperlink{namespacemm_ac1f6cb1b8e5c608bfa72664964bc62fa}{Matlab\+Fmt}}
+\begin{DoxyCompactList}\small\item\em Full precision format understood by Matlab/\+Octave. \end{DoxyCompactList}\item 
+Eigen\+::\+IOFormat \mbox{\hyperlink{namespacemm_a870e75f838a5173602abb21ee12e4bea}{Mathematica\+Fmt}}
+\begin{DoxyCompactList}\small\item\em Full precision output understood by Wolfram Mathematica. \end{DoxyCompactList}\item 
+Eigen\+::\+IOFormat \mbox{\hyperlink{namespacemm_a38918b8024e50dab3d402e05c7e0e11b}{CSVFmt}}
+\begin{DoxyCompactList}\small\item\em Valid \doxylink{classmm_1_1CSV}{CSV} format. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}} = \mbox{\hyperlink{structmm_1_1Pi}{Pi}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}$>$\+::value
+\begin{DoxyCompactList}\small\item\em Mathematical constant pi in double precision. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{namespacemm_a1f19f6918021bf7c2b7fcf9bab94d1b7}{INF}} = 1.\+0 / 0.\+0
+\begin{DoxyCompactList}\small\item\em Infinite floating point value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{NaN}} = 0.\+0 / 0.\+0
+\begin{DoxyCompactList}\small\item\em Not-\/a-\/number floating point value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacemm_aa44443d58b627c2cadda61d71976eabc}\label{namespacemm_aa44443d58b627c2cadda61d71976eabc} 
+\index{mm@{mm}!Gaussians@{Gaussians}}
+\index{Gaussians@{Gaussians}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Gaussians}{Gaussians}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_aa44443d58b627c2cadda61d71976eabc}{mm\+::\+Gaussians}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF basis using \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. Defined for convenience. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2cantilever_beam_implicit_8cpp-example}{test/end2end/cantilever\+\_\+beam\+\_\+implicit.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8}\label{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8} 
+\index{mm@{mm}!GaussianWeight@{GaussianWeight}}
+\index{GaussianWeight@{GaussianWeight}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{GaussianWeight}{GaussianWeight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8}{mm\+::\+Gaussian\+Weight}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF weight function using \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00103}{103}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a53f91864c99c804c019c8bd6e0c75204}\label{namespacemm_a53f91864c99c804c019c8bd6e0c75204} 
+\index{mm@{mm}!IMQs@{IMQs}}
+\index{IMQs@{IMQs}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{IMQs}{IMQs}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a53f91864c99c804c019c8bd6e0c75204}{mm\+::\+IMQs}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$\mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF basis using \doxylink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00147}{147}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f}\label{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f} 
+\index{mm@{mm}!IMQWeight@{IMQWeight}}
+\index{IMQWeight@{IMQWeight}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{IMQWeight}{IMQWeight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f}{mm\+::\+IMQWeight}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$\mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF weight function using \doxylink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00111}{111}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}\label{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b} 
+\index{mm@{mm}!indexes\_t@{indexes\_t}}
+\index{indexes\_t@{indexes\_t}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{indexes\_t}{indexes\_t}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::vector$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}}}
+
+
+
+Class representing a collection of indices. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2types_2ScalarField_test_8cpp-example}{test/types/\+Scalar\+Field\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2types_2VectorField_test_8cpp-example}{test/types/\+Vector\+Field\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{namespacemm_a02a16e36e4344e236ac7203e3825286b}\label{namespacemm_a02a16e36e4344e236ac7203e3825286b} 
+\index{mm@{mm}!MQs@{MQs}}
+\index{MQs@{MQs}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{MQs}{MQs}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a02a16e36e4344e236ac7203e3825286b}{mm\+::\+MQs}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$\mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF basis using \doxylink{classmm_1_1Multiquadric}{Multiquadric} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00143}{143}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a88dc351475468bd33170f2770f7192e9}\label{namespacemm_a88dc351475468bd33170f2770f7192e9} 
+\index{mm@{mm}!MQWeight@{MQWeight}}
+\index{MQWeight@{MQWeight}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{MQWeight}{MQWeight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a88dc351475468bd33170f2770f7192e9}{mm\+::\+MQWeight}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$\mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF weight function using \doxylink{classmm_1_1Multiquadric}{Multiquadric} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00107}{107}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a7dafd5114bd440120e542afffa012552}\label{namespacemm_a7dafd5114bd440120e542afffa012552} 
+\index{mm@{mm}!PHs@{PHs}}
+\index{PHs@{PHs}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{PHs}{PHs}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} K = -\/1$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a7dafd5114bd440120e542afffa012552}{mm\+::\+PHs}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$\mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t, K$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF basis using \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00151}{151}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73}\label{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73} 
+\index{mm@{mm}!PHWeight@{PHWeight}}
+\index{PHWeight@{PHWeight}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{PHWeight}{PHWeight}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73}{mm\+::\+PHWeight}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$\mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t, -\/1$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}$>$}
+
+
+
+RBF weight function using \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} RBF. Defined for convenience. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00115}{115}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_aa199920a7086b36ec358997bd6feaa0c}\label{namespacemm_aa199920a7086b36ec358997bd6feaa0c} 
+\index{mm@{mm}!ScalarFieldd@{ScalarFieldd}}
+\index{ScalarFieldd@{ScalarFieldd}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{ScalarFieldd}{ScalarFieldd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}$>$ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{mm\+::\+Scalar\+Fieldd}}}
+
+
+
+Convenience typedef for \doxylink{classmm_1_1ScalarField}{Scalar\+Field} of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2diffusion_explicit_8cpp-example}{test/end2end/diffusion\+\_\+explicit.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitOperators_test_8cpp-example}{test/operators/\+Explicit\+Operators\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2types_2ScalarField_test_8cpp-example}{test/types/\+Scalar\+Field\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_aab70649d11f59cae514a1f3bbcc61918}\label{namespacemm_aab70649d11f59cae514a1f3bbcc61918} 
+\index{mm@{mm}!ScalarFieldf@{ScalarFieldf}}
+\index{ScalarFieldf@{ScalarFieldf}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{ScalarFieldf}{ScalarFieldf}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{float}}$>$ \mbox{\hyperlink{namespacemm_aab70649d11f59cae514a1f3bbcc61918}{mm\+::\+Scalar\+Fieldf}}}
+
+
+
+Convenience typedef for \doxylink{classmm_1_1ScalarField}{Scalar\+Field} of floats. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00073}{73}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a4615f49cc707663f977b8f239f45723f}\label{namespacemm_a4615f49cc707663f977b8f239f45723f} 
+\index{mm@{mm}!Vec1cd@{Vec1cd}}
+\index{Vec1cd@{Vec1cd}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Vec1cd}{Vec1cd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$std\+::complex$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$, 1$>$ \mbox{\hyperlink{namespacemm_a4615f49cc707663f977b8f239f45723f}{mm\+::\+Vec1cd}}}
+
+
+
+Convenience typedef for 1d vector of complex doubles. 
+
+
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}\label{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d} 
+\index{mm@{mm}!Vec1d@{Vec1d}}
+\index{Vec1d@{Vec1d}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Vec1d}{Vec1d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 1$>$ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{mm\+::\+Vec1d}}}
+
+
+
+Convenience typedef for 1d vector of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2approximations_2Monomials_test_8cpp-example}{test/approximations/\+Monomials\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2WLSApproximant_test_8cpp-example}{test/approximations/\+WLSApproximant\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2BallShape_test_8cpp-example}{test/domains/\+Ball\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GeneralSurfaceFill_test_8cpp-example}{test/domains/\+General\+Surface\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2HalfLinksRefine_test_8cpp-example}{test/domains/\+Half\+Links\+Refine\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2NURBSPatch_test_8cpp-example}{test/domains/\+NURBSPatch\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2interpolants_2SheppardInterpolant_test_8cpp-example}{test/interpolants/\+Sheppard\+Interpolant\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitOperators_test_8cpp-example}{test/operators/\+Explicit\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ImplicitOperators_test_8cpp-example}{test/operators/\+Implicit\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2types_2Vec_test_8cpp-example}{test/types/\+Vec\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a2cf19a8905b02a5adee8d2f7a4c843d8}\label{namespacemm_a2cf19a8905b02a5adee8d2f7a4c843d8} 
+\index{mm@{mm}!Vec2cd@{Vec2cd}}
+\index{Vec2cd@{Vec2cd}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Vec2cd}{Vec2cd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$std\+::complex$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$, 2$>$ \mbox{\hyperlink{namespacemm_a2cf19a8905b02a5adee8d2f7a4c843d8}{mm\+::\+Vec2cd}}}
+
+
+
+Convenience typedef for 2d vector of complex doubles. 
+
+
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00039}{39}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}\label{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf} 
+\index{mm@{mm}!Vec2d@{Vec2d}}
+\index{Vec2d@{Vec2d}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Vec2d}{Vec2d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 2$>$ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{mm\+::\+Vec2d}}}
+
+
+
+Convenience typedef for 2d vector of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2approximations_2Monomials_test_8cpp-example}{test/approximations/\+Monomials\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2RBFBasis_test_8cpp-example}{test/approximations/\+RBFBasis\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2RBFFD_test_8cpp-example}{test/approximations/\+RBFFD\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2RBFInterpolant_test_8cpp-example}{test/approximations/\+RBFInterpolant\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2WLSApproximant_test_8cpp-example}{test/approximations/\+WLSApproximant\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2WLS_test_8cpp-example}{test/approximations/\+WLS\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2WeightFunction_test_8cpp-example}{test/approximations/\+Weight\+Function\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2operators_test_8cpp-example}{test/approximations/operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2BallShape_test_8cpp-example}{test/domains/\+Ball\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2BasicRelax_test_8cpp-example}{test/domains/\+Basic\+Relax\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2BoxShape_test_8cpp-example}{test/domains/\+Box\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2FindBalancedSupport_test_8cpp-example}{test/domains/\+Find\+Balanced\+Support\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2FindClosest_test_8cpp-example}{test/domains/\+Find\+Closest\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GeneralFill_test_8cpp-example}{test/domains/\+General\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GeneralSurfaceFill_test_8cpp-example}{test/domains/\+General\+Surface\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GrainDropFill_test_8cpp-example}{test/domains/\+Grain\+Drop\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2HalfLinksRefine_test_8cpp-example}{test/domains/\+Half\+Links\+Refine\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2NURBSPatch_test_8cpp-example}{test/domains/\+NURBSPatch\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2PolygonShape_test_8cpp-example}{test/domains/\+Polygon\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2RotatedShape_test_8cpp-example}{test/domains/\+Rotated\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2TranslatedShape_test_8cpp-example}{test/domains/\+Translated\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2cad_helpers_test_8cpp-example}{test/domains/cad\+\_\+helpers\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2compute_normal_test_8cpp-example}{test/domains/compute\+\_\+normal\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2discretization_helpers_test_8cpp-example}{test/domains/discretization\+\_\+helpers\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2end2end_2cantilever_beam_implicit_8cpp-example}{test/end2end/cantilever\+\_\+beam\+\_\+implicit.\+cpp}}, \mbox{\hyperlink{test_2end2end_2diffusion_explicit_8cpp-example}{test/end2end/diffusion\+\_\+explicit.\+cpp}}, \mbox{\hyperlink{test_2end2end_2poisson_implicit_8cpp-example}{test/end2end/poisson\+\_\+implicit.\+cpp}}, \mbox{\hyperlink{test_2interpolants_2SheppardInterpolant_test_8cpp-example}{test/interpolants/\+Sheppard\+Interpolant\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitOperators_test_8cpp-example}{test/operators/\+Explicit\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ImplicitOperators_test_8cpp-example}{test/operators/\+Implicit\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ImplicitVectorOperators_test_8cpp-example}{test/operators/\+Implicit\+Vector\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2spatial_search_2KDGrid_test_8cpp-example}{test/spatial\+\_\+search/\+KDGrid\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2spatial_search_2KDTreeMutable_test_8cpp-example}{test/spatial\+\_\+search/\+KDTree\+Mutable\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2spatial_search_2KDTree_test_8cpp-example}{test/spatial\+\_\+search/\+KDTree\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2types_2Vec_test_8cpp-example}{test/types/\+Vec\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2types_2VectorField_test_8cpp-example}{test/types/\+Vector\+Field\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a954fc47911319fe75a4926b8e437f795}\label{namespacemm_a954fc47911319fe75a4926b8e437f795} 
+\index{mm@{mm}!Vec3cd@{Vec3cd}}
+\index{Vec3cd@{Vec3cd}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Vec3cd}{Vec3cd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$std\+::complex$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$, 3$>$ \mbox{\hyperlink{namespacemm_a954fc47911319fe75a4926b8e437f795}{mm\+::\+Vec3cd}}}
+
+
+
+Convenience typedef for 3d vector of complex doubles. 
+
+
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a2107b91b1d35846c8b7ea3d142498502}\label{namespacemm_a2107b91b1d35846c8b7ea3d142498502} 
+\index{mm@{mm}!Vec3d@{Vec3d}}
+\index{Vec3d@{Vec3d}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{Vec3d}{Vec3d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 3$>$ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{mm\+::\+Vec3d}}}
+
+
+
+Convenience typedef for 3d vector of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2approximations_2Monomials_test_8cpp-example}{test/approximations/\+Monomials\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2approximations_2RBFBasis_test_8cpp-example}{test/approximations/\+RBFBasis\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2BallShape_test_8cpp-example}{test/domains/\+Ball\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2BoxShape_test_8cpp-example}{test/domains/\+Box\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GeneralFill_test_8cpp-example}{test/domains/\+General\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GeneralSurfaceFill_test_8cpp-example}{test/domains/\+General\+Surface\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GrainDropFill_test_8cpp-example}{test/domains/\+Grain\+Drop\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2NURBSPatch_test_8cpp-example}{test/domains/\+NURBSPatch\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2NURBSShape_test_8cpp-example}{test/domains/\+NURBSShape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2PolyhedronShape_test_8cpp-example}{test/domains/\+Polyhedron\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2RotatedShape_test_8cpp-example}{test/domains/\+Rotated\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2STLShape_test_8cpp-example}{test/domains/\+STLShape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2compute_normal_test_8cpp-example}{test/domains/compute\+\_\+normal\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2discretization_helpers_advanced_test_8cpp-example}{test/domains/discretization\+\_\+helpers\+\_\+advanced\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2interpolants_2SheppardInterpolant_test_8cpp-example}{test/interpolants/\+Sheppard\+Interpolant\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitOperators_test_8cpp-example}{test/operators/\+Explicit\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2spatial_search_2KDTreeMutable_test_8cpp-example}{test/spatial\+\_\+search/\+KDTree\+Mutable\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2spatial_search_2KDTree_test_8cpp-example}{test/spatial\+\_\+search/\+KDTree\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2types_2Vec_test_8cpp-example}{test/types/\+Vec\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2types_2VectorField_test_8cpp-example}{test/types/\+Vector\+Field\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a1eb8281f90ddea362c030944bfa58543}\label{namespacemm_a1eb8281f90ddea362c030944bfa58543} 
+\index{mm@{mm}!VectorField1d@{VectorField1d}}
+\index{VectorField1d@{VectorField1d}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{VectorField1d}{VectorField1d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 1$>$ \mbox{\hyperlink{namespacemm_a1eb8281f90ddea362c030944bfa58543}{mm\+::\+Vector\+Field1d}}}
+
+
+
+One dimensional vector field of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00151}{151}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a73a915a34cc600397408fd67f7dcf500}\label{namespacemm_a73a915a34cc600397408fd67f7dcf500} 
+\index{mm@{mm}!VectorField2d@{VectorField2d}}
+\index{VectorField2d@{VectorField2d}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{VectorField2d}{VectorField2d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 2$>$ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{mm\+::\+Vector\+Field2d}}}
+
+
+
+Two dimensional vector field of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2types_2VectorField_test_8cpp-example}{test/types/\+Vector\+Field\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00152}{152}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a271822e13a00bb7fd853b3520df262ab}\label{namespacemm_a271822e13a00bb7fd853b3520df262ab} 
+\index{mm@{mm}!VectorField3d@{VectorField3d}}
+\index{VectorField3d@{VectorField3d}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{VectorField3d}{VectorField3d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1VectorField}{Vector\+Field}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}, 3$>$ \mbox{\hyperlink{namespacemm_a271822e13a00bb7fd853b3520df262ab}{mm\+::\+Vector\+Field3d}}}
+
+
+
+Three dimensional vector field of doubles. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2types_2VectorField_test_8cpp-example}{test/types/\+Vector\+Field\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{VectorField__fwd_8hpp_source_l00153}{153}} of file \mbox{\hyperlink{VectorField__fwd_8hpp_source}{Vector\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemm_a7426072393faa2594e0ee38231669426}\label{namespacemm_a7426072393faa2594e0ee38231669426} 
+\index{mm@{mm}!HDF::readAttribute$<$ std::string $>$@{HDF::readAttribute$<$ std::string $>$}}
+\index{HDF::readAttribute$<$ std::string $>$@{HDF::readAttribute$<$ std::string $>$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{HDF::readAttribute$<$ std::string $>$()}{HDF::readAttribute< std::string >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+std\+::string \mbox{\hyperlink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{mm\+::\+HDF\+::read\+Attribute}}$<$ std\+::string $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{attr\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+Specialization for {\ttfamily std\+::string}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1HDF_aa3f829f1b0a8f64cd15b1ed7e80a3ced}{HDF\+::read\+Attribute}. 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{HDF_8cpp_source_l00087}{87}} of file \mbox{\hyperlink{HDF_8cpp_source}{HDF.\+cpp}}.
+
+\Hypertarget{namespacemm_aef4c1e4e8bed3ae431728e2dbc033e60}\label{namespacemm_aef4c1e4e8bed3ae431728e2dbc033e60} 
+\index{mm@{mm}!join@{join}}
+\index{join@{join}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily std\+::string mm\+::join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&}]{parts,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{joiner }\end{DoxyParamCaption})}
+
+
+
+Overload for {\ttfamily char}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split} 
+\end{DoxySeeAlso}
+\Hypertarget{namespacemm_abe6d3e2e992f087629e7f2af0d081311}\label{namespacemm_abe6d3e2e992f087629e7f2af0d081311} 
+\index{mm@{mm}!operator+@{operator+}}
+\index{operator+@{operator+}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{v1,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{v2 }\end{DoxyParamCaption})}
+
+
+
+Concatenate two vectors. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::vector<int>\ a\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{std::vector<int>\ b\ =\ \{4,\ 5,\ 6\};}
+\DoxyCodeLine{std::vector<int>\ c\ =\ a\ +\ b;\ \ \textcolor{comment}{//\ c\ =\ \{1,\ 2,\ 3,\ 4,\ 5,\ 6\};}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00265}{265}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a1019d6288fbc4be5dd7ec1311c7a9278}\label{namespacemm_a1019d6288fbc4be5dd7ec1311c7a9278} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1AdamsBashforth}{Adams\+Bashforth}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$ \&}]{method }\end{DoxyParamCaption})}
+
+
+
+Output the method\textquotesingle{}s tableau for debugging. 
+
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth_8hpp_source_l00039}{39}} of file \mbox{\hyperlink{AdamsBashforth_8hpp_source}{Adams\+Bashforth.\+hpp}}.
+
+\Hypertarget{namespacemm_a4699b62fb3d203c80084f61fdb9a8eb0}\label{namespacemm_a4699b62fb3d203c80084f61fdb9a8eb0} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} d$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der1s}{Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}} $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output info about Der1s$<$d$>$ 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00113}{113}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a2dc5c9c1b9e1c660870b42bc6b0b1849}\label{namespacemm_a2dc5c9c1b9e1c660870b42bc6b0b1849} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [3/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} d$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der2s}{Der2s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}} $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output info about Der2s$<$d$>$ 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00136}{136}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a1d0a8e633864dc5885558c8cdb6f94c4}\label{namespacemm_a1d0a8e633864dc5885558c8cdb6f94c4} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [4/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{d }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given domain. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00491}{491}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_ab96aae1d55a5eddc0e183571a3feb29d}\label{namespacemm_ab96aae1d55a5eddc0e183571a3feb29d} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [5/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{shape }\end{DoxyParamCaption})}
+
+
+
+Output info about given shape to ostream. 
+
+Calls polymorphic \doxylink{classmm_1_1DomainShape_ac68b9d64cfdc3501c5447e6cfe87cfac}{Domain\+Shape\+::print} function. \begin{DoxySeeAlso}{See also}
+print 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00220}{220}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a758cae5968f6747c2c04f3bec951e454}\label{namespacemm_a758cae5968f6747c2c04f3bec951e454} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [6/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output basic information about given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{ExplicitOperators_8hpp_source}{Explicit\+Operators.\+hpp}}.
+
+\Hypertarget{namespacemm_a1505895fdd102b836b3034886e829e55}\label{namespacemm_a1505895fdd102b836b3034886e829e55} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [7/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators_8hpp_source_l00151}{151}} of file \mbox{\hyperlink{ExplicitVectorOperators_8hpp_source}{Explicit\+Vector\+Operators.\+hpp}}.
+
+\Hypertarget{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}\label{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [8/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Output basic information about given \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{Gaussian_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{Gaussian_8hpp_source}{Gaussian.\+hpp}}.
+
+\Hypertarget{namespacemm_af9ff8359fae0be0525e8b8ebb38bde88}\label{namespacemm_af9ff8359fae0be0525e8b8ebb38bde88} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [9/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitOperators}{Implicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitOperators_8hpp_source_l00065}{65}} of file \mbox{\hyperlink{ImplicitOperators_8hpp_source}{Implicit\+Operators.\+hpp}}.
+
+\Hypertarget{namespacemm_adfed60939acb4b1422ba6163331b3ffe}\label{namespacemm_adfed60939acb4b1422ba6163331b3ffe} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [10/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{ImplicitVectorOperators_8hpp_source}{Implicit\+Vector\+Operators.\+hpp}}.
+
+\Hypertarget{namespacemm_a1d84d8f250c68e4346fdceb328396268}\label{namespacemm_a1d84d8f250c68e4346fdceb328396268} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [11/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Output basic information about given basis function. 
+
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{InverseMultiquadric_8hpp_source}{Inverse\+Multiquadric.\+hpp}}.
+
+\Hypertarget{namespacemm_a5cc2e78c5c88a4d353fb9989cef166aa}\label{namespacemm_a5cc2e78c5c88a4d353fb9989cef166aa} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [12/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1KDTree}{KDTree}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{tree }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTree_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{KDTree_8hpp_source}{KDTree.\+hpp}}.
+
+\Hypertarget{namespacemm_a71e41ba1887eb27a9b2d302c0771c441}\label{namespacemm_a71e41ba1887eb27a9b2d302c0771c441} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [13/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1KDTreeMutable}{KDTree\+Mutable}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{tree }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given tree. 
+
+
+
+Definition at line \mbox{\hyperlink{KDTreeMutable_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{KDTreeMutable_8hpp_source}{KDTree\+Mutable.\+hpp}}.
+
+\Hypertarget{namespacemm_a85158831b079038550d8fd0381388a72}\label{namespacemm_a85158831b079038550d8fd0381388a72} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [14/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Monomials}{Monomials}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given Monomial basis. 
+
+
+
+Definition at line \mbox{\hyperlink{Monomials_8hpp_source_l00269}{269}} of file \mbox{\hyperlink{Monomials_8hpp_source}{Monomials.\+hpp}}.
+
+\Hypertarget{namespacemm_ab0f8ecfcfd505c291353d3fb4e7678ca}\label{namespacemm_ab0f8ecfcfd505c291353d3fb4e7678ca} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [15/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Output basic information about given basis function. 
+
+
+
+Definition at line \mbox{\hyperlink{Multiquadric_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{Multiquadric_8hpp_source}{Multiquadric.\+hpp}}.
+
+\Hypertarget{namespacemm_a70bcb2267ff9f5b9701a7c3dc5714164}\label{namespacemm_a70bcb2267ff9f5b9701a7c3dc5714164} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [16/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight}{No\+Weight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given weight function. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a4b0d58b7d51281c7c45e6a0135a18c6f}\label{namespacemm_a4b0d58b7d51281c7c45e6a0135a18c6f} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [17/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Operator}{Operator}}$<$ Derived $>$ \&}]{op }\end{DoxyParamCaption})}
+
+
+
+Output info about given operator. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a182bcb240c51b26c29dbf8dc64350c8d}\label{namespacemm_a182bcb240c51b26c29dbf8dc64350c8d} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [18/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} K$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, K $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Output basic information about given \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{Polyharmonic_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{Polyharmonic_8hpp_source}{Polyharmonic.\+hpp}}.
+
+\Hypertarget{namespacemm_a58e90db021a5cd2f16bbfaf4597f85ec}\label{namespacemm_a58e90db021a5cd2f16bbfaf4597f85ec} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [19/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given basis. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{namespacemm_a09883ae3d31b3f94247577aea9f5ae00}\label{namespacemm_a09883ae3d31b3f94247577aea9f5ae00} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [20/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFFD}{RBFFD}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ \&}]{e }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given approximation engine. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFFD__fwd_8hpp_source_l00161}{161}} of file \mbox{\hyperlink{RBFFD__fwd_8hpp_source}{RBFFD\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_aed6b4f0ba39dbf4f88f8d32e702a50e5}\label{namespacemm_aed6b4f0ba39dbf4f88f8d32e702a50e5} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [21/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&}]{w }\end{DoxyParamCaption})}
+
+
+
+Output info about given weight function. 
+
+Output basic info about given weight function. 
+
+Definition at line \mbox{\hyperlink{WeightFunction_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{WeightFunction_8hpp_source}{Weight\+Function.\+hpp}}.
+
+\Hypertarget{namespacemm_ae2b8cacd4ca28b2c34d25d792ce40192}\label{namespacemm_ae2b8cacd4ca28b2c34d25d792ce40192} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [22/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit}{RKExplicit}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$ \&}]{method }\end{DoxyParamCaption})}
+
+
+
+Output the method\textquotesingle{}s tableau for debugging. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00235}{235}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{namespacemm_a00414321e80b138a4e841042d5f54f79}\label{namespacemm_a00414321e80b138a4e841042d5f54f79} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [23/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{D}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{D}}, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ \&}]{shapes }\end{DoxyParamCaption})}
+
+
+
+Output basic info about this shape storage. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00176}{176}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{namespacemm_a42e0898079f0c953ff8d42caec038fdf}\label{namespacemm_a42e0898079f0c953ff8d42caec038fdf} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [24/28]}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1STL_1_1Point}{STL\+::\+Point}} \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Print a \doxylink{classmm_1_1STL}{STL} point. 
+
+
+
+Definition at line \mbox{\hyperlink{STL_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{STL_8cpp_source}{STL.\+cpp}}.
+
+\Hypertarget{namespacemm_a3f2b6e33c627ad6940c0bb11348501f4}\label{namespacemm_a3f2b6e33c627ad6940c0bb11348501f4} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [25/28]}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{STL\+::\+Triangle}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Print a \doxylink{classmm_1_1STL}{STL} triangle. 
+
+
+
+Definition at line \mbox{\hyperlink{STL_8cpp_source_l00041}{41}} of file \mbox{\hyperlink{STL_8cpp_source}{STL.\+cpp}}.
+
+\Hypertarget{namespacemm_add87a6e89d563732bf964b973503d443}\label{namespacemm_add87a6e89d563732bf964b973503d443} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [26/28]}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Stopwatch}{Stopwatch}} \&}]{stopwatch }\end{DoxyParamCaption})}
+
+
+
+Output average lap times for all labels. 
+
+
+
+Definition at line \mbox{\hyperlink{Stopwatch_8cpp_source_l00076}{76}} of file \mbox{\hyperlink{Stopwatch_8cpp_source}{Stopwatch.\+cpp}}.
+
+\Hypertarget{namespacemm_a0ffbed372f662f3c5474b94db9186b0c}\label{namespacemm_a0ffbed372f662f3c5474b94db9186b0c} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [27/28]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS}{WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \&}]{wls }\end{DoxyParamCaption})}
+
+
+
+Output basic info about given \doxylink{classmm_1_1WLS}{WLS} class. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS_8hpp_source_l00105}{105}} of file \mbox{\hyperlink{WLS_8hpp_source}{WLS.\+hpp}}.
+
+\Hypertarget{namespacemm_aadaf0deaa03f64058b68dda3f8dbd911}\label{namespacemm_aadaf0deaa03f64058b68dda3f8dbd911} 
+\index{mm@{mm}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [28/28]}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1XML}{XML}} \&}]{xml }\end{DoxyParamCaption})}
+
+
+
+Prints the contents of currently loaded \doxylink{classmm_1_1XML}{XML} document. 
+
+
+
+Definition at line \mbox{\hyperlink{XML_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{XML_8cpp_source}{XML.\+cpp}}.
+
+\Hypertarget{namespacemm_a905c807069c1eab6b4eccc51a2b9ed36}\label{namespacemm_a905c807069c1eab6b4eccc51a2b9ed36} 
+\index{mm@{mm}!print\_green@{print\_green}}
+\index{print\_green@{print\_green}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{print\_green()}{print\_green()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::print\+\_\+green (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints given text in bold green. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & text to print. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{assert_8hpp_source_l00095}{95}} of file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+
+\Hypertarget{namespacemm_a48aee295207b24394af5ed5ae764c662}\label{namespacemm_a48aee295207b24394af5ed5ae764c662} 
+\index{mm@{mm}!print\_red@{print\_red}}
+\index{print\_red@{print\_red}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{print\_red()}{print\_red()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::print\+\_\+red (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints given text in bold red. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & text to print. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{assert_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+
+\Hypertarget{namespacemm_a65013f9a5275282cc4cf6db2c19f8821}\label{namespacemm_a65013f9a5275282cc4cf6db2c19f8821} 
+\index{mm@{mm}!print\_white@{print\_white}}
+\index{print\_white@{print\_white}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{print\_white()}{print\_white()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::print\+\_\+white (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints given text in bold white. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & text to print. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{assert_8hpp_source_l00090}{90}} of file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+
+\Hypertarget{namespacemm_a572700036a7cbccd80820b07857efe99}\label{namespacemm_a572700036a7cbccd80820b07857efe99} 
+\index{mm@{mm}!signum@{signum}}
+\index{signum@{signum}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{signum()}{signum()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::signum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{x,  }\item[{std\+::false\+\_\+type}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Signum overload for unsigned types. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00079}{79}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{namespacemm_a716cabd1f0ea3302690c3da4e4252267}\label{namespacemm_a716cabd1f0ea3302690c3da4e4252267} 
+\index{mm@{mm}!signum@{signum}}
+\index{signum@{signum}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{signum()}{signum()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::signum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{x,  }\item[{std\+::true\+\_\+type}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Signum overload for unsigned types. 
+
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{namespacemm_ae00b97fbaf06976c5c4c7eae4bb6e637}\label{namespacemm_ae00b97fbaf06976c5c4c7eae4bb6e637} 
+\index{mm@{mm}!split@{split}}
+\index{split@{split}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ mm\+::split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{s,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{delim }\end{DoxyParamCaption})}
+
+
+
+Overload for {\ttfamily char}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8cpp_source_l00024}{24}} of file \mbox{\hyperlink{stdtypesutils_8cpp_source}{stdtypesutils.\+cpp}}.
+
+\Hypertarget{namespacemm_a68b8507de8c6b561ecfbd2c0ae44a3ed}\label{namespacemm_a68b8507de8c6b561ecfbd2c0ae44a3ed} 
+\index{mm@{mm}!XML::get$<$ std::string $>$@{XML::get$<$ std::string $>$}}
+\index{XML::get$<$ std::string $>$@{XML::get$<$ std::string $>$}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{XML::get$<$ std::string $>$()}{XML::get< std::string >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+std\+::string \mbox{\hyperlink{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db}{mm\+::\+XML\+::get}}$<$ std\+::string $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{path }\end{DoxyParamCaption}) const}
+
+
+
+String specialization. 
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacemm_a6de6600cc8973ce82b321288cc7385e0}\label{namespacemm_a6de6600cc8973ce82b321288cc7385e0} 
+\index{mm@{mm}!CleanFmt@{CleanFmt}}
+\index{CleanFmt@{CleanFmt}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{CleanFmt}{CleanFmt}}
+{\footnotesize\ttfamily Eigen\+::\+IOFormat mm\+::\+Clean\+Fmt\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Clean readable multiline aligned format. 
+
+\Hypertarget{namespacemm_a38918b8024e50dab3d402e05c7e0e11b}\label{namespacemm_a38918b8024e50dab3d402e05c7e0e11b} 
+\index{mm@{mm}!CSVFmt@{CSVFmt}}
+\index{CSVFmt@{CSVFmt}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{CSVFmt}{CSVFmt}}
+{\footnotesize\ttfamily Eigen\+::\+IOFormat mm\+::\+CSVFmt\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Valid \doxylink{classmm_1_1CSV}{CSV} format. 
+
+\Hypertarget{namespacemm_a1f19f6918021bf7c2b7fcf9bab94d1b7}\label{namespacemm_a1f19f6918021bf7c2b7fcf9bab94d1b7} 
+\index{mm@{mm}!INF@{INF}}
+\index{INF@{INF}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{INF}{INF}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+INF = 1.\+0 / 0.\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Infinite floating point value. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{namespacemm_a9c939ede62b2307cbc35d6fbcac1f71b}\label{namespacemm_a9c939ede62b2307cbc35d6fbcac1f71b} 
+\index{mm@{mm}!InlineFmt@{InlineFmt}}
+\index{InlineFmt@{InlineFmt}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{InlineFmt}{InlineFmt}}
+{\footnotesize\ttfamily Eigen\+::\+IOFormat mm\+::\+Inline\+Fmt\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Readable inline format. 
+
+\Hypertarget{namespacemm_a870e75f838a5173602abb21ee12e4bea}\label{namespacemm_a870e75f838a5173602abb21ee12e4bea} 
+\index{mm@{mm}!MathematicaFmt@{MathematicaFmt}}
+\index{MathematicaFmt@{MathematicaFmt}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{MathematicaFmt}{MathematicaFmt}}
+{\footnotesize\ttfamily Eigen\+::\+IOFormat mm\+::\+Mathematica\+Fmt\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Full precision output understood by Wolfram Mathematica. 
+
+\Hypertarget{namespacemm_ac1f6cb1b8e5c608bfa72664964bc62fa}\label{namespacemm_ac1f6cb1b8e5c608bfa72664964bc62fa} 
+\index{mm@{mm}!MatlabFmt@{MatlabFmt}}
+\index{MatlabFmt@{MatlabFmt}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{MatlabFmt}{MatlabFmt}}
+{\footnotesize\ttfamily Eigen\+::\+IOFormat mm\+::\+Matlab\+Fmt\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Full precision format understood by Matlab/\+Octave. 
+
+\Hypertarget{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}\label{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0} 
+\index{mm@{mm}!NaN@{NaN}}
+\index{NaN@{NaN}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{NaN}{NaN}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+NaN = 0.\+0 / 0.\+0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Not-\/a-\/number floating point value. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{namespacemm_add5120ca222cb67674865bb4ea92cfae}\label{namespacemm_add5120ca222cb67674865bb4ea92cfae} 
+\index{mm@{mm}!PI@{PI}}
+\index{PI@{PI}!mm@{mm}}
+\doxysubsubsection{\texorpdfstring{PI}{PI}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+PI = \mbox{\hyperlink{structmm_1_1Pi}{Pi}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}$>$\+::value\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Mathematical constant pi in double precision. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2GeneralSurfaceFill_test_8cpp-example}{test/domains/\+General\+Surface\+Fill\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2NURBSPatch_test_8cpp-example}{test/domains/\+NURBSPatch\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2NURBSShape_test_8cpp-example}{test/domains/\+NURBSShape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2domains_2RotatedShape_test_8cpp-example}{test/domains/\+Rotated\+Shape\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2end2end_2complex_numbers_8cpp-example}{test/end2end/complex\+\_\+numbers.\+cpp}}, \mbox{\hyperlink{test_2end2end_2diffusion_explicit_8cpp-example}{test/end2end/diffusion\+\_\+explicit.\+cpp}}, \mbox{\hyperlink{test_2end2end_2poisson_implicit_8cpp-example}{test/end2end/poisson\+\_\+implicit.\+cpp}}, \mbox{\hyperlink{test_2integrators_2AdamsBashforth_test_8cpp-example}{test/integrators/\+Adams\+Bashforth\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2integrators_2RKExplicit_test_8cpp-example}{test/integrators/\+RKExplicit\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitOperators_test_8cpp-example}{test/operators/\+Explicit\+Operators\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2operators_2ImplicitVectorOperators_test_8cpp-example}{test/operators/\+Implicit\+Vector\+Operators\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+

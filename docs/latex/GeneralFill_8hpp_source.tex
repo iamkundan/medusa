@@ -1,0 +1,98 @@
+\doxysection{General\+Fill.\+hpp}
+\hypertarget{GeneralFill_8hpp_source}{}\label{GeneralFill_8hpp_source}\index{include/medusa/bits/domains/GeneralFill.hpp@{include/medusa/bits/domains/GeneralFill.hpp}}
+\mbox{\hyperlink{GeneralFill_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_GENERALFILL\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_GENERALFILL\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GeneralFill__fwd_8hpp}{GeneralFill\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discretization__helpers_8hpp}{discretization\_helpers.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{randutils_8hpp}{medusa/bits/utils/randutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTreeMutable_8hpp}{medusa/bits/spatial\_search/KDTreeMutable.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTree_8hpp}{medusa/bits/spatial\_search/KDTree.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00019}00019\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00021}00021\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00022}00022\ GeneralFill<vec\_t>::GeneralFill()\ :\ seed\_(\mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\_seed}}())\ \{\}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00025}00025\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ func\_t>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00027}00027\ \textcolor{keywordtype}{void}\ GeneralFill<vec\_t>::operator()(DomainDiscretization<vec\_t>\&\ domain,\ \textcolor{keyword}{const}\ func\_t\&\ h,}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00029}00029\ \ \ \ \ KDTreeMutable<vec\_t>\ tree;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00030}00030\ \ \ \ \ operator()(domain,\ h,\ tree,\ type);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00031}00031\ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00033}00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00034}00034\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ func\_t,\ \textcolor{keyword}{typename}\ search\_structure\_t>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00035}00035\ \textcolor{keywordtype}{void}\ GeneralFill<vec\_t>::operator()(DomainDiscretization<vec\_t>\&\ domain,\ \textcolor{keyword}{const}\ func\_t\&\ h,}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ search\_structure\_t\&\ search,\ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ 0)\ type\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00038}00038\ \ \ \ \ std::mt19937\ gen(seed\_);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00039}00039\ \ \ \ \ KDTree<vec\_t>\ boundary\_search;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00040}00040\ \ \ \ \ domain.makeDiscreteContainsStructure(boundary\_search);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{int}\ cur\_node\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{int}\ end\_node\ =\ domain.size();}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (end\_node\ ==\ 0)\ \{\ \ \textcolor{comment}{//\ If\ domain\ is\ empty,\ pick\ a\ random\ node\ inside\ it.}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ vec\_t\ lo\_bound,\ hi\_bound,\ random\_node;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ std::tie(lo\_bound,\ hi\_bound)\ =\ domain.shape().bbox();}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ std::vector<std::uniform\_real\_distribution<scalar\_t>>\ distributions;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++j)\ distributions.emplace\_back(lo\_bound[j],\ hi\_bound[j]);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++j)\ \{\ random\_node[j]\ =\ distributions[j](gen);\ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (++count\ >=\ 10000)\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ message\ =\ \textcolor{stringliteral}{"{}No\ suitable\ node\ in\ domain\ could\ be\ found\ after\ 10000\ tries."{}}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ This\ might\ happen\ if\ domain\ volume\ is\ very\ small\ compared\ "{}}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}to\ the\ volume\ of\ the\ bounding\ box.\ Try\ manually\ supplying\ "{}}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}the\ initial\ point."{}};}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(message);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (!domain.contains(random\_node,\ boundary\_search));}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ domain.addInternalNode(random\_node,\ type);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ end\_node\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00064}00064\ \ \ \ \ \textcolor{comment}{//\ Main\ algorithm\ loop.}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00065}00065\ \ \ \ \ search.insert(domain.positions());}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{while}\ (cur\_node\ <\ end\_node\ \&\&\ end\_node\ <\ max\_points)\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ vec\_t\ p\ =\ domain.pos(cur\_node);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ r\ =\ h(p);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(r\ >\ 0,\ \textcolor{stringliteral}{"{}Nodal\ spacing\ radius\ should\ be\ >\ 0,\ got\ \%g."{}},\ r);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ candidates\ =\ discretization\_helpers::SphereDiscretization<scalar\_t,\ dim>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ::construct(r,\ n\_samples,\ gen);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ filter\ candidates\ regarding\ the\ domain\ and\ proximity\ criteria}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ f\ :\ candidates)\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ vec\_t\ node\ =\ p\ +\ f;\ \ \textcolor{comment}{//\ Shift\ center\ to\ point\ \`{}p`.}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!domain.contains(node,\ boundary\_search))\ \textcolor{keywordflow}{continue};\ \ \textcolor{comment}{//\ If\ node\ is\ not\ in\ the\ domain.}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (search.existsPointInSphere(node,\ r*zeta))\ \textcolor{keywordflow}{continue};\ \ \textcolor{comment}{//\ If\ node\ is\ not\ far\ enough}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ domain.addInternalNode(node,\ type);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ from\ other\ nodes.}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ search.insert(node);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ end\_node++;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ cur\_node++;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{if}\ (end\_node\ >=\ max\_points)\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Maximum\ number\ of\ points\ reached,\ fill\ may\ be\ incomplete."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00089}00089\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00090}00090\ GeneralFill<vec\_t>\&\ GeneralFill<vec\_t>::proximityTolerance(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ zeta)\ \{}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00091}00091\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}((0\ <\ zeta\ \&\&\ zeta\ <\ 1),\ \textcolor{stringliteral}{"{}Zeta\ must\ be\ between\ 0\ and\ 1,\ got\ \%f."{}},\ zeta);}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00092}00092\ \ \ \ \ this-\/>zeta\ =\ zeta;}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00097}00097\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{GeneralFill_8hpp_source_l00099}00099\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_GENERALFILL\_HPP\_}}
+
+\end{DoxyCode}

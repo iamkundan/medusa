@@ -1,0 +1,44 @@
+\doxysection{Grid\+Fill.\+hpp}
+\hypertarget{GridFill_8hpp_source}{}\label{GridFill_8hpp_source}\index{include/medusa/bits/domains/GridFill.hpp@{include/medusa/bits/domains/GridFill.hpp}}
+\mbox{\hyperlink{GridFill_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_GRIDFILL\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_GRIDFILL\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GridFill__fwd_8hpp}{GridFill\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTree_8hpp}{medusa/bits/spatial\_search/KDTree.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00017}00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00018}\mbox{\hyperlink{classmm_1_1GridFill_a8e95c449cefa783f8016b6dcae3bbe81}{00018}}\ \mbox{\hyperlink{classmm_1_1GridFill_a8e95c449cefa783f8016b6dcae3bbe81}{GridFill<vec\_t>::GridFill}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ bot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ top)\ :\ bot(bot),\ top(top)\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198ea7f1b32acaca3a459256f0c828f86205d}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{bot}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ <=\ \mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{top}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ \textcolor{stringliteral}{"{}Bottom\ bounds\ \%s\ must\ be\ below\ top\ bounds\ \%s."{}},\ \mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{bot}},\ \mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{top}});}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00021}00021\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00025}\mbox{\hyperlink{classmm_1_1GridFill_ad6f8be5995f8548ed543a795a0422b03}{00025}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1GridFill_ad6f8be5995f8548ed543a795a0422b03}{GridFill<vec\_t>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{scalar\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}},}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ ==\ 0)\ type\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\ counts;}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ counts[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}((top[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ bot[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}})\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTree<vec\_t>}}\ tree(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.positions());}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ x\ :\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(bot,\ top,\ counts))\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.contains(x)\ \&\&\ (tree.size()\ ==\ 0\ ||\ tree.query(x,\ 1).second[0]\ >=\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}}*\mbox{\hyperlink{classmm_1_1Gaussian}{h}}))\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addInternalNode(x,\ type);}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00041}00041\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{GridFill_8hpp_source_l00043}00043\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_GRIDFILL\_HPP\_}}
+
+\end{DoxyCode}

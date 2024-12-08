@@ -1,0 +1,91 @@
+\doxysection{include/medusa/bits/operators/\+Implicit\+Vector\+Operators\+\_\+fwd.hpp File Reference}
+\hypertarget{ImplicitVectorOperators__fwd_8hpp}{}\label{ImplicitVectorOperators__fwd_8hpp}\index{include/medusa/bits/operators/ImplicitVectorOperators\_fwd.hpp@{include/medusa/bits/operators/ImplicitVectorOperators\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declarations of implicit vector operators. 
+
+
+
+Definition in file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+{\ttfamily \#include "{}Implicit\+Operators\+\_\+fwd.\+hpp"{}}\newline
+Include dependency graph for Implicit\+Vector\+Operators\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ImplicitVectorOperators__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ImplicitVectorOperators__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em This class represents implicit vector operators that fill given matrix \doxylink{classmm_1_1ImplicitVectorOperators_ae9519c74815de424a5d88b097b677f87}{M} and right hand side \doxylink{classmm_1_1ImplicitVectorOperators_a2d458b9fb8127458854493459927b6ad}{rhs} with appropriate coefficients approximating differential operators with shape functions from given shape storage \doxylink{classmm_1_1ImplicitVectorOperators_acd44e9a6cc6c91978fa1eadb14071729}{ss}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Row\+Vec\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing an operation on a specific set of rows of the matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Vec\+Op\+Base$<$ derived\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for all elementary implicit vector operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1ValueOp}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Value\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing the "{}evaluate"{} operation, i.\+e. the zero-\/th derivative. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1BasicOp}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Basic\+Op$<$ op\+\_\+family\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing basic operators. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1GradOp}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Grad\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing the directional derivative (gradient) operation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1GradDivOp}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Grad\+Div\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing the gradient of the divergence operator, i.\+e. operator $\nabla\nabla\cdot$. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Traction\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing the traction operator. Useful for setting boundary conditions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1Equation}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Equation}}
+\begin{DoxyCompactList}\small\item\em Represents one scalar component of a vector equation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_a134aae811be44d33557fdfac868f03d2}{USE\+\_\+\+VECTOR\+\_\+\+BASE}}(Name)
+\begin{DoxyCompactList}\small\item\em Macro that inherits appropriate members from parent Vec\+Op\+Base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ImplicitVectorOperators__fwd_8hpp_a134aae811be44d33557fdfac868f03d2}\label{ImplicitVectorOperators__fwd_8hpp_a134aae811be44d33557fdfac868f03d2} 
+\index{ImplicitVectorOperators\_fwd.hpp@{ImplicitVectorOperators\_fwd.hpp}!USE\_VECTOR\_BASE@{USE\_VECTOR\_BASE}}
+\index{USE\_VECTOR\_BASE@{USE\_VECTOR\_BASE}!ImplicitVectorOperators\_fwd.hpp@{ImplicitVectorOperators\_fwd.hpp}}
+\doxysubsubsection{\texorpdfstring{USE\_VECTOR\_BASE}{USE\_VECTOR\_BASE}}
+{\footnotesize\ttfamily \#define USE\+\_\+\+VECTOR\+\_\+\+BASE(\begin{DoxyParamCaption}\item[{}]{Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{private}:\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }VecOpBase<Name>::op;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }VecOpBase<Name>::node;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }VecOpBase<Name>::row;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }VecOpBase<Name>::VecOpBase;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }ImplicitVectorOperators;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }VecOpBase<Name>::eval;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }VecOpBase<Name>::operator=;}
+
+\end{DoxyCode}
+
+
+Macro that inherits appropriate members from parent Vec\+Op\+Base class. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00166}{166}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+

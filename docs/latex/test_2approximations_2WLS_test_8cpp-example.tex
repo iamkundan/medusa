@@ -1,0 +1,175 @@
+\doxysection{test/approximations/\+WLS\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2WLS_test_8cpp-example}{}\label{test_2approximations_2WLS_test_8cpp-example}WLS.
+
+WLS
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WLS_8hpp}{medusa/bits/approximations/WLS.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{medusa/bits/approximations/JacobiSVDWrapper.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Gaussian_8hpp}{medusa/bits/approximations/Gaussian.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RBFBasis_8hpp}{medusa/bits/approximations/RBFBasis.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials_8hpp}{medusa/bits/approximations/Monomials.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WeightFunction_8hpp}{medusa/bits/approximations/WeightFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{medusa/bits/approximations/Operators.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Eigen/LU"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSMon1d)\ \{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec1d>,\ NoWeight<Vec1d>,\ ScaleToFarthest,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::PartialPivLU<Eigen::MatrixXd>>\ wls(2,\ \{\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ wls.compute(0.0,\ \{0.0,\ -\/h,\ h\});}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ shape\ =\ wls.getShape();}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ expected(3);\ expected\ <<\ 1.0,\ 0.0,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ shape.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[0],\ shape[0],\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[1],\ shape[1],\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[2],\ shape[2],\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls.getShape(Der1<1>(0));}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ 0.0,\ -\/1.0/2.0/h,\ 1.0/2.0/h;}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ shape.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[0],\ shape[0],\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[1],\ shape[1],\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[2],\ shape[2],\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls.getShape(Der2<1>(0));}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ -\/2.0/h/h,\ 1.0/h/h,\ 1.0/h/h;}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ shape.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[0],\ shape[0],\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[1],\ shape[1],\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(expected[2],\ shape[2],\ 1e-\/13);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSMon2d)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ point\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.123;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{point,\ \{0,\ h\},\ \{h,\ 0\},\ \{-\/h,\ 0\},\ \{0,\ -\/h\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/h,\ h\},\ \{h,\ h\},\ \{-\/h,\ -\/h\},\ \{h,\ -\/h\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToClosest,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::PartialPivLU<Eigen::MatrixXd>>\ wls(\mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2),\ \{\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wls.compute(\{0.0,\ 0.0\},\ support);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ shape\ =\ wls.getShape(Der2<2>(0))\ +\ wls.getShape(Der2<2>(1,\ 1));}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ expected(9);\ expected\ <<\ -\/4/h/h,\ 1/h/h,\ 1/h/h,\ 1/h/h,\ 1/h/h,\ 0,\ 0,\ 0,\ 0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls.getShape(Der1<2>(0));}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ 0,\ 0,\ 1/(2*h),\ -\/1/(2*h),\ 0,\ 0,\ 0,\ 0,\ 0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls.getShape(Der1<2>(1));}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ 0,\ 1/(2*h),\ 0,\ 0,\ -\/1/(2*h),\ 0,\ 0,\ 0,\ 0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls.getShape(Der2<2>(0,\ 1));}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ 0,\ 0,\ 0,\ 0,\ 0,\ -\/1./4/h/h,\ 1./4/h/h,\ 1./4/h/h,\ -\/1./4/h/h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ shape);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSMon2dSingular)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ point\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.123;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{point,\ \{0,\ h\},\ \{h,\ 0\},\ \{-\/h,\ 0\},\ \{-\/h,\ h\},\ \{h,\ h\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/h,\ 2*h\},\ \{0,\ 2*h\},\ \{2*h,\ 0\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToClosest,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::PartialPivLU<Eigen::MatrixXd>>\ wls(\mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2),\ \{\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wls.compute(\{0.0,\ 0.0\},\ support);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ shape\ =\ wls.getShape(Der2<2>(0))\ +\ wls.getShape(Der2<2>(1));}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_FALSE(shape.allFinite());\ \ //\ different\ behaviour\ in\ new\ Eigen\ version?}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls.getShape(Der1<2>(0));}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_FALSE(shape.allFinite());\ \ //\ different\ behaviour\ in\ new\ Eigen\ version?}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToClosest,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ JacobiSVDWrapper<double>>\ wls\_svd(\mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2),\ \{\});}
+\DoxyCodeLine{\ \ \ \ wls\_svd.compute(\{0.0,\ 0.0\},\ support);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls\_svd.getShape(Lap<2>());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ expected(9);}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ 1.0/20/h/h,\ -\/2/h/h,\ -\/1.0/20/h/h,\ 13.0/20/h/h,\ 0,\ 0,\ 0,\ 1.0/h/h,\ 7.0/20/h/h;}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ shape.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ expected.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ shape[i],\ 2e-\/13);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ shape\ =\ wls\_svd.getShape(Der1<2>(1));}
+\DoxyCodeLine{\ \ \ \ expected\ <<\ -\/33/(40*h),\ 2/h,\ -\/27/(40*h),\ -\/9/(40*h),\ 0,\ 0,\ 0,\ -\/1/(2*h),\ 9/(40*h);}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ shape.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ expected.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ shape[i],\ 2e-\/14);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSGauss2d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.123;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 1.5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(s);}
+\DoxyCodeLine{\ \ \ \ WLS<RBFBasis<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>,\ NoWeight<Vec2d>,\ NoScale,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::LLT<Eigen::MatrixXd>>\ wls(\{9,\ g\},\ \{\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{h,\ 0\},\ \{0,\ -\/h\},\ \{-\/h,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/h,\ h\},\ \{-\/h,\ -\/h\},\ \{h,\ -\/h\},\ \{h,\ h\}\};}
+\DoxyCodeLine{\ \ \ \ wls.compute(\{0.0,\ 0.0\},\ support);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ -\/4.*(s*s\ +\ h*h/std::pow(std::sinh((h/s)*(h/s)),\ 2))\ /\ std::pow(s,\ 4);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ b\ =\ 4.*std::exp(3.*(h/s)*(h/s))*h*h\ /\ std::pow(-\/1+std::exp(2*(h/s)*(h/s)),\ 2)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ /\ std::pow(s,\ 4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ shape\ =\ wls.getShape(Lap<2>());}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ expected(9);\ expected\ <<\ a,\ b,\ b,\ b,\ b,\ 0,\ 0,\ 0,\ 0;}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ shape.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ expected.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i],\ shape[i],\ 1e-\/5);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ DISABLED\_WLSUsageExmaple)\ \{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest,\ Eigen::PartialPivLU<Eigen::MatrixXd>>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ appr(\mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2));\ \ \textcolor{comment}{//\ full\ type\ specification\ with\ scale\ and\ solver}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ appr2(2);\ \ \textcolor{comment}{//\ using\ default\ parameters}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Local\ neighbourhood}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{h,\ 0\},\ \{0,\ -\/h\},\ \{-\/h,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/h,\ h\},\ \{-\/h,\ -\/h\},\ \{h,\ -\/h\},\ \{h,\ h\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ compute\ approximations\ at\ point\ \`{}\{0.0,\ 0.0\}`.}}
+\DoxyCodeLine{\ \ \ \ appr.compute(\{0.0,\ 0.0\},\ support);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ info\ about\ the\ computation.}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.basis()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.weight()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.center()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.scale()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.localCoordinates()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.getMatrix()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.getWeights()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ Eigen::PartialPivLU<Eigen::MatrixXd>\ solver\ =\ appr.solver();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ shape\ (stencil\ weights)\ for\ approximation\ of\ Laplacian.}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ shape\ =\ appr.getShape(Lap<2>());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ shape\ (stencil\ weights)\ for\ approximation\ of\ value}}
+\DoxyCodeLine{\ \ \ \ shape\ =\ appr.getShape();}
+\DoxyCodeLine{\ \ \ \ (void)\ solver;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

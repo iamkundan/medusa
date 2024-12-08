@@ -1,0 +1,904 @@
+  % Handle batch mode
+  % to overcome problems with too many open files
+  \let\mypdfximage\pdfximage\def\pdfximage{\immediate\mypdfximage}
+  \pdfminorversion=7
+  % Set document class depending on configuration
+  \documentclass[twoside]{book}
+  %% moved from doxygen.sty due to workaround for LaTex 2019 version and unmaintained tabu package
+  \usepackage{ifthen}
+  \ifx\requestedLaTeXdate\undefined
+    \usepackage{array}
+  \else
+    \usepackage{array}[=2016-10-06]
+  \fi
+  %%
+  % Packages required by doxygen
+  \makeatletter
+  \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+  % suppress package identification of infwarerr as it contains the word "warning"
+  \let\@@protected@wlog\protected@wlog
+  \def\protected@wlog#1{\wlog{package info suppressed}}
+  \RequirePackage{infwarerr}
+  \let\protected@wlog\@@protected@wlog
+  \makeatother
+  \IfFormatAtLeastTF{2016/01/01}{}{\usepackage{fixltx2e}} % for \textsubscript
+  \IfFormatAtLeastTF{2015/01/01}{\pdfsuppresswarningpagegroup=1}{}
+  \usepackage{doxygen}
+  \usepackage{graphicx}
+  \usepackage[utf8]{inputenc}
+  \usepackage{makeidx}
+  \PassOptionsToPackage{warn}{textcomp}
+  \usepackage{textcomp}
+  \usepackage[nointegrals]{wasysym}
+  \usepackage{ifxetex}
+  % NLS support packages
+  % Define default fonts
+  % Font selection
+  \usepackage[T1]{fontenc}
+  % set main and monospaced font
+  \usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\renewcommand{\familydefault}{\sfdefault}
+  \doxyallsectionsfont{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \renewcommand{\DoxyLabelFont}{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+   % Arguments of doxygenemoji:
+   % 1) ':<text>:' form of the emoji, already LaTeX-escaped
+   % 2) file with the name of the emoji without the .png extension
+   % in case image exist use this otherwise use the ':<text>:' form
+   \newcommand{\doxygenemoji}[2]{%
+     \IfFileExists{./#2.png}{\raisebox{-0.1em}{\includegraphics[height=0.9em]{./#2.png}}}{#1}%
+   }
+  % Page & text layout
+  \usepackage{geometry}
+  \geometry{%
+    a4paper,%
+    top=2.5cm,%
+    bottom=2.5cm,%
+    left=2.5cm,%
+    right=2.5cm%
+  }
+  \usepackage{changepage}
+  % Allow a bit of overflow to go unnoticed by other means
+  \tolerance=750
+  \hfuzz=15pt
+  \hbadness=750
+  \setlength{\emergencystretch}{15pt}
+  \setlength{\parindent}{0cm}
+  \newcommand{\doxynormalparskip}{\setlength{\parskip}{3ex plus 2ex minus 2ex}}
+  \newcommand{\doxytocparskip}{\setlength{\parskip}{1ex plus 0ex minus 0ex}}
+  \doxynormalparskip
+  % Redefine paragraph/subparagraph environments, using sectsty fonts
+  \makeatletter
+  \renewcommand{\paragraph}{%
+    \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@parafont%
+    }%
+  }
+  \renewcommand{\subparagraph}{%
+    \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@subparafont%
+    }%
+  }
+  \makeatother
+  \makeatletter
+  \newcommand\hrulefilll{\leavevmode\leaders\hrule\hskip 0pt plus 1filll\kern\z@}
+  \makeatother
+  % Headers & footers
+  \usepackage{fancyhdr}
+  \pagestyle{fancyplain}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancypagestyle{fancyplain}{
+    \fancyhf{}
+    \fancyhead[LE, RO]{\bfseries\thepage}
+    \fancyhead[LO]{\bfseries\rightmark}
+    \fancyhead[RE]{\bfseries\leftmark}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Mon Oct 14 2024 16\+:54\+:48 for Medusa by Doxygen }
+  }
+  \fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Mon Oct 14 2024 16\+:54\+:48 for Medusa by Doxygen }
+    \renewcommand{\headrulewidth}{0pt}
+  }
+  \pagestyle{fancyplain}
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{#1}{}%
+  }
+  \renewcommand{\sectionmark}[1]{%
+    \markright{\thesection\ #1}%
+  }
+  % ToC, LoF, LoT, bibliography, and index
+  % Indices & bibliography
+  \usepackage{natbib}
+  \usepackage[titles]{tocloft}
+  \setcounter{tocdepth}{3}
+  \setcounter{secnumdepth}{5}
+  % creating indexes
+  \makeindex
+  \usepackage{newunicodechar}
+  \makeatletter
+    \def\doxynewunicodechar#1#2{%
+    \@tempswafalse
+    \edef\nuc@tempa{\detokenize{#1}}%
+    \if\relax\nuc@tempa\relax
+      \nuc@emptyargerr
+    \else
+      \edef\@tempb{\expandafter\@car\nuc@tempa\@nil}%
+      \nuc@check
+      \if@tempswa
+        \@namedef{u8:\nuc@tempa}{#2}%
+      \fi
+    \fi
+  }
+  \makeatother
+  \doxynewunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \doxynewunicodechar{²}{${}^{2}$}% Superscript two
+  \doxynewunicodechar{³}{${}^{3}$}% Superscript three
+  % Hyperlinks
+    % Hyperlinks (required, but should be loaded last)
+    \ifpdf
+      \usepackage[pdftex,pagebackref=true]{hyperref}
+    \else
+      \ifxetex
+        \usepackage[pagebackref=true]{hyperref}
+      \else
+        \usepackage[ps2pdf,pagebackref=true]{hyperref}
+      \fi
+    \fi
+    \hypersetup{%
+      colorlinks=true,%
+      linkcolor=blue,%
+      citecolor=blue,%
+      unicode,%
+      pdftitle={Medusa},%
+      pdfsubject={Coordinate Free Mehless Method implementation}%
+    }
+  % Custom commands used by the header
+  % Custom commands
+  \newcommand{\clearemptydoublepage}{%
+    \newpage{\pagestyle{empty}\cleardoublepage}%
+  }
+  % caption style definition
+  \usepackage{caption}
+  \captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+  % in page table of contents
+  \IfFormatAtLeastTF{2023/05/01}{\usepackage[deeplevels]{etoc}}{\usepackage[deeplevels]{etoc_doxygen}}
+  \etocsettocstyle{\doxytocparskip}{\doxynormalparskip}
+  \etocsetlevel{subsubsubsection}{4}
+  \etocsetlevel{subsubsubsubsection}{5}
+  \etocsetlevel{subsubsubsubsubsection}{6}
+  \etocsetlevel{subsubsubsubsubsubsection}{7}
+  \etocsetlevel{paragraph}{8}
+  \etocsetlevel{subparagraph}{9}
+  % prevent numbers overlap the titles in toc
+  \renewcommand{\numberline}[1]{#1~}
+% End of preamble, now comes the document contents
+%===== C O N T E N T S =====
+\begin{document}
+  \raggedbottom
+  % Titlepage & ToC
+    % To avoid duplicate page anchors due to reuse of same numbers for
+    % the index (be it as roman numbers)
+    \hypersetup{pageanchor=false,
+                bookmarksnumbered=true,
+                pdfencoding=unicode
+               }
+  \pagenumbering{alph}
+  \begin{titlepage}
+  \vspace*{7cm}
+  \begin{center}%
+  {\Large Medusa}\\
+  [1ex]\large 1.\+1 \\
+  \vspace*{1cm}
+  {\large Generated on Mon Oct 14 2024 16\+:54\+:48 for Medusa by Doxygen 1.9.8}\\
+    \vspace*{0.5cm}
+    {\small Mon Oct 14 2024 16:54:48}
+  \end{center}
+  \end{titlepage}
+  \clearemptydoublepage
+  \pagenumbering{roman}
+  \tableofcontents
+  \clearemptydoublepage
+  \pagenumbering{arabic}
+  % re-enable anchors again
+  \hypersetup{pageanchor=true}
+%--- Begin generated contents ---
+\input{index}
+\input{concepts}
+\chapter{Topic Index}
+\input{topics}
+\chapter{Namespace Index}
+\input{namespaces}
+\chapter{Hierarchical Index}
+\input{hierarchy}
+\chapter{Class Index}
+\input{annotated}
+\chapter{File Index}
+\input{files}
+\chapter{Topic Documentation}
+\input{group__types}
+\input{group__domains}
+\input{group__approximations}
+\input{group__interpolants}
+\input{group__operators}
+\input{group__integrators}
+\input{group__io}
+\input{group__utils}
+\chapter{Namespace Documentation}
+\input{namespacemm}
+\input{namespacemm_1_1assert__internal}
+\input{namespacemm_1_1cad__helpers}
+\input{namespacemm_1_1discretization__helpers}
+\input{namespacemm_1_1integrators}
+\input{namespacemm_1_1integrators_1_1Explicit}
+\input{namespacemm_1_1integrators_1_1ExplicitMultistep}
+\input{namespacemm_1_1kdtree__internal}
+\input{namespacemm_1_1nurbs__patch__internal}
+\input{namespacemm_1_1nurbs__shape__internal}
+\input{namespacemm_1_1operators__internal}
+\input{namespacemm_1_1resize__internal}
+\input{namespacemm_1_1sh}
+\input{namespacemm_1_1surface__fill__internal}
+\chapter{Class Documentation}
+\input{classmm_1_1AdamsBashforth}
+\input{classmm_1_1BallShape}
+\input{classmm_1_1ImplicitOperators_1_1BasicOp}
+\input{classmm_1_1ImplicitVectorOperators_1_1BasicOp}
+\input{classmm_1_1BasicRelax}
+\input{classmm_1_1BoxShape}
+\input{classmm_1_1Range_1_1ConstRangeView}
+\input{classmm_1_1CSV}
+\input{classmm_1_1deep__copy__unique__ptr}
+\input{structmm_1_1Der1}
+\input{structmm_1_1Der1s}
+\input{structmm_1_1Der2}
+\input{structmm_1_1Der2s}
+\input{structmm_1_1Derivative}
+\input{classmm_1_1DomainDiscretization}
+\input{classmm_1_1DomainShape}
+\input{classmm_1_1ImplicitVectorOperators_1_1Equation}
+\input{classmm_1_1ExplicitOperators}
+\input{classmm_1_1ExplicitVectorOperators}
+\input{classmm_1_1FindBalancedSupport}
+\input{classmm_1_1FindClosest}
+\input{classmm_1_1Gaussian}
+\input{classmm_1_1GeneralFill}
+\input{classmm_1_1GeneralSurfaceFill}
+\input{classmm_1_1ImplicitVectorOperators_1_1GradDivOp}
+\input{classmm_1_1ImplicitOperators_1_1GradOp}
+\input{classmm_1_1ImplicitVectorOperators_1_1GradOp}
+\input{classmm_1_1GrainDropFill}
+\input{classmm_1_1Grid}
+\input{classmm_1_1GridFill}
+\input{classmm_1_1HalfLinksRefine}
+\input{classmm_1_1HDF}
+\input{classmm_1_1ImplicitOperators}
+\input{classmm_1_1ImplicitVectorOperators}
+\input{classmm_1_1AdamsBashforth_1_1Integrator}
+\input{classmm_1_1RKExplicit_1_1Integrator}
+\input{classmm_1_1InverseMultiquadric}
+\input{classmm_1_1AdamsBashforth_1_1Integrator_1_1IterationStep}
+\input{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}
+\input{classmm_1_1JacobiSVDWrapper}
+\input{classmm_1_1KDGrid}
+\input{classmm_1_1KDTree}
+\input{classmm_1_1KDTreeMutable}
+\input{structmm_1_1Lap}
+\input{structmm_1_1HDF_1_1Members}
+\input{classmm_1_1Monomials}
+\input{classmm_1_1Multiquadric}
+\input{structmm_1_1nurbs__patch__internal_1_1NestedRange}
+\input{classmm_1_1NoScale}
+\input{classmm_1_1NoWeight}
+\input{classmm_1_1NURBSPatch}
+\input{structmm_1_1nurbs__patch__internal_1_1NURBSPatchHelper}
+\input{classmm_1_1NURBSShape}
+\input{structmm_1_1nurbs__shape__internal_1_1NURBSShapeHelper}
+\input{classmm_1_1ImplicitOperators_1_1OpBase}
+\input{structmm_1_1Operator}
+\input{structmm_1_1sh_1_1operator__tuple}
+\input{structmm_1_1Pi}
+\input{structmm_1_1STL_1_1Point}
+\input{structmm_1_1kdtree__internal_1_1PointCloud}
+\input{classmm_1_1PolygonShape}
+\input{classmm_1_1Polyharmonic}
+\input{classmm_1_1PolyhedronShape}
+\input{classmm_1_1PolytopeShape}
+\input{classmm_1_1RaggedShapeStorage}
+\input{classmm_1_1Range}
+\input{classmm_1_1Range_1_1RangeView}
+\input{classmm_1_1RBFBasis}
+\input{classmm_1_1RBFFD}
+\input{classmm_1_1RBFInterpolant}
+\input{classmm_1_1RBFWeight}
+\input{classmm_1_1RKExplicit}
+\input{classmm_1_1RotatedShape}
+\input{classmm_1_1ImplicitOperators_1_1RowOp}
+\input{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}
+\input{structmm_1_1scalar__type}
+\input{structmm_1_1scalar__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Options805de53c82fcd4aed23e43162f0a89b7}
+\input{structmm_1_1scalar__type_3_01Range_3_01T_01_4_01_4}
+\input{structmm_1_1scalar__type_3_01ScalarField_3_01T_01_4_01_4}
+\input{structmm_1_1scalar__type_3_01std_1_1vector_3_01T_01_4_01_4}
+\input{classmm_1_1ScalarField}
+\input{classmm_1_1ScalarField_1_1ScalarFieldView}
+\input{classmm_1_1ScaleToClosest}
+\input{classmm_1_1ScaleToFarthest}
+\input{classmm_1_1ShapeDifference}
+\input{classmm_1_1ShapeStorage}
+\input{classmm_1_1ShapeUnion}
+\input{classmm_1_1SheppardInterpolant}
+\input{structmm_1_1discretization__helpers_1_1SphereDiscretization}
+\input{structmm_1_1discretization__helpers_1_1SphereDiscretization_3_01scalar__t_00_011_01_4}
+\input{structmm_1_1discretization__helpers_1_1SphereDiscretization_3_01scalar__t_00_012_01_4}
+\input{classmm_1_1STL}
+\input{classmm_1_1STLShape}
+\input{classmm_1_1Stopwatch}
+\input{classmm_1_1Timer}
+\input{classmm_1_1ImplicitVectorOperators_1_1TractionOp}
+\input{classmm_1_1TranslatedShape}
+\input{structmm_1_1STL_1_1Triangle}
+\input{structmm_1_1tuple__has__type}
+\input{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01T_00_01Ts_8_8_8_01_4_01_4}
+\input{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01U_00_01Ts_8_8_8_01_4_01_4}
+\input{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_4_01_4}
+\input{structmm_1_1tuple__index}
+\input{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4}
+\input{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4}
+\input{classmm_1_1UniformShapeStorage}
+\input{classmm_1_1UnknownShape}
+\input{classmm_1_1ImplicitOperators_1_1ValueOp}
+\input{classmm_1_1ImplicitVectorOperators_1_1ValueOp}
+\input{classmm_1_1ImplicitVectorOperators_1_1VecOpBase}
+\input{structmm_1_1vector__type}
+\input{structmm_1_1vector__type_3_01Eigen_1_1Matrix_3_01__Scalar_00_01__Rows_00_01__Cols_00_01__Optionse6a0acf3820feabb43dfce994ead47ec}
+\input{structmm_1_1vector__type_3_01Range_3_01T_01_4_01_4}
+\input{structmm_1_1vector__type_3_01std_1_1vector_3_01T_01_4_01_4}
+\input{structmm_1_1vector__type_3_01VectorField_3_01Scalar_00_01dim_01_4_01_4}
+\input{classmm_1_1VectorField}
+\input{classmm_1_1VectorField_1_1VectorFieldView}
+\input{classmm_1_1WLS}
+\input{classmm_1_1WLSApproximant}
+\input{classmm_1_1XML}
+\chapter{File Documentation}
+\input{Approximations_8hpp}
+\input{Approximations_8hpp_source}
+\input{Approximations__fwd_8hpp}
+\input{Approximations__fwd_8hpp_source}
+\input{Gaussian_8hpp}
+\input{Gaussian_8hpp_source}
+\input{Gaussian__fwd_8hpp}
+\input{Gaussian__fwd_8hpp_source}
+\input{InverseMultiquadric_8hpp}
+\input{InverseMultiquadric_8hpp_source}
+\input{InverseMultiquadric__fwd_8hpp}
+\input{InverseMultiquadric__fwd_8hpp_source}
+\input{JacobiSVDWrapper_8hpp}
+\input{JacobiSVDWrapper_8hpp_source}
+\input{JacobiSVDWrapper__fwd_8hpp}
+\input{JacobiSVDWrapper__fwd_8hpp_source}
+\input{Monomials_8hpp}
+\input{Monomials_8hpp_source}
+\input{Monomials__fwd_8hpp}
+\input{Monomials__fwd_8hpp_source}
+\input{Multiquadric_8hpp}
+\input{Multiquadric_8hpp_source}
+\input{Multiquadric__fwd_8hpp}
+\input{Multiquadric__fwd_8hpp_source}
+\input{Operators__fwd_8hpp}
+\input{Operators__fwd_8hpp_source}
+\input{Polyharmonic_8hpp}
+\input{Polyharmonic_8hpp_source}
+\input{Polyharmonic__fwd_8hpp}
+\input{Polyharmonic__fwd_8hpp_source}
+\input{RBFBasis_8hpp}
+\input{RBFBasis_8hpp_source}
+\input{RBFBasis__fwd_8hpp}
+\input{RBFBasis__fwd_8hpp_source}
+\input{RBFFD_8hpp}
+\input{RBFFD_8hpp_source}
+\input{RBFFD__fwd_8hpp}
+\input{RBFFD__fwd_8hpp_source}
+\input{RBFInterpolant_8hpp}
+\input{RBFInterpolant_8hpp_source}
+\input{RBFInterpolant__fwd_8hpp}
+\input{RBFInterpolant__fwd_8hpp_source}
+\input{ScaleFunction_8hpp}
+\input{ScaleFunction_8hpp_source}
+\input{WeightFunction_8hpp}
+\input{WeightFunction_8hpp_source}
+\input{WeightFunction__fwd_8hpp}
+\input{WeightFunction__fwd_8hpp_source}
+\input{WLS_8hpp}
+\input{WLS_8hpp_source}
+\input{WLS__fwd_8hpp}
+\input{WLS__fwd_8hpp_source}
+\input{WLSApproximant_8hpp}
+\input{WLSApproximant_8hpp_source}
+\input{WLSApproximant__fwd_8hpp}
+\input{WLSApproximant__fwd_8hpp_source}
+\input{BallShape_8hpp}
+\input{BallShape_8hpp_source}
+\input{BallShape__fwd_8hpp}
+\input{BallShape__fwd_8hpp_source}
+\input{BasicRelax_8hpp}
+\input{BasicRelax_8hpp_source}
+\input{BasicRelax__fwd_8hpp}
+\input{BasicRelax__fwd_8hpp_source}
+\input{BoxShape_8hpp}
+\input{BoxShape_8hpp_source}
+\input{BoxShape__fwd_8hpp}
+\input{BoxShape__fwd_8hpp_source}
+\input{cad__helpers_8hpp}
+\input{cad__helpers_8hpp_source}
+\input{cad__helpers__fwd_8hpp}
+\input{cad__helpers__fwd_8hpp_source}
+\input{compute__normal_8hpp}
+\input{compute__normal_8hpp_source}
+\input{compute__normal__fwd_8hpp}
+\input{compute__normal__fwd_8hpp_source}
+\input{discretization__helpers_8hpp}
+\input{discretization__helpers_8hpp_source}
+\input{discretization__helpers__advanced_8hpp}
+\input{discretization__helpers__advanced_8hpp_source}
+\input{DomainDiscretization_8hpp}
+\input{DomainDiscretization_8hpp_source}
+\input{DomainDiscretization__fwd_8hpp}
+\input{DomainDiscretization__fwd_8hpp_source}
+\input{DomainShape_8hpp}
+\input{DomainShape_8hpp_source}
+\input{DomainShape__fwd_8hpp}
+\input{DomainShape__fwd_8hpp_source}
+\input{FindBalancedSupport_8hpp}
+\input{FindBalancedSupport_8hpp_source}
+\input{FindBalancedSupport__fwd_8hpp}
+\input{FindBalancedSupport__fwd_8hpp_source}
+\input{FindClosest_8hpp}
+\input{FindClosest_8hpp_source}
+\input{FindClosest__fwd_8hpp}
+\input{FindClosest__fwd_8hpp_source}
+\input{GeneralFill_8hpp}
+\input{GeneralFill_8hpp_source}
+\input{GeneralFill__fwd_8hpp}
+\input{GeneralFill__fwd_8hpp_source}
+\input{GeneralSurfaceFill_8hpp}
+\input{GeneralSurfaceFill_8hpp_source}
+\input{GeneralSurfaceFill__fwd_8hpp}
+\input{GeneralSurfaceFill__fwd_8hpp_source}
+\input{GrainDropFill_8hpp}
+\input{GrainDropFill_8hpp_source}
+\input{GrainDropFill__fwd_8hpp}
+\input{GrainDropFill__fwd_8hpp_source}
+\input{GridFill_8hpp}
+\input{GridFill_8hpp_source}
+\input{GridFill__fwd_8hpp}
+\input{GridFill__fwd_8hpp_source}
+\input{HalfLinksRefine_8hpp}
+\input{HalfLinksRefine_8hpp_source}
+\input{HalfLinksRefine__fwd_8hpp}
+\input{HalfLinksRefine__fwd_8hpp_source}
+\input{NURBSPatch_8hpp}
+\input{NURBSPatch_8hpp_source}
+\input{NURBSPatch__fwd_8hpp}
+\input{NURBSPatch__fwd_8hpp_source}
+\input{NURBSShape_8hpp}
+\input{NURBSShape_8hpp_source}
+\input{NURBSShape__fwd_8hpp}
+\input{NURBSShape__fwd_8hpp_source}
+\input{PolygonShape_8hpp}
+\input{PolygonShape_8hpp_source}
+\input{PolygonShape__fwd_8hpp}
+\input{PolygonShape__fwd_8hpp_source}
+\input{PolyhedronShape_8hpp_source}
+\input{PolyhedronShape__fwd_8hpp}
+\input{PolyhedronShape__fwd_8hpp_source}
+\input{PolytopeShape_8hpp_source}
+\input{PolytopeShape__fwd_8hpp}
+\input{PolytopeShape__fwd_8hpp_source}
+\input{RotatedShape_8hpp}
+\input{RotatedShape_8hpp_source}
+\input{RotatedShape__fwd_8hpp}
+\input{RotatedShape__fwd_8hpp_source}
+\input{ShapeDifference_8hpp}
+\input{ShapeDifference_8hpp_source}
+\input{ShapeDifference__fwd_8hpp}
+\input{ShapeDifference__fwd_8hpp_source}
+\input{ShapeUnion_8hpp}
+\input{ShapeUnion_8hpp_source}
+\input{ShapeUnion__fwd_8hpp}
+\input{ShapeUnion__fwd_8hpp_source}
+\input{STLShape_8hpp}
+\input{STLShape_8hpp_source}
+\input{STLShape__fwd_8hpp}
+\input{STLShape__fwd_8hpp_source}
+\input{TranslatedShape_8hpp}
+\input{TranslatedShape_8hpp_source}
+\input{TranslatedShape__fwd_8hpp}
+\input{TranslatedShape__fwd_8hpp_source}
+\input{UnknownShape_8hpp}
+\input{UnknownShape_8hpp_source}
+\input{UnknownShape__fwd_8hpp}
+\input{UnknownShape__fwd_8hpp_source}
+\input{AdamsBashforth_8hpp}
+\input{AdamsBashforth_8hpp_source}
+\input{AdamsBashforth__fwd_8hpp}
+\input{AdamsBashforth__fwd_8hpp_source}
+\input{RKExplicit_8hpp}
+\input{RKExplicit_8hpp_source}
+\input{RKExplicit__fwd_8hpp}
+\input{RKExplicit__fwd_8hpp_source}
+\input{Sheppard_8hpp}
+\input{Sheppard_8hpp_source}
+\input{Sheppard__fwd_8hpp}
+\input{Sheppard__fwd_8hpp_source}
+\input{CSV_8hpp}
+\input{CSV_8hpp_source}
+\input{CSV__Eigen_8hpp}
+\input{CSV__Eigen_8hpp_source}
+\input{CSV__fwd_8hpp}
+\input{CSV__fwd_8hpp_source}
+\input{HDF_8hpp}
+\input{HDF_8hpp_source}
+\input{HDF__Eigen_8hpp}
+\input{HDF__Eigen_8hpp_source}
+\input{HDF__fwd_8hpp}
+\input{HDF__fwd_8hpp_source}
+\input{ioformat_8hpp}
+\input{ioformat_8hpp_source}
+\input{STL_8hpp}
+\input{STL_8hpp_source}
+\input{STL__fwd_8hpp}
+\input{STL__fwd_8hpp_source}
+\input{XML_8hpp}
+\input{XML_8hpp_source}
+\input{XML__fwd_8hpp}
+\input{XML__fwd_8hpp_source}
+\input{computeShapes_8hpp}
+\input{computeShapes_8hpp_source}
+\input{computeShapes__fwd_8hpp}
+\input{computeShapes__fwd_8hpp_source}
+\input{ExplicitOperators_8hpp}
+\input{ExplicitOperators_8hpp_source}
+\input{ExplicitOperators__fwd_8hpp}
+\input{ExplicitOperators__fwd_8hpp_source}
+\input{ExplicitVectorOperators_8hpp}
+\input{ExplicitVectorOperators_8hpp_source}
+\input{ExplicitVectorOperators__fwd_8hpp}
+\input{ExplicitVectorOperators__fwd_8hpp_source}
+\input{ImplicitOperators_8hpp}
+\input{ImplicitOperators_8hpp_source}
+\input{ImplicitOperators__fwd_8hpp}
+\input{ImplicitOperators__fwd_8hpp_source}
+\input{ImplicitVectorOperators_8hpp}
+\input{ImplicitVectorOperators_8hpp_source}
+\input{ImplicitVectorOperators__fwd_8hpp}
+\input{ImplicitVectorOperators__fwd_8hpp_source}
+\input{printShapes_8hpp}
+\input{printShapes_8hpp_source}
+\input{RaggedShapeStorage_8hpp}
+\input{RaggedShapeStorage_8hpp_source}
+\input{RaggedShapeStorage__fwd_8hpp}
+\input{RaggedShapeStorage__fwd_8hpp_source}
+\input{shape__flags_8hpp}
+\input{shape__flags_8hpp_source}
+\input{ShapeStorage_8hpp}
+\input{ShapeStorage_8hpp_source}
+\input{ShapeStorage__fwd_8hpp}
+\input{ShapeStorage__fwd_8hpp_source}
+\input{UniformShapeStorage_8hpp}
+\input{UniformShapeStorage_8hpp_source}
+\input{UniformShapeStorage__fwd_8hpp}
+\input{UniformShapeStorage__fwd_8hpp_source}
+\input{Grid_8hpp}
+\input{Grid_8hpp_source}
+\input{Grid__fwd_8hpp}
+\input{Grid__fwd_8hpp_source}
+\input{KDGrid_8hpp}
+\input{KDGrid_8hpp_source}
+\input{KDGrid__fwd_8hpp}
+\input{KDGrid__fwd_8hpp_source}
+\input{KDTree_8hpp}
+\input{KDTree_8hpp_source}
+\input{KDTree__fwd_8hpp}
+\input{KDTree__fwd_8hpp_source}
+\input{KDTreeMutable_8hpp}
+\input{KDTreeMutable_8hpp_source}
+\input{KDTreeMutable__fwd_8hpp}
+\input{KDTreeMutable__fwd_8hpp_source}
+\input{PointCloud_8hpp}
+\input{PointCloud_8hpp_source}
+\input{MatrixAddons_8hpp}
+\input{MatrixAddons_8hpp_source}
+\input{MatrixBaseAddons_8hpp}
+\input{MatrixBaseAddons_8hpp_source}
+\input{Range_8hpp}
+\input{Range_8hpp_source}
+\input{Range__fwd_8hpp}
+\input{Range__fwd_8hpp_source}
+\input{ScalarField_8hpp}
+\input{ScalarField_8hpp_source}
+\input{ScalarField__fwd_8hpp}
+\input{ScalarField__fwd_8hpp_source}
+\input{traits_8hpp}
+\input{traits_8hpp_source}
+\input{traits__eigen_8hpp}
+\input{traits__eigen_8hpp_source}
+\input{Vec_8hpp}
+\input{Vec_8hpp_source}
+\input{Vec__fwd_8hpp}
+\input{Vec__fwd_8hpp_source}
+\input{VectorField_8hpp}
+\input{VectorField_8hpp_source}
+\input{VectorField__fwd_8hpp}
+\input{VectorField__fwd_8hpp_source}
+\input{assert_8hpp}
+\input{assert_8hpp_source}
+\input{memutils_8hpp}
+\input{memutils_8hpp_source}
+\input{numutils_8hpp}
+\input{numutils_8hpp_source}
+\input{print_8hpp}
+\input{print_8hpp_source}
+\input{randutils_8hpp}
+\input{randutils_8hpp_source}
+\input{stdtypesutils_8hpp}
+\input{stdtypesutils_8hpp_source}
+\input{Stopwatch_8hpp}
+\input{Stopwatch_8hpp_source}
+\input{Timer_8hpp}
+\input{Timer_8hpp_source}
+\input{Config_8hpp}
+\input{Config_8hpp_source}
+\input{Domain_8hpp}
+\input{Domain_8hpp_source}
+\input{Domain__fwd_8hpp}
+\input{Domain__fwd_8hpp_source}
+\input{Integrators_8hpp}
+\input{Integrators_8hpp_source}
+\input{Interpolants_8hpp}
+\input{Interpolants_8hpp_source}
+\input{Interpolants__fwd_8hpp}
+\input{Interpolants__fwd_8hpp_source}
+\input{IO_8hpp}
+\input{IO_8hpp_source}
+\input{Medusa_8hpp}
+\input{Medusa_8hpp_source}
+\input{Medusa__fwd_8hpp}
+\input{Medusa__fwd_8hpp_source}
+\input{bits_2approximations_2Operators_8hpp}
+\input{bits_2approximations_2Operators_8hpp_source}
+\input{Operators_8hpp}
+\input{Operators_8hpp_source}
+\input{Types_8hpp}
+\input{Types_8hpp_source}
+\input{Types__fwd_8hpp}
+\input{Types__fwd_8hpp_source}
+\input{Utils_8hpp}
+\input{Utils_8hpp_source}
+\input{Gaussian_8cpp}
+\input{Gaussian_8cpp_source}
+\input{InverseMultiquadric_8cpp}
+\input{InverseMultiquadric_8cpp_source}
+\input{JacobiSVDWrapper_8cpp}
+\input{JacobiSVDWrapper_8cpp_source}
+\input{Monomials_8cpp}
+\input{Monomials_8cpp_source}
+\input{Multiquadric_8cpp}
+\input{Multiquadric_8cpp_source}
+\input{Polyharmonic_8cpp}
+\input{Polyharmonic_8cpp_source}
+\input{RBFBasis_8cpp}
+\input{RBFBasis_8cpp_source}
+\input{RBFFD_8cpp}
+\input{RBFFD_8cpp_source}
+\input{RBFInterpolant_8cpp}
+\input{RBFInterpolant_8cpp_source}
+\input{ScaleFunction_8cpp}
+\input{ScaleFunction_8cpp_source}
+\input{WeightFunction_8cpp}
+\input{WeightFunction_8cpp_source}
+\input{WLS_8cpp}
+\input{WLS_8cpp_source}
+\input{WLSApproximant_8cpp}
+\input{WLSApproximant_8cpp_source}
+\input{BallShape_8cpp}
+\input{BallShape_8cpp_source}
+\input{BasicRelax_8cpp}
+\input{BasicRelax_8cpp_source}
+\input{BoxShape_8cpp}
+\input{BoxShape_8cpp_source}
+\input{cad__helpers_8cpp}
+\input{cad__helpers_8cpp_source}
+\input{compute__normal_8cpp}
+\input{compute__normal_8cpp_source}
+\input{DomainDiscretization_8cpp}
+\input{DomainDiscretization_8cpp_source}
+\input{DomainShape_8cpp}
+\input{DomainShape_8cpp_source}
+\input{FindBalancedSupport_8cpp}
+\input{FindBalancedSupport_8cpp_source}
+\input{FindClosest_8cpp}
+\input{FindClosest_8cpp_source}
+\input{GeneralFill_8cpp}
+\input{GeneralFill_8cpp_source}
+\input{GeneralSurfaceFill_8cpp}
+\input{GeneralSurfaceFill_8cpp_source}
+\input{GrainDropFill_8cpp}
+\input{GrainDropFill_8cpp_source}
+\input{GridFill_8cpp}
+\input{GridFill_8cpp_source}
+\input{HalfLinksRefine_8cpp}
+\input{HalfLinksRefine_8cpp_source}
+\input{NURBSPatch_8cpp}
+\input{NURBSPatch_8cpp_source}
+\input{NURBSShape_8cpp}
+\input{NURBSShape_8cpp_source}
+\input{PolygonShape_8cpp}
+\input{PolygonShape_8cpp_source}
+\input{PolyhedronShape_8cpp}
+\input{PolyhedronShape_8cpp_source}
+\input{PolytopeShape_8cpp}
+\input{PolytopeShape_8cpp_source}
+\input{RotatedShape_8cpp}
+\input{RotatedShape_8cpp_source}
+\input{ShapeDifference_8cpp}
+\input{ShapeDifference_8cpp_source}
+\input{ShapeUnion_8cpp}
+\input{ShapeUnion_8cpp_source}
+\input{STLShape_8cpp}
+\input{STLShape_8cpp_source}
+\input{TranslatedShape_8cpp}
+\input{TranslatedShape_8cpp_source}
+\input{UnknownShape_8cpp}
+\input{UnknownShape_8cpp_source}
+\input{AdamsBashforth_8cpp}
+\input{AdamsBashforth_8cpp_source}
+\input{RKExplicit_8cpp}
+\input{RKExplicit_8cpp_source}
+\input{Sheppard_8cpp}
+\input{Sheppard_8cpp_source}
+\input{CSV_8cpp}
+\input{CSV_8cpp_source}
+\input{HDF_8cpp}
+\input{HDF_8cpp_source}
+\input{ioformats_8cpp}
+\input{ioformats_8cpp_source}
+\input{STL_8cpp}
+\input{STL_8cpp_source}
+\input{XML_8cpp}
+\input{XML_8cpp_source}
+\input{computeShapes_8cpp}
+\input{computeShapes_8cpp_source}
+\input{ExplicitOperators_8cpp}
+\input{ExplicitOperators_8cpp_source}
+\input{ExplicitVectorOperators_8cpp}
+\input{ExplicitVectorOperators_8cpp_source}
+\input{ImplicitOperators_8cpp}
+\input{ImplicitOperators_8cpp_source}
+\input{ImplicitVectorOperators_8cpp}
+\input{ImplicitVectorOperators_8cpp_source}
+\input{RaggedShapeStorage_8cpp}
+\input{RaggedShapeStorage_8cpp_source}
+\input{UniformShapeStorage_8cpp}
+\input{UniformShapeStorage_8cpp_source}
+\input{Grid_8cpp}
+\input{Grid_8cpp_source}
+\input{KDGrid_8cpp}
+\input{KDGrid_8cpp_source}
+\input{KDTree_8cpp}
+\input{KDTree_8cpp_source}
+\input{KDTreeMutable_8cpp}
+\input{KDTreeMutable_8cpp_source}
+\input{Range_8cpp}
+\input{Range_8cpp_source}
+\input{ScalarField_8cpp}
+\input{ScalarField_8cpp_source}
+\input{Vec_8cpp}
+\input{Vec_8cpp_source}
+\input{VectorField_8cpp}
+\input{VectorField_8cpp_source}
+\input{assert_8cpp}
+\input{assert_8cpp_source}
+\input{memutils_8cpp}
+\input{memutils_8cpp_source}
+\input{numutils_8cpp}
+\input{numutils_8cpp_source}
+\input{randutils_8cpp}
+\input{randutils_8cpp_source}
+\input{stdtypesutils_8cpp}
+\input{stdtypesutils_8cpp_source}
+\input{Stopwatch_8cpp}
+\input{Stopwatch_8cpp_source}
+\input{Timer_8cpp}
+\input{Timer_8cpp_source}
+\chapter{Examples}
+\input{test_2approximations_2Gaussian_test_8cpp-example}
+\input{test_2approximations_2InverseMultiquadric_test_8cpp-example}
+\input{test_2approximations_2JacobiSVDWrapper_test_8cpp-example}
+\input{test_2approximations_2Monomials_test_8cpp-example}
+\input{test_2approximations_2Multiquadric_test_8cpp-example}
+\input{test_2approximations_2operators_test_8cpp-example}
+\input{test_2approximations_2Polyharmonic_test_8cpp-example}
+\input{test_2approximations_2RBFBasis_test_8cpp-example}
+\input{test_2approximations_2RBFFD_test_8cpp-example}
+\input{test_2approximations_2RBFInterpolant_test_8cpp-example}
+\input{test_2approximations_2ScaleFunction_test_8cpp-example}
+\input{test_2approximations_2WeightFunction_test_8cpp-example}
+\input{test_2approximations_2WLS_test_8cpp-example}
+\input{test_2approximations_2WLSApproximant_test_8cpp-example}
+\input{test_2domains_2BallShape_test_8cpp-example}
+\input{test_2domains_2BasicRelax_test_8cpp-example}
+\input{test_2domains_2BoxShape_test_8cpp-example}
+\input{test_2domains_2cad_helpers_test_8cpp-example}
+\input{test_2domains_2compute_normal_test_8cpp-example}
+\input{test_2domains_2discretization_helpers_test_8cpp-example}
+\input{test_2domains_2discretization_helpers_advanced_test_8cpp-example}
+\input{test_2domains_2DomainDiscretization_test_8cpp-example}
+\input{test_2domains_2DomainShape_test_8cpp-example}
+\input{test_2domains_2FindBalancedSupport_test_8cpp-example}
+\input{test_2domains_2FindClosest_test_8cpp-example}
+\input{test_2domains_2GeneralFill_test_8cpp-example}
+\input{test_2domains_2GeneralSurfaceFill_test_8cpp-example}
+\input{test_2domains_2GrainDropFill_test_8cpp-example}
+\input{test_2domains_2GridFill_test_8cpp-example}
+\input{test_2domains_2HalfLinksRefine_test_8cpp-example}
+\input{test_2domains_2NURBSPatch_test_8cpp-example}
+\input{test_2domains_2NURBSShape_test_8cpp-example}
+\input{test_2domains_2PolygonShape_test_8cpp-example}
+\input{test_2domains_2PolyhedronShape_test_8cpp-example}
+\input{test_2domains_2PolytopeShape_test_8cpp-example}
+\input{test_2domains_2RotatedShape_test_8cpp-example}
+\input{test_2domains_2ShapeDifference_test_8cpp-example}
+\input{test_2domains_2ShapeUnion_test_8cpp-example}
+\input{test_2domains_2STLShape_test_8cpp-example}
+\input{test_2domains_2TranslatedShape_test_8cpp-example}
+\input{test_2domains_2UnknownShape_test_8cpp-example}
+\input{test_2integrators_2AdamsBashforth_test_8cpp-example}
+\input{test_2integrators_2RKExplicit_test_8cpp-example}
+\input{test_2interpolants_2SheppardInterpolant_test_8cpp-example}
+\input{test_2io_2CSV_test_8cpp-example}
+\input{test_2io_2HDF_test_8cpp-example}
+\input{test_2io_2STL_test_8cpp-example}
+\input{test_2io_2XML_test_8cpp-example}
+\input{test_2operators_2computeShapes_test_8cpp-example}
+\input{test_2operators_2ExplicitOperators_test_8cpp-example}
+\input{test_2operators_2ExplicitVectorOperators_test_8cpp-example}
+\input{test_2operators_2ImplicitOperators_test_8cpp-example}
+\input{test_2operators_2ImplicitVectorOperators_test_8cpp-example}
+\input{test_2operators_2RaggedShapeStorage_test_8cpp-example}
+\input{test_2operators_2UniformShapeStorage_test_8cpp-example}
+\input{test_2spatial_search_2Grid_test_8cpp-example}
+\input{test_2spatial_search_2KDGrid_test_8cpp-example}
+\input{test_2spatial_search_2KDTree_test_8cpp-example}
+\input{test_2spatial_search_2KDTreeMutable_test_8cpp-example}
+\input{test_2types_2Range_test_8cpp-example}
+\input{test_2types_2ScalarField_test_8cpp-example}
+\input{test_2types_2Vec_test_8cpp-example}
+\input{test_2types_2VectorField_test_8cpp-example}
+\input{test_2utils_2memutils_test_8cpp-example}
+\input{test_2utils_2numutils_test_8cpp-example}
+\input{test_2utils_2randutils_test_8cpp-example}
+\input{test_2utils_2stdtypesutils_test_8cpp-example}
+\input{test_2utils_2Stopwatch_test_8cpp-example}
+\input{test_2utils_2Timer_test_8cpp-example}
+\input{test_2end2end_2cantilever_beam_implicit_8cpp-example}
+\input{test_2end2end_2complex_numbers_8cpp-example}
+\input{test_2end2end_2diffusion_explicit_8cpp-example}
+\input{test_2end2end_2poisson_explicit_8cpp-example}
+\input{test_2end2end_2poisson_implicit_8cpp-example}
+%--- End generated contents ---
+% Index
+  \backmatter
+  \newpage
+  \phantomsection
+  \clearemptydoublepage
+  \addcontentsline{toc}{chapter}{\indexname}
+  \printindex
+% Required for some languages (in combination with latexdocumentpre from the header)
+\end{document}

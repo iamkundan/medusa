@@ -1,0 +1,64 @@
+\doxysection{test/end2end/poisson\+\_\+explicit.\+cpp}
+\hypertarget{test_2end2end_2poisson_explicit_8cpp-example}{}\label{test_2end2end_2poisson_explicit_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials__fwd_8hpp}{medusa/bits/approximations/Monomials\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WeightFunction__fwd_8hpp}{medusa/bits/approximations/WeightFunction\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RaggedShapeStorage_8hpp}{medusa/bits/operators/RaggedShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WLS__fwd_8hpp}{medusa/bits/approximations/WLS\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF_8hpp}{medusa/bits/io/HDF.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization__fwd_8hpp}{medusa/bits/domains/DomainDiscretization\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape__fwd_8hpp}{medusa/bits/domains/BoxShape\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{UniformShapeStorage_8hpp}{medusa/bits/operators/UniformShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{computeShapes_8hpp}{medusa/bits/operators/computeShapes.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ExplicitOperators_8hpp}{medusa/bits/operators/ExplicitOperators.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScalarField_8hpp}{medusa/bits/types/ScalarField.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Eigen/LU"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{medusa/bits/approximations/JacobiSVDWrapper.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespacemm}{mm}};\ \ \textcolor{comment}{//\ NOLINT(*)}}
+\DoxyCodeLine{\textcolor{keyword}{using\ namespace\ }std;\ \ \textcolor{comment}{//\ NOLINT(*)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1Gaussian}{TEST}}(\mbox{\hyperlink{classmm_1_1Gaussian}{End2end}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{PoissonExplicit}})\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1HDF}{HDF}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{hdf}}(\textcolor{stringliteral}{"{}test.h5"{}},\ HDF::DESTROY);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hdf}}.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<Vec2d>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{box}}(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<Vec2d>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{box}}.discretizeWithStep(step);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.findSupport(\mbox{\hyperlink{classmm_1_1FindClosest}{FindClosest}}(9));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hdf}}.atomic().writeDomain(\textcolor{stringliteral}{"{}domain"{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{WLS<Monomials<Vec2d>}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{NoWeight<Vec2d>}},\ \mbox{\hyperlink{classmm_1_1ScaleToFarthest}{ScaleToFarthest}}>}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}(\mbox{\hyperlink{classmm_1_1Monomials}{Monomials<Vec2d>::tensorBasis}}(2),\ \{\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.computeShapes<sh::lap>(\mbox{\hyperlink{classmm_1_1Gaussian}{wls}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ op\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}}.explicitOperators();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{ScalarFieldd}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ ScalarFieldd::Ones(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{ScalarFieldd}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{s2}}\ =\ ScalarFieldd::Zero(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}[\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.boundary()]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dt}}\ =\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/5;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ steps\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}(\mbox{\hyperlink{classmm_1_1Gaussian}{T}}/\mbox{\hyperlink{classmm_1_1Gaussian}{dt}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ interior\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.interior();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ t\ =\ 0;\ t\ <\ steps;\ ++t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ interior)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{s2}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{dt}}\ *\ op.lap(\mbox{\hyperlink{classmm_1_1Gaussian}{s}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{s2}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hdf}}.reopen();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hdf}}.writeDoubleArray(\textcolor{stringliteral}{"{}sol"{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hdf}}.close();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCodeInclude}
+ 

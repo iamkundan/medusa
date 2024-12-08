@@ -1,0 +1,279 @@
+\doxysection{mm\+::Range\texorpdfstring{$<$}{<} T, Allocator \texorpdfstring{$>$}{>}\+::Range\+View Class Reference}
+\hypertarget{classmm_1_1Range_1_1RangeView}{}\label{classmm_1_1Range_1_1RangeView}\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+
+
+{\ttfamily \#include $<$Range\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} = std\+::allocator$<$\+T$>$$>$\newline
+class mm\+::\+Range$<$ T, Allocator $>$\+::\+Range\+View}
+This class represents a non contiguous view to a \doxylink{classmm_1_1Range}{Range}, allowing for read and write operations. 
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a13cc2296caab7ccc5cff46cf605a4456}{Range\+View}} (\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&)=\mbox{\hyperlink{classmm_1_1Gaussian}{delete}}
+\begin{DoxyCompactList}\small\item\em Disallow copying. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a39c2ec842cea5d65a704e024323555c3}{Range\+View}} (\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&\&)=\mbox{\hyperlink{classmm_1_1Gaussian}{delete}}
+\begin{DoxyCompactList}\small\item\em Disallow moving. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \& \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a22e3818e184b980a250e3bb357bda037}{operator=}} (\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&)=\mbox{\hyperlink{classmm_1_1Gaussian}{delete}}
+\begin{DoxyCompactList}\small\item\em Disallow copying. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \& \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a30fe58a3af0d025759367d7e0abd777f}{operator=}} (\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&\&)=\mbox{\hyperlink{classmm_1_1Gaussian}{delete}}
+\begin{DoxyCompactList}\small\item\em Disallow moving. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a2df948a5b8b4b724bad742bcbd4756e6}{as\+Range}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Cast to underlying container type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_aa2fa9726d3adc0fb1c7b85cdd956b47c}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&rhs)
+\begin{DoxyCompactList}\small\item\em Multiindex assignment\+: {\ttfamily a\mbox{[}\{1, 2, 3\}\mbox{]} = \doxylink{classmm_1_1Range}{Range}\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}(\{1, 2, 3\});}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a1e335a3adb957a691900568d22bf8b71}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&x)
+\begin{DoxyCompactList}\small\item\em Multiindex value assignment\+: {\ttfamily a = 4;}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_aa695686a1769c61397f2096db0ff33fe}{reference}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_ae0f2e8cfbaa1dad000d6b3478741d995}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Write access to sub-\/container elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{const\+\_\+reference}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_aa6b1a07c715e6a2394bd19e9defac9de}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read access to sub-\/container elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a1451b81bacac431963ba1e555d14dbb0}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Size of the sub-\/container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_acfd895dc66f5fefeceaa97f725374689}{Range}}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_aa822212e61da796ef525efe84ea71d56}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&c)
+\begin{DoxyCompactList}\small\item\em Output a \doxylink{classmm_1_1Range_1_1RangeView}{Range\+View}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView_ac7a7170f813b8b053e94ce5b12ba5b45}{Range\+View}} (\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{receiver\+\_\+}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{modifier\+\_\+}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \& \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a6c4acee5129a46b4ff85b9c4b7af7bbe}{receiver}}
+\begin{DoxyCompactList}\small\item\em Reference to object we are viewing / modifying. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1Range_1_1RangeView_a0de35182439c944a219f458e52a7b5cb}{modifier}}
+\begin{DoxyCompactList}\small\item\em List of indexes of elements to modify. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1Range_1_1RangeView_ac7a7170f813b8b053e94ce5b12ba5b45}\label{classmm_1_1Range_1_1RangeView_ac7a7170f813b8b053e94ce5b12ba5b45} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!RangeView@{RangeView}}
+\index{RangeView@{RangeView}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{RangeView()}{RangeView()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::\+Range\+View (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{receiver\+\_\+,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{modifier\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a13cc2296caab7ccc5cff46cf605a4456}\label{classmm_1_1Range_1_1RangeView_a13cc2296caab7ccc5cff46cf605a4456} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!RangeView@{RangeView}}
+\index{RangeView@{RangeView}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{RangeView()}{RangeView()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::\+Range\+View (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Disallow copying. 
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a39c2ec842cea5d65a704e024323555c3}\label{classmm_1_1Range_1_1RangeView_a39c2ec842cea5d65a704e024323555c3} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!RangeView@{RangeView}}
+\index{RangeView@{RangeView}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{RangeView()}{RangeView()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::\+Range\+View (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Disallow moving. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Range_1_1RangeView_a2df948a5b8b4b724bad742bcbd4756e6}\label{classmm_1_1Range_1_1RangeView_a2df948a5b8b4b724bad742bcbd4756e6} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!asRange@{asRange}}
+\index{asRange@{asRange}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{asRange()}{asRange()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::as\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cast to underlying container type. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00060}{60}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_aa2fa9726d3adc0fb1c7b85cdd956b47c}\label{classmm_1_1Range_1_1RangeView_aa2fa9726d3adc0fb1c7b85cdd956b47c} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{rhs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiindex assignment\+: {\ttfamily a\mbox{[}\{1, 2, 3\}\mbox{]} = \doxylink{classmm_1_1Range}{Range}\texorpdfstring{$<$}{<}int\texorpdfstring{$>$}{>}(\{1, 2, 3\});}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a1e335a3adb957a691900568d22bf8b71}\label{classmm_1_1Range_1_1RangeView_a1e335a3adb957a691900568d22bf8b71} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Multiindex value assignment\+: {\ttfamily a = 4;}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00076}{76}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a30fe58a3af0d025759367d7e0abd777f}\label{classmm_1_1Range_1_1RangeView_a30fe58a3af0d025759367d7e0abd777f} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Disallow moving. 
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a22e3818e184b980a250e3bb357bda037}\label{classmm_1_1Range_1_1RangeView_a22e3818e184b980a250e3bb357bda037} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Disallow copying. 
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_ae0f2e8cfbaa1dad000d6b3478741d995}\label{classmm_1_1Range_1_1RangeView_ae0f2e8cfbaa1dad000d6b3478741d995} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range_aa695686a1769c61397f2096db0ff33fe}{reference}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}}}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Write access to sub-\/container elements. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00082}{82}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_aa6b1a07c715e6a2394bd19e9defac9de}\label{classmm_1_1Range_1_1RangeView_aa6b1a07c715e6a2394bd19e9defac9de} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{const\+\_\+reference}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}}}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read access to sub-\/container elements. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a1451b81bacac431963ba1e555d14dbb0}\label{classmm_1_1Range_1_1RangeView_a1451b81bacac431963ba1e555d14dbb0} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!size@{size}}
+\index{size@{size}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Size of the sub-\/container. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00088}{88}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1Range_1_1RangeView_aa822212e61da796ef525efe84ea71d56}\label{classmm_1_1Range_1_1RangeView_aa822212e61da796ef525efe84ea71d56} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output a \doxylink{classmm_1_1Range_1_1RangeView}{Range\+View}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00093}{93}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_acfd895dc66f5fefeceaa97f725374689}\label{classmm_1_1Range_1_1RangeView_acfd895dc66f5fefeceaa97f725374689} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{Range}{Range}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{friend}} \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Range}{Range}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00090}{90}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1Range_1_1RangeView_a0de35182439c944a219f458e52a7b5cb}\label{classmm_1_1Range_1_1RangeView_a0de35182439c944a219f458e52a7b5cb} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!modifier@{modifier}}
+\index{modifier@{modifier}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{modifier}{modifier}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}\& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::modifier\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+List of indexes of elements to modify. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_1_1RangeView_a6c4acee5129a46b4ff85b9c4b7af7bbe}\label{classmm_1_1Range_1_1RangeView_a6c4acee5129a46b4ff85b9c4b7af7bbe} 
+\index{mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}!receiver@{receiver}}
+\index{receiver@{receiver}!mm::Range$<$ T, Allocator $>$::RangeView@{mm::Range$<$ T, Allocator $>$::RangeView}}
+\doxysubsubsection{\texorpdfstring{receiver}{receiver}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{T}}$>$\& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View\+::receiver\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Reference to object we are viewing / modifying. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/types/\mbox{\hyperlink{Range__fwd_8hpp}{Range\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

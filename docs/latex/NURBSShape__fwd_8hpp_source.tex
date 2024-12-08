@@ -1,0 +1,79 @@
+\doxysection{NURBSShape\+\_\+fwd.\+hpp}
+\hypertarget{NURBSShape__fwd_8hpp_source}{}\label{NURBSShape__fwd_8hpp_source}\index{include/medusa/bits/domains/NURBSShape\_fwd.hpp@{include/medusa/bits/domains/NURBSShape\_fwd.hpp}}
+\mbox{\hyperlink{NURBSShape__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_NURBSSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_NURBSSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainShape__fwd_8hpp}{medusa/bits/domains/DomainShape\_fwd.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{NURBSPatch__fwd_8hpp}{medusa/bits/domains/NURBSPatch\_fwd.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{randutils_8hpp}{medusa/bits/utils/randutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00023}\mbox{\hyperlink{namespacemm_1_1nurbs__shape__internal}{00023}}\ \textcolor{keyword}{namespace\ }nurbs\_shape\_internal\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00034}00034\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00035}\mbox{\hyperlink{structmm_1_1nurbs__shape__internal_1_1NURBSShapeHelper}{00035}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1nurbs__shape__internal_1_1NURBSShapeHelper}{NURBSShapeHelper}}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00036}00036\ \}\ \ \textcolor{comment}{//\ namespace\ nurbs\_shape\_internal}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00051}00051\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ param\_vec\_t>}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00052}\mbox{\hyperlink{classmm_1_1NURBSShape}{00052}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<vec\_t>\ \{}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1nurbs__shape__internal_1_1NURBSShapeHelper}{nurbs\_shape\_internal::NURBSShapeHelper}}<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{param\_vec\_t}}>;}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00055}00055\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00056}\mbox{\hyperlink{classmm_1_1NURBSShape_a7bae1413dc9d20cf21ed63ecd5aad4d5}{00056}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1NURBSShape_a7bae1413dc9d20cf21ed63ecd5aad4d5}{scalar\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00058}\mbox{\hyperlink{classmm_1_1NURBSShape_ac636fe7ab44eb0402f990dbc8a905365aad23d17f4e3b0d9c059222d984fd8cb8}{00058}}\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ \ \mbox{\hyperlink{classmm_1_1NURBSShape_ac636fe7ab44eb0402f990dbc8a905365aad23d17f4e3b0d9c059222d984fd8cb8}{dim}}\ =\ vec\_t::dim,}
+ \mbox{\hyperlink{classmm_1_1NURBSShape_ac636fe7ab44eb0402f990dbc8a905365ab5e34997a917974602deb7693b56f3ae}{proj\_dim}} = \mbox{\hyperlink{classmm_1_1NURBSShape_ac636fe7ab44eb0402f990dbc8a905365aad23d17f4e3b0d9c059222d984fd8cb8}{dim}} + 1, \mbox{\hyperlink{classmm_1_1NURBSShape_ac636fe7ab44eb0402f990dbc8a905365af03b08281ba5668bc8bcae80ba481ad3}{param\_dim}} = param\_vec\_t::dim\};\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00061}\mbox{\hyperlink{classmm_1_1NURBSShape_a7b5ac58ad704a38492fbe4e3b7b2772b}{00061}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ proj\_dim>}}\ \mbox{\hyperlink{classmm_1_1NURBSShape_a7b5ac58ad704a38492fbe4e3b7b2772b}{proj\_vec\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00063}00063\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00064}\mbox{\hyperlink{classmm_1_1NURBSShape_a69040afe49af22d70430e3ae7c72a196}{00064}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<NURBSPatch<vec\_t,\ param\_vec\_t>}}>\ \mbox{\hyperlink{classmm_1_1NURBSShape_a69040afe49af22d70430e3ae7c72a196}{patches}};\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00065}\mbox{\hyperlink{classmm_1_1NURBSShape_ac926ca7671579641cf244539f8b3ab55}{00065}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1NURBSShape_ac926ca7671579641cf244539f8b3ab55}{max\_points}}\ =\ 5000000;\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00066}\mbox{\hyperlink{classmm_1_1NURBSShape_a3ec8ef697a9f314d0dd31756a05bc90a}{00066}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1NURBSShape_a3ec8ef697a9f314d0dd31756a05bc90a}{seed\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00067}\mbox{\hyperlink{classmm_1_1NURBSShape_a86cb305bbdeeda8286ec9bd0890d9ac6}{00067}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1NURBSShape_a86cb305bbdeeda8286ec9bd0890d9ac6}{n\_samples}}\ =\ 15;\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00068}\mbox{\hyperlink{classmm_1_1NURBSShape_a9320b0aaca01d28883e650e5a32595e5}{00068}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape_a7bae1413dc9d20cf21ed63ecd5aad4d5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSShape_a9320b0aaca01d28883e650e5a32595e5}{zeta}}\ =\ 1\ -\/\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/10;\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00069}\mbox{\hyperlink{classmm_1_1NURBSShape_afe1501065cb796aeeea701b41fc99a90}{00069}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape_a7bae1413dc9d20cf21ed63ecd5aad4d5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSShape_afe1501065cb796aeeea701b41fc99a90}{epsilon}}\ =\ 0;\ \ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00071}00071\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{NURBSPatch<vec\_t,\ param\_vec\_t>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{patches\_in}});}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00075}\mbox{\hyperlink{classmm_1_1NURBSShape_abb3ae189b3cf92e1f7571fa51d029ed2}{00075}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1NURBSShape_abb3ae189b3cf92e1f7571fa51d029ed2}{contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \textcolor{comment}{/*\ point\ */})\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00077}\mbox{\hyperlink{classmm_1_1NURBSShape_acf644e94049c2a988c74e8afc3541609}{00077}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1NURBSShape_acf644e94049c2a988c74e8afc3541609}{hasContains}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00079}\mbox{\hyperlink{classmm_1_1NURBSShape_ad3138fa729f85cf47d1e542c1a1254a6}{00079}}\ \ \ \ \ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1NURBSShape_ad3138fa729f85cf47d1e542c1a1254a6}{bbox}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}This\ function\ is\ not\ available\ for\ this\ shape.\ A"{}}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bounding\ box\ of\ its\ DomainDiscretization\ should\ be\ taken."{}});}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00085}00085\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ discretizeBoundaryWithDensity(}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{classmm_1_1NURBSShape_a7bae1413dc9d20cf21ed63ecd5aad4d5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&,\ \textcolor{keywordtype}{int})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00088}\mbox{\hyperlink{classmm_1_1NURBSShape_a2501dffb0f8745ef2f71ac32055a1841}{00088}}\ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{classmm_1_1NURBSShape_a2501dffb0f8745ef2f71ac32055a1841}{print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{ostream}})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ostream}}\ <<\ \textcolor{stringliteral}{"{}NURBS\ shape\ made\ of\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1NURBSShape_a69040afe49af22d70430e3ae7c72a196}{patches}}.size()\ <<\ \textcolor{stringliteral}{"{}\ patches."{}};}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00092}\mbox{\hyperlink{classmm_1_1NURBSShape_abbd481656a22f28ee68c2a6aaa0393d1}{00092}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}*\ \mbox{\hyperlink{classmm_1_1NURBSShape_abbd481656a22f28ee68c2a6aaa0393d1}{clone}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classmm_1_1Gaussian}{NURBSShape<vec\_t,\ param\_vec\_t>}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00100}\mbox{\hyperlink{classmm_1_1NURBSShape_aa18a4d46410daf6b636b5f9c0fc9340e}{00100}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}\&\ \mbox{\hyperlink{classmm_1_1NURBSShape_aa18a4d46410daf6b636b5f9c0fc9340e}{maxPoints}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1NURBSShape_ac926ca7671579641cf244539f8b3ab55}{max\_points}})\ \{\ this-\/>max\_points\ =\ \mbox{\hyperlink{classmm_1_1NURBSShape_ac926ca7671579641cf244539f8b3ab55}{max\_points}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00103}\mbox{\hyperlink{classmm_1_1NURBSShape_ac3e1dbd3710dc6125a36bd085c87285b}{00103}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}\&\ \mbox{\hyperlink{classmm_1_1NURBSShape_ac3e1dbd3710dc6125a36bd085c87285b}{seed}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1NURBSShape_ac3e1dbd3710dc6125a36bd085c87285b}{seed}})\ \{\ \mbox{\hyperlink{classmm_1_1NURBSShape_a3ec8ef697a9f314d0dd31756a05bc90a}{seed\_}}\ =\ \mbox{\hyperlink{classmm_1_1NURBSShape_ac3e1dbd3710dc6125a36bd085c87285b}{seed}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00108}00108\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}\&\ \mbox{\hyperlink{classmm_1_1NURBSShape_ab11eb25ee0c4c4f143b6e8ff321d51b6}{proximityTolerance}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSShape_a9320b0aaca01d28883e650e5a32595e5}{zeta}});}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00116}\mbox{\hyperlink{classmm_1_1NURBSShape_a9a5f8af95cbaa644597a698c6370a6d8}{00116}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}\&\ \mbox{\hyperlink{classmm_1_1NURBSShape_a9a5f8af95cbaa644597a698c6370a6d8}{numSamples}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1NURBSShape_a86cb305bbdeeda8286ec9bd0890d9ac6}{n\_samples}})\ \{\ this-\/>n\_samples\ =\ \mbox{\hyperlink{classmm_1_1NURBSShape_a86cb305bbdeeda8286ec9bd0890d9ac6}{n\_samples}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00123}00123\ \ \ \ \ \mbox{\hyperlink{classmm_1_1NURBSShape}{NURBSShape}}\&\ \mbox{\hyperlink{classmm_1_1NURBSShape_ab11b96f38065ddb0eecc28c6db59c56b}{boundaryProximity}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1NURBSShape_afe1501065cb796aeeea701b41fc99a90}{epsilon}});}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00124}00124\ \};}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00127}00127\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{NURBSShape__fwd_8hpp_source_l00129}00129\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_NURBSSHAPE\_FWD\_HPP\_}}
+
+\end{DoxyCode}

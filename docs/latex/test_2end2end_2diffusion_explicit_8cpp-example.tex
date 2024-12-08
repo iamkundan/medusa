@@ -1,0 +1,175 @@
+\doxysection{test/end2end/diffusion\+\_\+explicit.\+cpp}
+\hypertarget{test_2end2end_2diffusion_explicit_8cpp-example}{}\label{test_2end2end_2diffusion_explicit_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Medusa__fwd_8hpp}{medusa/Medusa\_fwd.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }DiffusionExplicitTest\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n,\ m;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ time,\ dt,\ t\_steps;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ sigma;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ interior,\ boundary;}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec2d,\ std::tuple<Lap<2>>>\ shapes;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ DiffusionExplicitTest()\ :\ dx(1.\ /\ 50.),\ n(12),\ m(2),\ time(0.05),\ dt(1e-\/5),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ t\_steps(std::ceil(time\ /\ dt)),\ sigma(1.0),\ domain(prep\_domain()),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interior(domain.interior()),\ boundary(domain.boundary()),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shapes()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ prep\_shapes();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ prep\_domain()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ prep\ domain}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ BoxShape<Vec2d>\ b(\{0,\ 0\},\ \{1,\ 1\});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ b.discretizeWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ d.findSupport(FindClosest(n));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ d;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ prep\_shapes()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ prep\ shape\ funcs}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ WLS<Monomials<Vec2d>,\ GaussianWeight<Vec2d>,\ ScaleToClosest>\ wls(m,\ sigma);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple_aeac6b6014a78699acc51ee0134d41a8b}{sh::operator\_tuple<sh::lap,\ 2>::type}}\ operators;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.resize(domain.supportSizes());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}}(domain,\ wls,\ domain.all(),\ operators,\ \&shapes);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ analytical(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ pos,\ \textcolor{keywordtype}{double}\ t,\ \textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ D,\ \textcolor{keywordtype}{size\_t}\ N)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ T\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ f\ =\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ a;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ n\ =\ 1;\ n\ <\ N;\ n\ =\ n\ +\ 2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ m\ =\ 1;\ m\ <\ N;\ m\ =\ m\ +\ 2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ +=\ 16.0\ /\ f\ /\ f\ /\ (n\ *\ m)\ *\ std::sin(n\ *\ f\ *\ pos[0])\ *\ std::sin(m\ *\ f\ *\ pos[1])\ *}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::exp(-\/D\ *\ t\ *\ ((n\ *\ n\ +\ m\ *\ m)\ *\ f\ *\ f));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ T;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ LinfError(\textcolor{keywordtype}{double}\ t,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\&\ value)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<double>\ E2(domain.size(),\ 0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ c\ :\ interior)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ E2[c]\ =\ std::abs(value[c]\ -\/\ analytical(domain.pos(c),\ t,\ 1,\ 1,\ 50));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *std::max\_element(E2.begin(),\ E2.end());}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ solveBasic()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ T1(domain.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[interior]\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[boundary]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ T2\ =\ T1;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tt;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (tt\ =\ 0;\ tt\ <\ t\_steps;\ ++tt)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ new\ temperature}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ c\ :\ interior)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ Lap\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ Lap\ +=\ shapes.laplace(c,\ i)\ *\ T1[domain.support(c,\ i)];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T2[c]\ =\ T1[c]\ +\ dt\ *\ Lap;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ time\ advance}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ T1.swap(T2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ LinfError(tt\ *\ dt,\ T1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ solveOperators()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ T1(domain.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[interior]\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[boundary]\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ T2\ =\ T1;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.explicitOperators();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tt;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (tt\ =\ 0;\ tt\ <\ t\_steps;\ ++tt)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ new\ temp.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ c\ :\ interior)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T2[c]\ =\ T1[c]\ +\ dt\ *\ op.lap(T1,\ c);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ time\ advance}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ T1.swap(T2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ LinfError(tt\ *\ dt,\ T1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ solveRKEuler()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.explicitOperators();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ dv\_dt\ =\ [\&](double,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ der(y.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ :\ interior)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der[c]\ =\ op.lap(y,\ c);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ :\ boundary)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der[c]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ der;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ T1(domain.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[interior]\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[boundary]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ integrator\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41}{integrators::Explicit::Euler}}().solve(dv\_dt,\ 0.0,\ time,\ dt,\ T1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ stepper\ =\ integrator.begin();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (stepper)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ++stepper;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ LinfError(stepper.time(),\ stepper.value());}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ solveABEuler()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ op\ =\ shapes.explicitOperators();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ dv\_dt\ =\ [\&](double,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ der(y.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ :\ interior)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der[c]\ =\ op.lap(y,\ c);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ :\ boundary)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der[c]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ der;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ T1(domain.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[interior]\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ T1[boundary]\ =\ 0.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ integrator\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1ExplicitMultistep_aeec11e2af90d19d6488ad1573d6ba8e2}{integrators::ExplicitMultistep::AB1}}().solve(dv\_dt,\ 0.0,\ time,\ dt,\ T1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ stepper\ =\ integrator.begin();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (stepper)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ++stepper;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ LinfError(stepper.time(),\ stepper.value());}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(DiffusionExplicitTest,\ IntegratorsMatch)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\_basic\ =\ solveBasic();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\_op\ =\ solveOperators();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\_rk\ =\ solveRKEuler();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\_ab\ =\ solveABEuler();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tol\ =\ 1e-\/5;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(err\_basic,\ err\_op,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(err\_basic,\ err\_rk,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(err\_rk,\ err\_ab,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(err\_ab,\ err\_basic,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err\_basic,\ 5e-\/4);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

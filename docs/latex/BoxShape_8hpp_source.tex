@@ -1,0 +1,334 @@
+\doxysection{Box\+Shape.\+hpp}
+\hypertarget{BoxShape_8hpp_source}{}\label{BoxShape_8hpp_source}\index{include/medusa/bits/domains/BoxShape.hpp@{include/medusa/bits/domains/BoxShape.hpp}}
+\mbox{\hyperlink{BoxShape_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_BOXSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_BOXSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{BoxShape__fwd_8hpp}{BoxShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{discretization__helpers_8hpp}{discretization\_helpers.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape_8hpp}{DomainShape.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GeneralFill_8hpp}{GeneralFill.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00020}00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00021}\mbox{\hyperlink{classmm_1_1BoxShape_ab79f9c25d10e5b1ada27700ebd1db39a}{00021}}\ \mbox{\hyperlink{classmm_1_1BoxShape_ab79f9c25d10e5b1ada27700ebd1db39a}{BoxShape<vec\_t>::BoxShape}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ beg,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ end)\ :\ beg\_(beg),\ end\_(end)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(std::abs(\mbox{\hyperlink{classmm_1_1BoxShape_a205449b441e5d223b3b14646b2003362}{beg\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ \mbox{\hyperlink{classmm_1_1BoxShape_ae74e66214722b8b719cdacf3a39d327b}{end\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ >=\ \mbox{\hyperlink{classmm_1_1DomainShape_af858da3cacde52c0d9f4afbabf39b53c}{margin\_}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Box\ has\ no\ volume,\ sides\ in\ dimension\ \%d\ have\ same\ coordinate\ \%g."{}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1BoxShape_a205449b441e5d223b3b14646b2003362}{beg\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1BoxShape_a205449b441e5d223b3b14646b2003362}{beg\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ >\ \mbox{\hyperlink{classmm_1_1BoxShape_ae74e66214722b8b719cdacf3a39d327b}{end\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ std::swap(\mbox{\hyperlink{classmm_1_1BoxShape_a205449b441e5d223b3b14646b2003362}{beg\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ \mbox{\hyperlink{classmm_1_1BoxShape_ae74e66214722b8b719cdacf3a39d327b}{end\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00028}00028\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00030}00030\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1BoxShape_a216394f684b6858ba51b5c530e8df61e}{00031}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1BoxShape_a216394f684b6858ba51b5c530e8df61e}{BoxShape<vec\_t>::contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(beg\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ margin\_\ <=\ point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ \&\&\ point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ <=\ end\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ +\ margin\_))\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00038}00038\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00040}00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1BoxShape_abe2a5e20c10f73ddc85beef918df1f4d}{00041}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1BoxShape_abe2a5e20c10f73ddc85beef918df1f4d}{BoxShape<vec\_t>::discretizeBoundaryWithStep}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\ counts;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ counts[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}((end\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ beg\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ /\ step)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{return}\ discretizeBoundary(counts,\ type);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00048}00048\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00049}\mbox{\hyperlink{classmm_1_1BoxShape_ac5b9aa2728d546f83c2008cd5fa321ca}{00049}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1BoxShape_ac5b9aa2728d546f83c2008cd5fa321ca}{BoxShape<vec\_t>::discretizeBoundary}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\&\ counts,}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ :\ counts)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(x\ >=\ 2,\ \textcolor{stringliteral}{"{}All\ counts\ must\ be\ greater\ than\ 2,\ got\ counts\ =\ \%s"{}},\ counts);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00055}00055\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ normal,\ point;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(beg\_,\ type\ ==\ 0\ ?\ -\/1\ :\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(-\/1.0));}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(end\_,\ type\ ==\ 0\ ?\ -\/2\ :\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(1.0));}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00059}00059\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}}\ =\ (type\ ==\ 0)\ ?\ -\/4\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}}\ =\ (type\ ==\ 0)\ ?\ -\/2\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}}\ =\ (type\ ==\ 0)\ ?\ -\/3\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}}\ =\ (type\ ==\ 0)\ ?\ -\/1\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step\ =\ (end\_[0]\ -\/\ beg\_[0])\ /\ (counts[0]\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ counts[0]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}*step;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ normal[0]\ =\ 0;\ normal[1]\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ normal[0]\ =\ 0;\ normal[1]\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ step\ =\ (end\_[1]\ -\/\ beg\_[1])\ /\ (counts[1]\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ counts[1]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}*step;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ normal[0]\ =\ -\/1;\ normal[1]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ normal[0]\ =\ 1;\ normal[1]\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(beg\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(end\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{beg\_[0],\ end\_[1]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{end\_[0],\ beg\_[1]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00089}00089\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}}\ =\ -\/1,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}}\ =\ -\/2,\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}}\ =\ -\/3,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}}\ =\ -\/4,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}}\ =\ -\/5,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}}\ =\ -\/6;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ !=\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}}\ =\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step\ =\ (end\_[0]\ -\/\ beg\_[0])\ /\ (counts[0]\ -\/\ 1);\ \ \textcolor{comment}{//\ x}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ counts[0]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}*step;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ -\/1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ -\/1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ 1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ 1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{inner\_step}}\ =\ (end\_[1]\ -\/\ beg\_[1])\ /\ (counts[1]\ -\/\ 1);\ \ \textcolor{comment}{//\ y}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ counts[1]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}*\mbox{\hyperlink{classmm_1_1Gaussian}{inner\_step}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ 0,\ -\/1\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ 0,\ 1\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{inner\_step}}\ =\ (end\_[2]\ -\/\ beg\_[2])\ /\ (counts[2]\ -\/\ 1);\ \ \textcolor{comment}{//\ z}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ counts[2]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}*\mbox{\hyperlink{classmm_1_1Gaussian}{inner\_step}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ -\/1,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{0,\ 1,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00133}00133\ \ \ \ \ \ \ \ \ step\ =\ (end\_[1]\ -\/\ beg\_[1])\ /\ (counts[1]\ -\/\ 1);\ \ \textcolor{comment}{//\ y}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ counts[1]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}*step;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 0,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 0,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 0,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 0,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{inner\_step}}\ =\ (end\_[2]\ -\/\ beg\_[2])\ /\ (counts[2]\ -\/\ 1);\ \ \textcolor{comment}{//\ z}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ counts[2]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}*\mbox{\hyperlink{classmm_1_1Gaussian}{inner\_step}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 0,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 0,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00164}00164\ \ \ \ \ \ \ \ \ step\ =\ (end\_[2]\ -\/\ beg\_[2])\ /\ (counts[2]\ -\/\ 1);\ \ \textcolor{comment}{//\ z}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ counts[2]-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ point[2]\ =\ beg\_[2]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}*step;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ -\/1,\ 0\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 1,\ 0\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ -\/1,\ 0\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ point[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ point[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 1,\ 0\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}();}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}},\ normal);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00183}00183\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00184}00184\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(beg\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ -\/1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00185}00185\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(end\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00186}00186\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{end\_[0],\ beg\_[1],\ beg\_[2]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ -\/1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00188}00188\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{beg\_[0],\ end\_[1],\ end\_[2]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00190}00190\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{end\_[0],\ end\_[1],\ beg\_[2]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{beg\_[0],\ end\_[1],\ beg\_[2]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{beg\_[0],\ beg\_[1],\ end\_[2]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ -\/1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{end\_[0],\ beg\_[1],\ end\_[2]\}),\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ -\/1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00198}00198\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00200}00200\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00202}00202\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00203}\mbox{\hyperlink{classmm_1_1BoxShape_a77efb3a8258a44ba2dfbc907a7944796}{00203}}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1BoxShape_a77efb3a8258a44ba2dfbc907a7944796}{BoxShape<vec\_t>::print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00204}00204\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}BoxShape("{}}\ <<\ beg\_.transpose()\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ end\_.transpose()\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00205}00205\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00207}00207\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00208}00208\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00209}\mbox{\hyperlink{classmm_1_1BoxShape_abbc0ed3b2a861baf4e648ca699bebd91}{00209}}\ \mbox{\hyperlink{classmm_1_1BoxShape_abbc0ed3b2a861baf4e648ca699bebd91}{BoxShape<vec\_t>::discretizeBoundaryWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00211}00211\ \ \ \ \ \textcolor{keyword}{static\_assert}(0\ <=\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ \&\&\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ <=\ 3,\ \textcolor{stringliteral}{"{}Only\ dimensions\ up\ to\ 3\ are\ supported."{}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00212}00212\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(beg\_,\ type\ ==\ 0\ ?\ -\/1\ :\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(-\/1.0));}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00215}00215\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(end\_,\ type\ ==\ 0\ ?\ -\/2\ :\ type,\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(1.0));}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00216}00216\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}}\ =\ (type\ ==\ 0)\ ?\ -\/4\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}}\ =\ (type\ ==\ 0)\ ?\ -\/2\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}}\ =\ (type\ ==\ 0)\ ?\ -\/3\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}}\ =\ (type\ ==\ 0)\ ?\ -\/1\ :\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00221}00221\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p1\ =\ beg\_;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p2\ =\ \{beg\_[0],\ end\_[1]\};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p3\ =\ end\_;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{p4}}\ =\ \{end\_[0],\ beg\_[1]\};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretization\_helpers::discretizeLineWithDensity}}(p1,\ p2,\ dr))\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ \{-\/1,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretization\_helpers::discretizeLineWithDensity}}(p2,\ p3,\ dr))\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ \{0,\ 1\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretization\_helpers::discretizeLineWithDensity}}(p3,\ \mbox{\hyperlink{classmm_1_1Gaussian}{p4}},\ dr))\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ \{1,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00236}00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretization\_helpers::discretizeLineWithDensity}}(\mbox{\hyperlink{classmm_1_1Gaussian}{p4}},\ p1,\ dr))\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ \{0,\ -\/1\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00238}00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00240}00240\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p1,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p2,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{-\/1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(p3,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ 1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00243}00243\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{p4}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\{1,\ -\/1\}).\mbox{\hyperlink{classmm_1_1Gaussian}{normalized}}());}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00244}00244\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}}\ =\ -\/1,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}}\ =\ -\/2,\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}}\ =\ -\/3,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}}\ =\ -\/4,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}}\ =\ -\/5,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}}\ =\ -\/6;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\ !=\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}}\ =\ type;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00248}00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{GeneralFill<Vec<scalar\_t,\ 2>}}>\ fill;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00249}00249\ \ \ \ \ \ \ \ \ fill.seed(0).proximityTolerance(0.99);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00250}00250\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}}[0]\ =\ beg\_[1];\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}}[1]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}}[0]\ =\ end\_[1];\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}}[1]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<Vec<scalar\_t,\ 2>}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}(\mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr2}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ dr(\{beg\_[0],\ p[0],\ p[1]\});\ \};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr2}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ pos;\ pos[0]\ =\ beg\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos[1]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0);\ pos[2]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(pos,\ \mbox{\hyperlink{classmm_1_1Gaussian}{LEFT}},\ \{-\/1,\ 0,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr22}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ dr(\{end\_[0],\ p[0],\ p[1]\});\ \};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr22}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ pos[0]\ =\ end\_[0];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos[1]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0);\ pos[2]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(pos,\ \mbox{\hyperlink{classmm_1_1Gaussian}{RIGHT}},\ \{1,\ 0,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00268}00268\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00269}00269\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00270}00270\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}}[0]\ =\ beg\_[0];\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}}[1]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}}[0]\ =\ end\_[0];\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}}[1]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<Vec<scalar\_t,\ 2>}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}(\mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr2}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ dr(\{p[0],\ beg\_[1],\ p[1]\});\ \};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr2}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ pos;\ pos[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos[0]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0);\ pos[2]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(pos,\ \mbox{\hyperlink{classmm_1_1Gaussian}{FRONT}},\ \{0,\ -\/1,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr22}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ dr(\{p[0],\ end\_[1],\ p[1]\});\ \};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr22}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ pos[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos[0]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0);\ pos[2]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(pos,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BACK}},\ \{0,\ 1,\ 0\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00288}00288\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}}[0]\ =\ beg\_[0];\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}}[1]\ =\ beg\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}}[0]\ =\ end\_[0];\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}}[1]\ =\ end\_[1];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<Vec<scalar\_t,\ 2>}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}(\mbox{\hyperlink{classmm_1_1Gaussian}{side\_beg}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{side\_end}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr2}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ dr(\{p[0],\ p[1],\ beg\_[2]\});\ \};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr2}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ pos;\ pos[2]\ =\ beg\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos[0]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0);\ pos[1]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(pos,\ \mbox{\hyperlink{classmm_1_1Gaussian}{BOTTOM}},\ \{0,\ 0,\ -\/1\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dr22}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ 2>}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ dr(\{p[0],\ p[1],\ end\_[2]\});\ \};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{side}}.discretizeWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{dr22}},\ fill);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ pos[2]\ =\ end\_[2];}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.interior())\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pos[0]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0);\ pos[1]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain2d}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 1);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(pos,\ \mbox{\hyperlink{classmm_1_1Gaussian}{TOP}},\ \{0,\ 0,\ 1\});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00306}00306\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00308}00308\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00309}00309\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00310}00310\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00311}00311\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00312}\mbox{\hyperlink{classmm_1_1BoxShape_a3f8925ca3006ad1b037fa36d8a93930a}{00312}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1BoxShape_a3f8925ca3006ad1b037fa36d8a93930a}{BoxShape<vec\_t>::discretizeWithStep}}(}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00313}00313\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00314}00314\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\ counts;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00315}00315\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ counts[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}((end\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ beg\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ /\ step)\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00316}00316\ \ \ \ \ \textcolor{keywordflow}{return}\ discretize(counts,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00317}00317\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00319}00319\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00320}\mbox{\hyperlink{classmm_1_1BoxShape_a36c6064812954299c0b36e24cf6fe969}{00320}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1BoxShape_a36c6064812954299c0b36e24cf6fe969}{BoxShape<vec\_t>::discretize}}(}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00321}00321\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\&\ counts,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00322}00322\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}\ =\ discretizeBoundary(counts,\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00323}00323\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{counts\_internal}}\ =\ counts\ -\/\ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec<int,\ dim>::Constant}}(2);}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00324}00324\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}}\ ==\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00325}00325\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p\ :\ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{linspace}}(beg\_,\ end\_,\ \mbox{\hyperlink{classmm_1_1Gaussian}{counts\_internal}},\ \textcolor{keyword}{false}))\ \{}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00326}00326\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addInternalNode(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}});}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00327}00327\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00328}00328\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}};}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00329}00329\ \}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00330}00330\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00331}00331\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{BoxShape_8hpp_source_l00333}00333\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_BOXSHAPE\_HPP\_}}
+
+\end{DoxyCode}

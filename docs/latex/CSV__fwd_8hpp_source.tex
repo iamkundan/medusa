@@ -1,0 +1,49 @@
+\doxysection{CSV\+\_\+fwd.\+hpp}
+\hypertarget{CSV__fwd_8hpp_source}{}\label{CSV__fwd_8hpp_source}\index{include/medusa/bits/io/CSV\_fwd.hpp@{include/medusa/bits/io/CSV\_fwd.hpp}}
+\mbox{\hyperlink{CSV__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_IO\_CSV\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_IO\_CSV\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00016}00016\ \textcolor{keyword}{namespace\ }Eigen\ \{}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00017}00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00018}00018\ \textcolor{keyword}{class\ }MatrixBase;}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00020}00020\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ \_Scalar,\ \textcolor{keywordtype}{int}\ \_Rows,\ \textcolor{keywordtype}{int}\ \_Cols,\ \textcolor{keywordtype}{int}\ \_Options,\ \textcolor{keywordtype}{int}\ \_MaxRows,\ \textcolor{keywordtype}{int}\ \_MaxCols>}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00021}00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}};}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00025}00025\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00035}\mbox{\hyperlink{classmm_1_1CSV}{00035}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1CSV}{CSV}}\ \{}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00036}00036\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<double>\ \mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{read}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<double>>\ \mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{read2d}}(\textcolor{keyword}{const}\ std::string\&\ filename,}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{static}\ Eigen::Matrix<\mbox{\hyperlink{classmm_1_1Gaussian}{double}},\ -\/1,\ -\/1,\ 0,\ -\/1,\ -\/1>\ \mbox{\hyperlink{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}{readEigen}}(}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00070}00070\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ arr\_t>}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00071}00071\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}{write}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{arr\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{array}});}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00081}00081\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ arr\_t>}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1CSV_a4deed22f2309873bd25272a76d0eb245}{write2d}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{arr\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{array}},\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00092}00092\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5}{writeEigen}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{expr}},}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}\ =\ \textcolor{charliteral}{','});}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00096}00096\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00104}00104\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}{split}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{separator}});}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00105}00105\ \};}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00107}00107\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{CSV__fwd_8hpp_source_l00108}00108\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_IO\_CSV\_FWD\_HPP\_}}
+
+\end{DoxyCode}

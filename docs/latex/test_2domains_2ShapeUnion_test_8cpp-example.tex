@@ -1,0 +1,75 @@
+\doxysection{test/domains/\+Shape\+Union\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2ShapeUnion_test_8cpp-example}{}\label{test_2domains_2ShapeUnion_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeUnion_8hpp}{medusa/bits/domains/ShapeUnion.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeUnionContains1D)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec1d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ b(0.5,\ 1.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ +\ b;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.5));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(-\/1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(-\/3.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(5.0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeUnionContains2D)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ +\ b;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(\{-\/1.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(\{-\/3.0,\ 0.2\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeUnionContains3D)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ +\ b;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(\{-\/1.0,\ 0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(\{-\/3.0,\ 0.2,\ 1.0\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeUnionDiscretization)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ +\ b;}
+\DoxyCodeLine{\ \ \ \ (void)\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }BallShape<Vec2d>\&\textcolor{keyword}{>}(u.first());}
+\DoxyCodeLine{\ \ \ \ (void)\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }BoxShape<Vec2d>\&\textcolor{keyword}{>}(u.second());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ u.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(356,\ d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ d.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_TRUE(d.shape().contains(p));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ for\ actual\ discretization\ tests\ see\ DomainDiscretization::add.}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeUnionUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ c(-\/1.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ +\ b;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (u.contains(\{0,\ 0.2,\ -\/0.3\}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ u\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

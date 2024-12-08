@@ -1,0 +1,59 @@
+\doxysection{STLShape\+\_\+fwd.\+hpp}
+\hypertarget{STLShape__fwd_8hpp_source}{}\label{STLShape__fwd_8hpp_source}\index{include/medusa/bits/domains/STLShape\_fwd.hpp@{include/medusa/bits/domains/STLShape\_fwd.hpp}}
+\mbox{\hyperlink{STLShape__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_STLSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_STLSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape__fwd_8hpp}{DomainShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{STL__fwd_8hpp}{medusa/bits/io/STL\_fwd.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1STLShape}{00030}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1STLShape}{STLShape}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<vec\_t>\ \{}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00031}00031\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1Gaussian}{typename}}\ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{DomainShape<vec\_t>::scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}>\mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{::dim}};}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00035}00035\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}}\ ==\ 3,\ \textcolor{stringliteral}{"{}STL\ files\ are\ for\ 3D\ models\ only."{}});}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1STLShape_aee9d67dd8312a01a98ea9857279675e5}{00037}}\ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{classmm_1_1STLShape_aee9d67dd8312a01a98ea9857279675e5}{vertices\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00038}\mbox{\hyperlink{classmm_1_1STLShape_a5dc4611d9a7702512aa8952ff557e896}{00038}}\ \ \ \ \ std::vector<std::array<int,\ 3>>\ \mbox{\hyperlink{classmm_1_1STLShape_a5dc4611d9a7702512aa8952ff557e896}{faces\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00039}\mbox{\hyperlink{classmm_1_1STLShape_a04ec9f5e3d422ac52171086de31210d2}{00039}}\ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{classmm_1_1STLShape_a04ec9f5e3d422ac52171086de31210d2}{normals\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00040}\mbox{\hyperlink{classmm_1_1STLShape_a4f0edb55024a60c243df19b936596250}{00040}}\ \ \ \ \ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1STLShape_a4f0edb55024a60c243df19b936596250}{bbox\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00042}00042\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00044}00044\ \ \ \ \ \mbox{\hyperlink{classmm_1_1STLShape}{STLShape}}(\textcolor{keyword}{const}\ std::vector<STL::Triangle>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{stl}});}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00051}\mbox{\hyperlink{classmm_1_1STLShape_a3bba2e91f3b9251e38f0645ee087572b}{00051}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1STLShape_a3bba2e91f3b9251e38f0645ee087572b}{contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \textcolor{comment}{/*\ point\ */})\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00053}\mbox{\hyperlink{classmm_1_1STLShape_a9bfb19ff33d7ea23b8aa913de875a3cb}{00053}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1STLShape_a9bfb19ff33d7ea23b8aa913de875a3cb}{hasContains}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00055}\mbox{\hyperlink{classmm_1_1STLShape_a7c4d22cf533e51b63999fbdbfc4eeb0d}{00055}}\ \ \ \ \ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1STLShape_a7c4d22cf533e51b63999fbdbfc4eeb0d}{bbox}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1STLShape_a4f0edb55024a60c243df19b936596250}{bbox\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}>\mbox{\hyperlink{classmm_1_1STLShape_a3ab716821dc2d0438fdb616da8c26099}{::discretizeBoundaryWithDensity}};}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00058}00058\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1STLShape_a3ab716821dc2d0438fdb616da8c26099}{discretizeBoundaryWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&,\ \textcolor{keywordtype}{int})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00061}\mbox{\hyperlink{classmm_1_1STLShape_a161e763dd55b371324607adac1bccd73}{00061}}\ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{classmm_1_1STLShape_a161e763dd55b371324607adac1bccd73}{print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{ostream}})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ostream}}\ <<\ \textcolor{stringliteral}{"{}STL\ shape\ with\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1STLShape_aee9d67dd8312a01a98ea9857279675e5}{vertices\_}}.size()\ <<\ \textcolor{stringliteral}{"{}\ vertices\ and\ "{}}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classmm_1_1STLShape_a5dc4611d9a7702512aa8952ff557e896}{faces\_}}.size()\ <<\ \textcolor{stringliteral}{"{}\ faces."{}};}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00064}00064\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00066}\mbox{\hyperlink{classmm_1_1STLShape_a7992bb65f28971c8c4917067a1250d1b}{00066}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1STLShape}{STLShape}}*\ \mbox{\hyperlink{classmm_1_1STLShape_a7992bb65f28971c8c4917067a1250d1b}{clone}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classmm_1_1Gaussian}{STLShape<vec\_t>}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00070}00070\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00072}\mbox{\hyperlink{classmm_1_1STLShape_a14895adc4dec5f37d64187ebbc05743a}{00072}}\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1STLShape_a14895adc4dec5f37d64187ebbc05743a}{v}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structmm_1_1STL_1_1Point}{STL::Point}}\&\ p)\ \{}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(p.\mbox{\hyperlink{structmm_1_1STL_1_1Point_a27833e34cd9726b337b01d1a985602db}{x}},\ p.\mbox{\hyperlink{structmm_1_1STL_1_1Point_aa0426a31b5866ef1129ac6882e2938db}{y}},\ p.\mbox{\hyperlink{structmm_1_1STL_1_1Point_ae3fd92dbcd8af4ebb04d1d5b28d74fa9}{z}});}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00075}00075\ \};}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00077}00077\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{STLShape__fwd_8hpp_source_l00079}00079\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_STLSHAPE\_FWD\_HPP\_}}
+
+\end{DoxyCode}

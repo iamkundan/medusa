@@ -1,0 +1,59 @@
+\doxysection{KDTree\+Mutable.\+hpp}
+\hypertarget{KDTreeMutable_8hpp_source}{}\label{KDTreeMutable_8hpp_source}\index{include/medusa/bits/spatial\_search/KDTreeMutable.hpp@{include/medusa/bits/spatial\_search/KDTreeMutable.hpp}}
+\mbox{\hyperlink{KDTreeMutable_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDTREEMUTABLE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDTREEMUTABLE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{KDTreeMutable__fwd_8hpp}{KDTreeMutable\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ V>}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1KDTreeMutable_a12dccdb41fd8c22c84870dcd27b28684}{00017}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTreeMutable<V>}}\&\ tree)\ \ \{}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}KDTreeMutable:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ dimension:\ "{}}\ <<\ tree.dim\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ num\ of\ points:\ "{}}\ <<\ tree.size()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00021}00021\ \}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00023}00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00024}\mbox{\hyperlink{classmm_1_1KDTreeMutable_ab4666557545aeb297da4216a3836a481}{00024}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ab4666557545aeb297da4216a3836a481}{KDTreeMutable<vec\_t>::insert}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point)\ \{}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00025}00025\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(point.array().isFinite().prod()\ ==\ 1,\ \textcolor{stringliteral}{"{}Invalid\ point."{}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ points\_.kdtree\_get\_point\_count();}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00027}00027\ \ \ \ \ points\_.add(point);}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00028}00028\ \ \ \ \ tree.addPoints(\mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00029}00029\ \ \ \ \ ++size\_;}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00032}00032\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1KDTreeMutable_afb7f354e71cba4ef7ebc41610608683d}{00033}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1KDTreeMutable_ab4666557545aeb297da4216a3836a481}{KDTreeMutable<vec\_t>::insert}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\&\ points)\ \{}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ points\_.kdtree\_get\_point\_count();}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points)\ \{}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(p.array().isFinite().prod()\ ==\ 1,\ \textcolor{stringliteral}{"{}One\ of\ the\ points\ is\ invalid."{}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ points\_.add(p);}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00039}00039\ \ \ \ \ size\_\ +=\ points.size();}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00040}00040\ \ \ \ \ tree.addPoints(\mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ +\ points.size()\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00044}00044\ std::pair<mm::Range<int>,\ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<double>}}>}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00045}\mbox{\hyperlink{classmm_1_1KDTreeMutable_a7d1e2bf462498b33fb22a64a8e4a2beb}{00045}}\ \mbox{\hyperlink{classmm_1_1KDTreeMutable_a7d1e2bf462498b33fb22a64a8e4a2beb}{KDTreeMutable<vec\_t>::query}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(point.array().isFinite().prod()\ ==\ 1,\ \textcolor{stringliteral}{"{}Invalid\ query\ point."{}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00047}00047\ \ \ \ \ nanoflann::KNNResultSet<scalar\_t,\ int>\ \mbox{\hyperlink{classmm_1_1Gaussian}{resultSet}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret\_index}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{out\_dist\_sqr}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00050}00050\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{resultSet}}.init(\&\mbox{\hyperlink{classmm_1_1Gaussian}{ret\_index}}[0],\ \&\mbox{\hyperlink{classmm_1_1Gaussian}{out\_dist\_sqr}}[0]);}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00051}00051\ \ \ \ \ tree.findNeighbors(\mbox{\hyperlink{classmm_1_1Gaussian}{resultSet}},\ point.data(),\ nanoflann::SearchParams(\mbox{\hyperlink{classmm_1_1Gaussian}{k}}));}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{resultSet}}.full(),\ \textcolor{stringliteral}{"{}Not\ enough\ points\ in\ the\ tree,\ you\ requested\ \%d\ points,\ "{}}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}but\ the\ tree\ contains\ only\ \%d\ points."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}},\ size());}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{ret\_index}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{out\_dist\_sqr}}\};}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00057}00057\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{KDTreeMutable_8hpp_source_l00059}00059\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDTREEMUTABLE\_HPP\_}}
+
+\end{DoxyCode}

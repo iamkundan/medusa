@@ -1,0 +1,106 @@
+\doxysection{Domain\+Shape.\+hpp}
+\hypertarget{DomainShape_8hpp_source}{}\label{DomainShape_8hpp_source}\index{include/medusa/bits/domains/DomainShape.hpp@{include/medusa/bits/domains/DomainShape.hpp}}
+\mbox{\hyperlink{DomainShape_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_DOMAINSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_DOMAINSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape__fwd_8hpp}{DomainShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeDifference_8hpp}{ShapeDifference.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeUnion_8hpp}{ShapeUnion.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TranslatedShape_8hpp}{TranslatedShape.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RotatedShape_8hpp}{RotatedShape.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00020}00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00021}\mbox{\hyperlink{classmm_1_1DomainShape_ad05fa52766911955b20be0efff1f0ce1}{00021}}\ std::pair<bool,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1DomainShape_ad05fa52766911955b20be0efff1f0ce1}{DomainShape<vec\_t>::projectPointToBoundary}}(}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{unit\_normal}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{unit\_normal}}.norm()\ >\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/9,\ \textcolor{stringliteral}{"{}Normal\ \%s\ given\ for\ point\ \%s\ is\ zero."{}},}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{unit\_normal}},\ point);}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 1)\ \textcolor{keywordflow}{return}\ \{\textcolor{keyword}{false},\ point\};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{comment}{//\ Find\ point\ on\ the\ other\ side\ of\ the\ boundary\ with\ exponential\ search}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ start\ =\ point;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ normal\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{unit\_normal}};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{is\_inside}}\ =\ contains(start);}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}}\ =\ 100\ *\ margin\_;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (contains(start\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}}\ *\ normal)\ !=\ \mbox{\hyperlink{classmm_1_1Gaussian}{is\_inside}})\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (contains(start\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}}\ *\ normal)\ !=\ \mbox{\hyperlink{classmm_1_1Gaussian}{is\_inside}})\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}}\ *=\ -\/1;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}}\ *=\ 2;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::isinf(\mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}}))\ \{\ \ \textcolor{comment}{//\ hint\ is\ bad}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{keyword}{false},\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}()\};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ Find\ the\ point\ on\ the\ boundary\ using\ bisection}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00044}00044\ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{stretch}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{while}\ (std::abs(\mbox{\hyperlink{classmm_1_1Gaussian}{stretch}})\ >\ margin\_)\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{stretch}}\ /=\ 2;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (contains(start\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{stretch}}\ *\ normal)\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{is\_inside}})\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ start\ +=\ \mbox{\hyperlink{classmm_1_1Gaussian}{stretch}}\ *\ normal;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{comment}{//\ Make\ unit\ normal\ point\ outside}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{is\_inside}})\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ normal\ *=\ \mbox{\hyperlink{namespacemm_a572700036a7cbccd80820b07857efe99}{signum}}(\mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00055}00055\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ normal\ *=\ -\/\mbox{\hyperlink{namespacemm_a572700036a7cbccd80820b07857efe99}{signum}}(\mbox{\hyperlink{classmm_1_1Gaussian}{max\_stretch}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{comment}{//\ Make\ sure\ point\ is\ inside}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{while}\ (!contains(start))\ start\ -\/=\ margin\_\ *\ normal;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\textcolor{keyword}{true},\ start\};}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00066}\mbox{\hyperlink{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}{00066}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ShapeUnion<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}{DomainShape<vec\_t>::add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ShapeUnion<vec\_t>}}(*\textcolor{keyword}{this},\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00070}00070\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00071}\mbox{\hyperlink{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}{00071}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ShapeDifference<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}{DomainShape<vec\_t>::subtract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ShapeDifference<vec\_t>}}(*\textcolor{keyword}{this},\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00075}00075\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00076}00076\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00077}\mbox{\hyperlink{classmm_1_1DomainShape_a722c1762a89928f4ab4394ffa8438828}{00077}}\ \mbox{\hyperlink{classmm_1_1DomainShape_a722c1762a89928f4ab4394ffa8438828}{DomainShape<vec\_t>::discretizeWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00078}00078\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}This\ domain\ does\ not\ support\ filling\ with\ density,\ "{}}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}use\ a\ general\ fill\ engine\ instead."{}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00083}00083\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00084}\mbox{\hyperlink{classmm_1_1DomainShape_a1635812125d9bb0467b171e3a92ffc33}{00084}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{TranslatedShape<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1DomainShape_a1635812125d9bb0467b171e3a92ffc33}{DomainShape<vec\_t>::translate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ a)\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{TranslatedShape<vec\_t>}}(*\textcolor{keyword}{this},\ a);}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00088}00088\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00089}\mbox{\hyperlink{classmm_1_1DomainShape_a7624b9afff8ce43f55f7bb6e73592c95}{00089}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RotatedShape<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}{DomainShape<vec\_t>::rotate}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{angle}})\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00090}00090\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 2,\ \textcolor{stringliteral}{"{}Angle\ rotation\ only\ available\ in\ 2D."{}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00091}00091\ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ std::sin(\mbox{\hyperlink{classmm_1_1Gaussian}{angle}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00092}00092\ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ c\ =\ std::cos(\mbox{\hyperlink{classmm_1_1Gaussian}{angle}});}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00093}00093\ \ \ \ \ Eigen::Matrix<double,\ dim,\ dim>\ Q;\ Q\ <<\ c,\ -\/\mbox{\hyperlink{classmm_1_1Gaussian}{s}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}},\ c;}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{return}\ rotate(Q);}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00095}00095\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00097}00097\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00098}\mbox{\hyperlink{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}{00098}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RotatedShape<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}{DomainShape<vec\_t>::rotate}}(\textcolor{keyword}{const}\ Eigen::Matrix<scalar\_t,\ dim,\ dim>\&\ Q)\ \{}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RotatedShape<vec\_t>}}(*\textcolor{keyword}{this},\ Q);}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00103}00103\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{DomainShape_8hpp_source_l00105}00105\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_DOMAINSHAPE\_HPP\_}}
+
+\end{DoxyCode}

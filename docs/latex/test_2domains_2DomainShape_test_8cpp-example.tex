@@ -1,0 +1,48 @@
+\doxysection{test/domains/\+Domain\+Shape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2DomainShape_test_8cpp-example}{}\label{test_2domains_2DomainShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainShape_8hpp}{medusa/bits/domains/DomainShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeUnion_8hpp}{medusa/bits/domains/ShapeUnion.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeDifference_8hpp}{medusa/bits/domains/ShapeDifference.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ContainsNested2D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ test\ inclusion\ -\/\ exclusion}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ inner(\{1.5,\ 1.5\},\ \{2.5,\ 2.5\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ middle(\{2,\ 2\},\ 1);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ outer(\{0,\ 0\},\ \{4,\ 4\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u1\ =\ outer\ -\/\ middle;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u2\ =\ u1\ +\ inner;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u2.contains(\{1,\ 1\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u2.contains(\{1.2,\ 2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u2.contains(\{2,\ 2\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ContainsNested3D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ test\ inclusion\ -\/\ exclusion}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ inner(\{1.5,\ 1.5,\ 1.5\},\ \{2.5,\ 2.5,\ 2.5\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ middle(\{2,\ 2,\ 2\},\ 1);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ outer(\{0,\ 0,\ 0\},\ \{4,\ 4,\ 4\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u1\ =\ outer\ -\/\ middle;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u2\ =\ u1\ +\ inner;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u2.contains(\{1,\ 1,\ 1\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u2.contains(\{1.2,\ 2,\ 2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u2.contains(\{2,\ 2,\ 2\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DISABLED\_DomainShapeUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ inner(\{1.5,\ 1.5,\ 1.5\},\ \{2.5,\ 2.5,\ 2.5\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ middle(\{2,\ 2,\ 2\},\ 1);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ outer(\{0,\ 0,\ 0\},\ \{4,\ 4,\ 4\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ outer\ -\/\ middle\ +\ inner;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ u\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,24 @@
+\doxysection{Jacobi\+SVDWrapper.\+hpp}
+\hypertarget{JacobiSVDWrapper_8hpp_source}{}\label{JacobiSVDWrapper_8hpp_source}\index{include/medusa/bits/approximations/JacobiSVDWrapper.hpp@{include/medusa/bits/approximations/JacobiSVDWrapper.hpp}}
+\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_JACOBISVDWRAPPER\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_JACOBISVDWRAPPER\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp}{JacobiSVDWrapper\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00013}00013\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ QRPreconditioner>}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00014}\mbox{\hyperlink{classmm_1_1JacobiSVDWrapper_ad2976182672546538ac9c3fb7fb52ab4}{00014}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1JacobiSVDWrapper_ad2976182672546538ac9c3fb7fb52ab4}{JacobiSVDWrapper<scalar\_t,\ QRPreconditioner>::compute}}(}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\&\ M)\ \{}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00016}00016\ \ \ \ \ Eigen::JacobiSVD<Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>,}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{QRPreconditioner}}>::compute(}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ M,\ Eigen::ComputeThinU\ |\ Eigen::ComputeThinV);}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00021}00021\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{JacobiSVDWrapper_8hpp_source_l00023}00023\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_JACOBISVDWRAPPER\_HPP\_}}
+
+\end{DoxyCode}

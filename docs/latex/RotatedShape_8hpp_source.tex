@@ -1,0 +1,83 @@
+\doxysection{Rotated\+Shape.\+hpp}
+\hypertarget{RotatedShape_8hpp_source}{}\label{RotatedShape_8hpp_source}\index{include/medusa/bits/domains/RotatedShape.hpp@{include/medusa/bits/domains/RotatedShape.hpp}}
+\mbox{\hyperlink{RotatedShape_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_ROTATEDSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_ROTATEDSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RotatedShape__fwd_8hpp}{RotatedShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape_8hpp}{DomainShape.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1RotatedShape_a9a8ad00252677e9933fc35138980d522}{00017}}\ \mbox{\hyperlink{classmm_1_1RotatedShape_a9a8ad00252677e9933fc35138980d522}{RotatedShape<vec\_t>::RotatedShape}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainShape<vec\_t>}}\&\ sh,}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<scalar\_t,\ dim,\ dim>\&\ Q)\ :\ sh(sh),\ Q(Q)\ \{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{auto}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{rsh}}\ =\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }\mbox{\hyperlink{classmm_1_1Gaussian}{RotatedShape<vec\_t>}}*\textcolor{keyword}{>}(\&\mbox{\hyperlink{classmm_1_1RotatedShape_a54a6b5333c4bfc7fa5b0b4ab21eb8f1b}{sh}});}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{rsh}}\ !=\ \textcolor{keyword}{nullptr})\ \{\ \ \textcolor{comment}{//\ collapse\ double\ rotations}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ this-\/>sh\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{rsh}}-\/>sh;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ this-\/>Q\ =\ this-\/>Q\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{rsh}}-\/>Q;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}((\mbox{\hyperlink{classmm_1_1RotatedShape_a26644d309c3d0aaa6be4d06579ff3d2f}{Q}}*\mbox{\hyperlink{classmm_1_1RotatedShape_a26644d309c3d0aaa6be4d06579ff3d2f}{Q}}.transpose()).isApprox(\mbox{\hyperlink{classmm_1_1RotatedShape_a26644d309c3d0aaa6be4d06579ff3d2f}{Q}}.Identity(),\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/12),}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Matrix\ Q\ is\ not\ orthogonal,\ QQ\string^T\ -\/\ I\ =\ \%s"{}},\ (\mbox{\hyperlink{classmm_1_1RotatedShape_a26644d309c3d0aaa6be4d06579ff3d2f}{Q}}*\mbox{\hyperlink{classmm_1_1RotatedShape_a26644d309c3d0aaa6be4d06579ff3d2f}{Q}}.transpose())-\/\mbox{\hyperlink{classmm_1_1RotatedShape_a26644d309c3d0aaa6be4d06579ff3d2f}{Q}}.Identity());}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1RotatedShape_a3d739fe25b3570127505daea93525ce2}{00029}}\ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1RotatedShape_a3d739fe25b3570127505daea93525ce2}{RotatedShape<vec\_t>::bbox}}()\textcolor{keyword}{\ const\ \ }\{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{bb}}\ =\ sh-\/>bbox();}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ Q*\mbox{\hyperlink{classmm_1_1Gaussian}{bb}}.first;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ M\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}},\ t;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ (1\ <<\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ t[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ =\ (\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ \&\ (1u\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}))\ ?\ \mbox{\hyperlink{classmm_1_1Gaussian}{bb}}.second[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{bb}}.first[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ t\ =\ Q*t;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (t[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}])\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ =\ t[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (t[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ >\ M[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}])\ M[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ =\ t[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{m}},\ M\};}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00047}00047\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00048}00048\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization\ <vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00049}00049\ \mbox{\hyperlink{classmm_1_1DomainShape_af54c8588d3daff761edd06b8b744f0b5}{RotatedShape<vec\_t>::discretizeBoundaryWithStep}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ sh-\/>discretizeBoundaryWithStep(step,\ type);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.rotate(Q);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00055}00055\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00056}00056\ DomainDiscretization<vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00057}00057\ \mbox{\hyperlink{classmm_1_1DomainShape_a6d44c390e38d5cc374f8156f887a9944}{RotatedShape<vec\_t>::discretizeWithStep}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ internal\_type,\ \textcolor{keywordtype}{int}\ boundary\_type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ sh-\/>discretizeWithStep(step,\ internal\_type,\ boundary\_type);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00059}00059\ \ \ \ \ d.rotate(Q);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ d;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00063}00063\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00064}00064\ DomainDiscretization<vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00065}00065\ \mbox{\hyperlink{classmm_1_1DomainShape_a722c1762a89928f4ab4394ffa8438828}{RotatedShape<vec\_t>::discretizeWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(vec\_t)>\&\ dr,}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ internal\_type,\ \textcolor{keywordtype}{int}\ boundary\_type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ sh-\/>discretizeWithDensity(dr,\ internal\_type,\ boundary\_type);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00068}00068\ \ \ \ \ d.rotate(Q);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{return}\ d;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00070}00070\ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00072}00072\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00073}00073\ DomainDiscretization<vec\_t>}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00074}00074\ \mbox{\hyperlink{classmm_1_1DomainShape_ab49b18699e38dc9dade7bb24fb0a2916}{RotatedShape<vec\_t>::discretizeBoundaryWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(vec\_t)>\&\ dr,}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00076}00076\ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ sh-\/>discretizeBoundaryWithDensity(dr,\ type);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00077}00077\ \ \ \ \ d.rotate(Q);}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ d;}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00082}00082\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{RotatedShape_8hpp_source_l00084}00084\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_ROTATEDSHAPE\_HPP\_}}
+
+\end{DoxyCode}

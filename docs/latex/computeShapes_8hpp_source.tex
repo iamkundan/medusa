@@ -1,0 +1,151 @@
+\doxysection{compute\+Shapes.\+hpp}
+\hypertarget{computeShapes_8hpp_source}{}\label{computeShapes_8hpp_source}\index{include/medusa/bits/operators/computeShapes.hpp@{include/medusa/bits/operators/computeShapes.hpp}}
+\mbox{\hyperlink{computeShapes_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_OPERATORS\_COMPUTESHAPES\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_OPERATORS\_COMPUTESHAPES\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{computeShapes__fwd_8hpp}{computeShapes\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdtypesutils_8hpp}{medusa/bits/utils/stdtypesutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00017}00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00020}00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00021}00021\ \textcolor{keyword}{template}\ <sh::shape\_flags\ mask,\ \textcolor{keyword}{typename}\ approx\_t>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00022}00022\ RaggedShapeStorage<vec\_t,\ typename\ sh::operator\_tuple<mask,\ vec\_t::dim>::type>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00023}00023\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{DomainDiscretization<vec\_t>::computeShapes}}(approx\_t\ approx,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\&\ indexes)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vec\_t::dim)\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(approx\_t::dim),}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Domain\ and\ approximation\ engine\ dimensions\ do\ not\ match"{}});}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00026}00026\ \ \ \ \ RaggedShapeStorage<vec\_t,\ typename\ sh::operator\_tuple<mask,\ vec\_t::dim>::type>\ storage;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00027}00027\ \ \ \ \ storage.resize(supportSizes());}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple_aeac6b6014a78699acc51ee0134d41a8b}{sh::operator\_tuple<mask,\ vec\_t::dim>::type}}\ operators\{\};}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{if}\ (indexes.empty())\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm::computeShapes}}(*\textcolor{keyword}{this},\ approx,\ all(),\ operators\ ,\ \&storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{else}\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm::computeShapes}}(*\textcolor{keyword}{this},\ approx,\ indexes,\ operators\ ,\ \&storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{return}\ storage;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00035}00035\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00036}00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OperatorTuple,\ \textcolor{keyword}{typename}\ approx\_t>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00037}00037\ RaggedShapeStorage<vec\_t,\ OperatorTuple>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00038}00038\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{DomainDiscretization<vec\_t>::computeShapes}}(approx\_t\ approx,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\&\ indexes)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vec\_t::dim)\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(approx\_t::dim),}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Domain\ and\ approximation\ engine\ dimensions\ do\ not\ match"{}});}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00041}00041\ \ \ \ \ RaggedShapeStorage<vec\_t,\ OperatorTuple>\ storage;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00042}00042\ \ \ \ \ OperatorTuple\ operators\{\};}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00043}00043\ \ \ \ \ storage.resize(supportSizes());}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (indexes.empty())\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm::computeShapes}}(*\textcolor{keyword}{this},\ approx,\ all(),\ operators\ ,\ \&storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{else}\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm::computeShapes}}(*\textcolor{keyword}{this},\ approx,\ indexes,\ operators\ ,\ \&storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{return}\ storage;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00050}00050\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00051}00051\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OperatorTuple,\ \textcolor{keyword}{typename}\ approx\_t>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00052}00052\ RaggedShapeStorage<vec\_t,\ OperatorTuple>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00053}00053\ \mbox{\hyperlink{classmm_1_1DomainDiscretization_a1169ecc9c72a73a85409a4e4d3b9039a}{DomainDiscretization<vec\_t>::computeShapes}}(OperatorTuple\ operators,\ approx\_t\ approx,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00054}00054\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\&\ indexes)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vec\_t::dim)\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(approx\_t::dim),}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Domain\ and\ approximation\ engine\ dimensions\ do\ not\ match"{}});}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00057}00057\ \ \ \ \ RaggedShapeStorage<vec\_t,\ OperatorTuple>\ storage;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00058}00058\ \ \ \ \ storage.resize(supportSizes());}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{if}\ (indexes.empty())\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm::computeShapes}}(*\textcolor{keyword}{this},\ approx,\ all(),\ operators\ ,\ \&storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{else}\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm::computeShapes}}(*\textcolor{keyword}{this},\ approx,\ indexes,\ operators\ ,\ \&storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ storage;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00064}00064\ \textcolor{keyword}{namespace\ }shapes\_internal\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00067}00067\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ approx\_t,\ \textcolor{keyword}{typename}\ shape\_storage\_t,\ \textcolor{keyword}{typename}\ OperatorTuple,\ std::\textcolor{keywordtype}{size\_t}\ N>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00068}00068\ \textcolor{keyword}{struct\ }ShapeComputer\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ compute(\textcolor{keyword}{const}\ OperatorTuple\&\ operators,\ \textcolor{keyword}{const}\ approx\_t\&\ approx,\ \textcolor{keywordtype}{int}\ node,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shape\_storage\_t*\ storage)\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ computation\ for\ previous\ ones}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ ShapeComputer<approx\_t,\ shape\_storage\_t,\ OperatorTuple,\ N-\/1>::compute(}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ operators,\ approx,\ node,\ storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Do\ computation\ for\ current\ operator\ family:}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ get\ family\ type\ (for\ storage\ indexing)}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ std::tuple\_element<N-\/1,\ OperatorTuple>::type\ op\_family\_t;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ get\ family\ value,\ to\ produce\ operators}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ op\_family\ =\ std::get<N-\/1>(operators);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ count\ operators\ (requirements\ ensure\ compatibility\ with\ \`{}index`\ method\ used\ in\ \`{}apply`)}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ op\ :\ op\_family.operators())\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Access\ storage\ by\ family\ type,\ not\ by\ family\ index\ (e.g.\ using\ N-\/1),\ since\ given}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ operators\ may\ only\ be\ a\ subset\ of\ total\ operators\ in\ storage,\ and\ using}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ N-\/1\ is\ wrong.}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ storage-\/>template\ setShape<op\_family\_t>(i,\ node,\ approx.getShape(op));}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ ++i;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00089}00089\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00090}00090\ \};}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00092}00092\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ approx\_t,\ \textcolor{keyword}{typename}\ shape\_storage\_t,\ \textcolor{keyword}{typename}\ OperatorTuple>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00093}00093\ \textcolor{keyword}{struct\ }ShapeComputer<approx\_t,\ shape\_storage\_t,\ OperatorTuple,\ 0>\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00094}00094\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ compute(\textcolor{keyword}{const}\ OperatorTuple\&,\ \textcolor{keyword}{const}\ approx\_t\&,\ \textcolor{keywordtype}{int},\ shape\_storage\_t*)\ \{\}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00095}00095\ \};}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00097}00097\ \}\ \ \textcolor{comment}{//\ namespace\ shapes\_internal}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00100}00100\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ approx\_t,\ \ \textcolor{keyword}{typename}\ shape\_storage\_t,\ \textcolor{keyword}{typename}\ ...Operators>}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00101}00101\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}}(\textcolor{keyword}{const}\ DomainDiscretization<typename\ approx\_t::vector\_t>\&\ domain,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ approx\_t\ approx,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\&\ indexes,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::tuple<Operators...>\&\ operators,\ shape\_storage\_t*\ storage)\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00104}00104\ \ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00105}00105\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(domain.supports().size()\ ==\ N,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}domain.support.size\ =\ \%d\ and\ domain.size\ =\ \%d,\ but\ should\ be\ the\ same.\ "{}}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Did\ you\ forget\ to\ find\ support\ before\ computing\ shapes?"{}},}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ domain.supports().size(),\ domain.size());}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ c\ :\ indexes)\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ c\ \&\&\ c\ <\ N,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ \%d\ is\ not\ a\ valid\ index\ of\ a\ point\ in\ the\ domain,\ must\ be\ in\ range\ "{}}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[\%d,\ \%d)."{}},\ c,\ 0,\ N);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!domain.support(c).empty(),}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Node\ \%d\ has\ empty\ support!\ Did\ you\ forget\ to\ find\ support\ before\ "{}}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}computing\ shapes?"{}},\ c);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(storage-\/>size()\ ==\ N,}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Storage\ must\ of\ appropriate\ size\ before\ calling\ computeShapes(),\ got\ size\ \%d,\ "{}}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}expected\ \%d."{}},\ storage-\/>size(),\ N);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ construct\ shape\ functions\ for\ every\ point\ specified}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00122}00122\ \ \ \ \ \textcolor{keywordtype}{int}\ cc;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00123}00123\ \ \ \ \ \textcolor{keywordtype}{int}\ isize\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(indexes.size());}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00124}00124\ \ \ \ \ \textcolor{comment}{//\ create\ local\ copies\ of\ mls\ for\ each\ thread}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00125}00125\ \textcolor{preprocessor}{\ \ \ \ \#if\ !defined(\_OPENMP)}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00126}00126\ \ \ \ \ approx\_t\&\ local\_approx\ =\ approx;}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00127}00127\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00128}00128\ \ \ \ \ std::vector<approx\_t>\ approx\_copies(omp\_get\_max\_threads(),\ approx);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00129}00129\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ omp\ parallel\ for\ private(cc)\ schedule(static)}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00130}00130\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{for}\ (cc\ =\ 0;\ cc\ <\ isize;\ ++cc)\ \{}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ node\ =\ indexes[cc];}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ store\ local\ copy\ of\ approximation\ engine\ -\/-\/\ for\ parallel\ computing}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00134}00134\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_OPENMP)}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ approx\_t\&\ local\_approx\ =\ approx\_copies[omp\_get\_thread\_num()];}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00136}00136\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(storage-\/>supportSize(node)\ ==\ domain.supportSize(node),}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Storage\ must\ of\ appropriate\ size\ before\ calling\ computeShapes().\ "{}}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Got\ support\ size\ \%d\ at\ node\ \%d,\ expected\ \%d."{}},}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ storage-\/>supportSize(node),\ node,\ domain.supportSize(node));}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Preps\ local\ 1D\ support\ domain\ vector\ (cache\ friendly\ storage).}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00142}00142\ \ \ \ \ \ \ \ \ storage-\/>setSupport(node,\ domain.support(node));}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Resets\ local\ approximation\ engine\ with\ local\ parameters.}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00144}00144\ \ \ \ \ \ \ \ \ Range<typename\ approx\_t::vector\_t>\ supp\_domain\ =\ domain.supportNodes(node);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00145}00145\ \ \ \ \ \ \ \ \ local\_approx.compute(supp\_domain[0],\ supp\_domain);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Iterate\ over\ all\ operator\ families\ to\ compute\ approximations.}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00147}00147\ \ \ \ \ \ \ \ \ shapes\_internal::ShapeComputer<}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ approx\_t,\ shape\_storage\_t,\ std::tuple<Operators...>,\ \textcolor{keyword}{sizeof}...(Operators)}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00149}00149\ \ \ \ \ \ \ \ \ >::compute(operators,\ local\_approx,\ node,\ storage);}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00150}00150\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00151}00151\ \}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00152}00152\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00153}00153\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{computeShapes_8hpp_source_l00155}00155\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_OPERATORS\_COMPUTESHAPES\_HPP\_}}
+
+\end{DoxyCode}

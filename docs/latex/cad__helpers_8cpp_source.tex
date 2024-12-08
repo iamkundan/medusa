@@ -1,0 +1,29 @@
+\doxysection{cad\+\_\+helpers.\+cpp}
+\hypertarget{cad__helpers_8cpp_source}{}\label{cad__helpers_8cpp_source}\index{src/domains/cad\_helpers.cpp@{src/domains/cad\_helpers.cpp}}
+\mbox{\hyperlink{cad__helpers_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cad__helpers_8hpp}{medusa/bits/domains/cad\_helpers.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00009}00009\ \textcolor{keyword}{template}\ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Vec<double,\ 3>}}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{mm::cad\_helpers::evaluate\_b\_spline}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t,\ \textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00010}00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<double,\ 3>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<double>\&\ knots,\ \textcolor{keywordtype}{int}\ k);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00011}00011\ \textcolor{keyword}{template}\ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Vec<double,\ 2>}}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{mm::cad\_helpers::evaluate\_b\_spline}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ t,\ \textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00012}00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<double,\ 2>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<double>\&\ knots,\ \textcolor{keywordtype}{int}\ k);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00014}00014\ \textcolor{keyword}{template}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{mm::cad\_helpers::generate\_b\_spline\_derivative}}(\textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<double,\ 2>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<double>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ Range<Vec<double,\ 2>>\&\ der\_control\_points,\ Range<double>\&\ der\_knots);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00017}00017\ \textcolor{keyword}{template}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{mm::cad\_helpers::generate\_b\_spline\_derivative}}(\textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<double,\ 3>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<double>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00019}00019\ \ \ \ \ \ \ \ \ Range<Vec<double,\ 3>>\&\ der\_control\_points,\ Range<double>\&\ der\_knots);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00021}00021\ \textcolor{keyword}{template}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{mm::cad\_helpers::generate\_b\_spline\_derivative\_control\_points}}(\textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<double,\ 2>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<double>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ Range<Vec<double,\ 2>>\&\ der\_control\_points);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00024}00024\ \textcolor{keyword}{template}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{mm::cad\_helpers::generate\_b\_spline\_derivative\_control\_points}}(\textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<double,\ 3>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<double>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ Range<Vec<double,\ 3>>\&\ der\_control\_points);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00028}00028\ \textcolor{keyword}{template}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{mm::cad\_helpers::generate\_b\_spline\_derivative\_knots}}(\textcolor{keyword}{const}\ Range<double>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Range<double>\&\ der\_knots);}
+
+\end{DoxyCode}

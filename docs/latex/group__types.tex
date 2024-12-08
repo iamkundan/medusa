@@ -1,0 +1,72 @@
+\doxysection{Types}
+\hypertarget{group__types}{}\label{group__types}\index{Types@{Types}}
+
+
+Defines custom types, for working with vectors, scalar and vector fields and general containers.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range$<$ T, Allocator $>$}}
+\begin{DoxyCompactList}\small\item\em An extension of {\ttfamily std\+::vector\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>}} to support additional useful operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field$<$ Scalar $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a discretization of a scalar field, a finite collection of scalars. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1VectorField}{mm\+::\+Vector\+Field$<$ Scalar, dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a discretization of a vector field, a finite collection of vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{mm\+::\+Vec}} = Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1, Eigen\+::\+Col\+Major\texorpdfstring{$\vert$}{|}Eigen\+::\+Auto\+Align, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$
+\begin{DoxyCompactList}\small\item\em Fixed size vector type, representing a mathematical 1d/2d/3d vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines custom types, for working with vectors, scalar and vector fields and general containers. 
+
+We define 4 custom types, Range, Vec, Scalar\+Field and Vector\+Field.
+
+Range is a general purpose container with some convenience methods added to std\+::vector.
+
+Vec is intended to be used for small vector, i.\+e. for a 3D vector quantity such as velocity or displacement. It is a typedef for Eigen vector with a few methods added via their plugin system.
+
+Scalar\+Field is an array of scalars, usually one for each point in the domain. Under the hood, this is Eigen\textquotesingle{}s Vector\+Xd with some additional methods.
+
+Vector\+Field is an array of vectors. Accessing it at one point gives a Vec, while accessing one component gives a Scalar\+Field. Under the hood it extends Eigen\textquotesingle{}s Matrix type so all operations are kept efficient.
+
+These last three types are compatible with all Eigen expression and can interchangeably be used with Eigen\textquotesingle{}s Matrix types. 
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{group__types_gabd14a97bbb66ac6c2add9c3db998b333}\label{group__types_gabd14a97bbb66ac6c2add9c3db998b333} 
+\index{Types@{Types}!Vec@{Vec}}
+\index{Vec@{Vec}!Types@{Types}}
+\doxysubsubsection{\texorpdfstring{Vec}{Vec}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{mm\+::\+Vec}} = \mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} Eigen\+::\+Matrix$<$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1, Eigen\+::\+Col\+Major\texorpdfstring{$\vert$}{|}Eigen\+::\+Auto\+Align, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1$>$}
+
+
+
+Fixed size vector type, representing a mathematical 1d/2d/3d vector. 
+
+This is a special case of fixed size Eigen type. See our {\ttfamily Matrix} and {\ttfamily Matrix\+Base} add-\/ons for more functionality.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{MatrixAddons_8hpp}{Matrix\+Addons.\+hpp} 
+
+\doxylink{MatrixBaseAddons_8hpp}{Matrix\+Base\+Addons.\+hpp}
+\end{DoxySeeAlso}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec3d}}\ a(4.0);}
+\DoxyCodeLine{\ \ \ \ a\ =\ \{3,\ -\/4.3,\ 2\};}
+\DoxyCodeLine{\ \ \ \ a\ =\ 12.3;}
+\DoxyCodeLine{\ \ \ \ a\ /=\ 23.4;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ b(12.3,\ 34.5,\ -\/2.1);}
+\DoxyCodeLine{\ \ \ \ b\ -\/=\ a;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ a\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{Vec__fwd_8hpp_source_l00031}{31}} of file \mbox{\hyperlink{Vec__fwd_8hpp_source}{Vec\+\_\+fwd.\+hpp}}.
+

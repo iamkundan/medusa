@@ -1,0 +1,43 @@
+\doxysection{cad\+\_\+helpers\+\_\+fwd.\+hpp}
+\hypertarget{cad__helpers__fwd_8hpp_source}{}\label{cad__helpers__fwd_8hpp_source}\index{include/medusa/bits/domains/cad\_helpers\_fwd.hpp@{include/medusa/bits/domains/cad\_helpers\_fwd.hpp}}
+\mbox{\hyperlink{cad__helpers__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_CAD\_HELPERS\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_CAD\_HELPERS\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }cad\_helpers\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00033}00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00034}00034\ Vec<scalar\_t,\ dim>\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\&\ t,\ \textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<scalar\_t,\ dim>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<scalar\_t>\&\ knots,\ \textcolor{keywordtype}{int}\ k);}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00038}00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00039}00039\ Vec<scalar\_t,\ dim>\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\&\ t,\ \textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<scalar\_t,\ dim>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<scalar\_t>\&\ knots);}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00053}00053\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00054}00054\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{generate\_b\_spline\_derivative}}(\textcolor{keywordtype}{int}\ p,\ \textcolor{keyword}{const}\ Range<Vec<scalar\_t,\ dim>>\&\ control\_points,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<scalar\_t>\&\ knots,\ Range<Vec<scalar\_t,\ dim>>\&\ der\_control\_points,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ Range<scalar\_t>\&\ der\_knots);}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00068}00068\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00069}00069\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{generate\_b\_spline\_derivative\_control\_points}}(\textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<Vec<scalar\_t,\ dim>>\&\ control\_points,\ \textcolor{keyword}{const}\ Range<scalar\_t>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ Range<Vec<scalar\_t,\ dim>>\&\ der\_control\_points);}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00080}00080\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00081}00081\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{generate\_b\_spline\_derivative\_knots}}(\textcolor{keyword}{const}\ Range<scalar\_t>\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ Range<scalar\_t>\&\ der\_knots);}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00084}00084\ \}\ \ \textcolor{comment}{//\ namespace\ cad\_helpers}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00085}00085\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers__fwd_8hpp_source_l00087}00087\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_CAD\_HELPERS\_FWD\_HPP\_}}
+
+\end{DoxyCode}

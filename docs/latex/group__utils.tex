@@ -1,0 +1,792 @@
+\doxysection{Utilities}
+\hypertarget{group__utils}{}\label{group__utils}\index{Utilities@{Utilities}}
+
+
+Various utilities related to memory management, random, strings, numerics, spatial search, etc ...  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1Grid}{mm\+::\+Grid$<$ T, dimension, Index\+Type, Index\+Array\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing a simple n-\/dimensional grid structure, which supports indexing and storing values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1KDGrid}{mm\+::\+KDGrid$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Search structure over given d-\/dimensional box with given cell size. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1KDTree}{mm\+::\+KDTree$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing a static \href{https://en.wikipedia.org/wiki/K-d_tree}{\texttt{ k-\/d tree}} data structure. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1KDTreeMutable}{mm\+::\+KDTree\+Mutable$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em A \href{https://en.wikipedia.org/wiki/K-d_tree}{\texttt{ k-\/d tree}} data structure that supports dynamic insertions and lazy-\/removal. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{mm\+::kdtree\+\_\+internal\+::\+Point\+Cloud$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Helper class for \doxylink{classmm_1_1KDTree}{KDTree} with appropriate accessors containing a set of points. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{mm\+::deep\+\_\+copy\+\_\+unique\+\_\+ptr$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Unique pointer with polymorphic deep copy semantics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Stopwatch}{mm\+::\+Stopwatch}}
+\begin{DoxyCompactList}\small\item\em A simple stopwatch class\+: time sections of code that execute repeatedly and get average execution time. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Timer}{mm\+::\+Timer}}
+\begin{DoxyCompactList}\small\item\em Simple timer class\+: add checkpoints throughout the code and measure execution time between them. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Pi}{mm\+::\+Pi$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Value of \doxylink{structmm_1_1Pi}{Pi} in type {\ttfamily T}. Usage\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mm\+::mem2str}} (std\+::size\+\_\+t \mbox{\hyperlink{classmm_1_1Gaussian}{bytes}})
+\begin{DoxyCompactList}\small\item\em Simple function to help format memory amounts for printing. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\std\+::size\+\_\+t \mbox{\hyperlink{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}{mm\+::mem\+\_\+used}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v)
+\begin{DoxyCompactList}\small\item\em Returns number of bytes the container uses in memory. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{mm\+::iceil}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x)
+\begin{DoxyCompactList}\small\item\em Ceils a floating point to an integer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga8b0dd3e08714a12183860dc7db758344}{mm\+::ifloor}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x)
+\begin{DoxyCompactList}\small\item\em Floors a floating point to an integer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} exponent$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{mm\+::ipow}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{base}})
+\begin{DoxyCompactList}\small\item\em Compile time integer power, returns {\ttfamily base} raised to power {\ttfamily exponent}. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{group__utils_gada89027c55d5aae2be895470686604bd}{mm\+::ipow$<$ 0 $>$}} (\mbox{\hyperlink{classmm_1_1Gaussian}{double}})
+\begin{DoxyCompactList}\small\item\em Compile time integer power (base case 0) \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga0ebab8125b045c2fccfb7f3a5541549f}{mm\+::ipow}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1Gaussian}{b}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{e}})
+\begin{DoxyCompactList}\small\item\em Compute non-\/negative integer power {\ttfamily b\texorpdfstring{$^\wedge$}{\string^}e}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_gae3d8a1c01beb160c653056f1141e0952}{mm\+::ipowneg}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{classmm_1_1Gaussian}{b}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{e}})
+\begin{DoxyCompactList}\small\item\em Compute possibly negative integer power {\ttfamily b\texorpdfstring{$^\wedge$}{\string^}e}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga43f4adaf63b966eac55d56a6ebdbfd0b}{mm\+::signum}} (\mbox{\hyperlink{classmm_1_1Gaussian}{T}} x)
+\begin{DoxyCompactList}\small\item\em Signum function\+: determines a sign of a number {\ttfamily x}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{group__utils_ga3d998a49d777996d2276aa160c9dc769}{mm\+::increment\+Counter}} (\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{limit}})
+\begin{DoxyCompactList}\small\item\em Increments a multi-\/dimensional counter with given limits. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{group__utils_ga3fecc80024c00b0c3f60929257e95d0a}{mm\+::increment\+Counter}} (\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{low}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{high}})
+\begin{DoxyCompactList}\small\item\em Increments a multi-\/dimensional counter with given upper and lower limits. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{group__utils_gac53466280b26b3e911ab80c2f831ae49}{mm\+::increment\+Cyclic\+Counter}} (\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{low}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{high}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&size)
+\begin{DoxyCompactList}\small\item\em Increments a multi-\/dimensional counter with given upper and lower limits and global upper size, looping around to 0 if needed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \mbox{\hyperlink{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}{mm\+::linspace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&beg, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&end, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&counts, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \mbox{\hyperlink{classmm_1_1Gaussian}{include\+\_\+boundary}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Multidimensional clone of Matlab\textquotesingle{}s linspace function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \mbox{\hyperlink{group__utils_ga0b52c30d4c5eb4798e587d225e8387d0}{mm\+::linspace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&beg, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&end, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&counts, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{include\+\_\+boundary}})
+\begin{DoxyCompactList}\small\item\em Overload for bool argument of {\ttfamily include\+\_\+boundary}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \mbox{\hyperlink{group__utils_ga195465f9e61f7feb1b9f8a3f6bb1a9fa}{mm\+::linspace}} (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} beg, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} end, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{count}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{include\+\_\+boundary}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Overload for 1 dimension. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{function\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{output\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} verbose = false$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{group__utils_ga8314f17be8625c08f12fef72280c1375}{mm\+::bisection}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{function\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{f}}, \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{lo}}, \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{hi}}, \mbox{\hyperlink{classmm_1_1Gaussian}{output\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{target}}=0.\+0, \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{tolerance}}=1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/4, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{max\+\_\+iter}}=40)
+\begin{DoxyCompactList}\small\item\em Solves {\ttfamily f(x) = target} using bisection. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , class U $>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_ga89a1fcdac49877271ed49a22dfce81d1}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::pair$<$ T, U $>$ \&par)
+\begin{DoxyCompactList}\small\item\em Output pairs as {\ttfamily (1, 2)}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , size\+\_\+t N$>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_ga69ca1e3d6cb8da0f8271e5daeba7459b}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::array$<$ T, N $>$ \&arr)
+\begin{DoxyCompactList}\small\item\em Output arrays as {\ttfamily \mbox{[}1, 2, 3\mbox{]}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , class A $>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_gad93c3c2b8b292ba1a63b9a93402d9e82}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::vector$<$ T, A $>$ \&arr)
+\begin{DoxyCompactList}\small\item\em Output vectors as {\ttfamily \mbox{[}1, 2, 3\mbox{]}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , class A $>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_ga7e8d30888d6cf78572086b5c7bc4b128}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::vector$<$ std\+::vector$<$ T, A $>$ $>$ \&arr)
+\begin{DoxyCompactList}\small\item\em Output nested vectors as {\ttfamily \mbox{[}\mbox{[}1, 2\mbox{]}; \mbox{[}3, 4\mbox{]}\mbox{]}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args$>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_gaafc1cc8ecb74216332f62cb0f17a0b43}{std\+::operator$<$$<$}} (std\+::ostream \&os, const std\+::tuple$<$ Args... $>$ \&t)
+\begin{DoxyCompactList}\small\item\em Print a tuple as (1, 4.\+5, abc). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{mm\+::get\+\_\+seed}} ()
+\begin{DoxyCompactList}\small\item\em Return a random seed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga767cde18341d7425bdd92c2dcd6302c8}{mm\+::random\+\_\+choice}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{weights}}=\{\}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Randomly returns one of the specified elements with distribution according to given weights. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{mm\+::random\+\_\+choice}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{weights}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}, \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{generator}})
+\begin{DoxyCompactList}\small\item\em Overload for custom generator. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{mm\+::split}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{delim}})
+\begin{DoxyCompactList}\small\item\em Splits string by {\ttfamily delim}, returning a vector of tokens (including empty). \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{mm\+::join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{parts}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{joiner}})
+\begin{DoxyCompactList}\small\item\em Joins a vector of strings back together. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{mm\+::sort}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v)
+\begin{DoxyCompactList}\small\item\em Sorts a container inplace. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& \mbox{\hyperlink{group__utils_ga15a96934ce3c6759364373dc668a87a7}{mm\+::sort}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{pred}})
+\begin{DoxyCompactList}\small\item\em Sorts a container inplace according to ordering defined by {\ttfamily pred}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{mm\+::sorted}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} v)
+\begin{DoxyCompactList}\small\item\em Returns a sorted copy of container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_ga480725fbe71063bba9ed7be987075fd2}{mm\+::sorted}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} v, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{pred}})
+\begin{DoxyCompactList}\small\item\em Returns a sorted copy of container ordered according to {\ttfamily pred}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{mm\+::pad}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{container}}, \mbox{\hyperlink{classmm_1_1Gaussian}{T}} value)
+\begin{DoxyCompactList}\small\item\em Pads a ragged array with given value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Various utilities related to memory management, random, strings, numerics, spatial search, etc ... 
+
+This section includes many print operators. It is out philosophy that any object should be quickly printable, which is why we included print operators for many common C++ types as well as for most custom types.
+
+Spatial search structures such as k-\/d trees and k-\/d grids are also in this section. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__utils_ga8314f17be8625c08f12fef72280c1375}\label{group__utils_ga8314f17be8625c08f12fef72280c1375} 
+\index{Utilities@{Utilities}!bisection@{bisection}}
+\index{bisection@{bisection}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{bisection()}{bisection()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{function\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{output\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} verbose = false$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}} mm\+::bisection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{function\+\_\+t}} \&}]{f,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}}}]{lo,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}}}]{hi,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{output\+\_\+t}}}]{target = {\ttfamily 0.0},  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{input\+\_\+t}}}]{tolerance = {\ttfamily 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/4},  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{max\+\_\+iter = {\ttfamily 40} }\end{DoxyParamCaption})}
+
+
+
+Solves {\ttfamily f(x) = target} using bisection. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em function\+\_\+t} & Function type, like std\+::function or lambda, that returns output\+\_\+type. \\
+\hline
+{\em input\+\_\+t} & Floating point data type that support arithmetic operations. \\
+\hline
+{\em output\+\_\+t} & Floating point data type, such that {\ttfamily \doxylink{group__utils_ga43f4adaf63b966eac55d56a6ebdbfd0b}{mm\+::signum(output\+\_\+t)}} can be called. \\
+\hline
+{\em verbose} & Reports approximation every iteration. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & Function mapping {\ttfamily input\+\_\+t -\/\texorpdfstring{$>$}{>} output\+\_\+t}, for which to solve {\ttfamily f(x) = target}. \\
+\hline
+{\em lo} & Lower bound of the interval, containing the solution. \\
+\hline
+{\em hi} & Upper bound of the interval, containing the solution. \\
+\hline
+{\em target} & Target value, default 0. \\
+\hline
+{\em tolerance} & Desired accuracy of the solution, default {\ttfamily 1e-\/4}. \\
+\hline
+{\em max\+\_\+iter} & Maximal number of iterations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The solution {\ttfamily x}, such that {\ttfamily f(x)} is approximately equal to {\ttfamily target}. 
+\end{DoxyReturn}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00279}{279}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}\label{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2} 
+\index{Utilities@{Utilities}!get\_seed@{get\_seed}}
+\index{get\_seed@{get\_seed}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{get\_seed()}{get\_seed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::get\+\_\+seed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a random seed. 
+
+The seed is truly random if available, otherwise it is the current system time. \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2randutils_test_8cpp-example}{test/utils/randutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{randutils_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{randutils_8hpp_source}{randutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}\label{group__utils_ga3865c1d93dca35e836c70c17b2137bc3} 
+\index{Utilities@{Utilities}!iceil@{iceil}}
+\index{iceil@{iceil}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{iceil()}{iceil()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::iceil (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{x }\end{DoxyParamCaption})}
+
+
+
+Ceils a floating point to an integer. 
+
+\begin{DoxyWarning}{Warning}
+This function might overflow if {\ttfamily x} is too large or return undefined results if {\ttfamily x} is not a finite number. 
+\end{DoxyWarning}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga8b0dd3e08714a12183860dc7db758344}\label{group__utils_ga8b0dd3e08714a12183860dc7db758344} 
+\index{Utilities@{Utilities}!ifloor@{ifloor}}
+\index{ifloor@{ifloor}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{ifloor()}{ifloor()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::ifloor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{x }\end{DoxyParamCaption})}
+
+
+
+Floors a floating point to an integer. 
+
+\begin{DoxyWarning}{Warning}
+This function might overflow if {\ttfamily x} is too large or return undefined results if {\ttfamily x} is not a finite number. 
+\end{DoxyWarning}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga3d998a49d777996d2276aa160c9dc769}\label{group__utils_ga3d998a49d777996d2276aa160c9dc769} 
+\index{Utilities@{Utilities}!incrementCounter@{incrementCounter}}
+\index{incrementCounter@{incrementCounter}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{incrementCounter()}{incrementCounter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::increment\+Counter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{counter,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{limit }\end{DoxyParamCaption})}
+
+
+
+Increments a multi-\/dimensional counter with given limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & A valid counter state. \\
+\hline
+{\em limit} & Limit for each dimension of a counter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if an increment was performed and {\ttfamily false} otherwise. Repeated application of this function to counter with initial state {\ttfamily 0 0 0} and limits {\ttfamily 1 2 3} yields a sequence\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{0\ 0\ 0\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{0\ 0\ 1\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{0\ 0\ 2\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{0\ 1\ 0\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{0\ 1\ 1\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{0\ 1\ 2\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{0\ 1\ 2\ -\/>\ \textcolor{keyword}{false}}
+
+\end{DoxyCode}
+ This is made so that it can be used nicely with a {\ttfamily do \{\} while ()} loop, similarly to {\ttfamily std\+::next\+\_\+permutation}. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ 3>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{limit}}\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ Vec<int,\ 3>\ cnt;\ cnt.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec<int,\ 3>>\ result;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ result.push\_back(cnt);}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{group__utils_ga3d998a49d777996d2276aa160c9dc769}{incrementCounter}}(cnt,\ limit));}
+
+\end{DoxyCodeInclude}
+ 
+\end{DoxyReturn}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00120}{120}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga3fecc80024c00b0c3f60929257e95d0a}\label{group__utils_ga3fecc80024c00b0c3f60929257e95d0a} 
+\index{Utilities@{Utilities}!incrementCounter@{incrementCounter}}
+\index{incrementCounter@{incrementCounter}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{incrementCounter()}{incrementCounter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::increment\+Counter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{counter,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{low,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{high }\end{DoxyParamCaption})}
+
+
+
+Increments a multi-\/dimensional counter with given upper and lower limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em counter} & A valid counter state, which is modified. \\
+\hline
+{\em low} & Lower limit for each dimension of a counter. \\
+\hline
+{\em high} & Upper limit for each dimension of a counter. It must hold that {\ttfamily low \texorpdfstring{$<$}{<}= high} in each component. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if an increment was performed and {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__utils_ga3d998a49d777996d2276aa160c9dc769}{increment\+Counter} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00143}{143}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_gac53466280b26b3e911ab80c2f831ae49}\label{group__utils_gac53466280b26b3e911ab80c2f831ae49} 
+\index{Utilities@{Utilities}!incrementCyclicCounter@{incrementCyclicCounter}}
+\index{incrementCyclicCounter@{incrementCyclicCounter}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{incrementCyclicCounter()}{incrementCyclicCounter()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::increment\+Cyclic\+Counter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{counter,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{low,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{high,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{size }\end{DoxyParamCaption})}
+
+
+
+Increments a multi-\/dimensional counter with given upper and lower limits and global upper size, looping around to 0 if needed. 
+
+It need {\bfseries{not}} hold that {\ttfamily low \texorpdfstring{$<$}{<}= high} in each component. 
+\begin{DoxyParams}{Parameters}
+{\em counter} & A valid counter state, which is modified. \\
+\hline
+{\em low} & Lower limit for each dimension of a counter. \\
+\hline
+{\em high} & Upper limit for each dimension of a counter. \\
+\hline
+{\em size} & Global upper limit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if an increment was performed and {\ttfamily false} otherwise. Repeated application of this function to counter with limits {\ttfamily 1 0 2} and {\ttfamily 0 2 1} with size limit {\ttfamily 3 3 3}, starting from lower limit yields a sequence\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1\ 0\ 2\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{1\ 0\ 0\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{1\ 1\ 2\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{1\ 1\ 0\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{2\ 0\ 2\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{2\ 0\ 0\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{2\ 1\ 2\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{2\ 1\ 0\ -\/>\ \textcolor{keyword}{true}}
+\DoxyCodeLine{2\ 1\ 0\ -\/>\ \textcolor{keyword}{false}}
+
+\end{DoxyCode}
+ This is useful for cyclic iteration over multidimensional arrays. 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ 3>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{low}}\ =\ \{1,\ 0,\ 2\};}
+\DoxyCodeLine{\ \ \ \ Vec<int,\ 3>\ high\ =\ \{0,\ 2,\ 1\};}
+\DoxyCodeLine{\ \ \ \ Vec<int,\ 3>\ size\ =\ \{3,\ 3,\ 3\};}
+\DoxyCodeLine{\ \ \ \ Vec<int,\ 3>\ cnt\ =\ low;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec<int,\ 3>>\ result;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ result.push\_back(cnt);}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{group__utils_gac53466280b26b3e911ab80c2f831ae49}{incrementCyclicCounter}}(cnt,\ low,\ high,\ size));}
+
+\end{DoxyCodeInclude}
+ 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__utils_ga3d998a49d777996d2276aa160c9dc769}{increment\+Counter} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00182}{182}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga51a7b78dc2a21f865d436dc136e75541}\label{group__utils_ga51a7b78dc2a21f865d436dc136e75541} 
+\index{Utilities@{Utilities}!ipow@{ipow}}
+\index{ipow@{ipow}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{ipow()}{ipow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} exponent$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::ipow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compile time integer power, returns {\ttfamily base} raised to power {\ttfamily exponent}. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00040}{40}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga0ebab8125b045c2fccfb7f3a5541549f}\label{group__utils_ga0ebab8125b045c2fccfb7f3a5541549f} 
+\index{Utilities@{Utilities}!ipow@{ipow}}
+\index{ipow@{ipow}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{ipow()}{ipow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} mm\+::ipow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{b,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute non-\/negative integer power {\ttfamily b\texorpdfstring{$^\wedge$}{\string^}e}. 
+
+This function is usually faster than {\ttfamily std\+::pow} for {\ttfamily e \texorpdfstring{$<$}{<} 50} and matches the {\ttfamily std\+::pow} performance at approximately {\ttfamily e = 100}. For compile time constant {\ttfamily e} this function use \doxylink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}. 
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00056}{56}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_gada89027c55d5aae2be895470686604bd}\label{group__utils_gada89027c55d5aae2be895470686604bd} 
+\index{Utilities@{Utilities}!ipow$<$ 0 $>$@{ipow$<$ 0 $>$}}
+\index{ipow$<$ 0 $>$@{ipow$<$ 0 $>$}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{ipow$<$ 0 $>$()}{ipow< 0 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{mm\+::ipow}}$<$ 0 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compile time integer power (base case 0) 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_gae3d8a1c01beb160c653056f1141e0952}\label{group__utils_gae3d8a1c01beb160c653056f1141e0952} 
+\index{Utilities@{Utilities}!ipowneg@{ipowneg}}
+\index{ipowneg@{ipowneg}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{ipowneg()}{ipowneg()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} mm\+::ipowneg (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{b,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compute possibly negative integer power {\ttfamily b\texorpdfstring{$^\wedge$}{\string^}e}. 
+
+This function is usually faster than {\ttfamily std\+::pow} for {\ttfamily e \texorpdfstring{$<$}{<} 50} and matches the {\ttfamily std\+::pow} performance at approximately {\ttfamily e = 100}. 
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga21cf5475deabaedcb07d6266be6efec0}\label{group__utils_ga21cf5475deabaedcb07d6266be6efec0} 
+\index{Utilities@{Utilities}!join@{join}}
+\index{join@{join}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily std\+::string mm\+::join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&}]{parts,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{joiner }\end{DoxyParamCaption})}
+
+
+
+Joins a vector of strings back together. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parts} & Vector of strings. \\
+\hline
+{\em joiner} & String to glue the parts with. \\
+\hline
+\end{DoxyParams}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2stdtypesutils_test_8cpp-example}{test/utils/stdtypesutils\+\_\+test.\+cpp}}.\end{Desc}
+\Hypertarget{group__utils_ga0b52c30d4c5eb4798e587d225e8387d0}\label{group__utils_ga0b52c30d4c5eb4798e587d225e8387d0} 
+\index{Utilities@{Utilities}!linspace@{linspace}}
+\index{linspace@{linspace}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{linspace()}{linspace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ mm\+::linspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{beg,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{end,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{counts,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{include\+\_\+boundary }\end{DoxyParamCaption})}
+
+
+
+Overload for bool argument of {\ttfamily include\+\_\+boundary}. 
+
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00238}{238}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c}\label{group__utils_gaecbd2121e9f49cc547d064ed940f0f9c} 
+\index{Utilities@{Utilities}!linspace@{linspace}}
+\index{linspace@{linspace}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{linspace()}{linspace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ mm\+::linspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{beg,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{end,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \&}]{counts,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$}]{include\+\_\+boundary = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{true}}} }\end{DoxyParamCaption})}
+
+
+
+Multidimensional clone of Matlab\textquotesingle{}s linspace function. 
+
+Uniformly discretizes cuboid given with {\ttfamily beg} and {\ttfamily end} points. Similar to numpy\textquotesingle{}s linspace and Matlab\textquotesingle{}s meshgrid. 
+\begin{DoxyParams}{Parameters}
+{\em beg} & Beginning of a cuboid. \\
+\hline
+{\em end} & Ending of a cuboid. \\
+\hline
+{\em counts} & How many discretization points to use in each dimension. \\
+\hline
+{\em include\+\_\+boundary} & Flag whether to include boundary of a cuboid in a given dimension. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Uniform discretization points of a domain with counts\mbox{[}i\mbox{]} points in dimension i. Instead of returning a n-\/dim matrix it returns it as a \doxylink{classmm_1_1Range}{Range} instead. 
+\end{DoxyReturn}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2approximations_2Monomials_test_8cpp-example}{test/approximations/\+Monomials\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2utils_2numutils_test_8cpp-example}{test/utils/numutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00210}{210}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga195465f9e61f7feb1b9f8a3f6bb1a9fa}\label{group__utils_ga195465f9e61f7feb1b9f8a3f6bb1a9fa} 
+\index{Utilities@{Utilities}!linspace@{linspace}}
+\index{linspace@{linspace}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{linspace()}{linspace()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ mm\+::linspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}}]{beg,  }\item[{\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}}]{end,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{count,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{include\+\_\+boundary = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{true}}} }\end{DoxyParamCaption})}
+
+
+
+Overload for 1 dimension. 
+
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00245}{245}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}\label{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7} 
+\index{Utilities@{Utilities}!mem2str@{mem2str}}
+\index{mem2str@{mem2str}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{mem2str()}{mem2str()}}
+{\footnotesize\ttfamily std\+::string mm\+::mem2str (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{bytes }\end{DoxyParamCaption})}
+
+
+
+Simple function to help format memory amounts for printing. 
+
+Takes in number of bytes and returns a human readable representation. \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2memutils_test_8cpp-example}{test/utils/memutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{memutils_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{memutils_8cpp_source}{memutils.\+cpp}}.
+
+\Hypertarget{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}\label{group__utils_gaae358fa8b0c7deaec2a212c2ed344933} 
+\index{Utilities@{Utilities}!mem\_used@{mem\_used}}
+\index{mem\_used@{mem\_used}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{mem\_used()}{mem\_used()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ \\
+std\+::size\+\_\+t mm\+::mem\+\_\+used (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Returns number of bytes the container uses in memory. 
+
+The container must support {\ttfamily size()}. This does not count the memory that may be allocated by objects stored in the container. Also \doxylink{classmm_1_1STL}{STL} containers like vector may actually have more memory allocated than their size. 
+
+Definition at line \mbox{\hyperlink{memutils_8hpp_source_l00083}{83}} of file \mbox{\hyperlink{memutils_8hpp_source}{memutils.\+hpp}}.
+
+\Hypertarget{group__utils_gaafc1cc8ecb74216332f62cb0f17a0b43}\label{group__utils_gaafc1cc8ecb74216332f62cb0f17a0b43} 
+\index{Utilities@{Utilities}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$class... Args$>$ \\
+std\+::ostream \& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const std\+::tuple$<$ Args... $>$ \&}]{t }\end{DoxyParamCaption})}
+
+
+
+Print a tuple as (1, 4.\+5, abc). 
+
+
+
+Definition at line \mbox{\hyperlink{print_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{print_8hpp_source}{print.\+hpp}}.
+
+\Hypertarget{group__utils_ga69ca1e3d6cb8da0f8271e5daeba7459b}\label{group__utils_ga69ca1e3d6cb8da0f8271e5daeba7459b} 
+\index{Utilities@{Utilities}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$class T , size\+\_\+t N$>$ \\
+std\+::ostream \& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{xx,  }\item[{const std\+::array$<$ T, N $>$ \&}]{arr }\end{DoxyParamCaption})}
+
+
+
+Output arrays as {\ttfamily \mbox{[}1, 2, 3\mbox{]}}. 
+
+
+
+Definition at line \mbox{\hyperlink{print_8hpp_source_l00026}{26}} of file \mbox{\hyperlink{print_8hpp_source}{print.\+hpp}}.
+
+\Hypertarget{group__utils_ga89a1fcdac49877271ed49a22dfce81d1}\label{group__utils_ga89a1fcdac49877271ed49a22dfce81d1} 
+\index{Utilities@{Utilities}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$class T , class U $>$ \\
+std\+::ostream \& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{xx,  }\item[{const std\+::pair$<$ T, U $>$ \&}]{par }\end{DoxyParamCaption})}
+
+
+
+Output pairs as {\ttfamily (1, 2)}. 
+
+
+
+Definition at line \mbox{\hyperlink{print_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{print_8hpp_source}{print.\+hpp}}.
+
+\Hypertarget{group__utils_ga7e8d30888d6cf78572086b5c7bc4b128}\label{group__utils_ga7e8d30888d6cf78572086b5c7bc4b128} 
+\index{Utilities@{Utilities}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$class T , class A $>$ \\
+std\+::ostream \& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{xx,  }\item[{const std\+::vector$<$ std\+::vector$<$ T, A $>$ $>$ \&}]{arr }\end{DoxyParamCaption})}
+
+
+
+Output nested vectors as {\ttfamily \mbox{[}\mbox{[}1, 2\mbox{]}; \mbox{[}3, 4\mbox{]}\mbox{]}}. 
+
+
+
+Definition at line \mbox{\hyperlink{print_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{print_8hpp_source}{print.\+hpp}}.
+
+\Hypertarget{group__utils_gad93c3c2b8b292ba1a63b9a93402d9e82}\label{group__utils_gad93c3c2b8b292ba1a63b9a93402d9e82} 
+\index{Utilities@{Utilities}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$class T , class A $>$ \\
+std\+::ostream \& std\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{xx,  }\item[{const std\+::vector$<$ T, A $>$ \&}]{arr }\end{DoxyParamCaption})}
+
+
+
+Output vectors as {\ttfamily \mbox{[}1, 2, 3\mbox{]}}. 
+
+
+
+Definition at line \mbox{\hyperlink{print_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{print_8hpp_source}{print.\+hpp}}.
+
+\Hypertarget{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}\label{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4} 
+\index{Utilities@{Utilities}!pad@{pad}}
+\index{pad@{pad}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{pad()}{pad()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} mm\+::pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}}}]{container,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Pads a ragged array with given value. 
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{pad}}(\{\{1,\ 2\},\ \{\},\ \{9,\ 4,\ 2\}\},\ -\/1);\ \ \textcolor{comment}{//\ return\ \{\{1,\ 2,\ -\/1\},\ \{-\/1,\ -\/1,\ -\/1\},\ \{9,\ 4,\ 2\}\}}}
+
+\end{DoxyCode}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2stdtypesutils_test_8cpp-example}{test/utils/stdtypesutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{stdtypesutils_8hpp_source}{stdtypesutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga6e6d1058018719d342dd4900d34e31db}\label{group__utils_ga6e6d1058018719d342dd4900d34e31db} 
+\index{Utilities@{Utilities}!random\_choice@{random\_choice}}
+\index{random\_choice@{random\_choice}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{random\_choice()}{random\_choice()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} mm\+::random\+\_\+choice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{elements,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&}]{weights,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{normed,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} \&}]{generator }\end{DoxyParamCaption})}
+
+
+
+Overload for custom generator. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\+\_\+choice} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2randutils_test_8cpp-example}{test/utils/randutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{randutils_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{randutils_8hpp_source}{randutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga767cde18341d7425bdd92c2dcd6302c8}\label{group__utils_ga767cde18341d7425bdd92c2dcd6302c8} 
+\index{Utilities@{Utilities}!random\_choice@{random\_choice}}
+\index{random\_choice@{random\_choice}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{random\_choice()}{random\_choice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{T}} mm\+::random\+\_\+choice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{elements,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&}]{weights = {\ttfamily \{\}},  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{normed = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{false}}} }\end{DoxyParamCaption})}
+
+
+
+Randomly returns one of the specified elements with distribution according to given weights. 
+
+A {\ttfamily std\+::mt19937} generator is created and seeded randomly with call to \doxylink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\+\_\+seed()}. 
+\begin{DoxyParams}{Parameters}
+{\em elements} & A pool of elements to choose from. \\
+\hline
+{\em weights} & Weights of the elements. If this argument is omitted all elements are assigned the same weights. \\
+\hline
+{\em normed} & Boolean indicating that the weights are already normed and that additional computation is not necessary. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & might fail if thw weights are claimed to be normalized but are not. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\+\_\+seed} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{randutils_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{randutils_8hpp_source}{randutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga43f4adaf63b966eac55d56a6ebdbfd0b}\label{group__utils_ga43f4adaf63b966eac55d56a6ebdbfd0b} 
+\index{Utilities@{Utilities}!signum@{signum}}
+\index{signum@{signum}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{signum()}{signum()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::signum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{T}}}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Signum function\+: determines a sign of a number {\ttfamily x}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & A number under inspection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily 0} if {\ttfamily x == 0}, {\ttfamily -\/1} if {\ttfamily x} is negative and {\ttfamily +1} if {\ttfamily x} is positive 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{numutils_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{numutils_8hpp_source}{numutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}\label{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7} 
+\index{Utilities@{Utilities}!sort@{sort}}
+\index{sort@{sort}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& mm\+::sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+Sorts a container inplace. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2FindClosest_test_8cpp-example}{test/domains/\+Find\+Closest\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2utils_2stdtypesutils_test_8cpp-example}{test/utils/stdtypesutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{stdtypesutils_8hpp_source}{stdtypesutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga15a96934ce3c6759364373dc668a87a7}\label{group__utils_ga15a96934ce3c6759364373dc668a87a7} 
+\index{Utilities@{Utilities}!sort@{sort}}
+\index{sort@{sort}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{sort()}{sort()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& mm\+::sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&}]{v,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Sorts a container inplace according to ordering defined by {\ttfamily pred}. 
+
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{stdtypesutils_8hpp_source}{stdtypesutils.\+hpp}}.
+
+\Hypertarget{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}\label{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd} 
+\index{Utilities@{Utilities}!sorted@{sorted}}
+\index{sorted@{sorted}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{sorted()}{sorted()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} mm\+::sorted (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}}}]{v }\end{DoxyParamCaption})}
+
+
+
+Returns a sorted copy of container. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2stdtypesutils_test_8cpp-example}{test/utils/stdtypesutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{stdtypesutils_8hpp_source}{stdtypesutils.\+hpp}}.
+
+\Hypertarget{group__utils_ga480725fbe71063bba9ed7be987075fd2}\label{group__utils_ga480725fbe71063bba9ed7be987075fd2} 
+\index{Utilities@{Utilities}!sorted@{sorted}}
+\index{sorted@{sorted}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{sorted()}{sorted()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} mm\+::sorted (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}}}]{v,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&}]{pred }\end{DoxyParamCaption})}
+
+
+
+Returns a sorted copy of container ordered according to {\ttfamily pred}. 
+
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8hpp_source_l00064}{64}} of file \mbox{\hyperlink{stdtypesutils_8hpp_source}{stdtypesutils.\+hpp}}.
+
+\Hypertarget{group__utils_gae0fe292ba05b616654be10a96eaca8ed}\label{group__utils_gae0fe292ba05b616654be10a96eaca8ed} 
+\index{Utilities@{Utilities}!split@{split}}
+\index{split@{split}!Utilities@{Utilities}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ mm\+::split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{s,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{delim }\end{DoxyParamCaption})}
+
+
+
+Splits string by {\ttfamily delim}, returning a vector of tokens (including empty). 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{stringliteral}{"{}a,b,c,"{}},\ \textcolor{stringliteral}{"{},"{}});\ \ \textcolor{comment}{//\ returns\ \{"{}a"{},\ "{}b"{},\ "{}c"{},\ "{}"{}\}}}
+
+\end{DoxyCode}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2utils_2stdtypesutils_test_8cpp-example}{test/utils/stdtypesutils\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{stdtypesutils_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{stdtypesutils_8cpp_source}{stdtypesutils.\+cpp}}.
+

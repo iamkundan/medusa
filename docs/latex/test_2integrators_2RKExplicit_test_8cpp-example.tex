@@ -1,0 +1,145 @@
+\doxysection{test/integrators/\+RKExplicit\+\_\+test.\+cpp}
+\hypertarget{test_2integrators_2RKExplicit_test_8cpp-example}{}\label{test_2integrators_2RKExplicit_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RKExplicit_8hpp}{medusa/bits/integrators/RKExplicit.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Integrators,\ RKExplicitStiff)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ Solving:}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ y'\ =\ -\/20(y-\/2),\ y(0)\ =\ 3}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ with\ solution\ x\ =\ exp(-\/t)}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\ \ \ \ std::function<Eigen::VectorXd(\textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ Eigen::VectorXd\&)>\ func\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](double,\ \textcolor{keyword}{const}\ Eigen::VectorXd\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/20*(y-\/2*Eigen::VectorXd::Ones(1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ y0(1);\ y0\ <<\ 3.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tmax\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_rk4\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}{integrators::Explicit::RK4}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_rk38\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abad60192a42922b08007a211456cf63b}{integrators::Explicit::RK38}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_rk3\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_aea93a4d7f0c48d41498bffc1fca18374}{integrators::Explicit::RK3}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_midpoint\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_ad4f85bedfd1b7034ff9731850bc54c44}{integrators::Explicit::Midpoint}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_euler\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41}{integrators::Explicit::Euler}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_rk4\ =\ solver\_rk4.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_rk38\ =\ solver\_rk38.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_rk3\ =\ solver\_rk3.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_midpoint\ =\ solver\_midpoint.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_euler\ =\ solver\_euler.begin();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (stepper\_rk4)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_rk4;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_rk38;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_rk3;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_midpoint;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_euler;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ correct\ =\ 2.0\ +\ std::exp(-\/20.0*stepper\_rk4.time());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correct,\ stepper\_rk4.value()[0],\ 1e-\/9);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correct,\ stepper\_rk38.value()[0],\ 1e-\/9);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correct,\ stepper\_rk3.value()[0],\ 1e-\/7);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correct,\ stepper\_midpoint.value()[0],\ 1e-\/6);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correct,\ stepper\_euler.value()[0],\ 1e-\/4);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Integrators,\ RKExplicitCircle)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ Solving:}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ x'\ =\ -\/y}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ y'\ =\ x}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ with\ solution\ (x,\ y)\ =\ (cos(t),\ sin(t))}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::function<Eigen::VectorXd(\textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ Eigen::VectorXd\&)>\ func\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](double,\ \textcolor{keyword}{const}\ Eigen::VectorXd\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ r(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r(0)\ =\ -\/y(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r(1)\ =\ y(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tmax\ =\ 2*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ y0(2);\ y0\ <<\ 1.0,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_rk4\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}{integrators::Explicit::RK4}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_rk38\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abad60192a42922b08007a211456cf63b}{integrators::Explicit::RK38}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_rk3\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_aea93a4d7f0c48d41498bffc1fca18374}{integrators::Explicit::RK3}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_midpoint\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_ad4f85bedfd1b7034ff9731850bc54c44}{integrators::Explicit::Midpoint}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\_euler\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_a759eb0941532ec7b09abb0afb4305d41}{integrators::Explicit::Euler}}().solve(func,\ 0.0,\ tmax,\ step,\ y0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_rk4\ =\ solver\_rk4.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_rk38\ =\ solver\_rk38.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_rk3\ =\ solver\_rk3.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_midpoint\ =\ solver\_midpoint.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ stepper\_euler\ =\ solver\_euler.begin();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (stepper\_rk4)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_rk4;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_rk38;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_rk3;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_midpoint;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++stepper\_euler;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ correctx\ =\ std::cos(stepper\_rk4.time()),\ correcty\ =\ std::sin(stepper\_rk4.time());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correctx,\ stepper\_rk4.value()[0],\ 1e-\/5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correcty,\ stepper\_rk4.value()[1],\ 1e-\/5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correctx,\ stepper\_rk38.value()[0],\ 1e-\/5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correcty,\ stepper\_rk38.value()[1],\ 1e-\/5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correctx,\ stepper\_rk3.value()[0],\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correcty,\ stepper\_rk3.value()[1],\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correctx,\ stepper\_midpoint.value()[0],\ 2e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correcty,\ stepper\_midpoint.value()[1],\ 2e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correctx,\ stepper\_euler.value()[0],\ 1e-\/0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(correcty,\ stepper\_euler.value()[1],\ 1e-\/0);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Integrators,\ ExplicitOfOrderRK)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Test\ that\ this\ compiles}}
+\DoxyCodeLine{\ \ \ \ integrators::Explicit::of\_order<1>();}
+\DoxyCodeLine{\ \ \ \ integrators::Explicit::of\_order<2>();}
+\DoxyCodeLine{\ \ \ \ integrators::Explicit::of\_order<3>();}
+\DoxyCodeLine{\ \ \ \ integrators::Explicit::of\_order<4>();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Integrators,\ DISABLED\_RungeKuttaUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ std::function<Eigen::VectorXd(\textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ Eigen::VectorXd\&)>\ func\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](double,\ \textcolor{keyword}{const}\ Eigen::VectorXd\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/y;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ y0(1);}
+\DoxyCodeLine{\ \ \ \ y0\ <<\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tmax\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dt\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ integrator\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1Explicit_abe189b05d00a5bb1a6eb11318ceb3d27}{integrators::Explicit::RK4}}().solve(func,\ 0.0,\ tmax,\ dt,\ y0);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ integrator\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ step\ :\ integrator)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ You\ can\ use\ read\ write\ access\ to:}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ step.value();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ step.time();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ and\ check\ if\ this\ is\ the\ last\ step:}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ step.is\_last();}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Aditionally,\ one\ can\ iterate\ manually}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ step\ =\ integrator.begin();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{while}\ (step)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something\ with\ step}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ++step;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ value\ =\ step.value();\ \ \textcolor{comment}{//\ do\ something\ with\ value}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,56 @@
+\doxysection{test/domains/\+Translated\+Shape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2TranslatedShape_test_8cpp-example}{}\label{test_2domains_2TranslatedShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TranslatedShape_8hpp}{medusa/bits/domains/TranslatedShape.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ TranslatedContains)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box2d(\{1,\ 3\},\ \{1.2,\ 3.5\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ t\ =\ box2d.translate(\{-\/1.1,\ -\/3.1\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(t.contains(\{0,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(t.contains(\{0.1,\ 0.4\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(t.contains(\{1.1,\ 3.1\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ TranslatedBbox)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box2d(\{-\/1.1,\ -\/1.1\},\ \{1.1,\ 1.1\});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ a\ =\ \{-\/1,\ -\/2\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ t\ =\ box2d.translate(a);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ bbox\ =\ t.bbox();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((box2d.beg()+a\ -\/\ bbox.first).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((box2d.end()+a\ -\/\ bbox.second).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ TranslatedShapeCollapse)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box2d(\{1,\ 3\},\ \{1.2,\ 3.5\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ t\ =\ box2d.translate(\{1,\ 1\}).translate(\{2,\ 2\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NE(\textcolor{keyword}{nullptr},\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }BoxShape<Vec2d>*\textcolor{keyword}{>}(\&t.shape()));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(3,\ 3),\ t.translation());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ TranslatedDiscretize)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ ball(0,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ ball.discretizeBoundaryWithStep(0.1).translate(1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ ball2\ =\ ball.translate(1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ ball2.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ ball2\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d2.positions(),\ d.positions());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d2.types(),\ d.types());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d2.normals(),\ d.normals());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ d.assert\_is\_valid();}
+\DoxyCodeLine{\ \ \ \ d2.assert\_is\_valid();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

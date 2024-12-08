@@ -1,0 +1,289 @@
+\doxysection{mm\+::Implicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type \texorpdfstring{$>$}{>}\+::Traction\+Op Class Reference}
+\hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp}\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}}$>$\newline
+class mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Traction\+Op}
+Class representing the traction operator. Useful for setting boundary conditions. 
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00266}{266}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Implicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type \texorpdfstring{$>$}{>}\+::Traction\+Op\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1ImplicitVectorOperators_1_1TractionOp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Implicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type \texorpdfstring{$>$}{>}\+::Traction\+Op\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1ImplicitVectorOperators_1_1TractionOp__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_ac84fe858f2f2a3aebb89b36e372ef074}{eval}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate this operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ad0d74fc096cc9108dae13c9dc3823295}{eval}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Eval with {\ttfamily alpha = 1.\+0}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a53300d4dc451e9cd5e054dfec734cb59}{operator\texorpdfstring{$\ast$}{*}}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}})
+\begin{DoxyCompactList}\small\item\em Multiply this operation by a scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a43ce209c5d7fdadb8e81c8027d88c1a9}{operator+}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1Gaussian}{right}})
+\begin{DoxyCompactList}\small\item\em Combine this operation with another row operation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_adaf7d05fcfc889a92c9d6063ec16deb1}{operator+}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase}{Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{other\+\_\+derived\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{right}})
+\begin{DoxyCompactList}\small\item\em Combine tho operation with another operation. Both operations are evaluated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a74cfabdf42c4e5c765e0b08d49a5ed77}{operator-\/}} ()
+\begin{DoxyCompactList}\small\item\em Multiply this operation by {\ttfamily -\/1}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_aea93963763d196308c412ffbf7da285e}{Implicit\+Vector\+Operators}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}} \& \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581}{op}}
+\begin{DoxyCompactList}\small\item\em Reference to underlying operators. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821}{node}}
+\begin{DoxyCompactList}\small\item\em Index of the point for which to apply the operation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643}{row}}
+\begin{DoxyCompactList}\small\item\em Matrix row to which the operation should be applied (without offset). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a66c23ffc4951d72099896068d791ebab}{Traction\+Op}} (\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}} \&\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581}{op}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821}{node}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643}{row}}, \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_af30383c12113641e632fec98f9ffb1d5}{lam}}, \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a5727247f3d000cadd35dc6289560ddc0}{mu}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_ab47859ef66ea0612c1b2a3e421b01288}{domain\+\_\+vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a8bde4f4d10d669f30fa0b9c48f9f7f15}{normal}})
+\begin{DoxyCompactList}\small\item\em Create traction operator with given Lame constants and outside unit normal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_af30383c12113641e632fec98f9ffb1d5}{lam}}
+\begin{DoxyCompactList}\small\item\em 1st Lame constant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a5727247f3d000cadd35dc6289560ddc0}{mu}}
+\begin{DoxyCompactList}\small\item\em 2nd Lame constant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_ab47859ef66ea0612c1b2a3e421b01288}{domain\+\_\+vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a8bde4f4d10d669f30fa0b9c48f9f7f15}{normal}}
+\begin{DoxyCompactList}\small\item\em Unit normal to the surface where traction os desired. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a66c23ffc4951d72099896068d791ebab}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a66c23ffc4951d72099896068d791ebab} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!TractionOp@{TractionOp}}
+\index{TractionOp@{TractionOp}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{TractionOp()}{TractionOp()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\+::\+Traction\+Op\+::\+Traction\+Op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}} \&}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{row,  }\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}}}]{lam,  }\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}}}]{mu,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_ab47859ef66ea0612c1b2a3e421b01288}{domain\+\_\+vector\+\_\+t}} \&}]{normal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Create traction operator with given Lame constants and outside unit normal. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00274}{274}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ad0d74fc096cc9108dae13c9dc3823295}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ad0d74fc096cc9108dae13c9dc3823295} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!eval@{eval}}
+\index{eval@{eval}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Eval with {\ttfamily alpha = 1.\+0}. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00149}{149}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp_ac84fe858f2f2a3aebb89b36e372ef074}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp_ac84fe858f2f2a3aebb89b36e372ef074} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!eval@{eval}}
+\index{eval@{eval}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\+::\+Traction\+Op\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}}}]{alpha }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate this operator. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00279}{279}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a53300d4dc451e9cd5e054dfec734cb59}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a53300d4dc451e9cd5e054dfec734cb59} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}}}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Multiply this operation by a scalar. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00153}{153}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_adaf7d05fcfc889a92c9d6063ec16deb1}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_adaf7d05fcfc889a92c9d6063ec16deb1} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!operator+@{operator+}}
+\index{operator+@{operator+}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase}{Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{other\+\_\+derived\+\_\+t}} $>$ \&}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Combine tho operation with another operation. Both operations are evaluated. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00160}{160}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a43ce209c5d7fdadb8e81c8027d88c1a9}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a43ce209c5d7fdadb8e81c8027d88c1a9} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!operator+@{operator+}}
+\index{operator+@{operator+}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}}}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Combine this operation with another row operation. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00155}{155}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a74cfabdf42c4e5c765e0b08d49a5ed77}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a74cfabdf42c4e5c765e0b08d49a5ed77} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1RowVecOp}{Row\+Vec\+Op}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::operator-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Multiply this operation by {\ttfamily -\/1}. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00157}{157}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp_aea93963763d196308c412ffbf7da285e}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp_aea93963763d196308c412ffbf7da285e} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!ImplicitVectorOperators@{ImplicitVectorOperators}}
+\index{ImplicitVectorOperators@{ImplicitVectorOperators}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{ImplicitVectorOperators}{ImplicitVectorOperators}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{friend}} \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00267}{267}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp_af30383c12113641e632fec98f9ffb1d5}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp_af30383c12113641e632fec98f9ffb1d5} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!lam@{lam}}
+\index{lam@{lam}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{lam}{lam}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\+::\+Traction\+Op\+::lam\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+1st Lame constant. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00269}{269}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a5727247f3d000cadd35dc6289560ddc0}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a5727247f3d000cadd35dc6289560ddc0} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!mu@{mu}}
+\index{mu@{mu}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{mu}{mu}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_a0b7736515f1b8c962dbdb49ad3e54fb7}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\+::\+Traction\+Op\+::mu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+2nd Lame constant. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00270}{270}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a6f28a6046e2c117ef5f13b5e58459821} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!node@{node}}
+\index{node@{node}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{node}{node}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::node\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Index of the point for which to apply the operation. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a8bde4f4d10d669f30fa0b9c48f9f7f15}\label{classmm_1_1ImplicitVectorOperators_1_1TractionOp_a8bde4f4d10d669f30fa0b9c48f9f7f15} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!normal@{normal}}
+\index{normal@{normal}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{normal}{normal}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_ab47859ef66ea0612c1b2a3e421b01288}{domain\+\_\+vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\+::\+Traction\+Op\+::normal\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Unit normal to the surface where traction os desired. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00271}{271}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_abd6b7ca126b53a62c28a3a802071d581} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!op@{op}}
+\index{op@{op}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{op}{op}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}\& \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::op\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Reference to underlying operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00133}{133}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643}\label{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_ae6513fa9b3d74925e1ac80307ef7a643} 
+\index{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}!row@{row}}
+\index{row@{row}!mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp@{mm::ImplicitVectorOperators$<$ shape\_storage\_type, matrix\_type, rhs\_type $>$::TractionOp}}
+\doxysubsubsection{\texorpdfstring{row}{row}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{matrix\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{rhs\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1VecOpBase_a16fa9b3fab302f470ade2b0ba7e01e2f}{\+::\+Vec\+Op\+Base}}$<$ \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators_1_1TractionOp}{Traction\+Op}}  $>$\+::row\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Matrix row to which the operation should be applied (without offset). 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source_l00135}{135}} of file \mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp_source}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ImplicitVectorOperators__fwd_8hpp}{Implicit\+Vector\+Operators\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

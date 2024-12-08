@@ -1,0 +1,56 @@
+\doxysection{assert.\+hpp}
+\hypertarget{assert_8hpp_source}{}\label{assert_8hpp_source}\index{include/medusa/bits/utils/assert.hpp@{include/medusa/bits/utils/assert.hpp}}
+\mbox{\hyperlink{assert_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_UTILS\_ASSERT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_UTILS\_ASSERT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <tinyformat/tinyformat.h>}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{print_8hpp}{print.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00014}00014\ \textcolor{comment}{//\ print\ macro}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#define\ VA\_NUM\_ARGS(...)\ VA\_NUM\_ARGS\_IMPL(\_\_VA\_ARGS\_\_,\ 5,\ 4,\ 3,\ 2,\ 1,\ 0)}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00017}00017\ \textcolor{preprocessor}{\#define\ VA\_NUM\_ARGS\_IMPL(\_1,\ \_2,\ \_3,\ \_4,\ \_5,\ N,\ ...)\ N}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00018}00018\ \textcolor{preprocessor}{\#define\ macro\_dispatcher(func,\ ...)\ \ \ \ \ macro\_dispatcher\_(func,\ VA\_NUM\_ARGS(\_\_VA\_ARGS\_\_))}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00019}00019\ \textcolor{preprocessor}{\#define\ macro\_dispatcher\_(func,\ nargs)\ \ macro\_dispatcher\_\_(func,\ nargs)}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00020}00020\ \textcolor{preprocessor}{\#define\ macro\_dispatcher\_\_(func,\ nargs)\ func\ \#\#\ nargs}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00021}00021\ \textcolor{preprocessor}{\#define\ addflag(a)\ \{std::cerr\ <<\ "{}flags=[flags,\ "{}\ <<\ (a)\ <<\ "{}];"{}\ <<\ std::endl;\}}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00022}00022\ \textcolor{preprocessor}{\#define\ prnv2(a,\ b)\ \{std::cerr\ <<\ a\ <<\ "{}\ =\ "{}\ <<\ (b)\ <<\ "{};"{}\ <<\ std::endl;\}}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00023}00023\ \textcolor{preprocessor}{\#define\ prnv1(a)\ \ \ \{std::cerr\ <<\ \#a\ <<\ "{}\ =\ "{}\ <<\ (a)\ <<\ "{};"{}\ <<\ std::endl;\}}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00034}\mbox{\hyperlink{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}{00034}}\ \textcolor{preprocessor}{\#define\ prn(...)\ macro\_dispatcher(prnv,\ \_\_VA\_ARGS\_\_)(\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00036}00036\ \textcolor{keyword}{using\ }tinyformat::printf;}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00037}00037\ \textcolor{keyword}{using\ }tinyformat::format;}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00040}\mbox{\hyperlink{namespacemm_1_1assert__internal}{00040}}\ \textcolor{keyword}{namespace\ }assert\_internal\ \{}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00050}00050\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}{assert\_handler\_implementation}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{condition}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{func\_name}},}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{line}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{message}},\ tfm::FormatListRef\ \mbox{\hyperlink{classmm_1_1Gaussian}{format\_list}});}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00053}00053\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ \mbox{\hyperlink{classmm_1_1Gaussian}{Args}}>}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00054}\mbox{\hyperlink{namespacemm_1_1assert__internal_a96d2bd0bb276ed878d078bc585e46647}{00054}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespacemm_1_1assert__internal_a96d2bd0bb276ed878d078bc585e46647}{assert\_handler}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{condition}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ file,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{func\_name}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{line}},}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{message}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Args}}\&...\ \mbox{\hyperlink{classmm_1_1Gaussian}{args}})\ \{\ \ \textcolor{comment}{//\ unpacks\ first\ argument}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00056}00056\ \ \ \ \ tfm::FormatListRef\ \mbox{\hyperlink{classmm_1_1Gaussian}{arg\_list}}\ =\ tfm::makeFormatList(\mbox{\hyperlink{classmm_1_1Gaussian}{args}}...);}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}{assert\_handler\_implementation}}(\mbox{\hyperlink{classmm_1_1Gaussian}{condition}},\ file,\ \mbox{\hyperlink{classmm_1_1Gaussian}{func\_name}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{line}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{message}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{arg\_list}});}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00059}00059\ \}\ \ \textcolor{comment}{//\ namespace\ assert\_internal}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00061}00061\ \textcolor{preprocessor}{\#ifdef\ NDEBUG}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00062}00062\ \textcolor{preprocessor}{\#define\ assert\_msg(cond,\ ...)\ ((void)sizeof(cond))}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00063}00063\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00075}\mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{00075}}\ \textcolor{preprocessor}{\#define\ assert\_msg(cond,\ ...)\ ((void)(!(cond)\ \&\&\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00076}00076\ \textcolor{preprocessor}{\ \ \ \ mm::assert\_internal::assert\_handler(\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00077}00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#cond,\ \_\_FILE\_\_,\ \_\_PRETTY\_FUNCTION\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)\ \&\&\ (assert(0),\ 1)))}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00078}00078\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \#cond,\ \_\_FILE\_\_,\ \_\_PRETTY\_FUNCTION\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)\ \&\&\ (exit(1),\ 1)))}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00079}00079\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00085}\mbox{\hyperlink{namespacemm_a48aee295207b24394af5ed5ae764c662}{00085}}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_a48aee295207b24394af5ed5ae764c662}{print\_red}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}})\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[31;1m"{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[37;0m"{}};\ \}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00090}\mbox{\hyperlink{namespacemm_a65013f9a5275282cc4cf6db2c19f8821}{00090}}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_a65013f9a5275282cc4cf6db2c19f8821}{print\_white}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}})\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[37;1m"{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[37;0m"{}};\ \}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00095}\mbox{\hyperlink{namespacemm_a905c807069c1eab6b4eccc51a2b9ed36}{00095}}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_a905c807069c1eab6b4eccc51a2b9ed36}{print\_green}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}})\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[32;1m"{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[37;0m"{}};\ \}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00097}00097\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{assert_8hpp_source_l00099}00099\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_UTILS\_ASSERT\_HPP\_}}
+
+\end{DoxyCode}

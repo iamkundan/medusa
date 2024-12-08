@@ -1,0 +1,179 @@
+\doxysection{test/end2end/poisson\+\_\+implicit.\+cpp}
+\hypertarget{test_2end2end_2poisson_implicit_8cpp-example}{}\label{test_2end2end_2poisson_implicit_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Medusa__fwd_8hpp}{medusa/Medusa\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Eigen/SparseCore"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Eigen/SparseLU"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }PoissonImplicitTest\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Parameters}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ size;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ shift;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ size\ =\ \{1,\ 1\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shift\ =\ \{0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ BasisType,\ \textcolor{keyword}{class}\ WeightType>}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ solve(\textcolor{keyword}{const}\ BasisType\&\ basis,\ \textcolor{keywordtype}{int}\ support\_size,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ num\_nodes\_x,\ \textcolor{keyword}{const}\ WeightType\&\ weight)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Closed\ form\ solution\ -\/-\/\ refer\ to\ cantilever\_beam.nb\ for\ reference.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::function<double(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}})>\ analytical\ =\ [=](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*(p[0]-\/shift[0])/size[0])*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*(p[1]-\/shift[1])/size[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Domain\ definition}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ low\ =\ shift,\ high\ =\ shift+size;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ BoxShape<Vec2d>\ box(low,\ high);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ box.discretizeWithStep(size[0]\ /\ num\_nodes\_x);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ N\ =\ domain.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ domain.findSupport(FindClosest(support\_size));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ WLS<BasisType,\ WeightType,\ ScaleToFarthest>\ approx(basis,\ weight);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}>(approx,\ domain.interior());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ M(N,\ N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ M.reserve(storage.supportSizes());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::VectorXd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ op\ =\ storage.implicitOperators(M,\ rhs);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ equation\ on\ interior}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ p\ =\ domain.pos(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ op.lap(i)\ =\ -\/\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*(size.squaredNorm())/size[0]/size[0]/size[1]/size[1]*}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*(p[0]-\/shift[0])/size[0])*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*(p[1]-\/shift[1])/size[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.boundary())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ op.value(i)\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ M.makeCompressed();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::SparseMatrix<double>\ M2\ =\ M;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::SparseLU<\textcolor{keyword}{decltype}(M2)>\ solver;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ solver.compute(M2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::VectorXd\ sol\ =\ solver.solve(rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<double>\ error(N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ maxan\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ an\ =\ analytical(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (an\ >\ maxan)\ maxan\ =\ an;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ error[i]\ =\ std::abs(an\ -\/\ sol[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ L\_inf\_error\ =\ *std::max\_element(error.begin(),\ error.end());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ L\_inf\_error\ /\ maxan;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials5NoWeight)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon5(\{\{0,\ 0\},\ \{0,\ 1\},\ \{1,\ 0\},\ \{2,\ 0\},\ \{0,\ 2\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon5,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon5,\ ss,\ 93,\ NoWeight<Vec2d>()),\ 1e-\/4);}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_LT(solve(mon5,\ ss,\ 300,\ NoWeight<Vec2d>()),\ 1e-\/5);}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials5NoWeightShifted)\ \{}
+\DoxyCodeLine{\ \ \ \ shift\ =\ \{-\/123.234,\ 234.98713\};}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon5(\{\{0,\ 0\},\ \{0,\ 1\},\ \{1,\ 0\},\ \{2,\ 0\},\ \{0,\ 2\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon5,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials5NoWeightScaledUp)\ \{}
+\DoxyCodeLine{\ \ \ \ size\ =\ 1000.2345;}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon5(\{\{0,\ 0\},\ \{0,\ 1\},\ \{1,\ 0\},\ \{2,\ 0\},\ \{0,\ 2\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon5,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials5NoWeightScaledDown)\ \{}
+\DoxyCodeLine{\ \ \ \ size\ =\ 0.00112;}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon5(\{\{0,\ 0\},\ \{0,\ 1\},\ \{1,\ 0\},\ \{2,\ 0\},\ \{0,\ 2\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon5,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Gaussians5NoWeight)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ sigmaB\ =\ 100;}
+\DoxyCodeLine{\ \ \ \ Gaussians<Vec2d>\ g5(5,\ sigmaB);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(g5,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(g5,\ ss,\ 93,\ NoWeight<Vec2d>()),\ 1e-\/5);\ \ \textcolor{comment}{//\ stagnation\ error\ reached}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ solve(g5,\ ss,\ 167,\ NoWeight<Vec2d>());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err,\ 1e-\/4);\ \ \textcolor{comment}{//\ error\ starts\ increasing}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(err,\ 1e-\/5);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Gaussians5Weight)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ sigmaB\ =\ 100;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ Gaussians<Vec2d>\ g5(ss,\ sigmaB);}
+\DoxyCodeLine{\ \ \ \ GaussianWeight<Vec2d>\ w(1000.0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(g5,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials9NoWeight)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon9\ =\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 9;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon9,\ ss,\ 29,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon9,\ ss,\ 93,\ NoWeight<Vec2d>()),\ 1e-\/4);}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_LT(solve(mon9,\ ss,\ 300,\ NoWeight<Vec2d>()),\ 1e-\/5);}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials9Weight)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon9\ =\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2);}
+\DoxyCodeLine{\ \ \ \ GaussianWeight<Vec2d>\ w(1000.0);\ \ \textcolor{comment}{//\ effectively\ constant\ w}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 9;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon9,\ ss,\ 29,\ w),\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon9,\ ss,\ 93,\ w),\ 1e-\/4);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Gaussians9NoWeight)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ sigmaB\ =\ 100;}
+\DoxyCodeLine{\ \ \ \ Gaussians<Vec2d>\ g9(9,\ sigmaB);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 9;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(g9,\ ss,\ 22,\ NoWeight<Vec2d>()),\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(g9,\ ss,\ 66,\ NoWeight<Vec2d>()),\ 1e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(g9,\ ss,\ 149,\ NoWeight<Vec2d>()),\ 1e-\/4);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(PoissonImplicitTest,\ Monomials6Weight)\ \{}
+\DoxyCodeLine{\ \ \ \ GaussianWeight<Vec2d>\ w(1.0);}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon6(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 9;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon6,\ ss,\ 18,\ w),\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(solve(mon6,\ ss,\ 59,\ w),\ 1e-\/3);}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_LT(solve(mon6,\ ss,\ 188,\ w),\ 1e-\/4);}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ TEST\_F(PoissonImplicitTest,\ GaussiansWeight)\ \{}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ std::vector<int>\ ns\ =\ \{11,\ 12,\ 13,\ 15,\ 16,\ 18,\ 21,\ 23,\ 26,\ 29,\ 33,\ 37,\ 41,\ 46,\ 52,\ 59,\ 66,}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 74,\ 83,\ 93,\ 105,\ 118,\ 133,\ 149,\ 167,\ 188,\ 212,\ 238,\ 267,\ 300\};}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ std::vector<double>\ errs;}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ std::vector<int>\ Ns;}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ for\ (int\ n\ :\ ns)\ \{}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ \ \ \ double\ err\ =\ solve(mon,\ ss,\ n,\ w);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ \ \ \ prn(err);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ \ \ \ errs.push\_back(err);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \ \ \ \ Ns.push\_back(N);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ HDF\ hdf("{}tmp.h5"{},\ HDF::DESTROY);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ hdf.writeDoubleArray("{}errs"{},\ errs);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ \ hdf.writeDoubleArray("{}Ns"{},\ Ns);}}
+\DoxyCodeLine{\textcolor{comment}{//\ \}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

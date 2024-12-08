@@ -1,0 +1,98 @@
+\doxysection{Grid.\+hpp}
+\hypertarget{Grid_8hpp_source}{}\label{Grid_8hpp_source}\index{include/medusa/bits/spatial\_search/Grid.hpp@{include/medusa/bits/spatial\_search/Grid.hpp}}
+\mbox{\hyperlink{Grid_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_GRID\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_GRID\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Grid__fwd_8hpp}{Grid\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{memutils_8hpp}{medusa/bits/utils/memutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1Grid_aebf34d030cecfdd1445ec513fab31318}{00017}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{IndexType}}\ \mbox{\hyperlink{classmm_1_1Grid_ad5c6cef1dfb6b0b969f33f4d81a2b846}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::size}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}},\ \textcolor{stringliteral}{"{}Dimension\ index\ \%i\ must\ be\ in\ range\ [0,\ \%d)"{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{return}\ sizes\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00022}00022\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00023}\mbox{\hyperlink{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c}{00023}}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ \mbox{\hyperlink{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::operator()}}(}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Grid::IndexArray}}\&\ index)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00025}00025\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(inBounds(index,\ sizes\_),\ \textcolor{stringliteral}{"{}Index\ \%s\ is\ out\ of\ bounds\ \%s."{}},\ index,\ sizes\_);}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{return}\ data\_[linearIndex(index,\ sizes\_)];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1Grid_a9631b296ff2acea325436ab90a969944}{00030}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ \mbox{\hyperlink{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Grid::IndexArray}}\&\ index)\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(inBounds(index,\ sizes\_),\ \textcolor{stringliteral}{"{}Index\ \%s\ is\ out\ of\ bounds\ \%s."{}},\ index,\ sizes\_);}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{return}\ data\_[linearIndex(index,\ sizes\_)];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00035}00035\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00036}\mbox{\hyperlink{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2}{00036}}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ \mbox{\hyperlink{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::operator[]}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}}\&\ index)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Index\ \%d\ is\ out\ of\ bounds\ [0,\ \%d)."{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{return}\ data\_[index];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00041}00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00042}\mbox{\hyperlink{classmm_1_1Grid_a9558c2438436547d5c03c03b22ce5c12}{00042}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ \mbox{\hyperlink{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::operator[]}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}}\&\ index)\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Index\ \%d\ is\ out\ of\ bounds\ [0,\ \%d)."{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{return}\ data\_[index];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00045}00045\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00047}00047\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00048}\mbox{\hyperlink{classmm_1_1Grid_abf83454419f8ade980b0ea558c80b633}{00048}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{IndexType}}\ \mbox{\hyperlink{classmm_1_1Grid_abf83454419f8ade980b0ea558c80b633}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::computeSize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Grid::IndexArray}}\&\ sizes)\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ sizes[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00056}00056\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00057}\mbox{\hyperlink{classmm_1_1Grid_ac01e32a8dfcc1f5766e335c51a919c36}{00057}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Grid_af7f44b03c8b44ddbd6ffabe5ae33a60e}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::inBounds}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Grid::IndexArray}}\&\ index,}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00058}\mbox{\hyperlink{classmm_1_1Grid_aebf34d030cecfdd1445ec513fab31318}{00058}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Grid::IndexArray}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ <\ 0\ ||\ index[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ >=\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00066}\mbox{\hyperlink{classmm_1_1Grid_aaee1676de50808fc91e0f7e8cc3b220b}{00066}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{IndexType}}\ \mbox{\hyperlink{classmm_1_1Grid_add8fa9e4936bf1fef3e432cd3ca53442}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::linearIndex}}(}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Grid::IndexArray}}\&\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{Grid::IndexArray}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00068}\mbox{\hyperlink{classmm_1_1Grid_aa276c12d7369ba9def9052996926683c}{00068}}\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(inBounds(index,\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}}),\ \textcolor{stringliteral}{"{}Index\ \%s\ is\ out\ of\ bounds\ \%s."{}},\ index,\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}});}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Index}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00071}\mbox{\hyperlink{classmm_1_1Grid_a9631b296ff2acea325436ab90a969944}{00071}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ +=\ index[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00074}\mbox{\hyperlink{classmm_1_1Grid_a793b1d58afc0f0f81b4150aa1b4410f2}{00074}}\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00077}\mbox{\hyperlink{classmm_1_1Grid_a9558c2438436547d5c03c03b22ce5c12}{00077}}\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dimension,\ \textcolor{keyword}{typename}\ IndexType,\ \textcolor{keyword}{typename}\ IndexArrayT>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00078}\mbox{\hyperlink{classmm_1_1Grid_ad7235e47353e9de7be12d4fa4be413e8}{00078}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{IndexArrayT}}\ \mbox{\hyperlink{classmm_1_1Grid_a8570c34869430895c4e093670c42f025}{Grid<T,\ dimension,\ IndexType,\ IndexArrayT>::multiIndex}}(}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Grid_a8a067e9fa80fd2a854d39f94306a0faa}{Index}}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{IndexArray}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00080}00080\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Grid_a45c994b339551c173492ab199c29603c}{IndexArray}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{multi\_index}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}-\/1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ >=\ 0;\ -\/-\/\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{multi\_index}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ index\ \%\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ index\ /=\ \mbox{\hyperlink{classmm_1_1Gaussian}{bounds}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{multi\_index}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00089}\mbox{\hyperlink{classmm_1_1Grid_abf83454419f8ade980b0ea558c80b633}{00089}}\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keywordtype}{int}\ dim,\ \textcolor{keyword}{typename}\ I,\ \textcolor{keyword}{typename}\ IA>}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00090}00090\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Grid<T,\ dim,\ I,\ IA>}}\&\ grid)\ \{}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00091}00091\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ <<\ \textcolor{stringliteral}{"{}D\ grid\ with\ sizes\ "{}}\ <<\ grid.sizes\_\ <<\ \textcolor{stringliteral}{"{}\ and\ "{}}\ <<\ grid.size\_\ <<\ \textcolor{stringliteral}{"{}\ elements,\ "{}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00092}\mbox{\hyperlink{classmm_1_1Grid_ac01e32a8dfcc1f5766e335c51a919c36}{00092}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}using\ "{}}\ <<\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(\mbox{\hyperlink{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}{mem\_used}}(grid.data()))\ <<\ \textcolor{stringliteral}{"{}\ of\ memory."{}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00094}00094\ \}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00097}\mbox{\hyperlink{classmm_1_1Grid_ad7235e47353e9de7be12d4fa4be413e8}{00097}}\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{Grid_8hpp_source_l00099}00099\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_GRID\_HPP\_}}
+
+\end{DoxyCode}

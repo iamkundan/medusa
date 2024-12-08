@@ -1,0 +1,238 @@
+\doxysection{mm\+::RBFWeight\texorpdfstring{$<$}{<} RBFType, vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1RBFWeight}{}\label{classmm_1_1RBFWeight}\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+
+
+{\ttfamily \#include $<$Weight\+Function\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+RBFWeight$<$ RBFType, vec\+\_\+t $>$}
+Represents a weight function constructed from a Radial Basis function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em RBFType} & Type of the RBF used. Must satisfy the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}. \\
+\hline
+{\em vec\+\_\+t} & Vector type used in calculations.\\
+\hline
+\end{DoxyTemplParams}
+The weight function $w$ is defined as $w(x) = f(\|x\|_2^2)$, where $f$ is the given radial basis function.
+
+This class satisfies the \doxysectlink{concepts_weight-concept}{Weight function concept}{1}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 1.23;}
+\DoxyCodeLine{\ \ \ \ RBFWeight<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>\ weight(s);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p(1.37,\ -\/0.97);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ weight(p);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ weight\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1NoWeight}{No\+Weight}, \doxylink{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8}{Gaussian\+Weight}, \doxylink{namespacemm_a88dc351475468bd33170f2770f7192e9}{MQWeight}, \doxylink{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f}{IMQWeight}, \doxylink{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73}{PHWeight} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1RBFWeight_afea57a51b3a3629cb6d59b81f08c6490}{RBFWeight}} ()
+\begin{DoxyCompactList}\small\item\em Construct a weight with default construction of RBF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFWeight_abd24e89633d67f2789843352e0fcc746}{RBFWeight}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1RBFWeight_a4c94bb385fb25234da999c7a8fda2ef5}{rbf}})
+\begin{DoxyCompactList}\small\item\em Construct a weight from given RBF. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} ... Args$>$ }\\\mbox{\hyperlink{classmm_1_1RBFWeight_a391d130f56f319ad1183632038e8073e}{RBFWeight}} (\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Perfect forwarding constructor. Construct \doxylink{classmm_1_1RBFWeight}{RBFWeight} as if you were constructing given RBF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFWeight_a4c94bb385fb25234da999c7a8fda2ef5}{rbf}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns underlying RBF object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFWeight_a751dcb9fff08eca441c53f73a930a348}{rbf}} ()
+\begin{DoxyCompactList}\small\item\em Returns modifiable underlying RBF object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFWeight_ac0c5a1ff3880348869d4e992bde4c34e}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFWeight_adfd07f57c5446a37a5e15d4207bca2ca}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight_ae8f81b8e46143060d4019385ffb8fb97}{vector\+\_\+t}} \&point) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate weight function at {\ttfamily point}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1RBFWeight_a9eda708dc765ef25c00765f580437feda812a7d2eeb22a9c2f14dad5c70ac41cf}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} \mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Radial basis function type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFWeight_ae8f81b8e46143060d4019385ffb8fb97}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{vector\+\_\+t\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFWeight_ac0c5a1ff3880348869d4e992bde4c34e}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1RBFWeight_a623eaf0c84b5f2a0b757d719876017b0}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given weight function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFWeight_ade57558dbd930578952285e412c8e2c2}{rbf\+\_\+}}
+\begin{DoxyCompactList}\small\item\em RBF function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1RBFWeight_a9eda708dc765ef25c00765f580437fed}\label{classmm_1_1RBFWeight_a9eda708dc765ef25c00765f580437fed} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1RBFWeight_a9eda708dc765ef25c00765f580437feda812a7d2eeb22a9c2f14dad5c70ac41cf}\label{classmm_1_1RBFWeight_a9eda708dc765ef25c00765f580437feda812a7d2eeb22a9c2f14dad5c70ac41cf} 
+dim&Dimensionality of the function domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1RBFWeight_afea57a51b3a3629cb6d59b81f08c6490}\label{classmm_1_1RBFWeight_afea57a51b3a3629cb6d59b81f08c6490} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!RBFWeight@{RBFWeight}}
+\index{RBFWeight@{RBFWeight}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{RBFWeight()}{RBFWeight()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+RBFWeight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a weight with default construction of RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFWeight_abd24e89633d67f2789843352e0fcc746}\label{classmm_1_1RBFWeight_abd24e89633d67f2789843352e0fcc746} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!RBFWeight@{RBFWeight}}
+\index{RBFWeight@{RBFWeight}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{RBFWeight()}{RBFWeight()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+RBFWeight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \&}]{rbf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a weight from given RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFWeight_a391d130f56f319ad1183632038e8073e}\label{classmm_1_1RBFWeight_a391d130f56f319ad1183632038e8073e} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!RBFWeight@{RBFWeight}}
+\index{RBFWeight@{RBFWeight}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{RBFWeight()}{RBFWeight()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} ... Args$>$ \\
+\mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+RBFWeight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Perfect forwarding constructor. Construct \doxylink{classmm_1_1RBFWeight}{RBFWeight} as if you were constructing given RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00083}{83}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1RBFWeight_adfd07f57c5446a37a5e15d4207bca2ca}\label{classmm_1_1RBFWeight_adfd07f57c5446a37a5e15d4207bca2ca} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFWeight_ac0c5a1ff3880348869d4e992bde4c34e}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight_ae8f81b8e46143060d4019385ffb8fb97}{vector\+\_\+t}} \&}]{point }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate weight function at {\ttfamily point}. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00092}{92}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFWeight_a751dcb9fff08eca441c53f73a930a348}\label{classmm_1_1RBFWeight_a751dcb9fff08eca441c53f73a930a348} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!rbf@{rbf}}
+\index{rbf@{rbf}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf()}{rbf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns modifiable underlying RBF object. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFWeight_a4c94bb385fb25234da999c7a8fda2ef5}\label{classmm_1_1RBFWeight_a4c94bb385fb25234da999c7a8fda2ef5} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!rbf@{rbf}}
+\index{rbf@{rbf}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf()}{rbf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns underlying RBF object. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00086}{86}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1RBFWeight_a623eaf0c84b5f2a0b757d719876017b0}\label{classmm_1_1RBFWeight_a623eaf0c84b5f2a0b757d719876017b0} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given weight function. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{WeightFunction_8hpp_source}{Weight\+Function.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1RBFWeight_ade57558dbd930578952285e412c8e2c2}\label{classmm_1_1RBFWeight_ade57558dbd930578952285e412c8e2c2} 
+\index{mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}!rbf\_@{rbf\_}}
+\index{rbf\_@{rbf\_}!mm::RBFWeight$<$ RBFType, vec\_t $>$@{mm::RBFWeight$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf\_}{rbf\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFWeight_ab3bcdac380183e3bf58eb3422ec8948c}{rbf\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+RBF function. 
+
+
+
+Definition at line \mbox{\hyperlink{WeightFunction__fwd_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{WeightFunction__fwd_8hpp}{Weight\+Function\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

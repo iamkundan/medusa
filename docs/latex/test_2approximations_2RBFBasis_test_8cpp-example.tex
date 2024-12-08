@@ -1,0 +1,110 @@
+\doxysection{test/approximations/\+RBFBasis\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2RBFBasis_test_8cpp-example}{}\label{test_2approximations_2RBFBasis_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{medusa/bits/approximations/Operators.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RBFBasis_8hpp}{medusa/bits/approximations/RBFBasis.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Gaussian_8hpp}{medusa/bits/approximations/Gaussian.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ RBFBasis3D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 0.4;}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(s);}
+\DoxyCodeLine{\ \ \ \ RBFBasis<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}>\ basis(3,\ g);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ p(1.33,\ 4.55,\ -\/0.48);}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ support\ =\ \{\{1.3,\ 4.5,\ -\/0.5\},\ \{1.2,\ 4.3,\ -\/0.6\},\ \{1.4,\ 4.6,\ -\/0.49\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.97652981169681979,\ basis.eval(0,\ p,\ support),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.55640991454257032,\ basis.eval(1,\ p,\ support),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.95420666596918832,\ basis.eval(2,\ p,\ support),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.36619867938630742,\ basis.evalOp(0,\ p,\ Der1<3>(0),\ support),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.9041661111316767,\ basis.evalOp(1,\ p,\ Der1<3>(0),\ support),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.83493083272303978,\ basis.evalOp(2,\ p,\ Der1<3>(0),\ support),\ 1e-\/14);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.228874174616442138,\ basis.evalOp(0,\ p,\ Der2<3>(0,\ 1),\ support),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.356249166697515158,\ basis.evalOp(1,\ p,\ Der2<3>(0,\ 2),\ support),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.074547395778842837,\ basis.evalOp(2,\ p,\ Der2<3>(1,\ 2),\ support),\ 1e-\/14);}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ EXPECT\_NEAR(-\/0.065228971306487483,\ basis.evalOp(2,\ p,\ \{1,\ 1,\ 1\},\ support),\ 1e-\/14);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/12.069298141440380,\ basis.evalOp(0,\ p,\ Der2<3>(0),\ support),\ 1e-\/12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/1.5214333600773410,\ basis.evalOp(1,\ p,\ Der2<3>(1),\ support),\ 1e-\/12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/11.912673845459090,\ basis.evalOp(2,\ p,\ Der2<3>(2),\ support),\ 1e-\/12);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(1,\ p,\ Lap<3>(),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOp(1,\ p,\ Der2<3>(0),\ support)\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOp(1,\ p,\ Der2<3>(1),\ support)\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOp(1,\ p,\ Der2<3>(2),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1e-\/14);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Checked\ independently\ using\ code\ in\ Mathematica\ below.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ s\ =\ 0.4`20;}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ p\ =\ \{1.33`20,\ 4.55`20,\ -\/0.48`20\};}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ supp\ =\ \{\{1.3`20,\ 4.5`20,\ -\/0.5`20\},\ \{1.2`20,\ 4.3`20,\ -\/0.6`20\},\ \{1.4`20,\ 4.6`20,\ -\/0.49`20\}\};}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ basis\ =\ Table[With[\{q\ =\ sn,\ sc\ =\ s\},\ Function[x,\ Exp[-\/(x\ -\/\ q).(x\ -\/\ q)/sc\string^2]]],\ \{sn,\ supp\}]}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ D[basis[[3]][\{x,\ y,\ z\}],\ \{y,\ 0\},\ \{z,\ 0\},\ \{x,\ 2\}]\ /.\ \{x\ -\/>\ p[[1]],\ y\ -\/>\ p[[2]],\ z\ -\/>\ p[[3]]\}}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ RBFBasis2D)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 1.23;}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(s);}
+\DoxyCodeLine{\ \ \ \ RBFBasis<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>\ basis(2,\ g);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p(0.6,\ -\/0.33);}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{-\/0.77,\ 0.64\},\ \{0.49,\ -\/2.1\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.15528149718493840,\ basis.eval(0,\ p,\ support),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.12508158425064380,\ basis.eval(1,\ p,\ support),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.28122896575235060,\ basis.evalOp(0,\ p,\ Der1<2>(0),\ support),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.29267552927971390,\ basis.evalOp(1,\ p,\ Der1<2>(1),\ support),\ 1e-\/14);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.3606214512258313188,\ basis.evalOp(0,\ p,\ Der2<2>(0,\ 1),\ support),\ 1e-\/14);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.050053899223872840,\ basis.evalOp(0,\ p,\ Der2<2>(1),\ support),\ 1e-\/12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.16270845136299020,\ basis.evalOp(1,\ p,\ Der2<2>(0),\ support),\ 1e-\/12);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(1,\ p,\ Lap<2>(),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOp(1,\ p,\ Der2<2>(1),\ support)\ +\ basis.evalOp(1,\ p,\ Der2<2>(0),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ RBFBasis2DAtZero)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 1.23;}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(s);}
+\DoxyCodeLine{\ \ \ \ RBFBasis<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>\ basis(2,\ g);}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{-\/0.77,\ 0.64\},\ \{0.49,\ -\/2.1\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p(0.0,\ 0.0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.eval(0,\ p,\ support),\ basis.evalAt0(0,\ support),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.eval(1,\ p,\ support),\ basis.evalAt0(1,\ support),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(0,\ p,\ Der1<2>(0),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOpAt0(0,\ Der1<2>(0),\ support,\ 1),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(1,\ p,\ Der1<2>(1),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOpAt0(1,\ Der1<2>(1),\ support,\ 1),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(0,\ p,\ Der2<2>(0,\ 1),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOpAt0(0,\ Der2<2>(0,\ 1),\ support,\ 1),\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(1,\ p,\ Der2<2>(0),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOpAt0(1,\ Der2<2>(0),\ support,\ 1),\ 1e-\/12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(0,\ p,\ Der2<2>(1),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOpAt0(0,\ Der2<2>(1),\ support,\ 1),\ 1e-\/12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(basis.evalOp(0,\ p,\ Lap<2>(),\ support),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ basis.evalOpAt0(0,\ Lap<2>(),\ support,\ 1),\ 1e-\/12);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ RBFBasisUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(1.3);}
+\DoxyCodeLine{\ \ \ \ RBFBasis<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>\ basis(3,\ g);\ \ \textcolor{comment}{//\ construct}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ basis\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{0.1,\ 2.3\},\ \{0.2,\ 2.2\},\ \{0.0,\ 2.25\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ basis.eval(1,\ 0.05,\ support);\ \ \textcolor{comment}{//\ evaluate}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ basis.evalOp(1,\ 0.05,\ Lap<2>(),\ support);\ \ \textcolor{comment}{//\ evaluate\ derivative}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(0.0640224990298612,\ val);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(0.2649577880791847,\ der);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

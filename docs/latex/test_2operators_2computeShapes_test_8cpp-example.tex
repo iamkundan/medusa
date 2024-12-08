@@ -1,0 +1,127 @@
+\doxysection{test/operators/compute\+Shapes\+\_\+test.\+cpp}
+\hypertarget{test_2operators_2computeShapes_test_8cpp-example}{}\label{test_2operators_2computeShapes_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{computeShapes_8hpp}{medusa/bits/operators/computeShapes.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{UniformShapeStorage_8hpp}{medusa/bits/operators/UniformShapeStorage.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RaggedShapeStorage_8hpp}{medusa/bits/operators/RaggedShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeStorage_8hpp}{medusa/bits/operators/ShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdtypesutils_8hpp}{medusa/bits/utils/stdtypesutils.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WLS_8hpp}{medusa/bits/approximations/WLS.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WeightFunction_8hpp}{medusa/bits/approximations/WeightFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp}{medusa/bits/approximations/JacobiSVDWrapper\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials_8hpp}{medusa/bits/approximations/Monomials.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Operators__fwd_8hpp}{medusa/bits/approximations/Operators\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Timer_8hpp}{medusa/bits/utils/Timer.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}})\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ approx(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ d.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}|\mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{sh::d1}}>(approx);\ \ \textcolor{comment}{//\ implicit\ call\ via\ domain\ hook}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ direct\ call\ which\ overwrites\ shapes\ for\ Laplacian\ for\ internal\ nodes\ in\ given\ storage}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple_aeac6b6014a78699acc51ee0134d41a8b}{sh::operator\_tuple<sh::lap,\ 2>::type}}\ operators;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}}(d,\ approx,\ d.interior(),\ operators,\ \&shapes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ node\ =\ 12;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sh\ =\ approx.getShape(Der1<2>(0));\ \ \textcolor{comment}{//\ d/dx\ shape}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sh2\ =\ shapes.d1(0,\ node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ node\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ sh\ =\ approx.getShape(Der1<2>(1));\ \ \textcolor{comment}{//\ d/dy\ shape}}
+\DoxyCodeLine{\ \ \ \ sh2\ =\ shapes.d1(1,\ node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ node\ =\ 34;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ sh\ =\ approx.getShape(Lap<2>());\ \ \textcolor{comment}{//\ lap\ shape}}
+\DoxyCodeLine{\ \ \ \ sh2\ =\ shapes.laplace(node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ computeShapesD2)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ approx(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ d.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}|\mbox{\hyperlink{namespacemm_1_1sh_a60fdf30b21b8c0a0dc11e9bb211cf8f8}{sh::d2}}>(approx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ node\ =\ 22;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sh\ =\ approx.getShape(Der2<2>(0));\ \ \textcolor{comment}{//\ d/dx\string^2\ shape}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ sh2\ =\ shapes.d2(0,\ 0,\ node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ node\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ sh\ =\ approx.getShape(Der2<2>(1));\ \ \textcolor{comment}{//\ d/dy\string^2\ shape}}
+\DoxyCodeLine{\ \ \ \ sh2\ =\ shapes.d2(1,\ 1,\ node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ node\ =\ 46;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ sh\ =\ approx.getShape(Der2<2>(0,\ 1));\ \ \textcolor{comment}{//\ d/dy\string^2\ shape}}
+\DoxyCodeLine{\ \ \ \ sh2\ =\ shapes.d2(0,\ 1,\ node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ node\ =\ 78;}
+\DoxyCodeLine{\ \ \ \ approx.compute(d.pos(node),\ d.supportNodes(node));}
+\DoxyCodeLine{\ \ \ \ sh\ =\ approx.getShape(Lap<2>());\ \ \textcolor{comment}{//\ lap\ shape}}
+\DoxyCodeLine{\ \ \ \ sh2\ =\ shapes.laplace(node);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Dummy\ zero\ operator}}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }Zero\ :\ Operator<Zero>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ basis\_t>\ \textcolor{keyword}{typename}\ basis\_t::scalar\_t\ applyAt0(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ basis\_t\&,\ \textcolor{keywordtype}{int},\ \textcolor{keyword}{const}\ std::vector<typename\ basis\_t::vector\_t>\&,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ basis\_t::scalar\_t)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ 0.0;\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ ComputeShapesCustom)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 9;}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(n));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ approx(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::tuple<Lap<2>,\ Der1s<2>,\ Zero>\ ops;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ d.computeShapes<\textcolor{keyword}{decltype}(ops)>(ops,\ approx);}
+\DoxyCodeLine{\ \ \ \ shapes.get<Zero>(3,\ 2);\ \ \textcolor{comment}{//\ coefficient\ 4\ of\ shape\ for\ zero\ in\ 3rd\ node.}}
+\DoxyCodeLine{\ \ \ \ shapes.get<Der1s<2>>(0,\ 3,\ 4);\ \ \textcolor{comment}{//\ coefficient\ 4\ of\ shape\ for\ dx\ in\ 3rd\ node.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ d.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(0,\ shapes.get<Zero>(i,\ j));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ computeShapesEmptySupport)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ approx(2);}
+\DoxyCodeLine{\ \ \ \ UniformShapeStorage<Vec2d,\ std::tuple<Lap<2>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple_aeac6b6014a78699acc51ee0134d41a8b}{sh::operator\_tuple<sh::lap,\ 2>::type}}\ operators;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(\mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}}(d,\ approx,\ d.interior(),\ operators,\ \&storage),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Did\ you\ forget\ to\ find\ support\ before\ computing\ shapes?"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

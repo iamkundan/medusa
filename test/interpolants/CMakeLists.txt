@@ -1,0 +1,1 @@
+declare_test(interpolants FILES SheppardInterpolant_test.cpp)

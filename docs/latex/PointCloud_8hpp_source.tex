@@ -1,0 +1,45 @@
+\doxysection{Point\+Cloud.\+hpp}
+\hypertarget{PointCloud_8hpp_source}{}\label{PointCloud_8hpp_source}\index{include/medusa/bits/spatial\_search/PointCloud.hpp@{include/medusa/bits/spatial\_search/PointCloud.hpp}}
+\mbox{\hyperlink{PointCloud_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_POINTCLOUD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_POINTCLOUD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00014}\mbox{\hyperlink{namespacemm_1_1kdtree__internal}{00014}}\ \textcolor{keyword}{namespace\ }kdtree\_internal\ \{}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00017}00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00018}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{00018}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud}{PointCloud}}\ \{}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00019}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{00019}}\ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}};\ \ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00022}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a33c7516927bda5df2f59d37150dbd64f}{00022}}\ \ \ \ \ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a33c7516927bda5df2f59d37150dbd64f}{PointCloud}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00025}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a7fcf6f38e926b1119ae33f8ec2b02bce}{00025}}\ \ \ \ \ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a7fcf6f38e926b1119ae33f8ec2b02bce}{PointCloud}}(\textcolor{keyword}{const}\ std::vector<vec\_t>\&\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}})\ :\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}}(\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00028}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a1718134d9bac919db75c1323683df47f}{00028}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a1718134d9bac919db75c1323683df47f}{setPts}}(\textcolor{keyword}{const}\ std::vector<vec\_t>\&\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}})\ \{}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{PointCloud::pts}}\ =\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}};}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00033}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ac24f40254c080ff11a4d42a6767213dc}{00033}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ac24f40254c080ff11a4d42a6767213dc}{kdtree\_get\_point\_count}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}}.size();\ \}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00036}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_acb33b0fb4044600a88d3cde84e686e22}{00036}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_acb33b0fb4044600a88d3cde84e686e22}{kdtree\_get\_pt}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}}[\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}][\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}];}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00041}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_affc367e654990f29017b017bcbebbcfb}{00041}}\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_affc367e654990f29017b017bcbebbcfb}{get}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}}[\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}];\ \}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00044}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a76250f165e34e658f0e8e857898313e4}{00044}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_a76250f165e34e658f0e8e857898313e4}{add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p)\ \{\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_ad1bd6ec176fbb228cc79f06d92fd0a9a}{pts}}.push\_back(p);\ \}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ BBOX>}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00048}\mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_aadbb229e8084789c30357362008cee81}{00048}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structmm_1_1kdtree__internal_1_1PointCloud_aadbb229e8084789c30357362008cee81}{kdtree\_get\_bbox}}(\mbox{\hyperlink{classmm_1_1Gaussian}{BBOX}}\&\ \textcolor{comment}{/*\ bb\ */})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00049}00049\ \};}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00051}00051\ \}\ \ \textcolor{comment}{//\ namespace\ kdtree\_internal}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00052}00052\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{PointCloud_8hpp_source_l00054}00054\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_POINTCLOUD\_HPP\_}}
+
+\end{DoxyCode}

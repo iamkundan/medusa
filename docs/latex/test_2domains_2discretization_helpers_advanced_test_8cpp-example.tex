@@ -1,0 +1,50 @@
+\doxysection{test/domains/discretization\+\_\+helpers\+\_\+advanced\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2discretization_helpers_advanced_test_8cpp-example}{}\label{test_2domains_2discretization_helpers_advanced_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{discretization__helpers__advanced_8hpp}{medusa/bits/domains/discretization\_helpers\_advanced.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec__fwd_8hpp}{medusa/bits/types/Vec\_fwd.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeTriangleWithDensity)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ p1\ =\ \{0,\ 0,\ 1\},\ p2\ =\ \{0,\ 1,\ 0\},\ p3\ =\ \{1,\ 0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ n\ =\ (p2-\/p1).cross(p3-\/p1).normalized();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fn\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&)\ \{\ \textcolor{keywordflow}{return}\ 0.3;\ \};}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec3d>\ pts\_with\_bnd\ =\ \mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{discretization\_helpers::discretizeTriangleWithDensity}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ p1,\ p2,\ p3,\ n,\ fn,\ \textcolor{keyword}{false});\ \ \textcolor{comment}{//\ include\ boundary\ nodes}}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec3d>\ pts\_only\_int\ =\ \mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{discretization\_helpers::discretizeTriangleWithDensity}}(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ p1,\ p2,\ p3,\ n,\ fn,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Plot\ the\ points\ to\ check\ visually}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interior\ is\ a\ subset\ of\ with\ boundary.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ pts\_only\_int)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ std::find(pts\_with\_bnd.begin(),\ pts\_with\_bnd.end(),\ p);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NE(it,\ pts\_with\_bnd.end());}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Check\ the\ normals\ of\ all\ triplets\ -\/-\/\ they\ should\ all\ be\ the\ same\ up\ to\ a\ sign\ change.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (n[0]\ <\ 0)\ \{\ n\ =\ -\/n;\ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ s\ =\ pts\_with\_bnd.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ s;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ i+1;\ j\ <\ s;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ q1\ =\ pts\_with\_bnd[i],\ q2\ =\ pts\_with\_bnd[j];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ j+1;\ k\ <\ s;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ q3\ =\ pts\_with\_bnd[k];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ local\_normal\ =\ (q1-\/q2).cross(q1-\/q3);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ len\ =\ local\_normal.norm();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (len\ <\ 1e-\/14)\ \textcolor{keywordflow}{continue};\ \ \textcolor{comment}{//\ skip\ colinear\ points}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ local\_normal\ /=\ len;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (local\_normal[0]\ <\ 0)\ \{\ local\_normal\ =\ -\/local\_normal;\ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_LT((local\_normal-\/n).norm(),\ 2e-\/14);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ the\ distance.\ It\ can\ get\ closer\ than\ dx\ near\ the\ corners.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_GE((q2-\/q1).norm(),\ 0.2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

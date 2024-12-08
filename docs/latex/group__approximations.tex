@@ -1,0 +1,62 @@
+\doxysection{Approximations}
+\hypertarget{group__approximations}{}\label{group__approximations}\index{Approximations@{Approximations}}
+
+
+Contains various approximations for differential operators using monomials, RBFs, ...  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian$<$ scal\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1Gaussian}{Gaussian} Radial Basis Function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric$<$ scal\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Inverse \doxylink{classmm_1_1Multiquadric}{Multiquadric} Radial Basis Function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1JacobiSVDWrapper}{mm\+::\+Jacobi\+SVDWrapper$<$ scalar\+\_\+t, QRPreconditioner $>$}}
+\begin{DoxyCompactList}\small\item\em Extends Eigen\textquotesingle{}s Jacobi\+SVD to compute thin {\ttfamily U} and thin {\ttfamily V} by default. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Monomials}{mm\+::\+Monomials$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em A class representing Monomial basis. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Multiquadric}{mm\+::\+Multiquadric$<$ scal\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1Multiquadric}{Multiquadric} Radial Basis Function. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator$<$ Derived $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for a differential operator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Lap}{mm\+::\+Lap$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents the Laplacian operator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a family of all first derivatives. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der2s}{mm\+::\+Der2s$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a family of all second derivatives. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der1}{mm\+::\+Der1$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a first derivative wrt. {\ttfamily var}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a second derivative wrt. {\ttfamily var1} and {\ttfamily var2}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Derivative}{mm\+::\+Derivative$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a general derivative $\frac{\partial^{|\alpha|}}{\partial x^\alpha}$. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Polyharmonic}{mm\+::\+Polyharmonic$<$ scal\+\_\+t, k $>$}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} Radial Basis Function of odd order. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis$<$ RBFType, vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a basis of Radial Basis Functions over a local neighbourhood. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFFD}{mm\+::\+RBFFD$<$ RBFType, vec\+\_\+t, scale\+\_\+t, solver\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Computes a RBF-\/\+FD approximation of given operator over local neighbourhood. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ScaleToClosest}{mm\+::\+Scale\+To\+Closest}}
+\begin{DoxyCompactList}\small\item\em Scale function that scales to the closest neighbor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ScaleToFarthest}{mm\+::\+Scale\+To\+Farthest}}
+\begin{DoxyCompactList}\small\item\em Scale function that scales to the farthest neighbor. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1NoScale}{mm\+::\+No\+Scale}}
+\begin{DoxyCompactList}\small\item\em Scale function that indicates no scaling is performed. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1NoWeight}{mm\+::\+No\+Weight$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing no weight function, i.\+e. a constant 1. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight$<$ RBFType, vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a weight function constructed from a Radial Basis function. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS$<$ basis\+\_\+t, weight\+\_\+t, scale\+\_\+t, solver\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em A class for generating approximations using Weighted Least Squares over local neighborhoods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains various approximations for differential operators using monomials, RBFs, ... 
+
+This is one of the core parts of the library, which supports defining approximations for partial differential operators. Many strong form meshless methods can be implemented this way, such as RBF-\/\+FD, DAM, MLSM, GFD, FDM, LRBFCM, DLSM, ...
+
+Approximations are modular and can be easily changed, from basis functions, weight functions, scaling, solvers, RBFs, stencil size, etc...
+
+More about this can be read on the \doxysectlink{concepts}{Concepts}{0} page. 

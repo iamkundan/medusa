@@ -1,0 +1,409 @@
+\doxysection{mm\+::RKExplicit\texorpdfstring{$<$}{<} Scalar, num\+\_\+stages \texorpdfstring{$>$}{>}\+::Integrator\texorpdfstring{$<$}{<} func\+\_\+t \texorpdfstring{$>$}{>}\+::Iteration\+Step Class Reference}
+\hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+
+
+{\ttfamily \#include $<$RKExplicit\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$\newline
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}}$>$\newline
+class mm\+::\+RKExplicit$<$ Scalar, num\+\_\+stages $>$\+::\+Integrator$<$ func\+\_\+t $>$\+::\+Iteration\+Step}
+Class representing a step in the integration process. 
+
+This class satisfies {\ttfamily std\+::forward\+\_\+iterator} requirements and can therefore be used with STL-\/type algorithms. 
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::RKExplicit\texorpdfstring{$<$}{<} Scalar, num\+\_\+stages \texorpdfstring{$>$}{>}\+::Integrator\texorpdfstring{$<$}{<} func\+\_\+t \texorpdfstring{$>$}{>}\+::Iteration\+Step\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::RKExplicit\texorpdfstring{$<$}{<} Scalar, num\+\_\+stages \texorpdfstring{$>$}{>}\+::Integrator\texorpdfstring{$<$}{<} func\+\_\+t \texorpdfstring{$>$}{>}\+::Iteration\+Step\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6cdf3f98cf0fb6a4f090ac0c9716832f}{Iteration\+Step}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator}{Integrator}} \&\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a074a6b892a5e14e085728c9d60c94071}{integrator}})
+\begin{DoxyCompactList}\small\item\em Construct an iterator at the initial values of the equation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a4a0f33f0d0a0b35b28f981b22cb97755}{Iteration\+Step}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator}{Integrator}} \&\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a074a6b892a5e14e085728c9d60c94071}{integrator}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}})
+\begin{DoxyCompactList}\small\item\em Construct an (invalid) iterator pointing past the last step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a2a3a5423ca9f5a458a41a1d7242a7091}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em Advance the stepper for one time step, returning the new value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a37d5eba50326f266f13e3ce61bdf83bd}{operator++}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}})
+\begin{DoxyCompactList}\small\item\em Advance the stepper for one time step, returning the old value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6f78ccf1b2266583680290c17309a842}{operator==}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Compare two steppers if they are on the same step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a963943bc2dd1dd484d76561d815ae761}{operator!=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Negation of \doxylink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6f78ccf1b2266583680290c17309a842}{Iteration\+Step\+::operator==}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_af9eabda56de48ce6258262ff7fd0e9b0}{operator\texorpdfstring{$\ast$}{*}}} ()
+\begin{DoxyCompactList}\small\item\em Noop, used to conform to {\ttfamily std\+::iterator} requirements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a5b7310cf3b2e725c1569ecd4765274d6}{operator\texorpdfstring{$\ast$}{*}}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em const version of \doxylink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_af9eabda56de48ce6258262ff7fd0e9b0}{Iteration\+Step\+::operator\texorpdfstring{$\ast$}{*}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a899991055bae07f7168133c6c273ff31}{operator bool}} ()
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily false} if integrator went past the last step and {\ttfamily true} otherwise. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a02c395ab0360eb173de7ff153dde4266}{is\+\_\+last}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns true if integrator just completed its last step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_a637526f86efa88abb7243c3dd10c8b02}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a7409f248648e18de9a6c944914a10bea}{time}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get current time. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a92131d38004cde38ea34112aed9721fe}{value}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get current value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_a637526f86efa88abb7243c3dd10c8b02}{scalar\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_acec9076fe953ae22a963a74e14deb3f3}{time}} ()
+\begin{DoxyCompactList}\small\item\em Read-\/write access to current time. \end{DoxyCompactList}\item 
+Eigen\+::\+Vector\+Xd \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6c3bec166010404eca5bf203db37e181}{value}} ()
+\begin{DoxyCompactList}\small\item\em Read-\/write access to current value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_ae982a0a4713af64120f7ea0d4fd2e448}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \&\mbox{\hyperlink{classmm_1_1RKExplicit_a4430f3a6e8bb4b96807b9f4653967722}{step}})
+\begin{DoxyCompactList}\small\item\em Output current state of the stepper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator}{Integrator}} \& \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a074a6b892a5e14e085728c9d60c94071}{integrator}}
+\begin{DoxyCompactList}\small\item\em reference to underlying integrator \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RKExplicit_a637526f86efa88abb7243c3dd10c8b02}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a586ca24fcc12c3ed6b3b020754e20cc0}{t}}
+\begin{DoxyCompactList}\small\item\em current time \end{DoxyCompactList}\item 
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_adb296b0f43b2d96344ebf9a699706288}{y}}
+\begin{DoxyCompactList}\small\item\em current value \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_aa8f3f5f8570b9c38a31272765c1653c2}{cur\+\_\+step}}
+\begin{DoxyCompactList}\small\item\em current step \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6cdf3f98cf0fb6a4f090ac0c9716832f}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6cdf3f98cf0fb6a4f090ac0c9716832f} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!IterationStep@{IterationStep}}
+\index{IterationStep@{IterationStep}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{IterationStep()}{IterationStep()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::\+Iteration\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator}{Integrator}} \&}]{integrator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct an iterator at the initial values of the equation. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00101}{101}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a4a0f33f0d0a0b35b28f981b22cb97755}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a4a0f33f0d0a0b35b28f981b22cb97755} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!IterationStep@{IterationStep}}
+\index{IterationStep@{IterationStep}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{IterationStep()}{IterationStep()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::\+Iteration\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator}{Integrator}} \&}]{integrator,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an (invalid) iterator pointing past the last step. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00105}{105}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a02c395ab0360eb173de7ff153dde4266}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a02c395ab0360eb173de7ff153dde4266} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!is\_last@{is\_last}}
+\index{is\_last@{is\_last}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{is\_last()}{is\_last()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::is\+\_\+last (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns true if integrator just completed its last step. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00145}{145}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a899991055bae07f7168133c6c273ff31}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a899991055bae07f7168133c6c273ff31} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Returns {\ttfamily false} if integrator went past the last step and {\ttfamily true} otherwise. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00140}{140}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a963943bc2dd1dd484d76561d815ae761}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a963943bc2dd1dd484d76561d815ae761} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Negation of \doxylink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6f78ccf1b2266583680290c17309a842}{Iteration\+Step\+::operator==}. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00131}{131}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_af9eabda56de48ce6258262ff7fd0e9b0}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_af9eabda56de48ce6258262ff7fd0e9b0} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \& \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Noop, used to conform to {\ttfamily std\+::iterator} requirements. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a5b7310cf3b2e725c1569ecd4765274d6}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a5b7310cf3b2e725c1569ecd4765274d6} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \& \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+const version of \doxylink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_af9eabda56de48ce6258262ff7fd0e9b0}{Iteration\+Step\+::operator\texorpdfstring{$\ast$}{*}} 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00137}{137}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a2a3a5423ca9f5a458a41a1d7242a7091}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a2a3a5423ca9f5a458a41a1d7242a7091} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator++@{operator++}}
+\index{operator++@{operator++}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \& \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Advance the stepper for one time step, returning the new value. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00109}{109}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a37d5eba50326f266f13e3ce61bdf83bd}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a37d5eba50326f266f13e3ce61bdf83bd} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator++@{operator++}}
+\index{operator++@{operator++}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator++ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Advance the stepper for one time step, returning the old value. 
+
+\begin{DoxyWarning}{Warning}
+usually the prefix increment {\ttfamily ++step} is preferred, due to not having a temporary variable. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00121}{121}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6f78ccf1b2266583680290c17309a842}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6f78ccf1b2266583680290c17309a842} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator==@{operator==}}
+\index{operator==@{operator==}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compare two steppers if they are on the same step. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00128}{128}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_acec9076fe953ae22a963a74e14deb3f3}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_acec9076fe953ae22a963a74e14deb3f3} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!time@{time}}
+\index{time@{time}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{time()}{time()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit_a637526f86efa88abb7243c3dd10c8b02}{scalar\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/write access to current time. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00156}{156}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a7409f248648e18de9a6c944914a10bea}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a7409f248648e18de9a6c944914a10bea} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!time@{time}}
+\index{time@{time}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{time()}{time()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit_a637526f86efa88abb7243c3dd10c8b02}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current time. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00150}{150}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6c3bec166010404eca5bf203db37e181}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a6c3bec166010404eca5bf203db37e181} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!value@{value}}
+\index{value@{value}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+Eigen\+::\+Vector\+Xd \& \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/write access to current value. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00159}{159}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a92131d38004cde38ea34112aed9721fe}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a92131d38004cde38ea34112aed9721fe} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!value@{value}}
+\index{value@{value}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current value. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00153}{153}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_ae982a0a4713af64120f7ea0d4fd2e448}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_ae982a0a4713af64120f7ea0d4fd2e448} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep}{Iteration\+Step}} \&}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output current state of the stepper. 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00162}{162}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_aa8f3f5f8570b9c38a31272765c1653c2}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_aa8f3f5f8570b9c38a31272765c1653c2} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!cur\_step@{cur\_step}}
+\index{cur\_step@{cur\_step}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{cur\_step}{cur\_step}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::cur\+\_\+step\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+current step 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00097}{97}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a074a6b892a5e14e085728c9d60c94071}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a074a6b892a5e14e085728c9d60c94071} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!integrator@{integrator}}
+\index{integrator@{integrator}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{integrator}{integrator}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator}{Integrator}}\& \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::integrator\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+reference to underlying integrator 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a586ca24fcc12c3ed6b3b020754e20cc0}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_a586ca24fcc12c3ed6b3b020754e20cc0} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!t@{t}}
+\index{t@{t}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RKExplicit_a637526f86efa88abb7243c3dd10c8b02}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::t\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+current time 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00095}{95}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_adb296b0f43b2d96344ebf9a699706288}\label{classmm_1_1RKExplicit_1_1Integrator_1_1IterationStep_adb296b0f43b2d96344ebf9a699706288} 
+\index{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}!y@{y}}
+\index{y@{y}!mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep@{mm::RKExplicit$<$ Scalar, num\_stages $>$::Integrator$<$ func\_t $>$::IterationStep}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+stages$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{classmm_1_1RKExplicit}{mm\+::\+RKExplicit}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+stages}} $>$\mbox{\hyperlink{classmm_1_1RKExplicit_1_1Integrator_a4dcb40ace9feed16a3705a7adb6832ef}{\+::\+Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$\+::\+Iteration\+Step\+::y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+current value 
+
+
+
+Definition at line \mbox{\hyperlink{RKExplicit__fwd_8hpp_source_l00096}{96}} of file \mbox{\hyperlink{RKExplicit__fwd_8hpp_source}{RKExplicit\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/integrators/\mbox{\hyperlink{RKExplicit__fwd_8hpp}{RKExplicit\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

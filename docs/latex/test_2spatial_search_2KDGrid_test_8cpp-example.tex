@@ -1,0 +1,44 @@
+\doxysection{test/spatial\+\_\+search/\+KDGrid\+\_\+test.\+cpp}
+\hypertarget{test_2spatial_search_2KDGrid_test_8cpp-example}{}\label{test_2spatial_search_2KDGrid_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDGrid__fwd_8hpp}{medusa/bits/spatial\_search/KDGrid\_fwd.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDGrid,\ 2D)\ \{}
+\DoxyCodeLine{\ \ \ \ KDGrid<Vec2d>\ search(0,\ 1,\ 0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ search.insert(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0,\ 0));}
+\DoxyCodeLine{\ \ \ \ search.insert(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.05,\ 0.19));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(search.existsPointInSphere(0.0,\ 1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(search.existsPointInSphere(1.0,\ 1.0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDGrid,\ 3D)\ \{}
+\DoxyCodeLine{\ \ \ \ KDGrid<Vec2d>\ search(0,\ 1,\ 0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(search.existsPointInSphere(0.0,\ 1.0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ search.insert(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0,\ 0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(search.existsPointInSphere(0.0,\ 1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(search.existsPointInSphere(1.0,\ 1.0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDGrid,\ Usage)\ \{}
+\DoxyCodeLine{\ \ \ \ KDGrid<Vec2d>\ search(0,\ 1,\ 0.1);}
+\DoxyCodeLine{\ \ \ \ search.insert(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0,\ 0));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (search.existsPointInSphere(0.0,\ 1.0))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ sth\ ...}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ search\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,45 @@
+\doxysection{include/medusa/bits/utils/print.hpp File Reference}
+\hypertarget{print_8hpp}{}\label{print_8hpp}\index{include/medusa/bits/utils/print.hpp@{include/medusa/bits/utils/print.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Printing helpers for std types. 
+
+
+
+Definition in file \mbox{\hyperlink{print_8hpp_source}{print.\+hpp}}.
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+Include dependency graph for print.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{print_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T , class U $>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_ga89a1fcdac49877271ed49a22dfce81d1}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::pair$<$ T, U $>$ \&par)
+\begin{DoxyCompactList}\small\item\em Output pairs as {\ttfamily (1, 2)}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , size\+\_\+t N$>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_ga69ca1e3d6cb8da0f8271e5daeba7459b}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::array$<$ T, N $>$ \&arr)
+\begin{DoxyCompactList}\small\item\em Output arrays as {\ttfamily \mbox{[}1, 2, 3\mbox{]}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , class A $>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_gad93c3c2b8b292ba1a63b9a93402d9e82}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::vector$<$ T, A $>$ \&arr)
+\begin{DoxyCompactList}\small\item\em Output vectors as {\ttfamily \mbox{[}1, 2, 3\mbox{]}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , class A $>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_ga7e8d30888d6cf78572086b5c7bc4b128}{std\+::operator$<$$<$}} (std\+::ostream \&xx, const std\+::vector$<$ std\+::vector$<$ T, A $>$ $>$ \&arr)
+\begin{DoxyCompactList}\small\item\em Output nested vectors as {\ttfamily \mbox{[}\mbox{[}1, 2\mbox{]}; \mbox{[}3, 4\mbox{]}\mbox{]}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args$>$ }\\std\+::ostream \& \mbox{\hyperlink{group__utils_gaafc1cc8ecb74216332f62cb0f17a0b43}{std\+::operator$<$$<$}} (std\+::ostream \&os, const std\+::tuple$<$ Args... $>$ \&t)
+\begin{DoxyCompactList}\small\item\em Print a tuple as (1, 4.\+5, abc). \end{DoxyCompactList}\end{DoxyCompactItemize}

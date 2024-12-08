@@ -1,0 +1,85 @@
+\doxysection{include/medusa/bits/operators/\+Implicit\+Operators\+\_\+fwd.hpp File Reference}
+\hypertarget{ImplicitOperators__fwd_8hpp}{}\label{ImplicitOperators__fwd_8hpp}\index{include/medusa/bits/operators/ImplicitOperators\_fwd.hpp@{include/medusa/bits/operators/ImplicitOperators\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declarations of implicit operators. 
+
+
+
+Definition in file \mbox{\hyperlink{ImplicitOperators__fwd_8hpp_source}{Implicit\+Operators\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Operators\+\_\+fwd.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+Include dependency graph for Implicit\+Operators\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ImplicitOperators__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ImplicitOperators__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em This class represents implicit operators that fill given matrix \doxylink{classmm_1_1ImplicitOperators_afff142f20c1c2e60aaa59979562211e3}{M} and right hand side \doxylink{classmm_1_1ImplicitOperators_abff1c9239c5b68ae3e9ac8776002e058}{rhs} with appropriate coefficients approximating differential operators with shape functions from given shape storage \doxylink{classmm_1_1ImplicitOperators_a7c1549b19bdb03fb2f1a327c5bf04142}{ss}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators_1_1RowOp}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Row\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing an operation on a specific row of the matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators_1_1OpBase}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Op\+Base$<$ derived\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for all elementary implicit operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators_1_1ValueOp}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Value\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing the "{}evaluate"{} operation, i.\+e. the zero-\/th derivative. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators_1_1BasicOp}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Basic\+Op$<$ op\+\_\+family\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing Basic operators i.\+e. \doxylink{structmm_1_1Der1}{Der1}, \doxylink{structmm_1_1Der2}{Der2}, \doxylink{structmm_1_1Lap}{Lap} or user defined custom operators. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators_1_1GradOp}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$\+::\+Grad\+Op}}
+\begin{DoxyCompactList}\small\item\em Class representing the directional derivative (gradient) operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ImplicitOperators__fwd_8hpp_a8f034bba33daaf2eae6b0d2012cf9a6e}{USE\+\_\+\+BASE}}(Name)
+\begin{DoxyCompactList}\small\item\em Macro that inherits appropriate members from parent Op\+Base class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ImplicitOperators__fwd_8hpp_a8f034bba33daaf2eae6b0d2012cf9a6e}\label{ImplicitOperators__fwd_8hpp_a8f034bba33daaf2eae6b0d2012cf9a6e} 
+\index{ImplicitOperators\_fwd.hpp@{ImplicitOperators\_fwd.hpp}!USE\_BASE@{USE\_BASE}}
+\index{USE\_BASE@{USE\_BASE}!ImplicitOperators\_fwd.hpp@{ImplicitOperators\_fwd.hpp}}
+\doxysubsubsection{\texorpdfstring{USE\_BASE}{USE\_BASE}}
+{\footnotesize\ttfamily \#define USE\+\_\+\+BASE(\begin{DoxyParamCaption}\item[{}]{Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \textcolor{keyword}{private}:\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }OpBase<Name>::op;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }OpBase<Name>::node;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }OpBase<Name>::row;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }OpBase<Name>::OpBase;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }ImplicitOperators;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }OpBase<Name>::eval;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{using\ }OpBase<Name>::operator=;}
+
+\end{DoxyCode}
+
+
+Macro that inherits appropriate members from parent Op\+Base class. 
+
+
+
+Definition at line \mbox{\hyperlink{ImplicitOperators__fwd_8hpp_source_l00154}{154}} of file \mbox{\hyperlink{ImplicitOperators__fwd_8hpp_source}{Implicit\+Operators\+\_\+fwd.\+hpp}}.
+

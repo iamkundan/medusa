@@ -1,0 +1,87 @@
+\doxysection{Adams\+Bashforth.\+hpp}
+\hypertarget{AdamsBashforth_8hpp_source}{}\label{AdamsBashforth_8hpp_source}\index{include/medusa/bits/integrators/AdamsBashforth.hpp@{include/medusa/bits/integrators/AdamsBashforth.hpp}}
+\mbox{\hyperlink{AdamsBashforth_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_INTEGRATORS\_ADAMSBASHFORTH\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_INTEGRATORS\_ADAMSBASHFORTH\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{AdamsBashforth__fwd_8hpp}{AdamsBashforth\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RKExplicit_8hpp}{RKExplicit.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00014}00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{int}\ num\_steps>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ func\_t,\ \textcolor{keyword}{typename}\ initial\_method\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00016}00016\ \textcolor{keyword}{typename}\ AdamsBashforth<Scalar,\ num\_steps>::template}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ Integrator<func\_t,\ initial\_method\_t>::IterationStep\&}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00018}00018\ AdamsBashforth<Scalar,\ num\_steps>::Integrator<func\_t,}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00019}\mbox{\hyperlink{classmm_1_1AdamsBashforth_1_1Integrator_1_1IterationStep_ae27149b25ee6e972e754d2dcf0b2bbe9}{00019}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{initial\_method\_t}}>::IterationStep::operator++()\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00020}00020\ \ \ \ \ cur\_step++;}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00021}00021\ \ \ \ \ Eigen::VectorXd\ \mbox{\hyperlink{classmm_1_1Gaussian}{next}};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{if}\ (cur\_step\ <\ steps)\ \{\ \ \textcolor{comment}{//\ don't\ have\ enough\ steps,\ do\ a\ RK\ method.}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{next}}\ =\ integrator.initial\_method\_.step(}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ integrator.func\_,\ t,\ last\_ys.col(steps\ -\/\ 1),\ integrator.dt\_);}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00025}00025\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{next}}\ =\ integrator.method\_.step(integrator.func\_,\ t,\ last\_ys,\ integrator.dt\_);}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00027}00027\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00028}00028\ \ \ \ \ t\ +=\ integrator.dt\_;}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{comment}{//\ shift\ values}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ steps-\/1;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ last\_ys.col(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ last\_ys.col(\mbox{\hyperlink{classmm_1_1Gaussian}{i}}+1);}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00033}00033\ \ \ \ \ last\_ys.col(steps-\/1)\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{next}};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00038}00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ num\_steps>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00039}\mbox{\hyperlink{namespacemm_a1019d6288fbc4be5dd7ec1311c7a9278}{00039}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ num\_steps>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{method}})\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00040}00040\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}AdamsBashforth\ with\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_steps}}\ <<\ \textcolor{stringliteral}{"{}\ stages\ and\ "{}}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}b\ =\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{method}}.b\_.transpose();}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00045}\mbox{\hyperlink{namespacemm_1_1integrators}{00045}}\ \textcolor{keyword}{namespace\ }integrators\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00046}\mbox{\hyperlink{namespacemm_1_1integrators_1_1ExplicitMultistep}{00046}}\ \textcolor{keyword}{namespace\ }ExplicitMultistep\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00048}00048\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{classmm_1_1Gaussian}{of\_order\_internal}}\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00050}00050\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ order,\ \textcolor{keyword}{class}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00051}00051\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ order>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{\_of\_order\_impl<order,\ scalar\_t>::of\_order}}()\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{static\_assert}(order\ >\ 0,\ \textcolor{stringliteral}{"{}Order\ must\ be\ positive."{}});}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{static\_assert}(order\ <\ 6,\ \textcolor{stringliteral}{"{}Methods\ of\ so\ high\ orders\ are\ not\ implemented\ yet,\ but\ it's"{}}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ very\ simple\ to\ add\ them!"{}});}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00059}00059\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00060}00060\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{classmm_1_1Gaussian}{\_of\_order\_impl}}<1,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}>\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ 1>}}\ of\_order()\ \{\ \textcolor{keywordflow}{return}\ AB1();\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00062}00062\ \};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00066}00066\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{classmm_1_1Gaussian}{\_of\_order\_impl}}<2,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}>\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ 2>}}\ of\_order()\ \{\ \textcolor{keywordflow}{return}\ AB2();\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00068}00068\ \};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00071}00071\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00072}00072\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{classmm_1_1Gaussian}{\_of\_order\_impl}}<3,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}>\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ 3>}}\ of\_order()\ \{\ \textcolor{keywordflow}{return}\ AB3();\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00074}00074\ \};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00077}00077\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00078}00078\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{classmm_1_1Gaussian}{\_of\_order\_impl}}<4,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}>\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00079}00079\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ 4>}}\ of\_order()\ \{\ \textcolor{keywordflow}{return}\ AB4();\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00080}00080\ \};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00083}00083\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00084}00084\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{classmm_1_1Gaussian}{\_of\_order\_impl}}<5,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}>\ \{}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmm_1_1Gaussian}{AdamsBashforth<scalar\_t,\ 5>}}\ of\_order()\ \{\ \textcolor{keywordflow}{return}\ AB5();\ \}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00086}00086\ \};}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00088}00088\ \}\ \ \textcolor{comment}{//\ namespace\ of\_order\_internal}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00090}00090\ \}\ \ \textcolor{comment}{//\ namespace\ ExplicitMultistep}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00091}00091\ \}\ \ \textcolor{comment}{//\ namespace\ integrators}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00092}00092\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{AdamsBashforth_8hpp_source_l00094}00094\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_INTEGRATORS\_ADAMSBASHFORTH\_HPP\_}}
+
+\end{DoxyCode}

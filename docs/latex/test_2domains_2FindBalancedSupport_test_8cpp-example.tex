@@ -1,0 +1,90 @@
+\doxysection{test/domains/\+Find\+Balanced\+Support\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2FindBalancedSupport_test_8cpp-example}{}\label{test_2domains_2FindBalancedSupport_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindBalancedSupport_8hpp}{medusa/bits/domains/FindBalancedSupport.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec__fwd_8hpp}{medusa/bits/types/Vec\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ BalancedSupport)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ find\ for}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0,\ \ \ \ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.5,\ 0.5\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{1,\ \ \ \ 1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ search\ among}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{1,\ \ \ \ 1.1\},\ \ \ \textcolor{comment}{//\ 3}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{1,\ \ \ \ -\/1\},\ \ \ \ \textcolor{comment}{//\ 4}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.5,\ 0.5\},\ \ \ \textcolor{comment}{//\ 5}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/2,\ \ \ 2\},\ \ \ \ \textcolor{comment}{//\ 6}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.1,\ -\/1.1\},\ \ \textcolor{comment}{//\ 7}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/3.,\ 3.\},\ \ \textcolor{comment}{//\ 8}}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(BoxShape<Vec2d>(\{-\/3,\ -\/3\},\ \{3,\ 3\}));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ shift(0.4,\ -\/0.8);\ \ \textcolor{comment}{//\ not\ centred\ at\ 0,\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points)\ domain.addInternalNode(p+shift,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ min\_ss\ =\ 4,\ max\_ss\ =\ 6;}
+\DoxyCodeLine{\ \ \ \ FindBalancedSupport\ find\_support(min\_ss,\ max\_ss);}
+\DoxyCodeLine{\ \ \ \ find\_support.forNodes(\{0,\ 1,\ 2\}).searchAmong(\{3,\ 4,\ 5,\ 6,\ 7,\ 8\});}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(find\_support);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ 3)\ \{\ \ \textcolor{comment}{//\ test\ for\ nodes}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_GE(domain.support(i).size(),\ min\_ss);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_LE(domain.support(i).size(),\ max\_ss);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ :\ domain.support(i))\ \{\ \ \textcolor{comment}{//\ test\ search\ among}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_GE(j,\ 3);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_LE(j,\ 8);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_TRUE(domain.support(i).empty());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ Range<int>\ s;}
+\DoxyCodeLine{\ \ \ \ s\ =\ \{5,\ 4,\ 3,\ 7\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(s,\ domain.support(0));}
+\DoxyCodeLine{\ \ \ \ s\ =\ \{5,\ 3,\ 7,\ 4,\ 6\ \};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(s,\ domain.support(1));}
+\DoxyCodeLine{\ \ \ \ s\ =\ \{3,\ 5,\ 4,\ 7,\ 6,\ 8\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(s,\ domain.support(2));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ BalancedSupportBoundary)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<std::pair<Vec2d,\ Vec2d>>\ points\_bnd\ =\ \{\ \ \textcolor{comment}{//\ point\ and\ normal}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{0,\ 0\},\ \{0,\ 1\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{0.5,\ 0\},\ \{0,\ 1\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{1,\ 0\},\ \{0,\ 1\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{-\/1.1,\ 0\},\ \{0,\ 1\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{-\/1.5,\ 0\},\ \{0,\ 1\}\},}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \{\{-\/0.5,\ -\/0.5\},\ \{0,\ -\/0.6\},\ \{0.5,\ -\/0.6\}\};}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(BoxShape<Vec2d>(\{-\/3,\ -\/3\},\ \{3,\ 3\}));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ shift(0.4,\ -\/0.8);\ \ \textcolor{comment}{//\ not\ centred\ at\ 0,\ 0}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points\_bnd)\ domain.addBoundaryNode(p.first+shift,\ -\/1,\ p.second);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ points)\ domain.addInternalNode(p+shift,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ min\_ss\ =\ 4,\ max\_ss\ =\ 8;}
+\DoxyCodeLine{\ \ \ \ FindBalancedSupport\ find\_support(min\_ss,\ max\_ss);}
+\DoxyCodeLine{\ \ \ \ find\_support.forNodes(\{0\});}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(find\_support);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ s\ =\ \{0,\ 1,\ 6,\ 5,\ 7,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(s,\ domain.support(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ BalancedSupportGhost)\ \{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(UnknownShape<Vec3d>\{\});}
+\DoxyCodeLine{\ \ \ \ domain.addBoundaryNode(\{0,\ 0,\ 0\},\ -\/1,\ \{-\/1,\ 0,\ 0\});}
+\DoxyCodeLine{\ \ \ \ domain.addGhostNodes(0.1);}
+\DoxyCodeLine{\ \ \ \ FindBalancedSupport\ find\_support(1,\ 2);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(find\_support);}
+\DoxyCodeLine{\ \ \ \ Range<Range<int>>\ expected\ =\ \{\{0,\ 1\},\ \{\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

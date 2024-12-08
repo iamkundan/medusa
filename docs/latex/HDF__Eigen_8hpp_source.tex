@@ -1,0 +1,72 @@
+\doxysection{HDF\+\_\+\+Eigen.\+hpp}
+\hypertarget{HDF__Eigen_8hpp_source}{}\label{HDF__Eigen_8hpp_source}\index{include/medusa/bits/io/HDF\_Eigen.hpp@{include/medusa/bits/io/HDF\_Eigen.hpp}}
+\mbox{\hyperlink{HDF__Eigen_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_IO\_HDF\_EIGEN\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_IO\_HDF\_EIGEN\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{HDF__fwd_8hpp}{HDF\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00017}00017\ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ \mbox{\hyperlink{classmm_1_1HDF_a0ff56f6a9afa2c199c8cc9eacae5b586}{HDF::readEigen}}(}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ dataset\_name)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(H5Iis\_valid(\mbox{\hyperlink{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}{group}}),\ \textcolor{stringliteral}{"{}Group\ id\ \%d\ invalid.\ Did\ you\ open\ a\ group\ before\ reading?"{}},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}{group}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00021}00021\ \ \ \ \ hid\_t\ dataset\ =\ H5Dopen(\mbox{\hyperlink{classmm_1_1HDF_a782c12883203691a2c9e3b958ef1882b}{group}},\ dataset\_name.c\_str(),\ H5P\_DEFAULT);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(dataset\ >=\ 0,\ \textcolor{stringliteral}{"{}Dataset\ '\%s'\ could\ not\ be\ accessed\ in\ group\ '\%s'\ in\ file\ '\%s'."{}},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dataset\_name,\ \mbox{\hyperlink{classmm_1_1HDF_a39f36e07f141bdbdd16f5af09b7db3d3}{group\_name\_}},\ \mbox{\hyperlink{classmm_1_1HDF_ad9a1e3f20af3cce2516d5f19663ca210}{filename\_}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00025}00025\ \ \ \ \ hid\_t\ dataspace\ =\ H5Dget\_space(dataset);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ndims\ =\ H5Sget\_simple\_extent\_ndims(dataspace);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(ndims\ <=\ 2,\ \textcolor{stringliteral}{"{}This\ function\ is\ for\ 1\ and\ 2\ dimensional\ arrays\ only."{}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00028}00028\ \ \ \ \ hsize\_t\ dims[2]\ =\ \{1,\ 1\};}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00029}00029\ \ \ \ \ H5Sget\_simple\_extent\_dims(dataspace,\ dims,\ \textcolor{keyword}{nullptr});\ \ \textcolor{comment}{//\ read\ dimension\ into\ dims}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00030}00030\ \ \ \ \ hsize\_t\ cols\ =\ dims[0],\ rows\ =\ dims[1];}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00031}00031\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ M(rows,\ cols);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00033}00033\ \ \ \ \ hid\_t\ type\ =\ H5Dget\_type(dataset);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00034}00034\ \ \ \ \ herr\_t\ status\ =\ H5Dread(dataset,\ type,\ H5S\_ALL,\ H5S\_ALL,\ H5P\_DEFAULT,\ M.data());}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00035}00035\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(status\ >=\ 0,\ \textcolor{stringliteral}{"{}Failed\ reading\ dataset\ '\%s'\ from\ group\ '\%s'\ in\ file\ '\%s'."{}},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dataset\_name,\ \mbox{\hyperlink{classmm_1_1HDF_a39f36e07f141bdbdd16f5af09b7db3d3}{group\_name\_}},\ \mbox{\hyperlink{classmm_1_1HDF_ad9a1e3f20af3cce2516d5f19663ca210}{filename\_}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00038}00038\ \ \ \ \ H5Tclose(type);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00039}00039\ \ \ \ \ H5Sclose(dataspace);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00040}00040\ \ \ \ \ H5Dclose(dataset);}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{return}\ M;}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00045}00045\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00046}\mbox{\hyperlink{classmm_1_1HDF_a05f8a45b96ac4971761574da3db4a461}{00046}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1HDF_a05f8a45b96ac4971761574da3db4a461}{HDF::writeEigen}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{dataset\_name}},\ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ value,}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ Eigen::MatrixBase<Derived>::Scalar\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{if}\ (value.IsRowMajor)\ \{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1HDF_a05f8a45b96ac4971761574da3db4a461}{writeEigen}}(\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\_name}},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic,\ Eigen::ColMajor>(value),}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00055}00055\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hsize\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{cols}}\ =\ value.cols();}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{hsize\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{rows}}\ =\ value.rows();}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::is\_same<double,\ scalar\_t>::value)\ \{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{writeLinearArray<2>}}(\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\_name}},\ value.eval().data(),\ \{cols,\ rows\},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{H5T\_NATIVE\_DOUBLE}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00060}00060\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (std::is\_same<float,\ scalar\_t>::value)\ \{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{writeLinearArray<2>}}(\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\_name}},\ value.eval().data(),\ \{cols,\ rows\},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{H5T\_NATIVE\_FLOAT}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00063}00063\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (std::is\_same<int,\ scalar\_t>::value)\ \{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{writeLinearArray<2>}}(\mbox{\hyperlink{classmm_1_1Gaussian}{dataset\_name}},\ value.eval().data(),\ \{cols,\ rows\},}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{H5T\_NATIVE\_INT}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00066}00066\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}Only\ float,\ int\ and\ double\ types\ are\ supported."{}});}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00069}00069\ \}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00071}00071\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{HDF__Eigen_8hpp_source_l00073}00073\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_IO\_HDF\_EIGEN\_HPP\_}}
+
+\end{DoxyCode}

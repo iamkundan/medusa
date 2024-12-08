@@ -1,0 +1,154 @@
+\doxysection{test/operators/\+Ragged\+Shape\+Storage\+\_\+test.\+cpp}
+\hypertarget{test_2operators_2RaggedShapeStorage_test_8cpp-example}{}\label{test_2operators_2RaggedShapeStorage_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RaggedShapeStorage_8hpp}{medusa/bits/operators/RaggedShapeStorage.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ RaggedShapeStorageSuppSize)\ \{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec2d,\ std::tuple<Lap<2>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ss\ =\ \{5,\ 2,\ 1\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(ss);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ expected\ =\ ss;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ storage.supportSizes());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ expected\ =\ \{10,\ 4,\ 2,\ 10,\ 4,\ 2\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ storage.supportSizesVec());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec3d,\ std::tuple<Lap<2>>>\ storage3;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ss3\ =\ \{5,\ 2,\ 1\};}
+\DoxyCodeLine{\ \ \ \ storage3.resize(ss3);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ expected3\ =\ ss3;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected3,\ storage3.supportSizes());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ expected3\ =\ \{15,\ 6,\ 3,\ 15,\ 6,\ 3,\ 15,\ 6,\ 3\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected3,\ storage3.supportSizesVec());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ RaggedShapeStorageSupp)\ \{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec2d,\ std::tuple<Lap<2>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ss\ =\ \{1,\ 2,\ 5,\ 3,\ 1\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(ss);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<int>\ supp(ss[i],\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ storage.setSupport(i,\ supp);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ supp2\ =\ storage.support(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ ss[i];\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(supp[j],\ storage.support(i,\ j));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(supp[j],\ supp2[j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ RaggedShapeStorageLap)\ \{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec2d,\ std::tuple<Lap<2>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ss\ =\ \{1,\ 2,\ 5,\ 3,\ 1\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(ss);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<Eigen::VectorXd>\ shapes;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::VectorXd\ sh(ss[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ sh.setRandom();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shapes.push\_back(sh);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ storage.setLaplace(i,\ sh);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::VectorXd\ sh2\ =\ storage.laplace(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(shapes[i],\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ ss[i];\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(shapes[i][j],\ storage.laplace(i,\ j));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ RaggedShapeStorageD1)\ \{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec3d,\ std::tuple<Der1s<3>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ss\ =\ \{1,\ 2,\ 5,\ 3,\ 1\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(ss);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<Eigen::VectorXd>>\ shapes(3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ 3;\ ++d)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ sh(ss[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ sh.setRandom();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ shapes[d].push\_back(sh);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ storage.setD1(d,\ i,\ sh);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ 3;\ ++d)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ sh2\ =\ storage.d1(d,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ sh\ =\ shapes[d][i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ ss[i];\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(sh[j],\ storage.d1(d,\ i,\ j));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ RaggedShapeStorageD2)\ \{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec3d,\ std::tuple<Der2s<3>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ss\ =\ \{1,\ 2,\ 5,\ 3,\ 1,\ 7,\ 12\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(ss);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<Eigen::VectorXd>>>\ shapes(3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ 3;\ ++d)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d2\ =\ 0;\ d2\ <=\ d;\ ++d2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ shapes[d].emplace\_back();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ sh(ss[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sh.setRandom();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shapes[d].back().push\_back(sh);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ storage.setD2(d2,\ d,\ i,\ sh);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ 3;\ ++d)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d2\ =\ 0;\ d2\ <=\ d;\ ++d2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ shapes[d].emplace\_back();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ sh\ =\ shapes[d][d2][i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ sh2\ =\ storage.d2(d2,\ d,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(sh,\ sh2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ ss[i];\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(sh[j],\ storage.d2(d2,\ d,\ i,\ j));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Operators,\ RaggedShapeStorageUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ RaggedShapeStorage<Vec3d,\ std::tuple<Lap<3>,\ Der1s<3>>>\ storage;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ sizes\ =\ \{9,\ 13,\ 7\};}
+\DoxyCodeLine{\ \ \ \ storage.resize(sizes);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ storage.size();\ \ \textcolor{comment}{//\ 3}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ lap(7);}
+\DoxyCodeLine{\ \ \ \ lap\ <<\ 1.2,\ 3.4,\ 5.6,\ 7.8,\ 9.0,\ 1.2,\ 3.4;\ \ \textcolor{comment}{//\ compute\ the\ shapes}}
+\DoxyCodeLine{\ \ \ \ storage.setLaplace(2,\ lap);\ \ \textcolor{comment}{//\ set\ lap\ as\ laplace\ shape\ for\ node\ 2.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ storage.laplace(2,\ 3);\ \ \textcolor{comment}{//\ returns\ 7.8}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ sh\ =\ storage.d1(1,\ 0);\ \ \textcolor{comment}{//\ d/dy\ shape\ in\ node\ 0\ (returns\ 0,\ because\ it\ is\ not\ set\ yet)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ sh.size()\ is\ 9}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ storage\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ (void)\ (sh);\ \ \textcolor{comment}{//\ otherwise\ unused}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

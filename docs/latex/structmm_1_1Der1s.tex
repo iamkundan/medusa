@@ -1,0 +1,142 @@
+\doxysection{mm\+::Der1s\texorpdfstring{$<$}{<} dimension \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmm_1_1Der1s}{}\label{structmm_1_1Der1s}\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}
+
+
+{\ttfamily \#include $<$Operators\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$\newline
+struct mm\+::\+Der1s$<$ dimension $>$}
+Represents a family of all first derivatives. 
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00097}{97}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der1s_abc755fe01b836439e60dfefee041179d}{size}} ()
+\begin{DoxyCompactList}\small\item\em Size of this family is {\ttfamily dim}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Der1s_a9e0dfdce161b913b03f84f1e23de010a}{name}} ()
+\begin{DoxyCompactList}\small\item\em Human-\/readable name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Der1s_a2c8f9c9c2123f87f8de9d8512cac7e6b}{type\+\_\+name}} ()
+\begin{DoxyCompactList}\small\item\em Human readable type name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::array$<$ \mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \mbox{\hyperlink{structmm_1_1Der1s_a527dca6967deee338e5cde2d407e3bad}{operators}} ()
+\begin{DoxyCompactList}\small\item\em Return an iterable of iterators represented by a family. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der1s_a1dc20115eca3659efaeb06b33b57e507}{index}} (\mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51a1750d9d87a6b5dadf9be87c941c43093}{dim}} $>$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Get index of operator {\ttfamily d} in the family. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51a1750d9d87a6b5dadf9be87c941c43093}{dim}} = dimension
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51a1750d9d87a6b5dadf9be87c941c43093}{dim}} $>$ \mbox{\hyperlink{structmm_1_1Der1s_a45f8bafa720f1f8dbfa0038322c3f3d8}{operator\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of this family\textquotesingle{}s members. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51}\label{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}!dim@{dim}}}\Hypertarget{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51a1750d9d87a6b5dadf9be87c941c43093}\label{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51a1750d9d87a6b5dadf9be87c941c43093} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00099}{99}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structmm_1_1Der1s_a1dc20115eca3659efaeb06b33b57e507}\label{structmm_1_1Der1s_a1dc20115eca3659efaeb06b33b57e507} 
+\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}!index@{index}}
+\index{index@{index}!mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{structmm_1_1Der1s_a36acdc42266fe6bee1b6936c7ef5bf51a1750d9d87a6b5dadf9be87c941c43093}{dim}} $>$}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get index of operator {\ttfamily d} in the family. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00109}{109}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der1s_a9e0dfdce161b913b03f84f1e23de010a}\label{structmm_1_1Der1s_a9e0dfdce161b913b03f84f1e23de010a} 
+\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}!name@{name}}
+\index{name@{name}!mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Human-\/readable name. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00102}{102}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der1s_a527dca6967deee338e5cde2d407e3bad}\label{structmm_1_1Der1s_a527dca6967deee338e5cde2d407e3bad} 
+\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}!operators@{operators}}
+\index{operators@{operators}!mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operators()}{operators()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+std\+::array$<$ \mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Return an iterable of iterators represented by a family. 
+
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der1s_abc755fe01b836439e60dfefee041179d}\label{structmm_1_1Der1s_abc755fe01b836439e60dfefee041179d} 
+\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}!size@{size}}
+\index{size@{size}!mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Size of this family is {\ttfamily dim}. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00101}{101}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der1s_a2c8f9c9c2123f87f8de9d8512cac7e6b}\label{structmm_1_1Der1s_a2c8f9c9c2123f87f8de9d8512cac7e6b} 
+\index{mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}!type\_name@{type\_name}}
+\index{type\_name@{type\_name}!mm::Der1s$<$ dimension $>$@{mm::Der1s$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{type\_name()}{type\_name()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::type\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Human readable type name. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00103}{103}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Operators__fwd_8hpp}{Operators\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{Operators.\+hpp}}\end{DoxyCompactItemize}

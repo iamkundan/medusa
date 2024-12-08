@@ -1,0 +1,71 @@
+\doxysection{mm\+::Scale\+To\+Farthest Class Reference}
+\hypertarget{classmm_1_1ScaleToFarthest}{}\label{classmm_1_1ScaleToFarthest}\index{mm::ScaleToFarthest@{mm::ScaleToFarthest}}
+
+
+{\ttfamily \#include $<$Scale\+Function.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Scale function that scales to the farthest neighbor. 
+
+Used as a template parameter in \doxylink{classmm_1_1WLS}{WLS} computations of shape functions. This function satisfies the \doxysectlink{concepts_scale-concept}{Scale function concept}{1}. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1NoScale}{No\+Scale}, \doxylink{classmm_1_1ScaleToClosest}{Scale\+To\+Closest} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2poisson_explicit_8cpp-example}{test/end2end/poisson\+\_\+explicit.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{ScaleFunction_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{ScaleFunction_8hpp_source}{Scale\+Function.\+hpp}}.
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1ScaleToFarthest_aedf6389be3026c348c156c48f4727336}{scale}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&support)
+\begin{DoxyCompactList}\small\item\em Returns local scale of given point and its support. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1ScaleToFarthest_abaaa99550a9f6b37fcdd077c099d0885}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScaleToFarthest}{Scale\+To\+Farthest}} \&)
+\begin{DoxyCompactList}\small\item\em Print information about this scale function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ScaleToFarthest_aedf6389be3026c348c156c48f4727336}\label{classmm_1_1ScaleToFarthest_aedf6389be3026c348c156c48f4727336} 
+\index{mm::ScaleToFarthest@{mm::ScaleToFarthest}!scale@{scale}}
+\index{scale@{scale}!mm::ScaleToFarthest@{mm::ScaleToFarthest}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} vec\+\_\+t\+::scalar\+\_\+t mm\+::\+Scale\+To\+Farthest\+::scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{p,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{support }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Returns local scale of given point and its support. 
+
+
+
+Definition at line \mbox{\hyperlink{ScaleFunction_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{ScaleFunction_8hpp_source}{Scale\+Function.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ScaleToFarthest_abaaa99550a9f6b37fcdd077c099d0885}\label{classmm_1_1ScaleToFarthest_abaaa99550a9f6b37fcdd077c099d0885} 
+\index{mm::ScaleToFarthest@{mm::ScaleToFarthest}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::ScaleToFarthest@{mm::ScaleToFarthest}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScaleToFarthest}{Scale\+To\+Farthest}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Print information about this scale function. 
+
+
+
+Definition at line \mbox{\hyperlink{ScaleFunction_8hpp_source_l00052}{52}} of file \mbox{\hyperlink{ScaleFunction_8hpp_source}{Scale\+Function.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{ScaleFunction_8hpp}{Scale\+Function.\+hpp}}\end{DoxyCompactItemize}

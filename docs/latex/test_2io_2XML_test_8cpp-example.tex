@@ -1,0 +1,130 @@
+\doxysection{test/io/\+XML\+\_\+test.\+cpp}
+\hypertarget{test_2io_2XML_test_8cpp-example}{}\label{test_2io_2XML_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{XML_8hpp}{medusa/bits/io/XML.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLValidPath)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(xml.exists(\textcolor{stringliteral}{"{}"{}}),\ \textcolor{stringliteral}{"{}Path\ name\ should\ not\ be\ empty"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(xml.exists(\textcolor{stringliteral}{"{}test."{}}),\ \textcolor{stringliteral}{"{}Path\ .*\ contains\ an\ empty\ attribute\ name"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(xml.exists(\textcolor{stringliteral}{"{}.test"{}}),\ \textcolor{stringliteral}{"{}Path\ .*\ contains\ an\ empty\ element\ name"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(xml.exists(\textcolor{stringliteral}{"{}test.test..test"{}}),\ \textcolor{stringliteral}{"{}Path\ .*\ contains\ an\ empty\ element\ name"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLExists)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(xml.exists(\textcolor{stringliteral}{"{}h"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(xml.exists(\textcolor{stringliteral}{"{}num.nxs"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(xml.exists(\textcolor{stringliteral}{"{}solver.droptol"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(xml.exists(\textcolor{stringliteral}{"{}mls.m"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(xml.exists(\textcolor{stringliteral}{"{}mls.abc.def.m"{}}));\ \ \textcolor{comment}{//\ abc\ as\ an\ element}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(xml.exists(\textcolor{stringliteral}{"{}mls.abc"{}}));\ \ \textcolor{comment}{//\ abc\ as\ an\ attribute}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}solver.droptols"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}solve.droptols"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}mls.abc.a"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}qwer.asdf.qwer"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}h.h"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}mls.m.a"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLCopy)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ XML\ xml\_copy\ =\ xml;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}h"{}}),\ xml\_copy.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}h"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(xml.get<std::string>(\textcolor{stringliteral}{"{}num.nxs"{}}),\ xml\_copy.get<std::string>(\textcolor{stringliteral}{"{}num.nxs"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}solver.droptol"{}}),\ xml\_copy.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}solver.droptol"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}mls.m"{}}),\ xml\_copy.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}mls.m"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLGet)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(6,\ xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}h"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}10,\ 12,\ 14,\ 16"{}},\ xml.get<std::string>(\textcolor{stringliteral}{"{}num.nxs"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1e-\/5,\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}solver.droptol"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}3"{}},\ xml.get<std::string>(\textcolor{stringliteral}{"{}mls.m"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}mls.m"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3.0f,\ xml.get<\textcolor{keywordtype}{float}>(\textcolor{stringliteral}{"{}mls.m"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3.0,\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}mls.m"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5,\ xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}mls.abc.def.m"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}9"{}},\ xml.get<std::string>(\textcolor{stringliteral}{"{}mls.abc"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLSet)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 12.1372864128934;}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}r"{}},\ r);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(r,\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}r"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::string\ s\ =\ \textcolor{stringliteral}{"{}\ \ \ \(\backslash\)n\ \ \ "{}};}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}mls.abc.s"{}},\ s);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(s,\ xml.get<std::string>(\textcolor{stringliteral}{"{}mls.abc.s"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ -\/234;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(xml.set(\textcolor{stringliteral}{"{}mls.abc.def.m"{}},\ i),\ \textcolor{stringliteral}{"{}Attribute\ on\ path\ '.*'\ already\ exists"{}});}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}mls.abc.def.m"{}},\ i,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(i,\ xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}mls.abc.def.m"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ b\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}random.elements.should.be.created"{}},\ b);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(b,\ xml.get<\textcolor{keywordtype}{bool}>(\textcolor{stringliteral}{"{}random.elements.should.be.created"{}}));}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}random.elements.should.be.created"{}},\ !b,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(!b,\ xml.get<\textcolor{keywordtype}{bool}>(\textcolor{stringliteral}{"{}random.elements.should.be.created"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLGetAll)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 12.1372864128934;}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}r"{}},\ r);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(r,\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}r"{}}));}
+\DoxyCodeLine{\ \ \ \ std::vector<std::pair<std::string,\ std::string>>\ expected\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}h"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}6"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}r"{}},\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}12.1372864128934"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}mls.m"{}},\ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}3"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}mls.basis\_type"{}},\ \textcolor{stringliteral}{"{}mon"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}mls.abc"{}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}9"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}mls.abc.def.a"{}},\ \ \textcolor{stringliteral}{"{}5"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}mls.abc.def.m"{}},\ \ \textcolor{stringliteral}{"{}5"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}mls.abc.def2.a"{}},\ \textcolor{stringliteral}{"{}6"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}solver.droptol"{}},\ \textcolor{stringliteral}{"{}1e-\/5"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}num.nxs"{}},\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}10,\ 12,\ 14,\ 16"{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}meta.filename"{}},\ \ \textcolor{stringliteral}{"{}one\_domain\_implicit\_smooth.h5"{}}\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ actual\ =\ xml.getAll();}
+\DoxyCodeLine{\ \ \ \ std::sort(expected.begin(),\ expected.end());}
+\DoxyCodeLine{\ \ \ \ std::sort(actual.begin(),\ actual.end());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ actual);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ XMLDoubleLoad)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}r"{}},\ 23.4);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(23.4,\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}r"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ xml.load(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(xml.exists(\textcolor{stringliteral}{"{}r"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ DISABLED\_XMLUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ xml(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (xml.exists(\textcolor{stringliteral}{"{}element1.attr"{}}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ a\ =\ xml.get<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"{}element1.attr"{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cout\ <<\ a\ <<\ std::endl;\ \ \textcolor{comment}{//\ do\ something\ with\ a}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}test.abc.xyz"{}},\ 12.4543);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ xml.get<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}test.abc.xyz"{}});\ \ \textcolor{comment}{//\ r\ is\ 12.4543}}
+\DoxyCodeLine{\ \ \ \ xml.set(\textcolor{stringliteral}{"{}element1.attr"{}},\ 12,\ \textcolor{keyword}{true});\ \ \textcolor{comment}{//\ specify\ \`{}overwrite\ =\ true`\ to\ change\ existing\ values}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ xml\ <<\ std::endl;\ \ \textcolor{comment}{//\ outputs\ the\ loaded\ xml\ contents\ to\ screen}}
+\DoxyCodeLine{\ \ \ \ xml.load(\textcolor{stringliteral}{"{}test/testdata/another\_file.xml"{}});}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ r\ <<\ std::endl;\ \ \textcolor{comment}{//\ to\ not\ be\ unused}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

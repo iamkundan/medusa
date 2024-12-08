@@ -1,0 +1,35 @@
+\doxysection{STL\+\_\+fwd.\+hpp}
+\hypertarget{STL__fwd_8hpp_source}{}\label{STL__fwd_8hpp_source}\index{include/medusa/bits/io/STL\_fwd.hpp@{include/medusa/bits/io/STL\_fwd.hpp}}
+\mbox{\hyperlink{STL__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_IO\_STL\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_IO\_STL\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00016}00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00026}\mbox{\hyperlink{classmm_1_1STL}{00026}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1STL}{STL}}\ \{}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00027}00027\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00029}\mbox{\hyperlink{structmm_1_1STL_1_1Point_a27833e34cd9726b337b01d1a985602db}{00029}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1STL_1_1Point}{Point}}\ \{\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structmm_1_1STL_1_1Point_a27833e34cd9726b337b01d1a985602db}{x}}\ ,\ \mbox{\hyperlink{structmm_1_1STL_1_1Point_aa0426a31b5866ef1129ac6882e2938db}{y}}\ ,\ \mbox{\hyperlink{structmm_1_1STL_1_1Point_ae3fd92dbcd8af4ebb04d1d5b28d74fa9}{z}}\ ;\ \};}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00031}\mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{00031}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{Triangle}}\ \{}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00032}\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_af8a2f3d91bbaaf07def9b17b55214c70}{00032}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmm_1_1STL_1_1Point}{Point}}\ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle_af8a2f3d91bbaaf07def9b17b55214c70}{normal}}\ ,\ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle_aa8f9de493062bb4eec52bf50713da230}{p1}}\ ,\ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a80c6faf718d84be6320ee70c47f94ca6}{p2}}\ ,}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00033}\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a2583c30b9a508ea393cc010f672049b4}{00033}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a2583c30b9a508ea393cc010f672049b4}{p3}}\ ;}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00034}\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a6cf72f79927dfeeaa7bf2c9f2402e0b0}{00034}}\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{uint16\_t}}\ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a6cf72f79927dfeeaa7bf2c9f2402e0b0}{attribute}};\ \ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00035}00035\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Triangle>\ \mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{read}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00043}00043\ \};}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00046}00046\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmm_1_1STL_1_1Point}{STL::Point}}\&\ p);}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00048}00048\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{STL::Triangle}}\&\ v);}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00051}00051\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{STL__fwd_8hpp_source_l00053}00053\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_IO\_STL\_FWD\_HPP\_}}
+
+\end{DoxyCode}

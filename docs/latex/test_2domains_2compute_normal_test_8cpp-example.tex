@@ -1,0 +1,40 @@
+\doxysection{test/domains/compute\+\_\+normal\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2compute_normal_test_8cpp-example}{}\label{test_2domains_2compute_normal_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{compute__normal__fwd_8hpp}{medusa/bits/domains/compute\_normal\_fwd.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/Geometry>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NormalTest3D)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ J;}
+\DoxyCodeLine{\ \ \ \ J.col(1)\ =\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.5,\ 0.5,\ 0);}
+\DoxyCodeLine{\ \ \ \ J.col(0)\ =\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0.5,\ 0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ normal\ =\ -\/J.col(0).cross(J.col(1));}
+\DoxyCodeLine{\ \ \ \ normal.normalize();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ normal2\ =\ \mbox{\hyperlink{group__domains_ga9686eddc567f294ac9db3fef1209ddd1}{surface\_fill\_internal::compute\_normal}}(J);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((normal\ -\/\ normal2).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NormalTest1Dto3D)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<double,\ 3,\ 1>\ J;}
+\DoxyCodeLine{\ \ \ \ J.col(0)\ =\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.5,\ 0.5,\ 0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ normal\ =\ \mbox{\hyperlink{group__domains_ga9686eddc567f294ac9db3fef1209ddd1}{surface\_fill\_internal::compute\_normal}}(J);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(std::abs(normal.dot(J.col(0))),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ NormalTest2D)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<double,\ 2,\ 1>\ J;}
+\DoxyCodeLine{\ \ \ \ J\ <<\ 0.1,\ 2.3;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ normal(J(1),\ -\/J(0));\ normal.normalize();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ normal2\ =\ \mbox{\hyperlink{group__domains_ga9686eddc567f294ac9db3fef1209ddd1}{surface\_fill\_internal::compute\_normal}}(J);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((normal\ -\/\ normal2).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

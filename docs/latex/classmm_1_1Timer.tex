@@ -1,0 +1,323 @@
+\doxysection{mm\+::Timer Class Reference}
+\hypertarget{classmm_1_1Timer}{}\label{classmm_1_1Timer}\index{mm::Timer@{mm::Timer}}
+
+
+{\ttfamily \#include $<$Timer.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Simple timer class\+: add checkpoints throughout the code and measure execution time between them. 
+
+When timing parts of code for example inside loops \doxylink{classmm_1_1Stopwatch}{Stopwatch} should be used instead.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Timer\ timer;}
+\DoxyCodeLine{\ \ \ \ timer.addCheckPoint(\textcolor{stringliteral}{"{}beg"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//...\ code\ ...}}
+\DoxyCodeLine{\ \ \ \ timer.addCheckPoint(\textcolor{stringliteral}{"{}mid"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ...more\ code\ ...}}
+\DoxyCodeLine{\ \ \ \ timer.addCheckPoint(\textcolor{stringliteral}{"{}end"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ timer.showTimings(\textcolor{stringliteral}{"{}beg"{}},\ \textcolor{stringliteral}{"{}mid"{}});\ \ \textcolor{comment}{//\ shows\ time\ between\ two\ checkpoints}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ timer\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ t\ =\ timer.duration(\textcolor{stringliteral}{"{}beg"{}},\ \textcolor{stringliteral}{"{}end"{}});\ \ \textcolor{comment}{//\ time\ difference\ in\ seconds}}
+
+\end{DoxyCodeInclude}
+ \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1Stopwatch}{Stopwatch} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Timer_a9a30f5d1827f4e088757dddcf1cceed3}{add\+Check\+Point}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}})
+\begin{DoxyCompactList}\small\item\em Adds a checkpoint with given label and remembers the time at which it was added. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Timer_a493126729644988c06bae2cb5a871417}{show\+Timings}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}=std\+::cout) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Pretty print all durations between checkpoints. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Timer_a91c521fc1b08fdd53e0c1cf47fa2714c}{show\+Timings}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{from}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{to}}, std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}=std\+::cout) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Output duration between the checkpoints with given labels to {\ttfamily os}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}} \mbox{\hyperlink{classmm_1_1Timer_a1812e7699c5309ccbd3a0a9f02fb9db6}{time\+At}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return absolute time for a given label. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Timer_a43ea0de701680d29a9d20e09d41b66d7}{duration}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{from}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{to}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return time difference in seconds between two checkpoints. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Timer_a4f0e7aee0f334e4ea4db5b7912f3eb40}{duration\+To\+Now}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{from}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return time difference in seconds between {\ttfamily from} and now. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Timer_a55c68a21d1a7ae23b9b768db735144be}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return the number of measurements taken. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classmm_1_1Timer_a6312e3bd3a84eacd54c4a597c2cf19fe}{labels}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return all labels. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}} $>$ \& \mbox{\hyperlink{classmm_1_1Timer_ab9a5acc6ce4fe6f2e82f1a8c94ebe50e}{times}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return all times. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Timer_a4298a11b593fb678e260cf3f0a654672}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all of time points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Timer_a8e125e38ee1ec31b73d2e322c1ec93f2}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Timer}{Timer}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{timer}})
+\begin{DoxyCompactList}\small\item\em Output all times between all checkpoints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Time type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Timer_aeb827f3efc08d7df289bb43a88d9e303}{show\+Timings}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{from}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{to}}, std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}=std\+::cout) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Output timings between the checkpoints with given ids to {\ttfamily os}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Timer_a17414b39363d124f1ec1c077034d5d73}{get\+ID}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{label}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the ID of checkpoints with a given label. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}} \mbox{\hyperlink{classmm_1_1Timer_ac4d75309008a1fc9111739b6b2d5753f}{time\+At}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{id}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return absolute time for a given {\ttfamily id}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9}{labels\+\_\+}}
+\begin{DoxyCompactList}\small\item\em List of checkpoint labels. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}} $>$ \mbox{\hyperlink{classmm_1_1Timer_a66578f64b1a0dbe0a318b16da7675e0c}{times\+\_\+}}
+\begin{DoxyCompactList}\small\item\em List of checkpoint times. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Timer_a9a30f5d1827f4e088757dddcf1cceed3}\label{classmm_1_1Timer_a9a30f5d1827f4e088757dddcf1cceed3} 
+\index{mm::Timer@{mm::Timer}!addCheckPoint@{addCheckPoint}}
+\index{addCheckPoint@{addCheckPoint}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{addCheckPoint()}{addCheckPoint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Timer\+::add\+Check\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption})}
+
+
+
+Adds a checkpoint with given label and remembers the time at which it was added. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a4298a11b593fb678e260cf3f0a654672}\label{classmm_1_1Timer_a4298a11b593fb678e260cf3f0a654672} 
+\index{mm::Timer@{mm::Timer}!clear@{clear}}
+\index{clear@{clear}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Timer\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all of time points. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00073}{73}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a43ea0de701680d29a9d20e09d41b66d7}\label{classmm_1_1Timer_a43ea0de701680d29a9d20e09d41b66d7} 
+\index{mm::Timer@{mm::Timer}!duration@{duration}}
+\index{duration@{duration}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{duration()}{duration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Timer\+::duration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{from,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{to }\end{DoxyParamCaption}) const}
+
+
+
+Return time difference in seconds between two checkpoints. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00060}{60}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a4f0e7aee0f334e4ea4db5b7912f3eb40}\label{classmm_1_1Timer_a4f0e7aee0f334e4ea4db5b7912f3eb40} 
+\index{mm::Timer@{mm::Timer}!durationToNow@{durationToNow}}
+\index{durationToNow@{durationToNow}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{durationToNow()}{durationToNow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{double}} mm\+::\+Timer\+::duration\+To\+Now (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{from }\end{DoxyParamCaption}) const}
+
+
+
+Return time difference in seconds between {\ttfamily from} and now. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00063}{63}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a17414b39363d124f1ec1c077034d5d73}\label{classmm_1_1Timer_a17414b39363d124f1ec1c077034d5d73} 
+\index{mm::Timer@{mm::Timer}!getID@{getID}}
+\index{getID@{getID}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Timer\+::get\+ID (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Returns the ID of checkpoints with a given label. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00067}{67}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a6312e3bd3a84eacd54c4a597c2cf19fe}\label{classmm_1_1Timer_a6312e3bd3a84eacd54c4a597c2cf19fe} 
+\index{mm::Timer@{mm::Timer}!labels@{labels}}
+\index{labels@{labels}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{labels()}{labels()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \& mm\+::\+Timer\+::labels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return all labels. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00065}{65}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+\Hypertarget{classmm_1_1Timer_a91c521fc1b08fdd53e0c1cf47fa2714c}\label{classmm_1_1Timer_a91c521fc1b08fdd53e0c1cf47fa2714c} 
+\index{mm::Timer@{mm::Timer}!showTimings@{showTimings}}
+\index{showTimings@{showTimings}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{showTimings()}{showTimings()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Timer\+::show\+Timings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{from,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{to,  }\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout} }\end{DoxyParamCaption}) const}
+
+
+
+Output duration between the checkpoints with given labels to {\ttfamily os}. 
+
+Example\+: {\ttfamily show\+Timings("{}begin"{}, "{}end"{});} 
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00038}{38}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_aeb827f3efc08d7df289bb43a88d9e303}\label{classmm_1_1Timer_aeb827f3efc08d7df289bb43a88d9e303} 
+\index{mm::Timer@{mm::Timer}!showTimings@{showTimings}}
+\index{showTimings@{showTimings}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{showTimings()}{showTimings()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Timer\+::show\+Timings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{from,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{to,  }\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Output timings between the checkpoints with given ids to {\ttfamily os}. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00043}{43}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a493126729644988c06bae2cb5a871417}\label{classmm_1_1Timer_a493126729644988c06bae2cb5a871417} 
+\index{mm::Timer@{mm::Timer}!showTimings@{showTimings}}
+\index{showTimings@{showTimings}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{showTimings()}{showTimings()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Timer\+::show\+Timings (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cout} }\end{DoxyParamCaption}) const}
+
+
+
+Pretty print all durations between checkpoints. 
+
+If there are less than 2 checkpoints, only a warning is printed. 
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_a55c68a21d1a7ae23b9b768db735144be}\label{classmm_1_1Timer_a55c68a21d1a7ae23b9b768db735144be} 
+\index{mm::Timer@{mm::Timer}!size@{size}}
+\index{size@{size}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Timer\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the number of measurements taken. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+\Hypertarget{classmm_1_1Timer_a1812e7699c5309ccbd3a0a9f02fb9db6}\label{classmm_1_1Timer_a1812e7699c5309ccbd3a0a9f02fb9db6} 
+\index{mm::Timer@{mm::Timer}!timeAt@{timeAt}}
+\index{timeAt@{timeAt}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{timeAt()}{timeAt()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{Timer\+::time\+\_\+type}} mm\+::\+Timer\+::time\+At (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{label }\end{DoxyParamCaption}) const}
+
+
+
+Return absolute time for a given label. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00057}{57}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_ac4d75309008a1fc9111739b6b2d5753f}\label{classmm_1_1Timer_ac4d75309008a1fc9111739b6b2d5753f} 
+\index{mm::Timer@{mm::Timer}!timeAt@{timeAt}}
+\index{timeAt@{timeAt}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{timeAt()}{timeAt()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{Timer\+::time\+\_\+type}} mm\+::\+Timer\+::time\+At (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Return absolute time for a given {\ttfamily id}. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8cpp_source_l00052}{52}} of file \mbox{\hyperlink{Timer_8cpp_source}{Timer.\+cpp}}.
+
+\Hypertarget{classmm_1_1Timer_ab9a5acc6ce4fe6f2e82f1a8c94ebe50e}\label{classmm_1_1Timer_ab9a5acc6ce4fe6f2e82f1a8c94ebe50e} 
+\index{mm::Timer@{mm::Timer}!times@{times}}
+\index{times@{times}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{times()}{times()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}} $>$ \& mm\+::\+Timer\+::times (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return all times. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1Timer_a8e125e38ee1ec31b73d2e322c1ec93f2}\label{classmm_1_1Timer_a8e125e38ee1ec31b73d2e322c1ec93f2} 
+\index{mm::Timer@{mm::Timer}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Timer}{Timer}} \&}]{timer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output all times between all checkpoints. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9}\label{classmm_1_1Timer_ad9dc1a7427c4e4ff8fe40f0bab3ccab9} 
+\index{mm::Timer@{mm::Timer}!labels\_@{labels\_}}
+\index{labels\_@{labels\_}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{labels\_}{labels\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ mm\+::\+Timer\+::labels\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of checkpoint labels. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+\Hypertarget{classmm_1_1Timer_a66578f64b1a0dbe0a318b16da7675e0c}\label{classmm_1_1Timer_a66578f64b1a0dbe0a318b16da7675e0c} 
+\index{mm::Timer@{mm::Timer}!times\_@{times\_}}
+\index{times\_@{times\_}!mm::Timer@{mm::Timer}}
+\doxysubsubsection{\texorpdfstring{times\_}{times\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{classmm_1_1Timer_ad6b317ff9f0a85b642cf5cee49dc36b1}{time\+\_\+type}}$>$ mm\+::\+Timer\+::times\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of checkpoint times. 
+
+
+
+Definition at line \mbox{\hyperlink{Timer_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{Timer_8hpp_source}{Timer.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/utils/\mbox{\hyperlink{Timer_8hpp}{Timer.\+hpp}}\item 
+src/utils/\mbox{\hyperlink{Timer_8cpp}{Timer.\+cpp}}\end{DoxyCompactItemize}

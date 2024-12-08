@@ -1,0 +1,57 @@
+\doxysection{WLSApproximant.\+hpp}
+\hypertarget{WLSApproximant_8hpp_source}{}\label{WLSApproximant_8hpp_source}\index{include/medusa/bits/approximations/WLSApproximant.hpp@{include/medusa/bits/approximations/WLSApproximant.hpp}}
+\mbox{\hyperlink{WLSApproximant_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_WLSAPPROXIMANT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_WLSAPPROXIMANT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{WLSApproximant__fwd_8hpp}{WLSApproximant\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00014}00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ basis\_t>}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00015}\mbox{\hyperlink{classmm_1_1WLSApproximant_aa35335e9b9b52abc3d3bca7d12fc3271}{00015}}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_aa35335e9b9b52abc3d3bca7d12fc3271}{WLSApproximant<basis\_t>::WLSApproximant}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\_t}}\&\ basis,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\_t}}\&\ point,}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\_t}}\ scale,}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\&\ coefficients,}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\_t}}\ residual)\ :}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ basis\_(basis),\ point\_(point),\ support\_(support),\ scale\_(scale),}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ coefficients\_(coefficients),\ residual\_(residual)\ \{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \mbox{\hyperlink{classmm_1_1WLSApproximant_af3bff388d4a567bd70307173cda44194}{support\_}}.size();}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLSApproximant_af3bff388d4a567bd70307173cda44194}{support\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/=\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f}{point}};}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLSApproximant_af3bff388d4a567bd70307173cda44194}{support\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ /=\ \mbox{\hyperlink{classmm_1_1WLSApproximant_aafaf0b1644398bbe0fdbad98cfd6956f}{scale}};}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ basis\_t>}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00029}00029\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{WLSApproximant<basis\_t>::scalar\_t}}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1WLSApproximant_a6cd6d5a5a614e4751be25053c269bbf3}{00030}}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a6cd6d5a5a614e4751be25053c269bbf3}{WLSApproximant<basis\_t>::operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\_t}}\&\ point)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ basis\_.size();}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00032}00032\ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}}\ =\ (point\ -\/\ point\_)\ /\ scale\_;}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00033}00033\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{m}});}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ basis\_.eval(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}},\ support\_);}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}.dot(coefficients\_);}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00038}00038\ \}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00040}00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ basis\_t>}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00041}00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00042}00042\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{WLSApproximant<basis\_t>::scalar\_t}}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00043}\mbox{\hyperlink{classmm_1_1WLSApproximant_a9abd2a32e415faa48e0a35fe2a19f465}{00043}}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a6cd6d5a5a614e4751be25053c269bbf3}{WLSApproximant<basis\_t>::operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\_t}}\&\ point,\ \textcolor{keyword}{const}\ operator\_t\&\ op)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ basis\_.size();}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}}\ =\ (point\ -\/\ point\_)\ /\ scale\_;}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00046}00046\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{m}});}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ basis\_.evalOp(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}},\ op,\ support\_,\ scale\_);}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}.dot(coefficients\_);}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00054}00054\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{WLSApproximant_8hpp_source_l00056}00056\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_WLSAPPROXIMANT\_HPP\_}}
+
+\end{DoxyCode}

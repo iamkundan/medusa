@@ -1,0 +1,144 @@
+\doxysection{include/medusa/\+Config.hpp File Reference}
+\hypertarget{Config_8hpp}{}\label{Config_8hpp}\index{include/medusa/Config.hpp@{include/medusa/Config.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Contains compile time settings for the project, such as Eigen plugins. 
+
+
+
+Definition in file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for Config.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{Config_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Config_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1Pi}{mm\+::\+Pi$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Value of \doxylink{structmm_1_1Pi}{Pi} in type {\ttfamily T}. Usage\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Config_8hpp_afc792de073c9a00a2f3739a451be4312}{EIGEN\+\_\+\+MATRIXBASE\+\_\+\+PLUGIN}}~"{}medusa/bits/types/Matrix\+Base\+Addons.\+hpp"{}
+\begin{DoxyCompactList}\small\item\em Set Eigen Matrix\+Base plugin. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8hpp_a525f97d9a111a8f0b77b19bd040f22fe}{EIGEN\+\_\+\+MATRIX\+\_\+\+PLUGIN}}~"{}medusa/bits/types/Matrix\+Addons.\+hpp"{}
+\begin{DoxyCompactList}\small\item\em Set Eigen Matrix plugin. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8hpp_acb1e4e2de56103873d2de3c77c9c9373}{EIGEN\+\_\+\+DEFAULT\+\_\+\+IO\+\_\+\+FORMAT}}
+\begin{DoxyCompactList}\small\item\em Set Eigen default IO format. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}}~EIGEN\+\_\+\+STRONG\+\_\+\+INLINE
+\begin{DoxyCompactList}\small\item\em Strong inline macro. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8hpp_a08fe8ac8d421e1dff257cbbba1927521}{EIGEN\+\_\+\+INITIALIZE\+\_\+\+MATRICES\+\_\+\+BY\+\_\+\+NAN}}
+\begin{DoxyCompactList}\small\item\em Initialize matrices with NaN in debug mode for easier error detection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{mm\+::indexes\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Class representing a collection of indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{mm\+::\+PI}} = \mbox{\hyperlink{structmm_1_1Pi}{Pi}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{double}}$>$\+::value
+\begin{DoxyCompactList}\small\item\em Mathematical constant pi in double precision. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{namespacemm_a1f19f6918021bf7c2b7fcf9bab94d1b7}{mm\+::\+INF}} = 1.\+0 / 0.\+0
+\begin{DoxyCompactList}\small\item\em Infinite floating point value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{mm\+::\+NaN}} = 0.\+0 / 0.\+0
+\begin{DoxyCompactList}\small\item\em Not-\/a-\/number floating point value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{Config_8hpp_acb1e4e2de56103873d2de3c77c9c9373}\label{Config_8hpp_acb1e4e2de56103873d2de3c77c9c9373} 
+\index{Config.hpp@{Config.hpp}!EIGEN\_DEFAULT\_IO\_FORMAT@{EIGEN\_DEFAULT\_IO\_FORMAT}}
+\index{EIGEN\_DEFAULT\_IO\_FORMAT@{EIGEN\_DEFAULT\_IO\_FORMAT}!Config.hpp@{Config.hpp}}
+\doxysubsubsection{\texorpdfstring{EIGEN\_DEFAULT\_IO\_FORMAT}{EIGEN\_DEFAULT\_IO\_FORMAT}}
+{\footnotesize\ttfamily \#define EIGEN\+\_\+\+DEFAULT\+\_\+\+IO\+\_\+\+FORMAT}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::IOFormat(Eigen::StreamPrecision,\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::DontAlignCols,\ \textcolor{stringliteral}{"{},\ "{}},\ \textcolor{stringliteral}{"{};\ "{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}["{}},\ \textcolor{stringliteral}{"{}]"{}})}
+
+\end{DoxyCode}
+
+
+Set Eigen default IO format. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{Config_8hpp_a08fe8ac8d421e1dff257cbbba1927521}\label{Config_8hpp_a08fe8ac8d421e1dff257cbbba1927521} 
+\index{Config.hpp@{Config.hpp}!EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN@{EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN}}
+\index{EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN@{EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN}!Config.hpp@{Config.hpp}}
+\doxysubsubsection{\texorpdfstring{EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN}{EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN}}
+{\footnotesize\ttfamily \#define EIGEN\+\_\+\+INITIALIZE\+\_\+\+MATRICES\+\_\+\+BY\+\_\+\+NAN}
+
+
+
+Initialize matrices with NaN in debug mode for easier error detection. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00028}{28}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{Config_8hpp_a525f97d9a111a8f0b77b19bd040f22fe}\label{Config_8hpp_a525f97d9a111a8f0b77b19bd040f22fe} 
+\index{Config.hpp@{Config.hpp}!EIGEN\_MATRIX\_PLUGIN@{EIGEN\_MATRIX\_PLUGIN}}
+\index{EIGEN\_MATRIX\_PLUGIN@{EIGEN\_MATRIX\_PLUGIN}!Config.hpp@{Config.hpp}}
+\doxysubsubsection{\texorpdfstring{EIGEN\_MATRIX\_PLUGIN}{EIGEN\_MATRIX\_PLUGIN}}
+{\footnotesize\ttfamily \#define EIGEN\+\_\+\+MATRIX\+\_\+\+PLUGIN~"{}medusa/bits/types/Matrix\+Addons.\+hpp"{}}
+
+
+
+Set Eigen Matrix plugin. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00012}{12}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{Config_8hpp_afc792de073c9a00a2f3739a451be4312}\label{Config_8hpp_afc792de073c9a00a2f3739a451be4312} 
+\index{Config.hpp@{Config.hpp}!EIGEN\_MATRIXBASE\_PLUGIN@{EIGEN\_MATRIXBASE\_PLUGIN}}
+\index{EIGEN\_MATRIXBASE\_PLUGIN@{EIGEN\_MATRIXBASE\_PLUGIN}!Config.hpp@{Config.hpp}}
+\doxysubsubsection{\texorpdfstring{EIGEN\_MATRIXBASE\_PLUGIN}{EIGEN\_MATRIXBASE\_PLUGIN}}
+{\footnotesize\ttfamily \#define EIGEN\+\_\+\+MATRIXBASE\+\_\+\+PLUGIN~"{}medusa/bits/types/Matrix\+Base\+Addons.\+hpp"{}}
+
+
+
+Set Eigen Matrix\+Base plugin. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00010}{10}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+
+\Hypertarget{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}\label{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a} 
+\index{Config.hpp@{Config.hpp}!SINL@{SINL}}
+\index{SINL@{SINL}!Config.hpp@{Config.hpp}}
+\doxysubsubsection{\texorpdfstring{SINL}{SINL}}
+{\footnotesize\ttfamily \#define SINL~EIGEN\+\_\+\+STRONG\+\_\+\+INLINE}
+
+
+
+Strong inline macro. 
+
+
+
+Definition at line \mbox{\hyperlink{Config_8hpp_source_l00024}{24}} of file \mbox{\hyperlink{Config_8hpp_source}{Config.\+hpp}}.
+

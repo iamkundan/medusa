@@ -1,0 +1,73 @@
+\doxysection{test/domains/\+Grain\+Drop\+Fill\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2GrainDropFill_test_8cpp-example}{}\label{test_2domains_2GrainDropFill_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GrainDropFill_8hpp}{medusa/bits/domains/GrainDropFill.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GrainDrop1d)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain\ =\ b.discretizeBoundaryWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ GrainDropFill<Vec1d>\ fill\_engine(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(0).initialSpacing(dx/5).maxPoints(3000);}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ tests\ mostly\ that\ it\ compiles\ and\ runs,\ as\ this\ invokes\ a\ specialization.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ dx)\ /\ dx;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.1);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GrainDrop2d)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dx\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ std::pow(p[0]/10,\ 2)\ +\ 0.01;\ \};}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ b.discretizeBoundaryWithDensity(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ GrainDropFill<Vec2d>\ fill\_engine(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(0).initialSpacing(0.01/5).maxPoints(15000).excessFactor(10);}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ dx(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.3);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GrainDrop3d)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dx\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::pow(p[0]/10\ +\ p[1]/10\ +\ p[2]/10,\ 2)\ +\ 0.025;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ b.discretizeBoundaryWithDensity(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ GrainDropFill<Vec3d>\ fill\_engine(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(0).initialSpacing(0.025/5).maxPoints(50000);}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ dx(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

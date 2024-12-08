@@ -1,0 +1,21 @@
+\doxysection{mm\+::discretization\+\_\+helpers Namespace Reference}
+\hypertarget{namespacemm_1_1discretization__helpers}{}\label{namespacemm_1_1discretization__helpers}\index{mm::discretization\_helpers@{mm::discretization\_helpers}}
+
+
+\doxysubsection{Detailed Description}
+Namespace containing helpers for discretizing various geometric objects. \doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization}{Sphere\+Discretization}}
+\begin{DoxyCompactList}\small\item\em Discretizes a sphere with given radius uniformly with {\ttfamily num\+\_\+points} points on the great circle. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_3_01scalar__t_00_011_01_4}{Sphere\+Discretization$<$ scalar\+\_\+t, 1 $>$}}
+\begin{DoxyCompactList}\small\item\em One-\/dimensional base case of the discretization. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_3_01scalar__t_00_012_01_4}{Sphere\+Discretization$<$ scalar\+\_\+t, 2 $>$}}
+\begin{DoxyCompactList}\small\item\em Two-\/dimensional base case of the discretization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretize\+Line\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{q}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{delta\+\_\+r}})
+\begin{DoxyCompactList}\small\item\em Returns nodes lying on the line segment {\ttfamily pq} with approximate distances {\ttfamily delta\+\_\+r}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{discretize\+Triangle\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p1, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p2, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p3, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&normal, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{only\+\_\+interior}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Discretize a triangle in 3D space with given density. \end{DoxyCompactList}\end{DoxyCompactItemize}

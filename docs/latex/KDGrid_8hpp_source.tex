@@ -1,0 +1,90 @@
+\doxysection{KDGrid.\+hpp}
+\hypertarget{KDGrid_8hpp_source}{}\label{KDGrid_8hpp_source}\index{include/medusa/bits/spatial\_search/KDGrid.hpp@{include/medusa/bits/spatial\_search/KDGrid.hpp}}
+\mbox{\hyperlink{KDGrid_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDGRID\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDGRID\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{KDGrid__fwd_8hpp}{KDGrid\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Grid_8hpp}{Grid.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00017}00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00018}00018\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{KDGrid<vec\_t>::IndexArray}}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00019}\mbox{\hyperlink{classmm_1_1KDGrid_aa2981400e818d36ec35754e168eda1e5}{00019}}\ \mbox{\hyperlink{classmm_1_1KDGrid_aa2981400e818d36ec35754e168eda1e5}{KDGrid<vec\_t>::compute\_size}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ bot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ top,\ \mbox{\hyperlink{classmm_1_1KDGrid_a9d1a85ac527be54d84f8f1e714ad12e5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{cell\_size}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{IndexArray}}\ counts;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(bot[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ <=\ top[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ \textcolor{stringliteral}{"{}Bottom\ bounds\ \%s\ must\ be\ below\ top\ bounds\ \%s."{}},\ bot,\ top);}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ counts[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \mbox{\hyperlink{group__utils_ga3865c1d93dca35e836c70c17b2137bc3}{iceil}}((top[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ bot[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ /\ \mbox{\hyperlink{classmm_1_1Gaussian}{cell\_size}})\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00024}00024\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{return}\ counts;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1KDGrid_ac0292a67f0f9c12ce278b4282b6a527d}{00029}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1KDGrid_ac0292a67f0f9c12ce278b4282b6a527d}{KDGrid<vec\_t>::increment}}(\mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{KDGrid::IndexArray}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{cur}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{span}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{KDGrid::IndexArray}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{ref}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{cur}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{ref}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{span}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{cur}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{ref}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{span}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{cur}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00041}00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00042}\mbox{\hyperlink{classmm_1_1KDGrid_ae054566ac67531afa4e70e8446ece0be}{00042}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1KDGrid_ae753e5932049cbcc645a499f1298dc31}{KDGrid<vec\_t>::insert}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{KDGrid::IndexArray}}\&\ index)\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(grid\_(index)\ ==\ -\/1,\ \textcolor{stringliteral}{"{}This\ grid\ cell\ is\ already\ occupied\ by\ point\ \%d.\ Consider"{}}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ using\ smaller\ cell\ size."{}},\ grid\_(index));}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ =\ points\_.size();}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00046}00046\ \ \ \ \ grid\_(index)\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00047}00047\ \ \ \ \ points\_.push\_back(p);}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00051}00051\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00052}00052\ \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00053}\mbox{\hyperlink{classmm_1_1KDGrid_a247023562ea7c98ae92a55e7a409c533}{00053}}\ \mbox{\hyperlink{classmm_1_1KDGrid_adeb477de1958af5336bd05c6871b8088}{KDGrid<vec\_t>::existsPointInSphere}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p,\ \mbox{\hyperlink{classmm_1_1KDGrid_a9d1a85ac527be54d84f8f1e714ad12e5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{KDGrid::IndexArray}}\&\ index)\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{span}}\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(std::ceil(\mbox{\hyperlink{classmm_1_1Gaussian}{r}}/cell\_size\_));}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00055}00055\ \ \ \ \ \mbox{\hyperlink{classmm_1_1KDGrid_a9d1a85ac527be54d84f8f1e714ad12e5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}*\mbox{\hyperlink{classmm_1_1Gaussian}{r}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00056}00056\ \ \ \ \ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{IndexArray}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{tmp\_index}}\ =\ index;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \mbox{\hyperlink{classmm_1_1Gaussian}{tmp\_index}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/=\ \mbox{\hyperlink{classmm_1_1Gaussian}{span}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (grid\_.inBounds(\mbox{\hyperlink{classmm_1_1Gaussian}{tmp\_index}})\ \&\&\ grid\_(\mbox{\hyperlink{classmm_1_1Gaussian}{tmp\_index}})\ !=\ -\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{gp}}\ =\ points\_[grid\_(\mbox{\hyperlink{classmm_1_1Gaussian}{tmp\_index}})];}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((p-\/\mbox{\hyperlink{classmm_1_1Gaussian}{gp}}).\mbox{\hyperlink{classmm_1_1Gaussian}{squaredNorm}}()\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00065}00065\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (increment(\mbox{\hyperlink{classmm_1_1Gaussian}{tmp\_index}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{span}},\ index));}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00069}00069\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00070}\mbox{\hyperlink{classmm_1_1KDGrid_ae58d3ceffecb0b31c35dce9b1b54687d}{00070}}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{KDGrid<vec\_t>::IndexArray}}\ \mbox{\hyperlink{classmm_1_1KDGrid_ae58d3ceffecb0b31c35dce9b1b54687d}{KDGrid<vec\_t>::compute\_index}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p)\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00071}00071\ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ =\ (p-\/bot\_)\ /\ cell\_size\_;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{classmm_1_1KDGrid_aa801435d73e5cb8c8fc07b59630404a0}{IndexArray}}\ index;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ index[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]);}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{return}\ index;}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00080}00080\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00081}00081\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{KDGrid<V>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{search}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}KDGrid\ search\ structure\ from\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{search}}.bot\_\ <<\ \textcolor{stringliteral}{"{}\ to\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{search}}.top\_}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ with\ cell\_size\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{search}}.cell\_size\_\ <<\ \textcolor{stringliteral}{"{}\ containing\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{search}}.size()}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ points"{}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00089}00089\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{KDGrid_8hpp_source_l00091}00091\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDGRID\_HPP\_}}
+
+\end{DoxyCode}

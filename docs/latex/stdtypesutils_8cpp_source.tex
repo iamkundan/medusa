@@ -1,0 +1,43 @@
+\doxysection{stdtypesutils.\+cpp}
+\hypertarget{stdtypesutils_8cpp_source}{}\label{stdtypesutils_8cpp_source}\index{src/utils/stdtypesutils.cpp@{src/utils/stdtypesutils.cpp}}
+\mbox{\hyperlink{stdtypesutils_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdtypesutils_8hpp}{medusa/bits/utils/stdtypesutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00010}\mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{00010}}\ std::vector<std::string>\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{delim}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00011}00011\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{delim}}.empty(),\ \textcolor{stringliteral}{"{}Delimiter\ must\ not\ be\ empty."{}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00012}00012\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ =\ 0,\ pos\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00014}00014\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ pos\ =\ str.find(\mbox{\hyperlink{classmm_1_1Gaussian}{delim}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ ==\ std::string::npos)\ pos\ =\ str.length();}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}}.emplace\_back(str.substr(\mbox{\hyperlink{classmm_1_1Gaussian}{prev}},\ pos-\/\mbox{\hyperlink{classmm_1_1Gaussian}{prev}}));}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ =\ pos\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{delim}}.length();}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00019}00019\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (pos\ <\ str.length()\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ <\ str.length());}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{prev}}\ ==\ str.length())\ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}}.emplace\_back(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{tokens}};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00024}\mbox{\hyperlink{namespacemm_ae00b97fbaf06976c5c4c7eae4bb6e637}{00024}}\ std::vector<std::string>\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{delim}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(str,\ std::string(1,\ \mbox{\hyperlink{classmm_1_1Gaussian}{delim}}));}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00029}00029\ std::string\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ parts,\ \textcolor{keyword}{const}\ std::string\&\ joiner)\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (parts.empty())\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00031}00031\ \ \ \ \ std::string\ result\ =\ parts[0];}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ parts.size();}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ result\ +=\ joiner\ +\ parts[i];}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00039}00039\ std::string\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ parts,\ \textcolor{keywordtype}{char}\ joiner)\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(parts,\ std::string(1,\ joiner));}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8cpp_source_l00044}00044\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

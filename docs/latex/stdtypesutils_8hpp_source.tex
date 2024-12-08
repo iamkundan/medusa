@@ -1,0 +1,94 @@
+\doxysection{stdtypesutils.\+hpp}
+\hypertarget{stdtypesutils_8hpp_source}{}\label{stdtypesutils_8hpp_source}\index{include/medusa/bits/utils/stdtypesutils.hpp@{include/medusa/bits/utils/stdtypesutils.hpp}}
+\mbox{\hyperlink{stdtypesutils_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_UTILS\_STDTYPESUTILS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_UTILS\_STDTYPESUTILS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00027}00027\ std::vector<std::string>\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{keyword}{const}\ std::string\&\ s,\ \textcolor{keyword}{const}\ std::string\&\ delim);}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00029}00029\ std::vector<std::string>\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{keyword}{const}\ std::string\&\ s,\ \textcolor{keywordtype}{char}\ delim);}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00037}\mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{00037}}\ std::string\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{parts}},\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{joiner}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00039}\mbox{\hyperlink{namespacemm_aef4c1e4e8bed3ae431728e2dbc033e60}{00039}}\ std::string\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{parts}},\ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{classmm_1_1Gaussian}{joiner}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00042}00042\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ container\_t>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00043}\mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{00043}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\&\ \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}}(\mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00044}00044\ \ \ \ \ std::sort(v.begin(),\ v.end());}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00049}00049\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ container\_t,\ \textcolor{keyword}{typename}\ predicate\_t>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00050}\mbox{\hyperlink{group__utils_ga15a96934ce3c6759364373dc668a87a7}{00050}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\&\ \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}}(\mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\&\ v,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{pred}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00051}00051\ \ \ \ \ std::sort(v.begin(),\ v.end(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{pred}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00056}00056\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ container\_t>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00057}\mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{00057}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\ \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{sorted}}(\mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00058}00058\ \ \ \ \ std::sort(v.begin(),\ v.end());}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00063}00063\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ container\_t,\ \textcolor{keyword}{typename}\ predicate\_t>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00064}\mbox{\hyperlink{group__utils_ga480725fbe71063bba9ed7be987075fd2}{00064}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\ \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{sorted}}(\mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\ v,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{pred}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00065}00065\ \ \ \ \ std::sort(v.begin(),\ v.end(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{pred}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{return}\ v;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00067}00067\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00077}00077\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ container\_t,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00078}\mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{00078}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\ \mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{pad}}(\mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ value)\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00079}00079\ \ \ \ \ \textcolor{keyword}{decltype}(\mbox{\hyperlink{classmm_1_1Gaussian}{container}}.begin()-\/>size())\ \mbox{\hyperlink{classmm_1_1Gaussian}{maxsize}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{container}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x.size()\ >\ \mbox{\hyperlink{classmm_1_1Gaussian}{maxsize}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{maxsize}}\ =\ x.size();}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{container}})\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ x.size();\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{maxsize}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ x.push\_back(value);}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container}};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00097}00097\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Tuple>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00098}\mbox{\hyperlink{structmm_1_1tuple__index}{00098}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__index}{tuple\_index}}\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00100}\mbox{\hyperlink{structmm_1_1tuple__index_a5393a5de2e18ead8d27470212c9dad21}{00100}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::size\_t\ \mbox{\hyperlink{structmm_1_1tuple__index_a5393a5de2e18ead8d27470212c9dad21}{value}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00101}00101\ \ \ \ \ \textcolor{keyword}{static\_assert}(!std::is\_same<Tuple,\ std::tuple<>>\mbox{\hyperlink{structmm_1_1tuple__index_a5393a5de2e18ead8d27470212c9dad21}{::value}},\ \ \textcolor{comment}{//\ Did\ you\ access\ invalid\ operators?}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Could\ not\ get\ index\ of\ type\ \`{}T`\ in\ given\ \`{}Tuple`"{}});}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00103}00103\ \};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00106}00106\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ \textcolor{keyword}{typename}...\ \mbox{\hyperlink{classmm_1_1Gaussian}{Types}}>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00107}\mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4}{00107}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__index}{tuple\_index}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{tuple}}<T,\ Types...>>\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00108}\mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4_af53798ef700b20b89cf8785213f5676c}{00108}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::size\_t\ \mbox{\hyperlink{structmm_1_1tuple__index_a5393a5de2e18ead8d27470212c9dad21}{value}}\ =\ 0;\ \ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00109}00109\ \};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00112}00112\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{U}},\ \textcolor{keyword}{typename}...\ \mbox{\hyperlink{classmm_1_1Gaussian}{Types}}>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00113}\mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4}{00113}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__index}{tuple\_index}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{tuple}}<U,\ Types...>>\ \{}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00115}\mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4_ac0c859afa95121f846425d6ec498a80e}{00115}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::size\_t\ \mbox{\hyperlink{structmm_1_1tuple__index_a5393a5de2e18ead8d27470212c9dad21}{value}}\ =\ 1\ +\ \mbox{\hyperlink{structmm_1_1tuple__index}{tuple\_index}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::tuple<\mbox{\hyperlink{classmm_1_1Gaussian}{Types}}...>>\mbox{\hyperlink{structmm_1_1tuple__index_a5393a5de2e18ead8d27470212c9dad21}{::value}};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00116}00116\ \};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00119}00119\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Tuple>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00120}\mbox{\hyperlink{structmm_1_1tuple__has__type}{00120}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__has__type}{tuple\_has\_type}};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00123}00123\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00124}\mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_4_01_4}{00124}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__has__type}{tuple\_has\_type}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{tuple}}<>>\ :\ std::false\_type\ \{\};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00127}00127\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{U}},\ \textcolor{keyword}{typename}...\ \mbox{\hyperlink{classmm_1_1Gaussian}{Ts}}>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00128}\mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01U_00_01Ts_8_8_8_01_4_01_4}{00128}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__has__type}{tuple\_has\_type}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{tuple}}<U,\ Ts...>>\ :\ \mbox{\hyperlink{structmm_1_1tuple__has__type}{tuple\_has\_type}}<T,\ std::tuple<Ts...>>\ \{\};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00131}00131\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ \textcolor{keyword}{typename}...\ \mbox{\hyperlink{classmm_1_1Gaussian}{Ts}}>}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00132}\mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01T_00_01Ts_8_8_8_01_4_01_4}{00132}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1tuple__has__type}{tuple\_has\_type}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{tuple}}<T,\ Ts...>>\ :\ std::true\_type\ \{\};}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00134}00134\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{stdtypesutils_8hpp_source_l00136}00136\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_UTILS\_STDTYPESUTILS\_HPP\_}}
+
+\end{DoxyCode}

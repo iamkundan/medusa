@@ -1,0 +1,61 @@
+\doxysection{test/types/\+Scalar\+Field\+\_\+test.\+cpp}
+\hypertarget{test_2types_2ScalarField_test_8cpp-example}{}\label{test_2types_2ScalarField_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScalarField_8hpp}{medusa/bits/types/ScalarField.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ ScalarFieldAssgn)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ field(4);}
+\DoxyCodeLine{\ \ \ \ field\ =\ -\/3.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(4,\ field.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ field[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ field[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ field[2]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ field[3]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ idx\ =\ \{1,\ 2,\ 0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ field[idx]\ =\ 5.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(4,\ field.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5.0,\ field[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5.0,\ field[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5.0,\ field[2]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3.0,\ field[3]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ field2\ =\ field;}
+\DoxyCodeLine{\ \ \ \ field[\{2,\ 1,\ 0\}]\ =\ field2[\{0,\ 2,\ 3\}];}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(4,\ field.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3.0,\ field[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5.0,\ field[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5.0,\ field[2]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3.0,\ field[3]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ ScalarFieldTraits)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same<double,\ typename\ scalar\_type<Eigen::Matrix2d>::type>::value,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixX2f\ M;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same<float,\ \textcolor{keyword}{typename}\ scalar\_type<}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{decltype}(M.row(0))>::type>::value,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same<float,\ \textcolor{keyword}{typename}\ scalar\_type<}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{decltype}(M.block(0,\ 0,\ 1,\ 1))>::type>::value,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same<float,\ \textcolor{keyword}{typename}\ scalar\_type<}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{decltype}(M(\{1,\ 2,\ 3\},\ \{0,\ 1\}))>::type>::value,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ DISABLED\_ScalarFieldUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_aa199920a7086b36ec358997bd6feaa0c}{ScalarFieldd}}\ field(4);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ set\ to\ scalar\ and\ multi\ index\ access}}
+\DoxyCodeLine{\ \ \ \ field\ =\ -\/3.0;}
+\DoxyCodeLine{\ \ \ \ field[\{0,\ 2,\ 3\}]\ =\ 5.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ usual\ mathematical\ operations}}
+\DoxyCodeLine{\ \ \ \ field\ *=\ 2.5;}
+\DoxyCodeLine{\ \ \ \ field\ +=\ field;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ field\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,44 @@
+\doxysection{Gaussian\+\_\+fwd.\+hpp}
+\hypertarget{Gaussian__fwd_8hpp_source}{}\label{Gaussian__fwd_8hpp_source}\index{include/medusa/bits/approximations/Gaussian\_fwd.hpp@{include/medusa/bits/approximations/Gaussian\_fwd.hpp}}
+\mbox{\hyperlink{Gaussian__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_GAUSSIAN\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_GAUSSIAN\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Operators__fwd_8hpp}{Operators\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1Gaussian}{00029}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}\ \{}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00030}00030\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{00031}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00033}00033\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{00034}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00036}00036\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00038}00038\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}(\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}\ =\ 1.0);}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{00041}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00044}\mbox{\hyperlink{classmm_1_1Gaussian_a4f9e953aae6c4adc85a6a73769698515}{00044}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Gaussian_a4f9e953aae6c4adc85a6a73769698515}{setShape}}(\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}})\ \{\ \mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}};\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096}{operator()}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00060}\mbox{\hyperlink{classmm_1_1Gaussian_a85f616da9971b73e7f70b0344361ba19}{00060}}\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_a85f616da9971b73e7f70b0344361ba19}{operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dimension>}}\ lap)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00063}\mbox{\hyperlink{classmm_1_1Gaussian_af651c1e5e070477a5668ea2f43049eb9}{00063}}\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_af651c1e5e070477a5668ea2f43049eb9}{operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::exp(-\/\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}});\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00067}\mbox{\hyperlink{classmm_1_1Gaussian_a196ff4c920d0c5e56a79cce73969b0c6}{00067}}\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian_a196ff4c920d0c5e56a79cce73969b0c6}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian<V>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}});}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00068}00068\ \};}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00070}00070\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{Gaussian__fwd_8hpp_source_l00072}00072\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_GAUSSIAN\_FWD\_HPP\_}}
+
+\end{DoxyCode}

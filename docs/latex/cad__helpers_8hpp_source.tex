@@ -1,0 +1,93 @@
+\doxysection{cad\+\_\+helpers.\+hpp}
+\hypertarget{cad__helpers_8hpp_source}{}\label{cad__helpers_8hpp_source}\index{include/medusa/bits/domains/cad\_helpers.hpp@{include/medusa/bits/domains/cad\_helpers.hpp}}
+\mbox{\hyperlink{cad__helpers_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_CAD\_HELPERS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_CAD\_HELPERS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{cad__helpers__fwd_8hpp}{cad\_helpers\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00015}\mbox{\hyperlink{namespacemm_1_1cad__helpers}{00015}}\ \textcolor{keyword}{namespace\ }cad\_helpers\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00017}00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00018}\mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{00018}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\&\ t,\ \textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ knots,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}})\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{comment}{//\ Check\ for\ special\ cases.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (t\ ==\ *(knots.end()\ -\/\ 1))\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *(\mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}.end()\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00023}00023\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (t\ ==\ *knots.begin())\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}.begin();}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(knots.size()\ >=\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ +\ p\ +\ 1\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ -\/\ p\ >=\ 0,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ knots\ or\ parameter\ not\ within\ range.\ Try\ padding\ the\ knot\ vector\ p\ times."{}});}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ De\ Boor's\ algorithm.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<Vec<scalar\_t,\ dim>}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}(\mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}.begin()\ +\ (\mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ -\/\ p),\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}.begin()\ +\ (\mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ <\ p\ +\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ p;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ >\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ -\/\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}}\ =\ (t\ -\/\ knots[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ -\/\ p])\ /\ (knots[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ +\ 1\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}]\ -\/\ knots[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ -\/\ p]);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]\ =\ (1.0\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}})\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ -\/\ 1]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{alpha}}\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}[p];}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00044}\mbox{\hyperlink{namespacemm_1_1cad__helpers_abffb147e266ef4e2ea5ac45a04ad4d45}{00044}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\&\ t,\ \textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ knots)\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ Binary\ search\ for\ k.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ =\ std::upper\_bound(knots.begin(),\ knots.end(),\ t)\ -\/\ knots.begin();}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{evaluate\_b\_spline}}(t,\ p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}},\ knots,\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00053}00053\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00054}\mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{00054}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{generate\_b\_spline\_derivative}}(\textcolor{keywordtype}{int}\ p,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}},}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ knots,\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_control\_points}},}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_knots}})\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00057}00057\ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{generate\_b\_spline\_derivative\_control\_points}}(p,\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}},\ knots,\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_control\_points}});}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00058}00058\ \ \ \ \ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{generate\_b\_spline\_derivative\_knots}}(knots,\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_knots}});}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00061}00061\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t,\ \textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00062}\mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{00062}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{generate\_b\_spline\_derivative\_control\_points}}(\textcolor{keywordtype}{int}\ p,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\mbox{\hyperlink{classmm_1_1Gaussian}{Vec<scalar\_t,\ dim>}}>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_control\_points}})\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00065}00065\ \ \ \ \ \textcolor{comment}{//\ Derivative\ has\ one\ less\ control\ point.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00066}00066\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_control\_points}}.resize(\mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}.size()\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00068}00068\ \ \ \ \ \textcolor{comment}{//\ Calculate\ control\ points.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}.size()\ -\/\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{temp}}\ =\ ((\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}})p)\ /\ (knots[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ +\ p\ +\ 1]\ -\/\ knots[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ +\ 1]);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_control\_points}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}](\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{temp}}\ *\ (\mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ +\ 1](\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{control\_points}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}](\mbox{\hyperlink{classmm_1_1Gaussian}{j}}));}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00077}00077\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_t>}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00078}\mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{00078}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{generate\_b\_spline\_derivative\_knots}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ knots,}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_knots}})\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00080}00080\ \ \ \ \ \textcolor{comment}{//\ Derivative's\ order\ is\ one\ less\ than\ original\ order.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_knots}}.resize(knots.size()\ -\/\ 2);}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00083}00083\ \ \ \ \ \textcolor{comment}{//\ Calculate\ derivative\ knots.}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_knots}}.size();\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{der\_knots}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ knots[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ +\ 1];}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00086}00086\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00087}00087\ \}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00089}00089\ \}\ \ \textcolor{comment}{//\ namespace\ cad\_helpers}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00090}00090\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{cad__helpers_8hpp_source_l00092}00092\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_CAD\_HELPERS\_HPP\_}}
+
+\end{DoxyCode}

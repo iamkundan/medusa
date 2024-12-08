@@ -1,0 +1,44 @@
+\doxysection{test/utils/randutils\+\_\+test.\+cpp}
+\hypertarget{test_2utils_2randutils_test_8cpp-example}{}\label{test_2utils_2randutils_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{randutils_8hpp}{medusa/bits/utils/randutils.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ RandGetSeed)\ \{}
+\DoxyCodeLine{\ \ \ \ assert(\mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\_seed}}()\ !=\ \mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{get\_seed}}());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ RandChoice)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ random\ choice\ -\/-\/\ deterministic\ tests}}
+\DoxyCodeLine{\ \ \ \ Range<int>\ elements\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ Range<double>\ weights\ =\ \{0,\ 3,\ 0\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(elements,\ weights),\ 2);}
+\DoxyCodeLine{\ \ \ \ weights\ =\ \{0,\ 1,\ 0\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(elements,\ weights,\ \textcolor{keyword}{true}),\ 2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ elements\ =\ \{0,\ 1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ std::mt19937\ generator(42);}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ counts\ =\ \{0,\ 0,\ 0\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 100;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{random\_choice}}(elements,\ \{1,\ 1,\ 1\},\ \textcolor{keyword}{false},\ generator);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(0,\ c);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(c,\ 2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ counts[c]++;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(30,\ counts[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(counts[0],\ 37);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(30,\ counts[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(counts[1],\ 37);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(30,\ counts[2]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(counts[2],\ 37);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

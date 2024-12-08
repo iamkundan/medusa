@@ -1,0 +1,289 @@
+\doxysection{test/domains/\+Polygon\+Shape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2PolygonShape_test_8cpp-example}{}\label{test_2domains_2PolygonShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{PolygonShape_8hpp}{medusa/bits/domains/PolygonShape.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeOrientationTriangle)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ points\ =\ \{\{0.0,\ 0.0\},\ \{3.4,\ 1.2\},\ \{-\/1.2,\ 2.9\}\};}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(points);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(points,\ poly.points());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ points2\ =\ \{\{0.0,\ 0.0\},\ \{-\/1.2,\ 2.9\},\ \{3.4,\ 1.2\}\};}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly2(points2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NE(points2,\ poly2.points());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeOrientation)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{0.2400,\ 0.1538\},\ \{0.0646,\ 0.3092\},\ \{0.3015,\ 0.3554\},\ \{0.2015,\ 0.5692\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.3985,\ 0.5415\},\ \{0.6785,\ 0.6123\},\ \{0.7938,\ 0.5692\},\ \{0.7446,\ 0.4862\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.5569,\ 0.5092\},\ \{0.3969,\ 0.4477\},\ \{0.4877,\ 0.4277\},\ \{0.6200,\ 0.4277\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.8062,\ 0.4446\},\ \{0.8462,\ 0.5631\},\ \{0.8000,\ 0.6600\},\ \{0.9215,\ 0.6477\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.9169,\ 0.5200\},\ \{0.8846,\ 0.4000\},\ \{0.6877,\ 0.3662\},\ \{0.4108,\ 0.3508\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.4677,\ 0.2585\},\ \{0.7277,\ 0.2969\},\ \{0.8138,\ 0.3169\},\ \{0.8385,\ 0.2354\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.8015,\ 0.1908\},\ \{0.8631,\ 0.1123\},\ \{0.8492,\ 0.0431\},\ \{0.7538,\ 0.0369\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.7154,\ 0.1169\},\ \{0.7338,\ 0.2000\},\ \{0.5723,\ 0.1692\},\ \{0.6323,\ 0.0631\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.5431,\ 0.0292\},\ \{0.4831,\ 0.0738\},\ \{0.5138,\ 0.1569\},\ \{0.4846,\ 0.1985\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.3908,\ 0.2446\},\ \{0.2662,\ 0.2631\},\ \{0.3831,\ 0.2000\},\ \{0.4169,\ 0.1000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.3615,\ 0.0569\},\ \{0.3015,\ 0.1692\},\ \{0.2015,\ 0.2831\},\ \{0.1800,\ 0.2477\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.2862,\ 0.1477\},\ \{0.2492,\ 0.0338\},\ \{0.0477,\ 0.0892\},\ \{0.0338,\ 0.2400\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \{0.0985,\ 0.1400\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(pts);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NE(pts,\ poly.points());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::reverse(pts.begin(),\ pts.end());}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly2(pts);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(pts,\ poly2.points());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeContainsV)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(\{\{0.0,\ \ 0.0\},\ \{1.0,\ 2.0\},\ \{0.0,\ \ 0.1\},\ \{-\/1.0,\ \ 2.0\}\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{-\/1.0,\ 2.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1.0,\ 2.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 0.1\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 0.05\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0.0,\ 0.2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{-\/0.1,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0.1,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0.0,\ 1.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.5,\ 0.05+1.95*0.5\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{-\/0.5,\ 0.05+1.95*0.5\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeContainsM)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(\{\{0.0,\ 0.0\},\ \{4.0,\ 0.0\},\ \{4.0,\ 4.0\},\ \{2.0,\ 2.0\},\ \{0.0,\ 4.0\}\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{4.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{4.0,\ 4.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{2.0,\ 2.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 4.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1.0,\ 1.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{2.0,\ 3.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{2.0,\ -\/1.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{3.5,\ 3.5\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1.5,\ 1.5\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeContainsStar)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(\{\{0.0,\ -\/2.0\},\ \{1.0,\ -\/1.0\},\ \{2.0,\ 0.0\},\ \{1.0,\ 1.0\},\ \{0.0,\ 2.0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.0,\ 1.0\},\ \{-\/2.0,\ 0.0\},\ \{-\/1.0,\ -\/1.0\}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ -\/2.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1.0,\ -\/1.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{2.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 2.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ -\/1.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 1.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{-\/1.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.0,\ 0.0\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeMargin)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Unit\ square.}}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(\{\{0,\ 0\},\ \{1,\ 0\},\ \{1,\ 1\},\ \{0,\ 1\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ margin\ =\ poly.margin();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.5,\ 1+margin/2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0.5,\ 1+2*margin\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1+margin/2,\ 0.5\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{1+2*margin,\ 0.5\}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ poly.setMargin(-\/1e-\/8);}
+\DoxyCodeLine{\ \ \ \ margin\ =\ poly.margin();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0.5,\ 1+margin/2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.5,\ 1+2*margin\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{1+margin/2,\ 0.5\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{1+2*margin,\ 0.5\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonRandomContains)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.0985,\ 0.1400\},\ \{0.0338,\ 0.2400\},\ \{0.0477,\ 0.0892\},\ \{0.2492,\ 0.0338\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.2862,\ 0.1477\},\ \{0.1800,\ 0.2477\},\ \{0.2015,\ 0.2831\},\ \{0.3015,\ 0.1692\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.3615,\ 0.0569\},\ \{0.4169,\ 0.1000\},\ \{0.3831,\ 0.2000\},\ \{0.2662,\ 0.2631\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.3908,\ 0.2446\},\ \{0.4846,\ 0.1985\},\ \{0.5138,\ 0.1569\},\ \{0.4831,\ 0.0738\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.5431,\ 0.0292\},\ \{0.6323,\ 0.0631\},\ \{0.5723,\ 0.1692\},\ \{0.7338,\ 0.2000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.7154,\ 0.1169\},\ \{0.7538,\ 0.0369\},\ \{0.8492,\ 0.0431\},\ \{0.8631,\ 0.1123\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.8015,\ 0.1908\},\ \{0.8385,\ 0.2354\},\ \{0.8138,\ 0.3169\},\ \{0.7277,\ 0.2969\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.4677,\ 0.2585\},\ \{0.4108,\ 0.3508\},\ \{0.6877,\ 0.3662\},\ \{0.8846,\ 0.4000\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.9169,\ 0.5200\},\ \{0.9215,\ 0.6477\},\ \{0.8000,\ 0.6600\},\ \{0.8462,\ 0.5631\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.8062,\ 0.4446\},\ \{0.6200,\ 0.4277\},\ \{0.4877,\ 0.4277\},\ \{0.3969,\ 0.4477\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.5569,\ 0.5092\},\ \{0.7446,\ 0.4862\},\ \{0.7938,\ 0.5692\},\ \{0.6785,\ 0.6123\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.3985,\ 0.5415\},\ \{0.2015,\ 0.5692\},\ \{0.3015,\ 0.3554\},\ \{0.0646,\ 0.3092\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.2400,\ 0.1538\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(pts);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(pts,\ poly.points());\ \ \textcolor{comment}{//\ no\ orientation\ change}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Results\ were\ obtained\ using\ Matlab's\ inpolygon\ function\ on\ the\ polygon\ with\ changed\ margins.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ If\ margins\ are\ not\ taken\ into\ account,\ two\ points\ fail.}}
+\DoxyCodeLine{\ \ \ \ std::string\ results\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000001100000000000000000000001110000000000000001000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000001111100000000000000000000011111100000000000011111111100000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000011111111100000000100000000001111111111100000000011111111100000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000111111111111110000000110000000011111111111100000000111111111100000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000111111111111111110000001111100000001111111111000000000111111111100000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001111111111111111110000001111110000001111111110000000001111111111100000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001111111111111111110000011111110000001111111110000000001111111111110000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001111111111111111111000011111100000000111111100000000001111111111100000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001111111111111111111000111111100000000111111100000000001111111111000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001111000000000111111001111111100000000111111000000000001111111110000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001110000000000001110001111111000000000111111000000000000111111100000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001110000000000011100011111111000000000111111110000000000111111100000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00001100000000000111000111111110000000001111111111111100000111111000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00011000000000001110001111111110000000011111111111111111111111111000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00011000000000111100001111111000000001111111111111111111111111111100000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00010000000001111000011111100000000111111111111111111111111111111110000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000011110000111111000000011111111111111111111111111111111111000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000111100001111100000111111111111111111111111111111111111110000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000001111110011111111111111111111001111111111111111111111111110000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000011111110111111111111111111110000000000111111111111111111110000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000111111111111111111111111111100000000000000000011111111111100000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000011111111111111111111111111111100000000000000000000000011111100000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000001111111111111111111111111111000000000000000000000000000001100000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000011111111111111111111111000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000111111111111111110000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000001111111111100000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000011111111111111111111111111000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000011111111111111111111111111111111111100000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000111111111111111111111111111111111111111111000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000111111111111111111111111111111111111111111111111000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000001111111111111111111111111111111111111111111111111100000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000001111111111111111111111111111111111111111111111111100000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000001111111111111100000000000000000000000111111111111100000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000011111111111100000000000000000000000000000000111111100000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000011111111111111000000000000000000000000000000111111110000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000111111111111111111000000000000000000000000000011111110000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000111111111111111111111000000000000000000100000011111110000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000001111111111111111111111110000000011111111110000011111110000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000001111111111111111111111111111111111111111110000001111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000011111111111111111111111111111111111111111111000001111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000011111111111111111111111111111111111111111111100000111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000111111111110000000111111111111111111111111111100000111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000111000000000000000000011111111111111111111111110000111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000001111111111111111111100000111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000111111111111100000001111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000011111100000000001111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000011111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000011111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000111111111000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000111111100000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}00000000000000000000000000000000000000000000000000000000000000000000000000000000"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 80;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ N;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(j)/N;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(i)/N;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ inside\ =\ poly.contains(\{x,\ y\});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(inside,\ results[c]\ ==\ \textcolor{charliteral}{'1'})\ <<\ \textcolor{stringliteral}{"{}Failed\ at\ \#"{}}\ <<\ c\ <<\ \textcolor{stringliteral}{"{}:\ "{}}\ <<\ x\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ y;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ c++;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonDiscretizeBoundaryWithDensity)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ domain2d(\{\{0.0,\ -\/2.0\},\ \{1.3,\ -\/1.0\},\ \{2.0,\ 0.0\},\ \{1.0,\ 2.7\},\ \{0.0,\ 3.0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.0,\ 0.5\},\ \{-\/2.0,\ 0.0\},\ \{-\/1.6,\ -\/1.0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx1\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx2\ =\ 0.02;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tol\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s1\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ c1\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s2\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ c2\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fill\ =\ [=](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ (p[0]\ <\ 0.0)\ ?\ dx1\ :\ dx2;\ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discretization2d\ =\ domain2d.discretizeBoundaryWithDensity(fill);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(discretization2d.size(),\ 408);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(discretization2d.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ \ <\ discretization2d.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (discretization2d.pos(i,\ 0)\ <\ 0.0\ -\/\ tol)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Range<double>\ distances2\ =\ std::get<1>(tree.query(discretization2d.pos(i),\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ s1\ +=\ std::sqrt(distances2[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ c1\ +=\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (discretization2d.pos(i,\ 0)\ >\ 0.0\ +\ tol)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Range<double>\ distances2\ =\ std::get<1>(tree.query(discretization2d.pos(i),\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ s2\ +=\ std::sqrt(distances2[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ c2\ +=\ 1;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(dx1,\ s1/c1,\ dx1*tol);\ \ \textcolor{comment}{//\ 5\%\ error\ tolerance}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(dx2,\ s2/c2,\ dx2*tol);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonDiscretizeBoundaryWithStep)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ domain2d(\{\{0.0,\ -\/2.0\},\ \{1.3,\ -\/1.0\},\ \{2.0,\ 0.0\},\ \{1.0,\ 2.7\},\ \{0.0,\ 3.0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.0,\ 0.5\},\ \{-\/2.0,\ 0.0\},\ \{-\/1.6,\ -\/1.0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tol\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ c\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ discretization2d\ =\ domain2d.discretizeBoundaryWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(discretization2d.size(),\ 274);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(discretization2d.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ \ <\ discretization2d.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<double>\ distances2\ =\ std::get<1>(tree.query(discretization2d.pos(i),\ 2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ s\ +=\ std::sqrt(distances2[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ c\ +=\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(dx,\ s/c,\ dx*tol);\ \ \textcolor{comment}{//\ 5\%\ error\ tolerance}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolygonShapeUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(\{\{0.0,\ -\/2.0\},\ \{1.0,\ -\/1.0\},\ \{2.0,\ 0.0\},\ \{1.0,\ 1.0\},\ \{0.0,\ 2.0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.0,\ 1.0\},\ \{-\/2.0,\ 0.0\},\ \{-\/1.0,\ -\/1.0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (poly.contains(\{2.3,\ 4.5\}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ poly\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ poly.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ (void)\ d;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

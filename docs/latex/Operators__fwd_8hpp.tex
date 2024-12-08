@@ -1,0 +1,64 @@
+\doxysection{include/medusa/bits/approximations/\+Operators\+\_\+fwd.hpp File Reference}
+\hypertarget{Operators__fwd_8hpp}{}\label{Operators__fwd_8hpp}\index{include/medusa/bits/approximations/Operators\_fwd.hpp@{include/medusa/bits/approximations/Operators\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+File defining basic differential operator families. 
+
+
+
+Definition in file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Core$>$}\newline
+{\ttfamily \#include "{}Monomials\+\_\+fwd.\+hpp"{}}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+Include dependency graph for Operators\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Operators__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Operators__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator$<$ Derived $>$}}
+\begin{DoxyCompactList}\small\item\em Base class for a differential operator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Lap}{mm\+::\+Lap$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents the Laplacian operator. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der1s}{mm\+::\+Der1s$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a family of all first derivatives. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der2s}{mm\+::\+Der2s$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a family of all second derivatives. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der1}{mm\+::\+Der1$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a first derivative wrt. {\ttfamily var}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a second derivative wrt. {\ttfamily var1} and {\ttfamily var2}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1Derivative}{mm\+::\+Derivative$<$ dimension $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a general derivative $\frac{\partial^{|\alpha|}}{\partial x^\alpha}$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a4b0d58b7d51281c7c45e6a0135a18c6f}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Operator}{Operator}}$<$ Derived $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output info about given operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} d$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a4699b62fb3d203c80084f61fdb9a8eb0}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der1s}{Der1s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output info about Der1s$<$d$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} d$>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a2dc5c9c1b9e1c660870b42bc6b0b1849}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der2s}{Der2s}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{d}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output info about Der2s$<$d$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}

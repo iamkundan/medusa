@@ -1,0 +1,64 @@
+\doxysection{Shape\+Difference.\+hpp}
+\hypertarget{ShapeDifference_8hpp_source}{}\label{ShapeDifference_8hpp_source}\index{include/medusa/bits/domains/ShapeDifference.hpp@{include/medusa/bits/domains/ShapeDifference.hpp}}
+\mbox{\hyperlink{ShapeDifference_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_SHAPEDIFFERENCE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_SHAPEDIFFERENCE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeDifference__fwd_8hpp}{ShapeDifference\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1ShapeDifference_acccc510bb848916d080ca73d18362102}{00017}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeDifference_acccc510bb848916d080ca73d18362102}{ShapeDifference<vec\_t>::discretizeBoundaryWithStep}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeBoundaryWithStep(step,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00020}00020\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeBoundaryWithStep(step,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00022}00022\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.subtract(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00027}\mbox{\hyperlink{classmm_1_1ShapeDifference_a01015a369f8c893aa8e14fab21b401fd}{00027}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeDifference_a01015a369f8c893aa8e14fab21b401fd}{ShapeDifference<vec\_t>::discretizeWithStep}}(}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeWithStep(step,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00030}00030\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeBoundaryWithStep(step,\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00032}00032\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.subtract(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00034}00034\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00036}00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1ShapeDifference_a9ba150353cdc1fbb6b9fb8e96ba9b948}{00037}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeDifference_a9ba150353cdc1fbb6b9fb8e96ba9b948}{ShapeDifference<vec\_t>::discretizeBoundaryWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,\ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeBoundaryWithDensity(dr,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00040}00040\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeBoundaryWithDensity(dr,\ type);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00042}00042\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.subtract(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00046}00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1ShapeDifference_ab30a186e16c7360118ae3bba6ff914f7}{00047}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1ShapeDifference_ab30a186e16c7360118ae3bba6ff914f7}{ShapeDifference<vec\_t>::discretizeWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{auto}\ d1\ =\ sh1-\/>discretizeWithDensity(dr,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00050}00050\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ sh2-\/>discretizeBoundaryWithDensity(dr,\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00052}00052\ \ \ \ \ sh2-\/>toggleMargin();}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ d1.subtract(d2);}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00056}00056\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00057}\mbox{\hyperlink{classmm_1_1ShapeDifference_a27776abecd03e9390d9a7bf5ba44aab3}{00057}}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1ShapeDifference_a27776abecd03e9390d9a7bf5ba44aab3}{ShapeDifference<vec\_t>::print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}ShapeDifference("{}}\ <<\ *sh1\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ *sh2\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00061}00061\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{ShapeDifference_8hpp_source_l00063}00063\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_SHAPEDIFFERENCE\_HPP\_}}
+
+\end{DoxyCode}

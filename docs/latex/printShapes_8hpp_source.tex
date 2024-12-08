@@ -1,0 +1,87 @@
+\doxysection{print\+Shapes.\+hpp}
+\hypertarget{printShapes_8hpp_source}{}\label{printShapes_8hpp_source}\index{include/medusa/bits/operators/printShapes.hpp@{include/medusa/bits/operators/printShapes.hpp}}
+\mbox{\hyperlink{printShapes_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_OPERATORS\_PRINTSHAPES\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_OPERATORS\_PRINTSHAPES\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shape__flags_8hpp}{shape\_flags.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{memutils_8hpp}{medusa/bits/utils/memutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }shapes\_internal\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00017}00017\ \textcolor{comment}{//\ recursive\ case}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OpFamilies,\ \textcolor{keywordtype}{size\_t}\ i>}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00019}00019\ \textcolor{keyword}{struct\ }name\_printer\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ print(std::ostream\&\ os)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ name\_printer<OpFamilies,\ i-\/1>::print(os);}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ std::tuple\_element<i-\/1,\ OpFamilies>::type::name();}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00024}00024\ \};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00026}00026\ \textcolor{comment}{//\ base\ case\ 1\ element}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OpFamilies>}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00028}00028\ \textcolor{keyword}{struct\ }name\_printer<OpFamilies,\ 1>\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ print(std::ostream\&\ os)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ os\ <<\ std::tuple\_element<0,\ OpFamilies>::type::name();}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00032}00032\ \};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00034}00034\ \textcolor{comment}{//\ base\ case\ 0\ element}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00035}00035\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OpFamilies>}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00036}00036\ \textcolor{keyword}{struct\ }name\_printer<OpFamilies,\ 0>\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ print(std::ostream\&\ os)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}()"{}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00040}00040\ \};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00042}00042\ \textcolor{comment}{//\ recursive\ case}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ shape\_storage\_t,\ \textcolor{keywordtype}{size\_t}\ op>}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00044}00044\ \textcolor{keyword}{struct\ }shape\_printer\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ print(std::ostream\&\ os,\ \textcolor{keyword}{const}\ shape\_storage\_t\&\ storage)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ shape\_printer<shape\_storage\_t,\ op-\/1>::print(os,\ storage);}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ std::min(storage.size(),\ 5);}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }el\ =\ \textcolor{keyword}{typename}\ std::tuple\_element<}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ op-\/1,\ \textcolor{keyword}{typename}\ shape\_storage\_t::op\_families\_tuple>::type;}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ "{}}\ <<\ el::type\_name()\ <<\ \textcolor{stringliteral}{"{}\ (family\ \#"{}}\ <<\ op-\/1\ <<\ \textcolor{stringliteral}{"{})\ shape\ sample:\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ c\ =\ 0;\ c\ <\ el::size();\ ++c)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ Operator\ \#"{}}\ <<\ c\ <<\ \textcolor{stringliteral}{"{}:\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ node\ "{}}\ <<\ i\ <<\ \textcolor{stringliteral}{"{}:"{}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ storage.supportSize(i);\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ storage.template\ get<op-\/1>(c,\ i,\ j);}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00062}00062\ \};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00064}00064\ \textcolor{comment}{//\ base\ case}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ shape\_storage\_t>\ \textcolor{keyword}{struct\ }shape\_printer<shape\_storage\_t,\ 0>\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ print(std::ostream\&,\ \textcolor{keyword}{const}\ shape\_storage\_t\&)\ \{\}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00067}00067\ \};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00071}00071\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ shape\_storage\_t>}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00072}\mbox{\hyperlink{printShapes_8hpp_a5dedd6d13a801703028f62ec21e2009c}{00072}}\ std::ostream\&\ \mbox{\hyperlink{printShapes_8hpp_a5dedd6d13a801703028f62ec21e2009c}{printShapes}}(\textcolor{keyword}{const}\ shape\_storage\_t\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}},\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}})\ \{}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ dimension:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}}.dim\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ domain\ size:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}}.size()\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ operator\ families\ =\ "{}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00076}00076\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{name\_printer}}<\textcolor{keyword}{typename}\ shape\_storage\_t::op\_families\_tuple,}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shape\_storage\_t::num\_operators>::print(\mbox{\hyperlink{classmm_1_1Gaussian}{os}});}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00078}00078\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00079}00079\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\_printer<shape\_storage\_t,\ shape\_storage\_t::num\_operators>::print}}(\mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}});}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00081}00081\ \ \ \ \ std::size\_t\ \mbox{\hyperlink{classmm_1_1Gaussian}{memory\_used}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{storage}}.memoryUsed();}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ mem\ used\ total:\ "{}}\ <<\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(\mbox{\hyperlink{classmm_1_1Gaussian}{memory\_used}});}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00086}00086\ \}\ \ \textcolor{comment}{//\ namespace\ shapes\_internal}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00087}00087\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{printShapes_8hpp_source_l00089}00089\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_OPERATORS\_PRINTSHAPES\_HPP\_}}
+
+\end{DoxyCode}

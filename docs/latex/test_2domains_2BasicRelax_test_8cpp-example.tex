@@ -1,0 +1,249 @@
+\doxysection{test/domains/\+Basic\+Relax\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2BasicRelax_test_8cpp-example}{}\label{test_2domains_2BasicRelax_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BasicRelax_8hpp}{medusa/bits/domains/BasicRelax.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{GeneralFill_8hpp}{medusa/bits/domains/GeneralFill.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxWithConstDistributionTestBoundaryProjection0)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 1.0\ /\ 55;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeWithStep(step);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ before\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_1\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ min\_spacing\ =\ 0.5\ *\ step;}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(20).initialHeat(5).numNeighbours(4).projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a9cba8855c66ddbfc7769282ceaf48e87}{BasicRelax::DO\_NOT\_PROJECT}});}
+\DoxyCodeLine{\ \ \ \ relax(c,\ min\_spacing);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ after\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_2\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ actual\ tests}}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ min\_spacing\ /\ 10);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ nodes\ are\ added\ on\ boundary}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(N\_2,\ N\_1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxWithConstDistributionTestBoundaryProjection1)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 1.0\ /\ 55.0;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeWithStep(step);}
+\DoxyCodeLine{\ \ \ \ Range<int>\ to\_remove;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ c.boundary())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j++\ \%\ 3\ !=\ 0)\ to\_remove.push\_back(i);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ c.removeNodes(to\_remove);\ \ \textcolor{comment}{//\ keep\ every\ fifth\ node}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ before\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_1\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ min\_spacing\ =\ 0.5\ *\ step;}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(50).initialHeat(1).numNeighbours(4).finalHeat(0.1)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{BasicRelax::PROJECT\_IN\_DIRECTION}}).boundaryProjectionThreshold(0.35);}
+\DoxyCodeLine{\ \ \ \ relax(c,\ min\_spacing);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ after\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_2\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ actual\ tests}}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ min\_spacing\ /\ 10);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ nodes\ are\ added\ on\ boundary}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(N\_2,\ N\_1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxWithConstDistributionTestBoundaryProjection2)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 1.0\ /\ 55.0;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeWithStep(step);}
+\DoxyCodeLine{\ \ \ \ Range<int>\ to\_remove;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ j\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ c.boundary())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j++\ \%\ 3\ !=\ 0)\ to\_remove.push\_back(i);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ c.removeNodes(to\_remove);\ \ \textcolor{comment}{//\ keep\ every\ fifth\ node}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ before\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_1\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ min\_spacing\ =\ 0.5\ *\ step;}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(50).initialHeat(1).numNeighbours(5)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695aa27f8899840416e18ae6be1172712f3b}{BasicRelax::PROJECT\_BETWEEN\_CLOSEST}});}
+\DoxyCodeLine{\ \ \ \ relax(c,\ min\_spacing);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ after\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_2\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ actual\ tests}}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ min\_spacing\ /\ 10);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ nodes\ are\ added\ on\ boundary}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(N\_2,\ N\_1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxWithConstDistributionTestBoundaryProjectiontreshold)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 1.0\ /\ 55.0;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeWithStep(step);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ before\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_1\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ min\_spacing\ =\ 0.5\ *\ step;}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(20).initialHeat(1).numNeighbours(4).boundaryProjectionThreshold(1.5)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{BasicRelax::PROJECT\_IN\_DIRECTION}});}
+\DoxyCodeLine{\ \ \ \ relax(c,\ min\_spacing);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ no\ of\ boundary\ nodes\ after\ relax}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\_2\ =\ c.boundary().size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ actual\ tests}}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ min\_spacing\ /\ 10);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ nodes\ are\ added\ on\ boundary}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(N\_2,\ N\_1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxWithVariableDistribution)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fill\_density\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (0.005\ +\ (p[0]\ -\/\ 0.5)\ *\ (p[0]\ -\/\ 0.5)\ /\ 2\ +\ (p[1]\ -\/\ 0.5)\ *\ (p[1]\ -\/\ 0.5)\ /\ 2);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ sh.discretizeBoundaryWithStep(fill\_density(\{r,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;\ fill\_engine.seed(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax\_engine;}
+\DoxyCodeLine{\ \ \ \ relax\_engine.iterations(50).initialHeat(1).finalHeat(0.05).boundaryProjectionThreshold(0.75)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{BasicRelax::PROJECT\_IN\_DIRECTION}}).numNeighbours(5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.fill(fill\_engine,\ fill\_density);}
+\DoxyCodeLine{\ \ \ \ domain.relax(relax\_engine,\ fill\_density);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ 0.001);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxDeathTest)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ relax.iterations(50).initialHeat(20).finalHeat(0.05).boundaryProjectionThreshold(0.75)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{BasicRelax::PROJECT\_IN\_DIRECTION}}).numNeighbours(5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fill\_density\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p)\ -\/>\ \textcolor{keywordtype}{double}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (0.05\ +\ (p[0]\ -\/\ 0.5)\ *\ (p[0]\ -\/\ 0.5)\ /\ 2\ +\ (p[1]\ -\/\ 0.5)\ *\ (p[1]\ -\/\ 0.5)\ /\ 2);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ 1.0\ /\ 15.0;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeWithStep(step);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(relax(c,\ fill\_density),\ \textcolor{stringliteral}{"{}No\ nodes\ in\ relax\ pool\ anymore,\ perhaps\ use\ lower\ heat"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ RelaxWithoutDistribution)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(100).initialHeat(1).finalHeat(0).numNeighbours(3)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695a3d97f43b62a22f5dc91fd7eb9ba86b85}{BasicRelax::PROJECT\_IN\_DIRECTION}}).boundaryProjectionThreshold(0.55);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fill\_density\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p)\ -\/>\ \textcolor{keywordtype}{double}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (0.005\ +\ (p[0]\ -\/\ 0.5)\ *\ (p[0]\ -\/\ 0.5)\ /\ 2\ +\ (p[1]\ -\/\ 0.5)\ *\ (p[1]\ -\/\ 0.5)\ /\ 2);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeBoundaryWithStep(fill\_density(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{r,\ 0.0\})));}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ fill\_engine(c,\ fill\_density);}
+\DoxyCodeLine{\ \ \ \ relax(c);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ 0.001);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ DISABLED\_RelaxWikiImage1)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fill\_density\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p)\ -\/>\ \textcolor{keywordtype}{double}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (0.0025\ +\ (p[0]\ -\/\ 0.5)\ *\ (p[0]\ -\/\ 0.5)\ /\ 2\ +\ (p[1]\ -\/\ 0.5)\ *\ (p[1]\ -\/\ 0.5)\ /\ 4);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}{prn}}(fill\_density(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{0.25,\ 0\})))}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeBoundaryWithStep(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ fill\_density(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{0.25,\ 0\}))\ /\ 2);}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ fill\_engine(c,\ fill\_density);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(200).initialHeat(2).numNeighbours(3)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695aa27f8899840416e18ae6be1172712f3b}{BasicRelax::PROJECT\_BETWEEN\_CLOSEST}});}
+\DoxyCodeLine{\ \ \ \ relax.boundaryProjectionThreshold(0.45).finalHeat(0.5);}
+\DoxyCodeLine{\ \ \ \ relax(c,\ fill\_density);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ 0.0005);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ DISABLED\_RelaxWikiImage2)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 0.25;}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ sh(\{0.5,\ 0.5\},\ r);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fill\_density\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p)\ -\/>\ \textcolor{keywordtype}{double}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (0.0025\ +\ (p[0]\ -\/\ 0.5)\ *\ (p[0]\ -\/\ 0.5)\ /\ 2\ +\ (p[1]\ -\/\ 0.5)\ *\ (p[1]\ -\/\ 0.5)\ /\ 4);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}{prn}}(fill\_density(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{0.25,\ 0\})))}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ c\ =\ sh.discretizeBoundaryWithStep(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ fill\_density(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{0.25,\ 0\}))\ /\ 2);}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ fill\_engine(c,\ fill\_density);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ BasicRelax\ relax;}
+\DoxyCodeLine{\ \ \ \ relax.iterations(200).initialHeat(2).numNeighbours(3)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ .projectionType(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695aa27f8899840416e18ae6be1172712f3b}{BasicRelax::PROJECT\_BETWEEN\_CLOSEST}});}
+\DoxyCodeLine{\ \ \ \ relax.boundaryProjectionThreshold(0.45).finalHeat(0.5);}
+\DoxyCodeLine{\ \ \ \ relax(c);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ c.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ c.size();\ ++i)\ tmp.push\_back((c.pos(i)\ -\/\ c.pos(c.support(i,\ 1))).norm());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ for\ overlapping\ nodes}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GT(*std::min\_element(std::begin(tmp),\ std::end(tmp)),\ 0.0005);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

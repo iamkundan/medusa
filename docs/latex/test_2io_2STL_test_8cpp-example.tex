@@ -1,0 +1,51 @@
+\doxysection{test/io/\+STL\+\_\+test.\+cpp}
+\hypertarget{test_2io_2STL_test_8cpp-example}{}\label{test_2io_2STL_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{STL_8hpp}{medusa/bits/io/STL.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{print_8hpp}{medusa/bits/utils/print.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_ad406c6c2683a1862782c4a215dfa08b9}{operator==}}(\textcolor{keyword}{const}\ STL::Point\&\ a,\ \textcolor{keyword}{const}\ STL::Point\&\ b)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ a.x\ ==\ b.x\ \&\&\ a.y\ ==\ b.y\ \&\&\ a.z\ ==\ b.z;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ STLReadSample)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<STL::Triangle>\ stl\ =\ \mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{STL::read}}(\textcolor{stringliteral}{"{}test/testdata/tetrahedron.stl"{}});}
+\DoxyCodeLine{\ \ \ \ std::stringstream\ ss;\ ss\ <<\ stl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::string\ output\ =\ \textcolor{stringliteral}{"{}["{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}T(P(0,\ 0,\ 1),\ P(0.5,\ 0.5,\ 0.5),\ P(1.5,\ 0.5,\ 0.5),\ P(0.5,\ 1.5,\ 0.5)),\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}T(P(0,\ -\/1,\ 0),\ P(0.5,\ 0.5,\ 0.5),\ P(1.5,\ 0.5,\ 0.5),\ P(0.5,\ 0.5,\ 1.5)),\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}T(P(1,\ 0,\ 0),\ P(0.5,\ 0.5,\ 0.5),\ P(0.5,\ 1.5,\ 0.5),\ P(0.5,\ 0.5,\ 1.5)),\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}T(P(0.57735,\ 0.57735,\ 0.57735),\ P(1.5,\ 0.5,\ 0.5),\ P(0.5,\ 1.5,\ 0.5),\ P(0.5,\ 0.5,\ 1.5))]"{}};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(output,\ ss.str());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<STL::Point>\ vertices\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.5,\ 0.5,\ 0.5\},\ \{1.5,\ 0.5,\ 0.5\},\ \{0.5,\ 1.5,\ 0.5\},\ \{0.5,\ 0.5,\ 1.5\}\};}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<int>>\ faces\ =\ \{\{0,\ 1,\ 2\},\ \{0,\ 1,\ 3\},\ \{0,\ 2,\ 3\},\ \{1,\ 2,\ 3\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{float}\ f\ =\ 0.57735026918962576451f;}
+\DoxyCodeLine{\ \ \ \ std::vector<STL::Point>\ normals\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.0,\ 0.0,\ 1.0\},\ \{0.0,\ -\/1.0,\ 0.0\},\ \{1.0,\ 0.0,\ 0.0\},\ \{f,\ f,\ f\}\};}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(faces.size(),\ stl.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ static\_cast<int>(faces.size());\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(vertices[faces[i][0]],\ stl[i].p1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(vertices[faces[i][1]],\ stl[i].p2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(vertices[faces[i][2]],\ stl[i].p3);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(normals[i],\ stl[i].normal);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(i+1,\ stl[i].attribute);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ STLreadUtah)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ res\ =\ \mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{STL::read}}(\textcolor{stringliteral}{"{}test/testdata/Utah\_teapot.stl"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(9438,\ res.size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,88 @@
+\doxysection{test/end2end/complex\+\_\+numbers.\+cpp}
+\hypertarget{test_2end2end_2complex_numbers_8cpp-example}{}\label{test_2end2end_2complex_numbers_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Medusa__fwd_8hpp}{medusa/Medusa\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <complex>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/SparseCore>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/IterativeLinearSolvers>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{constexpr}\ std::complex<double>\ \textcolor{keyword}{operator}\textcolor{stringliteral}{"{}"{}}\_i(\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{double}\ d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ std::complex<double>\{0.0,\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(d)\};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(End2end,\ ComplexNumbers)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ box.discretizeWithStep(0.05);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Gaussians<Vec2d>>\ wls(\{9,\ 30.0\},\ \{\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes(wls);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Implicit\ scalar}}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseMatrix<std::complex<double>,\ Eigen::RowMajor>\ M(N,\ N);}
+\DoxyCodeLine{\ \ \ \ M.reserve(storage.supportSizes());}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXcd\ rhs(N);\ rhs.setZero();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ImplicitOperators<\textcolor{keyword}{decltype}(storage),\ \textcolor{keyword}{decltype}(M),\ \textcolor{keyword}{decltype}(rhs)>\ op(storage,\ M,\ rhs);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x,\ y;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ x\ =\ domain.pos(i,\ 0);\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ 1.0\_i\ *\ op.lap(i)\ =\ 2*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ *\ x)*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ *\ y);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.boundary())\ \{\ op.value(i)\ =\ 0.0;\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::BiCGSTAB<\textcolor{keyword}{decltype}(M),\ Eigen::IncompleteLUT<std::complex<double>>>\ solver;}
+\DoxyCodeLine{\ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXcd\ u\ =\ solver.solve(rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(u.real().norm(),\ 0,\ 1e-\/10);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ x\ =\ domain.pos(i,\ 0);\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ e\ =\ std::abs(u[i]\ -\/\ 1.0\_i*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ *\ x)*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ *\ y));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(e,\ 0,\ 1.5e-\/2);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Implicit\ vector}}
+\DoxyCodeLine{\ \ \ \ M.setZero();}
+\DoxyCodeLine{\ \ \ \ M.reserve(storage.supportSizes());}
+\DoxyCodeLine{\ \ \ \ rhs.setZero();}
+\DoxyCodeLine{\ \ \ \ ImplicitOperators<\textcolor{keyword}{decltype}(storage),\ \textcolor{keyword}{decltype}(M),\ \textcolor{keyword}{decltype}(rhs)>\ opv(storage,\ M,\ rhs);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ x\ =\ domain.pos(i,\ 0);\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ 1.0\_i\ *\ opv.lap(i)\ =\ 2*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ *\ x)*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ *\ y);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.boundary())\ \{\ opv.value(i)\ =\ 0.0;\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXcd\ uv\ =\ solver.solve(rhs);}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(uv,\ u);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ vf\ =\ VectorField<std::complex<double>,\ 1>::fromLinear(uv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ eop\ =\ storage.explicitOperators();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ evop\ =\ storage.explicitVectorOperators();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ x\ =\ domain.pos(i,\ 0);\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Explicit\ scalar}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ egrad\ =\ eop.grad(u,\ i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ agrad\ =\ Eigen::Vector2cd(1.0\_i*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*std::cos(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*x)*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*y),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1.0\_i*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*std::sin(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*x)*std::cos(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}*y));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ e\ =\ (egrad\ -\/\ agrad).norm();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(e,\ 0,\ 1e-\/2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Explicit\ vector}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ m\ =\ evop.grad(vf,\ i).transpose();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(m,\ egrad);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

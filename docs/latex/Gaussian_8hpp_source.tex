@@ -1,0 +1,41 @@
+\doxysection{Gaussian.\+hpp}
+\hypertarget{Gaussian_8hpp_source}{}\label{Gaussian_8hpp_source}\index{include/medusa/bits/approximations/Gaussian.hpp@{include/medusa/bits/approximations/Gaussian.hpp}}
+\mbox{\hyperlink{Gaussian_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_GAUSSIAN\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_GAUSSIAN\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Gaussian__fwd_8hpp}{Gaussian\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00014}\mbox{\hyperlink{namespacemm}{00014}}\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{00017}}\ \mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{Gaussian<scal\_t>::Gaussian}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ shape)\ :\ shape\_(shape)\ \{}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}\ >\ 0,\ \textcolor{stringliteral}{"{}Shape\ should\ be\ greater\ than\ 0,\ got\ \%s."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}});}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00019}00019\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00021}00021\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00022}\mbox{\hyperlink{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096}{00022}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096}{Gaussian<scal\_t>::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}\ >=\ 0,\ \textcolor{stringliteral}{"{}Derivative\ of\ negative\ order\ \%d\ requested."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}});}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{f}}\ =\ -\/1.0/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}};}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{return}\ std::exp(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}})\ *\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(\mbox{\hyperlink{classmm_1_1Gaussian}{f}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}});}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00026}00026\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ scal\_t>}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00030}00030\ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096}{Gaussian<scal\_t>::operator()}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dimension>}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{f}}\ =\ -\/1.0/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}}/\mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\_}};}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{return}\ (2*\mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}}\ +\ 4*\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}*(\mbox{\hyperlink{classmm_1_1Gaussian}{f}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}}))\ *\ std::exp(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}}*\mbox{\hyperlink{classmm_1_1Gaussian}{f}});}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00036}00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ S>}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00037}\mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{00037}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian<S>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}})\ \{}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Gaussian\ RBF\ with\ shape\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}.\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}();}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00041}00041\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{Gaussian_8hpp_source_l00043}00043\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_GAUSSIAN\_HPP\_}}
+
+\end{DoxyCode}

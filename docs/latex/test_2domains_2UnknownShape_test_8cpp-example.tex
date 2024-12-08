@@ -1,0 +1,22 @@
+\doxysection{test/domains/\+Unknown\+Shape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2UnknownShape_test_8cpp-example}{}\label{test_2domains_2UnknownShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{UnknownShape_8hpp}{medusa/bits/domains/UnknownShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ UnknownShape)\ \{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ shape;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(shape.contains(\{1.0,\ -\/2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(shape.contains(\{0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(shape.discretizeBoundaryWithStep(0.1),\ \textcolor{stringliteral}{"{}This\ function\ is\ not\ available"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(shape.bbox(),\ \textcolor{stringliteral}{"{}This\ function\ is\ not\ available"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

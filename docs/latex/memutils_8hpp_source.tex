@@ -1,0 +1,59 @@
+\doxysection{memutils.\+hpp}
+\hypertarget{memutils_8hpp_source}{}\label{memutils_8hpp_source}\index{include/medusa/bits/utils/memutils.hpp@{include/medusa/bits/utils/memutils.hpp}}
+\mbox{\hyperlink{memutils_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_UTILS\_MEMUTILS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_UTILS\_MEMUTILS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{00030}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\ :\ \textcolor{keyword}{public}\ std::unique\_ptr<T,\ std::default\_delete<T>>\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00031}00031\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{using\ }std::unique\_ptr<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::default\_delete<T>>::unique\_ptr;}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{using\ }std::unique\_ptr<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::default\_delete<T>>::operator=;}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{using\ }std::unique\_ptr<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::default\_delete<T>>::reset;}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_ad8d5281e381cdd41d6c8e7caada1d965}{00037}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_ad8d5281e381cdd41d6c8e7caada1d965}{deep\_copy\_unique\_ptr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ v)\ :}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{default\_delete}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}}>>(v.clone())\ \{\}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_af3198ddef976723879e550cd001e8de8}{00041}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_af3198ddef976723879e550cd001e8de8}{deep\_copy\_unique\_ptr}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\ o)\ :}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<\mbox{\hyperlink{classmm_1_1Gaussian}{T}},\ std::\mbox{\hyperlink{classmm_1_1Gaussian}{default\_delete}}<\mbox{\hyperlink{classmm_1_1Gaussian}{T}}>>()\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ reset(o\ ?\ o-\/>clone()\ :\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a68400e12e67c37719b2870bd53184ba0}{00047}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a68400e12e67c37719b2870bd53184ba0}{deep\_copy\_unique\_ptr}}(\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\&\ o)\ \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}\ :}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<T,\ std::default\_delete<T>>(std::move(o))\ \{\ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00051}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a967f86e7785684a186cf31e3e0a8316b}{00051}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a967f86e7785684a186cf31e3e0a8316b}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ reset(v.clone());}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00057}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a3026da8f4e5db21093aa3a7f64e382ab}{00057}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a3026da8f4e5db21093aa3a7f64e382ab}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\ o)\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ reset(o\ ?\ o-\/>clone()\ :\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00063}\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a5a80155474fc6392834997b92de10238}{00063}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\ \mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr_a5a80155474fc6392834997b92de10238}{operator=}}(\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\_copy\_unique\_ptr}}\&\&\ o)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ std::unique\_ptr<T,\ std::default\_delete<T>>::operator=(std::move(o));}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00067}00067\ \};}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00074}00074\ std::string\ \mbox{\hyperlink{group__utils_ga774c8cdcb954fc1fb710f5db8a74b4b7}{mem2str}}(std::size\_t\ bytes);}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00082}00082\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ container\_t>}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00083}\mbox{\hyperlink{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}{00083}}\ std::size\_t\ \mbox{\hyperlink{group__utils_gaae358fa8b0c7deaec2a212c2ed344933}{mem\_used}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{container\_t}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{sizeof}(v[0])\ *\ v.size();}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00085}00085\ \}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00087}00087\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{memutils_8hpp_source_l00089}00089\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_UTILS\_MEMUTILS\_HPP\_}}
+
+\end{DoxyCode}

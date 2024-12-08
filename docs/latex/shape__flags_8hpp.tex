@@ -1,0 +1,69 @@
+\doxysection{include/medusa/bits/operators/shape\+\_\+flags.hpp File Reference}
+\hypertarget{shape__flags_8hpp}{}\label{shape__flags_8hpp}\index{include/medusa/bits/operators/shape\_flags.hpp@{include/medusa/bits/operators/shape\_flags.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Definition of flags related to shape computation. 
+
+
+
+Definition in file \mbox{\hyperlink{shape__flags_8hpp_source}{shape\+\_\+flags.\+hpp}}.
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Operators.\+hpp$>$}\newline
+Include dependency graph for shape\+\_\+flags.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shape__flags_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shape__flags_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1sh_1_1operator__tuple}{mm\+::sh\+::operator\+\_\+tuple$<$ mask, dim $>$}}
+\begin{DoxyCompactList}\small\item\em Converts shape mask to operator tuple type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1sh}{mm\+::sh}}
+\begin{DoxyCompactList}\small\item\em Namespace holding masks for shapes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{mm\+::sh\+::shape\+\_\+flags}}
+\begin{DoxyCompactList}\small\item\em Type representing flags for shape functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespacemm_1_1sh_a468607edb6c6ec8ca5c1daf37d699a30}{mm\+::sh\+::str}} (\mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{classmm_1_1Gaussian}{f}})
+\begin{DoxyCompactList}\small\item\em Convert shape flags to a string representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{mm\+::sh\+::d1}} = 1
+\begin{DoxyCompactList}\small\item\em Indicates to calculate d1 shapes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{mm\+::sh\+::lap}} = 2
+\begin{DoxyCompactList}\small\item\em Indicates to calculate laplace shapes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_a60fdf30b21b8c0a0dc11e9bb211cf8f8}{mm\+::sh\+::d2}} = 4
+\begin{DoxyCompactList}\small\item\em Indicates to calculate d2 shapes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_aa0e133e500f0e7faa6abe62814ada346}{mm\+::sh\+::div}} = \mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{d1}}
+\begin{DoxyCompactList}\small\item\em Indicates to prepare all shapes needed for div. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_af1ffab29de3e3b7db0b950f75374c30b}{mm\+::sh\+::grad}} = \mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{d1}}
+\begin{DoxyCompactList}\small\item\em Indicates to prepare all shapes needed for grad. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_a60b0e1ba4d8f14cf84bd2e385816e6bd}{mm\+::sh\+::graddiv}} = \mbox{\hyperlink{namespacemm_1_1sh_a60fdf30b21b8c0a0dc11e9bb211cf8f8}{d2}}
+\begin{DoxyCompactList}\small\item\em Indicates to prepare all shapes needed for graddiv. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_1_1sh_aeea26d9303242b29d1918dfb81c15bc4}{shape\+\_\+flags}} \mbox{\hyperlink{namespacemm_1_1sh_a8f8306c190b70612fe22705ab5baa1a0}{mm\+::sh\+::all}} = \mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{d1}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{namespacemm_1_1sh_a60fdf30b21b8c0a0dc11e9bb211cf8f8}{d2}} \texorpdfstring{$\vert$}{|} \mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{lap}}
+\begin{DoxyCompactList}\small\item\em Indicates to prepare all shapes, default. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,74 @@
+\doxysection{include/medusa/bits/utils/stdtypesutils.hpp File Reference}
+\hypertarget{stdtypesutils_8hpp}{}\label{stdtypesutils_8hpp}\index{include/medusa/bits/utils/stdtypesutils.hpp@{include/medusa/bits/utils/stdtypesutils.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declaration of utilities for std types. 
+
+
+
+Definition in file \mbox{\hyperlink{stdtypesutils_8hpp_source}{stdtypesutils.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+Include dependency graph for stdtypesutils.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stdtypesutils_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stdtypesutils_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__index}{mm\+::tuple\+\_\+index$<$ T, Tuple $>$}}
+\begin{DoxyCompactList}\small\item\em Returns the first index of type {\ttfamily T} in {\ttfamily Tuple}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4}{mm\+::tuple\+\_\+index$<$ T, std\+::tuple$<$ T, Types... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Succesful match. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4}{mm\+::tuple\+\_\+index$<$ T, std\+::tuple$<$ U, Types... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Unsuccessful match and recursive search. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_4_01_4}{mm\+::tuple\+\_\+has\+\_\+type$<$ T, std\+::tuple$<$$>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- failed case. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01U_00_01Ts_8_8_8_01_4_01_4}{mm\+::tuple\+\_\+has\+\_\+type$<$ T, std\+::tuple$<$ U, Ts... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- unsuccessful, continue searching. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmm_1_1tuple__has__type_3_01T_00_01std_1_1tuple_3_01T_00_01Ts_8_8_8_01_4_01_4}{mm\+::tuple\+\_\+has\+\_\+type$<$ T, std\+::tuple$<$ T, Ts... $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Find type T in {\ttfamily Tuple} -- success. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{mm\+::split}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{delim}})
+\begin{DoxyCompactList}\small\item\em Splits string by {\ttfamily delim}, returning a vector of tokens (including empty). \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespacemm_ae00b97fbaf06976c5c4c7eae4bb6e637}{mm\+::split}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}}, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{delim}})
+\begin{DoxyCompactList}\small\item\em Overload for {\ttfamily char}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{mm\+::join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{parts}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{joiner}})
+\begin{DoxyCompactList}\small\item\em Joins a vector of strings back together. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacemm_aef4c1e4e8bed3ae431728e2dbc033e60}{mm\+::join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{parts}}, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{joiner}})
+\begin{DoxyCompactList}\small\item\em Overload for {\ttfamily char}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{mm\+::sort}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v)
+\begin{DoxyCompactList}\small\item\em Sorts a container inplace. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \& \mbox{\hyperlink{group__utils_ga15a96934ce3c6759364373dc668a87a7}{mm\+::sort}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{pred}})
+\begin{DoxyCompactList}\small\item\em Sorts a container inplace according to ordering defined by {\ttfamily pred}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{mm\+::sorted}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} v)
+\begin{DoxyCompactList}\small\item\em Returns a sorted copy of container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_ga480725fbe71063bba9ed7be987075fd2}{mm\+::sorted}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} v, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{predicate\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{pred}})
+\begin{DoxyCompactList}\small\item\em Returns a sorted copy of container ordered according to {\ttfamily pred}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{mm\+::pad}} (\mbox{\hyperlink{classmm_1_1Gaussian}{container\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{container}}, \mbox{\hyperlink{classmm_1_1Gaussian}{T}} value)
+\begin{DoxyCompactList}\small\item\em Pads a ragged array with given value. \end{DoxyCompactList}\end{DoxyCompactItemize}

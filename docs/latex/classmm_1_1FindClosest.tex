@@ -1,0 +1,218 @@
+\doxysection{mm\+::Find\+Closest Class Reference}
+\hypertarget{classmm_1_1FindClosest}{}\label{classmm_1_1FindClosest}\index{mm::FindClosest@{mm::FindClosest}}
+
+
+{\ttfamily \#include $<$Find\+Closest\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Class representing the engine for finding supports consisting of closest nodes. 
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Find\ the\ closest\ interior\ node\ for\ all\ nodes.}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1FindClosest_ac3bf0fa4c2e38265ab7e10e1a3af0287}{FindClosest}}\ f(1);\ f.searchAmong(domain.interior()).forceSelf(\textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(f);\ \ \textcolor{comment}{//\ domain\ is\ some\ DomainDiscretization}}
+
+\end{DoxyCodeInclude}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2poisson_explicit_8cpp-example}{test/end2end/poisson\+\_\+explicit.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00023}{23}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Find\+Closest\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classmm_1_1FindClosest__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1FindClosest_ac3bf0fa4c2e38265ab7e10e1a3af0287}{Find\+Closest}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\+\_\+size}})
+\begin{DoxyCompactList}\small\item\em Constructs an engine for finding support with given support size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& \mbox{\hyperlink{classmm_1_1FindClosest_a7ccefd6aeb9596a919bb05081d8eacdc}{for\+Nodes}} (\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{for\+\_\+which}})
+\begin{DoxyCompactList}\small\item\em Find support only for these nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& \mbox{\hyperlink{classmm_1_1FindClosest_a1251b321ab57268bbf930c0be748e782}{search\+Among}} (\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{search\+\_\+among}})
+\begin{DoxyCompactList}\small\item\em Search only among given nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& \mbox{\hyperlink{classmm_1_1FindClosest_a56b3ce002d1f742282e3093c63468016}{force\+Self}} (\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{b}}=\mbox{\hyperlink{classmm_1_1Gaussian}{true}})
+\begin{DoxyCompactList}\small\item\em Put each node as the first of its support, even if it is not in included in \doxylink{classmm_1_1FindClosest_a1251b321ab57268bbf930c0be748e782}{search\+Among()}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& \mbox{\hyperlink{classmm_1_1FindClosest_a3d431fb2ad64d1af2e39998f39f9afa1}{num\+Closest}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{num}})
+\begin{DoxyCompactList}\small\item\em Find {\ttfamily num} closest nodes. This methods overrides the value set in the constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1FindClosest_ae73e6b4226cb1844b6974e7ff6231e12}{operator()}} (domain\+\_\+t \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Find support for nodes in domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}{support\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Support size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1FindClosest_ab4b00552be30da193119830ac4719eb1}{for\+\_\+which\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Find support only for these nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1FindClosest_af3777cab9ca532b73374cbe0a76e9e92}{search\+\_\+among\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Search only among these nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1FindClosest_a215dce4a8a0fe7f3cd19f086f4f59bbc}{force\+\_\+self\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Force each node as the first element of its support. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1FindClosest_ac3bf0fa4c2e38265ab7e10e1a3af0287}\label{classmm_1_1FindClosest_ac3bf0fa4c2e38265ab7e10e1a3af0287} 
+\index{mm::FindClosest@{mm::FindClosest}!FindClosest@{FindClosest}}
+\index{FindClosest@{FindClosest}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{FindClosest()}{FindClosest()}}
+{\footnotesize\ttfamily mm\+::\+Find\+Closest\+::\+Find\+Closest (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{support\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an engine for finding support with given support size. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1FindClosest_a56b3ce002d1f742282e3093c63468016}\label{classmm_1_1FindClosest_a56b3ce002d1f742282e3093c63468016} 
+\index{mm::FindClosest@{mm::FindClosest}!forceSelf@{forceSelf}}
+\index{forceSelf@{forceSelf}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{forceSelf()}{forceSelf()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& mm\+::\+Find\+Closest\+::force\+Self (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{bool}}}]{b = {\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{true}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Put each node as the first of its support, even if it is not in included in \doxylink{classmm_1_1FindClosest_a1251b321ab57268bbf930c0be748e782}{search\+Among()}. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_a7ccefd6aeb9596a919bb05081d8eacdc}\label{classmm_1_1FindClosest_a7ccefd6aeb9596a919bb05081d8eacdc} 
+\index{mm::FindClosest@{mm::FindClosest}!forNodes@{forNodes}}
+\index{forNodes@{forNodes}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{forNodes()}{forNodes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& mm\+::\+Find\+Closest\+::for\+Nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}}]{for\+\_\+which }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find support only for these nodes. 
+
+If not given, finds support for all non-\/zero type domain nodes, as defined by \doxylink{classmm_1_1DomainDiscretization_a925d8467dd1e1fd9a79afe7a034a1c24}{domain.all()}. 
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_a3d431fb2ad64d1af2e39998f39f9afa1}\label{classmm_1_1FindClosest_a3d431fb2ad64d1af2e39998f39f9afa1} 
+\index{mm::FindClosest@{mm::FindClosest}!numClosest@{numClosest}}
+\index{numClosest@{numClosest}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{numClosest()}{numClosest()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& mm\+::\+Find\+Closest\+::num\+Closest (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Find {\ttfamily num} closest nodes. This methods overrides the value set in the constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_ae73e6b4226cb1844b6974e7ff6231e12}\label{classmm_1_1FindClosest_ae73e6b4226cb1844b6974e7ff6231e12} 
+\index{mm::FindClosest@{mm::FindClosest}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} domain\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{template}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+Find\+Closest\+::operator() (\begin{DoxyParamCaption}\item[{domain\+\_\+t \&}]{domain }\end{DoxyParamCaption}) const}
+
+
+
+Find support for nodes in domain. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{FindClosest_8hpp_source}{Find\+Closest.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_a1251b321ab57268bbf930c0be748e782}\label{classmm_1_1FindClosest_a1251b321ab57268bbf930c0be748e782} 
+\index{mm::FindClosest@{mm::FindClosest}!searchAmong@{searchAmong}}
+\index{searchAmong@{searchAmong}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{searchAmong()}{searchAmong()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1FindClosest}{Find\+Closest}} \& mm\+::\+Find\+Closest\+::search\+Among (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}}]{search\+\_\+among }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Search only among given nodes. 
+
+If not given, searches among all nodes, including zero-\/type nodes. 
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1FindClosest_ab4b00552be30da193119830ac4719eb1}\label{classmm_1_1FindClosest_ab4b00552be30da193119830ac4719eb1} 
+\index{mm::FindClosest@{mm::FindClosest}!for\_which\_@{for\_which\_}}
+\index{for\_which\_@{for\_which\_}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{for\_which\_}{for\_which\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ mm\+::\+Find\+Closest\+::for\+\_\+which\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Find support only for these nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00026}{26}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_a215dce4a8a0fe7f3cd19f086f4f59bbc}\label{classmm_1_1FindClosest_a215dce4a8a0fe7f3cd19f086f4f59bbc} 
+\index{mm::FindClosest@{mm::FindClosest}!force\_self\_@{force\_self\_}}
+\index{force\_self\_@{force\_self\_}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{force\_self\_}{force\_self\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} mm\+::\+Find\+Closest\+::force\+\_\+self\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Force each node as the first element of its support. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00028}{28}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_af3777cab9ca532b73374cbe0a76e9e92}\label{classmm_1_1FindClosest_af3777cab9ca532b73374cbe0a76e9e92} 
+\index{mm::FindClosest@{mm::FindClosest}!search\_among\_@{search\_among\_}}
+\index{search\_among\_@{search\_among\_}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{search\_among\_}{search\_among\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ mm\+::\+Find\+Closest\+::search\+\_\+among\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Search only among these nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817}\label{classmm_1_1FindClosest_a81bd34730f95a440bf1639687ffc2817} 
+\index{mm::FindClosest@{mm::FindClosest}!support\_size@{support\_size}}
+\index{support\_size@{support\_size}!mm::FindClosest@{mm::FindClosest}}
+\doxysubsubsection{\texorpdfstring{support\_size}{support\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{int}} mm\+::\+Find\+Closest\+::support\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Support size. 
+
+
+
+Definition at line \mbox{\hyperlink{FindClosest__fwd_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{FindClosest__fwd_8hpp_source}{Find\+Closest\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{FindClosest__fwd_8hpp}{Find\+Closest\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{FindClosest_8hpp}{Find\+Closest.\+hpp}}\item 
+src/domains/\mbox{\hyperlink{FindClosest_8cpp}{Find\+Closest.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,119 @@
+\doxysection{Find\+Balanced\+Support.\+hpp}
+\hypertarget{FindBalancedSupport_8hpp_source}{}\label{FindBalancedSupport_8hpp_source}\index{include/medusa/bits/domains/FindBalancedSupport.hpp@{include/medusa/bits/domains/FindBalancedSupport.hpp}}
+\mbox{\hyperlink{FindBalancedSupport_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_FINDBALANCEDSUPPORT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_FINDBALANCEDSUPPORT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTree_8hpp}{medusa/bits/spatial\_search/KDTree.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{FindBalancedSupport__fwd_8hpp}{FindBalancedSupport\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}Eigen/SVD"{}}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00018}00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00021}00021\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00022}00022\ Eigen::Matrix<\textcolor{keyword}{typename}\ vec\_t::scalar\_t,\ vec\_t::dim,\ vec\_t::dim\ -\/\ 1>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00023}00023\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54}{FindBalancedSupport::getFrame}}(\textcolor{keyword}{const}\ vec\_t\&\ normal)\ \ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{return}\ normal.transpose().jacobiSvd(Eigen::ComputeFullV).matrixV().rightCols(vec\_t::dim-\/1);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00028}00028\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ domain\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a13fd90710239e0ce7446bef98ae1086c}{00029}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a13fd90710239e0ce7446bef98ae1086c}{mm::FindBalancedSupport::operator()}}(domain\_t\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}\ =\ for\_which\_;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}.empty())\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.all();}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}\ =\ search\_among\_;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.empty())\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}\ =\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<int>::seq}}(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());\ \ \textcolor{comment}{//\ include\ potential\ ghost\ nodes}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00036}00036\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.positions().empty(),\ \textcolor{stringliteral}{"{}Cannot\ find\ support\ in\ an\ empty\ domain."{}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(min\_support\ >\ 0,\ \textcolor{stringliteral}{"{}Support\ size\ must\ be\ greater\ than\ 0,\ got\ \%d."{}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ min\_support);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00039}00039\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(min\_support\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.size(),\ \textcolor{stringliteral}{"{}Support\ size\ (\%d)\ cannot\ exceed\ number\ of\ "{}}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}points\ that\ we\ are\ searching\ among\ (\%d)."{}},\ min\_support,\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.size());}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00041}00041\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}}.empty(),\ \textcolor{stringliteral}{"{}Set\ of\ nodes\ for\ which\ to\ find\ the\ support\ is\ empty."{}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(!\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}.empty(),\ \textcolor{stringliteral}{"{}Set\ of\ nodes\ to\ search\ among\ is\ empty."{}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ x\ \&\&\ x\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ in\ for\_which."{}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ x,\ 0,\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ x\ \&\&\ x\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ in\ "{}}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}search\_among."{}},\ x,\ 0,\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size());}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00051}00051\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTree<typename\ domain\_t::vector\_t>}}\ tree(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.positions()[\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}]);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ balancedSupport(}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ tree,\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ min\_support,\ max\_support,\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00056}00056\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00058}00058\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00059}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}{00059}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}{FindBalancedSupport::mark\_quadrant}}(}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ dx,\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Gaussian}{tol}},\ std::vector<bool>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ vec\_t::dim,\ -\/1>\&\ basis)\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{comment}{//\ for\ each\ basis\ vector,\ determine\ if\ it\ is\ in\ the\ same\ or\ opposite\ direction}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//\ record\ that\ value\ in\ \`{}octants`}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{octant}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00065}00065\ \ \ \ \ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ basis.transpose()*dx;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}\ <\ basis.cols();\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{b}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::abs(\mbox{\hyperlink{classmm_1_1Gaussian}{s}}[\mbox{\hyperlink{classmm_1_1Gaussian}{b}}])\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{tol}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{octant}}\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{s}}[\mbox{\hyperlink{classmm_1_1Gaussian}{b}}]\ >\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{octant}}\ +=\ (1\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00073}00073\ \ \ \ \ \textcolor{comment}{//\ mark\ computed\ octant\ as\ covered}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{octant}}\ !=\ -\/1\ \&\&\ !\mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}}[\mbox{\hyperlink{classmm_1_1Gaussian}{octant}}])\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}}[\mbox{\hyperlink{classmm_1_1Gaussian}{octant}}]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00077}00077\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00081}00081\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ domain\_t,\ \textcolor{keyword}{typename}\ kdtree\_t>}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00082}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a6c9aa4575140e8aacf7d3fdc9e25061f}{00082}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a6c9aa4575140e8aacf7d3fdc9e25061f}{FindBalancedSupport::balancedSupport}}(domain\_t\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{kdtree\_t}}\&\ tree,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{min\_support\_size}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_support\_size}},}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ =\ domain\_t::dim;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00086}00086\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ domain\_t::vector\_t\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ domain\_t::scalar\_t\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00088}00088\ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ Eigen::Dynamic>\ basis\ =}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ dim>::Identity();}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ <\ 0)\ basis\ =\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4a29eb671273b9d2dc3fef7ed9ba8c54}{getFrame}}(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.normal(\mbox{\hyperlink{classmm_1_1Gaussian}{i}}));}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordtype}{int}\ support\_size\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{min\_support\_size}};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00093}00093\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ center\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{tol}}\ =\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/6;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00095}00095\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{target}}\ =\ 1\ <<\ basis.cols();}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00096}00096\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_neighbours\_required}}\ =\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ <\ 0)\ ?\ 2*(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}-\/1)+1\ :\ 0;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00097}00097\ \ \ \ \ std::vector<bool>\ \mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}}(\mbox{\hyperlink{classmm_1_1Gaussian}{target}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00098}00098\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00099}00099\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{indices}};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_support\_size}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{indices}}\ =\ tree.query(center,\ support\_size).first;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{indices}})\ \{\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ \mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{indices}}.size();\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ dx\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{indices}}[\mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}])\ -\/\ center;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{indices}}[\mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}])\ <\ 0\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_neighbours\_required}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{target}}\ -\/=\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}{mark\_quadrant}}(dx,\ \mbox{\hyperlink{classmm_1_1Gaussian}{tol}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}},\ basis);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ >\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{target}}\ -\/=\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a4997e68ead5fcb4a26d8c4970ecddaaa}{mark\_quadrant}}(dx,\ \mbox{\hyperlink{classmm_1_1Gaussian}{tol}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{octants\_covered}},\ basis);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{target}}\ <=\ 0\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_neighbours\_required}}\ <=\ 0\ \&\&}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}\ >=\ \mbox{\hyperlink{classmm_1_1Gaussian}{min\_support\_size}}-\/1)\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}(\mbox{\hyperlink{classmm_1_1Gaussian}{indices}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{indices}}.begin()+\mbox{\hyperlink{classmm_1_1Gaussian}{pos\_idx}}+1);}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ support\_size\ *=\ 2;}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (support\_size\ >\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_support\_size}})\ \{\ support\_size\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_support\_size}};\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00120}00120\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{indices}};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00123}00123\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8hpp_source_l00125}00125\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_FINDBALANCEDSUPPORT\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,52 @@
+\doxysection{Scale\+Function.\+hpp}
+\hypertarget{ScaleFunction_8hpp_source}{}\label{ScaleFunction_8hpp_source}\index{include/medusa/bits/approximations/ScaleFunction.hpp@{include/medusa/bits/approximations/ScaleFunction.hpp}}
+\mbox{\hyperlink{ScaleFunction_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_SCALEFUNCTION\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_SCALEFUNCTION\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00023}\mbox{\hyperlink{classmm_1_1ScaleToClosest}{00023}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1ScaleToClosest}{ScaleToClosest}}\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00024}00024\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00027}\mbox{\hyperlink{classmm_1_1ScaleToClosest_a5dc9332c3f197bfadc6a8958b4a1accd}{00027}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1ScaleToClosest_a5dc9332c3f197bfadc6a8958b4a1accd}{scale}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p,}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vec\_t>\&\ support)\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (p\ -\/\ support[1]).norm();}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00032}\mbox{\hyperlink{classmm_1_1ScaleToClosest_ae2cdb6222c4ab3aeab1a0d43324f5c28}{00032}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1ScaleToClosest_ae2cdb6222c4ab3aeab1a0d43324f5c28}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1ScaleToClosest}{ScaleToClosest}}\&\ \textcolor{comment}{/*\ scale\ */})\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}ScaleToClosest"{}};}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00035}00035\ \};}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00043}\mbox{\hyperlink{classmm_1_1ScaleToFarthest}{00043}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1ScaleToFarthest}{ScaleToFarthest}}\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00044}00044\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00046}00046\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1ScaleToFarthest_aedf6389be3026c348c156c48f4727336}{00047}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1ScaleToFarthest_aedf6389be3026c348c156c48f4727336}{scale}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p,}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vec\_t>\&\ support)\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (p\ -\/\ support.back()).norm();}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00052}\mbox{\hyperlink{classmm_1_1ScaleToFarthest_abaaa99550a9f6b37fcdd077c099d0885}{00052}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1ScaleToFarthest_abaaa99550a9f6b37fcdd077c099d0885}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1ScaleToFarthest}{ScaleToFarthest}}\&\ \textcolor{comment}{/*\ scale\ */})\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}ScaleToFarthest"{}};}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00055}00055\ \};}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00063}\mbox{\hyperlink{classmm_1_1NoScale}{00063}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1NoScale}{NoScale}}\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00064}00064\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00065}00065\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00067}\mbox{\hyperlink{classmm_1_1NoScale_a9695983e11c6728924c6206d4842eee0}{00067}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1NoScale_a9695983e11c6728924c6206d4842eee0}{scale}}(}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \textcolor{comment}{/*\ p\ */},\ \textcolor{keyword}{const}\ std::vector<vec\_t>\&\ \textcolor{comment}{/*\ support\ */})\ \{\ \textcolor{keywordflow}{return}\ 1.0;\ \}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00070}\mbox{\hyperlink{classmm_1_1NoScale_a7316209d5181c6246ab831a3b979ab00}{00070}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1NoScale_a7316209d5181c6246ab831a3b979ab00}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1NoScale}{NoScale}}\&\ \textcolor{comment}{/*\ scale\ */})\ \{}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}NoScale"{}};}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00073}00073\ \};}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00075}00075\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{ScaleFunction_8hpp_source_l00077}00077\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_SCALEFUNCTION\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,328 @@
+\doxysection{mm\+::Der2\texorpdfstring{$<$}{<} dimension \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmm_1_1Der2}{}\label{structmm_1_1Der2}\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+
+
+{\ttfamily \#include $<$Operators\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$\newline
+struct mm\+::\+Der2$<$ dimension $>$}
+Represents a second derivative wrt. {\ttfamily var1} and {\ttfamily var2}. 
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00164}{164}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Der2\texorpdfstring{$<$}{<} dimension \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{structmm_1_1Der2__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Der2\texorpdfstring{$<$}{<} dimension \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{structmm_1_1Der2__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmm_1_1Der2_a9f22043c3693860ab8df4063ae738374}{Der2}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for array preallocation purposes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmm_1_1Der2_a5e23086e8d226e5d72bd5a512c971d3f}{Der2}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der2_af6b3b646d61f3be0447f509e6cbef27c}{var1}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der2_a2815096b475c3dd43e35ddcafb2b05e3}{var2}})
+\begin{DoxyCompactList}\small\item\em Initialization of specific 2nd derivative operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmm_1_1Der2_a31230dcd08f00208df0cd32fd8766a9e}{Der2}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} var)
+\begin{DoxyCompactList}\small\item\em Initialization of specific 2nd derivative operator. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structmm_1_1Der2_af3fce79049d7f1e601dabeb663399d01}{name}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Human readable name. \end{DoxyCompactList}\item 
+std\+::array$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$, 1 $>$ \mbox{\hyperlink{structmm_1_1Operator_a8c4c0aa05fa594f972a30d6cdcf0eb3f}{operators}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return an iterable of iterators represented by a family. \end{DoxyCompactList}\item 
+basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&basis, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}{index}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&support, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t scale) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Apply this operator to a given basis function. \end{DoxyCompactList}\item 
+basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36}{apply\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&basis, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}{index}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&support, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t scale) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Like \doxylink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}, but with point equal to 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Der2_a1e338c1e4566c70f4741297f38f5f607}{type\+\_\+name}} ()
+\begin{DoxyCompactList}\small\item\em Human readable type name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a722301ecd3337c31b150d5def10f5eab}{size}} ()
+\begin{DoxyCompactList}\small\item\em Size of a single-\/operator family is always 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}{index}} (\mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$)
+\begin{DoxyCompactList}\small\item\em Index is always 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der2_af6b3b646d61f3be0447f509e6cbef27c}{var1}}
+\begin{DoxyCompactList}\small\item\em Lower index representing derived variable (x = 0, y = 1, z = 2, ...) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der2_a2815096b475c3dd43e35ddcafb2b05e3}{var2}}
+\begin{DoxyCompactList}\small\item\em Higher index representing derived variable (x = 0, y = 1, z = 2, ...) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{structmm_1_1Der2_a5d7e306787dda4c1cf2765834c0543d3aa7001b790a44a86d632d57ef59e4c41b}{dim}} = dimension
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ \mbox{\hyperlink{structmm_1_1Operator_a21922c48602fb501704dc46630874915}{operator\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of the contained operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{structmm_1_1Der2_a5d7e306787dda4c1cf2765834c0543d3}\label{structmm_1_1Der2_a5d7e306787dda4c1cf2765834c0543d3} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!dim@{dim}}}\Hypertarget{structmm_1_1Der2_a5d7e306787dda4c1cf2765834c0543d3aa7001b790a44a86d632d57ef59e4c41b}\label{structmm_1_1Der2_a5d7e306787dda4c1cf2765834c0543d3aa7001b790a44a86d632d57ef59e4c41b} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00166}{166}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structmm_1_1Der2_a9f22043c3693860ab8df4063ae738374}\label{structmm_1_1Der2_a9f22043c3693860ab8df4063ae738374} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!Der2@{Der2}}
+\index{Der2@{Der2}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{Der2()}{Der2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Der2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for array preallocation purposes. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00171}{171}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der2_a5e23086e8d226e5d72bd5a512c971d3f}\label{structmm_1_1Der2_a5e23086e8d226e5d72bd5a512c971d3f} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!Der2@{Der2}}
+\index{Der2@{Der2}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{Der2()}{Der2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Der2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var1,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var2 }\end{DoxyParamCaption})}
+
+
+
+Initialization of specific 2nd derivative operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var1} & First variable with respect to which the derivative is taken. variable (x = 0, y = 1, z = 2, ...). \\
+\hline
+{\em var2} & Second variable with respect to which the derivative is taken. (Should have higher index and the first variable.) variable (x = 0, y = 1, z = 2, ...). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00076}{76}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der2_a31230dcd08f00208df0cd32fd8766a9e}\label{structmm_1_1Der2_a31230dcd08f00208df0cd32fd8766a9e} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!Der2@{Der2}}
+\index{Der2@{Der2}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{Der2()}{Der2()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::\+Der2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialization of specific 2nd derivative operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em var} & Index representing two times derived variable (x = 0, y = 1, z = 2, ...). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00187}{187}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}\label{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!apply@{apply}}
+\index{apply@{apply}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$  $>$\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t}]{scale }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Apply this operator to a given basis function. 
+
+This function should be specialized (overloaded) for more concrete values of {\ttfamily basis\+\_\+t} in concrete classes inheriting form this one. It is intended that this function is never called but only serves as a default for demonstration purposes and better error messages. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em basis\+\_\+t} & Basis type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em basis} & The basis $b$ to apply the operator to. \\
+\hline
+{\em index} & Which element of the basis to apply the operator to. \\
+\hline
+{\em point} & At which aldeary shifted and translated point to apply the operator. \\
+\hline
+{\em support} & Local support domain (already shifted and scaled). These are the values $(x-c)/s$ in the equation below. \\
+\hline
+{\em scale} & Local scaling factor $s$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Let this operator be called $L$, the {\ttfamily index}-\/th basis function $b_i$. The function returns $L b_i((x-c)/s)$. Not that the operator $L$ is usually something like "{}derivative wrt. x"{} and factors of $s$ appear in the result. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{RBFBasis\+::eval\+Op}, \doxylink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials\+::eval\+Op}, \doxylink{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36}{apply\+At0} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00064}{64}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36}\label{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!applyAt0@{applyAt0}}
+\index{applyAt0@{applyAt0}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{applyAt0()}{applyAt0()}}
+{\footnotesize\ttfamily basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$  $>$\+::apply\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t}]{scale }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Like \doxylink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}, but with point equal to 0. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}, \doxylink{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}{RBFBasis\+::eval\+Op\+At0}, \doxylink{classmm_1_1Monomials_a6197e006b636c2ba64f7cde6127e948d}{Monomials\+::eval\+Op\+At0} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}\label{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!index@{index}}
+\index{index@{index}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$  $>$\+::index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [inherited]}}
+
+
+
+Index is always 0. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der2_af3fce79049d7f1e601dabeb663399d01}\label{structmm_1_1Der2_af3fce79049d7f1e601dabeb663399d01} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!name@{name}}
+\index{name@{name}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+std\+::string \mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Human readable name. 
+
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a8c4c0aa05fa594f972a30d6cdcf0eb3f}\label{structmm_1_1Operator_a8c4c0aa05fa594f972a30d6cdcf0eb3f} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!operators@{operators}}
+\index{operators@{operators}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{operators()}{operators()}}
+{\footnotesize\ttfamily std\+::array$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ , 1 $>$ \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$  $>$\+::operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Return an iterable of iterators represented by a family. 
+
+As this is a single operator, the family consists of itself only. 
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a722301ecd3337c31b150d5def10f5eab}\label{structmm_1_1Operator_a722301ecd3337c31b150d5def10f5eab} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!size@{size}}
+\index{size@{size}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$  $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [inherited]}}
+
+
+
+Size of a single-\/operator family is always 1. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der2_a1e338c1e4566c70f4741297f38f5f607}\label{structmm_1_1Der2_a1e338c1e4566c70f4741297f38f5f607} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!type\_name@{type\_name}}
+\index{type\_name@{type\_name}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{type\_name()}{type\_name()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::type\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Human readable type name. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00192}{192}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmm_1_1Der2_af6b3b646d61f3be0447f509e6cbef27c}\label{structmm_1_1Der2_af6b3b646d61f3be0447f509e6cbef27c} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!var1@{var1}}
+\index{var1@{var1}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{var1}{var1}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::var1}
+
+
+
+Lower index representing derived variable (x = 0, y = 1, z = 2, ...) 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00167}{167}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Der2_a2815096b475c3dd43e35ddcafb2b05e3}\label{structmm_1_1Der2_a2815096b475c3dd43e35ddcafb2b05e3} 
+\index{mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}!var2@{var2}}
+\index{var2@{var2}!mm::Der2$<$ dimension $>$@{mm::Der2$<$ dimension $>$}}
+\doxysubsubsection{\texorpdfstring{var2}{var2}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Der2}{mm\+::\+Der2}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$\+::var2}
+
+
+
+Higher index representing derived variable (x = 0, y = 1, z = 2, ...) 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00168}{168}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Monomials__fwd_8hpp}{Monomials\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Operators__fwd_8hpp}{Operators\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{Operators.\+hpp}}\end{DoxyCompactItemize}

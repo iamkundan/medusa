@@ -1,0 +1,132 @@
+\doxysection{Operators}
+\hypertarget{group__operators}{}\label{group__operators}\index{Operators@{Operators}}
+
+
+Implements operators for intuitive equation notation.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators$<$ shape\+\_\+storage\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em A class for evaluating typical operators needed in spatial discretization. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em A class for evaluating typical operators needed in spatial discretization. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitOperators}{mm\+::\+Implicit\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em This class represents implicit operators that fill given matrix \doxylink{classmm_1_1ImplicitOperators_afff142f20c1c2e60aaa59979562211e3}{M} and right hand side \doxylink{classmm_1_1ImplicitOperators_abff1c9239c5b68ae3e9ac8776002e058}{rhs} with appropriate coefficients approximating differential operators with shape functions from given shape storage \doxylink{classmm_1_1ImplicitOperators_a7c1549b19bdb03fb2f1a327c5bf04142}{ss}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{mm\+::\+Implicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type, matrix\+\_\+type, rhs\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em This class represents implicit vector operators that fill given matrix \doxylink{classmm_1_1ImplicitVectorOperators_ae9519c74815de424a5d88b097b677f87}{M} and right hand side \doxylink{classmm_1_1ImplicitVectorOperators_a2d458b9fb8127458854493459927b6ad}{rhs} with appropriate coefficients approximating differential operators with shape functions from given shape storage \doxylink{classmm_1_1ImplicitVectorOperators_acd44e9a6cc6c91978fa1eadb14071729}{ss}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RaggedShapeStorage}{mm\+::\+Ragged\+Shape\+Storage$<$ vec\+\_\+t, Op\+Families $>$}}
+\begin{DoxyCompactList}\small\item\em Efficiently stores shape functions of different lengths. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage$<$ Derived, vec\+\_\+t, Op\+Families $>$}}
+\begin{DoxyCompactList}\small\item\em Shape storage base class. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1UniformShapeStorage}{mm\+::\+Uniform\+Shape\+Storage$<$ vec\+\_\+t, Op\+Families $>$}}
+\begin{DoxyCompactList}\small\item\em Efficiently stores shape functions of uniform length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} shape\+\_\+storage\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} ... Op\+Families$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{mm\+::compute\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} approx\+\_\+t\+::vector\+\_\+t $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::tuple$<$ Op\+Families... $>$ \&operators, shape\+\_\+storage\+\_\+t \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{storage}})
+\begin{DoxyCompactList}\small\item\em Computes shape functions (stencil weights) for given nodes using support domains from {\ttfamily domain} and approximations provided by {\ttfamily approx}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements operators for intuitive equation notation. 
+
+Shapes defined by the approximation can be computed with compute\+Shapes functions, which has built in parallelization.
+
+Computed stencil weights / shape functions are stored in Shape\+Storage and can be used to construct operators. These operators enable an intuitive and expressive syntax which directly corresponds to the mathematics notation.
+
+For implicit operators, one simply writes the equations\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.lap(i)\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.boundary())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ op.value(i)\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+
+
+Explicit operators can be applied directly to scalar or vector fields\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ gd\ =\ op.graddiv(field,\ i);}
+
+\end{DoxyCodeInclude}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}\label{group__operators_gaff43acf3e841f21a3e28c4348b9943b6} 
+\index{Operators@{Operators}!computeShapes@{computeShapes}}
+\index{computeShapes@{computeShapes}!Operators@{Operators}}
+\doxysubsubsection{\texorpdfstring{computeShapes()}{computeShapes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} shape\+\_\+storage\+\_\+t , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} ... Op\+Families$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::compute\+Shapes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} approx\+\_\+t\+::vector\+\_\+t $>$ \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{approx\+\_\+t}}}]{approx,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::tuple$<$ Op\+Families... $>$ \&}]{operators,  }\item[{shape\+\_\+storage\+\_\+t \texorpdfstring{$\ast$}{*}}]{storage }\end{DoxyParamCaption})}
+
+
+
+Computes shape functions (stencil weights) for given nodes using support domains from {\ttfamily domain} and approximations provided by {\ttfamily approx}. 
+
+The computed shapes are stored in {\ttfamily storage}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em approx\+\_\+t} & Type of the approximation engine to use. Must satisfy the \doxysectlink{concepts_approx-concept}{Approximation engine concept}{1}. \\
+\hline
+{\em shape\+\_\+storage\+\_\+t} & Type of the shape storage. Must satisfy the \doxysectlink{concepts_ss-concept}{Shape storage concept}{1}. \\
+\hline
+{\em Op\+Families} & A list of operator families for which to compute the shapes. The families must satisfy the \doxysectlink{concepts_operator-family-concept}{Operator family concept}{1}. The family types must be unique. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em domain} & Domain discretization for which to compute the shape functions. \\
+\hline
+\mbox{\texttt{ in}}  & {\em approx} & Approximation engine specifying the shape computation procedure. \\
+\hline
+\mbox{\texttt{ in}}  & {\em indexes} & A set of indexes for which to compute the shape functions. Common values are \doxylink{classmm_1_1DomainDiscretization_a925d8467dd1e1fd9a79afe7a034a1c24}{domain.all()}, \doxylink{classmm_1_1DomainDiscretization_a0652465dfe89ec24c69b5f07a11d2af1}{domain.interior()}, \doxylink{classmm_1_1DomainDiscretization_a47910d9779b7e564782205683fffdf2e}{domain.boundary()}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em operators} & Object representing operator families. \\
+\hline
+\mbox{\texttt{ out}}  & {\em storage} & An object for storing the shape functions. The object is filled during computation, but must be appropriately reserved before computing shapes, by using \doxylink{classmm_1_1ShapeStorage_a55deaab120c7063667d7ed6dc647632f}{Shape\+Storage\+::resize}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function supports parallel execution if Open\+MP is enabled in the compiler, e.\+g.\textbackslash{} for GCC\+: {\ttfamily -\/fopenmp}, for ICC\+: {\ttfamily -\/openmp}.
+\end{DoxyNote}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{BoxShape<Vec2d>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{box}}(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<Vec2d>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{box}}.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.findSupport(\mbox{\hyperlink{classmm_1_1FindClosest}{FindClosest}}(9));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{WLS<Monomials<Vec2d>}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{approx}}(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.computeShapes<\mbox{\hyperlink{namespacemm_1_1sh_a434ea4fc68d98db4d13d50adf7915ac0}{sh::lap}}|\mbox{\hyperlink{namespacemm_1_1sh_abc1e7a707374c7118eb32cad985682fb}{sh::d1}}>(\mbox{\hyperlink{classmm_1_1Gaussian}{approx}});\ \ \textcolor{comment}{//\ implicit\ call\ via\ domain\ hook}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ direct\ call\ which\ overwrites\ shapes\ for\ Laplacian\ for\ internal\ nodes\ in\ given\ storage}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{sh::operator\_tuple<sh::lap,\ 2>::type}}\ operators;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{group__operators_gaff43acf3e841f21a3e28c4348b9943b6}{computeShapes}}(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{approx}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.interior(),\ operators,\ \&shapes);}
+
+\end{DoxyCodeInclude}
+
+
+Usage with (dummy) custom operator\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Dummy\ zero\ operator}}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }\mbox{\hyperlink{classmm_1_1Gaussian}{Zero}}\ :\ \mbox{\hyperlink{structmm_1_1Operator}{Operator}}<Zero>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ basis\_t>\ \textcolor{keyword}{typename}\ basis\_t::scalar\_t\ applyAt0(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\_t}}\&,\ \textcolor{keywordtype}{int},\ \textcolor{keyword}{const}\ std::vector<typename\ basis\_t::vector\_t>\&,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ basis\_t::scalar\_t)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ 0.0;\ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ std::tuple<Lap<2>,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der1s<2>}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{Zero}}>\ \mbox{\hyperlink{classmm_1_1Gaussian}{ops}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shapes\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.computeShapes<\textcolor{keyword}{decltype}(\mbox{\hyperlink{classmm_1_1Gaussian}{ops}})>(\mbox{\hyperlink{classmm_1_1Gaussian}{ops}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{approx}});}
+\DoxyCodeLine{\ \ \ \ shapes.get<\mbox{\hyperlink{classmm_1_1Gaussian}{Zero}}>(3,\ 2);\ \ \textcolor{comment}{//\ coefficient\ 4\ of\ shape\ for\ zero\ in\ 3rd\ node.}}
+\DoxyCodeLine{\ \ \ \ shapes.get<\mbox{\hyperlink{classmm_1_1Gaussian}{Der1s<2>}}>(0,\ 3,\ 4);\ \ \textcolor{comment}{//\ coefficient\ 4\ of\ shape\ for\ dx\ in\ 3rd\ node.}}
+
+\end{DoxyCodeInclude}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2diffusion_explicit_8cpp-example}{test/end2end/diffusion\+\_\+explicit.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitOperators_test_8cpp-example}{test/operators/\+Explicit\+Operators\+\_\+test.\+cpp}}, \mbox{\hyperlink{test_2operators_2ExplicitVectorOperators_test_8cpp-example}{test/operators/\+Explicit\+Vector\+Operators\+\_\+test.\+cpp}}, and \mbox{\hyperlink{test_2operators_2computeShapes_test_8cpp-example}{test/operators/compute\+Shapes\+\_\+test.\+cpp}}.\end{Desc}

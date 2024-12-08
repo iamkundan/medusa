@@ -1,0 +1,596 @@
+\doxysection{mm\+::WLS\texorpdfstring{$<$}{<} basis\+\_\+t, weight\+\_\+t, scale\+\_\+t, solver\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1WLS}{}\label{classmm_1_1WLS}\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+
+
+{\ttfamily \#include $<$WLS\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$\newline
+class mm\+::\+WLS$<$ basis\+\_\+t, weight\+\_\+t, scale\+\_\+t, solver\+\_\+t $>$}
+A class for generating approximations using Weighted Least Squares over local neighborhoods. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em basis\+\_\+t} & Type of basis used in approximation. Must satisfy the \doxysectlink{concepts_basis-concept}{Basis function concept}{1}. \\
+\hline
+{\em weight\+\_\+t} & Type of weight function used in approximation. Must satisfy the \doxysectlink{concepts_weight-concept}{Weight function concept}{1}. \\
+\hline
+{\em scale\+\_\+t} & Scale function to be used in approximation. Must satisfy the \doxysectlink{concepts_scale-concept}{Scale function concept}{1}. \\
+\hline
+{\em solver\+\_\+t} & Which linear solver to use in weight computations. Must satisfy the \doxysectlink{concepts_linsolve-concept}{Linear solver concept}{1}. Default\+: Jacobi SVD.\\
+\hline
+\end{DoxyTemplParams}
+This class satisfies the \doxysectlink{concepts_approx-concept}{Approximation engine concept}{1}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest,\ Eigen::PartialPivLU<Eigen::MatrixXd>>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ appr(\mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2));\ \ \textcolor{comment}{//\ full\ type\ specification\ with\ scale\ and\ solver}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>>\ appr2(2);\ \ \textcolor{comment}{//\ using\ default\ parameters}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Local\ neighbourhood}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{h,\ 0\},\ \{0,\ -\/h\},\ \{-\/h,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/h,\ h\},\ \{-\/h,\ -\/h\},\ \{h,\ -\/h\},\ \{h,\ h\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ compute\ approximations\ at\ point\ \`{}\{0.0,\ 0.0\}`.}}
+\DoxyCodeLine{\ \ \ \ appr.compute(\{0.0,\ 0.0\},\ support);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ info\ about\ the\ computation.}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.basis()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.weight()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.center()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.scale()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.localCoordinates()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.getMatrix()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ appr.getWeights()\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ Eigen::PartialPivLU<Eigen::MatrixXd>\ \mbox{\hyperlink{classmm_1_1WLS_ab706ef4f135d36402a43cd0e7f57451c}{solver}}\ =\ appr.solver();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ shape\ (stencil\ weights)\ for\ approximation\ of\ Laplacian.}}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ shape\ =\ appr.getShape(Lap<2>());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Get\ shape\ (stencil\ weights)\ for\ approximation\ of\ value}}
+\DoxyCodeLine{\ \ \ \ shape\ =\ appr.getShape();}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::WLS\texorpdfstring{$<$}{<} basis\+\_\+t, weight\+\_\+t, scale\+\_\+t, solver\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1WLS__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1WLS_ad365e874e41786525f3f107cd9708699}{WLS}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLS_a948423f356d349957d8998fee2463089}{basis}})
+\begin{DoxyCompactList}\small\item\em Construct \doxylink{classmm_1_1WLS}{WLS} with given basis and default constructed weight. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLS_a39c3e38f1caa12b1c8cdd14530f45c28}{WLS}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLS_a948423f356d349957d8998fee2463089}{basis}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLS_a8ab1f4f4e384f0dfa50ec1a642087d0f}{weight}})
+\begin{DoxyCompactList}\small\item\em Hold information about the type of approximation we want to have for the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \&support)
+\begin{DoxyCompactList}\small\item\em Computes, decomposes and stores matrix for shape calculation at given point with given neighbours. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{get\+Shape}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns weights for approximation of function value at point {\ttfamily point}, knowing values in its {\ttfamily support}, given by a previous call to compute. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} operator\+\_\+t $>$ }\\Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS_ab9b6c6a6bdac2b47bcd38242ab760e96}{get\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&op) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns weights for approximation of differentiation operator, given by {\ttfamily der} at point {\ttfamily point}, knowing values in its {\ttfamily support}, given by a previous call to compute. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ }\\Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS_a9e44676aac1566933caaa6b4ae783d4a}{get\+Shape\+From\+Rhs}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{Lb}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns weights for approximation with a given right hand side, which is expected to contains the values of an operator applied to your basis functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1WLS_a8fe42d2d81d787eac8f6ef5e52ef179f}{required\+Support\+Size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns minimal support size required for this approximation to be performed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS_a948423f356d349957d8998fee2463089}{basis}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns basis used in the computation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS_a8ab1f4f4e384f0dfa50ec1a642087d0f}{weight}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns weight function used in the computation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_a67743446b02ea2389ce92325d515ef02}{center}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return the center point of the approximation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_a9a7dcfb9bb23e9fa8349f84f9e33d53f}{scale}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return the scaling factor. Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1WLS_a84f925202b741199c147990ff06b39d7}{local\+Coordinates}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the local (translated and scaled) coordinates of the support nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{ei\+\_\+matrix\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_ad300044bcaaae6ecf5b472d99918d4bf}{get\+Matrix}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the matrix used in the approximation. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS_a7d67130f4f29646c5e49369aa17fec2e}{get\+Weights}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the current support weights. Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS_ab706ef4f135d36402a43cd0e7f57451c}{solver}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read access to the linear solver used for matrix decomposition. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS_aa76b8e72e0f4929adafbda280b14d134}{solver}} ()
+\begin{DoxyCompactList}\small\item\em Read-\/write access to the linear solver used for matrix decomposition. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ }\\\mbox{\hyperlink{classmm_1_1WLSApproximant}{WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1WLS_a8bed3f5e7db5f5a68f2a3986ea70bd51}{get\+Approximant}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&values) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmm_1_1WLS}{WLS} approximant anchored at {\ttfamily point} with given values in given support nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1WLS_a8547e519b325cd609c4ce9e6f2525a9eaba7afe4fa13affd5a3ebacebf384b87b}{dim}} = vector\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Numeric scalar data type, e.\+g. double. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} basis\+\_\+t\+::vector\+\_\+t \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector data type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, Eigen\+::\+Dynamic $>$ \mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{ei\+\_\+matrix\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Eigen matrix data type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{B}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{W}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1WLS_a4626e3ebfcb3a2260991a905dd891f1c}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS}{WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{B}}, \mbox{\hyperlink{classmm_1_1Gaussian}{W}}, \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{wls}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given approximation engine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{ei\+\_\+matrix\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_ab3f7f575ec4ee532368125eb8c4727fd}{get\+Matrix}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{local\+\_\+coordinates}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the collocation matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_abbe6653a0ab2cd2e1447ccf473a73d65}{basis\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Basis functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_ab154535ad8b0d2cf407c06850c9ba22d}{weight\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Weight function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1WLS_a9059645ff0ca6e3ff164c90547dd1d38}{local\+\_\+coordinates\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Support points after translation and scaling. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_afd09f0fea12e654963de0ff1d08beb2b}{point\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Saved center point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_a86bb9fd2f6a0e3984848e6ec219e35fa}{scale\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Saved scale. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS_aa945f402ff9a4255aa9195df8c5cccd8}{solver\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Saved decomposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1WLS_a8547e519b325cd609c4ce9e6f2525a9e}\label{classmm_1_1WLS_a8547e519b325cd609c4ce9e6f2525a9e} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1WLS_a8547e519b325cd609c4ce9e6f2525a9eaba7afe4fa13affd5a3ebacebf384b87b}\label{classmm_1_1WLS_a8547e519b325cd609c4ce9e6f2525a9eaba7afe4fa13affd5a3ebacebf384b87b} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1WLS_ad365e874e41786525f3f107cd9708699}\label{classmm_1_1WLS_ad365e874e41786525f3f107cd9708699} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!WLS@{WLS}}
+\index{WLS@{WLS}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{WLS()}{WLS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::\+WLS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct \doxylink{classmm_1_1WLS}{WLS} with given basis and default constructed weight. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a39c3e38f1caa12b1c8cdd14530f45c28}\label{classmm_1_1WLS_a39c3e38f1caa12b1c8cdd14530f45c28} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!WLS@{WLS}}
+\index{WLS@{WLS}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{WLS()}{WLS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::\+WLS (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} \&}]{weight }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Hold information about the type of approximation we want to have for the domain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em basis} & Basis to use in the algorithm. \\
+\hline
+{\em weight} & Weight function to use. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1WLS_a948423f356d349957d8998fee2463089}\label{classmm_1_1WLS_a948423f356d349957d8998fee2463089} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!basis@{basis}}
+\index{basis@{basis}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{basis()}{basis()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::basis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns basis used in the computation. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00138}{138}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a67743446b02ea2389ce92325d515ef02}\label{classmm_1_1WLS_a67743446b02ea2389ce92325d515ef02} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!center@{center}}
+\index{center@{center}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{center()}{center()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::center (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the center point of the approximation. 
+
+Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00146}{146}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}\label{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!compute@{compute}}
+\index{compute@{compute}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{compute()}{compute()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::compute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \&}]{support }\end{DoxyParamCaption})}
+
+
+
+Computes, decomposes and stores matrix for shape calculation at given point with given neighbours. 
+
+Given basis and weight function are used and evaluated in the local coordinate system with origin in {\ttfamily point} and scales by \doxylink{classmm_1_1WLS_a86bb9fd2f6a0e3984848e6ec219e35fa}{scale\+\_\+}. Decomposition given by \doxylink{classmm_1_1WLS_aa945f402ff9a4255aa9195df8c5cccd8}{solver\+\_\+} is used. This function must be called before any calls to \doxylink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{get\+Shape} are made for this point configuration. 
+\begin{DoxyParams}{Parameters}
+{\em point} & Point around which to prepare for shape computation. \\
+\hline
+{\em support} & Neighbouring points where function values are expected. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{WLS_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{WLS_8hpp_source}{WLS.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a8bed3f5e7db5f5a68f2a3986ea70bd51}\label{classmm_1_1WLS_a8bed3f5e7db5f5a68f2a3986ea70bd51} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getApproximant@{getApproximant}}
+\index{getApproximant@{getApproximant}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getApproximant()}{getApproximant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant}{WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Approximant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&}]{values }\end{DoxyParamCaption}) const}
+
+
+
+Construct a \doxylink{classmm_1_1WLS}{WLS} approximant anchored at {\ttfamily point} with given values in given support nodes. 
+
+The approximation function $\hat{u}(x) =
+\sum_{j=1}^m \alpha_j b_j\left(\frac{x - p}{s}\right)$ minimises \[ J = \sum_{i=1}^n w\left( \frac{p_i-p}{s}\right)^2 (u_i - \hat{u}(p_i))^2 \] 
+\begin{DoxyParams}{Parameters}
+{\em point} & Center point $p$. \\
+\hline
+{\em support} & Support values $p_i$. \\
+\hline
+{\em values} & Function values $u_i$ at $p_i$. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An object representing the approximant. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{WLS_8hpp_source_l00123}{123}} of file \mbox{\hyperlink{WLS_8hpp_source}{WLS.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_ad300044bcaaae6ecf5b472d99918d4bf}\label{classmm_1_1WLS_ad300044bcaaae6ecf5b472d99918d4bf} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getMatrix@{getMatrix}}
+\index{getMatrix@{getMatrix}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getMatrix()}{getMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{ei\+\_\+matrix\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the matrix used in the approximation. 
+
+Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00161}{161}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_ab3f7f575ec4ee532368125eb8c4727fd}\label{classmm_1_1WLS_ab3f7f575ec4ee532368125eb8c4727fd} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getMatrix@{getMatrix}}
+\index{getMatrix@{getMatrix}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getMatrix()}{getMatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLS}{WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{\+::ei\+\_\+matrix\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \&}]{local\+\_\+coordinates }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Returns the collocation matrix. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{WLS_8hpp_source}{WLS.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}\label{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getShape@{getShape}}
+\index{getShape@{getShape}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getShape()}{getShape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \\
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns weights for approximation of function value at point {\ttfamily point}, knowing values in its {\ttfamily support}, given by a previous call to compute. 
+
+\begin{DoxyReturn}{Returns}
+Vector of nodal weights $\chi$, such that $u(p) \approx \sum_{i=1}^n \chi_i u(p_i)$ where $p$ represents {\ttfamily point} and $p_i$ are its support nodes. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{WLS_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{WLS_8hpp_source}{WLS.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_ab9b6c6a6bdac2b47bcd38242ab760e96}\label{classmm_1_1WLS_ab9b6c6a6bdac2b47bcd38242ab760e96} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getShape@{getShape}}
+\index{getShape@{getShape}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getShape()}{getShape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} operator\+\_\+t $>$ \\
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&}]{op }\end{DoxyParamCaption}) const}
+
+
+
+Returns weights for approximation of differentiation operator, given by {\ttfamily der} at point {\ttfamily point}, knowing values in its {\ttfamily support}, given by a previous call to compute. 
+
+\begin{DoxyReturn}{Returns}
+Vector of nodal weights $\chi$, such that $(\mathcal{L}u)(p) \approx \sum_{i=1}^n \chi_i u(p_i)$ where $p$ represents {\ttfamily point}, $p_i$ are its support nodes and $\mathcal{L}$ is given by {\ttfamily der} as $\mathcal{L} = \dpar{^{\sum_{i=1}^d m_i}}{x_1^{m_1} \cdots \partial x_d^{m_d}}$, where $m_i$ are elements of {\ttfamily der}. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em op} & \doxylink{structmm_1_1Operator}{Operator} to be approximated. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmm_1_1WLS_a9e44676aac1566933caaa6b4ae783d4a}\label{classmm_1_1WLS_a9e44676aac1566933caaa6b4ae783d4a} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getShapeFromRhs@{getShapeFromRhs}}
+\index{getShapeFromRhs@{getShapeFromRhs}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getShapeFromRhs()}{getShapeFromRhs()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Shape\+From\+Rhs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&}]{Lb }\end{DoxyParamCaption}) const}
+
+
+
+Returns weights for approximation with a given right hand side, which is expected to contains the values of an operator applied to your basis functions. 
+
+This method is useful if values of the operator are computed differently to the procedure used by \doxylink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{get\+Shape}. 
+\begin{DoxyParams}{Parameters}
+{\em Lb} & The right hand side of the approximation system representing an values of an operator applied to basis functions at the point where \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute} was called. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{get\+Shape} 
+\end{DoxySeeAlso}
+\Hypertarget{classmm_1_1WLS_a7d67130f4f29646c5e49369aa17fec2e}\label{classmm_1_1WLS_a7d67130f4f29646c5e49369aa17fec2e} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!getWeights@{getWeights}}
+\index{getWeights@{getWeights}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{getWeights()}{getWeights()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::get\+Weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the current support weights. Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+\Hypertarget{classmm_1_1WLS_a84f925202b741199c147990ff06b39d7}\label{classmm_1_1WLS_a84f925202b741199c147990ff06b39d7} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!localCoordinates@{localCoordinates}}
+\index{localCoordinates@{localCoordinates}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{localCoordinates()}{localCoordinates()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::local\+Coordinates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the local (translated and scaled) coordinates of the support nodes. 
+
+Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00155}{155}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a8fe42d2d81d787eac8f6ef5e52ef179f}\label{classmm_1_1WLS_a8fe42d2d81d787eac8f6ef5e52ef179f} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!requiredSupportSize@{requiredSupportSize}}
+\index{requiredSupportSize@{requiredSupportSize}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{requiredSupportSize()}{requiredSupportSize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::required\+Support\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns minimal support size required for this approximation to be performed. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00136}{136}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a9a7dcfb9bb23e9fa8349f84f9e33d53f}\label{classmm_1_1WLS_a9a7dcfb9bb23e9fa8349f84f9e33d53f} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!scale@{scale}}
+\index{scale@{scale}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the scaling factor. Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00149}{149}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_aa76b8e72e0f4929adafbda280b14d134}\label{classmm_1_1WLS_aa76b8e72e0f4929adafbda280b14d134} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!solver@{solver}}
+\index{solver@{solver}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{solver()}{solver()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read-\/write access to the linear solver used for matrix decomposition. 
+
+Can be used to set additional solver parameters. Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00177}{177}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_ab706ef4f135d36402a43cd0e7f57451c}\label{classmm_1_1WLS_ab706ef4f135d36402a43cd0e7f57451c} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!solver@{solver}}
+\index{solver@{solver}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{solver()}{solver()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read access to the linear solver used for matrix decomposition. 
+
+Only initialized after the first call to \doxylink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{compute}. 
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00170}{170}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a8ab1f4f4e384f0dfa50ec1a642087d0f}\label{classmm_1_1WLS_a8ab1f4f4e384f0dfa50ec1a642087d0f} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!weight@{weight}}
+\index{weight@{weight}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{weight()}{weight()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::weight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns weight function used in the computation. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00140}{140}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1WLS_a4626e3ebfcb3a2260991a905dd891f1c}\label{classmm_1_1WLS_a4626e3ebfcb3a2260991a905dd891f1c} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{B}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{W}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS}{WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{B}}, \mbox{\hyperlink{classmm_1_1Gaussian}{W}}, \mbox{\hyperlink{classmm_1_1Gaussian}{S}}, \mbox{\hyperlink{classmm_1_1Gaussian}{L}} $>$ \&}]{wls }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given approximation engine. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1WLS_abbe6653a0ab2cd2e1447ccf473a73d65}\label{classmm_1_1WLS_abbe6653a0ab2cd2e1447ccf473a73d65} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!basis\_@{basis\_}}
+\index{basis\_@{basis\_}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{basis\_}{basis\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::basis\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Basis functions. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00064}{64}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a9059645ff0ca6e3ff164c90547dd1d38}\label{classmm_1_1WLS_a9059645ff0ca6e3ff164c90547dd1d38} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!local\_coordinates\_@{local\_coordinates\_}}
+\index{local\_coordinates\_@{local\_coordinates\_}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{local\_coordinates\_}{local\_coordinates\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::local\+\_\+coordinates\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Support points after translation and scaling. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_afd09f0fea12e654963de0ff1d08beb2b}\label{classmm_1_1WLS_afd09f0fea12e654963de0ff1d08beb2b} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!point\_@{point\_}}
+\index{point\_@{point\_}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{point\_}{point\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::point\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Saved center point. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_a86bb9fd2f6a0e3984848e6ec219e35fa}\label{classmm_1_1WLS_a86bb9fd2f6a0e3984848e6ec219e35fa} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!scale\_@{scale\_}}
+\index{scale\_@{scale\_}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{scale\_}{scale\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::scale\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Saved scale. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00069}{69}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_aa945f402ff9a4255aa9195df8c5cccd8}\label{classmm_1_1WLS_aa945f402ff9a4255aa9195df8c5cccd8} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!solver\_@{solver\_}}
+\index{solver\_@{solver\_}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{solver\_}{solver\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::solver\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Saved decomposition. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLS_ab154535ad8b0d2cf407c06850c9ba22d}\label{classmm_1_1WLS_ab154535ad8b0d2cf407c06850c9ba22d} 
+\index{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}!weight\_@{weight\_}}
+\index{weight\_@{weight\_}!mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$@{mm::WLS$<$ basis\_t, weight\_t, scale\_t, solver\_t $>$}}
+\doxysubsubsection{\texorpdfstring{weight\_}{weight\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}  = No\+Weight$<$typename basis\+\_\+t\+::vector\+\_\+t$>$, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}  = No\+Scale, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}}  = Jacobi\+SVDWrapper$<$typename basis\+\_\+t\+::scalar\+\_\+t,                                Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLS}{mm\+::\+WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$\+::weight\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Weight function. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS__fwd_8hpp_source_l00065}{65}} of file \mbox{\hyperlink{WLS__fwd_8hpp_source}{WLS\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{WLS__fwd_8hpp}{WLS\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{WLS_8hpp}{WLS.\+hpp}}\end{DoxyCompactItemize}

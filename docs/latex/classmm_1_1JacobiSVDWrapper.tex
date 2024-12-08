@@ -1,0 +1,88 @@
+\doxysection{mm\+::Jacobi\+SVDWrapper\texorpdfstring{$<$}{<} scalar\+\_\+t, QRPreconditioner \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1JacobiSVDWrapper}{}\label{classmm_1_1JacobiSVDWrapper}\index{mm::JacobiSVDWrapper$<$ scalar\_t, QRPreconditioner $>$@{mm::JacobiSVDWrapper$<$ scalar\_t, QRPreconditioner $>$}}
+
+
+{\ttfamily \#include $<$Jacobi\+SVDWrapper\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} QRPreconditioner = Eigen\+::\+Col\+Piv\+Householder\+QRPreconditioner$>$\newline
+class mm\+::\+Jacobi\+SVDWrapper$<$ scalar\+\_\+t, QRPreconditioner $>$}
+Extends Eigen\textquotesingle{}s Jacobi\+SVD to compute thin {\ttfamily U} and thin {\ttfamily V} by default. 
+
+This class exists because is is currently impossible to specify additional parameters to Jacobi\+SVD before calling the compute method. This class satisfies the \doxysectlink{concepts_linsolve-concept}{Linear solver concept}{1}. can as such be supplied to approximation engines. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em scalar\+\_\+t} & Numerical scalar type used in computations. \\
+\hline
+{\em QRPreconditioner} & this optional parameter allows to specify the type of QR decomposition that will be used internally for the R-\/\+SVD step for non-\/square matrices. See Eigen docs on Jacobi\+SVD for possible values.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M(7,\ 9);}
+\DoxyCodeLine{\ \ \ \ M.setRandom();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ JacobiSVDWrapper<double>\ svd;}
+\DoxyCodeLine{\ \ \ \ svd.compute(M);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ This\ code\ is\ the\ save\ as\ above,\ with\ explicit\ parameter\ specification.}}
+\DoxyCodeLine{\ \ \ \ Eigen::JacobiSVD<Eigen::MatrixXd>\ svd2;}
+\DoxyCodeLine{\ \ \ \ svd2.compute(M,\ Eigen::ComputeThinU\ |\ Eigen::ComputeThinV);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Use\ svd.matrixU(),\ svd.solve(b)\ as\ usual.}}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp_source}{Jacobi\+SVDWrapper\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Jacobi\+SVDWrapper\texorpdfstring{$<$}{<} scalar\+\_\+t, QRPreconditioner \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1JacobiSVDWrapper__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Jacobi\+SVDWrapper\texorpdfstring{$<$}{<} scalar\+\_\+t, QRPreconditioner \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1JacobiSVDWrapper__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1JacobiSVDWrapper_ad2976182672546538ac9c3fb7fb52ab4}{compute}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, Eigen\+::\+Dynamic $>$ \&M)
+\begin{DoxyCompactList}\small\item\em Override compute method by supplying {\ttfamily Eigen\+::\+Compute\+ThinU \texorpdfstring{$\vert$}{|} Eigen\+::\+Compute\+ThinV} by default. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1JacobiSVDWrapper_ad2976182672546538ac9c3fb7fb52ab4}\label{classmm_1_1JacobiSVDWrapper_ad2976182672546538ac9c3fb7fb52ab4} 
+\index{mm::JacobiSVDWrapper$<$ scalar\_t, QRPreconditioner $>$@{mm::JacobiSVDWrapper$<$ scalar\_t, QRPreconditioner $>$}!compute@{compute}}
+\index{compute@{compute}!mm::JacobiSVDWrapper$<$ scalar\_t, QRPreconditioner $>$@{mm::JacobiSVDWrapper$<$ scalar\_t, QRPreconditioner $>$}}
+\doxysubsubsection{\texorpdfstring{compute()}{compute()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} QRPreconditioner$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1JacobiSVDWrapper}{mm\+::\+Jacobi\+SVDWrapper}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{QRPreconditioner}} $>$\+::compute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, Eigen\+::\+Dynamic $>$ \&}]{M }\end{DoxyParamCaption})}
+
+
+
+Override compute method by supplying {\ttfamily Eigen\+::\+Compute\+ThinU \texorpdfstring{$\vert$}{|} Eigen\+::\+Compute\+ThinV} by default. 
+
+
+
+Definition at line \mbox{\hyperlink{JacobiSVDWrapper_8hpp_source_l00014}{14}} of file \mbox{\hyperlink{JacobiSVDWrapper_8hpp_source}{Jacobi\+SVDWrapper.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp}{Jacobi\+SVDWrapper\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{Jacobi\+SVDWrapper.\+hpp}}\end{DoxyCompactItemize}

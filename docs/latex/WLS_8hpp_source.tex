@@ -1,0 +1,150 @@
+\doxysection{WLS.\+hpp}
+\hypertarget{WLS_8hpp_source}{}\label{WLS_8hpp_source}\index{include/medusa/bits/approximations/WLS.hpp@{include/medusa/bits/approximations/WLS.hpp}}
+\mbox{\hyperlink{WLS_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_WLS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_WLS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{WLS__fwd_8hpp}{WLS\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{JacobiSVDWrapper.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{WLSApproximant_8hpp}{WLSApproximant.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00016}00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00019}\mbox{\hyperlink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{00019}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1WLS_ad9d0d3f06709303c8c1341f388b19fa6}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::compute}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\_t}}\&\ point,}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ support.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(basis\_.size()\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}WLS\ cannot\ have\ more\ basis\ functions\ than\ points\ in\ support\ domain,\ but\ \%d\ "{}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}support\ points\ and\ \%d\ basis\ functions\ were\ given."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ basis\_.size());}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00025}00025\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(basis\_.size()\ >\ 0,\ \textcolor{stringliteral}{"{}Cannot\ construct\ an\ approximation\ with\ an\ empty\ basis."{}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00026}00026\ \ \ \ \ scale\_\ =\ scale\_t::scale(point,\ support);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00027}00027\ \ \ \ \ local\_coordinates\_.resize(\mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ local\_coordinates\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ (support[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ point)\ /\ scale\_;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00031}00031\ \ \ \ \ point\_\ =\ point;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00032}00032\ \ \ \ \ solver\_.compute(getMatrix(local\_coordinates\_));}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00033}00033\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00034}00034\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00035}00035\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00036}00036\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::ei\_matrix\_t}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1WLS_ab3f7f575ec4ee532368125eb8c4727fd}{00037}}\ \mbox{\hyperlink{classmm_1_1WLS_ad300044bcaaae6ecf5b472d99918d4bf}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::getMatrix}}(}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ Evaluate\ basis\ functions\ in\ given\ points}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ basis\_.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{ei\_matrix\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{WB}}(\mbox{\hyperlink{classmm_1_1Gaussian}{m}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}}\ =\ weight\_(\mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{WB}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}}\ *\ basis\_.eval(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}],\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00048}00048\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{WB}};}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00052}00052\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00053}00053\ Eigen::Matrix<typename\ basis\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00054}\mbox{\hyperlink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{00054}}\ \mbox{\hyperlink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::getShape}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ basis\_.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00056}00056\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{m}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ basis\_.evalAt0(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ local\_coordinates\_);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ getShapeFromRhs(\mbox{\hyperlink{classmm_1_1Gaussian}{b}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00064}00064\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00066}00066\ Eigen::Matrix<typename\ basis\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00067}00067\ \mbox{\hyperlink{classmm_1_1WLS_a4d960de4652ac67e734413ef5651b100}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::getShape}}(\textcolor{keyword}{const}\ operator\_t\&\ op)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}\ =\ basis\_.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00069}00069\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lb}}(\mbox{\hyperlink{classmm_1_1Gaussian}{m}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Lb}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ basis\_.evalOpAt0(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ op,\ local\_coordinates\_,\ scale\_);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{return}\ getShapeFromRhs(Lb);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00074}00074\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00076}00076\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00077}00077\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ Derived>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00078}00078\ Eigen::Matrix<typename\ basis\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00079}00079\ \mbox{\hyperlink{classmm_1_1WLS_a9e44676aac1566933caaa6b4ae783d4a}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::getShapeFromRhs}}(}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ Lb)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ local\_coordinates\_.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00082}00082\ \ \ \ \ \textcolor{comment}{//\ Solve\ (WB)\string^T\ x\ =\ Lb}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00083}00083\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ result\ =\ solver\_.solve(Lb);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{comment}{//\ Multiply\ with\ weight}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ result(j)\ *=\ weight\_(local\_coordinates\_[j]);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00091}00091\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00092}00092\ Eigen::Matrix<typename\ basis\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00093}00093\ \mbox{\hyperlink{classmm_1_1WLS_a7d67130f4f29646c5e49369aa17fec2e}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::getWeights}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ local\_coordinates\_.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00095}00095\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ w(n);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ j++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ w(j)\ =\ weight\_(local\_coordinates\_[j]);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{return}\ w;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00104}00104\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00105}\mbox{\hyperlink{namespacemm_a0ffbed372f662f3c5474b94db9186b0c}{00105}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}})\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00106}00106\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}WLS:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00107}00107\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ dimension:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.dim\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ basis\ size:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.basis\_.size()\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ basis:\ "{}}\ \ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.basis\_\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00110}00110\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ weight:\ "{}}\ \ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.weight\_\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ scale:\ "{}}\ \ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{scale\_t}}()\ <<\ \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.point\_[0]\ !=\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.point\_[0])\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ last\ point:\ not\ used\ yet"{}};}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00114}00114\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ last\ point:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{wls}}.point\_;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00117}00117\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00118}00118\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00120}00120\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ basis\_t,\ \textcolor{keyword}{class}\ weight\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00121}00121\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00122}00122\ WLSApproximant<basis\_t>}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00123}\mbox{\hyperlink{classmm_1_1WLS_a8bed3f5e7db5f5a68f2a3986ea70bd51}{00123}}\ \mbox{\hyperlink{classmm_1_1WLS_a8bed3f5e7db5f5a68f2a3986ea70bd51}{WLS<basis\_t,\ weight\_t,\ scale\_t,\ solver\_t>::getApproximant}}(}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1WLS_a2668526e547726521c8769821fb2276a}{vector\_t}}\&\ point,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ values)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00126}00126\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ support.size();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00127}00127\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(values.size()\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ \textcolor{stringliteral}{"{}Number\ of\ given\ values\ \%d\ must\ be\ equal\ to\ support\ size\ \%d."{}},}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ values.size(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00129}00129\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(basis\_.size()\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}WLS\ cannot\ have\ more\ basis\ functions\ than\ points\ in\ support\ domain,\ but\ \%d\ "{}}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}support\ points\ and\ \%d\ basis\ functions\ were\ given."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}},\ basis\_.size());}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00132}00132\ \ \ \ \ \textcolor{keywordtype}{double}\ scale\ =\ scale\_t::scale(point,\ support);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00133}00133\ \ \ \ \ std::vector<vector\_t>\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}(\mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ =\ (support[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/\ point)\ /\ scale;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00137}00137\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{solver\_t}}\ solver;}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00138}00138\ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLS_a307e2781f2b9319930d4263fdf30df6f}{ei\_matrix\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{matrix}}\ =\ getMatrix(\mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}).transpose();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00139}00139\ \ \ \ \ solver.compute(\mbox{\hyperlink{classmm_1_1Gaussian}{matrix}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00141}00141\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{w}}(\mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00142}00142\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{w}}(\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ =\ weight\_(\mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}]);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00145}00145\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ coefficients\ =\ solver.solve(values.cwiseProduct(\mbox{\hyperlink{classmm_1_1Gaussian}{w}}));}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00146}00146\ \ \ \ \ \mbox{\hyperlink{classmm_1_1WLS_a256b3c375b6c5526386887b8f6764be3}{scalar\_t}}\ residual\ =\ (\mbox{\hyperlink{classmm_1_1Gaussian}{matrix}}*coefficients\ -\/\ values).\mbox{\hyperlink{classmm_1_1Gaussian}{squaredNorm}}();}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00147}00147\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{WLSApproximant<basis\_t>}}(basis\_,\ point,\ support,\ scale,\ coefficients,\ residual);}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00148}00148\ \}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00150}00150\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{WLS_8hpp_source_l00152}00152\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_WLS\_HPP\_}}
+
+\end{DoxyCode}

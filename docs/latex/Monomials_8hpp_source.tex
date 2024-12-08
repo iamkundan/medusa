@@ -1,0 +1,274 @@
+\doxysection{Monomials.\+hpp}
+\hypertarget{Monomials_8hpp_source}{}\label{Monomials_8hpp_source}\index{include/medusa/bits/approximations/Monomials.hpp@{include/medusa/bits/approximations/Monomials.hpp}}
+\mbox{\hyperlink{Monomials_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_MONOMIALS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_MONOMIALS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Monomials__fwd_8hpp}{Monomials\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Operators__fwd_8hpp}{Operators\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00017}00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00018}\mbox{\hyperlink{classmm_1_1Monomials_a1929a5837cd5e194e4c795d3b1f72177}{00018}}\ \mbox{\hyperlink{classmm_1_1Monomials_a19a9e642e623dfeb05f2fe504c86c7e1}{Monomials<vec\_t>::Monomials}}(\textcolor{keywordtype}{int}\ order)\ \ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(-\/1\ <=\ order,\ \textcolor{stringliteral}{"{}Requested\ monomials\ of\ negative\ order\ \%d."{}},\ order);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00020}00020\ \ \ \ \ setFromPowers(generatePowers(order,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00021}00021\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00023}00023\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00024}\mbox{\hyperlink{classmm_1_1Monomials_ae2252340c6757c4d9a914ca236258866}{00024}}\ std::vector<std::vector<int>>\ \mbox{\hyperlink{classmm_1_1Monomials_ae2252340c6757c4d9a914ca236258866}{Monomials<vec\_t>::generatePowers}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_order}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{max\_order}}\ <\ 0)\ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ==\ 0)\ \textcolor{keywordflow}{return}\ \{\{\}\};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00027}00027\ \ \ \ \ std::vector<std::vector<int>>\ powers;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{max\_order}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}}\ =\ generatePowers(\mbox{\hyperlink{classmm_1_1Gaussian}{max\_order}}\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}-\/1);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ powers.push\_back(\{\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\});}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ o\ :\ p)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ powers.back().push\_back(o);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ powers;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00038}00038\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00040}00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{00041}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<vec\_t>::tensorBasis}}(\textcolor{keywordtype}{int}\ order)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(-\/1\ <=\ order,\ \textcolor{stringliteral}{"{}Requested\ monomials\ of\ negative\ order\ \%d."{}},\ order);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (order\ ==\ -\/1)\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}();}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00044}00044\ \ \ \ \ std::vector<std::vector<int>>\ powers;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{counter}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<int,\ dim>}}\ counts\ =\ order+1;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ powers.push\_back(std::vector<int>(\mbox{\hyperlink{classmm_1_1Gaussian}{counter}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{counter}}.end()));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00049}00049\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{group__utils_ga3d998a49d777996d2276aa160c9dc769}{incrementCounter}}(\mbox{\hyperlink{classmm_1_1Gaussian}{counter}},\ counts));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}(powers);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00051}00051\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00053}00053\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00054}\mbox{\hyperlink{classmm_1_1Monomials_a8c2705f00afc354fe436f2fbccb8952c}{00054}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Monomials_a8c2705f00afc354fe436f2fbccb8952c}{Monomials<vec\_t>::setFromPowers}}(\textcolor{keyword}{const}\ std::vector<std::vector<int>>\&\ powers)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00055}00055\ \ \ \ \ powers\_.resize(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}},\ powers.size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{int}\ size\ =\ powers.size();}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ size;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\&\ p\ =\ powers[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(p.size()\ ==\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}},\ \textcolor{stringliteral}{"{}Monomial\ size\ \%s\ does\ not\ match\ dimension\ \%d"{}},\ p.size(),\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{j}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ p[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00066}00066\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00067}\mbox{\hyperlink{classmm_1_1Monomials_afee2ef86fb14504be3c58a6739c95c34}{00067}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_afee2ef86fb14504be3c58a6739c95c34}{Monomials<vec\_t>::eval}}(}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ \textcolor{comment}{/*\ support\ */})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size(),\ \textcolor{stringliteral}{"{}Monomial\ at\ index\ \%d\ does\ not\ exist.\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ must\ be\ in\ range\ [0,\ \%d)."{}},\ index,\ size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}(1.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00078}00078\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00079}\mbox{\hyperlink{classmm_1_1Monomials_a5b5f3bafc0ba4eb006aa00d3ef2c0b34}{00079}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials<vec\_t>::evalOp}}(}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Monomials_abb5cd578383e08ae72fcbcf0eb184ab8}{vector\_t}}\&\ point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dim>}},\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00082}00082\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}(0.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{d}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ index)\ <=\ 1)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ der2(1.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ der2\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ der2\ *=\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ index)\ *\ (powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ index)\ -\/\ 1)\ *\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{d}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ index)-\/2);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}+1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ der2\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ +=\ der2;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}/scale/scale;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00098}00098\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00099}\mbox{\hyperlink{classmm_1_1Monomials_adf3ea8a29bcb21b4721827f06c8caeea}{00099}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials<vec\_t>::evalOp}}(}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Monomials_abb5cd578383e08ae72fcbcf0eb184ab8}{vector\_t}}\&\ point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der1<dim>}}\ op,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00102}00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (powers\_(op.var,\ index)\ ==\ 0)\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}(1.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00104}00104\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ op.var;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00106}00106\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00107}00107\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ powers\_(op.var,\ index)*\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[op.var],\ powers\_(op.var,\ index)-\/1);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00108}00108\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ op.var+1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}/scale;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00112}00112\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00114}00114\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00115}\mbox{\hyperlink{classmm_1_1Monomials_aad70a88f71d2ce821b58f44da7900687}{00115}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials<vec\_t>::evalOp}}(}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Monomials_abb5cd578383e08ae72fcbcf0eb184ab8}{vector\_t}}\&\ point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der2<dim>}}\ op,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00118}00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (op.var1\ ==\ op.var2)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers\_(op.var1,\ index)\ <=\ 1)\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}(1.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ op.var1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ powers\_(op.var1,\ index)\ *\ (powers\_(op.var1,\ index)-\/1)\ *}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[op.var1],\ powers\_(op.var1,\ index)-\/2);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ op.var1+1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}/scale/scale;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00130}00130\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers\_(op.var1,\ index)\ ==\ 0\ ||\ powers\_(op.var2,\ index)\ ==\ 0\ )\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}(1.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ op.var1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ powers\_(op.var1,\ index)*\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[op.var1],\ powers\_(op.var1,\ index)-\/1);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ op.var1+1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ op.var2;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ powers\_(op.var2,\ index)*\mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[op.var2],\ powers\_(op.var2,\ index)-\/1);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ op.var2+1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index));}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}/scale/scale;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00145}00145\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00146}00146\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00148}00148\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00149}\mbox{\hyperlink{classmm_1_1Monomials_a94c33ac8913f04fcc5dde4f1517a4301}{00149}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials<vec\_t>::evalOp}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Monomials_abb5cd578383e08ae72fcbcf0eb184ab8}{vector\_t}}\&\ point,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Derivative<dim>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&,\ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00151}00151\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size(),\ \textcolor{stringliteral}{"{}Monomial\ at\ index\ \%d\ does\ not\ exist.\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ must\ be\ in\ range\ [0,\ \%d)."{}},\ index,\ size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00153}00153\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{totaldeg}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.orders)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(x\ >=\ 0,\ \textcolor{stringliteral}{"{}Derivative\ of\ negative\ order\ \%d\ requested."{}},\ x);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{totaldeg}}\ +=\ x;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00157}00157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00158}00158\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}(1.0);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{d}}.orders[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ >\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index))\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00163}00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(point[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index)\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.orders[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index);\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ >\ powers\_(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index)\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.orders[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}-\/-\/)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ *=\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00169}00169\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ /\ \mbox{\hyperlink{group__utils_ga51a7b78dc2a21f865d436dc136e75541}{ipow}}(scale,\ \mbox{\hyperlink{classmm_1_1Gaussian}{totaldeg}});}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00170}00170\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00172}00172\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00173}\mbox{\hyperlink{classmm_1_1Monomials_a835ec3541cf526a49b7e5ee674c85169}{00173}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a835ec3541cf526a49b7e5ee674c85169}{Monomials<vec\_t>::evalAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00174}00174\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size(),\ \textcolor{stringliteral}{"{}Monomial\ at\ index\ \%d\ does\ not\ exist.\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ must\ be\ in\ range\ [0,\ \%d)."{}},\ index,\ size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00176}00176\ \ \ \ \ \textcolor{keywordflow}{return}\ powers\_.col(index).sum()\ ==\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00177}00177\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00180}00180\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00181}00181\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00182}00182\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials<vec\_t>::evalOp}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ vector\_t\&\ point,\ operator\_t\ op,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00183}00183\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00184}00184\ \ \ \ \ \textcolor{keywordflow}{return}\ op.apply(*\textcolor{keyword}{this},\ index,\ point,\ support,\ scale);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00185}00185\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00188}00188\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00189}\mbox{\hyperlink{classmm_1_1Monomials_ae42658b584cf3428111b3cd08c8e22ec}{00189}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a6197e006b636c2ba64f7cde6127e948d}{Monomials<vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dim>}}\&,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00190}00190\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&,\ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00191}00191\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size(),\ \textcolor{stringliteral}{"{}Monomial\ at\ index\ \%d\ does\ not\ exist.\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ must\ be\ in\ range\ [0,\ \%d)."{}},\ index,\ size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00193}00193\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00194}00194\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ <\ vec\_t::dim;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{d}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers()(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ index)\ !=\ 2)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 2.0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00197}00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ vec\_t::dim;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ powers()(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ !=\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ \&\&\ p\ !=\ 0)\ \{\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 0;\ \textcolor{keywordflow}{break};\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00201}00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ +=\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}};}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00202}00202\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00203}00203\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ /\ (scale*scale);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00204}00204\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00206}00206\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00207}\mbox{\hyperlink{classmm_1_1Monomials_a542155b6cbeb56c05d291f4090bc5bb2}{00207}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a6197e006b636c2ba64f7cde6127e948d}{Monomials<vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der1<dim>}}\&\ der1,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ ,\ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00209}00209\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der1.var\ >=\ 0,\ \textcolor{stringliteral}{"{}Index\ of\ derived\ variable\ \%d\ should\ be\ higher\ or\ equal\ to\ 0."{}},}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ der1.var);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00211}00211\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der1.var\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}},\ \textcolor{stringliteral}{"{}Index\ of\ derived\ variable\ \%d\ should\ be\ lower"{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ than\ the\ number\ of\ dimensions\ \%d"{}},\ der1.var,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00213}00213\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size(),\ \textcolor{stringliteral}{"{}Monomial\ at\ index\ \%d\ does\ not\ exist.\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ must\ be\ in\ range\ [0,\ \%d)."{}},\ index,\ size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00215}00215\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ der1.var;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00216}00216\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00217}00217\ \ \ \ \ \textcolor{keywordflow}{if}\ (powers()(\mbox{\hyperlink{classmm_1_1Gaussian}{d}},\ index)\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ vec\_t::dim;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ powers()(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ !=\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ \&\&\ p\ !=\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}=0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00223}00223\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00224}00224\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ /\ scale;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00225}00225\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00227}00227\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00228}\mbox{\hyperlink{classmm_1_1Monomials_a83a791f880d7cd673ff9a3affb695833}{00228}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a6197e006b636c2ba64f7cde6127e948d}{Monomials<vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der2<dim>}}\&\ der2,}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ ,\ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00230}00230\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der2.var1\ >=\ 0\ \&\&\ der2.var2\ >=0,\ \textcolor{stringliteral}{"{}Index\ of\ derived\ variables\ \%d\ and\ \%d\ should"{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ be\ both\ higher\ or\ equal\ to\ 0."{}},}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der2.var1,\ der2.var2);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00233}00233\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der2.var1\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ \&\&\ der2.var2\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ,\ \textcolor{stringliteral}{"{}Indexes\ of\ derived\ variables\ \%d\ \ and\ \%d\ should"{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ both\ be\ lower\ than\ the\ number\ of\ dimensions\ \%d"{}},\ der2.var1,\ der2.var2,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00235}00235\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size(),\ \textcolor{stringliteral}{"{}Monomial\ at\ index\ \%d\ does\ not\ exist.\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ must\ be\ in\ range\ [0,\ \%d)."{}},\ index,\ size());}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00237}00237\ \ \ \ \ \textcolor{keywordtype}{int}\ d1\ =\ der2.var1;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00238}00238\ \ \ \ \ \textcolor{keywordtype}{int}\ d2\ =\ der2.var2;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00239}00239\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00241}00241\ \ \ \ \ \textcolor{keywordflow}{if}\ (d1\ ==\ d2)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers()(d1,\ index)\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ vec\_t::dim;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ powers()(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ !=\ d1\ \&\&\ p\ !=\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00248}00248\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00249}00249\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (powers()(d1,\ index)\ ==\ 1\ \&\&\ powers()(d2,\ index)\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ vec\_t::dim;\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ powers()(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ index);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ !=\ d1\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ !=\ d2\ \&\&\ p\ !=\ 0)\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00257}00257\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00258}00258\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}\ /\ (scale\ *\ scale);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00259}00259\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00261}00261\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00262}\mbox{\hyperlink{classmm_1_1Monomials_a204e45c710c72da3f0202fb2b55bd8dd}{00262}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1Monomials_a6197e006b636c2ba64f7cde6127e948d}{Monomials<vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Derivative<dim>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{der}},}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{classmm_1_1Monomials_a3c19cb2c56f2f93b50f5284e98151f44}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00264}00264\ \ \ \ \ \textcolor{keywordflow}{return}\ evalOp(index,\ 0.0,\ \mbox{\hyperlink{classmm_1_1Gaussian}{der}},\ support,\ scale);}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00265}00265\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00266}00266\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00268}00268\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ V>}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00269}\mbox{\hyperlink{classmm_1_1Monomials_a0a328358f1d6c3613a16825a9837ddb8}{00269}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<V>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}})\ \{}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00270}00270\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Monomials\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}.dim\ <<\ \textcolor{stringliteral}{"{}D:\ "{}}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}.powers\_.transpose()\ <<\ \textcolor{stringliteral}{"{},\ number\ of\ functions\ =\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}.size();}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00272}00272\ \}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00273}00273\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00274}00274\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00275}00275\ }
+\DoxyCodeLine{\Hypertarget{Monomials_8hpp_source_l00276}00276\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_MONOMIALS\_HPP\_}}
+
+\end{DoxyCode}

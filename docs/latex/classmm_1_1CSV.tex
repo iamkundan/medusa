@@ -1,0 +1,263 @@
+\doxysection{mm\+::CSV Class Reference}
+\hypertarget{classmm_1_1CSV}{}\label{classmm_1_1CSV}\index{mm::CSV@{mm::CSV}}
+
+
+{\ttfamily \#include $<$CSV\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Implements support for basic \doxylink{classmm_1_1CSV}{CSV} I/O. 
+
+\begin{DoxyNote}{Note}
+To enable support for Eigen types, additional header \doxylink{CSV__Eigen_8hpp}{CSV\+\_\+\+Eigen.\+hpp} must be included.
+\end{DoxyNote}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ v\ =\ \{1,\ 2.5,\ -\/4.5,\ 12.34\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}{CSV::write}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}},\ v);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ v2\ =\ \mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{CSV::read}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ v\ is\ the\ same\ as\ v2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ For\ the\ following,\ the\ CSV\_Eigen.hpp\ header\ needs\ to\ be\ included.}}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M\ =\ \mbox{\hyperlink{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}{CSV::readEigen}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5}{CSV::writeEigen}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}},\ M.transpose()*M);}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{CSV__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{CSV__fwd_8hpp_source}{CSV\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{read}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename)
+\begin{DoxyCompactList}\small\item\em Reads a \doxylink{classmm_1_1CSV}{CSV} file to a vector of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ \mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{read2d}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}=\textquotesingle{},\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Reads a \doxylink{classmm_1_1CSV}{CSV} file to a vector of vectors of doubles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}}, -\/1, -\/1, 0, -\/1, -\/1 $>$ \mbox{\hyperlink{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}{read\+Eigen}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}=\textquotesingle{},\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Reads a \doxylink{classmm_1_1CSV}{CSV} file to an Eigen matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}{write}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{array}})
+\begin{DoxyCompactList}\small\item\em Writes given array to a \doxylink{classmm_1_1CSV}{CSV} file (as a column). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1CSV_a4deed22f2309873bd25272a76d0eb245}{write2d}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{array}}, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}=\textquotesingle{},\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Writes given 2d array to a \doxylink{classmm_1_1CSV}{CSV} file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5}{write\+Eigen}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&filename, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{expr}}, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{separator}}=\textquotesingle{},\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Writes given Eigen matrix to a \doxylink{classmm_1_1CSV}{CSV} file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}{split}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&str, \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \mbox{\hyperlink{classmm_1_1Gaussian}{separator}})
+\begin{DoxyCompactList}\small\item\em Splits given string into a vector of strings on the given separator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}\label{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa} 
+\index{mm::CSV@{mm::CSV}!read@{read}}
+\index{read@{read}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ mm\+::\+CSV\+::read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a \doxylink{classmm_1_1CSV}{CSV} file to a vector of doubles. 
+
+The file must have one number per line, otherwise use \doxylink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{CSV\+::read2d}. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if file cannot be read or if it is malformed. \\
+\hline
+\end{DoxyExceptions}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2CSV_test_8cpp-example}{test/io/\+CSV\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{CSV_8cpp_source_l00010}{10}} of file \mbox{\hyperlink{CSV_8cpp_source}{CSV.\+cpp}}.
+
+\Hypertarget{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}\label{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f} 
+\index{mm::CSV@{mm::CSV}!read2d@{read2d}}
+\index{read2d@{read2d}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{read2d()}{read2d()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ $>$ mm\+::\+CSV\+::read2d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{separator = {\ttfamily \textquotesingle{},\textquotesingle{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a \doxylink{classmm_1_1CSV}{CSV} file to a vector of vectors of doubles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+{\em separator} & Character used as a separator in the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if file cannot be read or if it is malformed. \\
+\hline
+\end{DoxyExceptions}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2CSV_test_8cpp-example}{test/io/\+CSV\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{CSV_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{CSV_8cpp_source}{CSV.\+cpp}}.
+
+\Hypertarget{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}\label{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a} 
+\index{mm::CSV@{mm::CSV}!readEigen@{readEigen}}
+\index{readEigen@{readEigen}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{readEigen()}{readEigen()}}
+{\footnotesize\ttfamily Eigen\+::\+Matrix\+Xd mm\+::\+CSV\+::read\+Eigen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{separator = {\ttfamily \textquotesingle{},\textquotesingle{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Reads a \doxylink{classmm_1_1CSV}{CSV} file to an Eigen matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+{\em separator} & Character used as a separator in the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if file cannot be read or if it is malformed. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+To use this function, additional header \doxylink{CSV__Eigen_8hpp}{CSV\+\_\+\+Eigen.\+hpp} needs to be included. 
+\end{DoxyNote}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2CSV_test_8cpp-example}{test/io/\+CSV\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{CSV__Eigen_8hpp_source_l00014}{14}} of file \mbox{\hyperlink{CSV__Eigen_8hpp_source}{CSV\+\_\+\+Eigen.\+hpp}}.
+
+\Hypertarget{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}\label{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32} 
+\index{mm::CSV@{mm::CSV}!split@{split}}
+\index{split@{split}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ mm\+::\+CSV\+::split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{str,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{separator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Splits given string into a vector of strings on the given separator. 
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classmm_1_1CSV_a72d188a15b116e8a95a65f2c28069f32}{split}}(\textcolor{stringliteral}{"{}abc,def,efg"{}},\ \textcolor{charliteral}{','});\ \ \textcolor{comment}{//\ returns\ \{"{}abc"{},\ "{}def"{},\ "{}efg"{}\}}}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{CSV_8cpp_source_l00055}{55}} of file \mbox{\hyperlink{CSV_8cpp_source}{CSV.\+cpp}}.
+
+\Hypertarget{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}\label{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0} 
+\index{mm::CSV@{mm::CSV}!write@{write}}
+\index{write@{write}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+CSV\+::write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} \&}]{array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Writes given array to a \doxylink{classmm_1_1CSV}{CSV} file (as a column). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+{\em array} & One dimensional array of data that supports range for loop iteration. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if file cannot be written to. \\
+\hline
+\end{DoxyExceptions}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2CSV_test_8cpp-example}{test/io/\+CSV\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{CSV_8hpp_source_l00019}{19}} of file \mbox{\hyperlink{CSV_8hpp_source}{CSV.\+hpp}}.
+
+\Hypertarget{classmm_1_1CSV_a4deed22f2309873bd25272a76d0eb245}\label{classmm_1_1CSV_a4deed22f2309873bd25272a76d0eb245} 
+\index{mm::CSV@{mm::CSV}!write2d@{write2d}}
+\index{write2d@{write2d}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{write2d()}{write2d()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+CSV\+::write2d (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{arr\+\_\+t}} \&}]{array,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{separator = {\ttfamily \textquotesingle{},\textquotesingle{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Writes given 2d array to a \doxylink{classmm_1_1CSV}{CSV} file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+{\em array} & Two dimensional array of data that supports two nested range for loop iterations. \\
+\hline
+{\em separator} & Character to use as a separator in a \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if file cannot be written to. \\
+\hline
+\end{DoxyExceptions}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2CSV_test_8cpp-example}{test/io/\+CSV\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{CSV_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{CSV_8hpp_source}{CSV.\+hpp}}.
+
+\Hypertarget{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5}\label{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5} 
+\index{mm::CSV@{mm::CSV}!writeEigen@{writeEigen}}
+\index{writeEigen@{writeEigen}!mm::CSV@{mm::CSV}}
+\doxysubsubsection{\texorpdfstring{writeEigen()}{writeEigen()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} mm\+::\+CSV\+::write\+Eigen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&}]{filename,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ Derived $>$ \&}]{expr,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{char}}}]{separator = {\ttfamily \textquotesingle{},\textquotesingle{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Writes given Eigen matrix to a \doxylink{classmm_1_1CSV}{CSV} file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+{\em expr} & An Eigen expression that can be evaluated to a matrix. \\
+\hline
+{\em separator} & Character to use as a separator in a \doxylink{classmm_1_1CSV}{CSV} file. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if file cannot be written to. \\
+\hline
+\end{DoxyExceptions}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2io_2CSV_test_8cpp-example}{test/io/\+CSV\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{CSV__Eigen_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{CSV__Eigen_8hpp_source}{CSV\+\_\+\+Eigen.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/io/\mbox{\hyperlink{CSV__fwd_8hpp}{CSV\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/io/\mbox{\hyperlink{CSV_8hpp}{CSV.\+hpp}}\item 
+include/medusa/bits/io/\mbox{\hyperlink{CSV__Eigen_8hpp}{CSV\+\_\+\+Eigen.\+hpp}}\item 
+src/io/\mbox{\hyperlink{CSV_8cpp}{CSV.\+cpp}}\end{DoxyCompactItemize}

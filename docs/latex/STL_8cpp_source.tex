@@ -1,0 +1,46 @@
+\doxysection{STL.\+cpp}
+\hypertarget{STL_8cpp_source}{}\label{STL_8cpp_source}\index{src/io/STL.cpp@{src/io/STL.cpp}}
+\mbox{\hyperlink{STL_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{STL_8hpp}{medusa/bits/io/STL.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00014}\mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{00014}}\ std::vector<STL::Triangle>\ \mbox{\hyperlink{classmm_1_1STL_aaac3c874ba4dbd10dbc4f719798ca6e2}{STL::read}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \{}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00015}00015\ \ \ \ \ std::ifstream\ file(filename,\ std::ios::in\ |\ std::ios::binary);}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00016}00016\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(file,\ \textcolor{stringliteral}{"{}File\ '\%s'\ could\ not\ be\ opened:\ \%s"{}},\ filename,\ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{HEADER\_SIZE}}\ =\ 80;}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00018}00018\ \ \ \ \ file.seekg(\mbox{\hyperlink{classmm_1_1Gaussian}{HEADER\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(file,\ \textcolor{stringliteral}{"{}Error\ reading\ header\ in\ file\ '\%s':\ \%s"{}},\ filename,\ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{uint32\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_triangles}};}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00021}00021\ \ \ \ \ file.read(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&\mbox{\hyperlink{classmm_1_1Gaussian}{num\_triangles}}),\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{classmm_1_1Gaussian}{uint32\_t}}));}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(file,\ \textcolor{stringliteral}{"{}Error\ reading\ number\ of\ triangles\ in\ file\ '\%s':\ \%s"{}},\ filename,}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00024}00024\ \ \ \ \ std::vector<Triangle>\ \mbox{\hyperlink{classmm_1_1Gaussian}{triangles}}(\mbox{\hyperlink{classmm_1_1Gaussian}{num\_triangles}});}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00025}00025\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{TRIANGLE\_BYTE\_SIZE}}\ =\ 4\ *\ 4\ *\ 3;}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00026}00026\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ATTRIBUTE\_BYTE\_SIZE}}\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{uint64\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_triangles}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ file.read(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&\mbox{\hyperlink{classmm_1_1Gaussian}{triangles}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]),\ \mbox{\hyperlink{classmm_1_1Gaussian}{TRIANGLE\_BYTE\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(file,\ \textcolor{stringliteral}{"{}Error\ reading\ triangle\ \%d\ in\ file\ '\%s':\ \%s"{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ filename,}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00031}00031\ \ \ \ \ \ \ \ \ file.read(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\&\mbox{\hyperlink{classmm_1_1Gaussian}{triangles}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}].attribute),\ \mbox{\hyperlink{classmm_1_1Gaussian}{ATTRIBUTE\_BYTE\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(file,\ \textcolor{stringliteral}{"{}Error\ reading\ attribute\ \%d\ in\ file\ '\%s':\ \%s"{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ filename,}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{strerror}}(\mbox{\hyperlink{classmm_1_1Gaussian}{errno}}));}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{triangles}};}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00038}\mbox{\hyperlink{namespacemm_a42e0898079f0c953ff8d42caec038fdf}{00038}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmm_1_1STL_1_1Point}{STL::Point}}\&\ p)\ \{}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}P("{}}\ <<\ p.\mbox{\hyperlink{structmm_1_1STL_1_1Point_a27833e34cd9726b337b01d1a985602db}{x}}\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ p.\mbox{\hyperlink{structmm_1_1STL_1_1Point_aa0426a31b5866ef1129ac6882e2938db}{y}}\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ p.\mbox{\hyperlink{structmm_1_1STL_1_1Point_ae3fd92dbcd8af4ebb04d1d5b28d74fa9}{z}}\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00041}\mbox{\hyperlink{namespacemm_a3f2b6e33c627ad6940c0bb11348501f4}{00041}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmm_1_1STL_1_1Triangle}{STL::Triangle}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}T("{}}\ <<\ v.\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_af8a2f3d91bbaaf07def9b17b55214c70}{normal}}\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ v.\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_aa8f9de493062bb4eec52bf50713da230}{p1}}\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ v.\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a80c6faf718d84be6320ee70c47f94ca6}{p2}}\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ v.\mbox{\hyperlink{structmm_1_1STL_1_1Triangle_a2583c30b9a508ea393cc010f672049b4}{p3}}\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{STL_8cpp_source_l00045}00045\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

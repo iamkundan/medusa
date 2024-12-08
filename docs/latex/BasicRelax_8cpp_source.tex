@@ -1,0 +1,50 @@
+\doxysection{Basic\+Relax.\+cpp}
+\hypertarget{BasicRelax_8cpp_source}{}\label{BasicRelax_8cpp_source}\index{src/domains/BasicRelax.cpp@{src/domains/BasicRelax.cpp}}
+\mbox{\hyperlink{BasicRelax_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BasicRelax_8hpp}{medusa/bits/domains/BasicRelax.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00010}\mbox{\hyperlink{classmm_1_1BasicRelax_a779e0ee991a93a3ceef7c15335214854}{00010}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a779e0ee991a93a3ceef7c15335214854}{BasicRelax::onlyNodes}}(\mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{nodes}})\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00011}00011\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_a86e9a4f4fc113a241efd1a5c4a6cb782}{nodes\_}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{nodes}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00012}00012\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00014}\mbox{\hyperlink{classmm_1_1BasicRelax_a767e071093475a5a7ba8f4305b0410bb}{00014}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a767e071093475a5a7ba8f4305b0410bb}{BasicRelax::initialHeat}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}})\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00015}00015\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_a82137f81f9060ab3468d6f9c8709efa9}{initial\_heat}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00016}00016\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00018}\mbox{\hyperlink{classmm_1_1BasicRelax_abbb9ab1af3e7597dfb2da735b77619e8}{00018}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_abbb9ab1af3e7597dfb2da735b77619e8}{BasicRelax::finalHeat}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}})\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_acf63d67279761f418b021d8de496aed1}{final\_heat}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00020}00020\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00022}\mbox{\hyperlink{classmm_1_1BasicRelax_a45fec9472d9ccfba6005c13b714f92bc}{00022}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a45fec9472d9ccfba6005c13b714f92bc}{BasicRelax::projectionType}}(\mbox{\hyperlink{classmm_1_1BasicRelax_ad9c85f150b8c149ae8ae3316fce67695}{ProjectionType}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}})\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_aa054d3465d9b5190b5ef67b779d8dba1}{projection\_type}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00026}\mbox{\hyperlink{classmm_1_1BasicRelax_a6a0d3d9c18e38c11de3e3a9233ae9a6d}{00026}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a6a0d3d9c18e38c11de3e3a9233ae9a6d}{BasicRelax::boundaryProjectionThreshold}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}})\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0.0\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}}\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}}\ <\ 2.0,\ \textcolor{stringliteral}{"{}Weird\ projection\ threshold,\ it\ is\ equal\ to\ \%.6f,\ "{}}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}but\ expected\ in\ range\ [0,\ 1]."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}});}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00029}00029\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_af307d1fd61c9dec303b9429f599df8e2}{boundary\_projection\_threshold}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{in}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00033}\mbox{\hyperlink{classmm_1_1BasicRelax_afbec16426f7fe60cebcd97f43897cf5c}{00033}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_afbec16426f7fe60cebcd97f43897cf5c}{BasicRelax::numNeighbours}}(\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{neighbours}})\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_ab3d2afcee1b0617a428dfa002e749b26}{num\_neighbours}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{neighbours}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00037}\mbox{\hyperlink{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}{00037}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}{BasicRelax::iterations}}(\textcolor{keywordtype}{int}\ iterations)\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00038}00038\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_ad49fc5ee6414873bb491eb3888e847e4}{num\_iterations}}\ =\ \mbox{\hyperlink{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}{iterations}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00041}\mbox{\hyperlink{classmm_1_1BasicRelax_a8d4b382691505b6298b46e7b14642494}{00041}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a8d4b382691505b6298b46e7b14642494}{BasicRelax::potentialOrder}}(\textcolor{keywordtype}{int}\ order)\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_a83640d548d2e0be47968a56a0bb37eed}{potential\_order}}\ =\ order;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00045}\mbox{\hyperlink{classmm_1_1BasicRelax_a4fa13a5223bf28227000a9517ad742f3}{00045}}\ \mbox{\hyperlink{classmm_1_1BasicRelax}{BasicRelax}}\&\ \mbox{\hyperlink{classmm_1_1BasicRelax_a4fa13a5223bf28227000a9517ad742f3}{BasicRelax::rebuildTreeAfter}}(\textcolor{keywordtype}{int}\ iterations)\ \{}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00046}00046\ \ \ \ \ \mbox{\hyperlink{classmm_1_1BasicRelax_a5a0cba7fbe60728375baf0347230e7d8}{rebuild\_tree\_after}}\ =\ \mbox{\hyperlink{classmm_1_1BasicRelax_a33b238b7970a0e97b28e834b0aa08e5d}{iterations}};\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{BasicRelax_8cpp_source_l00049}00049\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

@@ -1,0 +1,208 @@
+\doxysection{mm\+::Inverse\+Multiquadric\texorpdfstring{$<$}{<} scal\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1InverseMultiquadric}{}\label{classmm_1_1InverseMultiquadric}\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+
+
+{\ttfamily \#include $<$Inverse\+Multiquadric\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}}$>$\newline
+class mm\+::\+Inverse\+Multiquadric$<$ scal\+\_\+t $>$}
+Inverse \doxylink{classmm_1_1Multiquadric}{Multiquadric} Radial Basis Function. 
+
+Specifically, this class represents a function $\frac{1}{\sqrt{1 + r^2/\sigma^2}}$. as a function of squared distance with shape parameter $\sigma $. This class satisfies the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ InverseMultiquadric<double>\ im(1.324);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ im(4.0);\ \ \ \ \ \textcolor{comment}{//\ value\ at\ 4.0\ (this\ is\ the\ squared\ radius)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ im(0.0,\ 2);\ \ \textcolor{comment}{//\ second\ derivative\ at\ 0.0}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ im\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source}{Inverse\+Multiquadric\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a5b79ff60e8577050e42b36209472004a}{Inverse\+Multiquadric}} (\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}}=1)
+\begin{DoxyCompactList}\small\item\em Creates a Inverse\+Multi\+Quadratic RBF basis with shape parameter {\ttfamily shape}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns shape parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_afe9ac43d26ec5960ffef3fa4128fd0cc}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}{shape}})
+\begin{DoxyCompactList}\small\item\em Sets shape parameter to a new value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}{operator()}} (\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate derivative of this RBF wrt. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ }\\\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a39476baad5cd6ad4f171f6a3ae6a725c}{operator()}} (\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}, \mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ lap) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate Laplacian of this RBF wrt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a9bddcba1ef819f4271e0d4bfb3600bd3}{operator()}} (\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate at a given point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type used for computations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1InverseMultiquadric_a18aa235566801c0250158cac5b63137d}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given basis function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}{shape\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Shape parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1InverseMultiquadric_a5b79ff60e8577050e42b36209472004a}\label{classmm_1_1InverseMultiquadric_a5b79ff60e8577050e42b36209472004a} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!InverseMultiquadric@{InverseMultiquadric}}
+\index{InverseMultiquadric@{InverseMultiquadric}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{InverseMultiquadric()}{InverseMultiquadric()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::\+Inverse\+Multiquadric (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}}}]{shape = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Creates a Inverse\+Multi\+Quadratic RBF basis with shape parameter {\ttfamily shape}. 
+
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{InverseMultiquadric_8hpp_source}{Inverse\+Multiquadric.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1InverseMultiquadric_a9bddcba1ef819f4271e0d4bfb3600bd3}\label{classmm_1_1InverseMultiquadric_a9bddcba1ef819f4271e0d4bfb3600bd3} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}}}]{r2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate at a given point. 
+
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{InverseMultiquadric_8hpp_source}{Inverse\+Multiquadric.\+hpp}}.
+
+\Hypertarget{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae}\label{classmm_1_1InverseMultiquadric_a72f2e5c4b9a2bee3df1a18578c7bcfae} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}}}]{r2,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{derivative }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate derivative of this RBF wrt. 
+
+{\ttfamily r2} at given point. 
+\begin{DoxyParams}{Parameters}
+{\em r2} & Squared radial distance. \\
+\hline
+{\em derivative} & Order of derivative to evaluate. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if derivative order is negative. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric_8hpp_source_l00022}{22}} of file \mbox{\hyperlink{InverseMultiquadric_8hpp_source}{Inverse\+Multiquadric.\+hpp}}.
+
+\Hypertarget{classmm_1_1InverseMultiquadric_a39476baad5cd6ad4f171f6a3ae6a725c}\label{classmm_1_1InverseMultiquadric_a39476baad5cd6ad4f171f6a3ae6a725c} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}}}]{r2,  }\item[{\mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$}]{lap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate Laplacian of this RBF wrt. 
+
+{\ttfamily r} at given point. 
+\begin{DoxyParams}{Parameters}
+{\em r2} & Squared radial distance. \\
+\hline
+{\em lap} & Laplacian operator object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmm_1_1InverseMultiquadric_afe9ac43d26ec5960ffef3fa4128fd0cc}\label{classmm_1_1InverseMultiquadric_afe9ac43d26ec5960ffef3fa4128fd0cc} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}}}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets shape parameter to a new value. 
+
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source}{Inverse\+Multiquadric\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca}\label{classmm_1_1InverseMultiquadric_a8e538a0aa5c8baac5479d8f0456cf8ca} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!shape@{shape}}
+\index{shape@{shape}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns shape parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source}{Inverse\+Multiquadric\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1InverseMultiquadric_a18aa235566801c0250158cac5b63137d}\label{classmm_1_1InverseMultiquadric_a18aa235566801c0250158cac5b63137d} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic information about given basis function. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9}\label{classmm_1_1InverseMultiquadric_ae1673f68bbf7046970e39f8296645ba9} 
+\index{mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}!shape\_@{shape\_}}
+\index{shape\_@{shape\_}!mm::InverseMultiquadric$<$ scal\_t $>$@{mm::InverseMultiquadric$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_}{shape\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1InverseMultiquadric_a8dd7a98190991fd004bde35e7069a542}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{mm\+::\+Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::shape\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shape parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{InverseMultiquadric__fwd_8hpp_source}{Inverse\+Multiquadric\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{InverseMultiquadric__fwd_8hpp}{Inverse\+Multiquadric\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{InverseMultiquadric_8hpp}{Inverse\+Multiquadric.\+hpp}}\end{DoxyCompactItemize}

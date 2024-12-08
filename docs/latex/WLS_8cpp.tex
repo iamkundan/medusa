@@ -1,0 +1,82 @@
+\doxysection{src/approximations/\+WLS.cpp File Reference}
+\hypertarget{WLS_8cpp}{}\label{WLS_8cpp}\index{src/approximations/WLS.cpp@{src/approximations/WLS.cpp}}
+
+
+\doxysubsection{Detailed Description}
+Instantiations of commonly used WLS approximations. 
+
+
+
+Definition in file \mbox{\hyperlink{WLS_8cpp_source}{WLS.\+cpp}}.
+
+{\ttfamily \#include $<$medusa/bits/approximations/\+WLS.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Gaussian.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Multiquadric.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+RBFBasis.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Monomials.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Weight\+Function.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Scale\+Function.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/approximations/\+Jacobi\+SVDWrapper.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Vec.\+hpp$>$}\newline
+{\ttfamily \#include $<$Eigen/\+Cholesky$>$}\newline
+{\ttfamily \#include $<$Eigen/\+LU$>$}\newline
+{\ttfamily \#include $<$Eigen/\+SVD$>$}\newline
+Include dependency graph for WLS.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{WLS_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{WLS_8cpp_aa2f49001be13949a16a57e6c99ab00ad}{COMMA}}~,
+\begin{DoxyCompactList}\small\item\em Macro for inserting a comma "{},"{}. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{WLS_8cpp_acd9746ab5a43cd0117f47a547adbe87d}{INSTANTIATE}}(classname)
+\begin{DoxyCompactList}\small\item\em Macro for instantiating template classes with get\+Shape method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{WLS_8cpp_aa2f49001be13949a16a57e6c99ab00ad}\label{WLS_8cpp_aa2f49001be13949a16a57e6c99ab00ad} 
+\index{WLS.cpp@{WLS.cpp}!COMMA@{COMMA}}
+\index{COMMA@{COMMA}!WLS.cpp@{WLS.cpp}}
+\doxysubsubsection{\texorpdfstring{COMMA}{COMMA}}
+{\footnotesize\ttfamily \#define COMMA~,}
+
+
+
+Macro for inserting a comma "{},"{}. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{WLS_8cpp_source}{WLS.\+cpp}}.
+
+\Hypertarget{WLS_8cpp_acd9746ab5a43cd0117f47a547adbe87d}\label{WLS_8cpp_acd9746ab5a43cd0117f47a547adbe87d} 
+\index{WLS.cpp@{WLS.cpp}!INSTANTIATE@{INSTANTIATE}}
+\index{INSTANTIATE@{INSTANTIATE}!WLS.cpp@{WLS.cpp}}
+\doxysubsubsection{\texorpdfstring{INSTANTIATE}{INSTANTIATE}}
+{\footnotesize\ttfamily \#define INSTANTIATE(\begin{DoxyParamCaption}\item[{}]{classname }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ \textcolor{keyword}{class\ }classname;\ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ Eigen::Matrix<double,\ Eigen::Dynamic,\ 1>\ classname::getShape(\textcolor{keyword}{const}\ Der1<dim>\&)\ \textcolor{keyword}{const};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ Eigen::Matrix<double,\ Eigen::Dynamic,\ 1>\ classname::getShape(\textcolor{keyword}{const}\ Der2<dim>\&)\ \textcolor{keyword}{const};\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ Eigen::Matrix<double,\ Eigen::Dynamic,\ 1>\ classname::getShape(\textcolor{keyword}{const}\ Lap<dim>\&)\ \textcolor{keyword}{const};\ \(\backslash\)}
+
+\end{DoxyCode}
+
+
+Macro for instantiating template classes with get\+Shape method. 
+
+
+
+Definition at line \mbox{\hyperlink{WLS_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{WLS_8cpp_source}{WLS.\+cpp}}.
+

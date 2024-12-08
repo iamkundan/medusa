@@ -1,0 +1,77 @@
+\doxysection{test/utils/stdtypesutils\+\_\+test.\+cpp}
+\hypertarget{test_2utils_2stdtypesutils_test_8cpp-example}{}\label{test_2utils_2stdtypesutils_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdtypesutils_8hpp}{medusa/bits/utils/stdtypesutils.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ StdTypesSort)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ a\ =\ \{3,\ 1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ b\ =\ \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{sorted}}(a);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ a[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ a[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ a[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ b[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ b[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ b[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}}(a);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(b,\ a);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ b\ =\ \mbox{\hyperlink{group__utils_gab6f9e2c2d14d3d758aaef24bd1d510dd}{sorted}}(a,\ [](\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j)\ \{\ \textcolor{keywordflow}{return}\ j\ <\ i;\ \});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ a[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ a[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ a[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ b[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ b[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ b[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}}(a,\ [](\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j)\ \{\ \textcolor{keywordflow}{return}\ j\ <\ i;\ \});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(b,\ a);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ StdTypesPad)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<int>>\ a\ =\ \{\{2,\ 1\},\ \{4\},\ \{\},\ \{1,\ 2,\ 3\}\};}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<int>>\ expected\ =\ \{\{2,\ 1,\ -\/1\},\ \{4,\ -\/1,\ -\/1\},\ \{-\/1,\ -\/1,\ -\/1\},\ \{1,\ 2,\ 3\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ \mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{pad}}(a,\ -\/1));}
+\DoxyCodeLine{\ \ \ \ a\ =\ \{\{1,\ 2\},\ \{3,\ 4\},\ \{5,\ 6\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(a,\ \mbox{\hyperlink{group__utils_gafa714aba02b819a0e5cb03cbe36d3ca4}{pad}}(a,\ -\/1));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ StdTypesTextSplit)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<std::string>(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\}),\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{stringliteral}{"{}a,b,c"{}},\ \textcolor{charliteral}{','}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<std::string>(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}c"{}}\}),\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{stringliteral}{"{}a,\ b,\ c"{}},\ \textcolor{stringliteral}{"{},\ "{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<std::string>(\{\textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}\ "{}},\ \textcolor{stringliteral}{"{}"{}}\}),\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{stringliteral}{"{}aaa\ a"{}},\ \textcolor{stringliteral}{"{}a"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<std::string>(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}"{}}\}),\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{stringliteral}{"{}a,b,"{}},\ \textcolor{stringliteral}{"{},"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<std::string>(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}b"{}},\ \textcolor{stringliteral}{"{}"{}}\}),\ \mbox{\hyperlink{group__utils_gae0fe292ba05b616654be10a96eaca8ed}{split}}(\textcolor{stringliteral}{"{}a,,b,,"{}},\ \textcolor{stringliteral}{"{},,"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ StdTypesTextJoin)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}ababa"{}},\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}}\},\ \textcolor{charliteral}{'b'}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}ababa"{}},\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}}\},\ \textcolor{stringliteral}{"{}b"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}abxabxa"{}},\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}a"{}}\},\ \textcolor{stringliteral}{"{}bx"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}aa"{}},\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}a"{}}\},\ \textcolor{stringliteral}{"{}"{}}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}a123123123123a123"{}},\ \mbox{\hyperlink{group__utils_ga21cf5475deabaedcb07d6266be6efec0}{join}}(\{\textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}"{}}\},\ \textcolor{stringliteral}{"{}123"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Utils,\ PrintTuple)\ \{}
+\DoxyCodeLine{\ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\ \ \ \ std::tuple<int,\ double,\ std::string>\ t(2,\ 4.5,\ \textcolor{stringliteral}{"{}asdf"{}});}
+\DoxyCodeLine{\ \ \ \ ss\ <<\ t;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}(2,\ 4.5,\ asdf)"{}},\ ss.str());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ss.str(\{\});}
+\DoxyCodeLine{\ \ \ \ ss.clear();}
+\DoxyCodeLine{\ \ \ \ std::tuple<>\ empty;}
+\DoxyCodeLine{\ \ \ \ ss\ <<\ empty;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}()"{}},\ ss.str());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

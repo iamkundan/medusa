@@ -1,0 +1,244 @@
+\doxysection{mm\+::Adams\+Bashforth\texorpdfstring{$<$}{<} Scalar, num\+\_\+steps \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1AdamsBashforth}{}\label{classmm_1_1AdamsBashforth}\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+
+
+{\ttfamily \#include $<$Adams\+Bashforth\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$\newline
+class mm\+::\+Adams\+Bashforth$<$ Scalar, num\+\_\+steps $>$}
+Class representing an \doxylink{classmm_1_1AdamsBashforth}{Adams\+Bashforth} method, an explicit linear multistep method. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Scalar} & Type of scalars to use for calculations, e.\+g. {\ttfamily double}. \\
+\hline
+{\em num\+\_\+steps} & Number of previous steps the method uses.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ Solving:}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ x'\ =\ -\/y}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ y'\ =\ x}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ *\ with\ solution\ (x,\ y)\ =\ (cos(t),\ sin(t))}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::function<Eigen::VectorXd(\textcolor{keywordtype}{double},\ \textcolor{keyword}{const}\ Eigen::VectorXd\&)>\ func\ =}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](double,\ \textcolor{keyword}{const}\ Eigen::VectorXd\&\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::VectorXd\ r(2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r(0)\ =\ -\/y(1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ r(1)\ =\ y(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tmax\ =\ 2*\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dt\ =\ 0.1;}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ y0(2);\ y0\ <<\ 1.0,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ solver\ =\ \mbox{\hyperlink{namespacemm_1_1integrators_1_1ExplicitMultistep_a706df7d148d5421098f7616bf132c370}{integrators::ExplicitMultistep::AB3}}().solve(func,\ 0.0,\ tmax,\ dt,\ y0);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ solver\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}{step}}\ :\ solver)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cout\ <<\ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}{step}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}{step}}.is\_last())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}This\ is\ the\ last\ step."{}}\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read/write\ access\ to\ current\ time\ and\ value.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}{step}}.time();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}{step}}.value();}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1AdamsBashforth_a9aa8c141956299bd4d186288a2fb7277}{Adams\+Bashforth}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}}, 1 $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{b}})
+\begin{DoxyCompactList}\small\item\em Construct an {\ttfamily num\+\_\+steps}-\/step Adams Bashforth method with coefficients {\ttfamily b}, given as $y_{n+s} = y_{n+s-1} + h \sum_{j=0}^{s-1} b_j f(t_j, y_j)$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1AdamsBashforth_1_1Integrator}{Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_ab749c4edc9b7b74c2a41be90e29e1855}{solve}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{func}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{t0}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{t\+\_\+max}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{dt}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Vector\+Xd \&\mbox{\hyperlink{classmm_1_1Gaussian}{y0}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a solver using this method. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{initial\+\_\+method\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1AdamsBashforth_1_1Integrator}{Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{initial\+\_\+method\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_ae95065f7464be4a242ae7362cc6e795b}{solve}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{initial\+\_\+method\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{method}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{func}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{t0}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{t\+\_\+max}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{dt}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Vector\+Xd \&\mbox{\hyperlink{classmm_1_1Gaussian}{y0}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Same as \doxylink{classmm_1_1AdamsBashforth_ab749c4edc9b7b74c2a41be90e29e1855}{Adams\+Bashforth\+::solve}, but offers the option of supplying your own initial method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}} = num\+\_\+steps
+ \}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em floating point type \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1AdamsBashforth_1_1Integrator}{Integrator}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1AdamsBashforth_1_1Integrator}{Integrator} class for AB methods. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} stages$>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1AdamsBashforth_a14a2ff2261d46034f7f5eed315fdffc0}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1AdamsBashforth}{Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, stages $>$ \&)
+\begin{DoxyCompactList}\small\item\em Output the method\textquotesingle{}s tableau for debugging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\Eigen\+::\+Vector\+Xd \mbox{\hyperlink{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}{step}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{func}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} t, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}} $>$ \&last\+\_\+ys, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{dt}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns next value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}}, 1 $>$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a94bae294d411a6320e90d4c6ad5f58ac}{b\+\_\+}}
+\begin{DoxyCompactList}\small\item\em coefficients of the multistep method \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99}\label{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{steps@{steps}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!steps@{steps}}}\Hypertarget{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}\label{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a} 
+steps&number of steps of the multistep method \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1AdamsBashforth_a9aa8c141956299bd4d186288a2fb7277}\label{classmm_1_1AdamsBashforth_a9aa8c141956299bd4d186288a2fb7277} 
+\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!AdamsBashforth@{AdamsBashforth}}
+\index{AdamsBashforth@{AdamsBashforth}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+\doxysubsubsection{\texorpdfstring{AdamsBashforth()}{AdamsBashforth()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+\mbox{\hyperlink{classmm_1_1AdamsBashforth}{mm\+::\+Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$\+::\+Adams\+Bashforth (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}}, 1 $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct an {\ttfamily num\+\_\+steps}-\/step Adams Bashforth method with coefficients {\ttfamily b}, given as $y_{n+s} = y_{n+s-1} + h \sum_{j=0}^{s-1} b_j f(t_j, y_j)$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Vector of size {\ttfamily num\+\_\+steps} representing the coefficients of the method. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1AdamsBashforth_ab749c4edc9b7b74c2a41be90e29e1855}\label{classmm_1_1AdamsBashforth_ab749c4edc9b7b74c2a41be90e29e1855} 
+\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!solve@{solve}}
+\index{solve@{solve}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1AdamsBashforth_1_1Integrator}{Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1AdamsBashforth}{mm\+::\+Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{func,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{t0,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{t\+\_\+max,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{dt,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Vector\+Xd \&}]{y0 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a solver using this method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function to integrate. \\
+\hline
+{\em t0} & Start time. \\
+\hline
+{\em t\+\_\+max} & End time. \\
+\hline
+{\em dt} & Time step. \\
+\hline
+{\em y0} & Initial value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Last step might not finish exactly on {\ttfamily t\+\_\+max}. The number of steps is calculated as {\ttfamily std\+::ceil((t\+\_\+max -\/ t0)/dt)}. 
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+A solver object. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00203}{203}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1AdamsBashforth_ae95065f7464be4a242ae7362cc6e795b}\label{classmm_1_1AdamsBashforth_ae95065f7464be4a242ae7362cc6e795b} 
+\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!solve@{solve}}
+\index{solve@{solve}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{initial\+\_\+method\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1AdamsBashforth_1_1Integrator}{Integrator}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{initial\+\_\+method\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1AdamsBashforth}{mm\+::\+Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$\+::solve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{initial\+\_\+method\+\_\+t}} \&}]{method,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{func,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{t0,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{t\+\_\+max,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{dt,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Vector\+Xd \&}]{y0 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Same as \doxylink{classmm_1_1AdamsBashforth_ab749c4edc9b7b74c2a41be90e29e1855}{Adams\+Bashforth\+::solve}, but offers the option of supplying your own initial method. 
+
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00211}{211}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a}\label{classmm_1_1AdamsBashforth_a15cec0925935685985fa31e808ce052a} 
+\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!step@{step}}
+\index{step@{step}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+\doxysubsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+Eigen\+::\+Vector\+Xd \mbox{\hyperlink{classmm_1_1AdamsBashforth}{mm\+::\+Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$\+::step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{func,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{t,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}} $>$ \&}]{last\+\_\+ys,  }\item[{\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}}]{dt }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Returns next value. 
+
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00220}{220}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1AdamsBashforth_a14a2ff2261d46034f7f5eed315fdffc0}\label{classmm_1_1AdamsBashforth_a14a2ff2261d46034f7f5eed315fdffc0} 
+\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} stages$>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1AdamsBashforth}{Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, stages $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output the method\textquotesingle{}s tableau for debugging. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1AdamsBashforth_a94bae294d411a6320e90d4c6ad5f58ac}\label{classmm_1_1AdamsBashforth_a94bae294d411a6320e90d4c6ad5f58ac} 
+\index{mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}!b\_@{b\_}}
+\index{b\_@{b\_}!mm::AdamsBashforth$<$ Scalar, num\_steps $>$@{mm::AdamsBashforth$<$ Scalar, num\_steps $>$}}
+\doxysubsubsection{\texorpdfstring{b\_}{b\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} num\+\_\+steps$>$ \\
+Eigen\+::\+Matrix$<$\mbox{\hyperlink{classmm_1_1AdamsBashforth_a4f1d7f050e61127482b351486e2749f4}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1AdamsBashforth_a0c84ef6ae65ecfc8f43e7ce3a4e23a99ab5e5382596fd18066abb505f478a086a}{steps}}, 1$>$ \mbox{\hyperlink{classmm_1_1AdamsBashforth}{mm\+::\+Adams\+Bashforth}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}, \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+steps}} $>$\+::b\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+coefficients of the multistep method 
+
+
+
+Definition at line \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{AdamsBashforth__fwd_8hpp_source}{Adams\+Bashforth\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/integrators/\mbox{\hyperlink{AdamsBashforth__fwd_8hpp}{Adams\+Bashforth\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

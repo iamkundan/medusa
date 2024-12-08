@@ -1,0 +1,57 @@
+\doxysection{test/approximations/\+Polyharmonic\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2Polyharmonic_test_8cpp-example}{}\label{test_2approximations_2Polyharmonic_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Polyharmonic_8hpp}{medusa/bits/approximations/Polyharmonic.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{TEST(Approximations,\ PolyharmonicEvaluate)\ \{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ Polyharmonic<double>\ ph(1);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ double\ r0\ =\ 0;}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ double\ r2\ =\ 1.23;}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0),\ 1e-\/15);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ EXPECT\_NEAR(std::sqrt(r2),\ ph(r2),\ 1e-\/15);}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0,\ 1),\ 1e-\/15);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ EXPECT\_NEAR(0.5\ /\ std::sqrt(r2),\ ph(r2,\ 1),\ 1e-\/15);}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0,\ 2),\ 1e-\/15);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ EXPECT\_NEAR(-\/0.25\ /\ r2\ /\ std::sqrt(r2),\ ph(r2,\ 2),\ 1e-\/15);}}
+\DoxyCodeLine{\textcolor{comment}{\}}}
+\DoxyCodeLine{\textcolor{comment}{*/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ PolyharmonicEvaluateCompileTime)\ \{}
+\DoxyCodeLine{\ \ \ \ Polyharmonic<double,\ 3>\ ph;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r0\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r2\ =\ 1.23;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(std::sqrt(r2*r2*r2),\ ph(r2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0,\ 0),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(std::sqrt(r2*r2*r2),\ ph(r2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0,\ 1),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1.5*std::sqrt(r2),\ ph(r2,\ 1),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0,\ 2),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.75/std::sqrt(r2),\ ph(r2,\ 2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0,\ ph(r0,\ 3),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.375\ /\ r2\ /\ std::sqrt(r2),\ ph(r2,\ 3),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ DISABLED\_PolyharmonicUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Polyharmonic<double,\ 3>\ ph;\ \ \textcolor{comment}{//\ order\ given\ compile\ time}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ ph(4.0);\ \ \ \ \ \textcolor{comment}{//\ value\ at\ 4.0\ (this\ is\ the\ squared\ radius)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ ph(0.0,\ 2);\ \ \textcolor{comment}{//\ second\ derivative\ at\ 0.0}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ ph\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ val\ <<\ der;\ \ \textcolor{comment}{//\ to\ not\ be\ unused}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

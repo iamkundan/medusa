@@ -1,0 +1,724 @@
+\doxysection{mm\+::Translated\+Shape\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1TranslatedShape}{}\label{classmm_1_1TranslatedShape}\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+
+
+{\ttfamily \#include $<$Translated\+Shape\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+Translated\+Shape$<$ vec\+\_\+t $>$}
+Class for working with translated domain shapes. 
+
+An existing domain shape can be translated to another point in the space, along with correctly working {\ttfamily contains} and discretization methods.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ ball(0,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ ball.discretizeBoundaryWithStep(0.1).translate(1.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ ball2\ =\ ball.translate(1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d2\ =\ ball2.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ ball2\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Translated\+Shape\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classmm_1_1TranslatedShape__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Translated\+Shape\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmm_1_1TranslatedShape__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1TranslatedShape_ab038070f8a2a8924ed2ab6d02ddf054d}{Translated\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1TranslatedShape_af17297418e33e5782508eed8631e041e}{sh}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1TranslatedShape_a81087b8de91a7b5c4a5643d1b0522236}{a}})
+\begin{DoxyCompactList}\small\item\em Construct a translated shape by specifying a shape and a translation vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1TranslatedShape_afe5ce8b28e71723a12d3f6539f879e9d}{contains}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point) \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Return true if {\ttfamily point} is not more than {\ttfamily \doxylink{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d}{margin()}} outside the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1TranslatedShape_aaaeda8b6eeeba9bf2ea90a6760c9b72b}{has\+Contains}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Return true if shape has {\ttfamily \doxylink{classmm_1_1TranslatedShape_afe5ce8b28e71723a12d3f6539f879e9d}{contains()}} method implemented. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape_ad7fd72b387b960e06ef680a1ae63498c}{bbox}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Return the bounding box of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1TranslatedShape}{Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1TranslatedShape_ab4a54246dde8c4c16bf8c484ba7e7a42}{clone}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Polymorphic clone pattern. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1TranslatedShape_a024707e86f1d7fd1ae7cac5d43712caa}{print}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Output information about this shape to given output stream {\ttfamily os}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape_aa74ef2ccdd519c5f7d8181aad9859635}{discretize\+Boundary\+With\+Step}} (\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} step, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type) \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Returns a discretization of the boundary of this shape with approximately uniform distance {\ttfamily step} between nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape_ac7d6749dd40ef58871eac29e2b1512b9}{discretize\+With\+Step}} (\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} step, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{internal\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\+\_\+type}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Returns a discretization of this shape with approximately uniform distance {\ttfamily step} between nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape_a0e089aa72dd9a19162d3c52f2ab867d1}{discretize\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&dr, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{internal\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\+\_\+type}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Returns a discretization of the domain with spatially variable step. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape_af986848c06cff688f6ebe0503684174d}{discretize\+Boundary\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&dr, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type) \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{override}}
+\begin{DoxyCompactList}\small\item\em Discretizes boundary with given density and fill engine. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1TranslatedShape_a42cf275c9b83f2ab714ea4277c3aa40e}{shape}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the underlying shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1TranslatedShape_a8d5658ee812e72a892d9d93499a67d01}{translation}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the translation vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d}{margin}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns current margin. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{virtual}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainShape_ab491077d09dfc36b118b70b9ef11bcba}{set\+Margin}} (\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d}{margin}})
+\begin{DoxyCompactList}\small\item\em Sets domain margin to {\ttfamily margin}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainShape_a761f1f572981a01d18716ba8195a5627}{toggle\+Margin}} ()
+\begin{DoxyCompactList}\small\item\em Toggles the margin from positive to negative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ShapeUnion}{Shape\+Union}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}{add}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a shape representing a union of {\ttfamily \texorpdfstring{$\ast$}{*}this} and {\ttfamily other}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ShapeUnion}{Shape\+Union}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a2b85598a6391e159fad295b1625821ea}{operator+}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structmm_1_1Operator}{Operator} form of \doxylink{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}{Domain\+Shape\+::add}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ShapeDifference}{Shape\+Difference}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}{subtract}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a shape representing a difference of {\ttfamily \texorpdfstring{$\ast$}{*}this} and {\ttfamily other}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ShapeDifference}{Shape\+Difference}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a785273f085b65a7a1247e77f96ac679f}{operator-\/}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structmm_1_1Operator}{Operator} form of \doxylink{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}{Domain\+Shape\+::subtract}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{virtual}} std\+::pair$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_ad05fa52766911955b20be0efff1f0ce1}{project\+Point\+To\+Boundary}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{unit\+\_\+normal}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Project point to boundary using bisection along the line define by {\ttfamily unit\+\_\+normal}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_ae7637664f0960ef434f692a9af28cdb1}{discretize\+Boundary\+With\+Step}} (\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} step) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a discretization of the boundary of this shape with approximately uniform distance {\ttfamily step} between nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a6240f448ca3606ea14b62632e3870d5a}{discretize\+With\+Step}} (\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} step) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classmm_1_1DomainShape_a6d44c390e38d5cc374f8156f887a9944}{discretize\+With\+Step} but with default types as assigned by the shape. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_aa171b58a12ceadc27cbf49b06320b3b3}{discretize\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&dr, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} \&fill, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{internal\+\_\+type}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\+\_\+type}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for fill engine. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a4f927605b9de6268e501c7c4f93114dd}{discretize\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&dr) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload with default types. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a67650479a794ced9dcdc9aaa3c575f88}{discretize\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&dr, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} \&fill) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for fill engine with default types. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a739d4b753655c4bc3d526d9a6400e10d}{discretize\+Boundary\+With\+Density}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&dr) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload with default type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1TranslatedShape}{Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a1635812125d9bb0467b171e3a92ffc33}{translate}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1TranslatedShape_a81087b8de91a7b5c4a5643d1b0522236}{a}})
+\begin{DoxyCompactList}\small\item\em Translate the shape by given vector {\ttfamily a}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RotatedShape}{Rotated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}{rotate}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}}, \mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}} $>$ \&Q)
+\begin{DoxyCompactList}\small\item\em Transform the shape by given orthogonal matrix {\ttfamily Q}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RotatedShape}{Rotated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape_a7624b9afff8ce43f55f7bb6e73592c95}{rotate}} (\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{angle}})
+\begin{DoxyCompactList}\small\item\em 2D version of \doxylink{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}{rotate} accepting an angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainShape_a08fcac485642122d4fa688ea08d9df97}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector data type used in computations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::\+Scalar \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar data type used in computation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainShape_af858da3cacde52c0d9f4afbabf39b53c}{margin\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Tolerance for the geometric operation of the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$ \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape_af17297418e33e5782508eed8631e041e}{sh}}
+\begin{DoxyCompactList}\small\item\em Shape to be translated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1TranslatedShape_a81087b8de91a7b5c4a5643d1b0522236}{a}}
+\begin{DoxyCompactList}\small\item\em Translation vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70ef}\label{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70ef} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}\label{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1TranslatedShape_ab038070f8a2a8924ed2ab6d02ddf054d}\label{classmm_1_1TranslatedShape_ab038070f8a2a8924ed2ab6d02ddf054d} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!TranslatedShape@{TranslatedShape}}
+\index{TranslatedShape@{TranslatedShape}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{TranslatedShape()}{TranslatedShape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+Translated\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{sh,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{a }\end{DoxyParamCaption})}
+
+
+
+Construct a translated shape by specifying a shape and a translation vector. 
+
+Can be easily constructed using \doxylink{classmm_1_1DomainShape_a1635812125d9bb0467b171e3a92ffc33}{Domain\+Shape\+::translate} or \doxylink{classmm_1_1DomainDiscretization_ad896ddd07e02f47fe9d1b1422d06f157}{Domain\+Discretization\+::translate}. 
+
+Definition at line \mbox{\hyperlink{TranslatedShape_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{TranslatedShape_8hpp_source}{Translated\+Shape.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}\label{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!add@{add}}
+\index{add@{add}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeUnion}{Shape\+Union}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Returns a shape representing a union of {\ttfamily \texorpdfstring{$\ast$}{*}this} and {\ttfamily other}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{DomainShape_8hpp_source}{Domain\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_ad7fd72b387b960e06ef680a1ae63498c}\label{classmm_1_1TranslatedShape_ad7fd72b387b960e06ef680a1ae63498c} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!bbox@{bbox}}
+\index{bbox@{bbox}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{bbox()}{bbox()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::pair$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::bbox (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return the bounding box of the domain. 
+
+Bounding box is returned in format {\ttfamily \doxylink{classmm_1_1TranslatedShape_ad7fd72b387b960e06ef680a1ae63498c}{bbox()} == \{\{mx, my, ...\}, \{MX, MY, ...\}\}}, such that {\ttfamily mx \texorpdfstring{$<$}{<}= Mx} and {\ttfamily my \texorpdfstring{$<$}{<}= My} etc.\textbackslash{} and that the whole domain is contained in the cuboid {\ttfamily \mbox{[}mx, my, ...\mbox{]} x \mbox{[}Mx, My, ...\mbox{]}}. 
+
+Implements \mbox{\hyperlink{classmm_1_1DomainShape_ab5bde30d60c95768689f32c9fb4a4150}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_ab4a54246dde8c4c16bf8c484ba7e7a42}\label{classmm_1_1TranslatedShape_ab4a54246dde8c4c16bf8c484ba7e7a42} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!clone@{clone}}
+\index{clone@{clone}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1TranslatedShape}{Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Polymorphic clone pattern. 
+
+
+
+Implements \mbox{\hyperlink{classmm_1_1DomainShape_a9f467bd9ea150a67565d0488abe93ba6}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00056}{56}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_afe5ce8b28e71723a12d3f6539f879e9d}\label{classmm_1_1TranslatedShape_afe5ce8b28e71723a12d3f6539f879e9d} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!contains@{contains}}
+\index{contains@{contains}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::contains (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true if {\ttfamily point} is not more than {\ttfamily \doxylink{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d}{margin()}} outside the domain. 
+
+
+
+Implements \mbox{\hyperlink{classmm_1_1DomainShape_ae86a4850e8eee2b8f1d7d2f019b158fe}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a739d4b753655c4bc3d526d9a6400e10d}\label{classmm_1_1DomainShape_a739d4b753655c4bc3d526d9a6400e10d} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeBoundaryWithDensity@{discretizeBoundaryWithDensity}}
+\index{discretizeBoundaryWithDensity@{discretizeBoundaryWithDensity}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeBoundaryWithDensity()}{discretizeBoundaryWithDensity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+Boundary\+With\+Density (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&}]{dr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Overload with default type. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00189}{189}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_af986848c06cff688f6ebe0503684174d}\label{classmm_1_1TranslatedShape_af986848c06cff688f6ebe0503684174d} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeBoundaryWithDensity@{discretizeBoundaryWithDensity}}
+\index{discretizeBoundaryWithDensity@{discretizeBoundaryWithDensity}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeBoundaryWithDensity()}{discretizeBoundaryWithDensity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+Boundary\+With\+Density (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&}]{dr,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Discretizes boundary with given density and fill engine. 
+
+If type is 0, the underlying shape provides the default. 
+
+Implements \mbox{\hyperlink{classmm_1_1DomainShape_ab49b18699e38dc9dade7bb24fb0a2916}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{TranslatedShape_8hpp_source}{Translated\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_ae7637664f0960ef434f692a9af28cdb1}\label{classmm_1_1DomainShape_ae7637664f0960ef434f692a9af28cdb1} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeBoundaryWithStep@{discretizeBoundaryWithStep}}
+\index{discretizeBoundaryWithStep@{discretizeBoundaryWithStep}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeBoundaryWithStep()}{discretizeBoundaryWithStep()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+Boundary\+With\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}}]{step }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Returns a discretization of the boundary of this shape with approximately uniform distance {\ttfamily step} between nodes. 
+
+Node type are decided by the underlying shape. 
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00126}{126}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_aa74ef2ccdd519c5f7d8181aad9859635}\label{classmm_1_1TranslatedShape_aa74ef2ccdd519c5f7d8181aad9859635} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeBoundaryWithStep@{discretizeBoundaryWithStep}}
+\index{discretizeBoundaryWithStep@{discretizeBoundaryWithStep}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeBoundaryWithStep()}{discretizeBoundaryWithStep()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+Boundary\+With\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}}]{step,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a discretization of the boundary of this shape with approximately uniform distance {\ttfamily step} between nodes. 
+
+{\ttfamily step} must be positive. Added nodes are of type {\ttfamily type}, which must be non-\/positive. Value 0 indicates that types are dependant on the implementation of concrete shape. 
+
+Reimplemented from \mbox{\hyperlink{classmm_1_1DomainShape_af54c8588d3daff761edd06b8b744f0b5}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape_8hpp_source_l00028}{28}} of file \mbox{\hyperlink{TranslatedShape_8hpp_source}{Translated\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a67650479a794ced9dcdc9aaa3c575f88}\label{classmm_1_1DomainShape_a67650479a794ced9dcdc9aaa3c575f88} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeWithDensity@{discretizeWithDensity}}
+\index{discretizeWithDensity@{discretizeWithDensity}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeWithDensity()}{discretizeWithDensity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+With\+Density (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{dr,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} \&}]{fill }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Overload for fill engine with default types. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00177}{177}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_aa171b58a12ceadc27cbf49b06320b3b3}\label{classmm_1_1DomainShape_aa171b58a12ceadc27cbf49b06320b3b3} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeWithDensity@{discretizeWithDensity}}
+\index{discretizeWithDensity@{discretizeWithDensity}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeWithDensity()}{discretizeWithDensity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+With\+Density (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{dr,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{fill\+\_\+t}} \&}]{fill,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{internal\+\_\+type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{boundary\+\_\+type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Overload for fill engine. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00162}{162}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a4f927605b9de6268e501c7c4f93114dd}\label{classmm_1_1DomainShape_a4f927605b9de6268e501c7c4f93114dd} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeWithDensity@{discretizeWithDensity}}
+\index{discretizeWithDensity@{discretizeWithDensity}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeWithDensity()}{discretizeWithDensity()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+With\+Density (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&}]{dr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Overload with default types. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00170}{170}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_a0e089aa72dd9a19162d3c52f2ab867d1}\label{classmm_1_1TranslatedShape_a0e089aa72dd9a19162d3c52f2ab867d1} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeWithDensity@{discretizeWithDensity}}
+\index{discretizeWithDensity@{discretizeWithDensity}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeWithDensity()}{discretizeWithDensity()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+With\+Density (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::function$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}})$>$ \&}]{dr,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{internal\+\_\+type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{boundary\+\_\+type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a discretization of the domain with spatially variable step. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dr} & Function giving desired internodal distance at each point. \\
+\hline
+{\em internal\+\_\+type} & User supplied type of internal nodes. Must be non-\/negative. \\
+\hline
+{\em boundary\+\_\+type} & User supplied type of boundary nodes. Must be non-\/positive. If any of the types is 0, the underlying shape provides the default. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Discretization with nodes distributed according to {\ttfamily dr}. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classmm_1_1DomainShape_a722c1762a89928f4ab4394ffa8438828}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{TranslatedShape_8hpp_source}{Translated\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a6240f448ca3606ea14b62632e3870d5a}\label{classmm_1_1DomainShape_a6240f448ca3606ea14b62632e3870d5a} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeWithStep@{discretizeWithStep}}
+\index{discretizeWithStep@{discretizeWithStep}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeWithStep()}{discretizeWithStep()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+With\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}}]{step }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+\doxylink{classmm_1_1TranslatedShape_ac7d6749dd40ef58871eac29e2b1512b9}{discretize\+With\+Step} but with default types as assigned by the shape. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00144}{144}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_ac7d6749dd40ef58871eac29e2b1512b9}\label{classmm_1_1TranslatedShape_ac7d6749dd40ef58871eac29e2b1512b9} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!discretizeWithStep@{discretizeWithStep}}
+\index{discretizeWithStep@{discretizeWithStep}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{discretizeWithStep()}{discretizeWithStep()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::discretize\+With\+Step (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}}]{step,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{internal\+\_\+type,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{boundary\+\_\+type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a discretization of this shape with approximately uniform distance {\ttfamily step} between nodes. 
+
+{\ttfamily step} must be positive. 
+\begin{DoxyParams}{Parameters}
+{\em step} & Desired internodal distance. \\
+\hline
+{\em internal\+\_\+type} & User supplied type of internal nodes. Must be non-\/negative. \\
+\hline
+{\em boundary\+\_\+type} & User supplied type of boundary nodes. Must be non-\/positive. If any of the types is 0, the underlying shape provides the default. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classmm_1_1DomainShape_a6d44c390e38d5cc374f8156f887a9944}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{TranslatedShape_8hpp_source}{Translated\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_aaaeda8b6eeeba9bf2ea90a6760c9b72b}\label{classmm_1_1TranslatedShape_aaaeda8b6eeeba9bf2ea90a6760c9b72b} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!hasContains@{hasContains}}
+\index{hasContains@{hasContains}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{hasContains()}{hasContains()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::has\+Contains (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true if shape has {\ttfamily \doxylink{classmm_1_1TranslatedShape_afe5ce8b28e71723a12d3f6539f879e9d}{contains()}} method implemented. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classmm_1_1DomainShape_a4f96c68c043097a2421a968827330a31}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d}\label{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!margin@{margin}}
+\index{margin@{margin}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{margin()}{margin()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::margin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Returns current margin. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a2b85598a6391e159fad295b1625821ea}\label{classmm_1_1DomainShape_a2b85598a6391e159fad295b1625821ea} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeUnion}{Shape\+Union}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+\doxylink{structmm_1_1Operator}{Operator} form of \doxylink{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}{Domain\+Shape\+::add}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainShape_a943840ec1d3946d89bc658b396acc126}{add} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a785273f085b65a7a1247e77f96ac679f}\label{classmm_1_1DomainShape_a785273f085b65a7a1247e77f96ac679f} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeDifference}{Shape\+Difference}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+\doxylink{structmm_1_1Operator}{Operator} form of \doxylink{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}{Domain\+Shape\+::subtract}. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}{subtract} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00086}{86}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_a024707e86f1d7fd1ae7cac5d43712caa}\label{classmm_1_1TranslatedShape_a024707e86f1d7fd1ae7cac5d43712caa} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!print@{print}}
+\index{print@{print}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::print (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Output information about this shape to given output stream {\ttfamily os}. 
+
+
+
+Implements \mbox{\hyperlink{classmm_1_1DomainShape_ac68b9d64cfdc3501c5447e6cfe87cfac}{mm\+::\+Domain\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_ad05fa52766911955b20be0efff1f0ce1}\label{classmm_1_1DomainShape_ad05fa52766911955b20be0efff1f0ce1} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!projectPointToBoundary@{projectPointToBoundary}}
+\index{projectPointToBoundary@{projectPointToBoundary}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{projectPointToBoundary()}{projectPointToBoundary()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+std\+::pair$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{bool}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::project\+Point\+To\+Boundary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{unit\+\_\+normal }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+
+
+Project point to boundary using bisection along the line define by {\ttfamily unit\+\_\+normal}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{DomainShape_8hpp_source}{Domain\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}\label{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!rotate@{rotate}}
+\index{rotate@{rotate}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RotatedShape}{Rotated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}}, \mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{dim}} $>$ \&}]{Q }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Transform the shape by given orthogonal matrix {\ttfamily Q}. 
+
+\begin{DoxyNote}{Note}
+It is usually faster to first discretize the domain and than transform the whole discretization using \doxylink{classmm_1_1DomainDiscretization_ac3dde61e9b9f412799a9d63e71d87a9c}{Domain\+Discretization\+::rotate}. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{DomainShape_8hpp_source_l00098}{98}} of file \mbox{\hyperlink{DomainShape_8hpp_source}{Domain\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a7624b9afff8ce43f55f7bb6e73592c95}\label{classmm_1_1DomainShape_a7624b9afff8ce43f55f7bb6e73592c95} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!rotate@{rotate}}
+\index{rotate@{rotate}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RotatedShape}{Rotated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rotate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+2D version of \doxylink{classmm_1_1DomainShape_ab23c2cd95f4a9390218d3334de233e1a}{rotate} accepting an angle. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{DomainShape_8hpp_source}{Domain\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_ab491077d09dfc36b118b70b9ef11bcba}\label{classmm_1_1DomainShape_ab491077d09dfc36b118b70b9ef11bcba} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!setMargin@{setMargin}}
+\index{setMargin@{setMargin}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{setMargin()}{setMargin()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{virtual}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::set\+Margin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}}}]{margin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+
+
+Sets domain margin to {\ttfamily margin}. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classmm_1_1PolygonShape_abcf4de904fbc7d5e1a065b2836d18def}{mm\+::\+Polygon\+Shape$<$ vec\+\_\+t $>$}}.
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_a42cf275c9b83f2ab714ea4277c3aa40e}\label{classmm_1_1TranslatedShape_a42cf275c9b83f2ab714ea4277c3aa40e} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!shape@{shape}}
+\index{shape@{shape}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \& \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the underlying shape. 
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f}\label{classmm_1_1DomainShape_a017a03e586e49c19622dfd23f7f3485f} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!subtract@{subtract}}
+\index{subtract@{subtract}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{subtract()}{subtract()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeDifference}{Shape\+Difference}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::subtract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Returns a shape representing a difference of {\ttfamily \texorpdfstring{$\ast$}{*}this} and {\ttfamily other}. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{DomainShape_8hpp_source}{Domain\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a761f1f572981a01d18716ba8195a5627}\label{classmm_1_1DomainShape_a761f1f572981a01d18716ba8195a5627} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!toggleMargin@{toggleMargin}}
+\index{toggleMargin@{toggleMargin}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{toggleMargin()}{toggleMargin()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::toggle\+Margin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+
+
+Toggles the margin from positive to negative. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00077}{77}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_a1635812125d9bb0467b171e3a92ffc33}\label{classmm_1_1DomainShape_a1635812125d9bb0467b171e3a92ffc33} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!translate@{translate}}
+\index{translate@{translate}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1TranslatedShape}{Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::translate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+
+
+
+Translate the shape by given vector {\ttfamily a}. 
+
+\begin{DoxyNote}{Note}
+It is usually faster to first discretize the domain and than translate the whole discretization using \doxylink{classmm_1_1DomainDiscretization_ad896ddd07e02f47fe9d1b1422d06f157}{Domain\+Discretization\+::translate}. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{DomainShape_8hpp_source_l00084}{84}} of file \mbox{\hyperlink{DomainShape_8hpp_source}{Domain\+Shape.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_a8d5658ee812e72a892d9d93499a67d01}\label{classmm_1_1TranslatedShape_a8d5658ee812e72a892d9d93499a67d01} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!translation@{translation}}
+\index{translation@{translation}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{translation()}{translation()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::translation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the translation vector. 
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1TranslatedShape_a81087b8de91a7b5c4a5643d1b0522236}\label{classmm_1_1TranslatedShape_a81087b8de91a7b5c4a5643d1b0522236} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!a@{a}}
+\index{a@{a}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{a}{a}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::a\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Translation vector. 
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1DomainShape_af858da3cacde52c0d9f4afbabf39b53c}\label{classmm_1_1DomainShape_af858da3cacde52c0d9f4afbabf39b53c} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!margin\_@{margin\_}}
+\index{margin\_@{margin\_}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{margin\_}{margin\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1DomainShape}{mm\+::\+Domain\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::margin\+\_\+\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Tolerance for the geometric operation of the domain. 
+
+The domain should behave as if it was {\ttfamily margin\+\_\+} thicker. Default margin is {\ttfamily 1e-\/10}. 
+
+Definition at line \mbox{\hyperlink{DomainShape__fwd_8hpp_source_l00064}{64}} of file \mbox{\hyperlink{DomainShape__fwd_8hpp_source}{Domain\+Shape\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1TranslatedShape_af17297418e33e5782508eed8631e041e}\label{classmm_1_1TranslatedShape_af17297418e33e5782508eed8631e041e} 
+\index{mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}!sh@{sh}}
+\index{sh@{sh}!mm::TranslatedShape$<$ vec\_t $>$@{mm::TranslatedShape$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{sh}{sh}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1deep__copy__unique__ptr}{deep\+\_\+copy\+\_\+unique\+\_\+ptr}}$<$\mbox{\hyperlink{classmm_1_1DomainShape}{Domain\+Shape}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ $>$ \mbox{\hyperlink{classmm_1_1TranslatedShape}{mm\+::\+Translated\+Shape}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::sh\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shape to be translated. 
+
+
+
+Definition at line \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source_l00028}{28}} of file \mbox{\hyperlink{TranslatedShape__fwd_8hpp_source}{Translated\+Shape\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{TranslatedShape__fwd_8hpp}{Translated\+Shape\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{TranslatedShape_8hpp}{Translated\+Shape.\+hpp}}\end{DoxyCompactItemize}

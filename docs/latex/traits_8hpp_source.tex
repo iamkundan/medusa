@@ -1,0 +1,27 @@
+\doxysection{traits.\+hpp}
+\hypertarget{traits_8hpp_source}{}\label{traits_8hpp_source}\index{include/medusa/bits/types/traits.hpp@{include/medusa/bits/types/traits.hpp}}
+\mbox{\hyperlink{traits_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_TYPES\_TRAITS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_TYPES\_TRAITS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00009}00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_field\_t>}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00017}\mbox{\hyperlink{structmm_1_1scalar__type}{00017}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\_type}}\ \{}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00019}\mbox{\hyperlink{structmm_1_1scalar__type_a513d206c300703cec5b37d4b06488b3e}{00019}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ scalar\_field\_t::Scalar\ \mbox{\hyperlink{structmm_1_1scalar__type_a513d206c300703cec5b37d4b06488b3e}{type}};\ \ \textcolor{comment}{//\ Reason\ for\ error:\ Underlying\ scalar\ type\ was\ not\ defined\ for\ given\ scalar\_field\_t.\ Please\ specify\ the\ required\ 'scalar\_type'\ type\ trait.\ \ //\ NOLINT(*)}}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00020}00020\ \};}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00028}\mbox{\hyperlink{structmm_1_1vector__type}{00028}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1vector__type}{vector\_type}}\ \{}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classmm_1_1Gaussian}{vector\_field\_t}}*\textcolor{keyword}{>}(\textcolor{keyword}{nullptr}),}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Underlying\ scalar\ type\ was\ not\ defined\ for\ given\ vector\_field\_t.\ Please\ specify\ "{}}}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}the\ required\ 'vector\_type'\ type\ trait."{}});}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00033}\mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{00033}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{type}};}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00034}00034\ \};}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00036}00036\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{traits_8hpp_source_l00038}00038\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_TYPES\_TRAITS\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,459 @@
+\doxysection{mm\+::Explicit\+Vector\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1ExplicitVectorOperators}{}\label{classmm_1_1ExplicitVectorOperators}\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+
+
+{\ttfamily \#include $<$Explicit\+Vector\+Operators\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}$>$\newline
+class mm\+::\+Explicit\+Vector\+Operators$<$ shape\+\_\+storage\+\_\+type $>$}
+A class for evaluating typical operators needed in spatial discretization. 
+
+This class represents vector differential operators, discretely approximated with shape functions that are stored in given shape storage. These shape functions are used to construct approximations of common operators such as gradient, Laplacian, divergence, ... that can be applied to vector fields at given points.
+
+\begin{DoxyNote}{Note}
+The scalar types (and sometimes even dimensions) of the given fields and the shapes can be different. We support computing the gradient of a {\ttfamily 3d} complex-\/valued field over 2d domain with {\ttfamily double} shapes\+: the result is a {\ttfamily 3x2} complex matrix.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em shape\+\_\+storage\+\_\+type} & Storage class for shapes. Must satisfy the \doxysectlink{concepts_ss-concept}{Shape storage concept}{1}.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0.0,\ 0.0\},\ \{1.0,\ 1.0\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.02);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes(wls);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a3b786fc4844851f6257c1df8d11861b5}{ExplicitVectorOperators}}<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ op\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a73a915a34cc600397408fd67f7dcf500}{VectorField2d}}\ v(d.size());\ \ \textcolor{comment}{//\ constant\ scalar\ field,\ value\ 1.34\ at\ each\ point}}
+\DoxyCodeLine{\ \ \ \ v\ =\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(12.4,\ -\/3.4);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ val\ =\ op.lap(v,\ 2);\ \ \textcolor{comment}{//\ laplace\ at\ point\ d.pos(2);}}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix2d\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a64160803e909a0f8dde8b1c0af75d28c}{grad}}\ =\ op.grad(v,\ 4);\ \ \textcolor{comment}{//\ gradient\ at\ point\ d.pos(4);}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ad97e967fc33fd3618d9c248fe5d661bc}{div}}\ =\ op.div(v,\ 3);\ \ \textcolor{comment}{//\ divergence\ at\ points\ d.pos(3);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ VectorField<std::complex<double>,\ 3>\ complex\_field(d.size());\ \ \textcolor{comment}{//\ 3d\ complex\ field}}
+\DoxyCodeLine{\ \ \ \ complex\_field.setConstant(std::complex<double>(2.5,\ -\/7.1));}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<std::complex<double>,\ 3,\ 2>\ cgrad\ =\ op.grad(complex\_field,\ 1);}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ExplicitOperators}{Explicit\+Operators} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a3b786fc4844851f6257c1df8d11861b5}{Explicit\+Vector\+Operators}} ()
+\begin{DoxyCompactList}\small\item\em Construct empty explicit vector operators. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a4bc62adeb0f8d059ce76ca2ba75937d9}{Explicit\+Vector\+Operators}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}})
+\begin{DoxyCompactList}\small\item\em Construct explicit vector operators over given shape storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ac095f65178d4b654eaa5443a010c8e8c}{set\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+}})
+\begin{DoxyCompactList}\small\item\em Sets a new shape storage from which this operators are generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a7d951546bbba14d287f721aca7f570b4}{has\+Shapes}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if operators have a non-\/null pointer to storage and {\ttfamily false} otherwise. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ac35c038ad0bce86f6337c51297b864f1}{lap}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns Laplacian of vector field {\ttfamily u} in node with index {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ab59e210d9c8d912822fb8ce6ad2941d0}{apply}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} op\+\_\+family\+\_\+t\+::operator\+\_\+t o) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an approximation of applying the requested operator to each component of field {\ttfamily u} at node {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa5d3a5655713416c9e283990851a5805}{apply}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for default constructible operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type\+::scalar\+\_\+t, \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type\+::dim, \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}{dim}} $>$ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a64160803e909a0f8dde8b1c0af75d28c}{grad}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns gradient of vector field {\ttfamily u} in node with index {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ad97e967fc33fd3618d9c248fe5d661bc}{div}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns divergence of a vector field {\ttfamily u} in in node with index {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_af88a56b20e9e71045c6dccc597b3a693}{curl}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns curl of a vector field {\ttfamily u} in node with index {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a04d104b88923f76168e394a58a6a5f66}{graddiv}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns gradient of divergence of a vector field {\ttfamily u} in in node with index {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_afa92529f4a97a9573aeeff7032c8c40a}{neumann}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a56df5a558e2406073d5f41203daa8d61}{vector\+\_\+t}} \&normal, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1Gaussian}{val}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em This is a vectorised version of \doxylink{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29}{Explicit\+Operators\+::neumann}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}{dim}} = shape\+\_\+storage\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of shape storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} shape\+\_\+storage\+\_\+t\+::vector\+\_\+t \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a56df5a558e2406073d5f41203daa8d61}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{shape\+\_\+storage\+\_\+t\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a0fc38469fb9e8b5fe09f06a03e349a95}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a5f6cf04c1f5af921a3f186003656ef73}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic info about given operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}}
+\begin{DoxyCompactList}\small\item\em Pointer to shape storage, but name is shortened for readability. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0}\label{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!dim@{dim}}}\Hypertarget{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}\label{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27} 
+dim&Dimensionality of the function domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a3b786fc4844851f6257c1df8d11861b5}\label{classmm_1_1ExplicitVectorOperators_a3b786fc4844851f6257c1df8d11861b5} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!ExplicitVectorOperators@{ExplicitVectorOperators}}
+\index{ExplicitVectorOperators@{ExplicitVectorOperators}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ExplicitVectorOperators()}{ExplicitVectorOperators()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::\+Explicit\+Vector\+Operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct empty explicit vector operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00052}{52}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a4bc62adeb0f8d059ce76ca2ba75937d9}\label{classmm_1_1ExplicitVectorOperators_a4bc62adeb0f8d059ce76ca2ba75937d9} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!ExplicitVectorOperators@{ExplicitVectorOperators}}
+\index{ExplicitVectorOperators@{ExplicitVectorOperators}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ExplicitVectorOperators()}{ExplicitVectorOperators()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::\+Explicit\+Vector\+Operators (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}} \&}]{ss }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct explicit vector operators over given shape storage. 
+
+The pointer to given storage is stored as a non-\/owning pointer. It is the user\textquotesingle{}s responsibility that given storage is valid throughout the use use of this class.
+
+This class is usually constructed directly from shape storage using the {\ttfamily explicit\+Vector\+Operators()} member function. 
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00061}{61}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_aa5d3a5655713416c9e283990851a5805}\label{classmm_1_1ExplicitVectorOperators_aa5d3a5655713416c9e283990851a5805} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!apply@{apply}}
+\index{apply@{apply}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload for default constructible operator. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ExplicitVectorOperators_ab59e210d9c8d912822fb8ce6ad2941d0}{apply} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00110}{110}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitVectorOperators_ab59e210d9c8d912822fb8ce6ad2941d0}\label{classmm_1_1ExplicitVectorOperators_ab59e210d9c8d912822fb8ce6ad2941d0} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!apply@{apply}}
+\index{apply@{apply}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} op\+\_\+family\+\_\+t\+::operator\+\_\+t}]{o }\end{DoxyParamCaption}) const}
+
+
+
+Returns an approximation of applying the requested operator to each component of field {\ttfamily u} at node {\ttfamily node}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & Field to which the operator is applied. \\
+\hline
+{\em node} & Node at which the derived field is evaluated. \\
+\hline
+{\em o} & The operator to apply. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The operator approximation is obtained from shape storage using the {\ttfamily op\+\_\+family\+\_\+t} type. The first weights computed for family of type {\ttfamily op\+\_\+family\+\_\+t} are used.
+\end{DoxyWarning}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }Dx\ :\ Der1<2>\ \{\ Dx()\ :\ Der1(0)\ \{\}\ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }Dy\ :\ Der1<2>\ \{\ Dy()\ :\ Der1(1)\ \{\}\ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes<std::tuple<Dx,\ Dy,\ Lap<2>>>(wls);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a3b786fc4844851f6257c1df8d11861b5}{ExplicitVectorOperators}}<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{\ \ \ \ VectorField<std::complex<double>,\ 3>\ field(d.size());}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c(2.4,\ -\/0.3);}
+\DoxyCodeLine{\ \ \ \ field.setConstant(c);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 3>\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ac35c038ad0bce86f6337c51297b864f1}{lap}}\ =\ op.apply<Lap<2>>(field,\ 52);}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 3>\ dx\ =\ op.apply<Dx>(field,\ 34);}
+\DoxyCodeLine{\ \ \ \ Vec<std::complex<double>,\ 3>\ dy\ =\ op.apply<Dy>(field,\ 32);}
+
+\end{DoxyCodeInclude}
+ \Hypertarget{classmm_1_1ExplicitVectorOperators_af88a56b20e9e71045c6dccc597b3a693}\label{classmm_1_1ExplicitVectorOperators_af88a56b20e9e71045c6dccc597b3a693} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!curl@{curl}}
+\index{curl@{curl}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{curl()}{curl()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::curl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns curl of a vector field {\ttfamily u} in node with index {\ttfamily node}. 
+
+\begin{DoxyReturn}{Returns}
+The rotor of {\ttfamily u}, where {\ttfamily dim = 3} and $\vec{u} = [u, v, w]$. The return value is $ \curl \vec{u} = \[\dpar{w}{y} - \dpar{v}{z}, \dpar{u}{z} - \dpar{w}{x}, \dpar{v}{x} - \dpar{u}{y}\] $ evaluated in point with index {\ttfamily node}, where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Static-\/assertion} & fails if {\ttfamily u} is not three dimensional. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_ad97e967fc33fd3618d9c248fe5d661bc}\label{classmm_1_1ExplicitVectorOperators_ad97e967fc33fd3618d9c248fe5d661bc} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!div@{div}}
+\index{div@{div}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{div()}{div()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::div (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns divergence of a vector field {\ttfamily u} in in node with index {\ttfamily node}. 
+
+\begin{DoxyReturn}{Returns}
+The divergence of {\ttfamily u}, e.\+g. when {\ttfamily dim = 3} and $\vec{u} = [u, v, w]$, the returned value is $ \nabla\cdot \vec{u} = \dpar{u}{x} + \dpar{v}{y} + \dpar{w}{z} $ evaluated in point with index {\ttfamily node}, where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Static-\/assertion} & fails if the dimension of {\ttfamily u} is not equal to domain dimension. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a64160803e909a0f8dde8b1c0af75d28c}\label{classmm_1_1ExplicitVectorOperators_a64160803e909a0f8dde8b1c0af75d28c} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!grad@{grad}}
+\index{grad@{grad}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{grad()}{grad()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type\+::scalar\+\_\+t, \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type\+::dim, \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}{dim}} $>$ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::grad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns gradient of vector field {\ttfamily u} in node with index {\ttfamily node}. 
+
+The field {\ttfamily u} and the domain can have different dimensions. \begin{DoxyReturn}{Returns}
+The gradient (Jacobi matrix) of {\ttfamily u}, e.\+g. when {\ttfamily \doxylink{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}{dim(u)} = 3} and and $\vec{u} = [u, v, w]$ and the domain dimension is 2, the returned value is  \[ \nabla \vec{u} = \begin{bmatrix}
+\dpar{u}{x}, \dpar{u}{y} \\
+\dpar{v}{x}, \dpar{v}{y} \\
+\dpar{w}{x}, \dpar{w}{y}
+\end{bmatrix} \] evaluated in point with index {\ttfamily node}, where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}. 
+\end{DoxyReturn}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a04d104b88923f76168e394a58a6a5f66}\label{classmm_1_1ExplicitVectorOperators_a04d104b88923f76168e394a58a6a5f66} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!graddiv@{graddiv}}
+\index{graddiv@{graddiv}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{graddiv()}{graddiv()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::graddiv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns gradient of divergence of a vector field {\ttfamily u} in in node with index {\ttfamily node}. 
+
+\begin{DoxyReturn}{Returns}
+The gradient of divergence of {\ttfamily u}, e.\+g. when {\ttfamily dim = 3} and $\vec{u} = [u, v, w]$, the returned value is  \[ \nabla(\nabla\cdot \vec{u}) = \begin{bmatrix}
+  \dpar{^2u}{x^2} + \dpar{^2v}{x\partial y} + \dpar{^2w}{x\partial z} \\
+  \dpar{^2u}{x\partial y} + \dpar{^2v}{^2y} + \dpar{^2w}{y\partial z} \\
+  \dpar{^2u}{x\partial z} + \dpar{^2v}{y\partial z} + \dpar{^2w}{^2z}
+\end{bmatrix} \] evaluated in point with index {\ttfamily node}, where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Static-\/assertion} & fails if the dimension of {\ttfamily u} is not equal to domain dimension. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a7d951546bbba14d287f721aca7f570b4}\label{classmm_1_1ExplicitVectorOperators_a7d951546bbba14d287f721aca7f570b4} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!hasShapes@{hasShapes}}
+\index{hasShapes@{hasShapes}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{hasShapes()}{hasShapes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::has\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily true} if operators have a non-\/null pointer to storage and {\ttfamily false} otherwise. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitVectorOperators_ac35c038ad0bce86f6337c51297b864f1}\label{classmm_1_1ExplicitVectorOperators_ac35c038ad0bce86f6337c51297b864f1} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!lap@{lap}}
+\index{lap@{lap}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{lap()}{lap()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::lap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns Laplacian of vector field {\ttfamily u} in node with index {\ttfamily node}. 
+
+\begin{DoxyReturn}{Returns}
+The Laplacian of {\ttfamily u}, e.\+g. when {\ttfamily dim = 3} and $\vec{u} = [u, v, w]$, the returned value is  $ \nabla^2 \vec{u} = [
+\dpar{^2 u}{x^2} + \dpar{^2 u}{y^2} + \dpar{^2 u}{z^2},
+\dpar{^2 v}{x^2} + \dpar{^2 v}{y^2} + \dpar{^2 v}{z^2},
+\dpar{^2 w}{x^2} + \dpar{^2 w}{y^2} + \dpar{^2 w}{z^2}
+]^T$ evaluated in point with index {\ttfamily node} where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}{ss}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Static-\/assertion} & fails if the dimension of {\ttfamily u} is not equal to domain dimension. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitVectorOperators_afa92529f4a97a9573aeeff7032c8c40a}\label{classmm_1_1ExplicitVectorOperators_afa92529f4a97a9573aeeff7032c8c40a} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!neumann@{neumann}}
+\index{neumann@{neumann}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{neumann()}{neumann()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::neumann (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a56df5a558e2406073d5f41203daa8d61}{vector\+\_\+t}} \&}]{normal,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1vector__type}{vector\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\+\_\+field\+\_\+t}} $>$\+::type}]{val }\end{DoxyParamCaption}) const}
+
+
+
+This is a vectorised version of \doxylink{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29}{Explicit\+Operators\+::neumann}. 
+
+Calculates a new field value {\ttfamily a} for {\ttfamily u} at {\ttfamily node}, such that the Neumann boundary condition {\ttfamily du/dn(node) = val} holds. Denote given index {\ttfamily node} by $i$ and {\ttfamily val} by $\vec v$. The function returns such $\vec a$, that by setting $ \vec{u}(i) = \vec{a}$ we satisfy the condition $ \dpar{\vec u}{\vec n}(i) = \vec v$. This is done using the following formula\+:  \[ \vec{a} = \frac{ \vec{v} -
+   \sum\limits_{i=1}^{s} \sum\limits_{d=1}^{dim}
+     n_d \chi_{\dpar{}{ x_d}}(i)\ \vec{u}(i)
+}{\sum\limits_{d=1}^{dim} n_d \chi_{\dpar{}{ x_d}}(0)},
+\] where $\chi_{\dpar{}{ x_d}}$ represents the formula for the shape function of first derivative wrt. $d$.
+
+\begin{DoxyNote}{Note}
+A few assumptions must hold for the support domain.
+\begin{DoxyItemize}
+\item Each node should be its own first first support node.
+\item For symmetrical supports the central node may not affect the calculated derivation and therefore this function is unable to give a value and will crash.
+\end{DoxyItemize}
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em u} & Scalar field to evaluate. \\
+\hline
+{\em node} & Index of the node, whose value should be changed to satisfy the boundary condition. \\
+\hline
+{\em normal} & Vector $\vec{n}$ with the same dimensionality as the problem domain giving the direction of the derivation. Usually the unit normal vector. \\
+\hline
+{\em val} & The value that $\dpar{ \vec u}{ \vec n}$ should be equal to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new value $\vec a$, such that $\dpar{\vec u}{\vec n} = \vec v$ after setting $\vec u(i) = \vec a$.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if {\ttfamily node}\textquotesingle{}s first support node is not {\ttfamily node}. \\
+\hline
+{\em Assertion} & fails if {\ttfamily node}\textquotesingle{}s value has negligible effect on the derivation, because no value could change the value of $\dpar{\vec u}{\vec n}$. \\
+\hline
+{\em Static-\/assertion} & fails if the dimension of {\ttfamily u} is not equal to domain dimension.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29}{Explicit\+Operators\+::neumann} 
+\end{DoxySeeAlso}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_ac095f65178d4b654eaa5443a010c8e8c}\label{classmm_1_1ExplicitVectorOperators_ac095f65178d4b654eaa5443a010c8e8c} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!setShapes@{setShapes}}
+\index{setShapes@{setShapes}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{setShapes()}{setShapes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::set\+Shapes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}} \&}]{shape\+\_\+storage\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets a new shape storage from which this operators are generated. 
+
+As in the constructor, the pointer to given storage is stored as a non-\/owning pointer. It is the user\textquotesingle{}s responsibility that given storage is valid throughout the use use of this class. 
+\begin{DoxyParams}{Parameters}
+{\em shape\+\_\+storage\+\_\+} & New shape storage. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00069}{69}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_a5f6cf04c1f5af921a3f186003656ef73}\label{classmm_1_1ExplicitVectorOperators_a5f6cf04c1f5af921a3f186003656ef73} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators_8hpp_source_l00151}{151}} of file \mbox{\hyperlink{ExplicitVectorOperators_8hpp_source}{Explicit\+Vector\+Operators.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86}\label{classmm_1_1ExplicitVectorOperators_ae710a528a03642c6e49efd0b89c00e86} 
+\index{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}!ss@{ss}}
+\index{ss@{ss}!mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$@{mm::ExplicitVectorOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ss}{ss}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_aa4ec090148a0102f47f398502aecd0f3}{shape\+\_\+storage\+\_\+t}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{mm\+::\+Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::ss\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to shape storage, but name is shortened for readability. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp_source}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp}{Explicit\+Vector\+Operators\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,175 @@
+\doxysection{Range.\+hpp}
+\hypertarget{Range_8hpp_source}{}\label{Range_8hpp_source}\index{include/medusa/bits/types/Range.hpp@{include/medusa/bits/types/Range.hpp}}
+\mbox{\hyperlink{Range_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_TYPES\_RANGE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_TYPES\_RANGE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Range__fwd_8hpp}{Range\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00014}00014\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00015}\mbox{\hyperlink{classmm_1_1Range_a9dcde2e9b28878faf260635ced5a4f82}{00015}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\&\ \mbox{\hyperlink{classmm_1_1Range_ab64a3d05c17e7013f729169c0155d488}{Range<T,\ Allocator>::operator=}}(std::initializer\_list<value\_type>\ \mbox{\hyperlink{classmm_1_1Gaussian}{lst}})\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00016}00016\ \ \ \ \ this-\/>resize(\mbox{\hyperlink{classmm_1_1Gaussian}{lst}}.size());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{const\_reference}}\ x\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{lst}})\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ operator[](\mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ =\ x;}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00024}00024\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00025}\mbox{\hyperlink{classmm_1_1Range_a04af2ab167c5b366bfbb85ebc71eba76}{00025}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\&\ \mbox{\hyperlink{classmm_1_1Range_ab64a3d05c17e7013f729169c0155d488}{Range<T,\ Allocator>::operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ x)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\_type}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ size();\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00027}00027\ \ \ \ \ \ \ \ \ operator[](\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ x;}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00032}00032\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}{00033}}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Range_aa695686a1769c61397f2096db0ff33fe}{Range<T,\ Allocator>::reference}}\ \mbox{\hyperlink{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}{Range<T,\ Allocator>::operator[]}}(\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\_type}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00034}00034\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ when\ accessing\ Range\ "{}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}for\ write."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0,\ size());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<T>::operator[](\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00039}00039\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00040}\mbox{\hyperlink{classmm_1_1Range_ab28ebd2642575da0bfa6e624f00673cf}{00040}}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{Range<T,\ Allocator>::const\_reference}}\ \mbox{\hyperlink{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}{Range<T,\ Allocator>::operator[]}}(\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\_type}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00041}00041\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ when\ accessing\ Range\ "{}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}for\ read/write."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ 0,\ size());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<T>::operator[](\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00046}00046\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1Range_ae3f8af4a691a11b989ca32672aa593d1}{00047}}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range<T,\ Allocator>::RangeView}}\ \mbox{\hyperlink{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}{Range<T,\ Allocator>::operator[]}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\&\ indexes)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\_type}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ :\ indexes)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ <\ size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ when\ using\ "{}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}multiindexed\ read-\/write\ access."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}},\ 0,\ size());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \{*\textcolor{keyword}{this},\ indexes\};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00055}00055\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00056}00056\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Range_1_1ConstRangeView}{Range<T,\ Allocator>::ConstRangeView}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00057}\mbox{\hyperlink{classmm_1_1Range_a5278f710970cee6952c9bd3dd1ed3e37}{00057}}\ \mbox{\hyperlink{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}{Range<T,\ Allocator>::operator[]}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\&\ indexes)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\_type}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ :\ indexes)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ \&\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}\ <\ size(),\ \textcolor{stringliteral}{"{}Index\ \%d\ out\ of\ range\ [\%d,\ \%d)\ when\ using\ "{}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}multiindexed\ read\ access."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}},\ 0,\ size());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{return}\ \{*\textcolor{keyword}{this},\ indexes\};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00065}00065\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00066}\mbox{\hyperlink{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b}{00066}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\&\ \mbox{\hyperlink{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b}{Range<T,\ Allocator>::append}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{rng}})\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00067}00067\ \ \ \ \ this-\/>insert(this-\/>end(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{rng}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{rng}}.end());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00069}00069\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00071}00071\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00072}\mbox{\hyperlink{classmm_1_1Range_ac212b31d818e324d9617bdcdd1af1d0e}{00072}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\ \mbox{\hyperlink{classmm_1_1Range_ac212b31d818e324d9617bdcdd1af1d0e}{Range<T,\ Allocator>::join}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{rng}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Range}{Range}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}}\ =\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00074}00074\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}}.insert(\mbox{\hyperlink{classmm_1_1Gaussian}{ret}}.end(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{rng}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{rng}}.end());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00078}00078\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00079}\mbox{\hyperlink{classmm_1_1Range_a62afb2dcae74b9f9100c3ccb58d1d6f6}{00079}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1Range_a62afb2dcae74b9f9100c3ccb58d1d6f6}{Range<T,\ Allocator>::remove}}(\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ indexes)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00080}00080\ \ \ \ \ std::sort(indexes.begin(),\ indexes.end());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00081}00081\ \ \ \ \ indexes.resize(std::unique(indexes.begin(),\ indexes.end())\ -\/\ indexes.begin());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00082}00082\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{sz}}\ =\ indexes.size();}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00083}00083\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{it}}\ =\ std::vector<T,\ Allocator>::begin();}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{cur}}\ =\ std::vector<T,\ Allocator>::begin();}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{to\_remove}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00086}00086\ \ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{cur}}\ !=\ std::vector<T,\ Allocator>::end())\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{to\_remove}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{sz}}\ \&\&\ c\ ==\ indexes[\mbox{\hyperlink{classmm_1_1Gaussian}{to\_remove}}])\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classmm_1_1Gaussian}{to\_remove}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{classmm_1_1Gaussian}{it}}++\ =\ std::move(*\mbox{\hyperlink{classmm_1_1Gaussian}{cur}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ ++c;}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classmm_1_1Gaussian}{cur}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00095}00095\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00096}00096\ \ \ \ \ std::vector<T,\ Allocator>::resize(\mbox{\hyperlink{classmm_1_1Gaussian}{it}}\ -\/\ std::vector<T,\ Allocator>::begin());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00099}00099\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00100}00100\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Predicate>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00101}\mbox{\hyperlink{classmm_1_1Range_ad0a20d9123fcee569c18fce9f0366722}{00101}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_ad0a20d9123fcee569c18fce9f0366722}{Range<T,\ Allocator>::filter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Predicate}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{predicate}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00102}00102\ \ \ \ \ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00103}00103\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\_type}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ size();\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{predicate}}(\textcolor{keyword}{operator}[](\mbox{\hyperlink{classmm_1_1Gaussian}{i}})))\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}}.push\_back(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00106}00106\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00108}00108\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00109}00109\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ UnaryOp>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00110}\mbox{\hyperlink{classmm_1_1Range_a18d2b3a1346d520b0a630a42614b5927}{00110}}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Range_a18d2b3a1346d520b0a630a42614b5927}{Range<T,\ Allocator>::map}}(\mbox{\hyperlink{classmm_1_1Gaussian}{UnaryOp}}\ op)\ -\/>\ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\textcolor{keyword}{decltype}(op(this-\/>\textcolor{keyword}{operator}[](0)))>\ \textcolor{keyword}{const}\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00111}00111\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Range}{Range}}<\textcolor{keyword}{decltype}(op(this-\/>\textcolor{keyword}{operator}[](0)))>\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00112}00112\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{r}}.reserve(size());}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00113}00113\ \ \ \ \ std::transform(\mbox{\hyperlink{classmm_1_1Range}{Range<T>::begin}}(),\ \mbox{\hyperlink{classmm_1_1Range}{Range<T>::end}}(),\ std::back\_inserter(\mbox{\hyperlink{classmm_1_1Gaussian}{r}}),\ op);}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00117}00117\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00118}\mbox{\hyperlink{classmm_1_1Range_ad003b476ef4debb38d5169b8df7278e5}{00118}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_ad003b476ef4debb38d5169b8df7278e5}{Range<T,\ Allocator>::operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00119}00119\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}}([\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ t)\ \{\ \textcolor{keywordflow}{return}\ t\ <\ v;\ \});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00120}00120\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00122}00122\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00123}\mbox{\hyperlink{classmm_1_1Range_a300bd86c799fa7a11d68ac843efcaa8f}{00123}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_a300bd86c799fa7a11d68ac843efcaa8f}{Range<T,\ Allocator>::operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}}([\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ t)\ \{\ \textcolor{keywordflow}{return}\ t\ >\ v;\ \});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00127}00127\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00128}\mbox{\hyperlink{classmm_1_1Range_a39ed7ae3df3b6baca15bbb6ce821216a}{00128}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_a39ed7ae3df3b6baca15bbb6ce821216a}{Range<T,\ Allocator>::operator<=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}}([\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ t)\ \{\ \textcolor{keywordflow}{return}\ t\ <=\ v;\ \});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00130}00130\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00132}00132\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00133}\mbox{\hyperlink{classmm_1_1Range_ab365c05904fb117db8a11476cd7900d8}{00133}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_ab365c05904fb117db8a11476cd7900d8}{Range<T,\ Allocator>::operator>=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}}([\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ t)\ \{\ \textcolor{keywordflow}{return}\ t\ >=\ v;\ \});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00135}00135\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00137}00137\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00138}\mbox{\hyperlink{classmm_1_1Range_af4f4505a07335f5a10ed51c44c33e039}{00138}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_af4f4505a07335f5a10ed51c44c33e039}{Range<T,\ Allocator>::operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00139}00139\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}}([\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ t)\ \{\ \textcolor{keywordflow}{return}\ t\ ==\ v;\ \});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00140}00140\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00142}00142\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00143}\mbox{\hyperlink{classmm_1_1Range_ab018539bc7c2c7712dff90740d6ebf68}{00143}}\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Range_ab018539bc7c2c7712dff90740d6ebf68}{Range<T,\ Allocator>::operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00144}00144\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a732a29c592a2f66dc4b66c0dc56fb080}{filter}}([\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\_type}}\&\ t)\ \{\ \textcolor{keywordflow}{return}\ t\ !=\ v;\ \});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00145}00145\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00148}00148\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00149}00149\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00150}00150\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T,\ Allocator>}}\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<T,\ Allocator>::seq}}(\mbox{\hyperlink{classmm_1_1Gaussian}{V}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}})\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00151}00151\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<T,\ Allocator>::seq}}(\textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classmm_1_1Gaussian}{V}}\textcolor{keyword}{>}(0),\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00152}00152\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00154}00154\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00155}00155\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00156}00156\ Range<T,\ Allocator>\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<T,\ Allocator>::seq}}(V\ start,\ V\ stop)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00157}00157\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<T,\ Allocator>::seq}}(start,\ stop,\ \textcolor{keyword}{static\_cast<}V\textcolor{keyword}{>}(1));}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00158}00158\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00160}00160\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T,\ \textcolor{keyword}{class}\ Allocator>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00161}00161\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V,\ \textcolor{keyword}{typename}\ D>}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00162}00162\ Range<T,\ Allocator>\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<T,\ Allocator>::seq}}(V\ start,\ V\ stop,\ D\ step)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00163}00163\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(step\ !=\ 0,\ \textcolor{stringliteral}{"{}Step\ must\ be\ nonzero."{}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00164}00164\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}((stop\ -\/\ start)\ /\ step\ >=\ 0,\ \textcolor{stringliteral}{"{}Step\ \%d\ must\ be\ in\ the\ direction\ from\ start\ \%d\ to\ "{}}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}stop\ \%d."{}},\ step,\ start,\ stop);}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00166}\mbox{\hyperlink{classmm_1_1Range_a9dcde2e9b28878faf260635ced5a4f82}{00166}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<T>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}}.reserve((stop\ -\/\ start)\ /\ step);}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00167}00167\ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{V}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ start;\ (step\ >\ 0)\ ?\ \mbox{\hyperlink{classmm_1_1Gaussian}{i\ <\ stop\ :\ i\ >}}\ stop;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ +=\ step)\ \{}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00168}00168\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}}.push\_back(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00169}\mbox{\hyperlink{classmm_1_1Range_a04af2ab167c5b366bfbb85ebc71eba76}{00169}}\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00170}00170\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret}};}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00171}00171\ \}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00174}00174\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00175}\mbox{\hyperlink{classmm_1_1Range_ab28ebd2642575da0bfa6e624f00673cf}{00175}}\ }
+\DoxyCodeLine{\Hypertarget{Range_8hpp_source_l00176}00176\ \textcolor{preprocessor}{\#endif\ \ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_TYPES\_RANGE\_HPP\_}}
+
+\end{DoxyCode}

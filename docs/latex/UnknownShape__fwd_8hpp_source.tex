@@ -1,0 +1,47 @@
+\doxysection{Unknown\+Shape\+\_\+fwd.\+hpp}
+\hypertarget{UnknownShape__fwd_8hpp_source}{}\label{UnknownShape__fwd_8hpp_source}\index{include/medusa/bits/domains/UnknownShape\_fwd.hpp@{include/medusa/bits/domains/UnknownShape\_fwd.hpp}}
+\mbox{\hyperlink{UnknownShape__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_UNKNOWNSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_UNKNOWNSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape__fwd_8hpp}{DomainShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00027}\mbox{\hyperlink{classmm_1_1UnknownShape}{00027}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1UnknownShape}{UnknownShape}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<vec\_t>\ \{}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00028}00028\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1Gaussian}{typename}}\ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{DomainShape<vec\_t>::scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}>\mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{::dim}};}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00032}\mbox{\hyperlink{classmm_1_1UnknownShape_a453a91d22ba7c6aed6709e2818a52bed}{00032}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1UnknownShape_a453a91d22ba7c6aed6709e2818a52bed}{contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \textcolor{comment}{/*\ point\ */})\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1UnknownShape_aa1d81665c9824aa2b7b3400aae0a8445}{00034}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1UnknownShape_aa1d81665c9824aa2b7b3400aae0a8445}{hasContains}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00036}\mbox{\hyperlink{classmm_1_1UnknownShape_a0d2debf6fa75b3d630f4bc198ffe5dcf}{00036}}\ \ \ \ \ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1UnknownShape_a0d2debf6fa75b3d630f4bc198ffe5dcf}{bbox}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}This\ function\ is\ not\ available\ for\ this\ shape."{}});}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00039}00039\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1UnknownShape_a0c03021c3d1b4a215ec3f108ea9d05fa}{00041}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1UnknownShape_a0c03021c3d1b4a215ec3f108ea9d05fa}{discretizeBoundaryWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&,\ \textcolor{keywordtype}{int})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{false},\ \textcolor{stringliteral}{"{}This\ function\ is\ not\ available\ for\ this\ shape."{}});}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00047}\mbox{\hyperlink{classmm_1_1UnknownShape_a5b6a3fd36f3e1a5a53e756d51c84e211}{00047}}\ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{classmm_1_1UnknownShape_a5b6a3fd36f3e1a5a53e756d51c84e211}{print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{ostream}})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ostream}}\ <<\ \textcolor{stringliteral}{"{}Unknown\ shape"{}};}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00051}\mbox{\hyperlink{classmm_1_1UnknownShape_a9e54f8add8f2a02b886e82168a3e80d5}{00051}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1UnknownShape}{UnknownShape}}*\ \mbox{\hyperlink{classmm_1_1UnknownShape_a9e54f8add8f2a02b886e82168a3e80d5}{clone}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classmm_1_1Gaussian}{UnknownShape<vec\_t>}}(*\textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00054}00054\ \};}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00056}00056\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{UnknownShape__fwd_8hpp_source_l00058}00058\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_UNKNOWNSHAPE\_FWD\_HPP\_}}
+
+\end{DoxyCode}

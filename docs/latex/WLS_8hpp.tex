@@ -1,0 +1,43 @@
+\doxysection{include/medusa/bits/approximations/\+WLS.hpp File Reference}
+\hypertarget{WLS_8hpp}{}\label{WLS_8hpp}\index{include/medusa/bits/approximations/WLS.hpp@{include/medusa/bits/approximations/WLS.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Implementation of weighted least squares approximation. 
+
+
+
+Definition in file \mbox{\hyperlink{WLS_8hpp_source}{WLS.\+hpp}}.
+
+{\ttfamily \#include "{}WLS\+\_\+fwd.\+hpp"{}}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Range.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/numutils.\+hpp$>$}\newline
+{\ttfamily \#include "{}Jacobi\+SVDWrapper.\+hpp"{}}\newline
+{\ttfamily \#include "{}WLSApproximant.\+hpp"{}}\newline
+Include dependency graph for WLS.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{WLS_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{WLS_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a0ffbed372f662f3c5474b94db9186b0c}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLS}{WLS}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{weight\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{scale\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{solver\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{wls}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given \doxylink{classmm_1_1WLS}{WLS} class. \end{DoxyCompactList}\end{DoxyCompactItemize}

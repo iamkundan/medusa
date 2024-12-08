@@ -1,0 +1,77 @@
+\doxysection{test/domains/\+Shape\+Difference\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2ShapeDifference_test_8cpp-example}{}\label{test_2domains_2ShapeDifference_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ShapeDifference_8hpp}{medusa/bits/domains/ShapeDifference.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF_8hpp}{medusa/bits/io/HDF.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeDifferenceContains1D)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec1d>\ c(0.0,\ 1.5);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ b(0.0,\ 1.5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ -\/\ b;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(-\/0.5));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(-\/1.5));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.5));\ \ \textcolor{comment}{//\ boundary\ points\ are\ not\ removed}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(-\/2.0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeDifferenceContains2D)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ c(-\/1.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ -\/\ b;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(-\/1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(\{-\/1.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(\{0.0,\ 0.9\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeDifferenceContains3D)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ c(-\/1.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ -\/\ b;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(-\/1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(u.contains(\{-\/1.0,\ 0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(u.contains(\{0.0,\ 0.9,\ 0.0\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeDifferenceDiscretization)\ \{}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(0.0,\ 1.1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ -\/\ b;}
+\DoxyCodeLine{\ \ \ \ (void)\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }BallShape<Vec2d>\&\textcolor{keyword}{>}(u.first());}
+\DoxyCodeLine{\ \ \ \ (void)\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }BoxShape<Vec2d>\&\textcolor{keyword}{>}(u.second());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ u.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(269,\ d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ p\ :\ d.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_TRUE(d.shape().contains(p))\ <<\ p;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ for\ actual\ discretization\ tests\ see\ DomainDiscretization::subtract.}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ ShapeDifferenceUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ c(-\/1.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ u\ =\ c\ -\/\ b;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (u.contains(\{0,\ 0.2,\ -\/0.3\}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ u\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

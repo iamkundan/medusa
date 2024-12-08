@@ -1,0 +1,256 @@
+\doxysection{mm\+::Operator\texorpdfstring{$<$}{<} Derived \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmm_1_1Operator}{}\label{structmm_1_1Operator}\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+
+
+{\ttfamily \#include $<$Operators\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived$>$\newline
+struct mm\+::\+Operator$<$ Derived $>$}
+Base class for a differential operator. 
+
+Also doubles as a one-\/element family. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Derived} & Derived class inheriting, used for CRTP.\\
+\hline
+\end{DoxyTemplParams}
+Example of custom operator usage. Definition\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ dim>}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }Biharmonic\ :\ \textcolor{keyword}{public}\ Operator<Biharmonic<dim>>\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{typedef}\ Vec<double,\ dim>\ vec;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ std::string\ type\_name()\ \{\ \textcolor{keywordflow}{return}\ format(\textcolor{stringliteral}{"{}Biharmonic<\%d>"{}},\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});\ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{int}\ k>}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ applyAt0(\textcolor{keyword}{const}\ RBFBasis<Polyharmonic<double,\ k>,\ vec>\&,\ \textcolor{keywordtype}{int}\ index,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vec>\&\ support,\ \textcolor{keywordtype}{double}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(k\ !=\ -\/1,\ \textcolor{stringliteral}{"{}If\ dynamic\ k\ is\ desired\ it\ can\ be\ obtained\ from\ basis.rbf()."{}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ support[index].norm();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ k*(k-\/2)*(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}+k-\/2)*(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}+k-\/4)*ipow<k-\/4>(r)\ /\ ipow<4>(scale);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ applyAt0(\textcolor{keyword}{const}\ Monomials<vec>\&\ mon,\ \textcolor{keywordtype}{int}\ idx,\ \textcolor{keyword}{const}\ std::vector<vec>\&\ q,\ \textcolor{keywordtype}{double}\ s)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ result\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::array<int,\ dim>\ orders;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++d)\ \{\ orders[d]\ =\ 0;\ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++d)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ orders[d]\ =\ 4;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ result\ +=\ mon.evalOpAt0(idx,\ Derivative<dim>(orders),\ q);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ orders[d]\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d2\ =\ 0;\ d2\ <\ d;\ ++d2)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ orders[d]\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ orders[d2]\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result\ +=\ 2*mon.evalOpAt0(idx,\ Derivative<dim>(orders),\ q);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ orders[d]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ orders[d2]\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result\ /\ ipow<4>(s);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+
+\end{DoxyCodeInclude}
+ Usage\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{typedef}\ Vec<double,\ dim>\ vec;}
+\DoxyCodeLine{\ \ \ \ BallShape<vec>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<vec>\ domain\ =\ b.discretizeBoundaryWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fn\ =\ [=](\textcolor{keyword}{const}\ vec\&)\ \{\ \textcolor{keywordflow}{return}\ dx;\ \};}
+\DoxyCodeLine{\ \ \ \ GeneralFill<vec>\ fill;\ fill.seed(1337);}
+\DoxyCodeLine{\ \ \ \ fill(domain,\ fn);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Monomials<vec>\ mon(6);}
+\DoxyCodeLine{\ \ \ \ Polyharmonic<double,\ 5>\ rbf;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ 2*mon.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(n));}
+\DoxyCodeLine{\ \ \ \ RBFFD<Polyharmonic<double,\ 5>,\ vec,\ ScaleToClosest>\ approx(rbf,\ mon);}
+\DoxyCodeLine{\ \ \ \ RBFBasis<Polyharmonic<double,\ 5>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>\ basis(n);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Biharmonic<2>\ bih;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val1\ =\ mon.evalOpAt0(0,\ bih);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val2\ =\ mon.evalOpAt0(mon.size()-\/1,\ bih);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val3\ =\ basis.evalOpAt0(0,\ bih,\ domain.supportNodes(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ approx.compute(domain.pos(0),\ domain.supportNodes(0));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ shape\ =\ approx.getShape(bih);}
+
+\end{DoxyCodeInclude}
+
+
+See also custom\+\_\+operators example in the examples suite. 
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structmm_1_1Operator_a0c7c29704abdfa678dc62963eac5e4c4}{name}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em CRTP for human-\/readable name. \end{DoxyCompactList}\item 
+std\+::array$<$ Derived, 1 $>$ \mbox{\hyperlink{structmm_1_1Operator_a8c4c0aa05fa594f972a30d6cdcf0eb3f}{operators}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return an iterable of iterators represented by a family. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ }\\basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&basis, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}{index}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&support, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t scale) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Apply this operator to a given basis function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ }\\basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36}{apply\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&basis, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}{index}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&support, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t scale) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Like \doxylink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}, but with point equal to 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a722301ecd3337c31b150d5def10f5eab}{size}} ()
+\begin{DoxyCompactList}\small\item\em Size of a single-\/operator family is always 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}{index}} (Derived)
+\begin{DoxyCompactList}\small\item\em Index is always 0. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Operator_a2119455efb6bd915c45b126e1beb2430}{type\+\_\+name}} ()
+\begin{DoxyCompactList}\small\item\em Human-\/readable type name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} Derived \mbox{\hyperlink{structmm_1_1Operator_a21922c48602fb501704dc46630874915}{operator\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of the contained operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}\label{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!apply@{apply}}
+\index{apply@{apply}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t}]{scale }\end{DoxyParamCaption}) const}
+
+
+
+Apply this operator to a given basis function. 
+
+This function should be specialized (overloaded) for more concrete values of {\ttfamily basis\+\_\+t} in concrete classes inheriting form this one. It is intended that this function is never called but only serves as a default for demonstration purposes and better error messages. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em basis\+\_\+t} & Basis type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em basis} & The basis $b$ to apply the operator to. \\
+\hline
+{\em index} & Which element of the basis to apply the operator to. \\
+\hline
+{\em point} & At which aldeary shifted and translated point to apply the operator. \\
+\hline
+{\em support} & Local support domain (already shifted and scaled). These are the values $(x-c)/s$ in the equation below. \\
+\hline
+{\em scale} & Local scaling factor $s$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Let this operator be called $L$, the {\ttfamily index}-\/th basis function $b_i$. The function returns $L b_i((x-c)/s)$. Not that the operator $L$ is usually something like "{}derivative wrt. x"{} and factors of $s$ appear in the result. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{RBFBasis\+::eval\+Op}, \doxylink{classmm_1_1Monomials_a06a0a0617e8c671a7f73f0be8e8aadb2}{Monomials\+::eval\+Op}, \doxylink{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36}{apply\+At0} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00016}{16}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36}\label{structmm_1_1Operator_a56d3b01649ece110c0cf9dee789eae36} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!applyAt0@{applyAt0}}
+\index{applyAt0@{applyAt0}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{applyAt0()}{applyAt0()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::apply\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::vector\+\_\+t $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} basis\+\_\+t\+::scalar\+\_\+t}]{scale }\end{DoxyParamCaption}) const}
+
+
+
+Like \doxylink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}, but with point equal to 0. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{structmm_1_1Operator_ac6cb8d217dbae6a067359c97b6fd10ce}{apply}, \doxylink{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}{RBFBasis\+::eval\+Op\+At0}, \doxylink{classmm_1_1Monomials_a6197e006b636c2ba64f7cde6127e948d}{Monomials\+::eval\+Op\+At0} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{bits_2approximations_2Operators_8hpp_source}{Operators.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5}\label{structmm_1_1Operator_a9ed6784fa79cd4bee3827eab0c6b65d5} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!index@{index}}
+\index{index@{index}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{index()}{index()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::index (\begin{DoxyParamCaption}\item[{Derived}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Index is always 0. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a0c7c29704abdfa678dc62963eac5e4c4}\label{structmm_1_1Operator_a0c7c29704abdfa678dc62963eac5e4c4} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!name@{name}}
+\index{name@{name}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+std\+::string \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+CRTP for human-\/readable name. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a8c4c0aa05fa594f972a30d6cdcf0eb3f}\label{structmm_1_1Operator_a8c4c0aa05fa594f972a30d6cdcf0eb3f} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!operators@{operators}}
+\index{operators@{operators}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{operators()}{operators()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+std\+::array$<$ Derived, 1 $>$ \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return an iterable of iterators represented by a family. 
+
+As this is a single operator, the family consists of itself only. 
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a722301ecd3337c31b150d5def10f5eab}\label{structmm_1_1Operator_a722301ecd3337c31b150d5def10f5eab} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!size@{size}}
+\index{size@{size}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Size of a single-\/operator family is always 1. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{structmm_1_1Operator_a2119455efb6bd915c45b126e1beb2430}\label{structmm_1_1Operator_a2119455efb6bd915c45b126e1beb2430} 
+\index{mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}!type\_name@{type\_name}}
+\index{type\_name@{type\_name}!mm::Operator$<$ Derived $>$@{mm::Operator$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{type\_name()}{type\_name()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::string \mbox{\hyperlink{structmm_1_1Operator}{mm\+::\+Operator}}$<$ Derived $>$\+::type\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Human-\/readable type name. 
+
+
+
+Definition at line \mbox{\hyperlink{Operators__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{Operators__fwd_8hpp_source}{Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Operators__fwd_8hpp}{Operators\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{Operators.\+hpp}}\end{DoxyCompactItemize}

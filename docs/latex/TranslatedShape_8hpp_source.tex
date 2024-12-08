@@ -1,0 +1,64 @@
+\doxysection{Translated\+Shape.\+hpp}
+\hypertarget{TranslatedShape_8hpp_source}{}\label{TranslatedShape_8hpp_source}\index{include/medusa/bits/domains/TranslatedShape.hpp@{include/medusa/bits/domains/TranslatedShape.hpp}}
+\mbox{\hyperlink{TranslatedShape_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_TRANSLATEDSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_TRANSLATEDSHAPE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TranslatedShape__fwd_8hpp}{TranslatedShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape_8hpp}{DomainShape.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainDiscretization_8hpp}{DomainDiscretization.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00017}\mbox{\hyperlink{classmm_1_1TranslatedShape_ab038070f8a2a8924ed2ab6d02ddf054d}{00017}}\ \mbox{\hyperlink{classmm_1_1TranslatedShape_ab038070f8a2a8924ed2ab6d02ddf054d}{TranslatedShape<vec\_t>::TranslatedShape}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainShape<vec\_t>}}\&\ sh,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ a)\ :}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ sh(sh),\ a(a)\ \{}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{auto}*\ \mbox{\hyperlink{classmm_1_1Gaussian}{tsh}}\ =\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }\mbox{\hyperlink{classmm_1_1Gaussian}{TranslatedShape<vec\_t>}}*\textcolor{keyword}{>}(\&\mbox{\hyperlink{classmm_1_1TranslatedShape_af17297418e33e5782508eed8631e041e}{sh}});}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{tsh}}\ !=\ \textcolor{keyword}{nullptr})\ \{\ \ \textcolor{comment}{//\ collapse\ double\ translations}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ this-\/>sh\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{tsh}}-\/>sh;}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ this-\/>a\ +=\ \mbox{\hyperlink{classmm_1_1Gaussian}{tsh}}-\/>a;}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00023}00023\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00027}00027\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization\ <vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00028}\mbox{\hyperlink{classmm_1_1TranslatedShape_aa74ef2ccdd519c5f7d8181aad9859635}{00028}}\ \mbox{\hyperlink{classmm_1_1TranslatedShape_aa74ef2ccdd519c5f7d8181aad9859635}{TranslatedShape<vec\_t>::discretizeBoundaryWithStep}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ \ }\{}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ sh-\/>discretizeBoundaryWithStep(step,\ type);}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.translate(a);}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00034}00034\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00035}00035\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00036}\mbox{\hyperlink{classmm_1_1TranslatedShape_ac7d6749dd40ef58871eac29e2b1512b9}{00036}}\ \mbox{\hyperlink{classmm_1_1TranslatedShape_ac7d6749dd40ef58871eac29e2b1512b9}{TranslatedShape<vec\_t>::discretizeWithStep}}(\mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ sh-\/>discretizeWithStep(step,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00039}00039\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.translate(a);}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00041}00041\ \}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00044}00044\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00045}\mbox{\hyperlink{classmm_1_1TranslatedShape_a0e089aa72dd9a19162d3c52f2ab867d1}{00045}}\ \mbox{\hyperlink{classmm_1_1TranslatedShape_a0e089aa72dd9a19162d3c52f2ab867d1}{TranslatedShape<vec\_t>::discretizeWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ sh-\/>discretizeWithDensity(dr,\ \mbox{\hyperlink{classmm_1_1Gaussian}{internal\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{boundary\_type}});}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.translate(a);}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00052}00052\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00053}00053\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00054}\mbox{\hyperlink{classmm_1_1TranslatedShape_af986848c06cff688f6ebe0503684174d}{00054}}\ \mbox{\hyperlink{classmm_1_1TranslatedShape_af986848c06cff688f6ebe0503684174d}{TranslatedShape<vec\_t>::discretizeBoundaryWithDensity}}(\textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ type)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}\ =\ sh-\/>discretizeBoundaryWithDensity(dr,\ type);}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00057}00057\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{d}}.translate(a);}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{d}};}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00061}00061\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{TranslatedShape_8hpp_source_l00063}00063\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_TRANSLATEDSHAPE\_HPP\_}}
+
+\end{DoxyCode}

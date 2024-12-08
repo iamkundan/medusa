@@ -1,0 +1,104 @@
+\doxysection{RBFFD\+\_\+fwd.\+hpp}
+\hypertarget{RBFFD__fwd_8hpp_source}{}\label{RBFFD__fwd_8hpp_source}\index{include/medusa/bits/approximations/RBFFD\_fwd.hpp@{include/medusa/bits/approximations/RBFFD\_fwd.hpp}}
+\mbox{\hyperlink{RBFFD__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFFD\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFFD\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range__fwd_8hpp}{medusa/bits/types/Range\_fwd.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFBasis__fwd_8hpp}{RBFBasis\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Monomials__fwd_8hpp}{Monomials\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ScaleFunction_8hpp}{ScaleFunction.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFInterpolant__fwd_8hpp}{RBFInterpolant\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00019}00019\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00036}00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class\ }RBFType,\ \textcolor{keyword}{class\ }vec\_t,\ \textcolor{keyword}{class\ }scale\_t\ =\ NoScale,\ \textcolor{keyword}{class\ }solver\_t\ =}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00037}00037\ \ \ \ \ Eigen::PartialPivLU<Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>>>}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00038}\mbox{\hyperlink{classmm_1_1RBFFD}{00038}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1RBFFD}{RBFFD}}\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_same<typename\ vec\_t::scalar\_t,\ typename\ RBFType::scalar\_t>::value,}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Basis\ and\ underlying\ RBF\ must\ have\ the\ same\ scalar\ type."{}});}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00041}00041\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00042}\mbox{\hyperlink{classmm_1_1RBFFD_a2b25da38a948d60f78a353b69790a709}{00042}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a2b25da38a948d60f78a353b69790a709}{rbf\_t}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00043}\mbox{\hyperlink{classmm_1_1RBFFD_ac113bdd3f0db8a69ec070e3564d3072e}{00043}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_ac113bdd3f0db8a69ec070e3564d3072e}{vector\_t}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00044}\mbox{\hyperlink{classmm_1_1RBFFD_a1edc3b2807cd3bd1041e429b30253d1b}{00044}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\_t::scalar\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a1edc3b2807cd3bd1041e429b30253d1b}{scalar\_t}};\ \ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00046}\mbox{\hyperlink{classmm_1_1RBFFD_aad79f7b96b2ac91df0dc735145f5534cad2f17c311e836bb89f67e0a22359f6fb}{00046}}\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ \ \mbox{\hyperlink{classmm_1_1RBFFD_aad79f7b96b2ac91df0dc735145f5534cad2f17c311e836bb89f67e0a22359f6fb}{dim}}\ =\ vec\_t::dim\ \};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00048}00048\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00049}\mbox{\hyperlink{classmm_1_1RBFFD_a5f060b5f85edfdf28aef820d90da952f}{00049}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{rbf\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a5f060b5f85edfdf28aef820d90da952f}{rbf\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00050}\mbox{\hyperlink{classmm_1_1RBFFD_a701915fb9e039fd69ce56c306af4d240}{00050}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a701915fb9e039fd69ce56c306af4d240}{mon\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00051}\mbox{\hyperlink{classmm_1_1RBFFD_a892828df8fabb3b4bd1f63b5a98dc0dd}{00051}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{solver\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a892828df8fabb3b4bd1f63b5a98dc0dd}{solver\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00053}\mbox{\hyperlink{classmm_1_1RBFFD_a79c5fb57b242d6d6488d3ed0a8d260f9}{00053}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a79c5fb57b242d6d6488d3ed0a8d260f9}{point\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00054}\mbox{\hyperlink{classmm_1_1RBFFD_aece710afd2377ab2bee9b97e3caca83d}{00054}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_aece710afd2377ab2bee9b97e3caca83d}{scale\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00055}\mbox{\hyperlink{classmm_1_1RBFFD_ab484b404efd8092b239f896488d1f0fe}{00055}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1RBFFD_ab484b404efd8092b239f896488d1f0fe}{support\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00057}00057\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00059}\mbox{\hyperlink{classmm_1_1RBFFD_a31cff687576247d97c45eee1081f0484}{00059}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classmm_1_1RBFFD_a31cff687576247d97c45eee1081f0484}{RBFFD}}(\mbox{\hyperlink{classmm_1_1Gaussian}{rbf\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_ab9acc4770cf56438d5c01181d274fc4c}{rbf}})\ :\ \mbox{\hyperlink{classmm_1_1RBFFD_a5f060b5f85edfdf28aef820d90da952f}{rbf\_}}(\mbox{\hyperlink{classmm_1_1RBFFD_ab9acc4770cf56438d5c01181d274fc4c}{rbf}}),\ \mbox{\hyperlink{classmm_1_1RBFFD_a701915fb9e039fd69ce56c306af4d240}{mon\_}}(),\ \mbox{\hyperlink{classmm_1_1RBFFD_a79c5fb57b242d6d6488d3ed0a8d260f9}{point\_}}(\mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{NaN}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00062}\mbox{\hyperlink{classmm_1_1RBFFD_ac675c69eb81169ea8d5c6821ab966a98}{00062}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFFD_ac675c69eb81169ea8d5c6821ab966a98}{RBFFD}}(\mbox{\hyperlink{classmm_1_1Gaussian}{rbf\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_ab9acc4770cf56438d5c01181d274fc4c}{rbf}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{mon}})\ :\ \mbox{\hyperlink{classmm_1_1RBFFD_a5f060b5f85edfdf28aef820d90da952f}{rbf\_}}(\mbox{\hyperlink{classmm_1_1RBFFD_ab9acc4770cf56438d5c01181d274fc4c}{rbf}}),\ \mbox{\hyperlink{classmm_1_1RBFFD_a701915fb9e039fd69ce56c306af4d240}{mon\_}}(\mbox{\hyperlink{classmm_1_1Gaussian}{mon}}),\ \mbox{\hyperlink{classmm_1_1RBFFD_a79c5fb57b242d6d6488d3ed0a8d260f9}{point\_}}(\mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{NaN}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00065}\mbox{\hyperlink{classmm_1_1RBFFD_ab9acc4770cf56438d5c01181d274fc4c}{00065}}\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{rbf\_t}}\&\ \mbox{\hyperlink{classmm_1_1RBFFD_ab9acc4770cf56438d5c01181d274fc4c}{rbf}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_a5f060b5f85edfdf28aef820d90da952f}{rbf\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00068}\mbox{\hyperlink{classmm_1_1RBFFD_a5ab807f26ebd62d0ab912e29112e7327}{00068}}\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1RBFFD_a5ab807f26ebd62d0ab912e29112e7327}{monomials}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_a701915fb9e039fd69ce56c306af4d240}{mon\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00071}\mbox{\hyperlink{classmm_1_1RBFFD_aa20c38968c7f16cc712402b59bb82410}{00071}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1RBFFD_aa20c38968c7f16cc712402b59bb82410}{requiredSupportSize}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_a701915fb9e039fd69ce56c306af4d240}{mon\_}}.size();\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00078}\mbox{\hyperlink{classmm_1_1RBFFD_ac5f26a855eb146302301a5093e86992e}{00078}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1RBFFD_ac5f26a855eb146302301a5093e86992e}{compute}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\_t}}\&\ point,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support);}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00081}\mbox{\hyperlink{classmm_1_1RBFFD_acd5ce60fb430b688c6d820437d4aac3f}{00081}}\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1RBFFD_acd5ce60fb430b688c6d820437d4aac3f}{getShape}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00085}\mbox{\hyperlink{classmm_1_1RBFFD_afe4f61120a189b2581ebe61072590b86}{00085}}\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1RBFFD_afe4f61120a189b2581ebe61072590b86}{getShape}}(\textcolor{keyword}{const}\ operator\_t\&\ op)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00097}00097\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00098}\mbox{\hyperlink{classmm_1_1RBFFD_aa027cba6578d764eb67bd07ef38e9f95}{00098}}\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1RBFFD_aa027cba6578d764eb67bd07ef38e9f95}{getShapeFromRhs}}(}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lb}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00101}00101\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00103}\mbox{\hyperlink{classmm_1_1RBFFD_a7acf70cbbd854b21d10d2b340f018782}{00103}}\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ \mbox{\hyperlink{classmm_1_1RBFFD_a7acf70cbbd854b21d10d2b340f018782}{getMatrix}}(}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_coordinates}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00106}00106\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00111}\mbox{\hyperlink{classmm_1_1RBFFD_a9d7a44089750aaf062b52ad2a29afac3}{00111}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a9d7a44089750aaf062b52ad2a29afac3}{center}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_a79c5fb57b242d6d6488d3ed0a8d260f9}{point\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00114}\mbox{\hyperlink{classmm_1_1RBFFD_ae2342b83532ee9f51dbb1c162be237e3}{00114}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1RBFFD_ae2342b83532ee9f51dbb1c162be237e3}{scale}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_aece710afd2377ab2bee9b97e3caca83d}{scale\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00120}\mbox{\hyperlink{classmm_1_1RBFFD_ac63ae11bc861c5e3f514843be44a6abb}{00120}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1RBFFD_ac63ae11bc861c5e3f514843be44a6abb}{localCoordinates}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_ab484b404efd8092b239f896488d1f0fe}{support\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00126}\mbox{\hyperlink{classmm_1_1RBFFD_aea95ef15d594a8fd6acbf04bf424f749}{00126}}\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ \mbox{\hyperlink{classmm_1_1RBFFD_aea95ef15d594a8fd6acbf04bf424f749}{getMatrix}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_aea95ef15d594a8fd6acbf04bf424f749}{getMatrix}}(\mbox{\hyperlink{classmm_1_1RBFFD_ab484b404efd8092b239f896488d1f0fe}{support\_}});}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00134}\mbox{\hyperlink{classmm_1_1RBFFD_a7e41e41eacc973f250491be40f59ce8f}{00134}}\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{solver\_t}}\&\ \mbox{\hyperlink{classmm_1_1RBFFD_a7e41e41eacc973f250491be40f59ce8f}{solver}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1RBFFD_a892828df8fabb3b4bd1f63b5a98dc0dd}{solver\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00135}00135\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00150}00150\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00151}\mbox{\hyperlink{classmm_1_1RBFFD_a4ca2a5e49274e723bbe851b8bcdd4be9}{00151}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFInterpolant<rbf\_t,\ vec\_t>}}\ \mbox{\hyperlink{classmm_1_1RBFFD_a4ca2a5e49274e723bbe851b8bcdd4be9}{getApproximant}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vector\_t}}\&\ point,}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ values)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00155}00155\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ R,\ \textcolor{keyword}{class}\ V,\ \textcolor{keyword}{class}\ S,\ \textcolor{keyword}{class}\ L>}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00156}00156\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1RBFFD_a8885b843a66f4c673c3f007a60e0be6f}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFFD<R,\ V,\ S,\ L>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}});}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00157}00157\ \};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00160}00160\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ R,\ \textcolor{keyword}{class}\ V,\ \textcolor{keyword}{class}\ S,\ \textcolor{keyword}{class}\ L>}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00161}\mbox{\hyperlink{classmm_1_1RBFFD_a8885b843a66f4c673c3f007a60e0be6f}{00161}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFFD<R,\ V,\ S,\ L>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}})\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00162}00162\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}RBFFD\ approximation\ engine:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00163}00163\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ dimension:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}}.dim\ <<\ \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{e}}.point\_[0]\ !=\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}}.point\_[0])\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00165}00165\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ last\ point:\ not\ used\ yet\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00166}00166\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00167}00167\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ last\ point:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}}.point\_\ <<\ \textcolor{charliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00168}00168\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00169}00169\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}\ \ \ \ RBF:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}}.rbf\_\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00170}00170\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ Augmentation:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{e}}.mon\_\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00171}00171\ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ scale:\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{S}}();}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00172}00172\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}};}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00173}00173\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00175}00175\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{RBFFD__fwd_8hpp_source_l00177}00177\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFFD\_FWD\_HPP\_}}
+
+\end{DoxyCode}

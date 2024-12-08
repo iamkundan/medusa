@@ -1,0 +1,103 @@
+\doxysection{include/medusa/bits/domains/\+Domain\+Discretization\+\_\+fwd.hpp File Reference}
+\hypertarget{DomainDiscretization__fwd_8hpp}{}\label{DomainDiscretization__fwd_8hpp}\index{include/medusa/bits/domains/DomainDiscretization\_fwd.hpp@{include/medusa/bits/domains/DomainDiscretization\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declarations for domain discretizations. 
+
+
+
+Definition in file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Range\+\_\+fwd.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/memutils.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/domains/\+Domain\+Shape\+\_\+fwd.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/operators/shape\+\_\+flags.\+hpp$>$}\newline
+{\ttfamily \#include $<$iosfwd$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for Domain\+Discretization\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{DomainDiscretization__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{DomainDiscretization__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1DomainDiscretization}{mm\+::\+Domain\+Discretization$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing domain discretization along with an associated \doxylink{classmm_1_1DomainShape}{shape}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_aeb7ac89ec6c7e80572e6f98771796412}{DOMAIN\+\_\+\+PLUGIN}}(Name)
+\begin{DoxyCompactList}\small\item\em Define a method {\ttfamily Name} that calls its first argument. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_a3bb03e300333df24bbdd527b8c388230}{DOMAIN\+\_\+\+PLUGIN\+\_\+\+CONST}}(Name)
+\begin{DoxyCompactList}\small\item\em Const version of DOMAIN\+\_\+\+PLUGIN. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a1d0a8e633864dc5885558c8cdb6f94c4}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{d}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{DomainDiscretization__fwd_8hpp_aeb7ac89ec6c7e80572e6f98771796412}\label{DomainDiscretization__fwd_8hpp_aeb7ac89ec6c7e80572e6f98771796412} 
+\index{DomainDiscretization\_fwd.hpp@{DomainDiscretization\_fwd.hpp}!DOMAIN\_PLUGIN@{DOMAIN\_PLUGIN}}
+\index{DOMAIN\_PLUGIN@{DOMAIN\_PLUGIN}!DomainDiscretization\_fwd.hpp@{DomainDiscretization\_fwd.hpp}}
+\doxysubsubsection{\texorpdfstring{DOMAIN\_PLUGIN}{DOMAIN\_PLUGIN}}
+{\footnotesize\ttfamily \#define DOMAIN\+\_\+\+PLUGIN(\begin{DoxyParamCaption}\item[{}]{Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ callable\_t,\ \textcolor{keyword}{typename}...\ Args>\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Name(callable\_t\&\ callable,\ Args\&\&...\ args)\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ callable(*\textcolor{keyword}{this},\ std::forward<Args>(args)...);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Define a method {\ttfamily Name} that calls its first argument. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00441}{441}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{DomainDiscretization__fwd_8hpp_a3bb03e300333df24bbdd527b8c388230}\label{DomainDiscretization__fwd_8hpp_a3bb03e300333df24bbdd527b8c388230} 
+\index{DomainDiscretization\_fwd.hpp@{DomainDiscretization\_fwd.hpp}!DOMAIN\_PLUGIN\_CONST@{DOMAIN\_PLUGIN\_CONST}}
+\index{DOMAIN\_PLUGIN\_CONST@{DOMAIN\_PLUGIN\_CONST}!DomainDiscretization\_fwd.hpp@{DomainDiscretization\_fwd.hpp}}
+\doxysubsubsection{\texorpdfstring{DOMAIN\_PLUGIN\_CONST}{DOMAIN\_PLUGIN\_CONST}}
+{\footnotesize\ttfamily \#define DOMAIN\+\_\+\+PLUGIN\+\_\+\+CONST(\begin{DoxyParamCaption}\item[{}]{Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ callable\_t,\ \textcolor{keyword}{typename}...\ Args>\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Name(\textcolor{keyword}{const}\ callable\_t\&\ callable,\ Args\&\&...\ args)\ \{\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ callable(*\textcolor{keyword}{this},\ std::forward<Args>(args)...);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Const version of DOMAIN\+\_\+\+PLUGIN. 
+
+
+
+Definition at line \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source_l00448}{448}} of file \mbox{\hyperlink{DomainDiscretization__fwd_8hpp_source}{Domain\+Discretization\+\_\+fwd.\+hpp}}.
+

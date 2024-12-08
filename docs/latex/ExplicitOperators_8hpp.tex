@@ -1,0 +1,74 @@
+\doxysection{include/medusa/bits/operators/\+Explicit\+Operators.hpp File Reference}
+\hypertarget{ExplicitOperators_8hpp}{}\label{ExplicitOperators_8hpp}\index{include/medusa/bits/operators/ExplicitOperators.hpp@{include/medusa/bits/operators/ExplicitOperators.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Explicit operators implementation. 
+
+
+
+Definition in file \mbox{\hyperlink{ExplicitOperators_8hpp_source}{Explicit\+Operators.\+hpp}}.
+
+{\ttfamily \#include "{}Explicit\+Operators\+\_\+fwd.\+hpp"{}}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Vec.\+hpp$>$}\newline
+{\ttfamily \#include "{}Shape\+Storage\+\_\+fwd.\+hpp"{}}\newline
+Include dependency graph for Explicit\+Operators.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ExplicitOperators_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ExplicitOperators_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\+\_\+\+ASSERTS}}(node)
+\begin{DoxyCompactList}\small\item\em Performs all asserts for a given node\+: asserts that node index is valid and that shape functions were initialized for a given node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a758cae5968f6747c2c04f3bec951e454}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic information about given operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}\label{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899} 
+\index{ExplicitOperators.hpp@{ExplicitOperators.hpp}!NODE\_ASSERTS@{NODE\_ASSERTS}}
+\index{NODE\_ASSERTS@{NODE\_ASSERTS}!ExplicitOperators.hpp@{ExplicitOperators.hpp}}
+\doxysubsubsection{\texorpdfstring{NODE\_ASSERTS}{NODE\_ASSERTS}}
+{\footnotesize\ttfamily \#define NODE\+\_\+\+ASSERTS(\begin{DoxyParamCaption}\item[{}]{node }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ (node)\ \&\&\ (node)\ <\ ss-\/>size(),\ \textcolor{stringliteral}{"{}Node\ index\ \%d\ must\ be\ in\ range\ "{}}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[0,\ num\_nodes\ =\ \%d)."{}},\ ss-\/>size());}
+
+\end{DoxyCode}
+
+
+Performs all asserts for a given node\+: asserts that node index is valid and that shape functions were initialized for a given node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node index to consider. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{ExplicitOperators_8hpp_source}{Explicit\+Operators.\+hpp}}.
+

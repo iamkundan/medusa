@@ -1,0 +1,31 @@
+\doxysection{test/approximations/\+Jacobi\+SVDWrapper\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2JacobiSVDWrapper_test_8cpp-example}{}\label{test_2approximations_2JacobiSVDWrapper_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{medusa/bits/approximations/JacobiSVDWrapper.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/SVD>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ JacobiSVDWrapper)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M(7,\ 9);}
+\DoxyCodeLine{\ \ \ \ M.setRandom();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ JacobiSVDWrapper<double>\ svd;}
+\DoxyCodeLine{\ \ \ \ svd.compute(M);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ This\ code\ is\ the\ save\ as\ above,\ with\ explicit\ parameter\ specification.}}
+\DoxyCodeLine{\ \ \ \ Eigen::JacobiSVD<Eigen::MatrixXd>\ svd2;}
+\DoxyCodeLine{\ \ \ \ svd2.compute(M,\ Eigen::ComputeThinU\ |\ Eigen::ComputeThinV);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Use\ svd.matrixU(),\ svd.solve(b)\ as\ usual.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((svd.matrixU()\ -\/\ svd2.matrixU()).isZero(0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((svd.matrixV()\ -\/\ svd2.matrixV()).isZero(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

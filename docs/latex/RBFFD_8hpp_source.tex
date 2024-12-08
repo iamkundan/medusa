@@ -1,0 +1,126 @@
+\doxysection{RBFFD.\+hpp}
+\hypertarget{RBFFD_8hpp_source}{}\label{RBFFD_8hpp_source}\index{include/medusa/bits/approximations/RBFFD.hpp@{include/medusa/bits/approximations/RBFFD.hpp}}
+\mbox{\hyperlink{RBFFD_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFFD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFFD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFFD__fwd_8hpp}{RBFFD\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{numutils_8hpp}{medusa/bits/utils/numutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <Eigen/LU>}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFInterpolant_8hpp}{RBFInterpolant.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00015}00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00019}00019\ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00020}00020\ \mbox{\hyperlink{classmm_1_1RBFFD_aea95ef15d594a8fd6acbf04bf424f749}{RBFFD<RBFType,\ vec\_t,\ scale\_t,\ solver\_t>::getMatrix}}(}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ local\_support)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{int}\ n1\ =\ local\_support.size();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00023}00023\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(n1\ >\ 0,\ \textcolor{stringliteral}{"{}Cannot\ construct\ a\ RBFFD\ approximation\ with\ no\ stencil\ nodes.\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Did\ you\ forget\ to\ cal\ findSupport?."{}});}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00025}00025\ \ \ \ \ \textcolor{keywordtype}{int}\ n2\ =\ mon\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00026}00026\ \ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ n1\ +\ n2;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00027}00027\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ M(N,\ N);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{comment}{//\ RBF\ part}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n1;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ i;\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ M(i,\ j)\ =\ M(j,\ i)\ =\ rbf\_((local\_support[i]-\/local\_support[j]).squaredNorm());}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00033}00033\ \ \ \ \ \ \ \ \ M(i,\ i)\ =\ rbf\_(0);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00034}00034\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ Monomial\ part}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n2;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n1;\ ++j)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ M(n1+i,\ j)\ =\ M(j,\ n1+i)\ =\ mon\_.eval(i,\ local\_support[j],\ local\_support);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00042}00042\ \ \ \ \ M.bottomRightCorner(n2,\ n2).setZero();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ M;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00046}00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00047}00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1RBFFD_ac5f26a855eb146302301a5093e86992e}{RBFFD<RBFType,\ vec\_t,\ scale\_t,\ solver\_t>::compute}}(}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ vec\_t\&\ point,\ \textcolor{keyword}{const}\ std::vector<vec\_t>\&\ support)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00049}00049\ \ \ \ \ scale\_\ =\ scale\_t::scale(point,\ support);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{int}\ n1\ =\ support.size();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{comment}{//\ Local\ scaled\ support}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00052}00052\ \ \ \ \ support\_.resize(n1);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n1;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ support\_[i]\ =\ (support[i]\ -\/\ point)\ /\ scale\_;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00056}00056\ \ \ \ \ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ M\ =\ getMatrix(support\_);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00057}00057\ \ \ \ \ point\_\ =\ point;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00058}00058\ \ \ \ \ solver\_.compute(M);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00059}00059\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00061}00061\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00062}00062\ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00063}00063\ \mbox{\hyperlink{classmm_1_1RBFFD_acd5ce60fb430b688c6d820437d4aac3f}{RBFFD<RBFType,\ vec\_t,\ scale\_t,\ solver\_t>::getShape}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ support\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00065}00065\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ rhs(n\ +\ mon\_.size());}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ rhs(i)\ =\ rbf\_(support\_[i].squaredNorm());}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ mon\_.size();\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ rhs(n+i)\ =\ mon\_.evalAt0(i);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00072}00072\ \ \ \ \ \textcolor{keywordflow}{return}\ getShapeFromRhs(rhs);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00073}00073\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00075}00075\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00076}00076\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00077}00077\ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00078}00078\ \mbox{\hyperlink{classmm_1_1RBFFD_acd5ce60fb430b688c6d820437d4aac3f}{RBFFD<RBFType,\ vec\_t,\ scale\_t,\ solver\_t>::getShape}}(\textcolor{keyword}{const}\ operator\_t\&\ op)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ support\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00080}00080\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ rhs(n\ +\ mon\_.size());}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00081}00081\ \ \ \ \ RBFBasis<RBFType,\ vec\_t>\ rbf\_basis(n,\ rbf\_);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ rhs(i)\ =\ rbf\_basis.evalOpAt0(i,\ op,\ support\_,\ scale\_);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00084}00084\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ mon\_.size();\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ rhs(n+i)\ =\ mon\_.evalOpAt0(i,\ op,\ support\_,\ scale\_);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{return}\ getShapeFromRhs(rhs);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00089}00089\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00091}00091\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00092}00092\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00093}00093\ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ 1>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00094}00094\ \mbox{\hyperlink{classmm_1_1RBFFD_aa027cba6578d764eb67bd07ef38e9f95}{RBFFD<RBFType,\ vec\_t,\ scale\_t,\ solver\_t>::getShapeFromRhs}}(}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ Lb)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{return}\ solver\_.solve(Lb).head(support\_.size());}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00097}00097\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00099}00099\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ scale\_t,\ \textcolor{keyword}{class}\ solver\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00100}00100\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00101}00101\ RBFInterpolant<RBFType,\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00102}00102\ \mbox{\hyperlink{classmm_1_1RBFFD_a4ca2a5e49274e723bbe851b8bcdd4be9}{RBFFD<RBFType,\ vec\_t,\ scale\_t,\ solver\_t>::getApproximant}}(\textcolor{keyword}{const}\ vector\_t\&\ point,}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \textcolor{keyword}{const}\ Eigen::MatrixBase<Derived>\&\ values)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00104}00104\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ support.size();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00105}00105\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(values.size()\ ==\ n,\ \textcolor{stringliteral}{"{}Number\ of\ given\ values\ \%d\ must\ be\ equal\ to\ support\ size\ \%d."{}},}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ values.size(),\ n);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00107}00107\ \ \ \ \ \textcolor{keywordtype}{double}\ scale\ =\ scale\_t::scale(point,\ support);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00108}00108\ \ \ \ \ \textcolor{comment}{//\ Local\ scaled\ support}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00109}00109\ \ \ \ \ std::vector<vec\_t>\ local\_support(n);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00111}00111\ \ \ \ \ \ \ \ \ local\_support[i]\ =\ (support[i]\ -\/\ point)\ /\ scale;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00113}00113\ \ \ \ \ Eigen::Matrix<typename\ vec\_t::scalar\_t,\ Eigen::Dynamic,\ Eigen::Dynamic>\ M\ =}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ getMatrix(local\_support);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00115}00115\ \ \ \ \ solver\_t\ solver;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00116}00116\ \ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00117}00117\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ rhs(n\ +\ mon\_.size());}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00118}00118\ \ \ \ \ rhs.head(n)\ =\ values;}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00119}00119\ \ \ \ \ rhs.tail(mon\_.size()).setZero();}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00120}00120\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ coeff\ =\ solver.solve(rhs);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00121}00121\ \ \ \ \ \textcolor{keywordflow}{return}\ RBFInterpolant<rbf\_t,\ vec\_t>(rbf\_,\ mon\_,\ point,\ support,\ scale,\ coeff);}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00122}00122\ \}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00125}00125\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{RBFFD_8hpp_source_l00127}00127\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFFD\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,143 @@
+\doxysection{RBFBasis.\+hpp}
+\hypertarget{RBFBasis_8hpp_source}{}\label{RBFBasis_8hpp_source}\index{include/medusa/bits/approximations/RBFBasis.hpp@{include/medusa/bits/approximations/RBFBasis.hpp}}
+\mbox{\hyperlink{RBFBasis_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFBASIS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFBASIS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFBasis__fwd_8hpp}{RBFBasis\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ RBFType>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00016}00016\ \textcolor{keyword}{typename}\ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{RBFBasis<vec\_t,\ RBFType>::scalar\_t}}\ \mbox{\hyperlink{classmm_1_1RBFBasis_ab59c28c466af9432eab98c88061c7578}{RBFBasis<vec\_t,\ RBFType>::eval}}(}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ vector\_t\&\ point,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordflow}{return}\ rbf\_((point-\/support[index]).squaredNorm());}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00025}00025\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00027}00027\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{RBFBasis<RBFType,\ vec\_t>::evalOp}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ vector\_t\&\ point,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00028}00028\ \ \ \ \ \ \ \ \ operator\_t\ op,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ op.apply(*\textcolor{keyword}{this},\ index,\ point,\ support,\ scale);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00033}00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1RBFBasis_a34059852ee0659f5cf2f07d0b1382cc8}{00034}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{RBFBasis<RBFType,\ vec\_t>::evalOp}}(}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\_t}}\&\ point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dim>}}\ op,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00037}00037\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00038}00038\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{return}\ rbf\_((point\ -\/\ support[index]).\mbox{\hyperlink{classmm_1_1Gaussian}{squaredNorm}}(),\ op)/scale/scale;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00044}00044\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00045}\mbox{\hyperlink{classmm_1_1RBFBasis_a6bc181cca33850b3a2224f7a8c791af7}{00045}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{RBFBasis<RBFType,\ vec\_t>::evalOp}}(}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\_t}}\&\ point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der1<dim>}}\ op,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00048}00048\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00049}00049\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ point\ -\/\ support[index];}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{return}\ 2*p[op.var]*rbf\_(p.squaredNorm(),\ 1)/scale;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00056}00056\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00057}\mbox{\hyperlink{classmm_1_1RBFBasis_acf3f1fcc68b352edc09e72b1659d61df}{00057}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{RBFBasis<RBFType,\ vec\_t>::evalOp}}(}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\_t}}\&\ point,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der2<dim>}}\ op,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00064}00064\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ p\ =\ point\ -\/\ support[index];}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00065}00065\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}\ =\ p.squaredNorm();}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{res}}\ =\ 4*p[op.var1]*p[op.var2]*rbf\_(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ 2);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (op.var1\ ==\ op.var2)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{res}}\ +=\ 2*rbf\_(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ 1);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{res}}/scale/scale;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00071}00071\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00073}00073\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ RBFType>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00074}\mbox{\hyperlink{classmm_1_1RBFBasis_a667a5725291881d7c5de7ec251cc1c77}{00074}}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{RBFBasis<vec\_t,\ RBFType>::scalar\_t}}\ \mbox{\hyperlink{classmm_1_1RBFBasis_a667a5725291881d7c5de7ec251cc1c77}{RBFBasis<vec\_t,\ RBFType>::evalAt0}}(}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00076}00076\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00077}00077\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{return}\ rbf\_(support[index].\mbox{\hyperlink{classmm_1_1Gaussian}{squaredNorm}}());}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00083}00083\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00084}00084\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00085}\mbox{\hyperlink{classmm_1_1RBFBasis_ae4ab97ed3770068785e3325108499eb7}{00085}}\ \mbox{\hyperlink{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}{RBFBasis<RBFType,\ vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Lap<dim>}}\&\ lap,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00087}00087\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00088}00088\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{return}\ rbf\_(support[index].\mbox{\hyperlink{classmm_1_1Gaussian}{squaredNorm}}(),\ lap)/scale/scale;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00092}00092\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00094}00094\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00095}\mbox{\hyperlink{classmm_1_1RBFBasis_a585c5091deeaa7995ed5e85824b4198b}{00095}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}{RBFBasis<RBFType,\ vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der1<dim>}}\&\ der1,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00097}00097\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00098}00098\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00101}00101\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der1.var\ >=\ 0,\ \textcolor{stringliteral}{"{}Index\ of\ derived\ variable\ \%d\ should\ be\ higher\ or\ equal\ to\ 0."{}},}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der1.var);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der1.var\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}},\ \textcolor{stringliteral}{"{}Index\ of\ derived\ variable\ \%d\ should\ be\ lower"{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ than\ the\ number\ of\ dimensions\ \%d"{}},\ der1.var,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00106}00106\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ support[index];}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00107}00107\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}.squaredNorm();}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00108}00108\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ v\ =\ rbf\_(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ 1);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00109}00109\ \ \ \ \ v\ *=\ -\/2*\mbox{\hyperlink{classmm_1_1Gaussian}{s}}[der1.var];}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00110}00110\ \ \ \ \ \textcolor{keywordflow}{return}\ v/scale;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00111}00111\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00113}00113\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ RBFType,\ \textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00114}\mbox{\hyperlink{classmm_1_1RBFBasis_a385273a02d35e205c90b52de9f3e0ccd}{00114}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}{RBFBasis<RBFType,\ vec\_t>::evalOpAt0}}(\textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Der2<dim>}}\&\ der2,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ scale)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00116}00116\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(0\ <=\ index\ \&\&\ index\ <\ size\_,\ \textcolor{stringliteral}{"{}Basis\ index\ \%d\ out\ of\ range\ [0,\ \%d)"{}},\ index,\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00117}00117\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(support.size())\ >=\ size\_,}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ enough\ support\ points\ given\ for\ this\ basis\ size,\ got\ \%d\ support\ points\ for\ "{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}basis\ size\ \%d."{}},\ support.size(),\ size\_);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00120}00120\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der2.var1\ >=\ 0\ \&\&\ der2.var2\ >=0,\ \textcolor{stringliteral}{"{}Indexes\ of\ derived\ variables\ \%d\ and\ \%d\ should"{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ be\ both\ higher\ or\ equal\ to\ 0."{}},}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ der2.var1,\ der2.var2);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00123}00123\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(der2.var1\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ \&\&\ der2.var2\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ ,\ \textcolor{stringliteral}{"{}Index\ of\ derived\ variable\ \%d\ \ and\ \%d\ should"{}}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ both\ be\ lower\ than\ the\ number\ of\ dimensions\ \%d"{}},\ der2.var1,\ der2.var2,\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}});}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00126}00126\ \ \ \ \ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ support[index];}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00127}00127\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}.squaredNorm();}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00128}00128\ \ \ \ \ \textcolor{keywordtype}{int}\ d1\ =\ der2.var1;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00129}00129\ \ \ \ \ \textcolor{keywordtype}{int}\ d2\ =\ der2.var2;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00130}00130\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\_t}}\ v\ =\ 4*\mbox{\hyperlink{classmm_1_1Gaussian}{s}}[d1]*\mbox{\hyperlink{classmm_1_1Gaussian}{s}}[d2]*rbf\_(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ 2);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{if}\ (d1\ ==\ d2)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00132}00132\ \ \ \ \ \ \ \ \ v\ +=\ 2*rbf\_(\mbox{\hyperlink{classmm_1_1Gaussian}{r2}},\ 1);}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{return}\ v/scale/scale;}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00135}00135\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00138}00138\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ V,\ \textcolor{keyword}{typename}\ R>}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00139}\mbox{\hyperlink{classmm_1_1RBFBasis_af31630f6deba90ce21ebc490a0dc15f9}{00139}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFBasis<V,\ R>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}})\ \{}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00140}00140\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}RBF\ basis\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}.dim\ <<\ \textcolor{stringliteral}{"{}D,\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}.size()\ <<\ \textcolor{stringliteral}{"{}x\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1Gaussian}{m}}.rbf();}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00141}00141\ \}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00143}00143\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{RBFBasis_8hpp_source_l00145}00145\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFBASIS\_HPP\_}}
+
+\end{DoxyCode}

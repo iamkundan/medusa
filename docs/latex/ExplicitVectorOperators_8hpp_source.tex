@@ -1,0 +1,159 @@
+\doxysection{Explicit\+Vector\+Operators.\+hpp}
+\hypertarget{ExplicitVectorOperators_8hpp_source}{}\label{ExplicitVectorOperators_8hpp_source}\index{include/medusa/bits/operators/ExplicitVectorOperators.hpp@{include/medusa/bits/operators/ExplicitVectorOperators.hpp}}
+\mbox{\hyperlink{ExplicitVectorOperators_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_OPERATORS\_EXPLICITVECTOROPERATORS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_OPERATORS\_EXPLICITVECTOROPERATORS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ExplicitVectorOperators__fwd_8hpp}{ExplicitVectorOperators\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeStorage__fwd_8hpp}{ShapeStorage\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00021}\mbox{\hyperlink{ExplicitVectorOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{00021}}\ \textcolor{preprocessor}{\#define\ NODE\_ASSERTS(node)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00022}00022\ \textcolor{preprocessor}{\ \ \ \ assert\_msg(0\ <=\ (node)\ \&\&\ (node)\ <\ ss-\/>size(),\ "{}Node\ index\ \%d\ must\ be\ in\ range\ "{}\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00023}00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}[0,\ num\_nodes\ =\ \%d)."{},\ ss-\/>size());}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00028}00028\ Eigen::Matrix<}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{vector\_type<vector\_field\_t>::type::scalar\_t}},}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ vector\_type<vector\_field\_t>::type::dim,}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00031}00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}{ExplicitVectorOperators<shape\_storage\_type>::dim}}>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00032}00032\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a64160803e909a0f8dde8b1c0af75d28c}{ExplicitVectorOperators<shape\_storage\_type>::grad}}(\textcolor{keyword}{const}\ vector\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ vector\_dim\ =\ vector\_type<vector\_field\_t>::type::dim;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ domain\_dim\ =\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a702f59361f77601ac71b4bec82f2a8b0a2ba4d29e16c8448be2c2a820ae287c27}{ExplicitVectorOperators<shape\_storage\_type>::dim}};}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00036}00036\ \ \ \ \ Eigen::Matrix<typename\ vector\_type<vector\_field\_t>::type::scalar\_t,\ vector\_dim,\ domain\_dim>\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ vector\_dim;\ ++d)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ var\ =\ 0;\ var\ <\ domain\_dim;\ ++var)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ ret(d,\ var)\ =\ ss-\/>d1(var,\ node,\ 0)\ *\ u[ss-\/>support(node,\ 0)][d];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret(d,\ var)\ +=\ ss-\/>d1(var,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][d];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00046}00046\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00048}00048\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00049}00049\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ op\_family\_t,\ \textcolor{keyword}{typename}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00050}00050\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00051}00051\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ab59e210d9c8d912822fb8ce6ad2941d0}{ExplicitVectorOperators<shape\_storage\_type>::apply}}(\textcolor{keyword}{const}\ vector\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node,}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ op\_family\_t::operator\_t\ o)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ u\_dim\ =\ vector\_type<vector\_field\_t>::type::dim;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}\ res;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00055}00055\ \ \ \ \ res.setZero();}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{int}\ idx\ =\ op\_family\_t::index(o);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ u\_dim;\ ++d)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ res[d]\ +=\ ss-\/>template\ get<op\_family\_t>(idx,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][d];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00065}00065\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00066}00066\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00067}00067\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{vector\_type<vector\_field\_t>::type::scalar\_t}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00068}00068\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_ad97e967fc33fd3618d9c248fe5d661bc}{ExplicitVectorOperators<shape\_storage\_type>::div}}(\textcolor{keyword}{const}\ vector\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00070}00070\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}})\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vector\_type<vector\_field\_t>::type::dim),}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Domain\ and\ filed\ dimensions\ must\ match."{}});}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{vector\_type<vector\_field\_t>::type::scalar\_t}}\ ret\ =}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ ss-\/>d1(0,\ node,\ 0)\ *\ u[ss-\/>support(node,\ 0)][0];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ ss-\/>supportSize(node);\ ++i)}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ ret\ +=\ ss-\/>d1(0,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][0];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ var\ =\ 1;\ var\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++var)}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss-\/>supportSize(node);\ ++i)}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ ret\ +=\ ss-\/>d1(var,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][var];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00082}00082\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00083}00083\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00084}00084\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00085}00085\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_af88a56b20e9e71045c6dccc597b3a693}{ExplicitVectorOperators<shape\_storage\_type>::curl}}(\textcolor{keyword}{const}\ vector\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00087}00087\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vector\_type<vector\_field\_t>::type::dim)\ ==\ 3,}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}The\ field\ must\ be\ three\ dimensional."{}});}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00089}00089\ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00090}00090\ \ \ \ \ ret.setZero();}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ ret[0]\ +=\ ss-\/>d1(1,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][2]}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ ss-\/>d1(2,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][1];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ ret[1]\ +=\ ss-\/>d1(2,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][0]}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ ss-\/>d1(0,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][2];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ ret[2]\ +=\ ss-\/>d1(0,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][1]}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ ss-\/>d1(1,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][0];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00098}00098\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00102}00102\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00103}00103\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00104}00104\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00105}00105\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a04d104b88923f76168e394a58a6a5f66}{ExplicitVectorOperators<shape\_storage\_type>::graddiv}}(\textcolor{keyword}{const}\ vector\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00106}00106\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00107}00107\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}})\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vector\_type<vector\_field\_t>::type::dim),}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Domain\ and\ filed\ dimensions\ must\ match."{}});}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00109}00109\ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00110}00110\ \ \ \ \ ret.setZero();}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d1\ =\ 0;\ d1\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++d1)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d2\ =\ 0;\ d2\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++d2)\ \{\ \ \textcolor{comment}{//\ loop\ over\ dimensions}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dmin\ =\ std::min(d1,\ d2);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ dmax\ =\ std::max(d1,\ d2);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ret[d1]\ +=\ ss-\/>d2(dmin,\ dmax,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)][d2];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00120}00120\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00123}00123\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00124}00124\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vector\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00125}00125\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00126}00126\ \mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_afa92529f4a97a9573aeeff7032c8c40a}{ExplicitVectorOperators<shape\_storage\_type>::neumann}}(}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ vector\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node,\ \textcolor{keyword}{const}\ vector\_t\&\ normal,}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1vector__type_a322cd34889ca3352104c8371c4582463}{vector\_type<vector\_field\_t>::type}}\ val)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00129}00129\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00130}00130\ \ \ \ \ \textcolor{keyword}{static\_assert}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}})\ ==\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(vector\_type<vector\_field\_t>::type::dim),}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Domain\ and\ filed\ dimensions\ must\ match."{}});}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00132}00132\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(ss-\/>support(node,\ 0)\ ==\ node,\ \textcolor{stringliteral}{"{}First\ support\ node\ should\ be\ the\ node\ itself."{}});}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00133}00133\ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ denominator\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00134}00134\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++d)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ val\ -\/=\ normal[d]\ *\ ss-\/>d1(d,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)];}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ i\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00139}00139\ \ \ \ \ \ \ \ \ denominator\ +=\ normal[d]\ *\ ss-\/>d1(d,\ node,\ 0);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00140}00140\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00141}00141\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(std::abs(denominator)\ >=\ 1e-\/14,}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Node\ \%d\ has\ no\ effect\ on\ the\ flux\ in\ direction\ \%s.\ The\ cause\ of\ this\ might\ be\ wrong"{}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ normal\ direction,\ bad\ neighbourhood\ choice\ or\ bad\ nodal\ positions."{}},\ node,\ normal);}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00144}00144\ \ \ \ \ \textcolor{keywordflow}{return}\ val\ /\ denominator;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00145}00145\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00146}00146\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00150}00150\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ S>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00151}\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators_a5f6cf04c1f5af921a3f186003656ef73}{00151}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ExplicitVectorOperators<S>}}\&\ op)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00152}00152\ \ \ \ \ \textcolor{keywordflow}{if}\ (!op.hasShapes())\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Explicit\ vector\ operators\ without\ any\ linked\ storage."{}};}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Explicit\ vector\ operators\ over\ storage:\ "{}}\ <<\ *op.ss;}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00156}00156\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00158}00158\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived,\ \textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ OpFamilies>}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00159}00159\ \mbox{\hyperlink{classmm_1_1Gaussian}{ExplicitVectorOperators<Derived>}}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00160}\mbox{\hyperlink{classmm_1_1ShapeStorage_afe94398ee37e5ad815f4be5f8b995f31}{00160}}\ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe94398ee37e5ad815f4be5f8b995f31}{ShapeStorage<Derived,\ vec\_t,\ OpFamilies>::explicitVectorOperators}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00161}00161\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ExplicitVectorOperators<Derived>}}(*\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }Derived*\textcolor{keyword}{>}(\textcolor{keyword}{this}));}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00162}00162\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00164}00164\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{ExplicitVectorOperators_8hpp_source_l00166}00166\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_OPERATORS\_EXPLICITVECTOROPERATORS\_HPP\_}}
+
+\end{DoxyCode}

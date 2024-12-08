@@ -1,0 +1,169 @@
+\doxysection{mm\+::Scalar\+Field\texorpdfstring{$<$}{<} Scalar \texorpdfstring{$>$}{>}\+::Scalar\+Field\+View Class Reference}
+\hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView}{}\label{classmm_1_1ScalarField_1_1ScalarFieldView}\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}}$>$\newline
+class mm\+::\+Scalar\+Field$<$ Scalar $>$\+::\+Scalar\+Field\+View}
+Represents a non contiguous view to a scalar field. 
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Scalar\+Field\texorpdfstring{$<$}{<} Scalar \texorpdfstring{$>$}{>}\+::Scalar\+Field\+View\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classmm_1_1ScalarField_1_1ScalarFieldView__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a3b3b0218c42caa3cddd56c7ce3b67232}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScalarField_a79c5a8fadaab1c5ee9e2720bb492020d}{scalar\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Assign a scalar to this view. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_af8532c434e54a70150ec8ba125c14cab}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em Assign another Eigen expression to this view. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a4ba2af9466c090180e2a93d71e428ebb}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{other}})
+\begin{DoxyCompactList}\small\item\em Assign another \doxylink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a606ae2d6ab44f19c8f3eb444426dab26}{Scalar\+Field}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a315bfd4c88bc9b94b5d7d852320b7789}{Scalar\+Field\+View}} (\mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}} \&\mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a77f3a46e399c3bb1d89693692d5a0bdd}{sf}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a60acd2e01722cbea747be6c4290cf061}{indexes}})
+\begin{DoxyCompactList}\small\item\em Construct a non contiguous view to a scalar field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}} \& \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a77f3a46e399c3bb1d89693692d5a0bdd}{sf}}
+\begin{DoxyCompactList}\small\item\em Reference to the viewed field. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView_a60acd2e01722cbea747be6c4290cf061}{indexes}}
+\begin{DoxyCompactList}\small\item\em Indexes of this view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_a315bfd4c88bc9b94b5d7d852320b7789}\label{classmm_1_1ScalarField_1_1ScalarFieldView_a315bfd4c88bc9b94b5d7d852320b7789} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!ScalarFieldView@{ScalarFieldView}}
+\index{ScalarFieldView@{ScalarFieldView}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{ScalarFieldView()}{ScalarFieldView()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field\+View\+::\+Scalar\+Field\+View (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}} \&}]{sf,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Construct a non contiguous view to a scalar field. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_af8532c434e54a70150ec8ba125c14cab}\label{classmm_1_1ScalarField_1_1ScalarFieldView_af8532c434e54a70150ec8ba125c14cab} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix\+Base$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Other\+Derived}} $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assign another Eigen expression to this view. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00055}{55}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_a3b3b0218c42caa3cddd56c7ce3b67232}\label{classmm_1_1ScalarField_1_1ScalarFieldView_a3b3b0218c42caa3cddd56c7ce3b67232} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScalarField_a79c5a8fadaab1c5ee9e2720bb492020d}{scalar\+\_\+t}} \&}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assign a scalar to this view. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_a4ba2af9466c090180e2a93d71e428ebb}\label{classmm_1_1ScalarField_1_1ScalarFieldView_a4ba2af9466c090180e2a93d71e428ebb} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field\+View\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assign another \doxylink{classmm_1_1ScalarField_1_1ScalarFieldView}{Scalar\+Field\+View}. 
+
+\begin{DoxyWarning}{Warning}
+Aliasing may occur. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_a606ae2d6ab44f19c8f3eb444426dab26}\label{classmm_1_1ScalarField_1_1ScalarFieldView_a606ae2d6ab44f19c8f3eb444426dab26} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!ScalarField@{ScalarField}}
+\index{ScalarField@{ScalarField}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{ScalarField}{ScalarField}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{friend}} \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_a60acd2e01722cbea747be6c4290cf061}\label{classmm_1_1ScalarField_1_1ScalarFieldView_a60acd2e01722cbea747be6c4290cf061} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!indexes@{indexes}}
+\index{indexes@{indexes}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{indexes}{indexes}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}\& \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field\+View\+::indexes\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Indexes of this view. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ScalarField_1_1ScalarFieldView_a77f3a46e399c3bb1d89693692d5a0bdd}\label{classmm_1_1ScalarField_1_1ScalarFieldView_a77f3a46e399c3bb1d89693692d5a0bdd} 
+\index{mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}!sf@{sf}}
+\index{sf@{sf}!mm::ScalarField$<$ Scalar $>$::ScalarFieldView@{mm::ScalarField$<$ Scalar $>$::ScalarFieldView}}
+\doxysubsubsection{\texorpdfstring{sf}{sf}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ScalarField}{Scalar\+Field}}\& \mbox{\hyperlink{classmm_1_1ScalarField}{mm\+::\+Scalar\+Field}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Scalar}} $>$\+::\+Scalar\+Field\+View\+::sf\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Reference to the viewed field. 
+
+
+
+Definition at line \mbox{\hyperlink{ScalarField__fwd_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{ScalarField__fwd_8hpp_source}{Scalar\+Field\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/types/\mbox{\hyperlink{ScalarField__fwd_8hpp}{Scalar\+Field\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

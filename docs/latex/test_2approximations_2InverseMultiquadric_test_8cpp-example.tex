@@ -1,0 +1,38 @@
+\doxysection{test/approximations/\+Inverse\+Multiquadric\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2InverseMultiquadric_test_8cpp-example}{}\label{test_2approximations_2InverseMultiquadric_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{InverseMultiquadric_8hpp}{medusa/bits/approximations/InverseMultiquadric.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ InverseMultiQuadraticEvaluate)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ s\ =\ 1/1.43;}
+\DoxyCodeLine{\ \ \ \ InverseMultiquadric<double>\ imq(s);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r0\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r2\ =\ 1.74;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(1,\ imq(r0),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.4683891614366080000,\ imq(r2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/1.022450000000000000,\ imq(r0,\ 1),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(-\/0.105066094730786300,\ imq(r2,\ 1),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(3.1362120074999990000,\ imq(r0,\ 2),\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.0707032858838209400,\ imq(r2,\ 2),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(0.6202486805208258000,\ imq(r2,\ 6),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ DISABLED\_InverseMultiQuadraticUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ InverseMultiquadric<double>\ im(1.324);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ im(4.0);\ \ \ \ \ \textcolor{comment}{//\ value\ at\ 4.0\ (this\ is\ the\ squared\ radius)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ im(0.0,\ 2);\ \ \textcolor{comment}{//\ second\ derivative\ at\ 0.0}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ im\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ val\ <<\ der;\ \ \textcolor{comment}{//\ to\ not\ be\ unused}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,166 @@
+<map id="include/medusa/bits/operators/shape_flags.hpp" name="include/medusa/bits/operators/shape_flags.hpp">
+<area shape="rect" id="Node000001" title="Definition of flags related to shape computation." alt="" coords="716,5,913,45"/>
+<area shape="rect" id="Node000002" href="$Operators_8hpp.html" title="Header for Operators module." alt="" coords="733,401,955,427"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="882,50,908,68,928,92,944,135,947,181,940,227,926,272,908,314,888,351,855,402,851,399,884,348,904,312,921,270,935,226,942,181,939,136,923,95,904,72,879,54"/>
+<area shape="rect" id="Node000005" href="$DomainDiscretization__fwd_8hpp.html" title="Declarations for domain discretizations." alt="" coords="1428,93,1655,148"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="927,38,1428,102,1428,108,926,44"/>
+<area shape="rect" id="Node000049" href="$RaggedShapeStorage_8hpp.html" title="Implementation of shape storage for shapes of different sizes." alt="" coords="41,299,300,339"/>
+<area shape="poly" id="edge84_Node000001_Node000049" title=" " alt="" coords="703,34,556,42,395,54,261,72,215,83,191,95,174,118,163,144,157,172,155,201,159,256,168,298,163,299,154,257,150,201,152,171,158,142,170,115,188,91,214,78,260,67,395,49,555,36,702,28"/>
+<area shape="rect" id="Node000051" href="$RaggedShapeStorage__fwd_8hpp.html" title="Declaration of shape storage for shapes of different sizes." alt="" coords="202,93,433,148"/>
+<area shape="poly" id="edge87_Node000001_Node000051" title=" " alt="" coords="703,49,446,96,433,98,432,93,445,91,702,44"/>
+<area shape="rect" id="Node000055" href="$UniformShapeStorage__fwd_8hpp.html" title="Declaration of shape storage for uniformly long shapes." alt="" coords="457,93,692,148"/>
+<area shape="poly" id="edge93_Node000001_Node000055" title=" " alt="" coords="754,53,643,96,641,91,753,48"/>
+<area shape="rect" id="Node000058" href="$computeShapes__fwd_8hpp.html" title="Declarations of shape function computation utilities." alt="" coords="993,93,1189,148"/>
+<area shape="poly" id="edge98_Node000001_Node000058" title=" " alt="" coords="884,47,1014,91,1012,96,883,52"/>
+<area shape="rect" id="Node000059" href="$printShapes_8hpp.html" title="Suppport functions for shape printing." alt="" coords="716,101,913,141"/>
+<area shape="poly" id="edge100_Node000001_Node000059" title=" " alt="" coords="817,59,817,101,812,101,812,59"/>
+<area shape="rect" id="Node000003" href="$Medusa_8hpp.html" title="Main header file that includes most other components." alt="" coords="1215,973,1423,999"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="868,434,898,467,930,510,955,562,963,589,965,618,965,818,972,856,989,888,1016,913,1050,934,1089,950,1131,962,1215,977,1214,982,1130,967,1088,955,1048,939,1013,918,985,891,967,858,960,819,960,618,957,590,950,564,925,513,894,470,864,438"/>
+<area shape="rect" id="Node000004" href="$Medusa__fwd_8hpp.html" title="Main header file that includes only declarations for some heavy classes such as mm::WLS to reduce com..." alt="" coords="1229,885,1409,925"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="891,430,938,453,983,487,1014,518,1036,545,1050,576,1055,618,1055,723,1059,754,1072,782,1092,806,1116,827,1176,860,1237,883,1236,888,1173,865,1113,832,1088,810,1068,785,1054,756,1049,724,1049,618,1045,578,1032,548,1010,521,980,491,935,458,888,434"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="1321,939,1321,973,1316,973,1316,939"/>
+<area shape="rect" id="Node000006" href="$Domain__fwd_8hpp.html" title="Header for Domain module, declarations only." alt="" coords="1466,797,1646,837"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="1426,155,1368,181,1314,216,1293,237,1276,261,1265,288,1261,318,1261,621,1265,662,1277,693,1299,719,1331,747,1362,768,1396,783,1466,803,1465,808,1394,788,1359,772,1328,751,1295,723,1273,695,1260,663,1256,621,1256,317,1260,286,1271,258,1289,233,1311,211,1365,176,1424,150"/>
+<area shape="rect" id="Node000008" href="$DomainDiscretization_8hpp.html" title="Implementation of discretized domains." alt="" coords="3033,203,3287,243"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="1669,127,3033,211,3032,217,1669,133"/>
+<area shape="rect" id="Node000028" href="$STLShape_8hpp.html" title="Implementation of STL shapes." alt="" coords="1599,497,1777,537"/>
+<area shape="poly" id="edge82_Node000005_Node000028" title=" " alt="" coords="1560,160,1573,195,1594,264,1607,319,1621,373,1646,440,1677,495,1673,498,1642,442,1616,375,1602,321,1589,266,1568,197,1555,162"/>
+<area shape="rect" id="Node000045" href="$HalfLinksRefine__fwd_8hpp.html" title="Declaration of the half&#45;link refinement algorithm." alt="" coords="1370,196,1558,251"/>
+<area shape="poly" id="edge78_Node000005_Node000045" title=" " alt="" coords="1515,161,1486,198,1482,194,1511,157"/>
+<area shape="rect" id="Node000048" href="$GeneralFill_8cpp.html" title="Instantiations of Poisson disk sampling algorithm." alt="" coords="3312,211,3515,236"/>
+<area shape="poly" id="edge83_Node000005_Node000048" title=" " alt="" coords="1669,122,2027,130,2497,144,2961,165,3154,178,3300,193,3373,208,3372,213,3300,199,3153,184,2961,171,2497,149,2026,135,1669,127"/>
+<area shape="poly" id="edge9_Node000006_Node000004" title=" " alt="" coords="1492,845,1372,888,1370,883,1490,840"/>
+<area shape="rect" id="Node000007" href="$Domain_8hpp.html" title="Header for Domain module." alt="" coords="3048,893,3256,918"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="1660,822,1901,835,3048,896,3048,901,1901,840,1659,827"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="3034,914,1423,983,1423,978,3034,909"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="3265,243,3300,248,3377,253,3473,255,3698,254,3812,256,3920,262,4013,275,4053,284,4086,296,4134,316,4173,337,4188,350,4200,367,4207,387,4209,413,4209,724,4202,766,4183,796,4152,818,4112,840,4063,853,3979,865,3743,884,3478,897,3256,904,3256,899,3477,891,3743,878,3978,860,4062,848,4110,835,4149,814,4179,792,4197,764,4204,723,4204,413,4202,388,4195,369,4184,354,4170,341,4132,321,4084,301,4051,289,4012,280,3919,268,3812,261,3698,259,3473,260,3377,259,3300,253,3265,248"/>
+<area shape="rect" id="Node000009" href="$BallShape_8hpp.html" title="Implementation of class for ball shaped domains." alt="" coords="2677,299,2856,339"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="3068,249,2847,301,2846,296,3067,244"/>
+<area shape="rect" id="Node000011" href="$BoxShape_8hpp.html" title="Implementation of class for box shaped domains." alt="" coords="3784,497,3963,537"/>
+<area shape="poly" id="edge15_Node000008_Node000011" title=" " alt="" coords="3268,243,3300,248,3375,255,3471,259,3693,272,3803,286,3902,307,3944,322,3981,339,4010,360,4032,385,4039,400,4042,414,4039,428,4032,443,4016,462,3997,477,3955,499,3953,494,3995,473,4013,458,4027,440,4034,426,4036,414,4034,402,4027,388,4007,364,3978,344,3942,327,3900,312,3802,291,3693,277,3470,264,3374,260,3300,253,3267,248"/>
+<area shape="rect" id="Node000014" href="$NURBSShape_8hpp.html" title="Implementation of NURBSShape class." alt="" coords="3868,797,4068,837"/>
+<area shape="poly" id="edge32_Node000008_Node000014" title=" " alt="" coords="3267,243,3300,248,3392,254,3515,257,3655,259,3800,266,3936,280,3997,292,4050,307,4095,326,4129,349,4151,378,4159,412,4159,621,4154,652,4143,681,4126,708,4104,732,4055,771,4009,800,4006,795,4052,767,4101,728,4121,705,4138,679,4149,651,4153,620,4153,413,4146,380,4125,353,4092,330,4048,312,3996,297,3935,286,3800,271,3655,265,3515,262,3392,260,3300,253,3266,248"/>
+<area shape="rect" id="Node000019" href="$GridFill_8hpp.html" title="Implementation of GridFill engine." alt="" coords="2880,299,3040,339"/>
+<area shape="poly" id="edge30_Node000008_Node000019" title=" " alt="" coords="3108,252,3002,301,2999,296,3106,247"/>
+<area shape="rect" id="Node000021" href="$PolygonShape_8hpp.html" title="Implementation of PolygonShape class." alt="" coords="1866,299,2073,339"/>
+<area shape="poly" id="edge33_Node000008_Node000021" title=" " alt="" coords="3019,233,2603,257,2348,277,2092,301,2073,304,2073,298,2092,296,2347,271,2602,252,3018,228"/>
+<area shape="rect" id="Node000024" href="$PolyhedronShape_8hpp_source.html" title=" " alt="" coords="2105,599,2332,639"/>
+<area shape="poly" id="edge47_Node000008_Node000024" title=" " alt="" coords="3019,227,2777,230,2500,241,2372,250,2263,263,2182,280,2155,290,2139,301,2133,309,2131,318,2140,337,2160,355,2182,363,2206,363,2232,360,2257,357,2283,357,2307,365,2329,385,2336,413,2339,459,2336,508,2326,545,2314,563,2298,578,2264,602,2261,597,2295,574,2310,560,2322,543,2331,507,2334,459,2331,413,2324,388,2304,370,2282,363,2258,362,2232,365,2207,369,2181,368,2157,360,2135,340,2126,319,2128,307,2135,297,2153,285,2180,275,2262,258,2372,245,2500,236,2777,225,3019,222"/>
+<area shape="rect" id="Node000031" href="$RotatedShape_8hpp.html" title="Implementation of rotated domain shapes." alt="" coords="3331,299,3536,339"/>
+<area shape="poly" id="edge48_Node000008_Node000031" title=" " alt="" coords="3229,245,3379,296,3377,301,3227,250"/>
+<area shape="rect" id="Node000033" href="$TranslatedShape_8hpp.html" title="Implementation of translated domain shapes." alt="" coords="3224,497,3445,537"/>
+<area shape="poly" id="edge72_Node000008_Node000033" title=" " alt="" coords="3217,248,3246,269,3270,297,3280,317,3285,335,3286,368,3284,401,3292,440,3306,470,3322,495,3318,498,3301,472,3287,442,3279,401,3281,368,3280,336,3275,319,3266,300,3242,273,3214,253"/>
+<area shape="rect" id="Node000037" href="$ShapeDifference_8hpp.html" title="Implementation of ShapeDifference class." alt="" coords="3611,299,3832,339"/>
+<area shape="poly" id="edge62_Node000008_Node000037" title=" " alt="" coords="3261,243,3288,248,3611,299,3610,305,3288,253,3260,248"/>
+<area shape="rect" id="Node000039" href="$ShapeUnion_8hpp.html" title="Implementation of ShapeUnion class." alt="" coords="3064,299,3256,339"/>
+<area shape="poly" id="edge67_Node000008_Node000039" title=" " alt="" coords="3154,257,3155,299,3150,299,3149,257"/>
+<area shape="rect" id="Node000041" href="$computeShapes_8hpp.html" title="Implementations of shape function computation utilities." alt="" coords="988,299,1212,339"/>
+<area shape="poly" id="edge73_Node000008_Node000041" title=" " alt="" coords="3019,231,2301,256,1826,276,1344,301,1212,311,1212,305,1344,296,1826,271,2301,251,3019,226"/>
+<area shape="rect" id="Node000043" href="$DomainDiscretization_8cpp.html" title="Instantiations for common domain discretizations." alt="" coords="2149,306,2422,331"/>
+<area shape="poly" id="edge76_Node000008_Node000043" title=" " alt="" coords="3019,241,2435,301,2374,309,2373,303,2434,296,3018,235"/>
+<area shape="rect" id="Node000044" href="$FindClosest_8cpp.html" title="Implementation of FindClosest." alt="" coords="2446,306,2653,331"/>
+<area shape="poly" id="edge77_Node000008_Node000044" title=" " alt="" coords="3019,248,2666,301,2620,309,2619,303,2665,296,3018,243"/>
+<area shape="poly" id="edge13_Node000009_Node000007" title=" " alt="" coords="2733,350,2716,368,2702,388,2687,421,2680,449,2677,515,2677,723,2680,738,2689,753,2721,781,2770,806,2830,829,2964,866,3083,890,3082,895,2962,871,2828,834,2768,811,2718,785,2685,756,2675,740,2672,724,2672,515,2674,448,2682,419,2698,385,2712,364,2729,346"/>
+<area shape="rect" id="Node000010" href="$BallShape_8cpp.html" title="Instantiation of class for ball shaped domains." alt="" coords="2440,401,2637,427"/>
+<area shape="poly" id="edge14_Node000009_Node000010" title=" " alt="" coords="2709,346,2568,404,2566,399,2707,341"/>
+<area shape="poly" id="edge16_Node000011_Node000007" title=" " alt="" coords="3788,543,3772,547,3713,554,3663,555,3641,557,3619,563,3597,575,3574,594,3552,623,3543,653,3542,684,3545,715,3548,747,3546,778,3536,809,3512,839,3494,852,3470,862,3405,879,3330,892,3256,900,3256,894,3329,886,3404,874,3468,857,3492,847,3509,835,3531,807,3541,777,3542,747,3539,716,3536,684,3538,652,3547,621,3570,590,3594,570,3617,558,3640,552,3663,549,3712,549,3772,541,3787,537"/>
+<area shape="rect" id="Node000012" href="$NURBSPatch__fwd_8hpp.html" title="Declaration of the NURBS patch class." alt="" coords="3583,592,3750,647"/>
+<area shape="poly" id="edge17_Node000011_Node000012" title=" " alt="" coords="3823,545,3722,594,3719,590,3821,540"/>
+<area shape="poly" id="edge28_Node000011_Node000014" title=" " alt="" coords="3935,541,3964,562,3986,591,3997,618,4003,647,4002,705,3991,758,3978,798,3973,796,3986,757,3997,705,3998,647,3992,619,3982,593,3960,566,3932,546"/>
+<area shape="rect" id="Node000018" href="$BoxShape_8cpp.html" title="Instantiation of class for box shaped domains." alt="" coords="3775,607,3972,632"/>
+<area shape="poly" id="edge29_Node000011_Node000018" title=" " alt="" coords="3876,550,3876,606,3871,606,3871,550"/>
+<area shape="poly" id="edge18_Node000012_Node000006" title=" " alt="" coords="3570,637,3467,649,2926,704,2397,752,1646,812,1646,807,2397,746,2925,699,3466,644,3569,631"/>
+<area shape="rect" id="Node000013" href="$NURBSPatch_8hpp.html" title="Implementation of the NURBS patch class." alt="" coords="3777,702,3972,742"/>
+<area shape="poly" id="edge19_Node000012_Node000013" title=" " alt="" coords="3734,650,3836,699,3834,704,3732,655"/>
+<area shape="rect" id="Node000017" href="$NURBSShape__fwd_8hpp.html" title="Declaration of NURBSShape class." alt="" coords="3581,695,3753,749"/>
+<area shape="poly" id="edge25_Node000012_Node000017" title=" " alt="" coords="3669,660,3669,695,3664,695,3664,660"/>
+<area shape="poly" id="edge20_Node000013_Node000007" title=" " alt="" coords="3788,748,3692,775,3620,800,3604,810,3592,820,3580,830,3562,840,3485,866,3404,884,3326,896,3257,902,3256,897,3326,890,3403,879,3483,861,3560,835,3577,826,3589,816,3600,805,3618,795,3690,770,3786,743"/>
+<area shape="poly" id="edge21_Node000013_Node000014" title=" " alt="" coords="3905,750,3951,795,3947,799,3901,754"/>
+<area shape="rect" id="Node000016" href="$NURBSPatch_8cpp.html" title="Instantiations of commonly used NURBSPatch instances." alt="" coords="3631,805,3844,830"/>
+<area shape="poly" id="edge24_Node000013_Node000016" title=" " alt="" coords="3837,752,3756,807,3753,802,3834,748"/>
+<area shape="poly" id="edge22_Node000014_Node000007" title=" " alt="" coords="3854,840,3523,876,3256,899,3256,894,3523,871,3854,835"/>
+<area shape="rect" id="Node000015" href="$NURBSShape_8cpp.html" title="Instantiations of commonly used NURBSShape instances." alt="" coords="3859,893,4077,918"/>
+<area shape="poly" id="edge23_Node000014_Node000015" title=" " alt="" coords="3971,851,3971,892,3965,892,3965,851"/>
+<area shape="poly" id="edge26_Node000017_Node000006" title=" " alt="" coords="3567,730,1647,815,1646,809,3567,725"/>
+<area shape="poly" id="edge27_Node000017_Node000014" title=" " alt="" coords="3765,751,3908,795,3906,800,3764,756"/>
+<area shape="rect" id="Node000020" href="$GridFill_8cpp.html" title="Instantiations of commonly used GridFill instances." alt="" coords="2712,401,2891,427"/>
+<area shape="poly" id="edge31_Node000019_Node000020" title=" " alt="" coords="2917,348,2822,404,2820,399,2915,343"/>
+<area shape="poly" id="edge34_Node000021_Node000007" title=" " alt="" coords="2087,331,2225,353,2285,368,2328,384,2370,410,2405,437,2436,466,2461,495,2503,554,2538,615,2573,675,2615,733,2641,760,2672,786,2708,811,2750,835,2825,864,2903,884,2979,895,3048,901,3047,906,2978,900,2902,889,2823,869,2748,840,2705,816,2669,791,2638,764,2611,736,2568,678,2533,618,2499,557,2457,498,2432,469,2402,441,2367,415,2325,389,2284,373,2224,359,2086,336"/>
+<area shape="rect" id="Node000022" href="$PolytopeShape_8hpp_source.html" title=" " alt="" coords="2104,394,2315,434"/>
+<area shape="poly" id="edge35_Node000021_Node000022" title=" " alt="" coords="2032,341,2162,391,2160,396,2030,346"/>
+<area shape="rect" id="Node000027" href="$discretization__helpers__advanced_8hpp.html" title="Contains helpers for discretizing various geometric objects that need more advanced parts of Medusa t..." alt="" coords="1905,387,2079,441"/>
+<area shape="poly" id="edge41_Node000021_Node000027" title=" " alt="" coords="1980,351,1988,386,1983,387,1975,352"/>
+<area shape="rect" id="Node000030" href="$PolygonShape_8cpp.html" title="Instantiation of PolygonShape class." alt="" coords="1656,401,1880,427"/>
+<area shape="poly" id="edge46_Node000021_Node000030" title=" " alt="" coords="1917,347,1794,404,1792,399,1915,342"/>
+<area shape="rect" id="Node000023" href="$PolyhedronShape__fwd_8hpp.html" title="Implementation of shape representing polyhedrons." alt="" coords="2113,489,2311,544"/>
+<area shape="poly" id="edge36_Node000022_Node000023" title=" " alt="" coords="2213,448,2214,489,2209,489,2208,448"/>
+<area shape="rect" id="Node000025" href="$PolyhedronShape_8cpp.html" title="Instantiation of PolyhedronShape class." alt="" coords="2023,709,2268,735"/>
+<area shape="poly" id="edge39_Node000022_Node000025" title=" " alt="" coords="2155,443,2126,464,2104,491,2085,531,2079,566,2083,602,2096,646,2114,681,2136,707,2131,711,2109,683,2091,648,2078,603,2074,566,2080,529,2099,488,2122,460,2151,439"/>
+<area shape="rect" id="Node000026" href="$PolytopeShape_8cpp.html" title="Instantiation of PolytopeShape class." alt="" coords="1801,504,2031,529"/>
+<area shape="poly" id="edge40_Node000022_Node000026" title=" " alt="" coords="2143,441,1950,506,1949,501,2141,436"/>
+<area shape="poly" id="edge37_Node000023_Node000024" title=" " alt="" coords="2217,558,2220,599,2215,599,2212,558"/>
+<area shape="poly" id="edge38_Node000024_Node000025" title=" " alt="" coords="2199,652,2156,710,2152,707,2195,649"/>
+<area shape="poly" id="edge42_Node000027_Node000023" title=" " alt="" coords="2063,445,2156,487,2154,492,2061,449"/>
+<area shape="poly" id="edge43_Node000027_Node000028" title=" " alt="" coords="1901,448,1746,499,1744,494,1899,443"/>
+<area shape="poly" id="edge44_Node000028_Node000007" title=" " alt="" coords="1730,542,1799,590,1858,636,1902,675,1947,711,2012,747,2102,785,2176,806,2351,835,2543,862,2735,880,2909,892,3048,898,3047,904,2909,897,2734,885,2542,867,2350,840,2175,811,2101,790,2009,752,1945,715,1898,679,1855,640,1796,594,1727,547"/>
+<area shape="rect" id="Node000029" href="$STLShape_8cpp.html" title="Instantiation of class for STL domains." alt="" coords="1591,607,1785,632"/>
+<area shape="poly" id="edge45_Node000028_Node000029" title=" " alt="" coords="1691,550,1691,606,1685,606,1685,550"/>
+<area shape="poly" id="edge49_Node000031_Node000007" title=" " alt="" coords="3365,346,3327,365,3291,389,3264,413,3247,434,3214,491,3170,580,3157,619,3149,656,3144,736,3148,837,3153,892,3148,892,3143,838,3139,736,3144,655,3152,617,3165,578,3210,488,3242,431,3261,409,3288,385,3324,360,3363,341"/>
+<area shape="rect" id="Node000032" href="$DomainShape_8hpp.html" title="Implementations of base class for domain shapes." alt="" coords="3548,394,3753,434"/>
+<area shape="poly" id="edge50_Node000031_Node000032" title=" " alt="" coords="3483,342,3600,391,3598,396,3481,347"/>
+<area shape="rect" id="Node000036" href="$RotatedShape_8cpp.html" title="Instantiation of class for rotated domains." alt="" coords="3301,401,3523,427"/>
+<area shape="poly" id="edge61_Node000031_Node000036" title=" " alt="" coords="3429,353,3417,402,3412,400,3423,351"/>
+<area shape="poly" id="edge51_Node000032_Node000007" title=" " alt="" coords="3589,442,3556,463,3527,491,3508,522,3498,550,3495,580,3495,618,3495,724,3488,762,3471,795,3445,822,3413,844,3376,862,3336,877,3256,895,3255,890,3334,871,3373,857,3410,840,3442,818,3467,791,3483,760,3489,723,3489,618,3490,579,3493,549,3503,520,3523,488,3552,459,3586,438"/>
+<area shape="poly" id="edge53_Node000032_Node000008" title=" " alt="" coords="3630,384,3595,340,3572,319,3547,301,3260,246,3261,241,3549,296,3575,315,3599,336,3634,381"/>
+<area shape="poly" id="edge52_Node000032_Node000011" title=" " alt="" coords="3706,437,3833,494,3831,499,3704,442"/>
+<area shape="poly" id="edge54_Node000032_Node000023" title=" " alt="" coords="3564,439,3536,444,3362,465,3184,482,2836,505,2532,515,2311,518,2311,513,2532,510,2836,499,3184,477,3362,460,3536,439,3563,434"/>
+<area shape="poly" id="edge55_Node000032_Node000031" title=" " alt="" coords="3601,391,3484,341,3486,336,3603,386"/>
+<area shape="poly" id="edge56_Node000032_Node000033" title=" " alt="" coords="3572,440,3388,499,3386,494,3571,435"/>
+<area shape="rect" id="Node000035" href="$DomainShape_8cpp.html" title="Explicit instantiations for common parameters." alt="" coords="3537,504,3759,529"/>
+<area shape="poly" id="edge60_Node000032_Node000035" title=" " alt="" coords="3652,448,3651,504,3646,503,3647,448"/>
+<area shape="poly" id="edge57_Node000033_Node000007" title=" " alt="" coords="3267,545,3234,566,3206,594,3184,633,3168,675,3158,719,3152,763,3150,841,3153,892,3148,893,3145,841,3147,763,3153,718,3163,674,3179,630,3202,590,3230,561,3264,540"/>
+<area shape="poly" id="edge58_Node000033_Node000032" title=" " alt="" coords="3413,490,3598,431,3600,437,3415,495"/>
+<area shape="rect" id="Node000034" href="$TranslatedShape_8cpp.html" title="Instantiation of class for translated domains." alt="" coords="3215,607,3454,632"/>
+<area shape="poly" id="edge59_Node000033_Node000034" title=" " alt="" coords="3337,550,3337,606,3332,606,3332,550"/>
+<area shape="poly" id="edge63_Node000037_Node000007" title=" " alt="" coords="3846,321,3893,329,3941,341,3988,359,4031,384,4066,412,4090,439,4104,472,4108,515,4108,723,4110,787,4103,814,4082,839,4064,849,4037,858,3958,872,3853,884,3731,892,3473,902,3256,906,3256,901,3473,897,3731,887,3853,878,3957,867,4036,853,4062,844,4078,835,4098,811,4105,787,4103,723,4103,515,4098,473,4085,442,4062,416,4028,389,3986,364,3939,346,3892,334,3845,327"/>
+<area shape="poly" id="edge64_Node000037_Node000008" title=" " alt="" coords="3597,300,3312,253,3270,246,3271,241,3312,248,3598,294"/>
+<area shape="poly" id="edge65_Node000037_Node000032" title=" " alt="" coords="3701,351,3667,396,3663,392,3697,348"/>
+<area shape="rect" id="Node000038" href="$ShapeDifference_8cpp.html" title="Instantiation of ShapeDifference class." alt="" coords="3778,401,4017,427"/>
+<area shape="poly" id="edge66_Node000037_Node000038" title=" " alt="" coords="3770,343,3877,399,3874,404,3768,347"/>
+<area shape="poly" id="edge68_Node000039_Node000007" title=" " alt="" coords="3061,345,2996,365,2971,377,2955,389,2935,418,2929,446,2931,515,2931,723,2936,756,2950,785,2972,811,2998,833,3059,868,3114,890,3113,895,3056,873,2995,837,2968,814,2946,788,2931,758,2925,724,2925,515,2923,445,2931,416,2951,385,2969,372,2994,360,3059,340"/>
+<area shape="poly" id="edge69_Node000039_Node000008" title=" " alt="" coords="3166,285,3165,243,3170,243,3171,285"/>
+<area shape="poly" id="edge70_Node000039_Node000032" title=" " alt="" coords="3270,335,3537,384,3571,391,3570,397,3535,389,3269,341"/>
+<area shape="rect" id="Node000040" href="$ShapeUnion_8cpp.html" title="Instantiation of ShapeUnion class." alt="" coords="2965,401,3176,427"/>
+<area shape="poly" id="edge71_Node000039_Node000040" title=" " alt="" coords="3134,350,3084,403,3080,399,3131,347"/>
+<area shape="poly" id="edge74_Node000041_Node000002" title=" " alt="" coords="1037,346,876,404,875,399,1035,341"/>
+<area shape="rect" id="Node000042" href="$computeShapes_8cpp.html" title="Explicit instantiations for common parameters." alt="" coords="979,401,1221,427"/>
+<area shape="poly" id="edge75_Node000041_Node000042" title=" " alt="" coords="1103,353,1103,401,1097,401,1097,353"/>
+<area shape="poly" id="edge79_Node000045_Node000006" title=" " alt="" coords="1393,260,1368,278,1346,300,1327,328,1317,352,1313,379,1312,413,1312,620,1317,653,1330,683,1351,709,1376,732,1436,769,1495,795,1493,800,1433,774,1373,737,1347,713,1326,686,1312,655,1307,621,1307,413,1308,378,1312,351,1323,325,1342,297,1364,274,1390,256"/>
+<area shape="rect" id="Node000046" href="$HalfLinksRefine_8hpp.html" title="Implementation of the half&#45;link refinement algorithm." alt="" coords="1356,299,1572,339"/>
+<area shape="poly" id="edge80_Node000045_Node000046" title=" " alt="" coords="1467,264,1467,299,1461,299,1461,264"/>
+<area shape="rect" id="Node000047" href="$HalfLinksRefine_8cpp.html" title="Explicit instantiations for common parameters." alt="" coords="1347,401,1581,427"/>
+<area shape="poly" id="edge81_Node000046_Node000047" title=" " alt="" coords="1467,353,1467,401,1461,401,1461,353"/>
+<area shape="poly" id="edge85_Node000049_Node000002" title=" " alt="" coords="314,336,520,358,609,367,722,384,796,399,795,404,721,389,608,373,519,363,313,341"/>
+<area shape="rect" id="Node000050" href="$RaggedShapeStorage_8cpp.html" title="Instantiations of shape storage for shapes of different sizes." alt="" coords="5,394,205,434"/>
+<area shape="poly" id="edge86_Node000049_Node000050" title=" " alt="" coords="152,351,121,395,116,392,148,348"/>
+<area shape="poly" id="edge92_Node000051_Node000049" title=" " alt="" coords="291,161,187,300,183,297,287,158"/>
+<area shape="rect" id="Node000052" href="$ExplicitOperators__fwd_8hpp.html" title="Explicit operators declarations." alt="" coords="333,196,537,251"/>
+<area shape="poly" id="edge88_Node000051_Node000052" title=" " alt="" coords="360,155,406,194,402,198,357,159"/>
+<area shape="rect" id="Node000053" href="$ExplicitOperators_8hpp.html" title="Explicit operators implementation." alt="" coords="324,299,556,339"/>
+<area shape="poly" id="edge89_Node000052_Node000053" title=" " alt="" coords="440,264,442,298,436,299,434,265"/>
+<area shape="poly" id="edge90_Node000053_Node000002" title=" " alt="" coords="536,339,795,399,794,404,534,344"/>
+<area shape="rect" id="Node000054" href="$ExplicitOperators_8cpp.html" title="Explicit operators implementation." alt="" coords="229,401,480,427"/>
+<area shape="poly" id="edge91_Node000053_Node000054" title=" " alt="" coords="416,350,367,403,363,399,412,347"/>
+<area shape="poly" id="edge94_Node000055_Node000052" title=" " alt="" coords="529,158,473,198,470,194,526,154"/>
+<area shape="rect" id="Node000056" href="$UniformShapeStorage_8hpp.html" title="Implementation of shape storage for uniformly long shapes." alt="" coords="586,299,849,339"/>
+<area shape="poly" id="edge95_Node000055_Node000056" title=" " alt="" coords="577,161,583,206,591,229,602,249,631,277,665,296,662,301,627,281,598,252,586,231,578,207,571,162"/>
+<area shape="poly" id="edge96_Node000056_Node000002" title=" " alt="" coords="755,345,830,399,827,403,752,349"/>
+<area shape="rect" id="Node000057" href="$UniformShapeStorage_8cpp.html" title="Instantiations of shape storage for uniform shapes." alt="" coords="505,394,709,434"/>
+<area shape="poly" id="edge97_Node000056_Node000057" title=" " alt="" coords="686,350,631,396,627,392,683,346"/>
+<area shape="poly" id="edge99_Node000058_Node000041" title=" " alt="" coords="1095,162,1102,298,1096,299,1090,162"/>
+<area shape="poly" id="edge104_Node000059_Node000056" title=" " alt="" coords="833,152,841,175,846,201,846,227,837,252,811,281,778,301,775,296,807,277,832,249,840,226,841,201,836,177,828,154"/>
+<area shape="rect" id="Node000060" href="$ShapeStorage_8hpp.html" title="Implementations of the ShapeStorage interface." alt="" coords="612,203,823,243"/>
+<area shape="poly" id="edge101_Node000059_Node000060" title=" " alt="" coords="789,153,737,205,734,201,785,149"/>
+<area shape="poly" id="edge102_Node000060_Node000049" title=" " alt="" coords="599,247,281,301,280,296,598,242"/>
+<area shape="poly" id="edge103_Node000060_Node000056" title=" " alt="" coords="720,257,720,299,715,299,715,257"/>
+</map>

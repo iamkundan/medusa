@@ -1,0 +1,519 @@
+\doxysection{test/io/\+HDF\+\_\+test.\+cpp}
+\hypertarget{test_2io_2HDF_test_8cpp-example}{}\label{test_2io_2HDF_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF_8hpp}{medusa/bits/io/HDF.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF__Eigen_8hpp}{medusa/bits/io/HDF\_Eigen.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Timer_8hpp}{medusa/bits/utils/Timer.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/Sparse>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{XML_8hpp}{medusa/bits/io/XML.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ HDF5Read)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ open\ file}}
+\DoxyCodeLine{\ \ \ \ std::string\ file\_name\ =\ \textcolor{stringliteral}{"{}test/testdata/test\_hdf5\_read.h5"{}};}
+\DoxyCodeLine{\ \ \ \ HDF\ reader(file\_name,\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}{HDF::READONLY}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(reader.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(reader.isGroupOpen());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ read\ parameters\ in\ /what}}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/group1"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/group1"{}},\ reader.groupName());}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}how"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/group1/how"{}},\ reader.groupName());}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/"{}},\ reader.groupName());}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}group1"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/group1"{}},\ reader.groupName());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ reader.close();}
+\DoxyCodeLine{\ \ \ \ reader.open(file\_name,\ \textcolor{stringliteral}{"{}/what"{}},\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}{HDF::READONLY}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/what"{}},\ reader.groupName());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(file\_name,\ reader.filename());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::string\ read\_str\ =\ reader.readStringAttribute(\textcolor{stringliteral}{"{}object"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::string(\textcolor{stringliteral}{"{}PVOL\(\backslash\)0"{}},\ 5),\ read\_str);}
+\DoxyCodeLine{\ \ \ \ std::string\ date\_str\ =\ reader.readNullTerminatedStringAttribute(\textcolor{stringliteral}{"{}date"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}20150501"{}},\ date\_str);}
+\DoxyCodeLine{\ \ \ \ std::string\ time\_str\ =\ reader.readNullTerminatedStringAttribute(\textcolor{stringliteral}{"{}time"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}000000"{}},\ time\_str);}
+\DoxyCodeLine{\ \ \ \ std::string\ source\_str\ =\ reader.readNullTerminatedStringAttribute(\textcolor{stringliteral}{"{}source"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}WMO:14024,RAD:SI41,PLC:Lisca,NOD:silis"{}},\ source\_str);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/group1/data1"{}});}
+\DoxyCodeLine{\ \ \ \ std::vector<std::string>\ groups\ =\ \{\textcolor{stringliteral}{"{}how"{}},\ \textcolor{stringliteral}{"{}what"{}}\},\ datasets\ =\ \{\textcolor{stringliteral}{"{}data"{}}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(groups,\ reader.groups());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(datasets,\ reader.datasets());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/where"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ height\ =\ reader.readDoubleAttribute(\textcolor{stringliteral}{"{}height"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(950.0,\ height);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ lat\ =\ reader.readDoubleAttribute(\textcolor{stringliteral}{"{}lat"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(46.06776997447014,\ lat);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ lon\ =\ reader.readDoubleAttribute(\textcolor{stringliteral}{"{}lon"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(15.28489999473095,\ lon);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/group1/how"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avgpwr\ =\ reader.readDoubleAttribute(\textcolor{stringliteral}{"{}avgpwr"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(135.0,\ avgpwr);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/group2/how"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avgpwr2\ =\ reader.readDoubleAttribute(\textcolor{stringliteral}{"{}avgpwr"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(135.0,\ avgpwr2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/group1/data1/what"{}});}
+\DoxyCodeLine{\ \ \ \ std::string\ quantity\ =\ reader.readNullTerminatedStringAttribute(\textcolor{stringliteral}{"{}quantity"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}DBZH"{}},\ quantity);}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/group1/data2/what"{}});}
+\DoxyCodeLine{\ \ \ \ quantity\ =\ reader.readNullTerminatedStringAttribute(\textcolor{stringliteral}{"{}quantity"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}VRAD"{}},\ quantity);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }HDF5WriteTest\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ HDF\ file;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ file\_name[];}
+\DoxyCodeLine{\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ file.openFile(file\_name,\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864ae870386227e0ea1075b5bf20f0ec0e78}{HDF::DESTROY}});}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ TearDown()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ file.closeGroup();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ file.closeFile();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::remove(file\_name);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ HDF5WriteTest::file\_name[]\ =\ \textcolor{stringliteral}{"{}test/testdata/test\_hdf5\_write.h5"{}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Reopen)\ \{}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test/test2/test3"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ attr\ =\ 1.2;}
+\DoxyCodeLine{\ \ \ \ file.writeDoubleAttribute(\textcolor{stringliteral}{"{}a"{}},\ attr);}
+\DoxyCodeLine{\ \ \ \ file.close();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isGroupOpen());}
+\DoxyCodeLine{\ \ \ \ file.reopenFile();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(file.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isGroupOpen());}
+\DoxyCodeLine{\ \ \ \ file.reopenGroup();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(file.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(file.isGroupOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(attr,\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}a"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Attribute)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ root\ folder}}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\ \ \ \ file.writeIntAttribute(\textcolor{stringliteral}{"{}int\_attribute"{}},\ 5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5,\ file.readIntAttribute(\textcolor{stringliteral}{"{}int\_attribute"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ordinary\ folder}}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ INT}}
+\DoxyCodeLine{\ \ \ \ file.writeIntAttribute(\textcolor{stringliteral}{"{}int\_attribute"{}},\ -\/10);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/10,\ file.readIntAttribute(\textcolor{stringliteral}{"{}int\_attribute"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ folder\ within\ existing\ folder}}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test/test2"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ DOUBLE}}
+\DoxyCodeLine{\ \ \ \ file.writeDoubleAttribute(\textcolor{stringliteral}{"{}double\_attribute"{}},\ 5.1);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(5.1,\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}double\_attribute"{}}));}
+\DoxyCodeLine{\ \ \ \ file.writeDoubleAttribute(\textcolor{stringliteral}{"{}double\_attribute"{}},\ 10.1245,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(10.1245,\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}double\_attribute"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ new\ double\ folder}}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test1/test1"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ FLOAT}}
+\DoxyCodeLine{\ \ \ \ file.writeFloatAttribute(\textcolor{stringliteral}{"{}float\_attribute"{}},\ 5.1f);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FLOAT\_EQ(5.1f,\ file.readFloatAttribute(\textcolor{stringliteral}{"{}float\_attribute"{}}));}
+\DoxyCodeLine{\ \ \ \ file.writeFloatAttribute(\textcolor{stringliteral}{"{}float\_attribute"{}},\ 10.1245f,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FLOAT\_EQ(10.1245f,\ file.readFloatAttribute(\textcolor{stringliteral}{"{}float\_attribute"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ new\ double\ folder}}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test1/test1"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ BOOL}}
+\DoxyCodeLine{\ \ \ \ file.writeBoolAttribute(\textcolor{stringliteral}{"{}bool\_attribute"{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(file.readBoolAttribute(\textcolor{stringliteral}{"{}bool\_attribute"{}}));}
+\DoxyCodeLine{\ \ \ \ file.writeBoolAttribute(\textcolor{stringliteral}{"{}bool\_attribute"{}},\ \textcolor{keyword}{false},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.readBoolAttribute(\textcolor{stringliteral}{"{}bool\_attribute"{}}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ existing\ folder}}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test/test2"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ STRING}}
+\DoxyCodeLine{\ \ \ \ std::string\ s\ =\ \textcolor{stringliteral}{"{}I\ have\ a\ null\ terminator\ in\ the\ middle"{}};}
+\DoxyCodeLine{\ \ \ \ s[8]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\ \ \ \ file.writeStringAttribute(\textcolor{stringliteral}{"{}tricky\_string"{}},\ s);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(s,\ file.readStringAttribute(\textcolor{stringliteral}{"{}tricky\_string"{}}));}
+\DoxyCodeLine{\ \ \ \ file.writeStringAttribute(\textcolor{stringliteral}{"{}string\_attribute"{}},\ \textcolor{stringliteral}{"{}Test\ string"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}Test\ string"{}},\ file.readStringAttribute(\textcolor{stringliteral}{"{}string\_attribute"{}}));}
+\DoxyCodeLine{\ \ \ \ file.writeStringAttribute(\textcolor{stringliteral}{"{}string\_attribute"{}},\ \textcolor{stringliteral}{"{}Second\ test\ string\ 1234."{}},\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}Second\ test\ string\ 1234."{}},\ file.readStringAttribute(\textcolor{stringliteral}{"{}string\_attribute"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ DoubleArray)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ ret,\ data\ =\ \{1.0,\ 10.234,\ 2.4\};}
+\DoxyCodeLine{\ \ \ \ file.writeDoubleArray(\textcolor{stringliteral}{"{}vector\_doubles"{}},\ data);}
+\DoxyCodeLine{\ \ \ \ ret\ =\ file.readDoubleArray(\textcolor{stringliteral}{"{}vector\_doubles"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data.size(),\ ret.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ ret.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(data[i],\ ret[i]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ data\ =\ \{5.0,\ 1234.234,\ 556\};}
+\DoxyCodeLine{\ \ \ \ file.writeDoubleArray(\textcolor{stringliteral}{"{}vector\_doubles"{}},\ data,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ ret\ =\ file.readDoubleArray(\textcolor{stringliteral}{"{}vector\_doubles"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data.size(),\ ret.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ ret.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(data[i],\ ret[i]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ DoubleArray2D)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ data2d\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.12,\ 3.14157,\ 12.7\},\ \{2.12,\ 2.6,\ 18.65\},\ \{3.12,\ 4.6,\ 99.65\},\ \{5,\ 5,\ 5\}\};}
+\DoxyCodeLine{\ \ \ \ file.writeDouble2DArray(\textcolor{stringliteral}{"{}vec\_vec\_double"{}},\ data2d);}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ ret2d\ =\ file.readDouble2DArray(\textcolor{stringliteral}{"{}vec\_vec\_double"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data2d.size(),\ ret2d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data2d.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(data2d[i].size(),\ ret2d[i].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ data2d[i].size();\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(data2d[i][j],\ ret2d[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ DoubleArray3D)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<double>>>\ data3d\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{0.12,\ 3.14157,\ 12.7\},\ \{2.12,\ 2.6,\ 18.65\},\ \{3.12,\ 4.6,\ 99.65\},\ \{5,\ 5,\ 5\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{-\/0.12,\ -\/3.14157,\ -\/12.7\},\ \{-\/2.12,\ -\/2.6,\ -\/18.65\},\ \{-\/3.12,\ -\/4.6,\ -\/99.65\},\ \{-\/5,\ -\/5,\ -\/5\}\}\};}
+\DoxyCodeLine{\ \ \ \ file.writeDouble3DArray(\textcolor{stringliteral}{"{}v3\_double"{}},\ data3d);}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<double>>>\ ret3d\ =\ file.readDouble3DArray(\textcolor{stringliteral}{"{}v3\_double"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data3d.size(),\ ret3d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data3d.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(data3d[i].size(),\ ret3d[i].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ data3d[i].size();\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(data3d[i][j].size(),\ ret3d[i][j].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ data3d[i][j].size();\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(data3d[i][j][k],\ ret3d[i][j][k]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ FloatArray)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<float>\ ret;}
+\DoxyCodeLine{\ \ \ \ std::vector<float>\ data\ =\ \{1.0,\ 10.234,\ 2.4\};}
+\DoxyCodeLine{\ \ \ \ file.writeFloatArray(\textcolor{stringliteral}{"{}vector\_floats"{}},\ data);}
+\DoxyCodeLine{\ \ \ \ ret\ =\ file.readFloatArray(\textcolor{stringliteral}{"{}vector\_floats"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data.size(),\ ret.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ ret.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(data[i],\ ret[i]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ data\ =\ \{5.0,\ 1234.234,\ 556\};}
+\DoxyCodeLine{\ \ \ \ file.writeFloatArray(\textcolor{stringliteral}{"{}vector\_floats"{}},\ data,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ ret\ =\ file.readFloatArray(\textcolor{stringliteral}{"{}vector\_floats"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data.size(),\ ret.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ ret.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(data[i],\ ret[i]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ FloatArray2D)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ data2d\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.12,\ 3.14157,\ 12.7\},\ \{2.12,\ 2.6,\ 18.65\},\ \{3.12,\ 4.6,\ 99.65\},\ \{5,\ 5,\ 5\}\};}
+\DoxyCodeLine{\ \ \ \ file.writeFloat2DArray(\textcolor{stringliteral}{"{}vec\_vec\_float"{}},\ data2d);}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ ret2d\ =\ file.readFloat2DArray(\textcolor{stringliteral}{"{}vec\_vec\_float"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data2d.size(),\ ret2d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data2d.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(data2d[i].size(),\ ret2d[i].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ data2d[i].size();\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(data2d[i][j],\ ret2d[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ FloatArray3D)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<float>>>\ data3d\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{0.12,\ 3.14157,\ 12.7\},\ \{2.12,\ 2.6,\ 18.65\},\ \{3.12,\ 4.6,\ 99.65\},\ \{5,\ 5,\ 5\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{-\/0.12,\ -\/3.14157,\ -\/12.7\},\ \{-\/2.12,\ -\/2.6,\ -\/18.65\},\ \{-\/3.12,\ -\/4.6,\ -\/99.65\},\ \{-\/5,\ -\/5,\ -\/5\}\}\};}
+\DoxyCodeLine{\ \ \ \ file.writeFloat3DArray(\textcolor{stringliteral}{"{}v3\_float"{}},\ data3d);}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<float>>>\ ret3d\ =\ file.readFloat3DArray(\textcolor{stringliteral}{"{}v3\_float"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data3d.size(),\ ret3d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data3d.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(data3d[i].size(),\ ret3d[i].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ data3d[i].size();\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(data3d[i][j].size(),\ ret3d[i][j].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ data3d[i][j].size();\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(data3d[i][j][k],\ ret3d[i][j][k]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ IntArray)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ ret;}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ data\ =\ \{1,\ 10,\ 2\};}
+\DoxyCodeLine{\ \ \ \ file.writeIntArray(\textcolor{stringliteral}{"{}vector\_ints"{}},\ data);}
+\DoxyCodeLine{\ \ \ \ ret\ =\ file.readIntArray(\textcolor{stringliteral}{"{}vector\_ints"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data.size(),\ ret.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ ret.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(data[i],\ ret[i]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ IntArray2D)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<int>>\ data2d\ =\ \{\{12,\ 3,\ 12\},\ \{2,\ 2,\ 18\},\ \{3,\ 4,\ 99\},\ \{5,\ 5,\ 5\}\};}
+\DoxyCodeLine{\ \ \ \ file.writeInt2DArray(\textcolor{stringliteral}{"{}vec\_vec\_int"{}},\ data2d);}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<int>>\ ret2d\ =\ file.readInt2DArray(\textcolor{stringliteral}{"{}vec\_vec\_int"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data2d.size(),\ ret2d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data2d.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(data2d[i].size(),\ ret2d[i].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ data2d[i].size();\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(data2d[i][j],\ ret2d[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ IntArray3D)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<int>>>\ data3d\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{12,\ 3,\ 12\},\ \{2,\ 2,\ 18\},\ \{3,\ 4,\ 99\},\ \{5,\ 5,\ 5\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\{12,\ 3,\ 12\},\ \{2,\ 2,\ 18\},\ \{3,\ 4,\ 99\},\ \{5,\ 5,\ 5\}\}\};}
+\DoxyCodeLine{\ \ \ \ file.writeInt3DArray(\textcolor{stringliteral}{"{}v3\_int"{}},\ data3d);}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<std::vector<int>>>\ ret3d\ =\ file.readInt3DArray(\textcolor{stringliteral}{"{}v3\_int"{}});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(data3d.size(),\ ret3d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ data3d.size();\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(data3d[i].size(),\ ret3d[i].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ 0;\ j\ <\ data3d[i].size();\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(data3d[i][j].size(),\ ret3d[i][j].size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ k\ =\ 0;\ k\ <\ data3d[i][j].size();\ k++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(data3d[i][j][k],\ ret3d[i][j][k]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ ArrayWithVec)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec<double,\ 3>>\ vector\_data;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ =\ 1;\ i\ <\ 100;\ ++i)\ vector\_data.push\_back(Vec<double,\ 3>\{0.1,\ 0.2,\ 0.3\});}
+\DoxyCodeLine{\ \ \ \ file.writeDouble2DArray(\textcolor{stringliteral}{"{}vector\_data"{}},\ vector\_data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ tt\ =\ file.readDouble2DArray(\textcolor{stringliteral}{"{}vector\_data"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ =\ 0;\ i\ <\ vector\_data.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ j\ =\ 0;\ j\ <\ vector\_data[0].size();\ ++j)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(tt[i][j],\ vector\_data[i][j]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Array3D)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Range<Vec<double,\ 3>>>\ data(5,\ Range<Vec<double,\ 3>>(4));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 4;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ 3;\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ data[i][j][k]\ =\ 0.5*i\ -\/\ 2.1*j\ +\ 1.2*k;}
+\DoxyCodeLine{\ \ \ \ \}\}\}}
+\DoxyCodeLine{\ \ \ \ file.write3DArray<\textcolor{keywordtype}{double}>(\textcolor{stringliteral}{"{}data3d"{}},\ data,\ H5T\_NATIVE\_DOUBLE,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Eigen)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix2d\ M;\ M.setRandom();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ file.writeEigen(\textcolor{stringliteral}{"{}M"{}},\ M);}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M2\ =\ file.readEigen(\textcolor{stringliteral}{"{}M"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((M-\/M2).isZero(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ file.writeEigen(\textcolor{stringliteral}{"{}M"{}},\ M*M,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ M2\ =\ file.readEigen(\textcolor{stringliteral}{"{}M"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((M*M\ -\/\ M2).isZero(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixX2d\ v(12,\ 2);}
+\DoxyCodeLine{\ \ \ \ v.setRandom();}
+\DoxyCodeLine{\ \ \ \ file.writeEigen(\textcolor{stringliteral}{"{}testEigen"{}},\ v,\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ v2\ =\ file.readDouble2DArray(\textcolor{stringliteral}{"{}testEigen"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ v.rows();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(v2[i].size()),\ v.cols());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ v.cols();\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(v(i,\ j),\ v2[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<float,\ Eigen::Dynamic,\ Eigen::Dynamic,\ Eigen::RowMajor>\ M3(3,\ 2);}
+\DoxyCodeLine{\ \ \ \ M3.setRandom();}
+\DoxyCodeLine{\ \ \ \ file.writeEigen(\textcolor{stringliteral}{"{}M3"{}},\ M3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ M4\ =\ file.readEigen<\textcolor{keywordtype}{float}>(\textcolor{stringliteral}{"{}M3"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((M3\ -\/\ M4).isZero(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ m\ =\ 5,\ n\ =\ 3;}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<float>>\ M5(m);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ m;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ M5[i].push\_back(2.32f*j+0.23f*i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ file.writeFloat2DArray(\textcolor{stringliteral}{"{}M5"{}},\ M5);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ M6\ =\ file.readEigen<\textcolor{keywordtype}{float}>(\textcolor{stringliteral}{"{}M5"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(m,\ M6.rows());}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(n,\ M6.cols());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ m;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(M6(i,\ j),\ M5[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ SparseMatrix)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::SparseMatrix<double>\ M(10,\ 10);}
+\DoxyCodeLine{\ \ \ \ M.coeffRef(0,\ 0)\ =\ 4.3;}
+\DoxyCodeLine{\ \ \ \ M.coeffRef(4,\ 5)\ =\ -\/2.1;}
+\DoxyCodeLine{\ \ \ \ file.writeSparseMatrix(\textcolor{stringliteral}{"{}M1"{}},\ M);}
+\DoxyCodeLine{\ \ \ \ file.writeSparseMatrix(\textcolor{stringliteral}{"{}M0"{}},\ M,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ M1\ =\ file.readDouble2DArray(\textcolor{stringliteral}{"{}M1"{}});}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ M1\_expected\ =\ \{\{1,\ 1,\ 4.3\},\ \{5,\ 6,\ -\/2.1\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(M1\_expected,\ M1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ M0\ =\ file.readDouble2DArray(\textcolor{stringliteral}{"{}M0"{}});}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ M0\_expected\ =\ \{\{0,\ 0,\ 4.3\},\ \{4,\ 5,\ -\/2.1\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(M0\_expected,\ M0);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Timer)\ \{}
+\DoxyCodeLine{\ \ \ \ Timer\ t;}
+\DoxyCodeLine{\ \ \ \ t.addCheckPoint(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ t.addCheckPoint(\textcolor{stringliteral}{"{}b"{}});}
+\DoxyCodeLine{\ \ \ \ t.addCheckPoint(\textcolor{stringliteral}{"{}c"{}});}
+\DoxyCodeLine{\ \ \ \ file.writeTimer(\textcolor{stringliteral}{"{}time"{}},\ t);}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test/time"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ total\ =\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}total"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(total,\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(total,\ 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ ab\ =\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}a-\/b"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(ab,\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(ab,\ 0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ bc\ =\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}b-\/c"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(bc,\ 1e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(bc,\ 0);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Conf)\ \{}
+\DoxyCodeLine{\ \ \ \ XML\ conf(\textcolor{stringliteral}{"{}test/testdata/test\_conf.xml"{}});}
+\DoxyCodeLine{\ \ \ \ file.writeXML(\textcolor{stringliteral}{"{}conf"{}},\ conf);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test/conf"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ actual\ =\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}mls.m"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ actual);}
+\DoxyCodeLine{\ \ \ \ actual\ =\ file.readDoubleAttribute(\textcolor{stringliteral}{"{}solver.droptol"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1e-\/5,\ actual);}
+\DoxyCodeLine{\ \ \ \ std::string\ data\ =\ file.readStringAttribute(\textcolor{stringliteral}{"{}mls.basis\_type"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}mon"{}},\ data);}
+\DoxyCodeLine{\ \ \ \ data\ =\ file.readStringAttribute(\textcolor{stringliteral}{"{}num.nxs"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}10,\ 12,\ 14,\ 16"{}},\ data);}
+\DoxyCodeLine{\ \ \ \ data\ =\ file.readStringAttribute(\textcolor{stringliteral}{"{}meta.filename"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}one\_domain\_implicit\_smooth.h5"{}},\ data);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Domain)\ \{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d(shape);}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(\{1.2,\ -\/0.3\},\ 1);}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(\{0.4,\ 0.0\},\ 2);}
+\DoxyCodeLine{\ \ \ \ d.addBoundaryNode(\{0.5,\ -\/0.1\},\ -\/1,\ \{-\/1,\ 0\});}
+\DoxyCodeLine{\ \ \ \ d.addInternalNode(\{12.3,\ 1.8\},\ 3);}
+\DoxyCodeLine{\ \ \ \ d.addBoundaryNode(\{4.5,\ 3.1\},\ -\/2,\ \{0,\ 1\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}/test/domain\_test"{}});}
+\DoxyCodeLine{\ \ \ \ file.writeDomain(\textcolor{stringliteral}{"{}domain"{}},\ d);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ file.openGroup(\textcolor{stringliteral}{"{}domain"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5,\ file.readIntAttribute(\textcolor{stringliteral}{"{}N"{}}));}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ expected\_types\ =\ \{1,\ 2,\ -\/1,\ 3,\ -\/2\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected\_types,\ file.readIntArray(\textcolor{stringliteral}{"{}types"{}}));}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M(5,\ 2);\ M\ <<\ 1.2,\ -\/0.3,\ 0.4,\ 0.0,\ 0.5,\ -\/0.1,\ 12.3,\ 1.8,\ 4.5,\ 3.1;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((M\ -\/\ file.readEigen(\textcolor{stringliteral}{"{}pos"{}})).isZero(0));}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ normals(2,\ 2);\ normals\ <<\ -\/1,\ 0,\ 0,\ 1;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((normals\ -\/\ file.readEigen(\textcolor{stringliteral}{"{}normals"{}})).isZero(0));}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ bmap\ =\ \{-\/1,\ -\/1,\ 0,\ -\/1,\ 1\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(bmap,\ file.readIntArray(\textcolor{stringliteral}{"{}bmap"{}}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(HDF5WriteTest,\ Atomic)\ \{}
+\DoxyCodeLine{\ \ \ \ file.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ file.setGroupName(\textcolor{stringliteral}{"{}asdf"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/asdf"{}},\ file.groupName());}
+\DoxyCodeLine{\ \ \ \ file.setGroupName(\textcolor{stringliteral}{"{}asdf/"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/asdf"{}},\ file.groupName());}
+\DoxyCodeLine{\ \ \ \ file.setGroupName(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}/"{}},\ file.groupName());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isGroupOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ file.atomic().writeDoubleAttribute(\textcolor{stringliteral}{"{}a"{}},\ 12.3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isGroupOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ file.atomic().readDoubleAttribute(\textcolor{stringliteral}{"{}a"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isGroupOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(file.isFileOpen());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(a,\ 12.3);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ HDFDeath)\ \{}
+\DoxyCodeLine{\ \ \ \ HDF\ reader;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(reader.openFile(\textcolor{stringliteral}{"{}sadfasdf"{}},\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864a49b535dea2264358a3006483780cc314}{HDF::READONLY}}),\ \textcolor{stringliteral}{"{}must\ exist\ and\ be\ accessible"{}});}
+\DoxyCodeLine{\ \ \ \ reader.openFile(\textcolor{stringliteral}{"{}test/testdata/test\_hdf5\_read.h5"{}});}
+\DoxyCodeLine{\ \ \ \ reader.openGroup(\textcolor{stringliteral}{"{}/what"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(reader.writeStringAttribute(\textcolor{stringliteral}{"{}object"{}},\ \textcolor{stringliteral}{"{}content"{}}),\ \textcolor{stringliteral}{"{}already\ exists"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ HDFUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (std::ifstream(\textcolor{stringliteral}{"{}test/testdata/new\_file.h5"{}}).good())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::remove(\textcolor{stringliteral}{"{}test/testdata/new\_file.h5"{}});}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ open\ new\ empty\ file\ and\ group\ '/'\ automatically}}
+\DoxyCodeLine{\ \ \ \ HDF\ hdf(\textcolor{stringliteral}{"{}test/testdata/filename.h5"{}},\ \mbox{\hyperlink{classmm_1_1HDF_acfcc499efe6a179903803e6793087864ae870386227e0ea1075b5bf20f0ec0e78}{HDF::DESTROY}});}
+\DoxyCodeLine{\ \ \ \ hdf.writeStringAttribute(\textcolor{stringliteral}{"{}text"{}},\ \textcolor{stringliteral}{"{}This\ is\ the\ content"{}});\ \ \textcolor{comment}{//\ written\ to\ group\ '/'}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hdf.openGroup(\textcolor{stringliteral}{"{}group1"{}});}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ a\ =\ \{1.2,\ -\/4.5,\ 4.5\};}
+\DoxyCodeLine{\ \ \ \ hdf.writeDoubleArray(\textcolor{stringliteral}{"{}a"{}},\ a);}
+\DoxyCodeLine{\ \ \ \ hdf.close();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hdf.reopen();\ \ \textcolor{comment}{//\ reopen\ previously\ closed\ file\ and\ group}}
+\DoxyCodeLine{\ \ \ \ hdf.openGroup(\textcolor{stringliteral}{"{}/"{}});}
+\DoxyCodeLine{\ \ \ \ std::string\ s\ =\ hdf.readStringAttribute(\textcolor{stringliteral}{"{}text"{}});}
+\DoxyCodeLine{\ \ \ \ hdf.writeStringAttribute(\textcolor{stringliteral}{"{}text"{}},\ \textcolor{stringliteral}{"{}New\ content"{}},\ \textcolor{keyword}{true});\ \ \textcolor{comment}{//\ enable\ overwrite}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ hdf.setFilename(\textcolor{stringliteral}{"{}test/testdata/new\_file.h5"{}});}
+\DoxyCodeLine{\ \ \ \ hdf.setGroupName(\textcolor{stringliteral}{"{}group\_name"{}});\ \ \textcolor{comment}{//\ set\ current\ group\ name\ and\ filename,\ but\ do\ not\ open\ yet}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ b(5,\ a);\ \ \textcolor{comment}{//\ written\ as\ dataset\ of\ size\ 5x3}}
+\DoxyCodeLine{\ \ \ \ hdf.atomic().writeFloat2DArray(\textcolor{stringliteral}{"{}b"{}},\ b);\ \ \textcolor{comment}{//\ opens,\ writes\ and\ closes,\ the\ value\ is\ cast\ to\ float}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M(5,\ 3);}
+\DoxyCodeLine{\ \ \ \ M\ <<\ 1,\ 2,\ 3,\ 4,\ 5,\ 6,\ 7,\ 8,\ 9,\ 10,\ 11,\ 12,\ 13,\ 14,\ 15;}
+\DoxyCodeLine{\ \ \ \ hdf.atomic().writeEigen(\textcolor{stringliteral}{"{}M"{}},\ M);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ M2\ =\ hdf.atomic().readEigen(\textcolor{stringliteral}{"{}M"{}});\ \ \textcolor{comment}{//\ opens,\ reads,\ closes}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ hdf\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Timer,\ DomainDiscretization\ and\ XML\ classes\ can\ also\ be\ written\ directly}}
+\DoxyCodeLine{\ \ \ \ s\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\ \ \ \ std::remove(\textcolor{stringliteral}{"{}test/testdata/new\_file.h5"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((M2\ -\/\ M).isZero(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

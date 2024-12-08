@@ -1,0 +1,239 @@
+\doxysection{mm\+::Sheppard\+Interpolant\texorpdfstring{$<$}{<} vec\+\_\+t, value\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1SheppardInterpolant}{}\label{classmm_1_1SheppardInterpolant}\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+
+
+{\ttfamily \#include $<$Sheppard\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}}$>$\newline
+class mm\+::\+Sheppard\+Interpolant$<$ vec\+\_\+t, value\+\_\+t $>$}
+Scattered interpolant using a slightly modified Sheppard\textquotesingle{}s interpolation (inverse distance weighting). 
+
+The essential difference is the introduction of a "{}regularization"{} parameter ({\ttfamily reg}) that is used when computing the inverse distance weights\+: $ w_i = 1 / (d(x, x_i)^{power} + reg) $ By supplying a positive regularization parameter one can avoid singularities at the locations of the data points as well as control the "{}smoothness"{} of the interpolation (e.\+g., make the weights of the neighbors less varied). The "{}smoothness"{} of interpolation can also be controlled by the power parameter ({\ttfamily power}). The interpolation is not continuous due to the cut off at the closest neighbors.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ 4;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ points.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ num\_closest\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ Closest\ neighbors.}}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos(N);\ \ \ \ \ \ \textcolor{comment}{//\ Positions.}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}}(N);\ \ \textcolor{comment}{//\ Values.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}}[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Sheppard's\ Interpolation.}}
+\DoxyCodeLine{\ \ \ \ SheppardInterpolant<Vec1d,\ double>\ interpolant(pos,\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point;}
+\DoxyCodeLine{\ \ \ \ point.setConstant(1.5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Interpolated\ value.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ interpolant(point,\ num\_closest);}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Sheppard\+Interpolant\texorpdfstring{$<$}{<} vec\+\_\+t, value\+\_\+t \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{classmm_1_1SheppardInterpolant__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a3d2ca4e0bbcd9f0fe4c9e65c023d0b5d}{Sheppard\+Interpolant}} ()=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Construct a new empty Sheppard Interpolant object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a33585107c4de85c5be8945458df1b0a0}{Sheppard\+Interpolant}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&pos)
+\begin{DoxyCompactList}\small\item\em Construct a new Sheppard Interpolant. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1SheppardInterpolant_abb17c2515e5a0824ed2b0bea6d261b37}{Sheppard\+Interpolant}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&pos, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}})
+\begin{DoxyCompactList}\small\item\em Construct a new Sheppard Interpolant object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{values\+\_\+container\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade}{set\+Values}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{values\+\_\+container\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{new\+\_\+values}})
+\begin{DoxyCompactList}\small\item\em Set new values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a9073d3892300794c10334188da74b207}{set\+Positions}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&pos)
+\begin{DoxyCompactList}\small\item\em Set new positions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} \mbox{\hyperlink{classmm_1_1SheppardInterpolant_aaae55271eda6462f5a3221132b5fd144}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+closest}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{power}}=2, \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{reg}}=0.\+0, \mbox{\hyperlink{classmm_1_1Gaussian}{double}} \mbox{\hyperlink{classmm_1_1Gaussian}{conf\+\_\+dist}}=1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/12) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate the interpolant at the given point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a61a34974eb71a29541da3d7cffb4948e}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar data type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1KDTree}{KDTree}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}{tree}}
+\begin{DoxyCompactList}\small\item\em Tree of all points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}}
+\begin{DoxyCompactList}\small\item\em Function values at given points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1SheppardInterpolant_a3d2ca4e0bbcd9f0fe4c9e65c023d0b5d}\label{classmm_1_1SheppardInterpolant_a3d2ca4e0bbcd9f0fe4c9e65c023d0b5d} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!SheppardInterpolant@{SheppardInterpolant}}
+\index{SheppardInterpolant@{SheppardInterpolant}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{SheppardInterpolant()}{SheppardInterpolant()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::\+Sheppard\+Interpolant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Construct a new empty Sheppard Interpolant object. 
+
+Use \doxylink{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade}{set\+Values} and \doxylink{classmm_1_1SheppardInterpolant_a9073d3892300794c10334188da74b207}{set\+Positions()} to fill the object. \Hypertarget{classmm_1_1SheppardInterpolant_a33585107c4de85c5be8945458df1b0a0}\label{classmm_1_1SheppardInterpolant_a33585107c4de85c5be8945458df1b0a0} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!SheppardInterpolant@{SheppardInterpolant}}
+\index{SheppardInterpolant@{SheppardInterpolant}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{SheppardInterpolant()}{SheppardInterpolant()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::\+Sheppard\+Interpolant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a new Sheppard Interpolant. 
+
+Use \doxylink{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade}{set\+Values} to add values. 
+\begin{DoxyParams}{Parameters}
+{\em pos} & Positions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1SheppardInterpolant_abb17c2515e5a0824ed2b0bea6d261b37}\label{classmm_1_1SheppardInterpolant_abb17c2515e5a0824ed2b0bea6d261b37} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!SheppardInterpolant@{SheppardInterpolant}}
+\index{SheppardInterpolant@{SheppardInterpolant}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{SheppardInterpolant()}{SheppardInterpolant()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::\+Sheppard\+Interpolant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{pos,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new Sheppard Interpolant object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Initial positions. \\
+\hline
+{\em values} & Function values to be interpolated.. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00061}{61}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1SheppardInterpolant_aaae55271eda6462f5a3221132b5fd144}\label{classmm_1_1SheppardInterpolant_aaae55271eda6462f5a3221132b5fd144} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} \mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{num\+\_\+closest,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{power = {\ttfamily 2},  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{reg = {\ttfamily 0.0},  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{double}}}]{conf\+\_\+dist = {\ttfamily 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/12} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate the interpolant at the given point. 
+
+The complexity of the evaluation function is $ \mathcal{O}(m\log{n}) $ for $ m $ closest nodes and $ n $ positions in the k-\/d tree.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Location where evaluation is needed. \\
+\hline
+{\em num\+\_\+closest} & Number of closest neighbors. \\
+\hline
+{\em power} & The power of the inverse distance used for the interpolation weights. \\
+\hline
+{\em reg} & Regularization parameter. \\
+\hline
+{\em conf\+\_\+dist} & The confusion distance below which the interpolator should use the value of the closest data point instead of attempting to interpolate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value\+\_\+t Interpolation value. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{Sheppard_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{Sheppard_8hpp_source}{Sheppard.\+hpp}}.
+
+\Hypertarget{classmm_1_1SheppardInterpolant_a9073d3892300794c10334188da74b207}\label{classmm_1_1SheppardInterpolant_a9073d3892300794c10334188da74b207} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!setPositions@{setPositions}}
+\index{setPositions@{setPositions}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{setPositions()}{setPositions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::set\+Positions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set new positions. 
+
+
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00083}{83}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade}\label{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!setValues@{setValues}}
+\index{setValues@{setValues}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{setValues()}{setValues()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{values\+\_\+container\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::set\+Values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{values\+\_\+container\+\_\+t}} \&}]{new\+\_\+values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set new values. 
+
+Any container that supports forward iteration with {\ttfamily .begin()} and {\ttfamily .end()} can be used. The contained element type must be compatible with {\ttfamily value\+\_\+t}. 
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00078}{78}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}\label{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!tree@{tree}}
+\index{tree@{tree}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{tree}{tree}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1KDTree}{KDTree}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::tree\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tree of all points. 
+
+
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}\label{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab} 
+\index{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}!values@{values}}
+\index{values@{values}!mm::SheppardInterpolant$<$ vec\_t, value\_t $>$@{mm::SheppardInterpolant$<$ vec\_t, value\_t $>$}}
+\doxysubsubsection{\texorpdfstring{values}{values}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1SheppardInterpolant}{mm\+::\+Sheppard\+Interpolant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{value\+\_\+t}} $>$\+::values\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function values at given points. 
+
+
+
+Definition at line \mbox{\hyperlink{Sheppard__fwd_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{Sheppard__fwd_8hpp_source}{Sheppard\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/interpolants/\mbox{\hyperlink{Sheppard__fwd_8hpp}{Sheppard\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/interpolants/\mbox{\hyperlink{Sheppard_8hpp}{Sheppard.\+hpp}}\end{DoxyCompactItemize}

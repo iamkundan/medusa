@@ -1,0 +1,428 @@
+\doxysection{test/domains/\+General\+Surface\+Fill\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2GeneralSurfaceFill_test_8cpp-example}{}\label{test_2domains_2GeneralSurfaceFill_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{GeneralSurfaceFill_8hpp}{medusa/bits/domains/GeneralSurfaceFill.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range__fwd_8hpp}{medusa/bits/types/Range\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization__fwd_8hpp}{medusa/bits/domains/DomainDiscretization\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTree_8hpp}{medusa/bits/spatial\_search/KDTree.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFill2DConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ surface.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ example\_r\ =\ [](\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t(0)\ =\ -\/t(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ pow(abs(cos(1.5\ *\ t(0))),\ sin(3\ *\ t(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(r\ *\ cos(t(0)),\ r\ *\ sin(t(0)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ der\_example\_r\ =\ [](\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t(0)\ =\ -\/t(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ pow(abs(cos(1.5\ *\ t(0))),\ sin(3\ *\ t(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ der\_r\ =\ (-\/1.5\ *\ pow(abs(cos(1.5\ *\ t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sin(3\ *\ t(0)))\ *\ sin(3\ *\ t(0))\ *\ sin(1.5\ *\ t(0))\ \ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ pow(abs(cos(1.5\ *\ t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sin(3\ *\ t(0)))\ *\ cos(3\ *\ t(0))\ *\ cos(1.5\ *\ t(0))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ log(abs(cos(1.5\ *\ t(0)))))\ /\ cos(1.5\ *\ t(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/(der\_r\ *\ cos(t(0))\ -\/\ r\ *\ sin(t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/(der\_r\ *\ sin(t(0))\ +\ r\ *\ cos(t(0)));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.02;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec2d,\ Vec1d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ bs(\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{0.0\},\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ bs,\ example\_r,\ der\_example\_r,\ h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(sqrt(tree.query(pt,\ 2).second[1]));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.05);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.35);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFill2DFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ surface.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ example\_r\ =\ [](\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t(0)\ =\ -\/t(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ pow(abs(cos(1.5\ *\ t(0))),\ sin(3\ *\ t(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(r\ *\ cos(t(0)),\ r\ *\ sin(t(0)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ der\_example\_r\ =\ [](\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t(0)\ =\ -\/t(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ pow(abs(cos(1.5\ *\ t(0))),\ sin(3\ *\ t(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ der\_r\ =\ (-\/1.5\ *\ pow(abs(cos(1.5\ *\ t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sin(3\ *\ t(0)))\ *\ sin(3\ *\ t(0))\ *\ sin(1.5\ *\ t(0))\ \ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ pow(abs(cos(1.5\ *\ t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sin(3\ *\ t(0)))\ *\ cos(3\ *\ t(0))\ *\ cos(1.5\ *\ t(0))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ log(abs(cos(1.5\ *\ t(0)))))\ /\ cos(1.5\ *\ t(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 2,\ 1>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/(der\_r\ *\ cos(t(0))\ -\/\ r\ *\ sin(t(0))),\ -\/(der\_r\ *\ sin(t(0))\ +\ r\ *\ cos(t(0)));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ gradient\_h\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\_0\ =\ 0.005;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\_m\ =\ 0.03\ -\/\ h\_0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \ 0.5\ *\ h\_m\ *\ (p(0)\ +\ p(1)\ +\ 3.0)\ +\ h\_0;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec2d,\ Vec1d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ bs(\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{0.0\},\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ param\_d(bs);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_d,\ example\_r,\ der\_example\_r,\ gradient\_h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec2d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ positions\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ positions.size()\ -\/\ 1\ ;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pt\ =\ positions[i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dist\ =\ sqrt(tree.query(pt,\ 2).second[1]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ gradient\_h(pt);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.35);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFill3DConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ torus\_r\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 10.0,\ b\ =\ 25.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}((a\ *\ cos(t(1))\ +\ b)\ *\ cos(t(0)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (a\ *\ cos(t(1))\ +\ b)\ *\ sin(t(0)),\ a\ *\ sin(t(1)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ torus\_jacobian\_matrix\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 10.0,\ b\ =\ 25.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/\ (a\ *\ cos(t(1))\ +\ b)\ *\ sin(t(0)),\ (a\ *\ cos(t(1))\ +\ b)\ *\ cos(t(0)),\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(1)\ <<\ -\/\ a\ *\ sin(t(1))\ *\ cos(t(0)),\ -\/\ a\ *\ sin(t(1))\ *\ sin(t(0)),\ a\ *\ cos(t(1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 1.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec3d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec3d,\ Vec2d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ bs(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{0.0,\ 0.0\},\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ param\_d(bs);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_d,\ torus\_r,\ torus\_jacobian\_matrix,\ h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ tree.query(pt,\ 5).second;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ d.size();\ i++)\ val\ +=\ sqrt(d[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ val\ /=\ (d.size()\ -\/\ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(val);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFill3DFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ parametrization\ function.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ torus\_r\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 10.0,\ b\ =\ 25.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}((a\ *\ cos(t(1))\ +\ b)\ *\ cos(t(0)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (a\ *\ cos(t(1))\ +\ b)\ *\ sin(t(0)),\ a\ *\ sin(t(1)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ Jacobian\ of\ parametrization\ function.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ torus\_jacobian\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ a\ =\ 10.0,\ b\ =\ 25.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/\ (a\ *\ cos(t(1))\ +\ b)\ *\ sin(t(0)),\ (a\ *\ cos(t(1))\ +\ b)\ *\ cos(t(0)),\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(1)\ <<\ -\/\ a\ *\ sin(t(1))\ *\ cos(t(0)),\ -\/\ a\ *\ sin(t(1))\ *\ sin(t(0)),\ a\ *\ cos(t(1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ density\ function.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ gradient\_h\ =\ [](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ p)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\_0\ =\ 1.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_0\ +\ (p[0]\ +\ p[1]\ +\ p[2])\ /\ 500.0;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ domain.}}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec3d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec3d,\ Vec2d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ param\_domain\_shape(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{0.0,\ 0.0\},\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ param\_domain(param\_domain\_shape);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_domain,\ torus\_r,\ torus\_jacobian,\ gradient\_h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec3d>\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ positions\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ positions.size()\ -\/\ 1\ ;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pt\ =\ positions[i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ tree.query(pt,\ 7).second;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ d.size();\ i++)\ val\ +=\ sqrt(d[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ val\ /=\ (d.size()\ -\/\ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ gradient\_h(pt);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_GE(val,\ 0.75\ *\ h);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFill4DConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ three\_sphere\_r\ =\ [](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Vec<double,\ 4>(R\ *\ cos(t(0)),\ R\ *\ sin(t(0))\ *\ cos(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ cos(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ sin(t(2)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ three\_sphere\_jacobian\_matrix\ =\ [](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 4,\ 3>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/\ R\ *\ sin(t(0)),\ R\ *\ cos(t(0))\ *\ cos(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ cos(t(0))\ *\ sin(t(1))\ *\ cos(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ cos(t(0))\ *\ sin(t(1))\ *\ sin(t(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(1)\ <<\ 0,\ -\/\ R\ *\ sin(t(0))\ *\ sin(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ cos(t(1))\ *\ cos(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ cos(t(1))\ *\ sin(t(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(2)\ <<\ 0,\ 0,\ -\/\ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ sin(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ cos(t(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 10.0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ domain.}}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec<double,\ 4>\ >\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec<double,\ 4>\ >\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec<double,\ 4>,\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ bs(\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{0.0,\ 0.0,\ 0.0\},\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ param\_domain(bs);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_domain,\ three\_sphere\_r,\ three\_sphere\_jacobian\_matrix,\ h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec<double,\ 4>\ >\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ avg\_dist\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pt\ :\ domain.positions())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ tree.query(pt,\ 10).second;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ d.size();\ i++)\ val\ +=\ sqrt(d[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ val\ /=\ (d.size()\ -\/\ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ distances.push\_back(val);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ avg\_dist\ +=\ distances[distances.size()\ -\/\ 1];}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ avg\_dist\ /=\ domain.positions().size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_avg\ =\ std::abs(avg\_dist\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_avg,\ 0.2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ err\_min\ =\ std::abs(*std::min\_element(distances.begin()\ +\ 1,\ distances.end()\ -\/\ 1)\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT(err\_min,\ 0.2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFill4DFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ three\_sphere\_r\ =\ [](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Vec<double,\ 4>(R\ *\ cos(t(0)),\ R\ *\ sin(t(0))\ *\ cos(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ cos(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ sin(t(2)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ three\_sphere\_jacobian\_matrix\ =\ [](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ t)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 4,\ 3>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/\ R\ *\ sin(t(0)),\ R\ *\ cos(t(0))\ *\ cos(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ cos(t(0))\ *\ sin(t(1))\ *\ cos(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ cos(t(0))\ *\ sin(t(1))\ *\ sin(t(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(1)\ <<\ 0,\ -\/\ R\ *\ sin(t(0))\ *\ sin(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ cos(t(1))\ *\ cos(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ cos(t(1))\ *\ sin(t(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(2)\ <<\ 0,\ 0,\ -\/\ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ sin(t(2)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1))\ *\ cos(t(2));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ gradient\_h\ =\ [](Vec<double,\ 4>\ p)\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\_0\ =\ 10.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_0\ +\ (p[0]\ +\ p[1]\ +\ p[2]\ +\ p[3])\ /\ 80.0;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ domain.}}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec<double,\ 4>\ >\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec<double,\ 4>\ >\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec<double,\ 4>,\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ bs(\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{0.0,\ 0.0,\ 0.0\},\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\{\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ param\_domain(bs);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_domain,\ three\_sphere\_r,\ three\_sphere\_jacobian\_matrix,\ gradient\_h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Calculate\ distances.}}
+\DoxyCodeLine{\ \ \ \ KDTree<Vec<double,\ 4>\ >\ tree(domain.positions());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ positions\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ positions.size()\ -\/\ 1\ ;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ pt\ =\ positions[i];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ d\ =\ tree.query(pt,\ 9).second;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ d.size();\ i++)\ val\ +=\ sqrt(d[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ val\ /=\ (d.size()\ -\/\ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ gradient\_h(pt);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_GE(val,\ 0.75\ *\ h);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralSurfaceFillMaxPoints)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Define\ surface.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ example\_r\ =\ [](\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t(0)\ =\ -\/t(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ pow(abs(cos(1.5\ *\ t(0))),\ sin(3\ *\ t(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(r\ *\ cos(t(0)),\ r\ *\ sin(t(0)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ der\_example\_r\ =\ [](\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ t(0)\ =\ -\/t(0);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ pow(abs(cos(1.5\ *\ t(0))),\ sin(3\ *\ t(0)));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ der\_r\ =\ (-\/1.5\ *\ pow(abs(cos(1.5\ *\ t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sin(3\ *\ t(0)))\ *\ sin(3\ *\ t(0))\ *\ sin(1.5\ *\ t(0))\ \ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ pow(abs(cos(1.5\ *\ t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sin(3\ *\ t(0)))\ *\ cos(3\ *\ t(0))\ *\ cos(1.5\ *\ t(0))}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ log(abs(cos(1.5\ *\ t(0)))))\ /\ cos(1.5\ *\ t(0));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 2,\ 1>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/(der\_r\ *\ cos(t(0))\ -\/\ r\ *\ sin(t(0))),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/(der\_r\ *\ sin(t(0))\ +\ r\ *\ cos(t(0)));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.02;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec2d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ max\_points\ =\ 400,\ num\_samples\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Fill\ domain.}}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec2d,\ Vec1d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ gsf.maxPoints(max\_points).numSamples(num\_samples);}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ bs(\mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{0.0\},\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ param\_d(bs);}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_d,\ example\_r,\ der\_example\_r,\ h);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(domain.positions().size(),\ max\_points\ +\ num\_samples);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(domain.positions().size(),\ max\_points\ -\/\ num\_samples);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ DISABLED\_EarthModel)\ \{}
+\DoxyCodeLine{\ \ \ \ std::ifstream\ fin(\textcolor{stringliteral}{"{}../testdata/topo.txt"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ map[180][360];}
+\DoxyCodeLine{\ \ \ \ std::string\ is,\ s;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ mx\ =\ -\/10000000,\ mn\ =\ 10000000;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ !fin.eof()\ \&\&\ i\ <\ 180;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ fin\ >>\ is;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::istringstream\ ss(is);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ std::getline(ss,\ s,\ \textcolor{charliteral}{','})\ \&\&\ j\ <\ 360;\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ map[i][j]\ =\ std::stoi(s);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ mx\ =\ std::max(mx,\ map[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ mn\ =\ std::min(mn,\ map[i][j]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 180;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 360;\ j++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ map[i][j]\ =\ (map[i][j]\ -\/\ mn)\ /\ (mx\ -\/\ mn);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ sphere\_r\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ 1.001;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(R\ *\ cos(t(0))\ *\ sin(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ sin(t(1)),\ R\ *\ cos(t(1)));}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ sphere\_jacobian\_matrix\ =\ [](\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ t)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ 1.001;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ jm;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(0)\ <<\ -\/\ R\ *\ sin(t(0))\ *\ sin(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ cos(t(0))\ *\ sin(t(1)),\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ jm.col(1)\ <<\ R\ *\ cos(t(0))\ *\ cos(t(1)),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ R\ *\ sin(t(0))\ *\ cos(t(1)),\ -\/\ R\ *\ sin(t(1));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ jm;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ earth\_h\ =\ [\&map](\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ R\ =\ p.norm();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ theta\ =\ (90.0\ -\/\ acos(p(2)\ /\ R)\ *\ 180.0\ /\ 3.14);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ phi\ =\ atan2(-\/p(0),\ p(1))\ *\ 180.0\ /\ 3.14;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\_0\ =\ 0.005;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ h\_0\ /\ (1\ *\ map[\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(theta\ -\/\ 0.5)\ +\ 90]}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(phi\ -\/\ 0.5)\ +\ 180]);}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ UnknownShape<Vec3d>\ shape;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(shape);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ GeneralSurfaceFill<Vec3d,\ Vec2d>\ gsf;\ gsf.seed(0);\ \ \textcolor{comment}{//\ deterministic}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ bs(\{0.0,\ 0.0\},\ \{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ param\_domain(bs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.fill(gsf,\ param\_domain,\ sphere\_r,\ sphere\_jacobian\_matrix,\ earth\_h);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

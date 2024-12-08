@@ -1,0 +1,190 @@
+\doxysection{test/spatial\+\_\+search/\+KDTree\+Mutable\+\_\+test.\+cpp}
+\hypertarget{test_2spatial_search_2KDTreeMutable_test_8cpp-example}{}\label{test_2spatial_search_2KDTreeMutable_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTreeMutable__fwd_8hpp}{medusa/bits/spatial\_search/KDTreeMutable\_fwd.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ DISABLED\_MutableUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points\ =\ \{\{5,\ 4,\ 0\},\ \{4,\ 2,\ 1\},\ \{7,\ 6,\ 9\},\ \{2,\ 2,\ 1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{8,\ 0,\ 5\},\ \{5,\ 7,\ 0\},\ \{3,\ 3,\ 8\},\ \{9,\ 7,\ 3\},\ \{2,\ 2,\ 6\},\ \{2,\ 0,\ 6\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec3d>\ tree(points);\ \ \textcolor{comment}{//\ \ Build\ kd-\/tree}}
+\DoxyCodeLine{\ \ \ \ Range<double>\ distances;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ closest;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ Get\ 3\ points\ closest\ to\ \{4.1,\ 3,\ 0.5\}}}
+\DoxyCodeLine{\ \ \ \ std::tie(closest,\ distances)\ =\ tree.query(\{4.1,\ 3,\ 0.5\},\ 3);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ Insertion\ and\ removal}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ new\_point\ =\ \{2,\ 30,\ 45\};}
+\DoxyCodeLine{\ \ \ \ tree.insert(new\_point);}
+\DoxyCodeLine{\ \ \ \ tree.remove(2);\ \ \textcolor{comment}{//\ remove\ by\ index\ (assigned\ at\ insertion)}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ tree\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ Mutable3DQuery)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 4,\ 0\},\ \{4,\ 2,\ 1\},\ \{7,\ 6,\ 9\},\ \{2,\ 2,\ 1\},\ \{8,\ 0,\ 5\},\ \{5,\ 7,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 3,\ 8\},\ \{9,\ 7,\ 3\},\ \{2,\ 2,\ 6\},\ \{2,\ 0,\ 6\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec3d>\ kd3(points);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(points.size(),\ kd3.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{1,\ 0\}),\ kd3.query(\{4.1,\ 3,\ 0.5\},\ 2).first);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{3,\ 1,\ 8\}),\ kd3.query(\{2,\ 2,\ 3\},\ 3).first);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ Reset)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{5,\ 4,\ 0\},\ \{4,\ 2,\ 1\},\ \{7,\ 6,\ 9\},\ \{2,\ 2,\ 1\},\ \{8,\ 0,\ 5\},\ \{5,\ 7,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{3,\ 3,\ 8\},\ \{9,\ 7,\ 3\},\ \{2,\ 2,\ 6\},\ \{2,\ 0,\ 6\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec3d>\ kd3(points);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(points.size(),\ kd3.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{1,\ 0\}),\ kd3.query(\{4.1,\ 3,\ 0.5\},\ 2).first);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{3,\ 1,\ 8\}),\ kd3.query(\{2,\ 2,\ 3\},\ 3).first);}
+\DoxyCodeLine{\ \ \ \ kd3.reset(\{\{1,\ 2,\ 3\},\ \{4,\ 5,\ 6\}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{0,\ 1\}),\ kd3.query(\{-\/1,\ -\/2,\ -\/3\},\ 2).first);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<double>(\{1*1+2*2+3*3,\ 4*4+5*5+6*6\}),\ kd3.query(\{0,\ 0,\ 0\},\ 2).second);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ Mutable2DQuery)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Test\ 2D\ with\ 50\ points}}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.6441209666616923,\ 0.5850353695296744\},\ \{-\/0.6201378980490286,\ 0.7811830957022021\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.6784344365993658,\ 0.9839667035596042\},\ \{0.044496636767509035,\ 0.4377470158269272\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.5274564029904492,\ 0.5696927123044102\},\ \{-\/0.6259567688687637,\ -\/0.7818614711722951\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.9162830614939184,\ 0.6489213976078669\},\ \{0.7591192942947527,\ -\/0.3433314817836943\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.23782320760874454,\ 0.1898945196158186\},\ \{-\/0.5441698103664361,\ 0.006385132320767317\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.3654415676489693,\ 0.06746853328508307\},\ \{0.931189791692042,\ 0.9181001537912621\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.3427312891982608,\ -\/0.6826010311723985\},\ \{0.891723271821818,\ -\/0.8508989951879877\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.11394616056891804,\ 0.84630479540056\},\ \{-\/0.5223541537898675,\ -\/0.026438581866889965\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.425710227280224,\ 0.232320814224092\},\ \{-\/0.12153165386201059,\ -\/0.09554948988436873\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.5360668060424465,\ 0.8346421613694428\},\ \{-\/0.48815760323401425,\ -\/0.47632741760208863\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7355755648085145,\ 0.021559400675411178\},\ \{0.16684622124842763,\ -\/0.5180297967184262\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.2750341401977108,\ 0.14027191172883025\},\ \{0.6550291085853586,\ -\/0.0906298270828052\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.11672354315833089,\ 0.6864647718719339\},\ \{0.4319012792644372,\ -\/0.5056121884571734\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.3111112525746833,\ 0.4841999490074793\},\ \{0.9537933710310402,\ -\/0.4121810950684375\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.13430435085483827,\ -\/0.7063126623794711\},\ \{0.8509710074195942,\ 0.4342793339962312\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.8387012530238107,\ -\/0.8797447958759539\},\ \{-\/0.788610725923649,\ -\/0.28402465290256296\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.3781644510827291,\ -\/0.19185822357265714\},\ \{0.3675280148118516,\ -\/0.19959444568922202\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.5441631640348303,\ 0.9923042351466602\},\ \{0.4379307570126687,\ -\/0.7976305308639227\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.6192156716466921,\ 0.5095818625700927\},\ \{0.4538538344127916,\ 0.24132983301916466\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.920957301103486,\ 0.7946521172232996\},\ \{-\/0.4620339775822764,\ -\/0.6725241136453264\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.6164340529959673,\ -\/0.370457261186975\},\ \{0.6353232887100764,\ -\/0.4527336246027056\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.5129962829311199,\ 0.2576340035951956\},\ \{-\/0.3355508932427227,\ 0.20820573070479842\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.03557537269552791,\ 0.801250103966441\},\ \{-\/0.6249260602423057,\ 0.01901038540320088\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{0.9052024446464844,\ -\/0.37370939241714884\},\ \{-\/0.08417808324593734,\ -\/0.4918951358215899\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{-\/0.7408521674604813,\ -\/0.38351394950328266\},\ \{0.8804020099004968,\ 0.2246660525735673\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ rs;}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec2d>\ kd2(points);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(points.size(),\ kd2.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(2u,\ kd2.query(points[33],\ 0.05,\ 3).first.size());}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(2u,\ kd2.query(points[33],\ 0.05,\ 2).first.size());}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ result\ =\ kd2.query(points[33],\ 3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{33,\ 32,\ 40\}),\ result.first);}
+\DoxyCodeLine{\ \ \ \ rs\ =\ result.first.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rs;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (points[33]\ -\/\ points[result.first[i]]).squaredNorm(),\ result.second[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(result.second[i],\ result.second[rs-\/1]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(3u,\ kd2.query(points[17],\ 0.09,\ 3).first.size());}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(2u,\ kd2.query(points[17],\ 0.09,\ 2).first.size());}}
+\DoxyCodeLine{\ \ \ \ result\ =\ kd2.query(points[17],\ 3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{17,\ 10,\ 8\}),\ result.first);}
+\DoxyCodeLine{\ \ \ \ rs\ =\ result.first.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rs;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (points[17]\ -\/\ points[result.first[i]]).squaredNorm(),\ result.second[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(result.second[i],\ result.second[rs-\/1]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(4u,\ kd2.query(\{0.,\ 0\},\ 0.14,\ 5).first.size());}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(2u,\ kd2.query(\{0.,\ 0\},\ 0.14,\ 2).first.size());}}
+\DoxyCodeLine{\ \ \ \ result\ =\ kd2.query(\{0.,\ 0\},\ 5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{17,\ 8,\ 22,\ 10,\ 43\}),\ result.first);}
+\DoxyCodeLine{\ \ \ \ rs\ =\ result.first.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rs;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{0,\ 0\})\ -\/\ points[result.first[i]]).squaredNorm(),\ result.second[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(result.second[i],\ result.second[rs-\/1]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(3u,\ kd2.query(\{0.7,\ 0.7\},\ 0.101,\ 5).first.size());}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ \ EXPECT\_EQ(2u,\ kd2.query(\{0.7,\ 0.7\},\ 0.101,\ 2).first.size());}}
+\DoxyCodeLine{\ \ \ \ result\ =\ kd2.query(\{0.7,\ 0.7\},\ 5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(std::vector<int>(\{36,\ 6,\ 29,\ 11,\ 34\}),\ result.first);}
+\DoxyCodeLine{\ \ \ \ rs\ =\ result.first.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rs;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\{0.7,\ 0.7\})\ -\/\ points[result.first[i]]).squaredNorm(),\ result.second[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(result.second[i],\ result.second[rs-\/1]);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ DISABLED\_MutableDeathTests)\ \{}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec2d>\ kd2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(kd2.query(\{0.,\ 2.0\},\ 3),\ \textcolor{stringliteral}{"{}Not\ enough\ points\ in\ the\ tree,\ you\ requested\ 3\ points,\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}but\ the\ tree\ contains\ only\ 0\ points."{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(kd2.insert(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\{sqrt(-\/1),\ 0\}),\ \textcolor{stringliteral}{"{}Invalid\ point."{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ Mutableinsert\_remove)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \{\{2,\ 3\},\ \{1,\ 5\},\ \{7,\ 8\},\ \{0,\ -\/2\},\ \{9,\ 12\},\ \{4,\ 15\},\ \{15,\ 4\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec2d>\ tree(points);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(7,\ tree.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ new\_point(\{2,\ 30\});}
+\DoxyCodeLine{\ \ \ \ tree.insert(new\_point);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(8,\ tree.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ tree.remove(0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(7,\ tree.size());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ tree.remove(0);\ \ \textcolor{comment}{//\ Removing\ a\ point\ again\ is\ valid,\ but\ has\ no\ effect.}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(7,\ tree.size());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ Mutable2DQuery\_2)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \{\{2,\ 4\},\ \{2,\ 3\},\ \{1,\ 5\},\ \{7,\ 8\},\ \{0,\ -\/2\},\ \{9,\ 12\},\ \{4,\ 15\},\ \{15,\ 4\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec2d>\ tree(points);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ reference\_point(\{2,\ 3\});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<int>}}\ closest;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<double>}}\ distances;}
+\DoxyCodeLine{\ \ \ \ std::tie(closest,\ distances)\ =\ tree.query(reference\_point,\ 1);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1\ ,\ closest[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0.0,\ distances[0]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ ExistsPointInSphere)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ points\ =\ \{\{2,\ 4\},\ \{2,\ 3\},\ \{1,\ 5\},\ \{7,\ 8\},\ \{0,\ -\/2\},\ \{9,\ 12\},\ \{4,\ 15\},\ \{15,\ 4\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec2d>\ tree;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(tree.existsPointInSphere(\{0.0,\ 0.0\},\ 1000));}
+\DoxyCodeLine{\ \ \ \ tree.insert(points);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ reference\_point(\{2,\ 3.1\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(tree.existsPointInSphere(reference\_point,\ 0.15));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(tree.existsPointInSphere(reference\_point,\ 0.15*0.15));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(KDTree,\ Mutable3DQuery\_2)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ points\ =\ \{\{2,\ 3,\ 7\},\ \{2,\ 4,\ -\/9.5\},\ \{1,\ -\/5,\ 7.2\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{7,\ 8,\ -\/40.6\},\ \{0,\ -\/2,\ 20.9\},\ \{9,\ 12,\ -\/102.1\},\ \{4,\ 15,\ 99.1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{15,\ 4,\ -\/0.4\},\ \{\ -\/4.2,\ 6,\ -\/9.8\},\ \{\ -\/1.5,\ -\/4.0,\ -\/7.0\}\};}
+\DoxyCodeLine{\ \ \ \ KDTreeMutable<Vec3d>\ tree(points);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ reference\_point(\{1,\ 3.0,\ 8.0\});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<int>}}\ closest\_points;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<double>}}\ distances;}
+\DoxyCodeLine{\ \ \ \ std::tie(closest\_points,\ distances)\ =\ tree.query(reference\_point,\ 2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<int>}}solution(\{0,\ 2\});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Range<double>}}\ dist\_solution(\{2.0,\ \ 0.8\ *\ 0.8\ +\ 8.0\ *\ 8.0\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(solution,\ closest\_points);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(dist\_solution,\ distances);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

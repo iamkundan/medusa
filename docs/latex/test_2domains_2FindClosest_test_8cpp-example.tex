@@ -1,0 +1,163 @@
+\doxysection{test/domains/\+Find\+Closest\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2FindClosest_test_8cpp-example}{}\label{test_2domains_2FindClosest_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stdtypesutils_8hpp}{medusa/bits/utils/stdtypesutils.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ FindClosestAll)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0,\ 0\},\ \{1,\ 1\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ d.size();}
+\DoxyCodeLine{\ \ \ \ Range<int>\ expected(N);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ expected[i]\ =\ i;}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(N));\ \ \textcolor{comment}{//\ should\ get\ everything}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ x\ :\ d.supports())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}}(x);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(expected.size(),\ x.size());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(expected,\ x);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ find\ in\ radius}}
+\DoxyCodeLine{\textcolor{comment}{/*}}
+\DoxyCodeLine{\textcolor{comment}{//\ see\ img/test\_case\_domain\_support.png}}
+\DoxyCodeLine{\textcolor{comment}{TEST(DomainEngines,\ FindClosestNoLimit)\ \{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ BoxShape<Vec2d>\ box(\{0,\ 0\},\ \{3,\ 3\});}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(1.0);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ d.findSupport(2,\ 10);\ \ //\ should\ not\ be\ limiting}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ int\ num\ =\ d.size();}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ std::map<Vec2d,\ Range<Vec2d>>\ expected(\{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{0,\ 0\},\ \{\{0,\ 0\},\ \{0,\ 1\},\ \{1,\ 0\},\ \{1,\ 1\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{1,\ 0\},\ \{\{0,\ 0\},\ \{0,\ 1\},\ \{1,\ 0\},\ \{1,\ 1\},\ \{2,\ 0\},\ \{2,\ 1\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{2,\ 0\},\ \{\{1,\ 0\},\ \{1,\ 1\},\ \{2,\ 0\},\ \{2,\ 1\},\ \{3,\ 0\},\ \{3,\ 1\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{3,\ 0\},\ \{\{2,\ 0\},\ \{2,\ 1\},\ \{3,\ 0\},\ \{3,\ 1\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{0,\ 1\},\ \{\{0,\ 0\},\ \{0,\ 1\},\ \{0,\ 2\},\ \{1,\ 0\},\ \{1,\ 1\},\ \{1,\ 2\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{1,\ 1\},\ \{\{0,\ 0\},\ \{0,\ 1\},\ \{0,\ 2\},\ \{1,\ 0\},\ \{1,\ 1\},\ \{1,\ 2\},\ \{2,\ 0\},\ \{2,\ 1\},\ \{2,\ 2\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{2,\ 1\},\ \{\{1,\ 0\},\ \{1,\ 1\},\ \{1,\ 2\},\ \{2,\ 0\},\ \{2,\ 1\},\ \{2,\ 2\},\ \{3,\ 0\},\ \{3,\ 1\},\ \{3,\ 2\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{3,\ 1\},\ \{\{2,\ 0\},\ \{2,\ 1\},\ \{2,\ 2\},\ \{3,\ 0\},\ \{3,\ 1\},\ \{3,\ 2\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{0,\ 2\},\ \{\{0,\ 1\},\ \{0,\ 2\},\ \{0,\ 3\},\ \{1,\ 1\},\ \{1,\ 2\},\ \{1,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{1,\ 2\},\ \{\{0,\ 1\},\ \{0,\ 2\},\ \{0,\ 3\},\ \{1,\ 1\},\ \{1,\ 2\},\ \{1,\ 3\},\ \{2,\ 1\},\ \{2,\ 2\},\ \{2,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{2,\ 2\},\ \{\{1,\ 1\},\ \{1,\ 2\},\ \{1,\ 3\},\ \{2,\ 1\},\ \{2,\ 2\},\ \{2,\ 3\},\ \{3,\ 1\},\ \{3,\ 2\},\ \{3,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{3,\ 2\},\ \{\{2,\ 1\},\ \{2,\ 2\},\ \{2,\ 3\},\ \{3,\ 1\},\ \{3,\ 2\},\ \{3,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{0,\ 3\},\ \{\{0,\ 2\},\ \{0,\ 3\},\ \{1,\ 2\},\ \{1,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{1,\ 3\},\ \{\{0,\ 2\},\ \{0,\ 3\},\ \{1,\ 2\},\ \{1,\ 3\},\ \{2,\ 2\},\ \{2,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{2,\ 3\},\ \{\{1,\ 2\},\ \{1,\ 3\},\ \{2,\ 2\},\ \{2,\ 3\},\ \{3,\ 2\},\ \{3,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \{\{3,\ 3\},\ \{\{2,\ 2\},\ \{2,\ 3\},\ \{3,\ 2\},\ \{3,\ 3\}\}\},}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \});}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ for\ (int\ i\ =\ 0;\ i\ <\ num;\ ++i)\ \{}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ Vec2d\ cur\ =\ d.pos(i);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ Range<Vec2d>\ a\ =\ d.supportNodes(i);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ sort(a.begin(),\ a.end());}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \ \ \ \ EXPECT\_EQ(expected[d.pos(i)],\ a);}}
+\DoxyCodeLine{\textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{\textcolor{comment}{\}\ */}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ see\ img/test\_case\_domain\_support.png}}
+\DoxyCodeLine{TEST(DomainEngines,\ FindClosest2d)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0,\ 0\},\ \{3,\ 3\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ ss\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(ss));}
+\DoxyCodeLine{\ \ \ \ std::map<Vec2d,\ Range<Vec2d>>\ expected(\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{\{1,\ 1\},\ \{\{0,\ 1\},\ \{1,\ 0\},\ \{1,\ 1\},\ \{1,\ 2\},\ \{2,\ 1\}\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{\{2,\ 1\},\ \{\{1,\ 1\},\ \{2,\ 0\},\ \{2,\ 1\},\ \{2,\ 2\},\ \{3,\ 1\}\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{\{1,\ 2\},\ \{\{0,\ 2\},\ \{1,\ 1\},\ \{1,\ 2\},\ \{1,\ 3\},\ \{2,\ 2\}\}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \{\{2,\ 2\},\ \{\{1,\ 2\},\ \{2,\ 1\},\ \{2,\ 2\},\ \{2,\ 3\},\ \{3,\ 2\}\}\},}
+\DoxyCodeLine{\ \ \ \ \});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ x\ :\ d.supports())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LE(x.size(),\ ss);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ d.interior())\ \{\ \ \textcolor{comment}{//\ internals\ are\ well\ defined}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ cur\ =\ d.pos(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<Vec2d>\ a\ =\ d.supportNodes(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{group__utils_ga87079d84cee5cd53d117cf7e9beceaf7}{sort}}(a.begin(),\ a.end());}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_EQ(expected[cur],\ a);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }FindClosestTest\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain;}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ pos;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ types;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ FindClosestTest()\ :\ domain(BoxShape<Vec1d>\{0,\ 1\})\ \{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ SetUp()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ pos\ =\ \{1.,\ 2.,\ 3.,\ 4.,\ 5.,\ 6.,\ 7.\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ types\ =\ \{-\/1,\ 2,\ -\/1,\ 2,\ 2,\ -\/1,\ -\/1\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ pos.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (types[i]\ >\ 0)\ domain.addInternalNode(pos[i],\ types[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ domain.addBoundaryNode(pos[i],\ types[i],\ pos[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(FindClosestTest,\ Ghost)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ gh\ =\ domain.addGhostNodes(0.001);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ Range<Range<int>>\ expected\ =\ \{\{0,\ 7\},\ \{1,\ 7\},\ \{2,\ 8\},\ \{3,\ 8\},\ \{4,\ 3\},\ \{5,\ 9\},\ \{6,\ 10\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\},\ \{\},\ \{\},\ \{\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(FindClosestTest,\ FindClosestForWhich)\ \{}
+\DoxyCodeLine{\ \ \ \ FindClosest\ f(1);\ f.forNodes(domain.boundary());}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(f);}
+\DoxyCodeLine{\ \ \ \ Range<Range<int>>\ expected\ =\ \{\{0\},\ \{\},\ \{2\},\ \{\},\ \{\},\ \{5\},\ \{6\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(FindClosestTest,\ FindClosestSearchAmong)\ \{}
+\DoxyCodeLine{\ \ \ \ FindClosest\ f(1);\ f.searchAmong(domain.interior());}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(f);}
+\DoxyCodeLine{\ \ \ \ Range<Range<int>>\ expected\ =\ \{\{1\},\ \{1\},\ \{1\},\ \{3\},\ \{4\},\ \{4\},\ \{4\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(FindClosestTest,\ FindClosestForceSelf)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Find\ the\ closest\ interior\ node\ for\ all\ nodes.}}
+\DoxyCodeLine{\ \ \ \ FindClosest\ f(1);\ f.searchAmong(domain.interior()).forceSelf(\textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(f);\ \ \textcolor{comment}{//\ domain\ is\ some\ DomainDiscretization}}
+\DoxyCodeLine{\ \ \ \ Range<Range<int>>\ expected\ =\ \{\{1\},\ \{1\},\ \{1\},\ \{3\},\ \{4\},\ \{4\},\ \{4\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\ \ \ \ f.forceSelf();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(f);}
+\DoxyCodeLine{\ \ \ \ expected\ =\ \{\{0\},\ \{1\},\ \{2\},\ \{3\},\ \{4\},\ \{5\},\ \{6\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\ \ \ \ f.numClosest(2);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(f);}
+\DoxyCodeLine{\ \ \ \ expected\ =\ \{\{0,\ 1\},\ \{1,\ 3\},\ \{2,\ 1\},\ \{3,\ 4\},\ \{4,\ 3\},\ \{5,\ 4\},\ \{6,\ 4\}\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ domain.supports());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ FindClosestDeath)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0,\ 0\},\ \{1,\ 1\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ FindClosest\ f(-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(d.findSupport(f),\ \textcolor{stringliteral}{"{}Support\ size\ must\ be\ greater\ than\ 0"{}});}
+\DoxyCodeLine{\ \ \ \ f.numClosest(122);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(d.findSupport(f),\ \textcolor{stringliteral}{"{}Support\ size\ \(\backslash\)\(\backslash\)(122)\ cannot\ exceed\ number\ of\ points\ that\ we\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}are\ searching\ among\ \(\backslash\)\(\backslash\)(121)."{}});}
+\DoxyCodeLine{\ \ \ \ f.numClosest(5).forNodes(\{1000\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(d.findSupport(f),\ \textcolor{stringliteral}{"{}Index\ 1000\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 121)\ in\ forNodes."{}});}
+\DoxyCodeLine{\ \ \ \ f.numClosest(1).forNodes(\{\}).searchAmong(\{5000\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(d.findSupport(f),\ \textcolor{stringliteral}{"{}Index\ 5000\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 121)\ in\ searchAmong."{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,470 @@
+\doxysection{mm\+::RBFBasis\texorpdfstring{$<$}{<} RBFType, vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1RBFBasis}{}\label{classmm_1_1RBFBasis}\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+
+
+{\ttfamily \#include $<$RBFBasis\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+RBFBasis$<$ RBFType, vec\+\_\+t $>$}
+Represents a basis of Radial Basis Functions over a local neighbourhood. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em RBFType} & Type of the RBF used. Must satisfy the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}. \\
+\hline
+{\em vec\+\_\+t} & Vector type used in calculations.\\
+\hline
+\end{DoxyTemplParams}
+This class satisfies the \doxysectlink{concepts_basis-concept}{Basis function concept}{1}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(1.3);}
+\DoxyCodeLine{\ \ \ \ RBFBasis<Gaussian<double>,\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}>\ basis(3,\ g);\ \ \textcolor{comment}{//\ construct}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ basis\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ support\ =\ \{\{0.1,\ 2.3\},\ \{0.2,\ 2.2\},\ \{0.0,\ 2.25\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ basis.eval(1,\ 0.05,\ support);\ \ \textcolor{comment}{//\ evaluate}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ basis.evalOp(1,\ 0.05,\ Lap<2>(),\ support);\ \ \textcolor{comment}{//\ evaluate\ derivative}}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a175cf579b4a38da88482849753438873}{RBFBasis}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+size}})
+\begin{DoxyCompactList}\small\item\em Construct a basis of {\ttfamily basis\+\_\+size} with default construction of RBF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a4cd1de95d6dd78d087a510fb628bd85f}{RBFBasis}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+size}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1RBFBasis_a6f52b3f754eab394b1aac763bf11ec86}{rbf}})
+\begin{DoxyCompactList}\small\item\em Construct a basis of {\ttfamily basis\+\_\+size} with given RBF. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1RBFBasis_a1e21ee16589cfd022d08b3e86ca94de7}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns basis size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFBasis_a6f52b3f754eab394b1aac763bf11ec86}{rbf}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns underlying RBF object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFBasis_a4c68dfd90073a24eed42267da1f1396e}{rbf}} ()
+\begin{DoxyCompactList}\small\item\em Returns modifiable underlying RBF object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_ab59c28c466af9432eab98c88061c7578}{eval}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&point, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluates {\ttfamily index}-\/th RBF\textquotesingle{}s at {\ttfamily point}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{eval\+Op}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&point, operator\+\_\+t op, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Apply an operator at a given point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a34059852ee0659f5cf2f07d0b1382cc8}{eval\+Op}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&point, \mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ op, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate Laplacian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a6bc181cca33850b3a2224f7a8c791af7}{eval\+Op}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&point, \mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ op, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate 1st derivative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_acf3f1fcc68b352edc09e72b1659d61df}{eval\+Op}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&point, \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ op, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate 2nd derivative. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a667a5725291881d7c5de7ec251cc1c77}{eval\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate {\ttfamily index}-\/th function at zero. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}{eval\+Op\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&op, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate general operator {\ttfamily op} at zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_ae4ab97ed3770068785e3325108499eb7}{eval\+Op\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ \&lap, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate Laplacian {\ttfamily lap} at zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a585c5091deeaa7995ed5e85824b4198b}{eval\+Op\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ \&der1, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate first derivative operator {\ttfamily der1} at zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a385273a02d35e205c90b52de9f3e0ccd}{eval\+Op\+At0}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} index, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ \&der2, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} scale=1) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate second derivative operator {\ttfamily der2} at zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} \mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Radial basis function type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vector\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1RBFBasis_af31630f6deba90ce21ebc490a0dc15f9}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given basis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1RBFBasis_a947ae202442d093885ad1c365c348822}{size\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Basis size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis_ab1682a3bae3dc8c40cca3248af449240}{rbf\+\_\+}}
+\begin{DoxyCompactList}\small\item\em RBF function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7f}\label{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7f} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}\label{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05} 
+dim&Dimensionality of the function domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1RBFBasis_a175cf579b4a38da88482849753438873}\label{classmm_1_1RBFBasis_a175cf579b4a38da88482849753438873} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!RBFBasis@{RBFBasis}}
+\index{RBFBasis@{RBFBasis}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{RBFBasis()}{RBFBasis()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+RBFBasis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{basis\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a basis of {\ttfamily basis\+\_\+size} with default construction of RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a4cd1de95d6dd78d087a510fb628bd85f}\label{classmm_1_1RBFBasis_a4cd1de95d6dd78d087a510fb628bd85f} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!RBFBasis@{RBFBasis}}
+\index{RBFBasis@{RBFBasis}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{RBFBasis()}{RBFBasis()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+RBFBasis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{basis\+\_\+size,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \&}]{rbf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a basis of {\ttfamily basis\+\_\+size} with given RBF. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1RBFBasis_ab59c28c466af9432eab98c88061c7578}\label{classmm_1_1RBFBasis_ab59c28c466af9432eab98c88061c7578} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!eval@{eval}}
+\index{eval@{eval}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support }\end{DoxyParamCaption}) const}
+
+
+
+Evaluates {\ttfamily index}-\/th RBF\textquotesingle{}s at {\ttfamily point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & A number in {\ttfamily \mbox{[}0, \doxylink{classmm_1_1RBFBasis_a1e21ee16589cfd022d08b3e86ca94de7}{size()})} specifying the index of RBF to evaluate. \\
+\hline
+{\em point} & Point in which to evaluate the RBF. \\
+\hline
+{\em support} & Points in local neighbourhood used as centers for RBFs.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of requested monomial at given point. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if {\ttfamily index} is out of range or if an invalid derivative is requested.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Derivatives only up to combined order of 2 are currently supported. 
+\end{DoxyNote}
+\Hypertarget{classmm_1_1RBFBasis_a667a5725291881d7c5de7ec251cc1c77}\label{classmm_1_1RBFBasis_a667a5725291881d7c5de7ec251cc1c77} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalAt0@{evalAt0}}
+\index{evalAt0@{evalAt0}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalAt0()}{evalAt0()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} $>$\+::eval\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate {\ttfamily index}-\/th function at zero. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a6bc181cca33850b3a2224f7a8c791af7}\label{classmm_1_1RBFBasis_a6bc181cca33850b3a2224f7a8c791af7} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOp@{evalOp}}
+\index{evalOp@{evalOp}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOp()}{evalOp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate 1st derivative. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{eval\+Op} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_acf3f1fcc68b352edc09e72b1659d61df}\label{classmm_1_1RBFBasis_acf3f1fcc68b352edc09e72b1659d61df} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOp@{evalOp}}
+\index{evalOp@{evalOp}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOp()}{evalOp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate 2nd derivative. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{eval\+Op} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a34059852ee0659f5cf2f07d0b1382cc8}\label{classmm_1_1RBFBasis_a34059852ee0659f5cf2f07d0b1382cc8} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOp@{evalOp}}
+\index{evalOp@{evalOp}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOp()}{evalOp()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate Laplacian. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}{eval\+Op} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4}\label{classmm_1_1RBFBasis_a3c3bd07520afc66e3951b311bd93b9d4} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOp@{evalOp}}
+\index{evalOp@{evalOp}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOp()}{evalOp()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} \&}]{point,  }\item[{operator\+\_\+t}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Apply an operator at a given point. 
+
+For $\frac{d}{dx}$, the function computes $ \frac{d}{dx} p_i(x_s), x_s = \frac{x - c}{s} $. 
+\begin{DoxyParams}{Parameters}
+{\em index} & A number in {\ttfamily \mbox{[}0, \doxylink{classmm_1_1RBFBasis_a1e21ee16589cfd022d08b3e86ca94de7}{size()})} specifying the index of a monomial to evaluate. \\
+\hline
+{\em point} & Translated and scaled point $x_s$ at which the basis function is evaluated. \\
+\hline
+{\em op} & The differential operator. \\
+\hline
+{\em support} & Translated and scaled values of nodes in the support domain. \\
+\hline
+{\em scale} & The scaling factor $s$. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the operator applied to {\ttfamily index}-\/th basis function at point {\ttfamily point}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if {\ttfamily index} is out of range. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxySeeAlso}{See also}
+\doxylink{structmm_1_1Operator}{Operator}, \doxylink{structmm_1_1Lap}{Lap}, \doxylink{structmm_1_1Der1}{Der1}, \doxylink{structmm_1_1Der2}{Der2} 
+\end{DoxySeeAlso}
+\Hypertarget{classmm_1_1RBFBasis_a585c5091deeaa7995ed5e85824b4198b}\label{classmm_1_1RBFBasis_a585c5091deeaa7995ed5e85824b4198b} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOpAt0@{evalOpAt0}}
+\index{evalOpAt0@{evalOpAt0}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOpAt0()}{evalOpAt0()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der1}{Der1}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ \&}]{der1,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate first derivative operator {\ttfamily der1} at zero. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00095}{95}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a385273a02d35e205c90b52de9f3e0ccd}\label{classmm_1_1RBFBasis_a385273a02d35e205c90b52de9f3e0ccd} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOpAt0@{evalOpAt0}}
+\index{evalOpAt0@{evalOpAt0}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOpAt0()}{evalOpAt0()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Der2}{Der2}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ \&}]{der2,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate second derivative operator {\ttfamily der2} at zero. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00114}{114}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_ae4ab97ed3770068785e3325108499eb7}\label{classmm_1_1RBFBasis_ae4ab97ed3770068785e3325108499eb7} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOpAt0@{evalOpAt0}}
+\index{evalOpAt0@{evalOpAt0}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOpAt0()}{evalOpAt0()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a2860e9f5fb13a88333bb90cf933b4d7fa4db3892d5a26bd0802039d6c5edc7f05}{dim}} $>$ \&}]{lap,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate Laplacian {\ttfamily lap} at zero. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3}\label{classmm_1_1RBFBasis_a71ee5182ce79a00e931242c32cc600d3} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!evalOpAt0@{evalOpAt0}}
+\index{evalOpAt0@{evalOpAt0}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{evalOpAt0()}{evalOpAt0()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::eval\+Op\+At0 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{index,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1RBFBasis_a0818a060c625cb4ff1cacbcf90e96391}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1RBFBasis_a2169b45da59efb8d1c0de8efe80ae7c8}{scalar\+\_\+t}}}]{scale = {\ttfamily 1} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate general operator {\ttfamily op} at zero. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & A number in {\ttfamily \mbox{[}0, \doxylink{classmm_1_1RBFBasis_a1e21ee16589cfd022d08b3e86ca94de7}{size()})} specifying the index of RBF to evaluate. \\
+\hline
+{\em op} & Evaluated operator.\\
+\hline
+{\em support} & Points in local neighbourhood used as centers for RBFs. \\
+\hline
+{\em scale} & Scaling factor.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of requested monomial at given point. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if {\ttfamily index} is out of range or if an invalid derivative is requested. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00115}{115}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a4c68dfd90073a24eed42267da1f1396e}\label{classmm_1_1RBFBasis_a4c68dfd90073a24eed42267da1f1396e} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!rbf@{rbf}}
+\index{rbf@{rbf}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf()}{rbf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns modifiable underlying RBF object. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a6f52b3f754eab394b1aac763bf11ec86}\label{classmm_1_1RBFBasis_a6f52b3f754eab394b1aac763bf11ec86} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!rbf@{rbf}}
+\index{rbf@{rbf}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf()}{rbf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns underlying RBF object. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00054}{54}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a1e21ee16589cfd022d08b3e86ca94de7}\label{classmm_1_1RBFBasis_a1e21ee16589cfd022d08b3e86ca94de7} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!size@{size}}
+\index{size@{size}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns basis size. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00051}{51}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1RBFBasis_af31630f6deba90ce21ebc490a0dc15f9}\label{classmm_1_1RBFBasis_af31630f6deba90ce21ebc490a0dc15f9} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1RBFBasis}{RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about given basis. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{RBFBasis_8hpp_source}{RBFBasis.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1RBFBasis_ab1682a3bae3dc8c40cca3248af449240}\label{classmm_1_1RBFBasis_ab1682a3bae3dc8c40cca3248af449240} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!rbf\_@{rbf\_}}
+\index{rbf\_@{rbf\_}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{rbf\_}{rbf\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1RBFBasis_a7f35f962c6df55bbdbe428034068a201}{rbf\+\_\+t}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::rbf\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+RBF function. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1RBFBasis_a947ae202442d093885ad1c365c348822}\label{classmm_1_1RBFBasis_a947ae202442d093885ad1c365c348822} 
+\index{mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}!size\_@{size\_}}
+\index{size\_@{size\_}!mm::RBFBasis$<$ RBFType, vec\_t $>$@{mm::RBFBasis$<$ RBFType, vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1RBFBasis}{mm\+::\+RBFBasis}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFType}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Basis size. 
+
+
+
+Definition at line \mbox{\hyperlink{RBFBasis__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{RBFBasis__fwd_8hpp_source}{RBFBasis\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{RBFBasis__fwd_8hpp}{RBFBasis\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{RBFBasis_8hpp}{RBFBasis.\+hpp}}\end{DoxyCompactItemize}

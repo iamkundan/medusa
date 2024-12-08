@@ -1,0 +1,211 @@
+\doxysection{test/domains/\+General\+Fill\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2GeneralFill_test_8cpp-example}{}\label{test_2domains_2GeneralFill_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{GeneralFill__fwd_8hpp}{medusa/bits/domains/GeneralFill\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape_8hpp}{medusa/bits/domains/BallShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization__fwd_8hpp}{medusa/bits/domains/DomainDiscretization\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDGrid_8hpp}{medusa/bits/spatial\_search/KDGrid.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFill1D)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec1d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec1d>\ domain\ =\ b.discretizeBoundaryWithStep(dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ find\ minimal\ distance}}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ minimal\ distance\ between\ two\ nodes\ is\ above\ target\ radius\ *\ proximityTolerance}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(*std::min\_element(tmp.begin(),\ tmp.end()),\ dx-\/1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ dx)\ /\ dx;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.31);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFill2DConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setup}}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(\{0,\ 0\},\ \{1.2,\ 1.5\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(\{0.4,\ 0.4\},\ 0.25);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(b-\/c);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ find\ minimal\ distance}}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ minimal\ distance\ between\ two\ nodes\ is\ above\ target\ radius}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(*std::min\_element(tmp.begin(),\ tmp.end()),\ dx-\/1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ dx)\ /\ dx;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.2);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFill2DFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setup}}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(\{0,\ 0\},\ \{1.2,\ 1.5\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(\{0.4,\ 0.4\},\ 0.25);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(b-\/c);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ define\ target\ density}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dx\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ std::pow(p[0]/10,\ 2)\ +\ 0.01;\ \};}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ find\ minimal\ distance}}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ minimal\ distance\ between\ two\ nodes\ is\ above\ target\ radius}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(*std::min\_element(tmp.begin(),\ tmp.end()),\ \ dx(0.0)-\/1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ dx(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.25);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFill2DFunctionFillBackgroundGrid)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setup}}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ bot\ =\ \{0,\ 0\},\ top\ =\ \{1.2,\ 1.5\};}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(bot,\ top);}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(\{0.4,\ 0.4\},\ 0.25);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(b-\/c);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ define\ target\ density}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dx\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ std::pow(p[0]/10,\ 2)\ +\ 0.01;\ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ KDGrid<Vec2d>\ grid(bot,\ top,\ 0.005);}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx,\ grid);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ find\ minimal\ distance}}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ minimal\ distance\ between\ two\ nodes\ is\ above\ target\ radius}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(*std::min\_element(tmp.begin(),\ tmp.end()),\ \ dx(0.0)-\/1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ dx(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.25);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFill3DConstantFill)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec3d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ b(\{0,\ 0,\ 0\},\ \{1.2,\ 1.5,\ 1.1\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ c(\{0,\ 0,\ 0\},\ 0.5);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(b-\/c);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.05;}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ find\ minimal\ distance\ -\/\ Actual\ test}}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ minimal\ distance\ between\ two\ nodes\ is\ above\ target\ radius}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(*std::min\_element(tmp.begin(),\ tmp.end()),\ dx-\/1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ dx)\ /\ dx;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.31);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFill3DFunctionFill)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec3d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ b(\{0,\ 0,\ 0\},\ \{1.2,\ 1.5,\ 1.1\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec3d>\ c(\{0,\ 0,\ 0\},\ 0.5);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(b-\/c);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ define\ target\ density}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ dx\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::pow(p[0]/10\ +\ p[1]/10\ +\ p[2]/10,\ 2)\ +\ 0.025;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ domain.fill(fill\_engine,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ find\ minimal\ distance\ -\/\ Actual\ test}}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ tmp;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ domain.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ tmp.push\_back(domain.dr(i));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ check\ if\ minimal\ distance\ between\ two\ nodes\ is\ above\ target\ radius}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(*std::min\_element(tmp.begin(),\ tmp.end()),\ dx(0.0)-\/1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(2));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ dr\ =\ domain.dr(i);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ dx(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ std::abs(dr\ -\/\ h)\ /\ h;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT(err,\ 0.4);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GeneralFillMaxPoints)\ \{}
+\DoxyCodeLine{\ \ \ \ GeneralFill<Vec2d>\ fill\_engine;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ max\_points\ =\ 1000,\ num\_samples\ =\ 15;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ setup}}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(1).maxPoints(max\_points).numSamples(num\_samples);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ test\ domain}}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ b(\{0,\ 0\},\ \{1.2,\ 1.5\});}
+\DoxyCodeLine{\ \ \ \ BallShape<Vec2d>\ c(\{0.4,\ 0.4\},\ 0.25);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(b-\/c);}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ dx\ =\ 0.01;}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ dx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(domain.positions().size(),\ max\_points\ +\ num\_samples);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_GE(domain.positions().size(),\ max\_points\ -\/\ num\_samples);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

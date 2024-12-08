@@ -1,0 +1,246 @@
+\doxysection{test/domains/\+NURBSPatch\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2NURBSPatch_test_8cpp-example}{}\label{test_2domains_2NURBSPatch_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{NURBSPatch_8hpp}{medusa/bits/domains/NURBSPatch.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ NURBSPatchCurveEvaluate)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ w(\{1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1\});}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ cp(\{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ -\/1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec1d>\ curve(cp,\ w,\ \{knots\},\ \{p\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\ =\ curve.evaluate(\{\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.evaluate(\{4.0\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/0.680118,\ -\/0.779688,\ 0)).norm(),\ 1e-\/6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.evaluate(\{0.25\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.973728,\ 0.266684,\ 0)).norm(),\ 1e-\/6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.evaluate(\{0.0\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.evaluate(\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ NURBSPatchCurveJacobian)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ w(\{1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1\});}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ cp(\{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ -\/1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec1d>\ curve(cp,\ w,\ \{knots\},\ \{p\});}
+\DoxyCodeLine{\ \ \ \ curve.computeDerivativeStructure();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\ =\ curve.jacobian(\{\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.0,\ -\/1.1026577908435842,\ 0.0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.jacobian(\{4.0\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.7398593320616775,\ -\/0.6222573803412518,\ 0.0)).norm(),\ 1e-\/6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.jacobian(\{0.25\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/0.2133476868599212,\ 1.0219703846566797,\ 0.0)).norm(),\ 1e-\/6);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.jacobian(\{0.0\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.0,\ 1.1026577908435842,\ 0.0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.jacobian(\{2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.0,\ 1.1026577908435842,\ 0.0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ NURBSPatchCurveBoundary)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ p\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ w(\{1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1,\ sqrt(3)\ /\ 2,\ 1\});}
+\DoxyCodeLine{\ \ \ \ Range<double>\ knots(\{0,\ 0,\ 0,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2,\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}},\ 2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\});}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ cp(\{\mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ 1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0,\ -\/1,\ 0),\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ -\/1,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1,\ 0,\ 0)\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec1d>\ curve(cp,\ w,\ \{knots\},\ \{p\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(curve.getBoundaries().size(),\ 2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ pt\ =\ curve.getPatchParameterFromBoundaryParameter(\{\},\ 0,\ 0.25);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}(\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2)).norm(),\ 1e-\/11);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ curve.getPatchParameterFromBoundaryParameter(\{\},\ 1,\ 0.25);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}(2\ *\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ -\/\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ /\ 2)).norm(),\ 1e-\/11);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ NURBSPatchSurfaceEvaluate)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ p\ =\ std::array<int,\ 2>\{1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ std::array<Range<double>,\ 2>\{Range<double>(\{0,\ 0,\ 1,\ 1\}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Range<double>(\{0,\ 0,\ 0,\ 0.25,\ 0.25,\ 0.5,\ 0.5,\ 0.75,\ 0.75,\ 1,\ 1,\ 1\})\};}
+\DoxyCodeLine{\ \ \ \ Range<Range<Vec<double,\ 4>>>\ wcp(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ 0.7071;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ 1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ 1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec2d>\ surf(wcp,\ knots,\ p);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\ =\ surf.evaluate(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.5,\ 0.5));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(-\/1,\ 0,\ 0.5)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ surf.evaluate(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.543,\ 0.123));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.7164157130984911,\ 0.6976712959591224,\ 0.543)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ surf.evaluate(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.341,\ 0.796));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(0.26993127614132345,\ -\/0.9628790508533985,\ 0.341)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ surf.evaluate(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.0,\ 0.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1.0,\ 0.0,\ 0.0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pt\ =\ surf.evaluate(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1.0,\ 1.0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((pt\ -\/\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}(1.0,\ 0.0,\ 1.0)).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ NURBSPatchSurfaceJacobian)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ p\ =\ std::array<int,\ 2>\{1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ std::array<Range<double>,\ 2>\{Range<double>(\{0,\ 0,\ 1,\ 1\}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ Range<double>(\{0,\ 0,\ 0,\ 0.25,\ 0.25,\ 0.5,\ 0.5,\ 0.75,\ 0.75,\ 1,\ 1,\ 1\})\};}
+\DoxyCodeLine{\ \ \ \ Range<Range<Vec<double,\ 4>>>\ wcp(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ 0.7071;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ 1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ 1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec2d>\ surf(wcp,\ knots,\ p);}
+\DoxyCodeLine{\ \ \ \ surf.computeDerivativeStructure();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ jm\ =\ surf.jacobian(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.5,\ 0.5));}
+\DoxyCodeLine{\ \ \ \ Eigen::Matrix<double,\ 3,\ 2>\ actual\_jm;}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(0)\ <<\ 0,\ 0,\ 1;}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(1)\ <<\ 0.0,\ -\/5.6568,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((jm\ -\/\ actual\_jm).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ jm\ =\ surf.jacobian(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.543,\ 0.123));}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(0)\ <<\ 0,\ 0,\ 1;}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(1)\ <<\ -\/4.623582182148408,\ 4.747803096778865,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((jm\ -\/\ actual\_jm).norm(),\ 1e-\/10);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ jm\ =\ surf.jacobian(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.341,\ 0.796));}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(0)\ <<\ 0,\ 0,\ 1;}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(1)\ <<\ 5.972112805677801,\ 1.6742281610437675,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((jm\ -\/\ actual\_jm).norm(),\ 1e-\/10);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ jm\ =\ surf.jacobian(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(0.0,\ 0.0));}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(0)\ <<\ 0,\ 0,\ 1;}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(1)\ <<\ 0.0,\ 5.6568,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((jm\ -\/\ actual\_jm).norm(),\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ jm\ =\ surf.jacobian(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(1.0,\ 1.0));}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(0)\ <<\ 0,\ 0,\ 1;}
+\DoxyCodeLine{\ \ \ \ actual\_jm.col(1)\ <<\ 0.0,\ 5.6568,\ 0.0;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((jm\ -\/\ actual\_jm).norm(),\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ NURBSPatchSurfaceBoundary)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ p\ =\ std::array<int,\ 2>\{1,\ 2\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ knots\ =\ std::array<Range<double>,\ 2>\{Range<double>(\{0,\ 0,\ 1,\ 1\}),}
+\DoxyCodeLine{\ \ \ \ Range<double>(\{0,\ 0,\ 0,\ 0.25,\ 0.25,\ 0.5,\ 0.5,\ 0.75,\ 0.75,\ 1,\ 1,\ 1\})\};}
+\DoxyCodeLine{\ \ \ \ Range<Range<Vec<double,\ 4>>>\ wcp(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ 0.7071;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ 1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 0,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(x,\ -\/x,\ 0,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[0].push\_back(Vec<double,\ 4>(1,\ 0,\ 0,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ 1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(-\/x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(0,\ -\/1,\ 1,\ 1));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(x,\ -\/x,\ x,\ x));}
+\DoxyCodeLine{\ \ \ \ wcp[1].push\_back(Vec<double,\ 4>(1,\ 0,\ 1,\ 1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ NURBSPatch<Vec3d,\ Vec2d>\ surf(wcp,\ knots,\ p);}
+\DoxyCodeLine{\ \ \ \ surf.computeDerivativeStructure();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ edges\ =\ surf.getBoundaries();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ t\ =\ 0.3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\_surf\ =\ surf.evaluate(surf.getPatchParameterFromBoundaryParameter(t,\ i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\_edge\ =\ edges[i].evaluate(t);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT((pt\_surf\ -\/\ pt\_edge).norm(),\ 1e-\/9);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ t\ =\ 0.75;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 4;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\_surf\ =\ surf.evaluate(surf.getPatchParameterFromBoundaryParameter(t,\ i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ pt\_edge\ =\ edges[i].evaluate(t);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_LT((pt\_surf\ -\/\ pt\_edge).norm(),\ 1e-\/9);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ edges[0].computeDerivativeStructure();}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ der\ =\ edges[0].jacobian(t);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ jac\ =\ surf.jacobian(surf.getPatchParameterFromBoundaryParameter(t,\ 0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((der\ -\/\ jac.col(1)).norm(),\ 1e-\/9);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ edges[3].computeDerivativeStructure();}
+\DoxyCodeLine{\ \ \ \ der\ =\ edges[3].jacobian(t);}
+\DoxyCodeLine{\ \ \ \ jac\ =\ surf.jacobian(surf.getPatchParameterFromBoundaryParameter(t,\ 3));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((der\ -\/\ jac.col(0)).norm(),\ 1e-\/9);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

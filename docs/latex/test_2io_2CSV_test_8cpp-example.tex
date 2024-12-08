@@ -1,0 +1,71 @@
+\doxysection{test/io/\+CSV\+\_\+test.\+cpp}
+\hypertarget{test_2io_2CSV_test_8cpp-example}{}\label{test_2io_2CSV_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CSV_8hpp}{medusa/bits/io/CSV.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{CSV__Eigen_8hpp}{medusa/bits/io/CSV\_Eigen.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <Eigen/Core>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ CSVRW1d)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ v\ =\ \{1,\ 2,\ 3,\ -\/3.41203498123234\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}{CSV::write}}(\textcolor{stringliteral}{"{}test/testdata/v.csv"{}},\ v);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ vread\ =\ \mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{CSV::read}}(\textcolor{stringliteral}{"{}test/testdata/v.csv"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(v,\ vread);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ CSVRW2d)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<std::vector<double>>\ M\ =\ \{\{1,\ \ \ \ 2\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{3,\ \ \ \ -\/3.4\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/4.5,\ 4.5\}\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a4deed22f2309873bd25272a76d0eb245}{CSV::write2d}}(\textcolor{stringliteral}{"{}test/testdata/M.csv"{}},\ M,\ \textcolor{charliteral}{'!'});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ Mread\ =\ \mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{CSV::read2d}}(\textcolor{stringliteral}{"{}test/testdata/M.csv"{}},\ \textcolor{charliteral}{'!'});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(M,\ Mread);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ CSVEigen1D)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ v(10);}
+\DoxyCodeLine{\ \ \ \ v\ <<\ 1,\ 3,\ 4,\ -\/2,\ 3,\ 5.6,\ 3.4,\ -\/2.3,\ 4,\ 5;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}{CSV::write}}(\textcolor{stringliteral}{"{}test/testdata/v2.csv"{}},\ v);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ vread\ =\ \mbox{\hyperlink{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}{CSV::readEigen}}(\textcolor{stringliteral}{"{}test/testdata/v2.csv"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((v\ -\/\ vread).isZero(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ CSVEigen2D)\ \{}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M(3,\ 2);\ M\ <<\ 1,\ 2,\ 3,\ 4.3,\ 7.1,\ -\/2.3;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5}{CSV::writeEigen}}(\textcolor{stringliteral}{"{}test/testdata/M2.csv"{}},\ M,\ \textcolor{charliteral}{';'});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ Mread\ =\ \mbox{\hyperlink{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}{CSV::readEigen}}(\textcolor{stringliteral}{"{}test/testdata/M2.csv"{}},\ \textcolor{charliteral}{';'});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE((M\ -\/\ Mread).isZero(0));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ CSVDeath)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(\mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{CSV::read2d}}(\textcolor{stringliteral}{"{}test/testdata/death1.csv"{}}),\ \textcolor{stringliteral}{"{}Failed\ parsing\ .*\ to\ double"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(\mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{CSV::read2d}}(\textcolor{stringliteral}{"{}test/testdata/death2.csv"{}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Not\ all\ rows\ in\ CSV\ file\ have\ the\ same\ number\ of\ elements"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(\mbox{\hyperlink{classmm_1_1CSV_a3ffd7a2cf149b38b2f0be5c7c860f62f}{CSV::read2d}}(\textcolor{stringliteral}{"{}test/testdata/death3.csv"{}}),\ \textcolor{stringliteral}{"{}Error\ opening\ CSV\ file"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(IO,\ CSVUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ v\ =\ \{1,\ 2.5,\ -\/4.5,\ 12.34\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a04e312fc77c662d9e7f694f2fa0cf9a0}{CSV::write}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}},\ v);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ v2\ =\ \mbox{\hyperlink{classmm_1_1CSV_a42cb855a9889a08a8b494500773716fa}{CSV::read}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ v\ is\ the\ same\ as\ v2}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ For\ the\ following,\ the\ CSV\_Eigen.hpp\ header\ needs\ to\ be\ included.}}
+\DoxyCodeLine{\ \ \ \ Eigen::MatrixXd\ M\ =\ \mbox{\hyperlink{classmm_1_1CSV_a296bf04b4d77201dda0571e2f3d6f48a}{CSV::readEigen}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1CSV_a11d3da0c988e7b591a1b0a95e75b81a5}{CSV::writeEigen}}(\textcolor{stringliteral}{"{}test/testdata/example.csv"{}},\ M.transpose()*M);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(v,\ v2);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

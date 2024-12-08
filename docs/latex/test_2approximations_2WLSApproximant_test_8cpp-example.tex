@@ -1,0 +1,104 @@
+\doxysection{test/approximations/\+WLSApproximant\+\_\+test.\+cpp}
+\hypertarget{test_2approximations_2WLSApproximant_test_8cpp-example}{}\label{test_2approximations_2WLSApproximant_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{WLSApproximant_8hpp}{medusa/bits/approximations/WLSApproximant.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{bits_2approximations_2Operators_8hpp}{medusa/bits/approximations/Operators.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{WLS_8hpp}{medusa/bits/approximations/WLS.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{JacobiSVDWrapper_8hpp}{medusa/bits/approximations/JacobiSVDWrapper.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Monomials_8hpp}{medusa/bits/approximations/Monomials.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFBasis_8hpp}{medusa/bits/approximations/RBFBasis.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{WeightFunction_8hpp}{medusa/bits/approximations/WeightFunction.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Gaussian_8hpp}{medusa/bits/approximations/Gaussian.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSApproximantInterpolation)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ point\ =\ 1.2;}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec1d>\ support\ =\ \{0.5,\ 0.6,\ 0.8,\ 1.0,\ 1.1,\ 1.4,\ 1.5\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ support.size();}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ values(n);\ \ \textcolor{comment}{//\ monomial\ 2x\string^2\ -\/\ 3x\ +\ 5\ is\ reproduced\ exactly}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ values[i]\ =\ 2*support[i][0]*support[i][0]\ -\/\ 3*support[i][0]\ +\ 4;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec1d>,\ NoWeight<Vec1d>,\ ScaleToClosest>\ wls(n-\/1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ appr\ =\ wls.getApproximant(point,\ support,\ values);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(2*support[i][0]*support[i][0]\ -\/\ 3*support[i][0]\ +\ 4,\ appr(support[i]),\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(4*support[i][0]\ -\/\ 3,\ appr(support[i],\ Der1<1>(0)),\ 1e-\/13);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(4,\ appr(support[i],\ Der2<1>(0)),\ 1e-\/11);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(appr.residual(),\ 0,\ 1e-\/16);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSApproximantLS)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1,\ u1\ =\ 3.23432,\ u2\ =\ -\/2.3234,\ u3\ =\ 0.12443498,\ u4\ =\ 1.908432,\ u5\ =\ -\/0.98742532;}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =\ \{\{0,\ 0\},\ \{0,\ -\/h\},\ \{0,\ h\},\ \{h,\ 0\},\ \{-\/h,\ 0\}\};}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ values(pts.size());\ values\ <<\ u1,\ u2,\ u3,\ u4,\ u5;}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ expected\_coeff(wls.basis().size());}
+\DoxyCodeLine{\ \ \ \ expected\_coeff\ <<\ u1/5.\ +\ u2/5.\ +\ u3/5.\ +\ u4/5.\ +\ u5/5.,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ -\/u2/2.\ +\ u3/2.,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ u4/2.\ -\/\ u5/2.;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ appr\ =\ wls.getApproximant(0.0,\ pts,\ values);}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ coeff\ =\ appr.coefficients();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ appr.basis().size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(coeff[i],\ expected\_coeff[i],\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSApproximantWLS)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1,\ u1\ =\ 3.23432,\ u2\ =\ -\/2.3234,\ u3\ =\ 0.12443498,\ u4\ =\ 1.908432,\ u5\ =\ -\/0.98742532;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ c\ =\ \{0.05,\ 0.05\};}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{0,\ -\/h\},\ \{h,\ 0\},\ \{-\/h,\ 0\}\};}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ values(pts.size());\ values\ <<\ u1,\ u2,\ u3,\ u4,\ u5;}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ GaussianWeight<Vec2d>,\ ScaleToClosest>\ wls(1,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ appr\ =\ wls.getApproximant(c,\ pts,\ values);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ appr(0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ appr(0,\ Der1<2>(1));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(value,\ 3.2248113457636491,\ 1e-\/15);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(der,\ -\/55.453110407462376,\ 1e-\/15);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ expected\_coeff(wls.basis().size());}
+\DoxyCodeLine{\ \ \ \ expected\_coeff\ <<\ \ \textcolor{comment}{//\ calculated\ using\ Mathematica\ (see\ test/approximations/wls\_fit.nb)}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ 0.000668905719969*u1\ +\ 0.499832773570008*u2\ -\/\ 0.0001672264299923161*u3\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ 0.499832773570008*u4\ -\/\ 0.0001672264299923161*u5,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ -\/0.7047418423337238*u1\ +\ 0.7063969822976793*u2\ -\/\ 0.000709798888868241*u3\ -\/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ 0.0004726705375436*u4\ -\/\ 0.0004726705375436009*u5,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ -\/0.7047418423337238*u1\ -\/\ 0.0004726705375436*u2\ -\/\ 0.0004726705375436009*u3\ +}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ 0.7063969822976793*u4\ -\/\ 0.000709798888868241*u5;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ coeff\ =\ appr.coefficients();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ appr.basis().size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(coeff[i],\ expected\_coeff[i],\ 1e-\/14);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(appr(0),\ 3.2248113457636491,\ 1e-\/15);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Approximations,\ WLSInterpolantRBF)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.154,\ u1\ =\ 3.23432,\ u2\ =\ -\/2.3234,\ u3\ =\ 0.12443498,\ u4\ =\ 1.908432,\ u5\ =\ -\/0.98742532;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ c\ =\ \{0.05,\ 0.05\};}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{0,\ -\/h\},\ \{h,\ 0\},\ \{-\/h,\ 0\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ x\ :\ pts)\ x\ +=\ c;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ values(pts.size());\ values\ <<\ u1,\ u2,\ u3,\ u4,\ u5;}
+\DoxyCodeLine{\ \ \ \ WLS<Gaussians<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(\{5,\ 1.0\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ appr\ =\ wls.getApproximant(\{0.123,\ -\/0.654\},\ pts,\ values);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ 5;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(values[i],\ appr(pts[i]),\ 1e-\/11);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

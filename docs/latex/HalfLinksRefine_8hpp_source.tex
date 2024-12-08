@@ -1,0 +1,110 @@
+\doxysection{Half\+Links\+Refine.\+hpp}
+\hypertarget{HalfLinksRefine_8hpp_source}{}\label{HalfLinksRefine_8hpp_source}\index{include/medusa/bits/domains/HalfLinksRefine.hpp@{include/medusa/bits/domains/HalfLinksRefine.hpp}}
+\mbox{\hyperlink{HalfLinksRefine_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_HALFLINKSREFINE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_HALFLINKSREFINE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{HalfLinksRefine__fwd_8hpp}{HalfLinksRefine\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTreeMutable_8hpp}{medusa/bits/spatial\_search/KDTreeMutable.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00016}00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00018}00018\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00019}\mbox{\hyperlink{classmm_1_1HalfLinksRefine_a1c3d5c7987a6b38cc22607204c13faaf}{00019}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a1c3d5c7987a6b38cc22607204c13faaf}{HalfLinksRefine::operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTreeMutable<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain\_tree}}(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.positions());}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a1c3d5c7987a6b38cc22607204c13faaf}{operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain\_tree}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00022}00022\ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00024}00024\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00025}\mbox{\hyperlink{classmm_1_1HalfLinksRefine_accb97c77fe50d15b70dfa83403eccb96}{00025}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a1c3d5c7987a6b38cc22607204c13faaf}{HalfLinksRefine::operator()}}(}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00026}00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTreeMutable<vec\_t>}}\&\ tree)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00027}00027\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}\ =\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a06af755e54c2a1f1f551cf8798edbaab}{region\_}};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}.empty())\ \{\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.all();\ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00030}00030\ \ \ \ \ \textcolor{comment}{//\ sort:\ boundary\ nodes\ first}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00031}00031\ \ \ \ \ std::sort(\mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}.begin(),\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}.end(),}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&](\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{\ return\ domain.type(i)\ <\ domain.type(j);\ \});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a6deae854f1d2bd23715924c5e52a9802}{refine\_impl}}(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}},\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a381873cbbc5fd5b24473c62bc36e9dab}{fraction\_}},\ tree);}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00037}00037\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00038}\mbox{\hyperlink{classmm_1_1HalfLinksRefine_a6deae854f1d2bd23715924c5e52a9802}{00038}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a6deae854f1d2bd23715924c5e52a9802}{HalfLinksRefine::refine\_impl}}(}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\&\ region,}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{fraction}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTreeMutable<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain\_tree}})\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{region\_size}}\ =\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}.size();}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{N}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.size();}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ =\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t;}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00045}00045\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{region\_size}}\ >\ 0,\ \textcolor{stringliteral}{"{}The\ region\ to\ refine\ is\ empty."{}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ Iterate\ through\ points\ in\ region\ and\ generate\ new\ points}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_new\_points}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{region\_size}};\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}++)\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a0a18e45720bb1d7a19b6ce35677b2793}{region}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];\ \ \textcolor{comment}{//\ the\ global\ domain\ index}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ pos\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(c);}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{supp}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.support(c);}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{supp}}.size()\ >=\ 2,\ \textcolor{stringliteral}{"{}At\ least\ 2\ nodes\ must\ be\ in\ support\ of\ every\ node,\ \%d\ "{}}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}found\ in\ support\ of\ node\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{supp}}.size(),\ c);}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a3ea9163e34db8a0297e1c99e7e06281e}{min\_dist}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{fraction}}\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.dr(c);}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{supp}}.size();}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Half\ links\ to\ my\ support.}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ =\ 1;\ \mbox{\hyperlink{classmm_1_1Gaussian}{j}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{j}})\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{s}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{supp}}[\mbox{\hyperlink{classmm_1_1Gaussian}{j}}];}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate}}\ =\ 0.5\ *\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(c)\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{s}}));}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Decide\ the\ type\ of\ new\ node\ and\ project\ to\ boundary\ if\ necessary.}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(c)\ ==\ 0\ ||\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{s}})\ ==\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate\_type}}\ =\ std::max(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(c),\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.type(\mbox{\hyperlink{classmm_1_1Gaussian}{s}}));}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{candidate\_type}}\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.normal(c)\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.normal(\mbox{\hyperlink{classmm_1_1Gaussian}{s}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}}.squaredNorm()\ <\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/15)\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ normal\_vector\ of\ given\ points\ point\ in\ opposite\ directions.}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}}.normalize();}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}().projectPointToBoundary(\mbox{\hyperlink{classmm_1_1Gaussian}{candidate}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{result}}.first)\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}.second;}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ format(\textcolor{stringliteral}{"{}Adding\ point\ \%s\ with\ type\ \%d\ to\ the\ boundary\ along\ "{}}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}normal\ \%s\ was\ not\ successful."{}},}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}})}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ If\ nodes\ are\ out\ of\ the\ domain,\ they\ should\ be\ thrown\ away.}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.\mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}().contains(\mbox{\hyperlink{classmm_1_1Gaussian}{candidate}}))\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Distance\ to\ closest\ node.}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dist2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain\_tree}}.query(\mbox{\hyperlink{classmm_1_1Gaussian}{candidate}}).second[0];}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{dist2}}\ >=\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a3ea9163e34db8a0297e1c99e7e06281e}{min\_dist}}\ *\ \mbox{\hyperlink{classmm_1_1HalfLinksRefine_a3ea9163e34db8a0297e1c99e7e06281e}{min\_dist}})\ \{\ \ \textcolor{comment}{//\ add\ new\ point}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{classmm_1_1Gaussian}{num\_new\_points}};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain\_tree}}.insert(\mbox{\hyperlink{classmm_1_1Gaussian}{candidate}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{candidate\_type}}\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addBoundaryNode(\mbox{\hyperlink{classmm_1_1Gaussian}{candidate}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate\_type}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{normal\_vector}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.addInternalNode(\mbox{\hyperlink{classmm_1_1Gaussian}{candidate}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{candidate\_type}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00100}00100\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00102}00102\ \ \ \ \ \textcolor{comment}{//\ return\ back\ indices\ of\ new\ nodes}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_ids}}(\mbox{\hyperlink{classmm_1_1Gaussian}{num\_new\_points}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00104}00104\ \ \ \ \ std::iota(\mbox{\hyperlink{classmm_1_1Gaussian}{new\_ids}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_ids}}.end(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{N}});}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00105}00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_ids}};}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00106}00106\ \}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00108}00108\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{HalfLinksRefine_8hpp_source_l00110}00110\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_HALFLINKSREFINE\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,217 @@
+\doxysection{mm\+::Gaussian\texorpdfstring{$<$}{<} scal\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1Gaussian}{}\label{classmm_1_1Gaussian}\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+
+
+{\ttfamily \#include $<$Gaussian\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{class}} \mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{scal\+\_\+t}}$>$\newline
+class mm\+::\+Gaussian$<$ scal\+\_\+t $>$}
+\doxylink{classmm_1_1Gaussian}{Gaussian} Radial Basis Function. 
+
+Specifically, this class represents a function $ f(r^2) = \exp(-r^2/\sigma^2) $ as a function of squared distance with shape parameter $\sigma $. This class satisfies the \doxysectlink{concepts_rbf-concept}{Radial Basis Function concept}{1}.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Gaussian<double>\ g(1.324);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ g(4.0);\ \ \ \ \ \textcolor{comment}{//\ value\ at\ 4.0\ (this\ is\ the\ squared\ radius)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ g(0.0,\ 2);\ \ \textcolor{comment}{//\ second\ derivative\ at\ 0.0}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ g\ <<\ std::endl;}
+
+\end{DoxyCodeInclude}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2end2end_2poisson_explicit_8cpp-example}{test/end2end/poisson\+\_\+explicit.\+cpp}}, and \mbox{\hyperlink{test_2spatial_search_2KDTreeMutable_test_8cpp-example}{test/spatial\+\_\+search/\+KDTree\+Mutable\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Gaussian__fwd_8hpp_source_l00029}{29}} of file \mbox{\hyperlink{Gaussian__fwd_8hpp_source}{Gaussian\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{Gaussian}} (\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}}=1.\+0)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classmm_1_1Gaussian}{Gaussian} RBF with shape parameter {\ttfamily shape}. The shape should be positive. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns shape parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Gaussian_a4f9e953aae6c4adc85a6a73769698515}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}{shape}})
+\begin{DoxyCompactList}\small\item\em Sets shape parameter to a new value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{derivative}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate derivative of this RBF wrt. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_a85f616da9971b73e7f70b0344361ba19}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}, \mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$ lap) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate Laplacian of this RBF wrt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_af651c1e5e070477a5668ea2f43049eb9}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{r2}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate this RBF given squared radial distance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type used for computations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian_a196ff4c920d0c5e56a79cce73969b0c6}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic information about given \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}{shape\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Shape parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}\label{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!Gaussian@{Gaussian}}
+\index{Gaussian@{Gaussian}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{Gaussian()}{Gaussian()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::\+Gaussian (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}}}]{shape = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+
+
+Creates a \doxylink{classmm_1_1Gaussian}{Gaussian} RBF with shape parameter {\ttfamily shape}. The shape should be positive. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2RotatedShape_test_8cpp-example}{test/domains/\+Rotated\+Shape\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Gaussian_8hpp_source_l00017}{17}} of file \mbox{\hyperlink{Gaussian_8hpp_source}{Gaussian.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Gaussian_af651c1e5e070477a5668ea2f43049eb9}\label{classmm_1_1Gaussian_af651c1e5e070477a5668ea2f43049eb9} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{\+::operator}}() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}}}]{r2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate this RBF given squared radial distance. 
+
+
+
+Definition at line \mbox{\hyperlink{Gaussian__fwd_8hpp_source_l00063}{63}} of file \mbox{\hyperlink{Gaussian__fwd_8hpp_source}{Gaussian\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096}\label{classmm_1_1Gaussian_afd8757eaa8897043a27942169a3f1096} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{\+::operator}}() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}}}]{r2,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{derivative }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate derivative of this RBF wrt. 
+
+{\ttfamily r2} at given point. 
+\begin{DoxyParams}{Parameters}
+{\em r2} & Squared radial distance. \\
+\hline
+{\em derivative} & Order of derivative to evaluate. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if derivative order is negative. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{Gaussian_8hpp_source_l00022}{22}} of file \mbox{\hyperlink{Gaussian_8hpp_source}{Gaussian.\+hpp}}.
+
+\Hypertarget{classmm_1_1Gaussian_a85f616da9971b73e7f70b0344361ba19}\label{classmm_1_1Gaussian_a85f616da9971b73e7f70b0344361ba19} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} dimension$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\mbox{\hyperlink{classmm_1_1Gaussian_a09cd0a9192470c8b9444ddd17b32a7a0}{\+::operator}}() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}}}]{r2,  }\item[{\mbox{\hyperlink{structmm_1_1Lap}{Lap}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}} $>$}]{lap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Evaluate Laplacian of this RBF wrt. 
+
+{\ttfamily r} at given point. 
+\begin{DoxyParams}{Parameters}
+{\em r2} & Squared radial distance. \\
+\hline
+{\em lap} & Laplacian operator object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmm_1_1Gaussian_a4f9e953aae6c4adc85a6a73769698515}\label{classmm_1_1Gaussian_a4f9e953aae6c4adc85a6a73769698515} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}}}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets shape parameter to a new value. 
+
+
+
+Definition at line \mbox{\hyperlink{Gaussian__fwd_8hpp_source_l00044}{44}} of file \mbox{\hyperlink{Gaussian__fwd_8hpp_source}{Gaussian\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5}\label{classmm_1_1Gaussian_ab19078ff5c4e16b19eaf66ba8736ebf5} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!shape@{shape}}
+\index{shape@{shape}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns shape parameter. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2DomainDiscretization_test_8cpp-example}{test/domains/\+Domain\+Discretization\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{Gaussian__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{Gaussian__fwd_8hpp_source}{Gaussian\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1Gaussian_a196ff4c920d0c5e56a79cce73969b0c6}\label{classmm_1_1Gaussian_a196ff4c920d0c5e56a79cce73969b0c6} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic information about given \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156}\label{classmm_1_1Gaussian_adcd634196bc8a05ddec826256affb156} 
+\index{mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}!shape\_@{shape\_}}
+\index{shape\_@{shape\_}!mm::Gaussian$<$ scal\_t $>$@{mm::Gaussian$<$ scal\_t $>$}}
+\doxysubsubsection{\texorpdfstring{shape\_}{shape\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{mm\+::\+Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scal\+\_\+t}} $>$\+::shape\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Shape parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{Gaussian__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{Gaussian__fwd_8hpp_source}{Gaussian\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Gaussian__fwd_8hpp}{Gaussian\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{Gaussian_8hpp}{Gaussian.\+hpp}}\end{DoxyCompactItemize}

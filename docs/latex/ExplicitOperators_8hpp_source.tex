@@ -1,0 +1,88 @@
+\doxysection{Explicit\+Operators.\+hpp}
+\hypertarget{ExplicitOperators_8hpp_source}{}\label{ExplicitOperators_8hpp_source}\index{include/medusa/bits/operators/ExplicitOperators.hpp@{include/medusa/bits/operators/ExplicitOperators.hpp}}
+\mbox{\hyperlink{ExplicitOperators_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_OPERATORS\_EXPLICITOPERATORS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_OPERATORS\_EXPLICITOPERATORS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ExplicitOperators__fwd_8hpp}{ExplicitOperators\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec_8hpp}{medusa/bits/types/Vec.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeStorage__fwd_8hpp}{ShapeStorage\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00021}\mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{00021}}\ \textcolor{preprocessor}{\#define\ NODE\_ASSERTS(node)\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00022}00022\ \textcolor{preprocessor}{\ \ \ \ assert\_msg(0\ <=\ (node)\ \&\&\ (node)\ <\ ss-\/>size(),\ "{}Node\ index\ \%d\ must\ be\ in\ range\ "{}\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00023}00023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ "{}[0,\ num\_nodes\ =\ \%d)."{},\ ss-\/>size());}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ op\_family\_t,\ \textcolor{keyword}{typename}\ scalar\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00028}00028\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1scalar__type_a513d206c300703cec5b37d4b06488b3e}{scalar\_type<scalar\_field\_t>::type}}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00029}00029\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a80067a958aab068b1a851e3726ae87fa}{ExplicitOperators<shape\_storage\_type>::apply}}(\textcolor{keyword}{const}\ scalar\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node,}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ op\_family\_t::operator\_t\ o)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00031}00031\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{int}\ op\_idx\ =\ op\_family\_t::index(o);}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00033}00033\ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1scalar__type_a513d206c300703cec5b37d4b06488b3e}{scalar\_type<scalar\_field\_t>::type}}\ ret\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ ss-\/>supportSize(node);\ ++j)}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ ret\ +=\ ss-\/>template\ get<op\_family\_t>(op\_idx,\ node,\ j)\ *\ u[ss-\/>support(node,\ j)];}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00036}00036\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00039}00039\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00040}00040\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00041}00041\ Vec<typename\ scalar\_type<scalar\_field\_t>::type,\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120}{ExplicitOperators<shape\_storage\_type>::dim}}>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00042}00042\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a69ab05a1ab1bbecfd054bd41f36a2169}{ExplicitOperators<shape\_storage\_type>::grad}}(\textcolor{keyword}{const}\ scalar\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00044}00044\ \ \ \ \ Vec<typename\ scalar\_type<scalar\_field\_t>::type,\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120}{ExplicitOperators<shape\_storage\_type>::dim}}>\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00045}00045\ \ \ \ \ ret.setZero();}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ var\ =\ 0;\ var\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++var)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ ret[var]\ +=\ ss-\/>d1(var,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)];}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00055}00055\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ shape\_storage\_type>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00056}00056\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ scalar\_field\_t>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00057}00057\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1scalar__type_a513d206c300703cec5b37d4b06488b3e}{scalar\_type<scalar\_field\_t>::type}}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00058}00058\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29}{ExplicitOperators<shape\_storage\_type>::neumann}}(}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ scalar\_field\_t\&\ u,\ \textcolor{keywordtype}{int}\ node,\ \textcolor{keyword}{const}\ vector\_t\&\ normal,}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structmm_1_1scalar__type_a513d206c300703cec5b37d4b06488b3e}{scalar\_type<scalar\_field\_t>::type}}\ val)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00061}00061\ \ \ \ \ \mbox{\hyperlink{ExplicitOperators_8hpp_a02ee591b42963d4ced2526887e3be899}{NODE\_ASSERTS}}(node);}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00062}00062\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(ss-\/>support(node,\ 0)\ ==\ node,\ \textcolor{stringliteral}{"{}First\ support\ node\ should\ be\ the\ node\ itself."{}});}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00063}00063\ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ denominator\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ d\ =\ 0;\ d\ <\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}};\ ++d)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ ss-\/>supportSize(node);\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ val\ -\/=\ normal[d]\ *\ ss-\/>d1(d,\ node,\ i)\ *\ u[ss-\/>support(node,\ i)];}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ i\ =\ 0}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ denominator\ +=\ normal[d]\ *\ ss-\/>d1(d,\ node,\ 0);}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(std::abs(denominator)\ >=\ 1e-\/14,}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Node\ \%d\ has\ no\ effect\ on\ the\ flux\ in\ direction\ \%s.\ The\ cause\ of\ this\ might\ be\ wrong"{}}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ normal\ direction,\ bad\ neighbourhood\ choice\ or\ bad\ nodal\ positions."{}},\ node,\ normal);}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{return}\ val\ /\ denominator;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00079}00079\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ S>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00080}\mbox{\hyperlink{classmm_1_1ExplicitOperators_a61f7092b350d19be3ddd95c494dd5aa0}{00080}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ExplicitOperators<S>}}\&\ op)\ \ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (!op.hasShapes())\ \{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Explicit\ operators\ without\ any\ linked\ storage."{}};}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00083}00083\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00084}00084\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Explicit\ operators\ over\ storage:\ "{}}\ <<\ *op.ss;}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00085}00085\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00087}00087\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Derived,\ \textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ OpFamilies>}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00088}00088\ \mbox{\hyperlink{classmm_1_1Gaussian}{ExplicitOperators<Derived>}}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00089}\mbox{\hyperlink{classmm_1_1ShapeStorage_a1962deed241f05e4c5d33cbae968bbc6}{00089}}\ \mbox{\hyperlink{classmm_1_1ShapeStorage_a1962deed241f05e4c5d33cbae968bbc6}{ShapeStorage<Derived,\ vec\_t,\ OpFamilies>::explicitOperators}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ExplicitOperators<Derived>}}(*\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }Derived*\textcolor{keyword}{>}(\textcolor{keyword}{this}));}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00091}00091\ \}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00093}00093\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{ExplicitOperators_8hpp_source_l00095}00095\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_OPERATORS\_EXPLICITOPERATORS\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,76 @@
+\doxysection{discretization\+\_\+helpers\+\_\+advanced.\+hpp}
+\hypertarget{discretization__helpers__advanced_8hpp_source}{}\label{discretization__helpers__advanced_8hpp_source}\index{include/medusa/bits/domains/discretization\_helpers\_advanced.hpp@{include/medusa/bits/domains/discretization\_helpers\_advanced.hpp}}
+\mbox{\hyperlink{discretization__helpers__advanced_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_DISCRETIZATION\_HELPERS\_ADVANCED\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_DISCRETIZATION\_HELPERS\_ADVANCED\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{PolygonShape_8hpp}{medusa/bits/domains/PolygonShape.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{GeneralFill_8hpp}{medusa/bits/domains/GeneralFill.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00017}00017\ \textcolor{preprocessor}{\#include\ <Eigen/Geometry>}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00019}00019\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00021}00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00022}00022\ \textcolor{keyword}{namespace\ }discretization\_helpers\ \{}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00044}00044\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t,\ \textcolor{keyword}{typename}\ func\_t>}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00045}\mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{00045}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\ \mbox{\hyperlink{group__domains_ga42125852110a3cfef96615b8b76bd7aa}{discretizeTriangleWithDensity}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p2,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ p3,}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ normal,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{func\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}},}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{only\_interior}}\ =\ \textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00048}00048\ \ \ \ \ \textcolor{keyword}{static\_assert}(vec\_t::dim\ ==\ 3,\ \textcolor{stringliteral}{"{}This\ method\ is\ intended\ for\ 3D\ vectors\ only."{}});}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ =\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1Gaussian}{V2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::Vec<scalar\_t,\ 2>}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ =\ vec\_t::dim;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00053}00053\ \ \ \ \ \textcolor{comment}{//\ Rotate\ to\ flat}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{zunit}}\ =\ \{0,\ 0,\ 1\};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00055}00055\ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ c\ =\ normal.dot(\mbox{\hyperlink{classmm_1_1Gaussian}{zunit}});}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (c\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{zunit}}\ =\ -\/\mbox{\hyperlink{classmm_1_1Gaussian}{zunit}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ c\ =\ -\/c;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vp}}\ =\ normal.cross(\mbox{\hyperlink{classmm_1_1Gaussian}{zunit}});}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00062}00062\ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ dim>\ \mbox{\hyperlink{classmm_1_1Gaussian}{R}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00063}00063\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}.setIdentity();}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00064}00064\ \ \ \ \ Eigen::Matrix<scalar\_t,\ dim,\ dim>\ \mbox{\hyperlink{classmm_1_1Gaussian}{VP}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00065}00065\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{VP}}\ <<\ 0,\ -\/\mbox{\hyperlink{classmm_1_1Gaussian}{vp}}[2],\ \mbox{\hyperlink{classmm_1_1Gaussian}{vp}}[1],\ \mbox{\hyperlink{classmm_1_1Gaussian}{vp}}[2],\ 0,\ -\/\mbox{\hyperlink{classmm_1_1Gaussian}{vp}}[0],\ -\/\mbox{\hyperlink{classmm_1_1Gaussian}{vp}}[1],\ \mbox{\hyperlink{classmm_1_1Gaussian}{vp}}[0],\ 0;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00066}00066\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}\ +=\ \mbox{\hyperlink{classmm_1_1Gaussian}{VP}}\ +\ 1\ /\ (1\ +\ c)\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{VP}}\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{VP}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00068}00068\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{np1}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}\ *\ p1;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{np2}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}\ *\ p2;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{np3}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{R}}\ *\ p3;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00071}00071\ \ \ \ \ \textcolor{comment}{//\ All\ z\ coordinates\ are\ the\ same,\ but\ still\ take\ the\ average.}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ z\ =\ 1.0\ /\ 3.0\ *\ (\mbox{\hyperlink{classmm_1_1Gaussian}{np1}}[2]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{np2}}[2]\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{np3}}[2]);}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00075}00075\ \ \ \ \ \textcolor{comment}{//\ Fill\ the\ flat\ triangle.}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00076}00076\ \ \ \ \ std::vector<V2>\ pts\ =\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{np1}}.template\ \mbox{\hyperlink{classmm_1_1Gaussian}{head<2>}}(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{np2}}.template\ \mbox{\hyperlink{classmm_1_1Gaussian}{head<2>}}(),}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{np3}}.template\ \mbox{\hyperlink{classmm_1_1Gaussian}{head<2>}}()\};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00078}00078\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::PolygonShape<V2>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{triangle}}(pts);}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00079}00079\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_h}}\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{V2}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}}(\mbox{\hyperlink{classmm_1_1Gaussian}{R}}.transpose()\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(p[0],\ p[1],\ z));\ \};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00080}00080\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{triangle}}.discretizeBoundaryWithDensity(\mbox{\hyperlink{classmm_1_1Gaussian}{new\_h}});}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00081}00081\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{mm::GeneralFill<V2>}}\ fill;}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00082}00082\ \ \ \ \ fill.seed(0);}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00083}00083\ \ \ \ \ fill(\mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_h}});}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00085}00085\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idxs}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{only\_interior}}\ ?\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.interior()\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.all();}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00086}00086\ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00087}00087\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}.reserve(\mbox{\hyperlink{classmm_1_1Gaussian}{idxs}}.size());}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ :\ \mbox{\hyperlink{classmm_1_1Gaussian}{idxs}})\ \{}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ip}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}}.pos(\mbox{\hyperlink{classmm_1_1Gaussian}{i}});}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{result}}.emplace\_back(\mbox{\hyperlink{classmm_1_1Gaussian}{R}}.transpose()\ *\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{ip}}[0],\ \mbox{\hyperlink{classmm_1_1Gaussian}{ip}}[1],\ z));}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{result}};}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00093}00093\ \}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00095}00095\ \}\ \ \textcolor{comment}{//\ namespace\ discretization\_helpers}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00096}00096\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{discretization__helpers__advanced_8hpp_source_l00098}00098\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_DISCRETIZATION\_HELPERS\_ADVANCED\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,37 @@
+\doxysection{Grid\+Fill\+\_\+fwd.\+hpp}
+\hypertarget{GridFill__fwd_8hpp_source}{}\label{GridFill__fwd_8hpp_source}\index{include/medusa/bits/domains/GridFill\_fwd.hpp@{include/medusa/bits/domains/GridFill\_fwd.hpp}}
+\mbox{\hyperlink{GridFill__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_GRIDFILL\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_GRIDFILL\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00016}00016\ \textcolor{keyword}{class\ }DomainDiscretization;}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1GridFill}{00030}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1GridFill}{GridFill}}\ \{}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00031}00031\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00032}\mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{00032}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{scalar\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00033}\mbox{\hyperlink{classmm_1_1GridFill_a4a37d410dd1cf05aac11650f4db9ae7d}{00033}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1GridFill_a4a37d410dd1cf05aac11650f4db9ae7d}{vector\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00035}\mbox{\hyperlink{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198ea7f1b32acaca3a459256f0c828f86205d}{00035}}\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ \ \mbox{\hyperlink{classmm_1_1GridFill_a39c1401a46609edc2265b8915f83198ea7f1b32acaca3a459256f0c828f86205d}{dim}}\ =\ vec\_t::dim\ \};}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00037}00037\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00038}\mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{00038}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{bot}};\ \ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00039}\mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{00039}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\ \mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{top}};\ \ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00041}00041\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{classmm_1_1GridFill}{GridFill}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1GridFill_aa77322a33e7ff539ba58f5bb738ff19a}{bot}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1GridFill_ab7cd163431e794fc502919967921c756}{top}});}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1GridFill_ad6f8be5995f8548ed543a795a0422b03}{operator()}}(\mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{domain}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1GridFill_aa1a71fe5c89683da91ddf9de6b353aa6}{scalar\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{h}},\ \textcolor{keywordtype}{int}\ type\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00055}00055\ \};}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00058}00058\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{GridFill__fwd_8hpp_source_l00060}00060\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_GRIDFILL\_FWD\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,116 @@
+\doxysection{include/medusa/bits/utils/assert.hpp File Reference}
+\hypertarget{assert_8hpp}{}\label{assert_8hpp}\index{include/medusa/bits/utils/assert.hpp@{include/medusa/bits/utils/assert.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Implementation of custom assert and debug utilities. 
+
+
+
+Definition in file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+
+{\ttfamily \#include $<$tinyformat/tinyformat.\+h$>$}\newline
+{\ttfamily \#include "{}print.\+hpp"{}}\newline
+Include dependency graph for assert.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{assert_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{assert_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1assert__internal}{mm\+::assert\+\_\+internal}}
+\begin{DoxyCompactList}\small\item\em Namespace holding custom assert implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}{prn}}(...)~macro\+\_\+dispatcher(prnv, \+\_\+\+\_\+\+VA\+\_\+\+ARGS\+\_\+\+\_\+)(\+\_\+\+\_\+\+VA\+\_\+\+ARGS\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Prints a variable name and value to standard output. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\+\_\+msg}}(cond, ...)
+\begin{DoxyCompactList}\small\item\em Assert with better error reporting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{namespacemm_1_1assert__internal_a3d6ccbc33fe39e41264b05a58f7b09ee}{mm\+::assert\+\_\+internal\+::assert\+\_\+handler\+\_\+implementation}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{condition}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{line}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{message}}, tfm\+::\+Format\+List\+Ref \mbox{\hyperlink{classmm_1_1Gaussian}{format\+\_\+list}})
+\begin{DoxyCompactList}\small\item\em Actual assert implementation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{namespacemm_1_1assert__internal_a96d2bd0bb276ed878d078bc585e46647}{mm\+::assert\+\_\+internal\+::assert\+\_\+handler}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{condition}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}file, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+name}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{line}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{char}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classmm_1_1Gaussian}{message}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Args}} \&... \mbox{\hyperlink{classmm_1_1Gaussian}{args}})
+\begin{DoxyCompactList}\small\item\em Assert handler that unpacks varargs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_a48aee295207b24394af5ed5ae764c662}{mm\+::print\+\_\+red}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Prints given text in bold red. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_a65013f9a5275282cc4cf6db2c19f8821}{mm\+::print\+\_\+white}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Prints given text in bold white. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_a905c807069c1eab6b4eccc51a2b9ed36}{mm\+::print\+\_\+green}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::string \&\mbox{\hyperlink{classmm_1_1Gaussian}{s}})
+\begin{DoxyCompactList}\small\item\em Prints given text in bold green. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{assert_8hpp_a67c64a8e3a60557627922c88b087d484}\label{assert_8hpp_a67c64a8e3a60557627922c88b087d484} 
+\index{assert.hpp@{assert.hpp}!assert\_msg@{assert\_msg}}
+\index{assert\_msg@{assert\_msg}!assert.hpp@{assert.hpp}}
+\doxysubsubsection{\texorpdfstring{assert\_msg}{assert\_msg}}
+{\footnotesize\ttfamily \#define assert\+\_\+msg(\begin{DoxyParamCaption}\item[{}]{cond,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ ((void)(!(cond)\ \&\&\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ mm::assert\_internal::assert\_handler(\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \#cond,\ \_\_FILE\_\_,\ \_\_PRETTY\_FUNCTION\_\_,\ \_\_LINE\_\_,\ \_\_VA\_ARGS\_\_)\ \&\&\ (assert(0),\ 1)))}
+
+\end{DoxyCode}
+
+
+Assert with better error reporting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cond} & Conditions to test. \\
+\hline
+{\em ...} & The second parameter is also required and represents the message to print on failure. For every \%\texorpdfstring{$\ast$}{*} field in message one additional parameter must be present.\\
+\hline
+\end{DoxyParams}
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(n\ >\ 0,\ \textcolor{stringliteral}{"{}n\ must\ be\ positive,\ got\ \%d."{}},\ n);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{assert_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+
+\Hypertarget{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}\label{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710} 
+\index{assert.hpp@{assert.hpp}!prn@{prn}}
+\index{prn@{prn}!assert.hpp@{assert.hpp}}
+\doxysubsubsection{\texorpdfstring{prn}{prn}}
+{\footnotesize\ttfamily \#define prn(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~macro\+\_\+dispatcher(prnv, \+\_\+\+\_\+\+VA\+\_\+\+ARGS\+\_\+\+\_\+)(\+\_\+\+\_\+\+VA\+\_\+\+ARGS\+\_\+\+\_\+)}
+
+
+
+Prints a variable name and value to standard output. 
+
+Can take one or two parameters. Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ a\ =\ 6;}
+\DoxyCodeLine{\mbox{\hyperlink{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}{prn}}(a)\ \textcolor{comment}{//\ prints\ 'a\ =\ 6;'}}
+\DoxyCodeLine{\mbox{\hyperlink{assert_8hpp_a3f3734ea7d65c4b17839bd41547ac710}{prn}}(\textcolor{stringliteral}{"{}value"{}},\ a)\ \textcolor{comment}{//\ prints\ 'value\ =\ 6;'}}
+
+\end{DoxyCode}
+ \begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2BasicRelax_test_8cpp-example}{test/domains/\+Basic\+Relax\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{assert_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{assert_8hpp_source}{assert.\+hpp}}.
+

@@ -1,0 +1,106 @@
+\doxysection{test/domains/\+Half\+Links\+Refine\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2HalfLinksRefine_test_8cpp-example}{}\label{test_2domains_2HalfLinksRefine_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{HalfLinksRefine_8hpp}{medusa/bits/domains/HalfLinksRefine.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape_8hpp}{medusa/bits/domains/BoxShape.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization_8hpp}{medusa/bits/domains/DomainDiscretization.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ Refine1d)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec1d>\ box(0,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain\ =\ box.discretizeWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(3));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ region\ =\ domain.positions().filter([](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}}\ \&v)\ \{\ \textcolor{keywordflow}{return}\ v[0]\ <\ 0.45;\ \});}
+\DoxyCodeLine{\ \ \ \ HalfLinksRefine\ refine;\ refine.region(region);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ new\_points\ =\ refine(domain);}
+\DoxyCodeLine{\ \ \ \ Range<Vec1d>\ expected\ =\ \{0.05,\ 0.15,\ 0.25,\ 0.35,\ 0.45\};}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ new\_points.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ expected.size();\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ASSERT\_EQ(N\ +\ i,\ new\_points[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_DOUBLE\_EQ(expected[i][0],\ domain.pos(new\_points[i],\ 0));}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ check\_approx\_array\_equal(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<vec\_t>\&\ expected\_pos,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<int>\&\ expected\_types,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<vec\_t>\&\ actual\_pos,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Range<int>\&\ actual\_types,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ tol)\ \{}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn(actual\_pos)}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ \ prn(actual\_types)}}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected\_pos.size(),\ actual\_pos.size());}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected\_types.size(),\ actual\_types.size());}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected\_pos.size(),\ expected\_types.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ expected\_pos.size();}
+\DoxyCodeLine{\ \ \ \ std::vector<bool>\ seen(n,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ found\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ n;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!seen[j]\ \&\&\ (expected\_pos[j]\ -\/\ actual\_pos[i]).norm()\ <\ tol)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ seen[j]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_EQ(expected\_types[j],\ actual\_types[i]);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ found\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_TRUE(found)\ <<\ \textcolor{stringliteral}{"{}Element\ "{}}\ <<\ actual\_pos[i]\ <<\ \textcolor{stringliteral}{"{}\ was\ not\ found\ in\ "{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ expected\_pos\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ all\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!seen[i])\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ all\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(all);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ Refine2dCorner)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain\ =\ box.discretizeWithStep(0.2);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ region\ =\ domain.positions().filter(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ \&v)\ \{\ \textcolor{keywordflow}{return}\ v[0]\ <\ 0.35\ \&\&\ v[1]\ <\ 0.35;\ \});}
+\DoxyCodeLine{\ \ \ \ HalfLinksRefine\ refine;\ refine.region(region);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ new\_points\ =\ refine(domain);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(N\ +\ new\_points.size(),\ domain.size());}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\ =\ \{\{0.0,\ 0.1\},\ \{0.0,\ 0.3\},\ \{0.1,\ 0.0\},\ \{0.1,\ 0.1\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.1,\ 0.2\},\ \{0.1,\ 0.3\},\ \{0.2,\ 0.1\},\ \{0.2,\ 0.3\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.3,\ 0.0\},\ \{0.3,\ 0.1\},\ \{0.3,\ 0.2\},\ \{0.3,\ 0.3\}\};}
+\DoxyCodeLine{\ \ \ \ Range<int>\ expected\_types\ =\ \{-\/1,\ -\/1,\ -\/1,\ 1,\ 1,\ 1,\ 1,\ 1,\ -\/3,\ 1,\ 1,\ 1\};}
+\DoxyCodeLine{\ \ \ \ check\_approx\_array\_equal(expected,\ expected\_types,\ domain.positions()[new\_points].asRange(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ domain.types()[new\_points].asRange(),\ 1e-\/10);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ Refine2dLeftSide)\ \{}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(0,\ 1);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ domain\ =\ box.discretizeWithStep(0.5);}
+\DoxyCodeLine{\ \ \ \ domain.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ region\ =\ domain.positions().filter([](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ \&v)\ \{\ \textcolor{keywordflow}{return}\ v[0]\ <\ 0.4;\ \});}
+\DoxyCodeLine{\ \ \ \ HalfLinksRefine\ refine;\ refine.region(region);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ new\_points\ =\ refine(domain);}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\ =\ \{\{0.0,\ 0.25\},\ \{0.0,\ 0.75\},\ \ \{0.25,\ 0.0\},\ \{0.25,\ 0.25\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.25,\ 0.5\},\ \{0.25,\ 0.75\},\ \{0.25,\ 1.0\}\};}
+\DoxyCodeLine{\ \ \ \ Range<int>\ expected\_types\ =\ \{-\/1,\ -\/1,\ -\/1,\ 1,\ 1,\ 1,\ -\/4\};}
+\DoxyCodeLine{\ \ \ \ check\_approx\_array\_equal(expected,\ expected\_types,\ domain.positions()[new\_points].asRange(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ domain.types()[new\_points].asRange(),\ 1e-\/10);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

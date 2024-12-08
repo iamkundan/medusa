@@ -1,0 +1,61 @@
+\doxysection{XML\+\_\+fwd.\+hpp}
+\hypertarget{XML__fwd_8hpp_source}{}\label{XML__fwd_8hpp_source}\index{include/medusa/bits/io/XML\_fwd.hpp@{include/medusa/bits/io/XML\_fwd.hpp}}
+\mbox{\hyperlink{XML__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_IO\_XML\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_IO\_XML\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00013}00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00014}00014\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#include\ <rapidxml/rapidxml.hpp>}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00017}00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00040}\mbox{\hyperlink{classmm_1_1XML}{00040}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1XML}{XML}}\ \{}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00041}\mbox{\hyperlink{classmm_1_1XML_ad0b619975565fa2e39cddc8d09873a70}{00041}}\ \ \ \ \ std::vector<char>\ \mbox{\hyperlink{classmm_1_1XML_ad0b619975565fa2e39cddc8d09873a70}{file\_contents}};\ \ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00042}\mbox{\hyperlink{classmm_1_1XML_ac0a61d4678b680e20102f15436acfe41}{00042}}\ \ \ \ \ rapidxml::xml\_document<char>\ \mbox{\hyperlink{classmm_1_1XML_ac0a61d4678b680e20102f15436acfe41}{doc}};\ \ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00044}00044\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00046}\mbox{\hyperlink{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}{00046}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}{XML}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}{XML}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1XML}{XML}}\&);}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classmm_1_1XML_ac83cf09e7720ab11f98bd91ca03d178c}{XML}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a388d1a25b2a66452a23c062f3fd655f3}{load}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00061}00061\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a2d9abc594c526470adf2d85a51925f74}{loadFileHelper}}(\textcolor{keyword}{const}\ std::string\&\ file);}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a9bdbd54d4ab0b27158ba588f517039e0}{loadFromStoredContents}}();}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classmm_1_1XML_a52e5f082527be9313ddd69c2d39e8e91}{getString}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}},\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00078}00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a3aee76d208933dbacd9696c9ea359cb0}{setString}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}},\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{attribute\_name}},}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{content}});}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00087}00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a1bc4871658ff04ad294eb9435f97d09a}{getAllRecursive}}(\textcolor{keyword}{const}\ rapidxml::xml\_node<>*\ node,\ std::string\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}},}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<std::pair<std::string,\ std::string>>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{all\_attr}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00094}00094\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<std::vector<std::string>,\ std::string>\ \mbox{\hyperlink{classmm_1_1XML_a7a88aed0996c65e2b3816473f1427d4a}{splitPath}}(std::string\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}});}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00095}00095\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00097}00097\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classmm_1_1XML_aa0749a07271c15f29170b1c4da28d594}{join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}});}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00099}00099\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00101}00101\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1XML_a919cc32ed509e410174fc987b4242f35}{exists}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00111}00111\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00112}00112\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ \mbox{\hyperlink{classmm_1_1XML_adcebfe37cb86752a64e712655661a9db}{get}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00126}00126\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00127}00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1XML_a9ead3434b3644a4d560f49eeeac6be68}{set}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{path}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\&\ value,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1Gaussian}{overwrite}}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00130}00130\ \ \ \ \ std::vector<std::pair<std::string,\ std::string>>\ \mbox{\hyperlink{classmm_1_1XML_a1194b74b5b5da70eed10e6260a32a77e}{getAll}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00133}00133\ \ \ \ \ rapidxml::xml\_document<char>\&\ \mbox{\hyperlink{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c}{documentRoot}}();}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00135}00135\ \ \ \ \ \textcolor{keyword}{const}\ rapidxml::xml\_document<char>\&\ \mbox{\hyperlink{classmm_1_1XML_a39d21d90b5d741e71dea6d2dc11a717c}{documentRoot}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00138}00138\ \ \ \ \ \textcolor{keyword}{friend}\ std::ostream\&\ \mbox{\hyperlink{classmm_1_1XML_a0f6bc7e006bf03a23629f83fe9456efd}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1XML}{XML}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{xml}});}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00139}00139\ \};}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00142}00142\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{XML__fwd_8hpp_source_l00144}00144\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_IO\_XML\_FWD\_HPP\_}}
+
+\end{DoxyCode}

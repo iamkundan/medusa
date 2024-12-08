@@ -1,0 +1,33 @@
+\doxysection{test/domains/\+Polytope\+Shape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2PolytopeShape_test_8cpp-example}{}\label{test_2domains_2PolytopeShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}medusa/bits/domains/PolytopeShape.hpp"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolytopeShapeUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ You\ must\ include\ PolyhedronShape.hpp\ (which\ depends\ on\ CGAL)\ for\ the\ 3D\ version.}}
+\DoxyCodeLine{\ \ \ \ PolytopeShape<Vec2d>\ poly(\{\{0.0,\ -\/2.0\},\ \{1.0,\ -\/1.0\},\ \{2.0,\ 0.0\},\ \{1.0,\ 1.0\},\ \{0.0,\ 2.0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.0,\ 1.0\},\ \{-\/2.0,\ 0.0\},\ \{-\/1.0,\ -\/1.0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (poly.contains(\{2.3,\ 4.5\}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ poly\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ poly.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{\ \ \ \ (void)\ d;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolytopeShapeCast)\ \{}
+\DoxyCodeLine{\ \ \ \ PolygonShape<Vec2d>\ poly(\{\{0.0,\ -\/2.0\},\ \{1.0,\ -\/1.0\},\ \{2.0,\ 0.0\},\ \{1.0,\ 1.0\},\ \{0.0,\ 2.0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.0,\ 1.0\},\ \{-\/2.0,\ 0.0\},\ \{-\/1.0,\ -\/1.0\}\});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Check\ that\ this\ compiles.}}
+\DoxyCodeLine{\ \ \ \ PolytopeShape<Vec2d>\ poly2\ =\ poly;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(poly.points(),\ poly2.points());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+ 

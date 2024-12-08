@@ -1,0 +1,56 @@
+\doxysection{Matrix\+Addons.\+hpp}
+\hypertarget{MatrixAddons_8hpp_source}{}\label{MatrixAddons_8hpp_source}\index{include/medusa/bits/types/MatrixAddons.hpp@{include/medusa/bits/types/MatrixAddons.hpp}}
+\mbox{\hyperlink{MatrixAddons_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_TYPES\_MATRIXADDONS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_TYPES\_MATRIXADDONS\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00015}\mbox{\hyperlink{MatrixAddons_8hpp_aa248d9e4b565dba0d5ac9ef56955adfd}{00015}}\ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}\&\ \mbox{\hyperlink{MatrixAddons_8hpp_aa248d9e4b565dba0d5ac9ef56955adfd}{operator=}}(\textcolor{keyword}{const}\ Scalar\&\ s)\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00016}00016\ \ \ \ \ this-\/>setConstant(s);}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00021}\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{00021}}\ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}(\textcolor{keyword}{const}\ Scalar\&\ s)\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00022}00022\ \ \ \ \ \_init1alt<RowsAtCompileTime\ !=\ Dynamic\ \&\&\ ColsAtCompileTime\ !=\ Dynamic>(s);}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00025}00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{bool}\ is\_fixed>}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00028}00028\ \textcolor{keywordtype}{void}\ \_init1alt(\textcolor{keyword}{const}\ Scalar\&\ s,}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ std::enable\_if<is\_fixed>::type*\ =\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00030}00030\ \ \ \ \ this-\/>setConstant(s);}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00031}00031\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00033}00033\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{bool}\ is\_fixed>}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00034}00034\ \textcolor{keywordtype}{void}\ \_init1alt(\textcolor{keyword}{const}\ Scalar\&\ s,\ \textcolor{keyword}{typename}\ std::enable\_if<!is\_fixed>::type*\ =\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00035}00035\ \ \ \ \ Base::\_check\_template\_params();}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00036}00036\ \ \ \ \ Base::template\ \_init1<Scalar>(s);}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00040}00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00042}\mbox{\hyperlink{MatrixAddons_8hpp_a4663ffb6e4bdf9b0edee736ad2981f8b}{00042}}\ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}(std::initializer\_list<Scalar>\ lst)\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00043}00043\ \ \ \ \ EIGEN\_STATIC\_ASSERT\_FIXED\_SIZE(\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}});}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00044}00044\ \ \ \ \ assert((lst.size()\ ==\ RowsAtCompileTime\ ||\ lst.size()\ ==\ ColsAtCompileTime)\ \&\&}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Initializer\ list\ of\ inappropriate\ size."{}});}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ Scalar\&\ s\ :\ lst)\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00048}00048\ \ \ \ \ \ \ \ \ this-\/>operator()(i++)\ =\ s;}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00050}00050\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00053}\mbox{\hyperlink{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}{00053}}\ Map<Matrix<Scalar,\ Dynamic,\ 1>>\ \mbox{\hyperlink{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}{asLinear}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{return}\ \{this-\/>data(),\ this-\/>size()\};}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00055}00055\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00056}00056\ Map<Matrix<Scalar,\ Dynamic,\ 1>>\ \mbox{\hyperlink{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}{asLinear}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{return}\ \{this-\/>data(),\ this-\/>size()\};}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00058}00058\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00060}\mbox{\hyperlink{MatrixAddons_8hpp_a35f885de229ab394df578599f5af2c46}{00060}}\ Map<Matrix<Scalar,\ Dynamic,\ 1>>\ \mbox{\hyperlink{MatrixAddons_8hpp_a35f885de229ab394df578599f5af2c46}{asRowLinear}}()\ \{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{return}\ \{this-\/>data(),\ this-\/>size()\};}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00063}00063\ Map<Matrix<Scalar,\ Dynamic,\ 1>>\ \mbox{\hyperlink{MatrixAddons_8hpp_a35f885de229ab394df578599f5af2c46}{asRowLinear}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \{this-\/>data(),\ this-\/>size()\};}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00065}00065\ \}}
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{MatrixAddons_8hpp_source_l00067}00067\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_TYPES\_MATRIXADDONS\_HPP\_}}
+
+\end{DoxyCode}

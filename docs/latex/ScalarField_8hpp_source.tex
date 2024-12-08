@@ -1,0 +1,28 @@
+\doxysection{Scalar\+Field.\+hpp}
+\hypertarget{ScalarField_8hpp_source}{}\label{ScalarField_8hpp_source}\index{include/medusa/bits/types/ScalarField.hpp@{include/medusa/bits/types/ScalarField.hpp}}
+\mbox{\hyperlink{ScalarField_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_TYPES\_SCALARFIELD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_TYPES\_SCALARFIELD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ScalarField__fwd_8hpp}{ScalarField\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00012}00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00016}00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00017}00017\ \mbox{\hyperlink{classmm_1_1ScalarField_abc14bec7d211c6e3cd6aa1db18707dec}{ScalarField<Scalar>::ScalarField}}(\textcolor{keyword}{const}\ Eigen::MatrixBase<OtherDerived>\&\ other)\ :\ Base(other)\ \{\}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00019}00019\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar>}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00020}00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00021}00021\ ScalarField<Scalar>\&\ ScalarField<Scalar>::operator=(}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::MatrixBase<OtherDerived>\&\ other)\ \{}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00023}00023\ \ \ \ \ Base::operator=(other);\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00027}00027\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{ScalarField_8hpp_source_l00029}00029\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_TYPES\_SCALARFIELD\_HPP\_}}
+
+\end{DoxyCode}

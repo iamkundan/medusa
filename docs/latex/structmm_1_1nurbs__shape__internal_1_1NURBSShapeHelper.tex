@@ -1,0 +1,24 @@
+\doxysection{mm\+::nurbs\+\_\+shape\+\_\+internal\+::NURBSShape\+Helper\texorpdfstring{$<$}{<} vec\+\_\+t, param\+\_\+vec\+\_\+t \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmm_1_1nurbs__shape__internal_1_1NURBSShapeHelper}{}\label{structmm_1_1nurbs__shape__internal_1_1NURBSShapeHelper}\index{mm::nurbs\_shape\_internal::NURBSShapeHelper$<$ vec\_t, param\_vec\_t $>$@{mm::nurbs\_shape\_internal::NURBSShapeHelper$<$ vec\_t, param\_vec\_t $>$}}
+
+
+{\ttfamily \#include $<$NURBSShape\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{param\+\_\+vec\+\_\+t}}$>$\newline
+struct mm\+::nurbs\+\_\+shape\+\_\+internal\+::\+NURBSShape\+Helper$<$ vec\+\_\+t, param\+\_\+vec\+\_\+t $>$}
+Internal structure of \doxylink{classmm_1_1NURBSShape}{NURBSShape} that helps with partial class specialization. 
+
+All of its functions have the same signature (apart from accepting a reference to \doxylink{classmm_1_1NURBSShape}{NURBSShape}) as the corresponding functions of \doxylink{classmm_1_1NURBSShape}{NURBSShape}. \doxylink{classmm_1_1NURBSShape}{NURBSShape} holds an instance of this class and calls its functions when specialized functions are requested.
+
+Note\+: partial class specialization can also be done by having a base class with functions, that are not specialized (NURBSShape\+Base) and a fully specialized class (\doxylink{classmm_1_1NURBSShape}{NURBSShape}) that inherits from it. This approach was chosen to keep Medusa\textquotesingle{}s class hierarchy cleaner. 
+
+Definition at line \mbox{\hyperlink{NURBSShape__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{NURBSShape__fwd_8hpp_source}{NURBSShape\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{NURBSShape__fwd_8hpp}{NURBSShape\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

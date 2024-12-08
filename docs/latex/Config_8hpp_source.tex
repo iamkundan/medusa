@@ -1,0 +1,44 @@
+\doxysection{Config.\+hpp}
+\hypertarget{Config_8hpp_source}{}\label{Config_8hpp_source}\index{include/medusa/Config.hpp@{include/medusa/Config.hpp}}
+\mbox{\hyperlink{Config_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_CONFIG\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_CONFIG\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00010}\mbox{\hyperlink{Config_8hpp_afc792de073c9a00a2f3739a451be4312}{00010}}\ \textcolor{preprocessor}{\#define\ EIGEN\_MATRIXBASE\_PLUGIN\ "{}medusa/bits/types/MatrixBaseAddons.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00012}\mbox{\hyperlink{Config_8hpp_a525f97d9a111a8f0b77b19bd040f22fe}{00012}}\ \textcolor{preprocessor}{\#define\ EIGEN\_MATRIX\_PLUGIN\ "{}medusa/bits/types/MatrixAddons.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00015}00015\ \textcolor{preprocessor}{\#ifdef\ EIGEN\_DEFAULT\_IO\_FORMAT}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00016}00016\ \textcolor{preprocessor}{\#error\ "{}Medusa's\ Eigen\ configuration\ was\ included\ after\ Eigen.\ Make\ sure\ you\ include\ this\ header\ "{}}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}before\ including\ any\ of\ the\ Eigen\ headers."{}}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00018}00018\ \textcolor{preprocessor}{\#\ include\ <stophereandnow>}\ \ \textcolor{comment}{//\ Make\ sure\ to\ not\ compile\ further\ and\ emit\ a\ bunch\ of\ Eigen\ errors.}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00019}00019\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00020}\mbox{\hyperlink{Config_8hpp_acb1e4e2de56103873d2de3c77c9c9373}{00020}}\ \textcolor{preprocessor}{\#define\ EIGEN\_DEFAULT\_IO\_FORMAT\ Eigen::IOFormat(Eigen::StreamPrecision,\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00021}00021\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Eigen::DontAlignCols,\ "{},\ "{},\ "{};\ "{},\ "{}"{},\ "{}"{},\ "{}["{},\ "{}]"{})}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00022}00022\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00024}\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{00024}}\ \textcolor{preprocessor}{\#define\ SINL\ EIGEN\_STRONG\_INLINE}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00026}00026\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00028}\mbox{\hyperlink{Config_8hpp_a08fe8ac8d421e1dff257cbbba1927521}{00028}}\ \textcolor{preprocessor}{\#define\ EIGEN\_INITIALIZE\_MATRICES\_BY\_NAN}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00029}00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00031}00031\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00034}00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00036}\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{00036}}\ \textcolor{keyword}{typedef}\ std::vector<int>\ \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00039}00039\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00040}\mbox{\hyperlink{structmm_1_1Pi}{00040}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmm_1_1Pi}{Pi}}\ \{}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00041}\mbox{\hyperlink{structmm_1_1Pi_a746b1e8b196e79cc5dbda97b9a85aa9c}{00041}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}\ \mbox{\hyperlink{structmm_1_1Pi_a746b1e8b196e79cc5dbda97b9a85aa9c}{value}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}(3.14159265358979323846264338327950L);\ \ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00042}00042\ \};}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00044}\mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{00044}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacemm_add5120ca222cb67674865bb4ea92cfae}{PI}}\ =\ \mbox{\hyperlink{structmm_1_1Pi}{Pi<double>::value}};\ \ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00045}\mbox{\hyperlink{namespacemm_a1f19f6918021bf7c2b7fcf9bab94d1b7}{00045}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacemm_a1f19f6918021bf7c2b7fcf9bab94d1b7}{INF}}\ =\ 1.0\ /\ 0.0;\ \ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00046}\mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{00046}}\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{NaN}}\ =\ 0.0\ /\ 0.0;\ \ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00048}00048\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{Config_8hpp_source_l00050}00050\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_CONFIG\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\doxysection{mm\+::discretization\+\_\+helpers\+::Sphere\+Discretization\texorpdfstring{$<$}{<} scalar\+\_\+t, dim \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structmm_1_1discretization__helpers_1_1SphereDiscretization}{}\label{structmm_1_1discretization__helpers_1_1SphereDiscretization}\index{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$@{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$}}
+
+
+{\ttfamily \#include $<$discretization\+\_\+helpers.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$\newline
+struct mm\+::discretization\+\_\+helpers\+::\+Sphere\+Discretization$<$ scalar\+\_\+t, dim $>$}
+Discretizes a sphere with given radius uniformly with {\ttfamily num\+\_\+points} points on the great circle. 
+
+This is a class because C++ does not allow partial template specializations of functions. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em dim} & Dimension of the sphere. \\
+\hline
+{\em scalar\+\_\+t} & Data type for numeric computations, e.\+g. {\ttfamily double} or {\ttfamily float}.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ std::mt19937\ gen;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 2.3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}{discretization\_helpers::SphereDiscretization<double,\ dim>::construct}}(r,\ 4,\ gen);}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{discretization__helpers_8hpp_source_l00075}{75}} of file \mbox{\hyperlink{discretization__helpers_8hpp_source}{discretization\+\_\+helpers.\+hpp}}.
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{generator\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$, Eigen\+::aligned\+\_\+allocator$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$ $>$ $>$ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}{construct}} (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} radius, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+samples}}, \mbox{\hyperlink{classmm_1_1Gaussian}{generator\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{generator}})
+\begin{DoxyCompactList}\small\item\em Construct a randomized discretization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$, Eigen\+::aligned\+\_\+allocator$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$ $>$ $>$ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a90fe6b3d1768b6f942c7cbaa3382b660}{construct}} (\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} radius, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{num\+\_\+samples}})
+\begin{DoxyCompactList}\small\item\em Construct the discretization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structmm_1_1discretization__helpers_1_1SphereDiscretization_a90fe6b3d1768b6f942c7cbaa3382b660}\label{structmm_1_1discretization__helpers_1_1SphereDiscretization_a90fe6b3d1768b6f942c7cbaa3382b660} 
+\index{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$@{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$}!construct@{construct}}
+\index{construct@{construct}!mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$@{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$}}
+\doxysubsubsection{\texorpdfstring{construct()}{construct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$, Eigen\+::aligned\+\_\+allocator$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$ $>$ $>$ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization}{mm\+::discretization\+\_\+helpers\+::\+Sphere\+Discretization}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$\+::construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}}]{radius,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{num\+\_\+samples }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Construct the discretization. 
+
+
+
+Definition at line \mbox{\hyperlink{discretization__helpers_8hpp_source_l00110}{110}} of file \mbox{\hyperlink{discretization__helpers_8hpp_source}{discretization\+\_\+helpers.\+hpp}}.
+
+\Hypertarget{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}\label{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003} 
+\index{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$@{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$}!construct@{construct}}
+\index{construct@{construct}!mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$@{mm::discretization\_helpers::SphereDiscretization$<$ scalar\_t, dim $>$}}
+\doxysubsubsection{\texorpdfstring{construct()}{construct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{generator\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} std\+::vector$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$, Eigen\+::aligned\+\_\+allocator$<$ Eigen\+::\+Matrix$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}, 1 $>$ $>$ $>$ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization}{mm\+::discretization\+\_\+helpers\+::\+Sphere\+Discretization}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$\+::construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}}]{radius,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{num\+\_\+samples,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{generator\+\_\+t}} \&}]{generator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Construct a randomized discretization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & Radius of the sphere. \\
+\hline
+{\em num\+\_\+samples} & Number of points on the equator, implies nodal spacing {\ttfamily dp = 2\texorpdfstring{$\ast$}{*}pi\texorpdfstring{$\ast$}{*}r/n}. \\
+\hline
+{\em generator} & A random number generator. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of discretization points. 
+\end{DoxyReturn}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2domains_2discretization_helpers_test_8cpp-example}{test/domains/discretization\+\_\+helpers\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{discretization__helpers_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{discretization__helpers_8hpp_source}{discretization\+\_\+helpers.\+hpp}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{discretization__helpers_8hpp}{discretization\+\_\+helpers.\+hpp}}\end{DoxyCompactItemize}

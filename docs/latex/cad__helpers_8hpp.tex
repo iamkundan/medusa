@@ -1,0 +1,50 @@
+\doxysection{include/medusa/bits/domains/cad\+\_\+helpers.hpp File Reference}
+\hypertarget{cad__helpers_8hpp}{}\label{cad__helpers_8hpp}\index{include/medusa/bits/domains/cad\_helpers.hpp@{include/medusa/bits/domains/cad\_helpers.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Implementation of functions evaluating basis splines (B-\/splines) and other useful functions for CAD. 
+
+
+
+Definition in file \mbox{\hyperlink{cad__helpers_8hpp_source}{cad\+\_\+helpers.\+hpp}}.
+
+{\ttfamily \#include "{}cad\+\_\+helpers\+\_\+fwd.\+hpp"{}}\newline
+{\ttfamily \#include "{}medusa/bits/utils/assert.\+hpp"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+Include dependency graph for cad\+\_\+helpers.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cad__helpers_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cad__helpers_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespacemm_1_1cad__helpers}{mm\+::cad\+\_\+helpers}}
+\begin{DoxyCompactList}\small\item\em Namespace for helper functions used in CAD. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \mbox{\hyperlink{namespacemm_1_1cad__helpers_a30a8f8968ee431bf55047228399bea89}{mm\+::cad\+\_\+helpers\+::evaluate\+\_\+b\+\_\+spline}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} \&t, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{control\+\_\+points}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&knots, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{k}})
+\begin{DoxyCompactList}\small\item\em Evaluate B-\/spline in one point using De Boor\textquotesingle{}s algorithm -\/ $\mathcal{O}(d p^2)$, where $d$ is the number of dimensions. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ \mbox{\hyperlink{namespacemm_1_1cad__helpers_abffb147e266ef4e2ea5ac45a04ad4d45}{mm\+::cad\+\_\+helpers\+::evaluate\+\_\+b\+\_\+spline}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} \&t, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{control\+\_\+points}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&knots)
+\begin{DoxyCompactList}\small\item\em Overload with binary search for position of {\ttfamily t} in {\ttfamily knots}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_1_1cad__helpers_a4cc8e1079c912d9feade8ff48b54bf0c}{mm\+::cad\+\_\+helpers\+::generate\+\_\+b\+\_\+spline\+\_\+derivative}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{control\+\_\+points}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&knots, \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{der\+\_\+control\+\_\+points}}, \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{der\+\_\+knots}})
+\begin{DoxyCompactList}\small\item\em Generate control points and knot vector of a B-\/spline that is the first derivative of the inputed B-\/spline. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{int}} dim$>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_1_1cad__helpers_ae6a1f484d24fde45159838d377c4b9ed}{mm\+::cad\+\_\+helpers\+::generate\+\_\+b\+\_\+spline\+\_\+derivative\+\_\+control\+\_\+points}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{control\+\_\+points}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&knots, \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}}, \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}} $>$ $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{der\+\_\+control\+\_\+points}})
+\begin{DoxyCompactList}\small\item\em Generate control points of a B-\/spline that is the first derivative of the inputed B-\/spline. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{namespacemm_1_1cad__helpers_ac3111c9d543192339854c0151fbaa570}{mm\+::cad\+\_\+helpers\+::generate\+\_\+b\+\_\+spline\+\_\+derivative\+\_\+knots}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&knots, \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{der\+\_\+knots}})
+\begin{DoxyCompactList}\small\item\em Generate knots of a B-\/spline that is the first derivative of the inputed B-\/spline. \end{DoxyCompactList}\end{DoxyCompactItemize}

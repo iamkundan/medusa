@@ -1,0 +1,75 @@
+\doxysection{test/domains/\+Polyhedron\+Shape\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2PolyhedronShape_test_8cpp-example}{}\label{test_2domains_2PolyhedronShape_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}medusa/bits/domains/PolyhedronShape.hpp"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolyhedronShapeUsageExample)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ poly\ =\ \mbox{\hyperlink{classmm_1_1PolyhedronShape_a9f0239eaf14f123643ff093d0237c47b}{PolyhedronShape<Vec3d>::fromOFF}}(\textcolor{stringliteral}{"{}test/testdata/bunny.off"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (poly.contains(\{2.3,\ 4.5,\ 0.1\}))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ do\ something}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ poly\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Boundary\ types\ are\ derived\ from\ face\ colors.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ poly.discretizeBoundaryWithStep(2.5);}
+\DoxyCodeLine{\ \ \ \ (void)\ d;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolyhedronShapeContains)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ poly\ =\ \mbox{\hyperlink{classmm_1_1PolyhedronShape_a9f0239eaf14f123643ff093d0237c47b}{PolyhedronShape<Vec3d>::fromOFF}}(\textcolor{stringliteral}{"{}test/testdata/tetrahedron.off"{}});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0,\ 0,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{-\/1,\ -\/1,\ -\/1\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{-\/0.1,\ 0,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0,\ -\/1,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(poly.contains(\{0,\ 0,\ -\/0.1\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(poly.contains(\{0.2,\ 0.2,\ 0.2\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolyhedronShapeDiscretizeWithType)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ poly\ =\ \mbox{\hyperlink{classmm_1_1PolyhedronShape_a9f0239eaf14f123643ff093d0237c47b}{PolyhedronShape<Vec3d>::fromOFF}}(\textcolor{stringliteral}{"{}test/testdata/tetrahedron.off"{}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ poly.discretizeBoundaryWithStep(0.1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::vector<int>\ expected\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ poly.rgb2type(255,\ 0,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ poly.rgb2type(0,\ 255,\ 0),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ poly.rgb2type(0,\ 0,\ 255),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ poly.rgb2type(0,\ 0,\ 0),}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ type\ :\ d.types())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NE(std::find(expected.begin(),\ expected.end(),\ type),\ expected.end());}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ contains\ =\ [\&](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::find(d.positions().begin(),\ d.positions().end(),\ p)\ !=\ d.positions().end();}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(contains(\{0.0,\ 0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(contains(\{1.0,\ 0.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(contains(\{0.0,\ 1.0,\ 0.0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(contains(\{0.0,\ 0.0,\ 1.0\}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Size\ is\ dependent\ on\ the\ order\ of\ triangles\ and\ their\ boundary\ points.}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d.size(),\ 110);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolyhedronShapeOnlyTriangular)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DEATH(\mbox{\hyperlink{classmm_1_1PolyhedronShape_a9f0239eaf14f123643ff093d0237c47b}{PolyhedronShape<Vec3d>::fromOFF}}(\textcolor{stringliteral}{"{}test/testdata/cube.off"{}}),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Surface\ must\ be\ a\ triangle\ mesh"{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ PolyhderonToPoltopeShapeCast)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ poly\ =\ PolytopeShape<Vec3d>::fromOFF(\textcolor{stringliteral}{"{}test/testdata/bunny.off"{}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ bot\ =\ \{-\/95.3614,\ -\/59.3019,\ 33.3985\};}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\ top\ =\ \{61.5441,\ 61.8599,\ 187.632\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ bb\ =\ poly.bbox();}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((bb.first\ -\/\ bot).norm(),\ 1e-\/5);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LT((bb.second\ -\/\ top).norm(),\ 1e-\/5);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{}
+
+\end{DoxyCodeInclude}
+ 

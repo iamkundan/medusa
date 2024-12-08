@@ -1,0 +1,181 @@
+\doxysection{test/end2end/cantilever\+\_\+beam\+\_\+implicit.\+cpp}
+\hypertarget{test_2end2end_2cantilever_beam_implicit_8cpp-example}{}\label{test_2end2end_2cantilever_beam_implicit_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Monomials__fwd_8hpp}{medusa/bits/approximations/Monomials\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Gaussian__fwd_8hpp}{medusa/bits/approximations/Gaussian\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RaggedShapeStorage_8hpp}{medusa/bits/operators/RaggedShapeStorage.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{RBFFD__fwd_8hpp}{medusa/bits/approximations/RBFFD\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF_8hpp}{medusa/bits/io/HDF.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF__Eigen_8hpp}{medusa/bits/io/HDF\_Eigen.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{DomainDiscretization__fwd_8hpp}{medusa/bits/domains/DomainDiscretization\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape__fwd_8hpp}{medusa/bits/domains/BoxShape\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindClosest_8hpp}{medusa/bits/domains/FindClosest.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{UniformShapeStorage__fwd_8hpp}{medusa/bits/operators/UniformShapeStorage\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{computeShapes_8hpp}{medusa/bits/operators/computeShapes.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ImplicitVectorOperators_8hpp}{medusa/bits/operators/ImplicitVectorOperators.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ExplicitVectorOperators_8hpp}{medusa/bits/operators/ExplicitVectorOperators.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScalarField_8hpp}{medusa/bits/types/ScalarField.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{VectorField_8hpp}{medusa/bits/types/VectorField.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WeightFunction__fwd_8hpp}{medusa/bits/approximations/WeightFunction\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ScaleFunction_8hpp}{medusa/bits/approximations/ScaleFunction.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{WLS_8hpp}{medusa/bits/approximations/WLS.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{JacobiSVDWrapper__fwd_8hpp}{medusa/bits/approximations/JacobiSVDWrapper\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Eigen/SparseCore"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Eigen/IterativeLinearSolvers"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }CantileverBeamTest\ :\ \textcolor{keyword}{public}\ ::testing::Test\ \{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Physical\ parameters}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ E\ =\ 72.1e9;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ v\ =\ 0.33;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ P\ =\ 1000;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ D\ =\ 5;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ L\ =\ 30;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Numerical\ parameters}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ solver\_tolerance\ =\ 1e-\/15;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ max\_iterations\ =\ 50;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ drop\_tolerance\ =\ 1e-\/5;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ fill\_factor\ =\ 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{typedef}\ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ matrix\_t;}
+\DoxyCodeLine{\ \ \ \ Eigen::BiCGSTAB<matrix\_t,\ Eigen::IncompleteLUT<double>>\ solver;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ BasisType>}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ solve(\textcolor{keyword}{const}\ BasisType\&\ basis,\ \textcolor{keywordtype}{int}\ num\_nodes\_x,\ \textcolor{keywordtype}{double}\ sigmaW\ =\ 1.0)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Derived\ parameters}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ I\ =\ D\ *\ D\ *\ D\ /\ 12;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lam\ =\ E\ *\ v\ /\ (1\ -\/\ 2\ *\ v)\ /\ (1\ +\ v);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ mu\ =\ E\ /\ 2\ /\ (1\ +\ v);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ lam\ =\ 2\ *\ mu\ *\ lam\ /\ (2\ *\ mu\ +\ lam);\ \ \textcolor{comment}{//\ plane\ stress}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Closed\ form\ solution\ -\/-\/\ refer\ to\ cantilever\_beam.nb\ for\ reference.}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::function<\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(\mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}})>\ analytical\ =\ [=](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x\ =\ p[0],\ y\ =\ p[1];}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ ux\ =\ (P*y*(3*D*D*(1+v)-\/4*(3*L*L-\/3*x*x+(2+v)*y*y)))\ /\ (2.*D*D*D*E);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ uy\ =\ -\/(P*(3*D*D*(1+v)*(L-\/x)\ +\ 4*(L-\/x)*(L-\/x)*(2*L+x)+12*v*x*y*y))\ /\ (2.*D*D*D*E);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}(ux,\ uy);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ BOTTOM\ =\ -\/3;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ TOP\ =\ -\/4;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ LEFT\ =\ -\/1;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ RIGHT\ =\ -\/2;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Domain\ definition}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ low(0,\ -\/D\ /\ 2),\ high(L,\ D\ /\ 2);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ BoxShape<Vec2d>\ box(low,\ high);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ step\ =\ L\ /\ num\_nodes\_x;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ DomainDiscretization<Vec2d>\ domain\ =\ box.discretizeWithStep(step);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ N\ =\ domain.size();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ support\_size\ =\ 9;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ domain.findSupport(FindClosest(support\_size));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ WLS<BasisType,\ GaussianWeight<Vec2d>,\ ScaleToClosest>\ approx(basis,\ sigmaW);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ domain.computeShapes(approx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::SparseMatrix<double,\ Eigen::RowMajor>\ M(2*N,\ 2*N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ M.reserve(storage.supportSizesVec());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::VectorXd\ rhs(2*N);\ rhs.setZero();\ rhs.setZero();}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ op\ =\ storage.implicitVectorOperators(M,\ rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ equation\ on\ interior}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.interior())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ (lam+mu)*op.graddiv(i)\ +\ mu*op.lap(i)\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ RIGHT)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ op.value(i)\ =\ \{(P*y*(3*D*D*(1+v)\ -\/\ 4*(2+v)*y*y))\ /\ (24.*E*I),\ -\/(L*v*P*y*y)\ /\ (2.*E*I)\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ LEFT)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y\ =\ domain.pos(i,\ 1);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ op.traction(i,\ lam,\ mu,\ \{-\/1,\ 0\})\ =\ \{0,\ -\/P*(D*D\ -\/\ 4*y*y)\ /\ (8.*I)\};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ TOP)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ op.traction(i,\ lam,\ mu,\ \{0,\ 1\})\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ :\ domain.types()\ ==\ BOTTOM)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ op.traction(i,\ lam,\ mu,\ \{0,\ -\/1\})\ =\ 0.0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ M.makeCompressed();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ solver.preconditioner().setDroptol(drop\_tolerance);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ solver.preconditioner().setFillfactor(fill\_factor);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ solver.setMaxIterations(max\_iterations);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ solver.setTolerance(solver\_tolerance);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ solver.compute(M);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Eigen::VectorXd\ sol\ =\ solver.solve(rhs);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ Range<double>\ error(N);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ maxuv\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ N;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ uv\ =\ analytical(domain.pos(i));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ maxuv\ =\ std::max(maxuv,\ std::max(std::abs(uv[0]),\ std::abs(uv[1])));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ error[i]\ =\ std::max(std::abs(uv[0]\ -\/\ sol[i]),\ std::abs(uv[1]\ -\/\ sol[i\ +\ N]));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ L\_inf\_error\ =\ *std::max\_element(error.begin(),\ error.end())\ /\ maxuv;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ L\_inf\_error;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{\textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ CantileverBeamTest::solver\_tolerance;}
+\DoxyCodeLine{\textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ CantileverBeamTest::drop\_tolerance;}
+\DoxyCodeLine{\textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ CantileverBeamTest::L;}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(CantileverBeamTest,\ Monomials)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon9\ =\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ nx\ =\ 100;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ solve(mon9,\ nx);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err,\ 1.9e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.iterations(),\ 8);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.error(),\ solver\_tolerance);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ nx\ =\ 200;}
+\DoxyCodeLine{\ \ \ \ err\ =\ solve(mon9,\ nx);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err,\ 5e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.iterations(),\ 12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.error(),\ solver\_tolerance);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(CantileverBeamTest,\ MonomialsNoWeight)\ \{}
+\DoxyCodeLine{\ \ \ \ Monomials<Vec2d>\ mon9\ =\ \mbox{\hyperlink{classmm_1_1Monomials_a52c807a4e23756112e7941944ca9ed17}{Monomials<Vec2d>::tensorBasis}}(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ nx\ =\ 100;\ \ \textcolor{comment}{/*\ unstable\ at\ first,\ only\ test\ later\ */}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ solve(mon9,\ nx,\ 10000.0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err,\ 2.5e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.iterations(),\ 8);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.error(),\ solver\_tolerance);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ nx\ =\ 200;}
+\DoxyCodeLine{\ \ \ \ err\ =\ solve(mon9,\ nx,\ 10000.0);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err,\ 5e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.iterations(),\ 20);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.error(),\ solver\_tolerance);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST\_F(CantileverBeamTest,\ \mbox{\hyperlink{namespacemm_aa44443d58b627c2cadda61d71976eabc}{Gaussians}})\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ nx\ =\ 100;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ sigmaB\ =\ 400.0;}
+\DoxyCodeLine{\ \ \ \ Gaussians<Vec2d>\ gau9(9,\ sigmaB);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ err\ =\ solve(gau9,\ nx);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err,\ 2.5e-\/2);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.iterations(),\ 8);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.error(),\ solver\_tolerance);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ nx\ =\ 200;}
+\DoxyCodeLine{\ \ \ \ err\ =\ solve(gau9,\ nx);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(err,\ 8e-\/3);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.iterations(),\ 12);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_LE(solver.error(),\ solver\_tolerance);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

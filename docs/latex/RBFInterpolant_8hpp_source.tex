@@ -1,0 +1,65 @@
+\doxysection{RBFInterpolant.\+hpp}
+\hypertarget{RBFInterpolant_8hpp_source}{}\label{RBFInterpolant_8hpp_source}\index{include/medusa/bits/approximations/RBFInterpolant.hpp@{include/medusa/bits/approximations/RBFInterpolant.hpp}}
+\mbox{\hyperlink{RBFInterpolant_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFINTERPOLANT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFINTERPOLANT\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFInterpolant__fwd_8hpp}{RBFInterpolant\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{RBFBasis_8hpp}{RBFBasis.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ RBFType,\ \textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00016}\mbox{\hyperlink{classmm_1_1RBFInterpolant_a86dc7cf0be088eca49133a36dc1e10f0}{00016}}\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a86dc7cf0be088eca49133a36dc1e10f0}{RBFInterpolant<RBFType,\ vec\_t>::RBFInterpolant}}(}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_ab3d572ac3ea683ae5e211d7822b79c72}{rbf\_t}}\&\ rbf,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Monomials<vec\_t>}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{mon}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\_t}}\&\ point,}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vector\_t>\&\ support,\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a6609a01058ae09748bdcc296aacf985b}{scalar\_t}}\ scale,}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\&\ coefficients)\ :}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ rbf\_(rbf),\ mon\_(\mbox{\hyperlink{classmm_1_1Gaussian}{mon}}),\ point\_(point),\ support\_(support),\ scale\_(scale),}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ coefficients\_(coefficients)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00022}00022\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}}\ =\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_aa3570f0f6a29c6d65dd6faaabb729983}{support\_}}.size();}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00024}00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFInterpolant_aa3570f0f6a29c6d65dd6faaabb729983}{support\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ -\/=\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_acd29ba3d71509ce09d24b03477911583}{point}};}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFInterpolant_aa3570f0f6a29c6d65dd6faaabb729983}{support\_}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]\ /=\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a66ce7337d6f8d343ca574c9158caaf15}{scale}};}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00029}00029\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ RBFType,\ \textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00030}\mbox{\hyperlink{classmm_1_1RBFInterpolant_a67108ed828871db3e2da2e17e866f5be}{00030}}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a67108ed828871db3e2da2e17e866f5be}{RBFInterpolant<RBFType,\ vec\_t>::operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\_t}}\&\ point)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n1}}\ =\ support\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}}\ =\ mon\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a5d41c5ed4d42729dd82c79702d0d99ef}{vector\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}}\ =\ (point\ -\/\ point\_)\ /\ scale\_;}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00034}00034\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{n1}}\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}});}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n1}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ rbf\_((\mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}}\ -\/\ support\_[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}]).\mbox{\hyperlink{classmm_1_1Gaussian}{squaredNorm}}());}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{n1}}+\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ mon\_.eval(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}});}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}.dot(coefficients\_);}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00045}00045\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ RBFType,\ \textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00046}00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ operator\_t>}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00047}00047\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00048}00048\ \mbox{\hyperlink{classmm_1_1RBFInterpolant_a67108ed828871db3e2da2e17e866f5be}{RBFInterpolant<RBFType,\ vec\_t>::operator()}}(\textcolor{keyword}{const}\ vector\_t\&\ point,\ \textcolor{keyword}{const}\ operator\_t\&\ op)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00049}00049\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n1}}\ =\ support\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}}\ =\ mon\_.size();}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00051}00051\ \ \ \ \ vector\_t\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}}\ =\ (point\ -\/\ point\_)\ /\ scale\_;}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00052}00052\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{RBFBasis<rbf\_t,\ vec\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{rbf\_basis}}(\mbox{\hyperlink{classmm_1_1Gaussian}{n1}},\ rbf\_);}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00053}00053\ \ \ \ \ Eigen::Matrix<scalar\_t,\ Eigen::Dynamic,\ 1>\ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{n1}}\ +\ \mbox{\hyperlink{classmm_1_1Gaussian}{n2}});}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{n1}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{b}}(\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{rbf\_basis}}.evalOp(\mbox{\hyperlink{classmm_1_1Gaussian}{i}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{local\_point}},\ op,\ support\_);}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n2;\ ++i)\ \{}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ b(n1+i)\ =\ mon\_.evalOp(i,\ local\_point,\ op);}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00059}00059\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{return}\ b.dot(coefficients\_);}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00061}00061\ \}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00064}00064\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{RBFInterpolant_8hpp_source_l00066}00066\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_APPROXIMATIONS\_RBFINTERPOLANT\_HPP\_}}
+
+\end{DoxyCode}

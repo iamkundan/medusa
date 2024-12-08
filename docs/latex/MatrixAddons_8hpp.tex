@@ -1,0 +1,100 @@
+\doxysection{include/medusa/bits/types/\+Matrix\+Addons.hpp File Reference}
+\hypertarget{MatrixAddons_8hpp}{}\label{MatrixAddons_8hpp}\index{include/medusa/bits/types/MatrixAddons.hpp@{include/medusa/bits/types/MatrixAddons.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Plugins for {\ttfamily Eigen\+::\+Matrix} class. 
+
+This extension adds some convenience constructors and assignments from scalars and initializer lists for fixed size matrices. Additionally if makes all matrices compatible with range based {\ttfamily for} loops and STL containers by adding appropriate {\ttfamily begin()} and {\ttfamily end()} methods. It also offers linear and row linear views to matrices. 
+
+Definition in file \mbox{\hyperlink{MatrixAddons_8hpp_source}{Matrix\+Addons.\+hpp}}.
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}} \& \mbox{\hyperlink{MatrixAddons_8hpp_aa248d9e4b565dba0d5ac9ef56955adfd}{operator=}} (const Scalar \&s)
+\begin{DoxyCompactList}\small\item\em Assign scalar to a matrix, setting all its elements to {\ttfamily s}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}} (const Scalar \&s)
+\begin{DoxyCompactList}\small\item\em Construct matrix from scalar. Enabled only for fixed size matrices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{MatrixAddons_8hpp_a4663ffb6e4bdf9b0edee736ad2981f8b}{Matrix}} (std\+::initializer\+\_\+list$<$ Scalar $>$ lst)
+\begin{DoxyCompactList}\small\item\em Construct a fixed sized matrix from an initializer list. \end{DoxyCompactList}\item 
+Map$<$ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}$<$ Scalar, Dynamic, 1 $>$ $>$ \mbox{\hyperlink{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}{as\+Linear}} ()
+\begin{DoxyCompactList}\small\item\em Returns a view to a matrix as a column vector. \end{DoxyCompactList}\item 
+Map$<$ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}$<$ Scalar, Dynamic, 1 $>$ $>$ \mbox{\hyperlink{MatrixAddons_8hpp_a35f885de229ab394df578599f5af2c46}{as\+Row\+Linear}} ()
+\begin{DoxyCompactList}\small\item\em Returns a view to a matrix as a row vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9}\label{MatrixAddons_8hpp_adba0755b932e557ac7b71953dca3afd9} 
+\index{MatrixAddons.hpp@{MatrixAddons.hpp}!asLinear@{asLinear}}
+\index{asLinear@{asLinear}!MatrixAddons.hpp@{MatrixAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{asLinear()}{asLinear()}}
+{\footnotesize\ttfamily Map$<$ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}$<$ Scalar, Dynamic, 1 $>$ $>$ as\+Linear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a view to a matrix as a column vector. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixAddons_8hpp_source_l00053}{53}} of file \mbox{\hyperlink{MatrixAddons_8hpp_source}{Matrix\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixAddons_8hpp_a35f885de229ab394df578599f5af2c46}\label{MatrixAddons_8hpp_a35f885de229ab394df578599f5af2c46} 
+\index{MatrixAddons.hpp@{MatrixAddons.hpp}!asRowLinear@{asRowLinear}}
+\index{asRowLinear@{asRowLinear}!MatrixAddons.hpp@{MatrixAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{asRowLinear()}{asRowLinear()}}
+{\footnotesize\ttfamily Map$<$ \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}}$<$ Scalar, Dynamic, 1 $>$ $>$ as\+Row\+Linear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a view to a matrix as a row vector. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixAddons_8hpp_source_l00060}{60}} of file \mbox{\hyperlink{MatrixAddons_8hpp_source}{Matrix\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}\label{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d} 
+\index{MatrixAddons.hpp@{MatrixAddons.hpp}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!MatrixAddons.hpp@{MatrixAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Matrix (\begin{DoxyParamCaption}\item[{const Scalar \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Construct matrix from scalar. Enabled only for fixed size matrices. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2types_2Vec_test_8cpp-example}{test/types/\+Vec\+\_\+test.\+cpp}}.\end{Desc}
+
+
+Definition at line \mbox{\hyperlink{MatrixAddons_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{MatrixAddons_8hpp_source}{Matrix\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixAddons_8hpp_a4663ffb6e4bdf9b0edee736ad2981f8b}\label{MatrixAddons_8hpp_a4663ffb6e4bdf9b0edee736ad2981f8b} 
+\index{MatrixAddons.hpp@{MatrixAddons.hpp}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!MatrixAddons.hpp@{MatrixAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Matrix (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ Scalar $>$}]{lst }\end{DoxyParamCaption})}
+
+
+
+Construct a fixed sized matrix from an initializer list. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixAddons_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{MatrixAddons_8hpp_source}{Matrix\+Addons.\+hpp}}.
+
+\Hypertarget{MatrixAddons_8hpp_aa248d9e4b565dba0d5ac9ef56955adfd}\label{MatrixAddons_8hpp_aa248d9e4b565dba0d5ac9ef56955adfd} 
+\index{MatrixAddons.hpp@{MatrixAddons.hpp}!operator=@{operator=}}
+\index{operator=@{operator=}!MatrixAddons.hpp@{MatrixAddons.hpp}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{MatrixAddons_8hpp_ada1810f1c2ee4177c4468ab4d0a6720d}{Matrix}} \& operator= (\begin{DoxyParamCaption}\item[{const Scalar \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Assign scalar to a matrix, setting all its elements to {\ttfamily s}. 
+
+
+
+Definition at line \mbox{\hyperlink{MatrixAddons_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{MatrixAddons_8hpp_source}{Matrix\+Addons.\+hpp}}.
+

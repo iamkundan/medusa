@@ -1,0 +1,158 @@
+\doxysection{test/types/\+Range\+\_\+test.\+cpp}
+\hypertarget{test_2types_2Range_test_8cpp-example}{}\label{test_2types_2Range_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range_8hpp}{medusa/bits/types/Range.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeConstructAssign)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ a(\{1,\ 2,\ 3.6\});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(3,\ a.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ a[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ a[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3.6,\ a[2]);}
+\DoxyCodeLine{\ \ \ \ a\ =\ \{2.3,\ -\/4.1\};}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(2,\ a.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2.3,\ a[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/4.1,\ a[1]);}
+\DoxyCodeLine{\ \ \ \ a\ =\ \{3,\ 4,\ 5,\ 6,\ 7.2\};}
+\DoxyCodeLine{\ \ \ \ Range<double>\ b(1,\ 3);}
+\DoxyCodeLine{\ \ \ \ b\ =\ a[\{1,\ 2,\ 4\}].asRange();}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(3,\ b.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(4,\ b[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(5,\ b[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(7.2,\ b[2]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeCompare)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ a\ =\ \{1.0,\ 2.0,\ 3.0,\ 4.0,\ 5.0,\ 6.0,\ 7.0,\ 8.0\};}
+\DoxyCodeLine{\ \ \ \ Range<int>\ result\ =\ a\ >\ 3.2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{3,\ 4,\ 5,\ 6,\ 7\}),\ result);}
+\DoxyCodeLine{\ \ \ \ result\ =\ a\ <\ 3.2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{0,\ 1,\ 2\}),\ result);}
+\DoxyCodeLine{\ \ \ \ result\ =\ a\ ==\ 3.2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(),\ result);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(a,\ a);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ b(std::vector<double>(\{1,\ 2,\ 3\}));}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(3,\ b.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ b[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ b[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(3,\ b[2]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ b\ =\ std::vector<double>(\{1.2,\ 2.3\});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(2,\ b.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(1.2,\ b[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(2.3,\ b[1]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ c\ =\ \{1,\ 2,\ 3,\ 1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ Range<int>\ d\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((c[\{0,\ 1,\ 2\}]).asRange(),\ d);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NE((c[\{1,\ 2,\ 0\}]).asRange(),\ d);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((c[\{0,\ 1,\ 2\}]).asRange(),\ (c[\{3,\ 4,\ 5\}]).asRange());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(d,\ (c[\{0,\ 1,\ 2\}]).asRange());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeAccess)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ d\_range(5,\ 1);}
+\DoxyCodeLine{\ \ \ \ d\_range\ =\ \textcolor{keyword}{static\_cast<}Range<double>\textcolor{keyword}{>}(d\_range[\{0,\ 2\}]);}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(2,\ d\_range.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ d\_range[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(1,\ d\_range[1]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeAppendJoin)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ a\ =\ \{1.0,\ -\/2.2,\ 3.0\},\ b\ =\ \{2.0,\ 3.0,\ 4.0\};}
+\DoxyCodeLine{\ \ \ \ Range<double>\ c(b);}
+\DoxyCodeLine{\ \ \ \ Range<double>\ d(a);}
+\DoxyCodeLine{\ \ \ \ a.append(b);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<double>(\{1.0,\ -\/2.2,\ 3.0,\ 2.0,\ 3.0,\ 4.0\}),\ a);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(c,\ b);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<double>(\{1.0,\ -\/2.2,\ 3.0,\ 2.0,\ 3.0,\ 4.0\}),\ d.join(c));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeRemove)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ a\ =\ \{0,\ 1,\ 2,\ 3,\ 4,\ 5,\ 6,\ 7,\ 8\};}
+\DoxyCodeLine{\ \ \ \ a.remove(\{4,\ 3,\ 2,\ 3\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<double>(\{0,\ 1,\ 5,\ 6,\ 7,\ 8\}),\ a);}
+\DoxyCodeLine{\ \ \ \ a.remove(\{\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<double>(\{0,\ 1,\ 5,\ 6,\ 7,\ 8\}),\ a);}
+\DoxyCodeLine{\ \ \ \ a.remove(\{0,\ 1,\ 2,\ 3,\ 4,\ 5\});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<double>(),\ a);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeFilter)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<double>\ aa\ =\ \{1.0,\ 2.0,\ 3.0,\ 4.0,\ 5.0,\ 6.0,\ 7.0,\ 8.0\};}
+\DoxyCodeLine{\ \ \ \ Range<int>\ ind\ =\ aa.filter([](\textcolor{keywordtype}{double}\ v)\ \{\ \textcolor{keywordflow}{return}\ v\ >\ 2.3\ \&\&\ v\ <\ 6.4;\ \});}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{2,\ 3,\ 4,\ 5\}),\ ind);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeMap)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<std::pair<double,\ double>>\ r\ =\ \{\{1,\ 0\},\ \{1.5,\ 2\},\ \{0,\ -\/0.1\}\};}
+\DoxyCodeLine{\ \ \ \ Range<double>\ n\ =\ r.map([]\ (\textcolor{keyword}{const}\ std::pair<double,\ double>\&\ v)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ v.first*v.first\ +\ v.second*v.second;\ \});}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(3,\ n.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(1.0*1.0,\ n[0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(2.5*2.5,\ n[1]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_DOUBLE\_EQ(0.1*0.1,\ n[2]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeBool)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<bool>\ a(30,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \ \ a[7]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\ \ \ \ EXPECT\_TRUE(a[7]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(a[6]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_FALSE(a[8]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeDeathTest)\ \{}
+\DoxyCodeLine{\ \ \ \ \ Range<int>\ a\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ \ Range<int>\ b\ =\ \{3,\ 1\};}
+\DoxyCodeLine{\ \ \ \ \ EXPECT\_DEATH((a[\{4,\ 1\}]),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ 4\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 3)\ when\ using\ multiindexed\ read-\/write\ access."{}});}
+\DoxyCodeLine{\ \ \ \ \ EXPECT\_DEATH((a[\{4,\ 1\}])\ =\ 5,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ 4\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 3)\ when\ using\ multiindexed\ read-\/write\ access."{}});}
+\DoxyCodeLine{\ \ \ \ \ EXPECT\_DEATH((\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }Range<int>\&\textcolor{keyword}{>}(a)[\{4,\ 1\}]),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ 4\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 3)\ when\ using\ multiindexed\ read\ access."{}});}
+\DoxyCodeLine{\ \ \ \ \ EXPECT\_DEATH(\textcolor{keyword}{static\_cast<}\textcolor{keyword}{const\ }Range<int>\&\textcolor{keyword}{>}(a)[4],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Index\ 4\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 3)\ when\ accessing\ Range\ for\ read/write."{}});}
+\DoxyCodeLine{\ \ \ \ \ EXPECT\_DEATH(a[4],\ \textcolor{stringliteral}{"{}Index\ 4\ out\ of\ range\ \(\backslash\)\(\backslash\)[0,\ 3)\ when\ accessing\ Range\ for\ write."{}});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ RangeViewPrint)\ \{}
+\DoxyCodeLine{\ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{\ \ \ \ Range<int>\ a\ =\ \{1,\ 2,\ 3\};}
+\DoxyCodeLine{\ \ \ \ ss\ <<\ a[\{1,\ 0,\ 1\}];}
+\DoxyCodeLine{\ \ \ \ ss\ <<\ static\_cast<const\ Range<int>\&>(a)[\{1,\ 2,\ 1\}];}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(\textcolor{stringliteral}{"{}[2,\ 1,\ 2][2,\ 3,\ 2]"{}},\ ss.str());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ Seq)\ \{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{0,\ 1,\ 2,\ 3,\ 4\}),\ Range<int>::seq(5));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{2,\ 3,\ 4\}),\ Range<int>::seq(2,\ 5));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{4,\ 3,\ 2,\ 1,\ 0\}),\ Range<int>::seq(4,\ -\/1,\ -\/1));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{4,\ 2,\ 0\}),\ Range<int>::seq(4,\ -\/1,\ -\/2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{4,\ 2\}),\ Range<int>::seq(4,\ 0,\ -\/2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{2,\ 4\}),\ Range<int>::seq(2,\ 5,\ 2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{2,\ 4\}),\ Range<int>::seq(2,\ 6,\ 2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(Range<int>(\{2,\ 4,\ 6\}),\ Range<int>::seq(2,\ 7,\ 2));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Types,\ DISABLED\_RangeExamples)\ \{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ v\ =\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<int>::seq}}(100);\ \ \textcolor{comment}{//\ numbers\ from\ 0\ to\ 99,\ inclusive}}
+\DoxyCodeLine{\ \ \ \ v[v.filter([](\textcolor{keywordtype}{int}\ x)\ \{\ \textcolor{keywordflow}{return}\ x\ \%\ 2\ ==\ 0;\ \})]\ =\ 0;\ \ \textcolor{comment}{//\ set\ even\ to\ 0}}
+\DoxyCodeLine{\ \ \ \ v.remove(v\ >\ 80);\ \ \textcolor{comment}{//\ remove\ greater\ than\ 80}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ v\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ u(100,\ 4);}
+\DoxyCodeLine{\ \ \ \ v.append(u);\ \ \textcolor{comment}{//\ append\ one\ range\ to\ another}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ v\ +\ u\ <<\ std::endl;\ \ \textcolor{comment}{//\ join\ two\ ranges\ and\ return\ result}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

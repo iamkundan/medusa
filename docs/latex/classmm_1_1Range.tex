@@ -1,0 +1,620 @@
+\doxysection{mm\+::Range\texorpdfstring{$<$}{<} T, Allocator \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1Range}{}\label{classmm_1_1Range}\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+
+
+{\ttfamily \#include $<$Range\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} = std\+::allocator$<$\+T$>$$>$\newline
+class mm\+::\+Range$<$ T, Allocator $>$}
+An extension of {\ttfamily std\+::vector\texorpdfstring{$<$}{<}T\texorpdfstring{$>$}{>}} to support additional useful operations. 
+
+It only adds new methods, no new members, so destructing via base pointer is still safe (even though this usage is not intended).
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ Range<int>\ v\ =\ \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{Range<int>::seq}}(100);\ \ \textcolor{comment}{//\ numbers\ from\ 0\ to\ 99,\ inclusive}}
+\DoxyCodeLine{\ \ \ \ v[v.filter([](\textcolor{keywordtype}{int}\ x)\ \{\ \textcolor{keywordflow}{return}\ x\ \%\ 2\ ==\ 0;\ \})]\ =\ 0;\ \ \textcolor{comment}{//\ set\ even\ to\ 0}}
+\DoxyCodeLine{\ \ \ \ v.remove(v\ >\ 80);\ \ \textcolor{comment}{//\ remove\ greater\ than\ 80}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ v\ <<\ std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ Range<int>\ u(100,\ 4);}
+\DoxyCodeLine{\ \ \ \ v.append(u);\ \ \textcolor{comment}{//\ append\ one\ range\ to\ another}}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ v\ +\ u\ <<\ std::endl;\ \ \textcolor{comment}{//\ join\ two\ ranges\ and\ return\ result}}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+
+
+Inheritance diagram for mm\+::Range\texorpdfstring{$<$}{<} T, Allocator \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classmm_1_1Range__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mm\+::Range\texorpdfstring{$<$}{<} T, Allocator \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classmm_1_1Range__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Range_a02a186bb98f2c00a41a56fe9f0eaf8f9}{Range}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \&o)=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a73dd61c92a67bea21fd596c2fb521b2f}{Range}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a8a54e9826690254ec9efcf32381ea6a2}{Range}} (\mbox{\hyperlink{classmm_1_1Range}{Range}} \&\&o) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range_ab64a3d05c17e7013f729169c0155d488}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \&o)=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default copy assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range_a9526c3d84406bd7032438e5e4c199c93}{operator=}} (\mbox{\hyperlink{classmm_1_1Range}{Range}} \&\&o) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}=\mbox{\hyperlink{classmm_1_1Gaussian}{default}}
+\begin{DoxyCompactList}\small\item\em Default move assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a6c063448ba418ddb6a61f5d29419829e}{Range}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&o)
+\begin{DoxyCompactList}\small\item\em Copy construct from {\ttfamily std\+::vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a8849326d5e6cc78c148daee224c26291}{Range}} (std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\&o) \mbox{\hyperlink{classmm_1_1Gaussian}{noexcept}}
+\begin{DoxyCompactList}\small\item\em Move Construct from {\ttfamily std\+::vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_adac7cad9ac02d98265f07e9c8835c5b3}{Range}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+::\+Range\+View}} \&o)
+\begin{DoxyCompactList}\small\item\em Construct from {\ttfamily \doxylink{classmm_1_1Range_1_1RangeView}{Range\+View}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a187f4c0b724c4047feb19cd8ee48cc00}{Range}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_1_1ConstRangeView}{Range\+::\+Const\+Range\+View}} \&o)
+\begin{DoxyCompactList}\small\item\em Construct from {\ttfamily \doxylink{classmm_1_1Range_1_1ConstRangeView}{Const\+Range\+View}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range_a9dcde2e9b28878faf260635ced5a4f82}{operator=}} (std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} $>$ \mbox{\hyperlink{classmm_1_1Gaussian}{lst}})
+\begin{DoxyCompactList}\small\item\em Assign from initializer list\+: {\ttfamily a = \{1, 2, 3\};}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range_a04af2ab167c5b366bfbb85ebc71eba76}{operator=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&x)
+\begin{DoxyCompactList}\small\item\em Assign a single value to all elements\+: {\ttfamily a = 4;}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_aa695686a1769c61397f2096db0ff33fe}{reference}} \mbox{\hyperlink{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}})
+\begin{DoxyCompactList}\small\item\em Overload vector\textquotesingle{}s {\ttfamily \mbox{[}\mbox{]}} to assert parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{const\+\_\+reference}} \mbox{\hyperlink{classmm_1_1Range_ab28ebd2642575da0bfa6e624f00673cf}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}} \mbox{\hyperlink{classmm_1_1Gaussian}{i}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload vector\textquotesingle{}s {\ttfamily \mbox{[}\mbox{]}} to assert parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}} \mbox{\hyperlink{classmm_1_1Range_ae3f8af4a691a11b989ca32672aa593d1}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes)
+\begin{DoxyCompactList}\small\item\em Multi-\/indexed access for writing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range_1_1ConstRangeView}{Const\+Range\+View}} \mbox{\hyperlink{classmm_1_1Range_a5278f710970cee6952c9bd3dd1ed3e37}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&indexes) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Multi-\/indexed access for reading. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Range_a2894c302f01f6cc9e9c7c2bfcaf7796f}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns number of elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b}{append}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{rng}})
+\begin{DoxyCompactList}\small\item\em Append all elements of {\ttfamily rng} to self. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range_a8cffe60280296b355aa78ec4c16bd620}{operator+=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{rng}})
+\begin{DoxyCompactList}\small\item\em \doxylink{structmm_1_1Operator}{Operator} version of \doxylink{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b}{Range\+::append}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range_ac212b31d818e324d9617bdcdd1af1d0e}{join}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{rng}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return new copy containing this range\textquotesingle{}s elements followed by all elements of {\ttfamily rng}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Range_a62afb2dcae74b9f9100c3ccb58d1d6f6}{remove}} (\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} indexes)
+\begin{DoxyCompactList}\small\item\em Remove elements wih given indexes. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Predicate}} $>$ }\\\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_ad0a20d9123fcee569c18fce9f0366722}{filter}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Predicate}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{predicate}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes for which predicate returns {\ttfamily true}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Unary\+Op}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{auto}} \mbox{\hyperlink{classmm_1_1Range_a18d2b3a1346d520b0a630a42614b5927}{map}} (\mbox{\hyperlink{classmm_1_1Gaussian}{Unary\+Op}} op) -\/$>$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{decltype}}(op(\mbox{\hyperlink{classmm_1_1Gaussian}{this}}-\/$>$\mbox{\hyperlink{classmm_1_1Gaussian}{operator}}\mbox{[}$\,$\mbox{]}(0)))$>$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a new range, obtained by applying {\ttfamily op} to all elements of this \doxylink{classmm_1_1Range}{Range}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_ad003b476ef4debb38d5169b8df7278e5}{operator$<$}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&v) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are less than {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_a300bd86c799fa7a11d68ac843efcaa8f}{operator$>$}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&v) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are greater than {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_a39ed7ae3df3b6baca15bbb6ce821216a}{operator$<$=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&v) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are less or equal to {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_ab365c05904fb117db8a11476cd7900d8}{operator$>$=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&v) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are greater or equal to {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_af4f4505a07335f5a10ed51c44c33e039}{operator==}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&v) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are equal to {\ttfamily v}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range_ab018539bc7c2c7712dff90740d6ebf68}{operator!=}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&v) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns list of indexes of elements that are not equal to {\ttfamily v}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}{seq}} (\mbox{\hyperlink{classmm_1_1Gaussian}{V}} \mbox{\hyperlink{classmm_1_1Gaussian}{n}})
+\begin{DoxyCompactList}\small\item\em Returns range {\ttfamily \{0, ..., n-\/1\}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range_aba9e6fd9a3ad81a09d55fad1f902be4c}{seq}} (\mbox{\hyperlink{classmm_1_1Gaussian}{V}} start, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} stop)
+\begin{DoxyCompactList}\small\item\em Returns range with integers in interval {\ttfamily \mbox{[}start, stop)}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{D}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range_aca618cc960c6729d788d298c0cd41504}{seq}} (\mbox{\hyperlink{classmm_1_1Gaussian}{V}} start, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} stop, \mbox{\hyperlink{classmm_1_1Gaussian}{D}} step)
+\begin{DoxyCompactList}\small\item\em Returns range with integers in interval {\ttfamily \mbox{[}start, stop)} with step {\ttfamily step}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::value\+\_\+type \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em This container\textquotesingle{}s value type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::reference \mbox{\hyperlink{classmm_1_1Range_aa695686a1769c61397f2096db0ff33fe}{reference}}
+\begin{DoxyCompactList}\small\item\em This container\textquotesingle{}s reference to value type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::const\+\_\+reference \mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{const\+\_\+reference}}
+\begin{DoxyCompactList}\small\item\em This container\textquotesingle{}s const reference to value type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em This container\textquotesingle{}s size type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1Range_1_1ConstRangeView}{Const\+Range\+View}}
+\begin{DoxyCompactList}\small\item\em This class represents a non contiguous view to a \doxylink{classmm_1_1Range}{Range}, allowing for read-\/only operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1Range_1_1RangeView}{Range\+View}}
+\begin{DoxyCompactList}\small\item\em This class represents a non contiguous view to a \doxylink{classmm_1_1Range}{Range}, allowing for read and write operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1Range_a02a186bb98f2c00a41a56fe9f0eaf8f9}\label{classmm_1_1Range_a02a186bb98f2c00a41a56fe9f0eaf8f9} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default copy constructor. 
+
+\Hypertarget{classmm_1_1Range_a73dd61c92a67bea21fd596c2fb521b2f}\label{classmm_1_1Range_a73dd61c92a67bea21fd596c2fb521b2f} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00142}{142}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a8a54e9826690254ec9efcf32381ea6a2}\label{classmm_1_1Range_a8a54e9826690254ec9efcf32381ea6a2} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+Default move constructor. 
+
+\Hypertarget{classmm_1_1Range_a6c063448ba418ddb6a61f5d29419829e}\label{classmm_1_1Range_a6c063448ba418ddb6a61f5d29419829e} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy construct from {\ttfamily std\+::vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00147}{147}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a8849326d5e6cc78c148daee224c26291}\label{classmm_1_1Range_a8849326d5e6cc78c148daee224c26291} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Move Construct from {\ttfamily std\+::vector}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00149}{149}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_adac7cad9ac02d98265f07e9c8835c5b3}\label{classmm_1_1Range_adac7cad9ac02d98265f07e9c8835c5b3} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct from {\ttfamily \doxylink{classmm_1_1Range_1_1RangeView}{Range\+View}}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00151}{151}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a187f4c0b724c4047feb19cd8ee48cc00}\label{classmm_1_1Range_a187f4c0b724c4047feb19cd8ee48cc00} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!Range@{Range}}
+\index{Range@{Range}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Const\+Range\+View \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct from {\ttfamily \doxylink{classmm_1_1Range_1_1ConstRangeView}{Const\+Range\+View}}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00153}{153}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b}\label{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!append@{append}}
+\index{append@{append}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{rng }\end{DoxyParamCaption})}
+
+
+
+Append all elements of {\ttfamily rng} to self. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ad0a20d9123fcee569c18fce9f0366722}\label{classmm_1_1Range_ad0a20d9123fcee569c18fce9f0366722} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!filter@{filter}}
+\index{filter@{filter}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{filter()}{filter()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Predicate}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::filter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{Predicate}} \&}]{predicate }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes for which predicate returns {\ttfamily true}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Predicate} & Any callable object, e.\+g. lambda func, functional, class with {\ttfamily operator()} defined. Example\+: 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ idxs\ =\ a.filter([](\textcolor{keywordtype}{double}\ v)\{\ \textcolor{keywordflow}{return}\ 2.3\ <\ v\ \&\&\ v\ <\ 6.4;\ \})];}
+
+\end{DoxyCode}
+ returns all elements of a that are between 2.\+3 and 6.\+4. \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00101}{101}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ac212b31d818e324d9617bdcdd1af1d0e}\label{classmm_1_1Range_ac212b31d818e324d9617bdcdd1af1d0e} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!join@{join}}
+\index{join@{join}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{rng }\end{DoxyParamCaption}) const}
+
+
+
+Return new copy containing this range\textquotesingle{}s elements followed by all elements of {\ttfamily rng}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a18d2b3a1346d520b0a630a42614b5927}\label{classmm_1_1Range_a18d2b3a1346d520b0a630a42614b5927} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!map@{map}}
+\index{map@{map}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{map()}{map()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Unary\+Op}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{auto}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{Unary\+Op}}}]{op }\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{decltype}}(op(\mbox{\hyperlink{classmm_1_1Gaussian}{this}}-\/$>$\mbox{\hyperlink{classmm_1_1Gaussian}{operator}}\mbox{[}$\,$\mbox{]}(0)))$>$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}}}
+
+
+
+Returns a new range, obtained by applying {\ttfamily op} to all elements of this \doxylink{classmm_1_1Range}{Range}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Unary\+Op} & Any callable object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em op} & Operation mapping {\ttfamily T -\/\texorpdfstring{$>$}{>} Out} type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily \mbox{[}a, b, c\mbox{]}.\doxylink{classmm_1_1Range_a18d2b3a1346d520b0a630a42614b5927}{map(f)} -\/\texorpdfstring{$>$}{>} \mbox{[}f(a), f(b), f(c)\mbox{]}} 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00110}{110}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ab018539bc7c2c7712dff90740d6ebf68}\label{classmm_1_1Range_ab018539bc7c2c7712dff90740d6ebf68} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are not equal to {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00143}{143}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a8cffe60280296b355aa78ec4c16bd620}\label{classmm_1_1Range_a8cffe60280296b355aa78ec4c16bd620} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{rng }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxylink{structmm_1_1Operator}{Operator} version of \doxylink{classmm_1_1Range_a7686234b38ef636f26d907834e7e3d6b}{Range\+::append}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00190}{190}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ad003b476ef4debb38d5169b8df7278e5}\label{classmm_1_1Range_ad003b476ef4debb38d5169b8df7278e5} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are less than {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00118}{118}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a39ed7ae3df3b6baca15bbb6ce821216a}\label{classmm_1_1Range_a39ed7ae3df3b6baca15bbb6ce821216a} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator$<$= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are less or equal to {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00128}{128}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ab64a3d05c17e7013f729169c0155d488}\label{classmm_1_1Range_ab64a3d05c17e7013f729169c0155d488} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default copy assignment. 
+
+\Hypertarget{classmm_1_1Range_a04af2ab167c5b366bfbb85ebc71eba76}\label{classmm_1_1Range_a04af2ab167c5b366bfbb85ebc71eba76} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Assign a single value to all elements\+: {\ttfamily a = 4;}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00025}{25}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a9526c3d84406bd7032438e5e4c199c93}\label{classmm_1_1Range_a9526c3d84406bd7032438e5e4c199c93} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}} \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \&\&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+Default move assignment. 
+
+\Hypertarget{classmm_1_1Range_a9dcde2e9b28878faf260635ced5a4f82}\label{classmm_1_1Range_a9dcde2e9b28878faf260635ced5a4f82} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \& \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator= (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} $>$}]{lst }\end{DoxyParamCaption})}
+
+
+
+Assign from initializer list\+: {\ttfamily a = \{1, 2, 3\};}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_af4f4505a07335f5a10ed51c44c33e039}\label{classmm_1_1Range_af4f4505a07335f5a10ed51c44c33e039} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are equal to {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00138}{138}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a300bd86c799fa7a11d68ac843efcaa8f}\label{classmm_1_1Range_a300bd86c799fa7a11d68ac843efcaa8f} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator$>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are greater than {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00123}{123}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ab365c05904fb117db8a11476cd7900d8}\label{classmm_1_1Range_ab365c05904fb117db8a11476cd7900d8} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator$>$= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range_a90f2d9a3032ee62c2b4d1336b20ead7c}{value\+\_\+type}} \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Returns list of indexes of elements that are greater or equal to {\ttfamily v}. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00133}{133}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ae3f8af4a691a11b989ca32672aa593d1}\label{classmm_1_1Range_ae3f8af4a691a11b989ca32672aa593d1} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Range\+View \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption})}
+
+
+
+Multi-\/indexed access for writing. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a5278f710970cee6952c9bd3dd1ed3e37}\label{classmm_1_1Range_a5278f710970cee6952c9bd3dd1ed3e37} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::\+Const\+Range\+View \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}} \&}]{indexes }\end{DoxyParamCaption}) const}
+
+
+
+Multi-\/indexed access for reading. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af}\label{classmm_1_1Range_addfb894bc7486aaae51665d164ab52af} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\mbox{\hyperlink{classmm_1_1Range_aa695686a1769c61397f2096db0ff33fe}{\+::reference}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}}}]{i }\end{DoxyParamCaption})}
+
+
+
+Overload vector\textquotesingle{}s {\ttfamily \mbox{[}\mbox{]}} to assert parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_ab28ebd2642575da0bfa6e624f00673cf}\label{classmm_1_1Range_ab28ebd2642575da0bfa6e624f00673cf} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\mbox{\hyperlink{classmm_1_1Range_a55c5c3094eb6e7e74f0638e549ff29f9}{\+::const\+\_\+reference}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Range_a8a8e0d4b2d0cac97425364f580e0575d}{size\+\_\+type}}}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Overload vector\textquotesingle{}s {\ttfamily \mbox{[}\mbox{]}} to assert parameter. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00040}{40}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a62afb2dcae74b9f9100c3ccb58d1d6f6}\label{classmm_1_1Range_a62afb2dcae74b9f9100c3ccb58d1d6f6} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!remove@{remove}}
+\index{remove@{remove}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\+\_\+t}}}]{indexes }\end{DoxyParamCaption})}
+
+
+
+Remove elements wih given indexes. 
+
+
+
+Definition at line \mbox{\hyperlink{Range_8hpp_source_l00079}{79}} of file \mbox{\hyperlink{Range_8hpp_source}{Range.\+hpp}}.
+
+\Hypertarget{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d}\label{classmm_1_1Range_a072259bcb0fddbb2ba577fc74fc17a6d} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!seq@{seq}}
+\index{seq@{seq}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{seq()}{seq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::seq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{V}}}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns range {\ttfamily \{0, ..., n-\/1\}}. 
+
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{test_2types_2Range_test_8cpp-example}{test/types/\+Range\+\_\+test.\+cpp}}.\end{Desc}
+\Hypertarget{classmm_1_1Range_aba9e6fd9a3ad81a09d55fad1f902be4c}\label{classmm_1_1Range_aba9e6fd9a3ad81a09d55fad1f902be4c} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!seq@{seq}}
+\index{seq@{seq}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{seq()}{seq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::seq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{V}}}]{start,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{V}}}]{stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns range with integers in interval {\ttfamily \mbox{[}start, stop)}. 
+
+\Hypertarget{classmm_1_1Range_aca618cc960c6729d788d298c0cd41504}\label{classmm_1_1Range_aca618cc960c6729d788d298c0cd41504} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!seq@{seq}}
+\index{seq@{seq}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{seq()}{seq()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{D}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Range}{Range}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::seq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{V}}}]{start,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{V}}}]{stop,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{D}}}]{step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns range with integers in interval {\ttfamily \mbox{[}start, stop)} with step {\ttfamily step}. 
+
+\Hypertarget{classmm_1_1Range_a2894c302f01f6cc9e9c7c2bfcaf7796f}\label{classmm_1_1Range_a2894c302f01f6cc9e9c7c2bfcaf7796f} 
+\index{mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}!size@{size}}
+\index{size@{size}!mm::Range$<$ T, Allocator $>$@{mm::Range$<$ T, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}}  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Range}{mm\+::\+Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Allocator}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns number of elements. 
+
+\begin{DoxyNote}{Note}
+This function returns signed type, contrary to {\ttfamily std\+::vector\+::size}. 
+\end{DoxyNote}
+
+
+Definition at line \mbox{\hyperlink{Range__fwd_8hpp_source_l00185}{185}} of file \mbox{\hyperlink{Range__fwd_8hpp_source}{Range\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/types/\mbox{\hyperlink{Range__fwd_8hpp}{Range\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/types/\mbox{\hyperlink{Range_8hpp}{Range.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,68 @@
+\doxysection{mm\+::Scale\+To\+Closest Class Reference}
+\hypertarget{classmm_1_1ScaleToClosest}{}\label{classmm_1_1ScaleToClosest}\index{mm::ScaleToClosest@{mm::ScaleToClosest}}
+
+
+{\ttfamily \#include $<$Scale\+Function.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+Scale function that scales to the closest neighbor. 
+
+Used as a template parameter in \doxylink{classmm_1_1WLS}{WLS} computations of shape functions. This function satisfies the \doxysectlink{concepts_scale-concept}{Scale function concept}{1}. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1NoScale}{No\+Scale}, \doxylink{classmm_1_1ScaleToFarthest}{Scale\+To\+Farthest} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ScaleFunction_8hpp_source_l00023}{23}} of file \mbox{\hyperlink{ScaleFunction_8hpp_source}{Scale\+Function.\+hpp}}.
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{static}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1ScaleToClosest_a5dc9332c3f197bfadc6a8958b4a1accd}{scale}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&p, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&support)
+\begin{DoxyCompactList}\small\item\em Returns local scale of given point and its support. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1ScaleToClosest_ae2cdb6222c4ab3aeab1a0d43324f5c28}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScaleToClosest}{Scale\+To\+Closest}} \&)
+\begin{DoxyCompactList}\small\item\em Print information about this scale function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ScaleToClosest_a5dc9332c3f197bfadc6a8958b4a1accd}\label{classmm_1_1ScaleToClosest_a5dc9332c3f197bfadc6a8958b4a1accd} 
+\index{mm::ScaleToClosest@{mm::ScaleToClosest}!scale@{scale}}
+\index{scale@{scale}!mm::ScaleToClosest@{mm::ScaleToClosest}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} vec\+\_\+t\+::scalar\+\_\+t mm\+::\+Scale\+To\+Closest\+::scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{p,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{support }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Returns local scale of given point and its support. 
+
+
+
+Definition at line \mbox{\hyperlink{ScaleFunction_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{ScaleFunction_8hpp_source}{Scale\+Function.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ScaleToClosest_ae2cdb6222c4ab3aeab1a0d43324f5c28}\label{classmm_1_1ScaleToClosest_ae2cdb6222c4ab3aeab1a0d43324f5c28} 
+\index{mm::ScaleToClosest@{mm::ScaleToClosest}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::ScaleToClosest@{mm::ScaleToClosest}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ScaleToClosest}{Scale\+To\+Closest}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Print information about this scale function. 
+
+
+
+Definition at line \mbox{\hyperlink{ScaleFunction_8hpp_source_l00032}{32}} of file \mbox{\hyperlink{ScaleFunction_8hpp_source}{Scale\+Function.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{ScaleFunction_8hpp}{Scale\+Function.\+hpp}}\end{DoxyCompactItemize}

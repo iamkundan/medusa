@@ -1,0 +1,57 @@
+\doxysection{test/domains/\+Grid\+Fill\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2GridFill_test_8cpp-example}{}\label{test_2domains_2GridFill_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BoxShape__fwd_8hpp}{medusa/bits/domains/BoxShape\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{BallShape__fwd_8hpp}{medusa/bits/domains/BallShape\_fwd.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{HDF_8hpp}{medusa/bits/io/HDF.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GridFill__fwd_8hpp}{medusa/bits/domains/GridFill\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ShapeDifference_8hpp}{medusa/bits/domains/ShapeDifference.hpp}}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GridFill2d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ sh\ =\ BoxShape<Vec2d>(-\/1,\ 1)\ -\/\ BallShape<Vec2d>(0,\ 0.5);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ domain(sh);}
+\DoxyCodeLine{\ \ \ \ domain.fill(GridFill<Vec2d>(-\/1,\ 1),\ 0.5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ pos\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ std::sort(pos.begin(),\ pos.end());}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected;}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ cs\ =\ \{-\/1,\ -\/0.5,\ 0,\ 0.5,\ 1\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ x\ :\ cs)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ y\ :\ cs)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ ==\ 0\ \&\&\ y\ ==\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ expected.emplace\_back(x,\ y);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ pos);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(DomainEngines,\ GridFill3d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ sh\ =\ BoxShape<Vec3d>(-\/1,\ 1)\ -\/\ BallShape<Vec3d>(0,\ 0.5);}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain(sh);}
+\DoxyCodeLine{\ \ \ \ domain.addInternalNode(\{0,\ 0,\ 1\},\ 2);\ \ \textcolor{comment}{//\ Test\ that\ this\ node\ is\ not\ doubled.}}
+\DoxyCodeLine{\ \ \ \ domain.fill(GridFill<Vec3d>(-\/1,\ 1),\ 0.5);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ pos\ =\ domain.positions();}
+\DoxyCodeLine{\ \ \ \ std::sort(pos.begin(),\ pos.end());}
+\DoxyCodeLine{\ \ \ \ Range<Vec3d>\ expected;}
+\DoxyCodeLine{\ \ \ \ std::vector<double>\ cs\ =\ \{-\/1,\ -\/0.5,\ 0,\ 0.5,\ 1\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ x\ :\ cs)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ y\ :\ cs)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{double}\ z\ :\ cs)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (x\ ==\ 0\ \&\&\ y\ ==\ 0\ \&\&\ z\ ==\ 0)\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expected.emplace\_back(x,\ y,\ z);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(expected,\ pos);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

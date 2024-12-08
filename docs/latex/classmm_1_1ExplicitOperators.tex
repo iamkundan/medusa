@@ -1,0 +1,434 @@
+\doxysection{mm\+::Explicit\+Operators\texorpdfstring{$<$}{<} shape\+\_\+storage\+\_\+type \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1ExplicitOperators}{}\label{classmm_1_1ExplicitOperators}\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+
+
+{\ttfamily \#include $<$Explicit\+Operators\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}}$>$\newline
+class mm\+::\+Explicit\+Operators$<$ shape\+\_\+storage\+\_\+type $>$}
+A class for evaluating typical operators needed in spatial discretization. 
+
+This class represents scalar differential operators, discretely approximated with shape functions that are stored in given shape storage. These shape functions are used to construct approximations of common operators such as gradient, Laplacian and coordinate derivatives that can be applied to scalar fields at given points.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em shape\+\_\+storage\+\_\+type} & Storage class for shapes. \doxysectlink{concepts_ss-concept}{Shape storage concept}{1}.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec2d>\ box(\{0.0,\ 0.0\},\ \{1.0,\ 1.0\});}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec2d>\ d\ =\ box.discretizeWithStep(0.02);}
+\DoxyCodeLine{\ \ \ \ d.findSupport(FindClosest(9));}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ NoWeight<Vec2d>,\ ScaleToFarthest>\ wls(2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes(wls);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1ExplicitOperators_adf18e349d40b681f198aea9fc02b7a90}{ExplicitOperators}}<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ op\ <<\ std::endl;}
+\DoxyCodeLine{\ \ \ \ Range<double>\ field(d.size(),\ 1.34);\ \ \textcolor{comment}{//\ constant\ scalar\ field,\ value\ 1.34\ at\ each\ point}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ val\ =\ op.lap(field,\ 2);\ \ \textcolor{comment}{//\ laplace\ at\ point\ d.pos(2);}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a69ab05a1ab1bbecfd054bd41f36a2169}{grad}}\ =\ op.grad(field,\ 4);\ \ \textcolor{comment}{//\ gradient\ at\ point\ d.pos(4);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ ScalarField<std::complex<double>>\ complex\_field(d.size());}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c(2.4,\ -\/0.3);}
+\DoxyCodeLine{\ \ \ \ complex\_field.setConstant(c);\ \ \textcolor{comment}{//\ constant\ complex\ field,\ value\ c\ at\ each\ point}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ what\ should\ the\ value\ at\ node\ 0\ be,\ so\ that\ the\ normal\ derivative\ is\ 0\ +\ 0i?}}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ neu\ =\ op.neumann(field,\ 0,\ \{-\/1\},\ 0.0);\ \ \textcolor{comment}{//\ result\ equal\ to\ c}}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1ExplicitOperators_adf18e349d40b681f198aea9fc02b7a90}{Explicit\+Operators}} ()
+\begin{DoxyCompactList}\small\item\em Construct empty explicit operators. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ExplicitOperators_a0d3b4301868cc94b6a14f01949a6c69b}{Explicit\+Operators}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}{ss}})
+\begin{DoxyCompactList}\small\item\em Construct explicit operators over given shape storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_ad9ba7bd4c62b2e777ba1f403ba8e57ad}{set\+Shapes}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+}})
+\begin{DoxyCompactList}\small\item\em Sets a new shape storage from which this operators are generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_ab3ffb338326b4c62348f4ef516a3bd1d}{has\+Shapes}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns {\ttfamily true} if operators have a non-\/null pointer to storage and {\ttfamily false} otherwise. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators_a4873de54dffb60a6547e3dda53e00ade}{lap}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an approximation of Laplacian of field {\ttfamily u} in {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type, \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120}{\+::dim}} $>$ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a69ab05a1ab1bbecfd054bd41f36a2169}{grad}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an approximation of gradient of field {\ttfamily u} in {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29}{neumann}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_ab9586b4b575486687dc58868ec28178a}{vector\+\_\+t}} \&normal, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1Gaussian}{val}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Calculates a new field value {\ttfamily a} for {\ttfamily u} at {\ttfamily node}, such that the Neumann boundary condition {\ttfamily du/dn(node) = val} holds. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators_a1a0e0d13fd541835349c4e749eb86286}{d1}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} var, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an approximation of requested derivative of field {\ttfamily u} in {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators_a90714e5628fdbc4391a655138707d397}{d2}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmin}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmax}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an approximation of requested second derivative of field {\ttfamily u} in {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators_a80067a958aab068b1a851e3726ae87fa}{apply}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} op\+\_\+family\+\_\+t\+::operator\+\_\+t o) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns an approximation of applying the requested operator to field {\ttfamily u} at node {\ttfamily node}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ }\\\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f2ae040fbf8fd8cb44b98141f270c8}{apply}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{u}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for default constructible operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120}{dim}} = shape\+\_\+storage\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of shape storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} shape\+\_\+storage\+\_\+t\+::vector\+\_\+t \mbox{\hyperlink{classmm_1_1ExplicitOperators_ab9586b4b575486687dc58868ec28178a}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian_a485cc39648f69212e4c1bcef60e0f194}{shape\+\_\+storage\+\_\+t\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_ab74a6bf5810f7cca1c185fda749ae2ad}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1ExplicitOperators_a61f7092b350d19be3ddd95c494dd5aa0}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&op)
+\begin{DoxyCompactList}\small\item\em Output basic information about given operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}{ss}}
+\begin{DoxyCompactList}\small\item\em Pointer to shape storage, but name is shortened for readability. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664}\label{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!dim@{dim}}}\Hypertarget{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120}\label{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120} 
+dim&Dimensionality of the function domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ExplicitOperators_adf18e349d40b681f198aea9fc02b7a90}\label{classmm_1_1ExplicitOperators_adf18e349d40b681f198aea9fc02b7a90} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!ExplicitOperators@{ExplicitOperators}}
+\index{ExplicitOperators@{ExplicitOperators}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ExplicitOperators()}{ExplicitOperators()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::\+Explicit\+Operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct empty explicit operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitOperators_a0d3b4301868cc94b6a14f01949a6c69b}\label{classmm_1_1ExplicitOperators_a0d3b4301868cc94b6a14f01949a6c69b} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!ExplicitOperators@{ExplicitOperators}}
+\index{ExplicitOperators@{ExplicitOperators}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ExplicitOperators()}{ExplicitOperators()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::\+Explicit\+Operators (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}} \&}]{ss }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct explicit operators over given shape storage. 
+
+The pointer to given storage is stored as a non-\/owning pointer. It is the user\textquotesingle{}s responsibility that given storage is valid throughout the use use of this class.
+
+This class is usually constructed directly from shape storage using the {\ttfamily explicit\+Operators()} member function. 
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ExplicitOperators_a43f2ae040fbf8fd8cb44b98141f270c8}\label{classmm_1_1ExplicitOperators_a43f2ae040fbf8fd8cb44b98141f270c8} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!apply@{apply}}
+\index{apply@{apply}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload for default constructible operator. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ExplicitOperators_a80067a958aab068b1a851e3726ae87fa}{apply} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00186}{186}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitOperators_a80067a958aab068b1a851e3726ae87fa}\label{classmm_1_1ExplicitOperators_a80067a958aab068b1a851e3726ae87fa} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!apply@{apply}}
+\index{apply@{apply}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} op\+\_\+family\+\_\+t\+::operator\+\_\+t}]{o }\end{DoxyParamCaption}) const}
+
+
+
+Returns an approximation of applying the requested operator to field {\ttfamily u} at node {\ttfamily node}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & Field to which the operator is applied. \\
+\hline
+{\em node} & Node at which the derived field is evaluated. \\
+\hline
+{\em o} & The operator to apply. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The operator approximation is obtained from shape storage using the {\ttfamily op\+\_\+family\+\_\+t} type. The first weights computed for family of type {\ttfamily op\+\_\+family\+\_\+t} are used.
+\end{DoxyWarning}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }Dx\ :\ Der1<2>\ \{\ Dx()\ :\ Der1(0)\ \{\}\ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }Dy\ :\ Der1<2>\ \{\ Dy()\ :\ Der1(1)\ \{\}\ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ storage\ =\ d.computeShapes<std::tuple<Dx,\ Dy,\ Lap<2>>>(wls);}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classmm_1_1ExplicitOperators_adf18e349d40b681f198aea9fc02b7a90}{ExplicitOperators}}<\textcolor{keyword}{decltype}(storage)>\ op(storage);}
+\DoxyCodeLine{\ \ \ \ ScalarField<std::complex<double>>\ field(d.size());}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ c(2.4,\ -\/0.3);}
+\DoxyCodeLine{\ \ \ \ field.setConstant(c);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ \mbox{\hyperlink{classmm_1_1ExplicitOperators_a4873de54dffb60a6547e3dda53e00ade}{lap}}\ =\ op.apply<Lap<2>>(field,\ 52);}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ dx\ =\ op.apply<Dx>(field,\ 34);}
+\DoxyCodeLine{\ \ \ \ std::complex<double>\ dy\ =\ op.apply<Dy>(field,\ 32);}
+
+\end{DoxyCodeInclude}
+ \Hypertarget{classmm_1_1ExplicitOperators_a1a0e0d13fd541835349c4e749eb86286}\label{classmm_1_1ExplicitOperators_a1a0e0d13fd541835349c4e749eb86286} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!d1@{d1}}
+\index{d1@{d1}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{d1()}{d1()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::d1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an approximation of requested derivative of field {\ttfamily u} in {\ttfamily node}-\/th node. 
+
+\begin{DoxyReturn}{Returns}
+The approximation of the derivative $ \dpar{ u}{ x_v} $, where $x_v$ is the {\ttfamily var}-\/th variable and approximation is taken from \doxylink{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}{ss}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails unless {\ttfamily 0 \texorpdfstring{$<$}{<}= var \&\& var \texorpdfstring{$<$}{<} dim} holds. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00150}{150}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitOperators_a90714e5628fdbc4391a655138707d397}\label{classmm_1_1ExplicitOperators_a90714e5628fdbc4391a655138707d397} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!d2@{d2}}
+\index{d2@{d2}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{d2()}{d2()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::d2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmin,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmax,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an approximation of requested second derivative of field {\ttfamily u} in {\ttfamily node}-\/th node. 
+
+\begin{DoxyReturn}{Returns}
+The approximation of the derivative $ \dpar{^2 u}{ x_v x_w} $, where $x_v$ is the {\ttfamily varmin}-\/th variable, $x_w$ is the {\ttfamily varmax}-\/th variable and approximation is taken from \doxylink{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}{ss}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails unless {\ttfamily 0 \texorpdfstring{$<$}{<}= varmin \texorpdfstring{$<$}{<}= varmax \texorpdfstring{$<$}{<} dim} holds. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00163}{163}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitOperators_a69ab05a1ab1bbecfd054bd41f36a2169}\label{classmm_1_1ExplicitOperators_a69ab05a1ab1bbecfd054bd41f36a2169} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!grad@{grad}}
+\index{grad@{grad}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{grad()}{grad()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{group__types_gabd14a97bbb66ac6c2add9c3db998b333}{Vec}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type, \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\mbox{\hyperlink{classmm_1_1ExplicitOperators_a174f21c2866bd518dcb08abbad071664a504b931cb83412969ae865d4fc09d120}{\+::dim}} $>$ \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::grad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns an approximation of gradient of field {\ttfamily u} in {\ttfamily node}-\/th node. 
+
+\begin{DoxyReturn}{Returns}
+Vector containing the components of the gradient, e.\+g. when {\ttfamily dim = 3}\+:  $ [
+  \dpar{ u}{ x},
+  \dpar{ u}{ y},
+  \dpar{ u}{ z}
+]^T$, where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}{ss}. 
+\end{DoxyReturn}
+\Hypertarget{classmm_1_1ExplicitOperators_ab3ffb338326b4c62348f4ef516a3bd1d}\label{classmm_1_1ExplicitOperators_ab3ffb338326b4c62348f4ef516a3bd1d} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!hasShapes@{hasShapes}}
+\index{hasShapes@{hasShapes}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{hasShapes()}{hasShapes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::has\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns {\ttfamily true} if operators have a non-\/null pointer to storage and {\ttfamily false} otherwise. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00069}{69}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitOperators_a4873de54dffb60a6547e3dda53e00ade}\label{classmm_1_1ExplicitOperators_a4873de54dffb60a6547e3dda53e00ade} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!lap@{lap}}
+\index{lap@{lap}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{lap()}{lap()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::lap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an approximation of Laplacian of field {\ttfamily u} in {\ttfamily node}-\/th node. 
+
+\begin{DoxyReturn}{Returns}
+The Laplacian of {\ttfamily u}, e.\+g. when {\ttfamily dim = 3}\+:  $
+\dpar{^2 u}{ x^2} +
+\dpar{^2 u}{ y^2} +
+\dpar{^2 u}{ z^2}
+$, where derivatives are approximated using shape functions from \doxylink{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}{ss}. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29}\label{classmm_1_1ExplicitOperators_af6db62a3f8104330369f04dda0781c29} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!neumann@{neumann}}
+\index{neumann@{neumann}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{neumann()}{neumann()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$ \\
+\mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::neumann (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} \&}]{u,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_ab9586b4b575486687dc58868ec28178a}{vector\+\_\+t}} \&}]{normal,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{structmm_1_1scalar__type}{scalar\+\_\+type}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{scalar\+\_\+field\+\_\+t}} $>$\+::type}]{val }\end{DoxyParamCaption}) const}
+
+
+
+Calculates a new field value {\ttfamily a} for {\ttfamily u} at {\ttfamily node}, such that the Neumann boundary condition {\ttfamily du/dn(node) = val} holds. 
+
+Denote given index {\ttfamily node} by $i$ and {\ttfamily val} by $v$. The function returns such $a$, that by setting $ u(i) = a$ we satisfy the condition $ \dpar{ u}{ \vec n}(i) = v$. This is done using the following formula\+:  \[ a = \frac{v - \sum\limits_{i=1}^{s} \sum\limits_{d=1}^{dim}
+  n_d \chi_{\dpar{}{ x_d}}(i)\ u(i)}
+{\sum\limits_{d=1}^{dim} n_d \chi_{\dpar{}{ x_d}}(0)},
+\] where $\chi_{\dpar{}{ x_d}}$ represents the formula for the shape function of first derivative wrt. $d$.
+
+\begin{DoxyNote}{Note}
+A few assumptions must hold for the support domain.
+\begin{DoxyItemize}
+\item Each node should be its own first first support node.
+\item For symmetrical supports the central node may not affect the calculated derivation and therefore this function is unable to give a value and will crash.
+\end{DoxyItemize}
+\end{DoxyNote}
+The function is constructed in such a way to make explicit iteration with Neumann boundary conditions simple. To satisfy $\dpar{u}{\vec n} = v$, we simply use 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{u[i]\ =\ op.neumann(u,\ i,\ domain.normal(i),\ v);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & Scalar field to evaluate. \\
+\hline
+{\em node} & Index of the node, whose value should be changed to satisfy the boundary condition. \\
+\hline
+{\em normal} & Vector $\vec{n}$ with the same dimensionality as the problem domain giving the direction of the derivation. Usually the unit normal vector. \\
+\hline
+{\em val} & The value that $\dpar{ u}{ \vec n}$ should be equal to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new value $a$, such that $\dpar{ u}{ \vec n} = v$ after setting $ u(i) = a$.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Assertion} & fails if {\ttfamily node}\textquotesingle{}s first support node is not {\ttfamily node}. \\
+\hline
+{\em Assertion} & fails if {\ttfamily node}\textquotesingle{}s value has negligible effect on the derivation, because no value could change the value of $\dpar{ u}{ \vec n}$. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmm_1_1ExplicitOperators_ad9ba7bd4c62b2e777ba1f403ba8e57ad}\label{classmm_1_1ExplicitOperators_ad9ba7bd4c62b2e777ba1f403ba8e57ad} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!setShapes@{setShapes}}
+\index{setShapes@{setShapes}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{setShapes()}{setShapes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::set\+Shapes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}} \&}]{shape\+\_\+storage\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets a new shape storage from which this operators are generated. 
+
+As in the constructor, the pointer to given storage is stored as a non-\/owning pointer. It is the user\textquotesingle{}s responsibility that given storage is valid throughout the use use of this class. 
+\begin{DoxyParams}{Parameters}
+{\em shape\+\_\+storage\+\_\+} & New shape storage. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ExplicitOperators_a61f7092b350d19be3ddd95c494dd5aa0}\label{classmm_1_1ExplicitOperators_a61f7092b350d19be3ddd95c494dd5aa0} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{S}} $>$ \&}]{op }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic information about given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{ExplicitOperators_8hpp_source}{Explicit\+Operators.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d}\label{classmm_1_1ExplicitOperators_a973d7a375f8c9d6a4845ea6877149a4d} 
+\index{mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}!ss@{ss}}
+\index{ss@{ss}!mm::ExplicitOperators$<$ shape\_storage\_type $>$@{mm::ExplicitOperators$<$ shape\_storage\_type $>$}}
+\doxysubsubsection{\texorpdfstring{ss}{ss}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{class}} \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ExplicitOperators_a43f8b58502c756fbd5047e1bfbd625b5}{shape\+\_\+storage\+\_\+t}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ExplicitOperators}{mm\+::\+Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{shape\+\_\+storage\+\_\+type}} $>$\+::ss\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pointer to shape storage, but name is shortened for readability. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{ExplicitOperators__fwd_8hpp_source}{Explicit\+Operators\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ExplicitOperators__fwd_8hpp}{Explicit\+Operators\+\_\+fwd.\+hpp}}\end{DoxyCompactItemize}

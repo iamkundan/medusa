@@ -1,0 +1,45 @@
+\doxysection{Vector\+Field.\+hpp}
+\hypertarget{VectorField_8hpp_source}{}\label{VectorField_8hpp_source}\index{include/medusa/bits/types/VectorField.hpp@{include/medusa/bits/types/VectorField.hpp}}
+\mbox{\hyperlink{VectorField_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_TYPES\_VECTORFIELD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_TYPES\_VECTORFIELD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{VectorField__fwd_8hpp}{VectorField\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00011}00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00013}00013\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00014}00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00015}\mbox{\hyperlink{classmm_1_1VectorField_a3d3b00540f67c6368407fc00ca763597}{00015}}\ \mbox{\hyperlink{classmm_1_1VectorField_a3e25e3eb78e49773611f36b219688287}{VectorField<Scalar,\ dimension>::VectorField}}(\textcolor{keyword}{const}\ Eigen::MatrixBase<OtherDerived>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00016}00016\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmm_1_1VectorField_aee1aa89c7e3e3fc87b10105a1df56179}{Base}}(\mbox{\hyperlink{classmm_1_1Gaussian}{other}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00019}00019\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00020}00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00021}00021\ \mbox{\hyperlink{classmm_1_1Gaussian}{VectorField<Scalar,\ dimension>}}\&\ \mbox{\hyperlink{classmm_1_1VectorField_a292f150fd807f6675f058dfc100dd99d}{VectorField<Scalar,\ dimension>::operator=}}(}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::MatrixBase<OtherDerived>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})\ \{}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00023}00023\ \ \ \ \ Base::operator=(\mbox{\hyperlink{classmm_1_1Gaussian}{other}});\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00024}00024\ \}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00028}00028\ VectorField<Scalar,\ dimension>\&}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1VectorField_af39bc2f5e367c2d165ca2a38bbf42439}{00029}}\ \mbox{\hyperlink{classmm_1_1VectorField_a292f150fd807f6675f058dfc100dd99d}{VectorField<Scalar,\ dimension>::operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Vec<Scalar,\ dimension>}}\&\ v)\ \{}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00030}00030\ \ \ \ \ Base::rowwise()\ =\ v.transpose();}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00035}00035\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Scalar,\ \textcolor{keywordtype}{int}\ dimension>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00036}00036\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ OtherDerived>}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00037}00037\ \mbox{\hyperlink{classmm_1_1Gaussian}{VectorField<Scalar,\ dimension>}}\ \mbox{\hyperlink{classmm_1_1VectorField_a2f1d966bdbc4c67380fda5da310b0cf8}{VectorField<Scalar,\ dimension>::fromLinear}}(}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ Eigen::PlainObjectBase<OtherDerived>\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}})\ \{}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00039}00039\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{other}}.size()\ \%\ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}}\ ==\ 0,\ \textcolor{stringliteral}{"{}The\ length\ of\ the\ given\ data\ is\ not\ a\ "{}}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}multiple\ of\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}});}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{return}\ Eigen::Map<const\ Eigen::Matrix<Scalar,\ Eigen::Dynamic,\ dimension>,\ 0>(}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{other}}.data(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{other}}.size()/\mbox{\hyperlink{classmm_1_1Gaussian}{dimension}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{dimension}});}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00043}00043\ \}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00046}00046\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{VectorField_8hpp_source_l00048}00048\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_TYPES\_VECTORFIELD\_HPP\_}}
+
+\end{DoxyCode}

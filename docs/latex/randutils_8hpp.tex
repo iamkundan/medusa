@@ -1,0 +1,46 @@
+\doxysection{include/medusa/bits/utils/randutils.hpp File Reference}
+\hypertarget{randutils_8hpp}{}\label{randutils_8hpp}\index{include/medusa/bits/utils/randutils.hpp@{include/medusa/bits/utils/randutils.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Utilities for randomization. 
+
+
+
+Definition in file \mbox{\hyperlink{randutils_8hpp_source}{randutils.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/utils/assert.\+hpp$>$}\newline
+{\ttfamily \#include $<$medusa/bits/types/\+Range.\+hpp$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+Include dependency graph for randutils.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{randutils_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{randutils_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{unsigned}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{group__utils_ga9f26c11aa51eea591d8ec9dba23d2bd2}{mm\+::get\+\_\+seed}} ()
+\begin{DoxyCompactList}\small\item\em Return a random seed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga6e6d1058018719d342dd4900d34e31db}{mm\+::random\+\_\+choice}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{weights}}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}, \mbox{\hyperlink{classmm_1_1Gaussian}{URNG}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{generator}})
+\begin{DoxyCompactList}\small\item\em Overload for custom generator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{T}} \mbox{\hyperlink{group__utils_ga767cde18341d7425bdd92c2dcd6302c8}{mm\+::random\+\_\+choice}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{elements}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{double}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{weights}}=\{\}, \mbox{\hyperlink{classmm_1_1Gaussian}{bool}} \mbox{\hyperlink{classmm_1_1Gaussian}{normed}}=\mbox{\hyperlink{classmm_1_1Gaussian}{false}})
+\begin{DoxyCompactList}\small\item\em Randomly returns one of the specified elements with distribution according to given weights. \end{DoxyCompactList}\end{DoxyCompactItemize}

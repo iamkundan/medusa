@@ -1,0 +1,358 @@
+\doxysection{mm\+::Grain\+Drop\+Fill\texorpdfstring{$<$}{<} vec\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1GrainDropFill}{}\label{classmm_1_1GrainDropFill}\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+
+
+{\ttfamily \#include $<$Grain\+Drop\+Fill\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}$>$\newline
+class mm\+::\+Grain\+Drop\+Fill$<$ vec\+\_\+t $>$}
+Implements general {\ttfamily n}-\/d node placing algorithm, as described in \href{https://arxiv.org/abs/1906.00636}{\texttt{ https\+://arxiv.\+org/abs/1906.\+00636}} This node generation algorithm simulates dropping grains with variable radius in a box. 
+
+First, a large bounding box is filled and only the nodes in the domain shape are kept. Thus, gaps may appear at the boundary and \doxylink{classmm_1_1BasicRelax}{Basic\+Relax} can be used to smooth them.
+
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ BoxShape<Vec3d>\ b(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699}{dx}}\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a2107b91b1d35846c8b7ea3d142498502}{Vec3d}}\&\ p)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::pow(p[0]/10\ +\ p[1]/10\ +\ p[2]/10,\ 2)\ +\ 0.025;}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \ \ DomainDiscretization<Vec3d>\ domain\ =\ b.discretizeBoundaryWithDensity(\mbox{\hyperlink{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699}{dx}});}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ execute\ fill\ domain\ with\ constant\ density}}
+\DoxyCodeLine{\ \ \ \ GrainDropFill<Vec3d>\ fill\_engine(0.0,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ fill\_engine.seed(0).initialSpacing(0.025/5).maxPoints(50000);}
+\DoxyCodeLine{\ \ \ \ fill\_engine(domain,\ \mbox{\hyperlink{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699}{dx}});}
+
+\end{DoxyCodeInclude}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1GeneralFill}{General\+Fill}, \doxylink{classmm_1_1BasicRelax}{Basic\+Relax} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill_a0d7275a2e314b8d72ddf83ab734b01c3}{Grain\+Drop\+Fill}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1GrainDropFill_aaca82d5e883ed2c0a07052a20044fed5}{bot}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1GrainDropFill_acd93248c48c470cf9cfbde30f105fc73}{top}})
+\begin{DoxyCompactList}\small\item\em Prepare to fill domain within {\ttfamily \mbox{[}bot, top\mbox{]}} bounding box. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill_a8da9110d5520d05cf118f35b863e4c9d}{max\+Points}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a1ac82b84cd306dea12f9afb84b26bb66}{max\+\_\+points}})
+\begin{DoxyCompactList}\small\item\em Maximal number of points generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill_ad63bc30b4265b77b23341e6963030d4f}{seed}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} seed)
+\begin{DoxyCompactList}\small\item\em Set custom seed for the random number generator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill_a6eb19b9aaf396bd71f404237a3303a11}{initial\+Spacing}} (\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699}{dx}})
+\begin{DoxyCompactList}\small\item\em Set initial discretization density by specifying number of dots along each dimension. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill_a7d6d435cf9203c6d071ffc8eb4d72b12}{excess\+Factor}} (\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1Gaussian}{factor}})
+\begin{DoxyCompactList}\small\item\em Set percentage of allowed generation over the top. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a44b89531a682455b9be8092967213a8d}{operator()}} (\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Fills domain with a quality node distribution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a15ba6d1d1222062b18919b165e43ec29}{operator()}} (\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{domain}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} type=0) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Overload for constant function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ }\\std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1GrainDropFill_ab58564d3de3723e9fc0806eed15b1b37}{fill\+Box}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Actual fill algorithm which fills {\ttfamily \mbox{[}bot, top\mbox{]}} box with spacing {\ttfamily h}. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}} $>$ \mbox{\hyperlink{classmm_1_1GrainDropFill_aa1596fff0fbe52ad46e2c985ef777b84}{fill\+Box}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1Gaussian}{h}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Specialization for 1D. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1GrainDropFill_afcc0da103765fa64c9461166b8293635a50e50c95e2b2329d7277d40a26c56e8c}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Store dimension of the domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type;. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill_ab983d85956c2b73d298aeb6701c03e9a}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a1ac82b84cd306dea12f9afb84b26bb66}{max\+\_\+points}} = 5000000
+\begin{DoxyCompactList}\small\item\em Maximal number of points generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill_aaca82d5e883ed2c0a07052a20044fed5}{bot}}
+\begin{DoxyCompactList}\small\item\em Bottom left corner of the box to fill. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill_acd93248c48c470cf9cfbde30f105fc73}{top}}
+\begin{DoxyCompactList}\small\item\em Top right corner of the box to fill. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699}{dx}} = -\/1.\+0
+\begin{DoxyCompactList}\small\item\em Initial discretization spacing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GrainDropFill_aaad2149a6e8b3d126f4495d361d54673}{seed\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Seed for the random number generator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a6a3fc1f6ba45074d01c1c1d20b147ac3}{excess\+\_\+factor}} = 10
+\begin{DoxyCompactList}\small\item\em Fill {\ttfamily excess\+\_\+factor\texorpdfstring{$\ast$}{*}dx} over the top of the domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1GrainDropFill_afcc0da103765fa64c9461166b8293635}\label{classmm_1_1GrainDropFill_afcc0da103765fa64c9461166b8293635} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Store dimension of the domain. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!dim@{dim}}}\Hypertarget{classmm_1_1GrainDropFill_afcc0da103765fa64c9461166b8293635a50e50c95e2b2329d7277d40a26c56e8c}\label{classmm_1_1GrainDropFill_afcc0da103765fa64c9461166b8293635a50e50c95e2b2329d7277d40a26c56e8c} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00042}{42}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1GrainDropFill_a0d7275a2e314b8d72ddf83ab734b01c3}\label{classmm_1_1GrainDropFill_a0d7275a2e314b8d72ddf83ab734b01c3} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!GrainDropFill@{GrainDropFill}}
+\index{GrainDropFill@{GrainDropFill}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{GrainDropFill()}{GrainDropFill()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::\+Grain\+Drop\+Fill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{bot,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \&}]{top }\end{DoxyParamCaption})}
+
+
+
+Prepare to fill domain within {\ttfamily \mbox{[}bot, top\mbox{]}} bounding box. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill_8hpp_source_l00018}{18}} of file \mbox{\hyperlink{GrainDropFill_8hpp_source}{Grain\+Drop\+Fill.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1GrainDropFill_a7d6d435cf9203c6d071ffc8eb4d72b12}\label{classmm_1_1GrainDropFill_a7d6d435cf9203c6d071ffc8eb4d72b12} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!excessFactor@{excessFactor}}
+\index{excessFactor@{excessFactor}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{excessFactor()}{excessFactor()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::excess\+Factor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}}}]{factor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set percentage of allowed generation over the top. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_aa1596fff0fbe52ad46e2c985ef777b84}\label{classmm_1_1GrainDropFill_aa1596fff0fbe52ad46e2c985ef777b84} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!fillBox@{fillBox}}
+\index{fillBox@{fillBox}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{fillBox()}{fillBox()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}} $>$ \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{namespacemm_a1fc3cec58dd3ef75ce84fa992081076d}{Vec1d}} $>$\+::fill\+Box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{h }\end{DoxyParamCaption}) const}
+
+
+
+Specialization for 1D. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill_8hpp_source_l00117}{117}} of file \mbox{\hyperlink{GrainDropFill_8hpp_source}{Grain\+Drop\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_ab58564d3de3723e9fc0806eed15b1b37}\label{classmm_1_1GrainDropFill_ab58564d3de3723e9fc0806eed15b1b37} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!fillBox@{fillBox}}
+\index{fillBox@{fillBox}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{fillBox()}{fillBox()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::fill\+Box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{h }\end{DoxyParamCaption}) const}
+
+
+
+Actual fill algorithm which fills {\ttfamily \mbox{[}bot, top\mbox{]}} box with spacing {\ttfamily h}. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{GrainDropFill_8hpp_source}{Grain\+Drop\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a6eb19b9aaf396bd71f404237a3303a11}\label{classmm_1_1GrainDropFill_a6eb19b9aaf396bd71f404237a3303a11} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!initialSpacing@{initialSpacing}}
+\index{initialSpacing@{initialSpacing}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{initialSpacing()}{initialSpacing()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::initial\+Spacing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}}}]{dx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set initial discretization density by specifying number of dots along each dimension. 
+
+The recommended density is 10 times less than the minimal nodal spacing. Number of data points along the last dimension is ignored. 
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00065}{65}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a8da9110d5520d05cf118f35b863e4c9d}\label{classmm_1_1GrainDropFill_a8da9110d5520d05cf118f35b863e4c9d} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!maxPoints@{maxPoints}}
+\index{maxPoints@{maxPoints}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{maxPoints()}{maxPoints()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::max\+Points (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{max\+\_\+points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Maximal number of points generated. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00057}{57}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a44b89531a682455b9be8092967213a8d}\label{classmm_1_1GrainDropFill_a44b89531a682455b9be8092967213a8d} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{func\+\_\+t}} \&}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const}
+
+
+
+Fills domain with a quality node distribution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em domain} & Domain to fill with nodes. Can be partially filled. \\
+\hline
+{\em h} & Nodal spacing function. \\
+\hline
+{\em type} & Type of the nodes. If 0 the engines default value is used.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Header {\ttfamily  \#include \texorpdfstring{$<$}{<}\doxylink{GrainDropFill_8hpp}{medusa/bits/domains/\+Grain\+Drop\+Fill.\+hpp}\texorpdfstring{$>$}{>}} must be included additionally to {\ttfamily  \#include \texorpdfstring{$<$}{<}\doxylink{Medusa__fwd_8hpp}{medusa/\+Medusa\+\_\+fwd.\+hpp}\texorpdfstring{$>$}{>}}. 
+\end{DoxyWarning}
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill_8hpp_source_l00028}{28}} of file \mbox{\hyperlink{GrainDropFill_8hpp_source}{Grain\+Drop\+Fill.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a15ba6d1d1222062b18919b165e43ec29}\label{classmm_1_1GrainDropFill_a15ba6d1d1222062b18919b165e43ec29} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1DomainDiscretization}{Domain\+Discretization}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \&}]{domain,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \&}]{h,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{type = {\ttfamily 0} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Overload for constant function. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00082}{82}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_ad63bc30b4265b77b23341e6963030d4f}\label{classmm_1_1GrainDropFill_ad63bc30b4265b77b23341e6963030d4f} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!seed@{seed}}
+\index{seed@{seed}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{seed()}{seed()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill}{Grain\+Drop\+Fill}} \& \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::seed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{seed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set custom seed for the random number generator. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00059}{59}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1GrainDropFill_aaca82d5e883ed2c0a07052a20044fed5}\label{classmm_1_1GrainDropFill_aaca82d5e883ed2c0a07052a20044fed5} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!bot@{bot}}
+\index{bot@{bot}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{bot}{bot}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::bot\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Bottom left corner of the box to fill. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00046}{46}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699}\label{classmm_1_1GrainDropFill_a1e1032bd69e6e885c12ddb8cc4997699} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!dx@{dx}}
+\index{dx@{dx}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{dx}{dx}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::dx = -\/1.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initial discretization spacing. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a6a3fc1f6ba45074d01c1c1d20b147ac3}\label{classmm_1_1GrainDropFill_a6a3fc1f6ba45074d01c1c1d20b147ac3} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!excess\_factor@{excess\_factor}}
+\index{excess\_factor@{excess\_factor}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{excess\_factor}{excess\_factor}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1GrainDropFill_a20c378526991aadb10bd9bc89acbdfd6}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::excess\+\_\+factor = 10\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fill {\ttfamily excess\+\_\+factor\texorpdfstring{$\ast$}{*}dx} over the top of the domain. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_a1ac82b84cd306dea12f9afb84b26bb66}\label{classmm_1_1GrainDropFill_a1ac82b84cd306dea12f9afb84b26bb66} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!max\_points@{max\_points}}
+\index{max\_points@{max\_points}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{max\_points}{max\_points}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::max\+\_\+points = 5000000\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Maximal number of points generated. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_aaad2149a6e8b3d126f4495d361d54673}\label{classmm_1_1GrainDropFill_aaad2149a6e8b3d126f4495d361d54673} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!seed\_@{seed\_}}
+\index{seed\_@{seed\_}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{seed\_}{seed\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::seed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Seed for the random number generator. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1GrainDropFill_acd93248c48c470cf9cfbde30f105fc73}\label{classmm_1_1GrainDropFill_acd93248c48c470cf9cfbde30f105fc73} 
+\index{mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}!top@{top}}
+\index{top@{top}!mm::GrainDropFill$<$ vec\_t $>$@{mm::GrainDropFill$<$ vec\_t $>$}}
+\doxysubsubsection{\texorpdfstring{top}{top}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1GrainDropFill}{mm\+::\+Grain\+Drop\+Fill}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} $>$\+::top\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Top right corner of the box to fill. 
+
+
+
+Definition at line \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{GrainDropFill__fwd_8hpp_source}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/domains/\mbox{\hyperlink{GrainDropFill__fwd_8hpp}{Grain\+Drop\+Fill\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/domains/\mbox{\hyperlink{GrainDropFill_8hpp}{Grain\+Drop\+Fill.\+hpp}}\end{DoxyCompactItemize}

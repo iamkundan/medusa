@@ -1,0 +1,79 @@
+\doxysection{test/domains/discretization\+\_\+helpers\+\_\+test.\+cpp}
+\hypertarget{test_2domains_2discretization_helpers_test_8cpp-example}{}\label{test_2domains_2discretization_helpers_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{discretization__helpers_8hpp}{medusa/bits/domains/discretization\_helpers.hpp}}>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Vec__fwd_8hpp}{medusa/bits/types/Vec\_fwd.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ SphereDiscretization1d)\ \{}
+\DoxyCodeLine{\ \ \ \ std::mt19937\ gen;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 2.3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{MatrixBaseAddons_8hpp_a4caf8d8f829279fba122163d961608a4adab4fc5cf28f3e6da4c0cbec125fce6f}{dim}}\ =\ 1;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}{discretization\_helpers::SphereDiscretization<double,\ dim>::construct}}(r,\ 4,\ gen);}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(2,\ v.size());}
+\DoxyCodeLine{\ \ \ \ std::sort(v.begin(),\ v.end());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/r,\ v[0][0]);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(r,\ v[1][0]);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ SphereDiscretization2d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 2.3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}{discretization\_helpers::SphereDiscretization<double,\ 2>::construct}}(r,\ 4);}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(v.size(),\ 4);}
+\DoxyCodeLine{\ \ \ \ std::sort(v.begin(),\ v.end());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tol\ =\ 1e-\/15;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[0][0],\ -\/r,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[0][1],\ 0,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[1][0],\ 0,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[1][1],\ -\/r,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[2][0],\ 0,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[2][1],\ r,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[3][0],\ r,\ tol);}
+\DoxyCodeLine{\ \ \ \ EXPECT\_NEAR(v[3][1],\ 0,\ tol);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ SphereDiscretization3d)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ r\ =\ 2.3;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{structmm_1_1discretization__helpers_1_1SphereDiscretization_a246948498aed588ddeecf260e54fb003}{discretization\_helpers::SphereDiscretization<double,\ 3>::construct}}(r,\ 6);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{decltype}(v)\ expected\ =\ \{\{-\/1.15,\ -\/1.99186,\ 2.43932e-\/16\},\ \{-\/1.15,\ -\/0.995929,\ -\/1.725\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.15,\ -\/0.995929,\ 1.725\},\ \{-\/1.15,\ 0.995929,\ -\/1.725\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{-\/1.15,\ 0.995929,\ 1.725\},\ \{-\/1.15,\ 1.99186,\ 0\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1.15,\ -\/1.99186,\ 2.43932e-\/16\},\ \{1.15,\ -\/0.995929,\ -\/1.725\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1.15,\ -\/0.995929,\ 1.725\},\ \{1.15,\ 0.995929,\ -\/1.725\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1.15,\ 0.995929,\ 1.725\},\ \{1.15,\ 1.99186,\ 0\}\};}
+\DoxyCodeLine{\ \ \ \ std::sort(v.begin(),\ v.end());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tol\ =\ 1e-\/5;\ \ \textcolor{comment}{//\ large\ due\ to\ low\ precision\ data\ above,\ but\ not\ really\ a\ problem}}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ v.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ expected.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ 3;\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i][j],\ v[i][j],\ tol);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Domains,\ DiscretizeLineWithDensity)\ \{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ p\ =\ 0.0,\ q\ =\ \{1.0,\ 0.5\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ fn\ =\ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\&\ p)\ \{\ \textcolor{keywordflow}{return}\ 0.1*(1+p[0]);\ \};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ d\ =\ \mbox{\hyperlink{group__domains_ga512df82fe796b64942e99d10f4d66328}{discretization\_helpers::discretizeLineWithDensity}}(p,\ q,\ fn);}
+\DoxyCodeLine{\ \ \ \ Range<Vec2d>\ expected\ =\ \{\{0.0894427,\ 0.0447214\},\ \{0.186885,\ 0.0934427\},\ \{0.293044,\ 0.146522\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.408697,\ 0.204349\},\ \{0.534695,\ 0.267347\},\ \{0.671962,\ 0.335981\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{0.821507,\ 0.410753\}\};}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ plot\ the\ points:\ endpoints\ are\ not\ included,\ spacing\ is\ variable}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ tol\ =\ 1e-\/6;}
+\DoxyCodeLine{\ \ \ \ ASSERT\_EQ(expected.size(),\ d.size());}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ d.size();}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ n;\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i][0],\ d[i][0],\ tol);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ EXPECT\_NEAR(expected[i][1],\ d[i][1],\ tol);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 

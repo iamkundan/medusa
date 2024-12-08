@@ -1,0 +1,55 @@
+\doxysection{Sheppard\+\_\+fwd.\+hpp}
+\hypertarget{Sheppard__fwd_8hpp_source}{}\label{Sheppard__fwd_8hpp_source}\index{include/medusa/bits/interpolants/Sheppard\_fwd.hpp@{include/medusa/bits/interpolants/Sheppard\_fwd.hpp}}
+\mbox{\hyperlink{Sheppard__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_INTERPOLANTS\_SHEPPARD\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_INTERPOLANTS\_SHEPPARD\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{KDTree_8hpp}{medusa/bits/spatial\_search/KDTree.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Range__fwd_8hpp}{medusa/bits/types/Range\_fwd.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00033}00033\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t,\ \textcolor{keyword}{class}\ value\_t>}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1SheppardInterpolant}{00034}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1SheppardInterpolant}{SheppardInterpolant}}\ \{}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00035}00035\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00036}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}{00036}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTree<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}{tree}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00037}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{00037}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<value\_t>}}\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00038}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a61a34974eb71a29541da3d7cffb4948e}{00038}}\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{typename}\ vec\_t::scalar\_t\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a61a34974eb71a29541da3d7cffb4948e}{scalar\_t}};\ \ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00040}00040\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00045}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a3d2ca4e0bbcd9f0fe4c9e65c023d0b5d}{00045}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a3d2ca4e0bbcd9f0fe4c9e65c023d0b5d}{SheppardInterpolant}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00051}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a33585107c4de85c5be8945458df1b0a0}{00051}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a33585107c4de85c5be8945458df1b0a0}{SheppardInterpolant}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\&\ pos)\ :\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}{tree}}(pos)\ \{}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{N}}\ =\ pos.size();}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{N}}\ >\ 0,\ \textcolor{stringliteral}{"{}Number\ of\ positions\ in\ the\ tree\ must\ be\ greater\ than\ 0,\ got\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{N}});}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00054}00054\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00061}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_abb17c2515e5a0824ed2b0bea6d261b37}{00061}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_abb17c2515e5a0824ed2b0bea6d261b37}{SheppardInterpolant}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\&\ pos,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<value\_t>}}\&\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}})}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}{tree}}(pos),\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}}(\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}})\ \{}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{N}}\ =\ pos.size();}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ M\ =\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}}.\mbox{\hyperlink{classmm_1_1Range_a2894c302f01f6cc9e9c7c2bfcaf7796f}{size}}();}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{N}}\ >\ 0,\ \textcolor{stringliteral}{"{}Number\ of\ positions\ in\ the\ tree\ must\ be\ greater\ than\ 0,\ got\ \%d."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{N}});}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{N}}\ ==\ M,}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Number\ of\ positions\ must\ equal\ number\ of\ values.\ Got\ \%d\ positions\ in\ the\ tree\ "{}}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}and\ \%d\ values."{}},}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{N}},\ M);}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00071}00071\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00077}00077\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ values\_container\_t>}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00078}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade}{00078}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a21fdb732bea94f6780b82b96d9c57ade}{setValues}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{values\_container\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_values}})\ \{}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a6b8376b6f83da51164cf1deb47080fab}{values}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<value\_t>}}(\mbox{\hyperlink{classmm_1_1Gaussian}{new\_values}}.begin(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{new\_values}}.end());}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00083}\mbox{\hyperlink{classmm_1_1SheppardInterpolant_a9073d3892300794c10334188da74b207}{00083}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a9073d3892300794c10334188da74b207}{setPositions}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<vec\_t>}}\&\ pos)\ \{\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_a466145457e07805f59737b3b555f6e54}{tree}}.reset(pos);\ \}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00100}00100\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{value\_t}}\ \mbox{\hyperlink{classmm_1_1SheppardInterpolant_aaae55271eda6462f5a3221132b5fd144}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{num\_closest}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{power}}\ =\ 2,\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{reg}}\ =\ 0.0,}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classmm_1_1Gaussian}{conf\_dist}}\ =\ 1\mbox{\hyperlink{classmm_1_1Gaussian}{e}}-\/12)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00102}00102\ \};}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00104}00104\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{Sheppard__fwd_8hpp_source_l00106}00106\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_INTERPOLANTS\_SHEPPARD\_FWD\_HPP\_}}
+
+\end{DoxyCode}

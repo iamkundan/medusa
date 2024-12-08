@@ -1,0 +1,322 @@
+\doxysection{mm\+::WLSApproximant\texorpdfstring{$<$}{<} basis\+\_\+t \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1WLSApproximant}{}\label{classmm_1_1WLSApproximant}\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+
+
+{\ttfamily \#include $<$WLSApproximant\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}}$>$\newline
+class mm\+::\+WLSApproximant$<$ basis\+\_\+t $>$}
+Class representing the function that is a \doxylink{classmm_1_1WLS}{WLS} approximant using some basis function over some points. 
+
+These must satisfy the \doxysectlink{concepts_basis-concept}{Basis function concept}{1}. \begin{DoxyNote}{Note}
+This class does not compute the approximant, that is done by \doxylink{classmm_1_1WLS_a8bed3f5e7db5f5a68f2a3986ea70bd51}{WLS\+::get\+Approximant}. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1WLS}{WLS} 
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em basis\+\_\+t} & Basis function type.\\
+\hline
+\end{DoxyTemplParams}
+Usage example\+: 
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ h\ =\ 0.1,\ u1\ =\ 3.23432,\ u2\ =\ -\/2.3234,\ u3\ =\ 0.12443498,\ u4\ =\ 1.908432,\ u5\ =\ -\/0.98742532;}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{namespacemm_a3cf09fb5c30d93f0cfb30d80f0b8c6cf}{Vec2d}}\ c\ =\ \{0.05,\ 0.05\};}
+\DoxyCodeLine{\ \ \ \ std::vector<Vec2d>\ pts\ =\ \{\{0,\ 0\},\ \{0,\ h\},\ \{0,\ -\/h\},\ \{h,\ 0\},\ \{-\/h,\ 0\}\};}
+\DoxyCodeLine{\ \ \ \ Eigen::VectorXd\ values(pts.size());\ values\ <<\ u1,\ u2,\ u3,\ u4,\ u5;}
+\DoxyCodeLine{\ \ \ \ WLS<Monomials<Vec2d>,\ GaussianWeight<Vec2d>,\ ScaleToClosest>\ wls(1,\ 1.0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{auto}\ appr\ =\ wls.getApproximant(c,\ pts,\ values);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ value\ =\ appr(0);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{double}\ der\ =\ appr(0,\ Der1<2>(1));}
+
+\end{DoxyCodeInclude}
+ 
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_aa35335e9b9b52abc3d3bca7d12fc3271}{WLSApproximant}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLSApproximant_a8312192d65f5733e3abe3adbf6d560b0}{basis}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f}{point}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} $>$ \&support, \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_aafaf0b1644398bbe0fdbad98cfd6956f}{scale}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&\mbox{\hyperlink{classmm_1_1WLSApproximant_a436b91e279ff963fdf22fd4f2e7b6840}{coefficients}}, \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_afbf4e1fcefade048ea4c8928ea1020d3}{residual}}=\mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{NaN}})
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmm_1_1WLS}{WLS} approximant with known coefficients. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a6cd6d5a5a614e4751be25053c269bbf3}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f}{point}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate the approximant at given {\ttfamily point}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ }\\\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9abd2a32e415faa48e0a35fe2a19f465}{operator()}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \&\mbox{\hyperlink{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f}{point}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&op) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Evaluate an operator applied to approximant at given {\ttfamily point}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLSApproximant_a8312192d65f5733e3abe3adbf6d560b0}{basis}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the basis functions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f}{point}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the center point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_aafaf0b1644398bbe0fdbad98cfd6956f}{scale}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the scale. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \& \mbox{\hyperlink{classmm_1_1WLSApproximant_a436b91e279ff963fdf22fd4f2e7b6840}{coefficients}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the coefficient vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_afbf4e1fcefade048ea4c8928ea1020d3}{residual}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the residual. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} basis\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} basis\+\_\+t\+::vector\+\_\+t \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a11d933894e40760f8327088c7ca2cbe5}{basis\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Basis. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a47238db25b379c27a3af983cb7b7d95c}{point\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Center point. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} $>$ \mbox{\hyperlink{classmm_1_1WLSApproximant_af3bff388d4a567bd70307173cda44194}{support\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Local scaled stencil points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_ac4986c14c8056379e06f7485840f1fc0}{scale\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Scale. \end{DoxyCompactList}\item 
+Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \mbox{\hyperlink{classmm_1_1WLSApproximant_ab8f5806a29537a19fab4a23d40778ada}{coefficients\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Coefficients (for scaled fn.) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a594fe76761dba5c3126c164f8fb7e5e3}{residual\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Store residual of the approximation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1WLSApproximant_aa35335e9b9b52abc3d3bca7d12fc3271}\label{classmm_1_1WLSApproximant_aa35335e9b9b52abc3d3bca7d12fc3271} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!WLSApproximant@{WLSApproximant}}
+\index{WLSApproximant@{WLSApproximant}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{WLSApproximant()}{WLSApproximant()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::\+WLSApproximant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \&}]{basis,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} $>$ \&}]{support,  }\item[{\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}}]{scale,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{coefficients,  }\item[{\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}}]{residual = {\ttfamily \mbox{\hyperlink{namespacemm_ac853cc031230b4c9c7c861bbf33d07d0}{NaN}}} }\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{classmm_1_1WLS}{WLS} approximant with known coefficients. 
+
+The approximant is of the form \[ u(p) = \sum_{i=1}^m \alpha_i b_i\left(\frac{p - p_c}{s}\right), \] where $b_i$ may depend on the stencil nodes (e.\+g. RBF-\/s). 
+\begin{DoxyParams}{Parameters}
+{\em basis} & Basis functions $b_i$ to be used, must satisfy the \doxysectlink{concepts_basis-concept}{Basis function concept}{1}. \\
+\hline
+{\em point} & Center point $p_c$ of the \doxylink{classmm_1_1WLS}{WLS} approximation. \\
+\hline
+{\em support} & Nonscaled stencil of the \doxylink{classmm_1_1WLS}{WLS} approximation. \\
+\hline
+{\em scale} & Scale $s$ used in \doxylink{classmm_1_1WLS}{WLS} computation, see \doxysectlink{concepts_scale-concept}{Scale function concept}{1}. \\
+\hline
+{\em coefficients} & Coefficients $\alpha_i$ of the approximation. \\
+\hline
+{\em residual} & The resudial of the weighted least squares approximation. If 0, this function is an interpolant. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{WLSApproximant_8hpp_source}{WLSApproximant.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1WLSApproximant_a8312192d65f5733e3abe3adbf6d560b0}\label{classmm_1_1WLSApproximant_a8312192d65f5733e3abe3adbf6d560b0} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!basis@{basis}}
+\index{basis@{basis}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{basis()}{basis()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::basis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the basis functions. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00066}{66}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_a436b91e279ff963fdf22fd4f2e7b6840}\label{classmm_1_1WLSApproximant_a436b91e279ff963fdf22fd4f2e7b6840} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!coefficients@{coefficients}}
+\index{coefficients@{coefficients}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{coefficients()}{coefficients()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \& \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::coefficients (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the coefficient vector. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00072}{72}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_a6cd6d5a5a614e4751be25053c269bbf3}\label{classmm_1_1WLSApproximant_a6cd6d5a5a614e4751be25053c269bbf3} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant}{WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \&}]{point }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate the approximant at given {\ttfamily point}. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant_8hpp_source_l00030}{30}} of file \mbox{\hyperlink{WLSApproximant_8hpp_source}{WLSApproximant.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_a9abd2a32e415faa48e0a35fe2a19f465}\label{classmm_1_1WLSApproximant_a9abd2a32e415faa48e0a35fe2a19f465} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} operator\+\_\+t $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant}{WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::operator() (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \&}]{point,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} operator\+\_\+t\&}]{op }\end{DoxyParamCaption}) const}
+
+
+
+Evaluate an operator applied to approximant at given {\ttfamily point}. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant_8hpp_source_l00043}{43}} of file \mbox{\hyperlink{WLSApproximant_8hpp_source}{WLSApproximant.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f}\label{classmm_1_1WLSApproximant_a9c097c139016623f3bec0ee14077b71f} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!point@{point}}
+\index{point@{point}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{point()}{point()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \& \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the center point. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_afbf4e1fcefade048ea4c8928ea1020d3}\label{classmm_1_1WLSApproximant_afbf4e1fcefade048ea4c8928ea1020d3} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!residual@{residual}}
+\index{residual@{residual}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{residual()}{residual()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::residual (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the residual. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00074}{74}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_aafaf0b1644398bbe0fdbad98cfd6956f}\label{classmm_1_1WLSApproximant_aafaf0b1644398bbe0fdbad98cfd6956f} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!scale@{scale}}
+\index{scale@{scale}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the scale. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1WLSApproximant_a11d933894e40760f8327088c7ca2cbe5}\label{classmm_1_1WLSApproximant_a11d933894e40760f8327088c7ca2cbe5} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!basis\_@{basis\_}}
+\index{basis\_@{basis\_}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{basis\_}{basis\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::basis\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Basis. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_ab8f5806a29537a19fab4a23d40778ada}\label{classmm_1_1WLSApproximant_ab8f5806a29537a19fab4a23d40778ada} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!coefficients\_@{coefficients\_}}
+\index{coefficients\_@{coefficients\_}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{coefficients\_}{coefficients\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+Eigen\+::\+Matrix$<$\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1$>$ \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::coefficients\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Coefficients (for scaled fn.) 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00037}{37}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_a47238db25b379c27a3af983cb7b7d95c}\label{classmm_1_1WLSApproximant_a47238db25b379c27a3af983cb7b7d95c} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!point\_@{point\_}}
+\index{point\_@{point\_}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{point\_}{point\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::point\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Center point. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00034}{34}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_a594fe76761dba5c3126c164f8fb7e5e3}\label{classmm_1_1WLSApproximant_a594fe76761dba5c3126c164f8fb7e5e3} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!residual\_@{residual\_}}
+\index{residual\_@{residual\_}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{residual\_}{residual\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::residual\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store residual of the approximation. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00038}{38}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_ac4986c14c8056379e06f7485840f1fc0}\label{classmm_1_1WLSApproximant_ac4986c14c8056379e06f7485840f1fc0} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!scale\_@{scale\_}}
+\index{scale\_@{scale\_}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{scale\_}{scale\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+\mbox{\hyperlink{classmm_1_1WLSApproximant_a582d589cd00f9f0bcb3d8f3d4e8b17f2}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::scale\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Scale. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1WLSApproximant_af3bff388d4a567bd70307173cda44194}\label{classmm_1_1WLSApproximant_af3bff388d4a567bd70307173cda44194} 
+\index{mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}!support\_@{support\_}}
+\index{support\_@{support\_}!mm::WLSApproximant$<$ basis\_t $>$@{mm::WLSApproximant$<$ basis\_t $>$}}
+\doxysubsubsection{\texorpdfstring{support\_}{support\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$ \\
+std\+::vector$<$\mbox{\hyperlink{classmm_1_1WLSApproximant_a9c48224a0ae96d49c2c57dade9d842d0}{vector\+\_\+t}}$>$ \mbox{\hyperlink{classmm_1_1WLSApproximant}{mm\+::\+WLSApproximant}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{basis\+\_\+t}} $>$\+::support\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Local scaled stencil points. 
+
+
+
+Definition at line \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{WLSApproximant__fwd_8hpp_source}{WLSApproximant\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{WLSApproximant__fwd_8hpp}{WLSApproximant\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/approximations/\mbox{\hyperlink{WLSApproximant_8hpp}{WLSApproximant.\+hpp}}\end{DoxyCompactItemize}

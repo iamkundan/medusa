@@ -1,0 +1,62 @@
+\doxysection{Polygon\+Shape\+\_\+fwd.\+hpp}
+\hypertarget{PolygonShape__fwd_8hpp_source}{}\label{PolygonShape__fwd_8hpp_source}\index{include/medusa/bits/domains/PolygonShape\_fwd.hpp@{include/medusa/bits/domains/PolygonShape\_fwd.hpp}}
+\mbox{\hyperlink{PolygonShape__fwd_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_DOMAINS\_POLYGONSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_DOMAINS\_POLYGONSHAPE\_FWD\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Config_8hpp}{medusa/Config.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DomainShape__fwd_8hpp}{DomainShape\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00014}00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00026}00026\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00027}\mbox{\hyperlink{classmm_1_1PolygonShape}{00027}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmm_1_1PolygonShape}{PolygonShape}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<vec\_t>\ \{}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{static\_assert}(vec\_t::dim\ ==\ 2,\ \textcolor{stringliteral}{"{}Only\ available\ in\ 2\ dimensions."{}});}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00029}\mbox{\hyperlink{classmm_1_1PolygonShape_a1afc7d393d21ea507cf3ea666f525dbf}{00029}}\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape}{base\_t}}\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainShape<vec\_t>}};\ \ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00031}\mbox{\hyperlink{classmm_1_1PolygonShape_afc96201343239bf1c7f2f6870392f071}{00031}}\ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{classmm_1_1PolygonShape_afc96201343239bf1c7f2f6870392f071}{points\_}};\ \ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00034}\mbox{\hyperlink{classmm_1_1PolygonShape_a726f649201774c45093c5e5552177424}{00034}}\ \ \ \ \ std::vector<vec\_t>\ \mbox{\hyperlink{classmm_1_1PolygonShape_a726f649201774c45093c5e5552177424}{points\_with\_margin\_}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape}{DomainShape}}<\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}>\mbox{\hyperlink{classmm_1_1DomainShape_af858da3cacde52c0d9f4afbabf39b53c}{::margin\_}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00037}00037\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00038}00038\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1Gaussian}{typename}}\ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{base\_t::scalar\_t}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00039}00039\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1Gaussian}{typename}}\ \mbox{\hyperlink{classmm_1_1DomainShape_a08fcac485642122d4fa688ea08d9df97}{base\_t::vector\_t}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00040}00040\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape_a97ed2888cd370cda937262f2e5fa70efa8e9f515555c8b81ce8f07fc3fcd48791}{base\_t::dim}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00041}00041\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape_ab49b18699e38dc9dade7bb24fb0a2916}{base\_t::discretizeBoundaryWithDensity}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00042}00042\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmm_1_1DomainShape_af54c8588d3daff761edd06b8b744f0b5}{base\_t::discretizeBoundaryWithStep}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00050}00050\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classmm_1_1PolygonShape}{PolygonShape}}(\textcolor{keyword}{const}\ std::vector<vec\_t>\&\ \mbox{\hyperlink{classmm_1_1PolygonShape_a27941940f5f008770f5f255871bf0411}{points}});}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00053}\mbox{\hyperlink{classmm_1_1PolygonShape_a27941940f5f008770f5f255871bf0411}{00053}}\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<vec\_t>\&\ \mbox{\hyperlink{classmm_1_1PolygonShape_a27941940f5f008770f5f255871bf0411}{points}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1PolygonShape_afc96201343239bf1c7f2f6870392f071}{points\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1PolygonShape_abcf4de904fbc7d5e1a065b2836d18def}{setMargin}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1DomainShape_af2df9c26a6c9d428a2bd9873bf693e2d}{margin}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmm_1_1PolygonShape_a36af2aa31a530db60dcad5660a602e16}{contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00064}00064\ \ \ \ \ std::pair<vec\_t,\ vec\_t>\ \mbox{\hyperlink{classmm_1_1PolygonShape_a775a2298916b9a899512a2dcb31dfb63}{bbox}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00071}00071\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1PolygonShape_ae55b3df4a12924352a7685fe1f2f0aec}{discretizeBoundaryWithStep}}(\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{scalar\_t}}\ step,\ \textcolor{keywordtype}{int}\ type)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00078}00078\ \ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{DomainDiscretization<vec\_t>}}\ \mbox{\hyperlink{classmm_1_1PolygonShape_aa513b3c4459b6ed9c8cb988cbb86e69a}{discretizeBoundaryWithDensity}}(}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\mbox{\hyperlink{classmm_1_1PolygonShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}(\mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}})>\&\ dr,\ \textcolor{keywordtype}{int}\ type)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00081}\mbox{\hyperlink{classmm_1_1PolygonShape_a0e89efb7c80515412bad57c4ab3c91fb}{00081}}\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{PolygonShape<vec\_t>}}*\ \mbox{\hyperlink{classmm_1_1PolygonShape_a0e89efb7c80515412bad57c4ab3c91fb}{clone}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classmm_1_1Gaussian}{PolygonShape<vec\_t>}}(*\textcolor{keyword}{this});\ \}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00083}\mbox{\hyperlink{classmm_1_1PolygonShape_aac3a79b509a9d786f6ff803e77ca3d8e}{00083}}\ \ \ \ \ std::ostream\&\ \mbox{\hyperlink{classmm_1_1PolygonShape_aac3a79b509a9d786f6ff803e77ca3d8e}{print}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}Polygon\ shape\ with\ "{}}\ <<\ \mbox{\hyperlink{classmm_1_1PolygonShape_afc96201343239bf1c7f2f6870392f071}{points\_}}.size()\ <<\ \textcolor{stringliteral}{"{}\ points."{}};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00087}00087\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00094}\mbox{\hyperlink{classmm_1_1PolygonShape_abf47f1e15911dee4e08277e6e365b754}{00094}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classmm_1_1DomainShape_af7316ce1646ab9606ac987ed70911e11}{scalar\_t}}\ \mbox{\hyperlink{classmm_1_1PolygonShape_abf47f1e15911dee4e08277e6e365b754}{isLeft}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{P0}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{P1}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{P2}})\ \{}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{classmm_1_1Gaussian}{P1}}[0]\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{P0}}[0])\ *\ (\mbox{\hyperlink{classmm_1_1Gaussian}{P2}}[1]\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{P0}}[1])\ -\/\ (\mbox{\hyperlink{classmm_1_1Gaussian}{P2}}[0]\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{P0}}[0])\ *\ (\mbox{\hyperlink{classmm_1_1Gaussian}{P1}}[1]\ -\/\ \mbox{\hyperlink{classmm_1_1Gaussian}{P0}}[1]);}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00096}00096\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmm_1_1PolygonShape_afb75f34cae81fbe9a4efbbd369288c96}{extendByMargin}}();}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00100}00100\ \};}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00102}00102\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{PolygonShape__fwd_8hpp_source_l00104}00104\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_DOMAINS\_POLYGONSHAPE\_FWD\_HPP\_}}
+
+\end{DoxyCode}

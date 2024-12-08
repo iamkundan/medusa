@@ -1,0 +1,906 @@
+\doxysection{mm\+::Shape\+Storage\texorpdfstring{$<$}{<} Derived, vec\+\_\+t, Op\+Families \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classmm_1_1ShapeStorage}{}\label{classmm_1_1ShapeStorage}\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+
+
+{\ttfamily \#include $<$Shape\+Storage\+\_\+fwd.\+hpp$>$}
+
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$\newline
+class mm\+::\+Shape\+Storage$<$ Derived, vec\+\_\+t, Op\+Families $>$}
+Shape storage base class. 
+
+It supports storing computed shapes for \doxylink{structmm_1_1Lap}{Lap}, D1 and D2 operators. Derived classes should inherit the interface via CRTP and implement missing methods.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1UniformShapeStorage}{Uniform\+Shape\+Storage}, \doxylink{classmm_1_1RaggedShapeStorage}{Ragged\+Shape\+Storage} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+
+
+Collaboration diagram for mm\+::Shape\+Storage\texorpdfstring{$<$}{<} Derived, vec\+\_\+t, Op\+Families \texorpdfstring{$>$}{>}\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{classmm_1_1ShapeStorage__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a55deaab120c7063667d7ed6dc647632f}{resize}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{support\+\_\+sizes}})
+\begin{DoxyCompactList}\small\item\em Resizes the storage to accommodate shapes of given sizes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage_af5d08dfd5b42e128ab3b29dd215669aa}{size}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns number of nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage_aad346ccc1a96e777c797381172954209}{support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns index of {\ttfamily j}-\/th neighbour of {\ttfamily node}-\/th node, i.\+e. {\ttfamily support\mbox{[}node\mbox{]}\mbox{[}j\mbox{]}}, but possibly faster. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a7e420ce6c913a45b4cb12bb8b9d96fad}{support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a collection of support indices for given {\ttfamily node}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a8d41f5167ddb2e6bae1e3585bf6ee214}{set\+Support}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{node\+\_\+idx}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&\mbox{\hyperlink{classmm_1_1ShapeStorage_aad346ccc1a96e777c797381172954209}{support}})
+\begin{DoxyCompactList}\small\item\em Sets support of {\ttfamily node}-\/th node to {\ttfamily support}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a1ac8bb451b0db372aae95bb0863063bf}{support\+Size}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns support size of {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_af5acb712018e86ba012610c7cd4c75a8}{support\+Sizes}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a vector of support sizes for all nodes, useful for matrix space preallocation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a20ee8fdb165461c0ef10dc540a510cdd}{support\+Sizes\+Vec}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns a {\ttfamily dim\texorpdfstring{$\ast$}{*}N} vector of {\ttfamily dim\texorpdfstring{$\ast$}{*}support\+\_\+size}, useful for matrix space preallocation for vector equations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::array$<$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} $>$, \mbox{\hyperlink{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230}{num\+\_\+operators}} $>$ \& \mbox{\hyperlink{classmm_1_1ShapeStorage_a19e8f50191bd2a4481e3b1985930ae9c}{shapes}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Read access to complete shape storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67}{get}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the weight of {\ttfamily j}-\/th stencil node of {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by index). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67}{get}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the weight of {\ttfamily j}-\/th stencil node of {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by type). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_ad4f29c6921c1378292830acee954c0a2}{get}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the {\ttfamily j}-\/th weight of shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by index). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_ad4f29c6921c1378292830acee954c0a2}{get}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the {\ttfamily j}-\/th weight of shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by type). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ }\\Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a80b3f076e99b8747e9bbbba5a23f9812}{get\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by index). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ }\\Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a80b3f076e99b8747e9bbbba5a23f9812}{get\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by type). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a8bbc97068585f658c8f396d4a628148b}{get\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by index). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a8bbc97068585f658c8f396d4a628148b}{get\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Get the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by type). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a69bacc37df7d0ec7ec3ab3b62906d028}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Set the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by index). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a69bacc37df7d0ec7ec3ab3b62906d028}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Set the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by type). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a2ef420aae6aa20adc4ccd00e5f5471e3}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Set the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by index). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a2ef420aae6aa20adc4ccd00e5f5471e3}{set\+Shape}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Set the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by type). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a1da7aab6d3078b5224d978ab9d14139a}{laplace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return {\ttfamily j-\/th} laplace shape coefficient for {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_ab5ca06bd0bda77f79d3013d1ed1c287a}{laplace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the laplace shape for {\ttfamily node}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_ad2cae8aeb99dfa3276c12fc6fc8edaba}{set\+Laplace}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Sets the laplace shape for {\ttfamily node} to {\ttfamily shape}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_ab3ec00ee410aff9f5c56525dbefde749}{d1}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} var, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return {\ttfamily j}-\/th shape coefficient for derivative wrt. variable {\ttfamily var} in {\ttfamily node}. \end{DoxyCompactList}\item 
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a996bba1b4f78b45c133fee97f3b0bea9}{d1}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} var, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return shape for derivative wrt. variable {\ttfamily var} in {\ttfamily node}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_acfb41bac39dea40d78fe7dffe538714f}{set\+D1}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} var, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Sets shape for derivative wrt. variable {\ttfamily var} for {\ttfamily node} to {\ttfamily shape}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a10a04b4d0634e87b6fe6f9694c99782b}{d2}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmin}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmax}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{j}}) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return {\ttfamily j}-\/th shape coefficient for mixed derivative wrt. \end{DoxyCompactList}\item 
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a2fa716a37694d9846adce08120a90c46}{d2}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmin}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmax}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Return shape for mixed derivative wrt. variables {\ttfamily varmin} and {\ttfamily varmax} in {\ttfamily node}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage_add965fa41f172363b9ff076178c6d9b9}{set\+D2}} (\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmin}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1Gaussian}{varmax}}, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&shape)
+\begin{DoxyCompactList}\small\item\em Sets shape for mixed derivative wrt. variables {\ttfamily varmin} and {\ttfamily varmax} for {\ttfamily node} to {\ttfamily shape}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{size\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a58ea0a5c369e8d3749e7303b078591c2}{memory\+Used}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the approximate memory used (in bytes). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a1962deed241f05e4c5d33cbae968bbc6}{explicit\+Operators}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Construct explicit operators over this storage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe94398ee37e5ad815f4be5f8b995f31}{explicit\+Vector\+Operators}} () \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Construct explicit vector operators over this storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\\mbox{\hyperlink{classmm_1_1ImplicitOperators}{Implicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a025e8c5dc9b56926822c87da23c869f5}{implicit\+Operators}} (M \&\mbox{\hyperlink{classmm_1_1Gaussian}{matrix}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} \&rhs) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Construct implicit operators over this storage. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ }\\\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a61210ae48b8bd4c6339e6853cbcf00e6}{implicit\+Vector\+Operators}} (M \&\mbox{\hyperlink{classmm_1_1Gaussian}{matrix}}, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} \&rhs) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Construct implicit vector operators over this storage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{friend}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}
+\begin{DoxyCompactList}\small\item\em Be friends with derived class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{static}} \mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230}{num\+\_\+operators}} = std\+::tuple\+\_\+size$<$\mbox{\hyperlink{classmm_1_1ShapeStorage_a38bd24518a7c9456c49a642d677ba050}{op\+\_\+families\+\_\+tuple}}$>$\+::value
+\begin{DoxyCompactList}\small\item\em Number of operator families in this storage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmm_1_1ShapeStorage_a7f9ab593b9cd256a3e963e79ba76792ba9ce0998a204c456cd86fe40bf28575b6}{dim}} = vec\+\_\+t\+::dim
+ \}
+\begin{DoxyCompactList}\small\item\em Bitmask telling us which shapes to create. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage_adbc5a35b0989d73578515f9b9ff4cbdb}{vector\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Vector type used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} vec\+\_\+t\+::scalar\+\_\+t \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Scalar type used. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{typedef}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a38bd24518a7c9456c49a642d677ba050}{op\+\_\+families\+\_\+tuple}}
+\begin{DoxyCompactList}\small\item\em Tuple of operator families. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{D}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{classmm_1_1ShapeStorage_afa3283c90bf3e2978c54af6b8ebf8671}{operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{D}}, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ \&\mbox{\hyperlink{classmm_1_1ShapeStorage_a19e8f50191bd2a4481e3b1985930ae9c}{shapes}})
+\begin{DoxyCompactList}\small\item\em Output basic info about this shape storage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage_a66f1cb267c63e30dbef93247def13161}{access}} (std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns pointer to the start of values for {\ttfamily node}-\/th node for {\ttfamily op}-\/th operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage_aa1f7b095b364cf99c4f2ba927898396a}{access}} (std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns pointer to the start of values for {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage_a2ab0dfc463ce64cd2e99a8cf83158b26}{access}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} op, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns const pointer to the start of values for {\ttfamily node}-\/th node for {\ttfamily op}-\/th operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ }\\\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage_adf889e2eeaa84e7cdef0e3f16a80f3d3}{access}} (\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&v, \mbox{\hyperlink{classmm_1_1Gaussian}{int}} node) \mbox{\hyperlink{classmm_1_1Gaussian}{const}}
+\begin{DoxyCompactList}\small\item\em Returns const pointer to the start of values for {\ttfamily node}-\/th node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1ShapeStorage_ab90ddf17d12e93369d34e48a658c6d8b}{Shape\+Storage}} ()
+\begin{DoxyCompactList}\small\item\em Constructs empty storage with size 0. Can be resized with \doxylink{classmm_1_1ShapeStorage_a55deaab120c7063667d7ed6dc647632f}{resize}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage_a14579922605c087bd382f708d1d11c85}{domain\+\_\+size\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Total number of nodes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a53532339e426873b332fa55051d65b4d}{support\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Local copy of support domains. \end{DoxyCompactList}\item 
+std\+::array$<$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} $>$, \mbox{\hyperlink{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230}{num\+\_\+operators}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage_a1abfd5339a88af0c76781e460c2c73ab}{shapes\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Tuple of shape containers for given operators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classmm_1_1ShapeStorage_a7f9ab593b9cd256a3e963e79ba76792b}\label{classmm_1_1ShapeStorage_a7f9ab593b9cd256a3e963e79ba76792b} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{anonymous}} \mbox{\hyperlink{classmm_1_1Gaussian}{enum}}}
+
+
+
+Bitmask telling us which shapes to create. 
+
+Store dimension of the domain. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{dim@{dim}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!dim@{dim}}}\Hypertarget{classmm_1_1ShapeStorage_a7f9ab593b9cd256a3e963e79ba76792ba9ce0998a204c456cd86fe40bf28575b6}\label{classmm_1_1ShapeStorage_a7f9ab593b9cd256a3e963e79ba76792ba9ce0998a204c456cd86fe40bf28575b6} 
+dim&Dimensionality of the domain. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00047}{47}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmm_1_1ShapeStorage_ab90ddf17d12e93369d34e48a658c6d8b}\label{classmm_1_1ShapeStorage_ab90ddf17d12e93369d34e48a658c6d8b} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!ShapeStorage@{ShapeStorage}}
+\index{ShapeStorage@{ShapeStorage}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{ShapeStorage()}{ShapeStorage()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::\+Shape\+Storage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Constructs empty storage with size 0. Can be resized with \doxylink{classmm_1_1ShapeStorage_a55deaab120c7063667d7ed6dc647632f}{resize}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00077}{77}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmm_1_1ShapeStorage_adf889e2eeaa84e7cdef0e3f16a80f3d3}\label{classmm_1_1ShapeStorage_adf889e2eeaa84e7cdef0e3f16a80f3d3} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!access@{access}}
+\index{access@{access}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{access()}{access()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::access (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Returns const pointer to the start of values for {\ttfamily node}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00073}{73}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a2ab0dfc463ce64cd2e99a8cf83158b26}\label{classmm_1_1ShapeStorage_a2ab0dfc463ce64cd2e99a8cf83158b26} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!access@{access}}
+\index{access@{access}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{access()}{access()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::access (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Returns const pointer to the start of values for {\ttfamily node}-\/th node for {\ttfamily op}-\/th operator. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00070}{70}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_aa1f7b095b364cf99c4f2ba927898396a}\label{classmm_1_1ShapeStorage_aa1f7b095b364cf99c4f2ba927898396a} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!access@{access}}
+\index{access@{access}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{access()}{access()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::access (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Returns pointer to the start of values for {\ttfamily node}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00067}{67}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a66f1cb267c63e30dbef93247def13161}\label{classmm_1_1ShapeStorage_a66f1cb267c63e30dbef93247def13161} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!access@{access}}
+\index{access@{access}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{access()}{access()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{T}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::access (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{T}} $>$ \&}]{v,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Returns pointer to the start of values for {\ttfamily node}-\/th node for {\ttfamily op}-\/th operator. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00064}{64}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a996bba1b4f78b45c133fee97f3b0bea9}\label{classmm_1_1ShapeStorage_a996bba1b4f78b45c133fee97f3b0bea9} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!d1@{d1}}
+\index{d1@{d1}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{d1()}{d1()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::d1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Return shape for derivative wrt. variable {\ttfamily var} in {\ttfamily node}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00103}{103}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_ab3ec00ee410aff9f5c56525dbefde749}\label{classmm_1_1ShapeStorage_ab3ec00ee410aff9f5c56525dbefde749} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!d1@{d1}}
+\index{d1@{d1}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{d1()}{d1()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::d1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Return {\ttfamily j}-\/th shape coefficient for derivative wrt. variable {\ttfamily var} in {\ttfamily node}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00065}{65}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a2fa716a37694d9846adce08120a90c46}\label{classmm_1_1ShapeStorage_a2fa716a37694d9846adce08120a90c46} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!d2@{d2}}
+\index{d2@{d2}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{d2()}{d2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::d2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmin,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmax,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Return shape for mixed derivative wrt. variables {\ttfamily varmin} and {\ttfamily varmax} in {\ttfamily node}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00113}{113}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a10a04b4d0634e87b6fe6f9694c99782b}\label{classmm_1_1ShapeStorage_a10a04b4d0634e87b6fe6f9694c99782b} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!d2@{d2}}
+\index{d2@{d2}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{d2()}{d2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::d2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmin,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmax,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Return {\ttfamily j}-\/th shape coefficient for mixed derivative wrt. 
+
+variables {\ttfamily varmin} and {\ttfamily varmax} in {\ttfamily node}. 
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00076}{76}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a1962deed241f05e4c5d33cbae968bbc6}\label{classmm_1_1ShapeStorage_a1962deed241f05e4c5d33cbae968bbc6} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!explicitOperators@{explicitOperators}}
+\index{explicitOperators@{explicitOperators}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{explicitOperators()}{explicitOperators()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ExplicitOperators}{Explicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::explicit\+Operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Construct explicit operators over this storage. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitOperators_8hpp_source_l00089}{89}} of file \mbox{\hyperlink{ExplicitOperators_8hpp_source}{Explicit\+Operators.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_afe94398ee37e5ad815f4be5f8b995f31}\label{classmm_1_1ShapeStorage_afe94398ee37e5ad815f4be5f8b995f31} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!explicitVectorOperators@{explicitVectorOperators}}
+\index{explicitVectorOperators@{explicitVectorOperators}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{explicitVectorOperators()}{explicitVectorOperators()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ExplicitVectorOperators}{Explicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::explicit\+Vector\+Operators (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Construct explicit vector operators over this storage. 
+
+
+
+Definition at line \mbox{\hyperlink{ExplicitVectorOperators_8hpp_source_l00160}{160}} of file \mbox{\hyperlink{ExplicitVectorOperators_8hpp_source}{Explicit\+Vector\+Operators.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_ad4f29c6921c1378292830acee954c0a2}\label{classmm_1_1ShapeStorage_ad4f29c6921c1378292830acee954c0a2} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!get@{get}}
+\index{get@{get}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the {\ttfamily j}-\/th weight of shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by index). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00134}{134}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_ad4f29c6921c1378292830acee954c0a2}\label{classmm_1_1ShapeStorage_ad4f29c6921c1378292830acee954c0a2} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!get@{get}}
+\index{get@{get}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the {\ttfamily j}-\/th weight of shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by type). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00139}{139}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67}\label{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!get@{get}}
+\index{get@{get}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the weight of {\ttfamily j}-\/th stencil node of {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by index). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00124}{124}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67}\label{classmm_1_1ShapeStorage_a7590640501f4258763e6b2dbe404ec67} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!get@{get}}
+\index{get@{get}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the weight of {\ttfamily j}-\/th stencil node of {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by type). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00129}{129}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a8bbc97068585f658c8f396d4a628148b}\label{classmm_1_1ShapeStorage_a8bbc97068585f658c8f396d4a628148b} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!getShape@{getShape}}
+\index{getShape@{getShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{getShape()}{getShape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by index). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00157}{157}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a8bbc97068585f658c8f396d4a628148b}\label{classmm_1_1ShapeStorage_a8bbc97068585f658c8f396d4a628148b} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!getShape@{getShape}}
+\index{getShape@{getShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{getShape()}{getShape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by type). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00163}{163}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a80b3f076e99b8747e9bbbba5a23f9812}\label{classmm_1_1ShapeStorage_a80b3f076e99b8747e9bbbba5a23f9812} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!getShape@{getShape}}
+\index{getShape@{getShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{getShape()}{getShape()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ \\
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by index). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00145}{145}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a80b3f076e99b8747e9bbbba5a23f9812}\label{classmm_1_1ShapeStorage_a80b3f076e99b8747e9bbbba5a23f9812} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!getShape@{getShape}}
+\index{getShape@{getShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{getShape()}{getShape()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ \\
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::get\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by type). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00151}{151}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a025e8c5dc9b56926822c87da23c869f5}\label{classmm_1_1ShapeStorage_a025e8c5dc9b56926822c87da23c869f5} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!implicitOperators@{implicitOperators}}
+\index{implicitOperators@{implicitOperators}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{implicitOperators()}{implicitOperators()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitOperators}{Implicit\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::implicit\+Operators (\begin{DoxyParamCaption}\item[{M \&}]{matrix,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{R}} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Construct implicit operators over this storage. 
+
+\Hypertarget{classmm_1_1ShapeStorage_a61210ae48b8bd4c6339e6853cbcf00e6}\label{classmm_1_1ShapeStorage_a61210ae48b8bd4c6339e6853cbcf00e6} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!implicitVectorOperators@{implicitVectorOperators}}
+\index{implicitVectorOperators@{implicitVectorOperators}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{implicitVectorOperators()}{implicitVectorOperators()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} M , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ImplicitVectorOperators}{Implicit\+Vector\+Operators}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, M, \mbox{\hyperlink{classmm_1_1Gaussian}{R}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::implicit\+Vector\+Operators (\begin{DoxyParamCaption}\item[{M \&}]{matrix,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{R}} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Construct implicit vector operators over this storage. 
+
+\Hypertarget{classmm_1_1ShapeStorage_ab5ca06bd0bda77f79d3013d1ed1c287a}\label{classmm_1_1ShapeStorage_ab5ca06bd0bda77f79d3013d1ed1c287a} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!laplace@{laplace}}
+\index{laplace@{laplace}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{laplace()}{laplace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::laplace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns the laplace shape for {\ttfamily node}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00094}{94}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a1da7aab6d3078b5224d978ab9d14139a}\label{classmm_1_1ShapeStorage_a1da7aab6d3078b5224d978ab9d14139a} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!laplace@{laplace}}
+\index{laplace@{laplace}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{laplace()}{laplace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\mbox{\hyperlink{MatrixBaseAddons_8hpp_a695df4b7223929a38bb9cec692d413b5}{\+::scalar\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::laplace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Return {\ttfamily j-\/th} laplace shape coefficient for {\ttfamily node}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00055}{55}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a58ea0a5c369e8d3749e7303b078591c2}\label{classmm_1_1ShapeStorage_a58ea0a5c369e8d3749e7303b078591c2} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!memoryUsed@{memoryUsed}}
+\index{memoryUsed@{memoryUsed}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{memoryUsed()}{memoryUsed()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{size\+\_\+t}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::memory\+Used (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the approximate memory used (in bytes). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00182}{182}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a55deaab120c7063667d7ed6dc647632f}\label{classmm_1_1ShapeStorage_a55deaab120c7063667d7ed6dc647632f} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!resize@{resize}}
+\index{resize@{resize}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&}]{support\+\_\+sizes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resizes the storage to accommodate shapes of given sizes. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00081}{81}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_acfb41bac39dea40d78fe7dffe538714f}\label{classmm_1_1ShapeStorage_acfb41bac39dea40d78fe7dffe538714f} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setD1@{setD1}}
+\index{setD1@{setD1}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setD1()}{setD1()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+D1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{var,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})}
+
+
+
+Sets shape for derivative wrt. variable {\ttfamily var} for {\ttfamily node} to {\ttfamily shape}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00147}{147}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_add965fa41f172363b9ff076178c6d9b9}\label{classmm_1_1ShapeStorage_add965fa41f172363b9ff076178c6d9b9} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setD2@{setD2}}
+\index{setD2@{setD2}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setD2()}{setD2()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+D2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmin,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{varmax,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})}
+
+
+
+Sets shape for mixed derivative wrt. variables {\ttfamily varmin} and {\ttfamily varmax} for {\ttfamily node} to {\ttfamily shape}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00158}{158}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_ad2cae8aeb99dfa3276c12fc6fc8edaba}\label{classmm_1_1ShapeStorage_ad2cae8aeb99dfa3276c12fc6fc8edaba} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setLaplace@{setLaplace}}
+\index{setLaplace@{setLaplace}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setLaplace()}{setLaplace()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+Laplace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})}
+
+
+
+Sets the laplace shape for {\ttfamily node} to {\ttfamily shape}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00137}{137}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a2ef420aae6aa20adc4ccd00e5f5471e3}\label{classmm_1_1ShapeStorage_a2ef420aae6aa20adc4ccd00e5f5471e3} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by index). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00183}{183}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a2ef420aae6aa20adc4ccd00e5f5471e3}\label{classmm_1_1ShapeStorage_a2ef420aae6aa20adc4ccd00e5f5471e3} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the shape for {\ttfamily node} for the only operator in {\ttfamily op\+\_\+family} (by type). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00189}{189}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a69bacc37df7d0ec7ec3ab3b62906d028}\label{classmm_1_1ShapeStorage_a69bacc37df7d0ec7ec3ab3b62906d028} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}} op\+\_\+family$>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by index). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00170}{170}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a69bacc37df7d0ec7ec3ab3b62906d028}\label{classmm_1_1ShapeStorage_a69bacc37df7d0ec7ec3ab3b62906d028} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setShape@{setShape}}
+\index{setShape@{setShape}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setShape()}{setShape()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{op\+\_\+family}} $>$ \\
+\mbox{\hyperlink{Config_8hpp_abd8fb9a18b0a74333238b9e61c8f9e6a}{SINL}} \mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{op,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}, Eigen\+::\+Dynamic, 1 $>$ \&}]{shape }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the shape for {\ttfamily node} for operator {\ttfamily op} in {\ttfamily op\+\_\+family} (by type). 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00177}{177}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a8d41f5167ddb2e6bae1e3585bf6ee214}\label{classmm_1_1ShapeStorage_a8d41f5167ddb2e6bae1e3585bf6ee214} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!setSupport@{setSupport}}
+\index{setSupport@{setSupport}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{setSupport()}{setSupport()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{void}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::set\+Support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node\+\_\+idx,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::vector$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \&}]{support }\end{DoxyParamCaption})}
+
+
+
+Sets support of {\ttfamily node}-\/th node to {\ttfamily support}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00126}{126}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a19e8f50191bd2a4481e3b1985930ae9c}\label{classmm_1_1ShapeStorage_a19e8f50191bd2a4481e3b1985930ae9c} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!shapes@{shapes}}
+\index{shapes@{shapes}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{shapes()}{shapes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{const}} std\+::array$<$ \mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}} $>$, \mbox{\hyperlink{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230}{num\+\_\+operators}} $>$ \& \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read access to complete shape storage. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00121}{121}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_af5d08dfd5b42e128ab3b29dd215669aa}\label{classmm_1_1ShapeStorage_af5d08dfd5b42e128ab3b29dd215669aa} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!size@{size}}
+\index{size@{size}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns number of nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00087}{87}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a7e420ce6c913a45b4cb12bb8b9d96fad}\label{classmm_1_1ShapeStorage_a7e420ce6c913a45b4cb12bb8b9d96fad} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!support@{support}}
+\index{support@{support}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+Eigen\+::\+Map$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{const}} Eigen\+::\+Matrix$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}}, Eigen\+::\+Dynamic, 1 $>$ $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const}
+
+
+
+Returns a collection of support indices for given {\ttfamily node}. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00027}{27}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_aad346ccc1a96e777c797381172954209}\label{classmm_1_1ShapeStorage_aad346ccc1a96e777c797381172954209} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!support@{support}}
+\index{support@{support}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{support()}{support()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::support (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Returns index of {\ttfamily j}-\/th neighbour of {\ttfamily node}-\/th node, i.\+e. {\ttfamily support\mbox{[}node\mbox{]}\mbox{[}j\mbox{]}}, but possibly faster. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00015}{15}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a1ac8bb451b0db372aae95bb0863063bf}\label{classmm_1_1ShapeStorage_a1ac8bb451b0db372aae95bb0863063bf} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!supportSize@{supportSize}}
+\index{supportSize@{supportSize}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{supportSize()}{supportSize()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::support\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{int}}}]{node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns support size of {\ttfamily node}-\/th node. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00102}{102}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_af5acb712018e86ba012610c7cd4c75a8}\label{classmm_1_1ShapeStorage_af5acb712018e86ba012610c7cd4c75a8} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!supportSizes@{supportSizes}}
+\index{supportSizes@{supportSizes}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{supportSizes()}{supportSizes()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::support\+Sizes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns a vector of support sizes for all nodes, useful for matrix space preallocation. 
+
+\begin{DoxyWarning}{Warning}
+If there are ghost nodes present, their support sizes might be zero. However, matrix rows corresponding to ghost nodes must still be preallocated. 
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ShapeStorage_a20ee8fdb165461c0ef10dc540a510cdd}{support\+Sizes\+Vec} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00036}{36}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a20ee8fdb165461c0ef10dc540a510cdd}\label{classmm_1_1ShapeStorage_a20ee8fdb165461c0ef10dc540a510cdd} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!supportSizesVec@{supportSizesVec}}
+\index{supportSizesVec@{supportSizesVec}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{supportSizesVec()}{supportSizesVec()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{int}} $>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::support\+Sizes\+Vec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns a {\ttfamily dim\texorpdfstring{$\ast$}{*}N} vector of {\ttfamily dim\texorpdfstring{$\ast$}{*}support\+\_\+size}, useful for matrix space preallocation for vector equations. 
+
+Same warning as for \doxylink{classmm_1_1ShapeStorage_af5acb712018e86ba012610c7cd4c75a8}{support\+Sizes} applies. \begin{DoxySeeAlso}{See also}
+\doxylink{classmm_1_1ShapeStorage_af5acb712018e86ba012610c7cd4c75a8}{support\+Sizes} 
+\end{DoxySeeAlso}
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00045}{45}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+
+
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classmm_1_1ShapeStorage_afa3283c90bf3e2978c54af6b8ebf8671}\label{classmm_1_1ShapeStorage_afa3283c90bf3e2978c54af6b8ebf8671} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{D}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ \\
+std\+::ostream \& \mbox{\hyperlink{classmm_1_1Gaussian}{operator}}$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{D}}, \mbox{\hyperlink{classmm_1_1Gaussian}{V}}, \mbox{\hyperlink{classmm_1_1Gaussian}{O}} $>$ \&}]{shapes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Output basic info about this shape storage. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage_8hpp_source_l00176}{176}} of file \mbox{\hyperlink{ShapeStorage_8hpp_source}{Shape\+Storage.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}\label{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!Derived@{Derived}}
+\index{Derived@{Derived}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{Derived}{Derived}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} Derived , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{friend}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ Derived, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::\+Derived}
+
+
+
+Be friends with derived class. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00052}{52}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a14579922605c087bd382f708d1d11c85}\label{classmm_1_1ShapeStorage_a14579922605c087bd382f708d1d11c85} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!domain\_size\_@{domain\_size\_}}
+\index{domain\_size\_@{domain\_size\_}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{domain\_size\_}{domain\_size\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::domain\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Total number of nodes. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00056}{56}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230}\label{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!num\_operators@{num\_operators}}
+\index{num\_operators@{num\_operators}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{num\_operators}{num\_operators}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Gaussian}{constexpr}} \mbox{\hyperlink{classmm_1_1Gaussian}{int}} \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::num\+\_\+operators = std\+::tuple\+\_\+size$<$\mbox{\hyperlink{classmm_1_1ShapeStorage_a38bd24518a7c9456c49a642d677ba050}{op\+\_\+families\+\_\+tuple}}$>$\+::value\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Number of operator families in this storage. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a1abfd5339a88af0c76781e460c2c73ab}\label{classmm_1_1ShapeStorage_a1abfd5339a88af0c76781e460c2c73ab} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!shapes\_@{shapes\_}}
+\index{shapes\_@{shapes\_}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{shapes\_}{shapes\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+std\+::array$<$\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1ShapeStorage_afe3b02b2eb29a6d1f5665a0ae866f0c1}{scalar\+\_\+t}}$>$, \mbox{\hyperlink{classmm_1_1ShapeStorage_a2c55f67168ddbef526429429e6ee1230}{num\+\_\+operators}}$>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::shapes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tuple of shape containers for given operators. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00061}{61}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+\Hypertarget{classmm_1_1ShapeStorage_a53532339e426873b332fa55051d65b4d}\label{classmm_1_1ShapeStorage_a53532339e426873b332fa55051d65b4d} 
+\index{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}!support\_@{support\_}}
+\index{support\_@{support\_}!mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$@{mm::ShapeStorage$<$ Derived, vec\_t, OpFamilies $>$}}
+\doxysubsubsection{\texorpdfstring{support\_}{support\_}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}} , \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}}  = std\+::tuple$<$\+Lap$<$vec\+\_\+t\+::dim$>$, Der1s$<$vec\+\_\+t\+::dim$>$, Der2s$<$vec\+\_\+t\+::dim$>$$>$$>$ \\
+\mbox{\hyperlink{classmm_1_1Range}{Range}}$<$\mbox{\hyperlink{classmm_1_1Gaussian}{int}}$>$ \mbox{\hyperlink{classmm_1_1ShapeStorage}{mm\+::\+Shape\+Storage}}$<$ \mbox{\hyperlink{classmm_1_1ShapeStorage_afa591e1906c11d85beb82e62c001cd88}{Derived}}, \mbox{\hyperlink{classmm_1_1Gaussian}{vec\+\_\+t}}, \mbox{\hyperlink{classmm_1_1Gaussian}{Op\+Families}} $>$\+::support\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Local copy of support domains. 
+
+
+
+Definition at line \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{ShapeStorage__fwd_8hpp_source}{Shape\+Storage\+\_\+fwd.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ShapeStorage__fwd_8hpp}{Shape\+Storage\+\_\+fwd.\+hpp}}\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ExplicitOperators_8hpp}{Explicit\+Operators.\+hpp}}\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ExplicitVectorOperators_8hpp}{Explicit\+Vector\+Operators.\+hpp}}\item 
+include/medusa/bits/operators/\mbox{\hyperlink{ShapeStorage_8hpp}{Shape\+Storage.\+hpp}}\end{DoxyCompactItemize}

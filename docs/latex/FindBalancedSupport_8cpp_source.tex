@@ -1,0 +1,32 @@
+\doxysection{Find\+Balanced\+Support.\+cpp}
+\hypertarget{FindBalancedSupport_8cpp_source}{}\label{FindBalancedSupport_8cpp_source}\index{src/domains/FindBalancedSupport.cpp@{src/domains/FindBalancedSupport.cpp}}
+\mbox{\hyperlink{FindBalancedSupport_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{FindBalancedSupport_8hpp}{medusa/bits/domains/FindBalancedSupport.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00008}00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00010}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_adbd3d12e46760ae8aff20b92ae5a7b7f}{00010}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_adbd3d12e46760ae8aff20b92ae5a7b7f}{FindBalancedSupport::FindBalancedSupport}}(\textcolor{keywordtype}{int}\ min\_support,\ \textcolor{keywordtype}{int}\ max\_support)\ :}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00011}00011\ \ \ \ \ \ \ \ \ min\_support(min\_support),\ max\_support(max\_support),\ for\_which\_(),\ search\_among\_()\ \{\}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00013}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a49201c96edcb78825d11fbee11837939}{00013}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a49201c96edcb78825d11fbee11837939}{FindBalancedSupport::forNodes}}(\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00014}00014\ \ \ \ \ this-\/>\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1af218948727d97842deaa065392a500}{for\_which\_}}\ =\ std::move(\mbox{\hyperlink{classmm_1_1Gaussian}{for\_which}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00016}00016\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00018}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449}{00018}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a2a9cf2623c6a11e356d9494358265449}{FindBalancedSupport::searchAmong}}(\mbox{\hyperlink{namespacemm_ad7e6f4b480cd9b10e1fe1530ea184d9b}{indexes\_t}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}})\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00019}00019\ \ \ \ \ this-\/>\mbox{\hyperlink{classmm_1_1FindBalancedSupport_aa7c1011b219b8bd3ec8f014818fce09f}{search\_among\_}}\ =\ std::move(\mbox{\hyperlink{classmm_1_1Gaussian}{search\_among}});}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00021}00021\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00023}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_abba4c9707f249d5168ea762e41d94bfe}{00023}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_abba4c9707f249d5168ea762e41d94bfe}{FindBalancedSupport::minSupportSize}}(\textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00024}00024\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a1967ff1f926083da2ee8c9ec47647ffa}{min\_support}}\ =\ size;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00027}\mbox{\hyperlink{classmm_1_1FindBalancedSupport_a42e8a8f06515555952e3489bf26834a3}{00027}}\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport}{FindBalancedSupport}}\&\ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a42e8a8f06515555952e3489bf26834a3}{FindBalancedSupport::maxSupportSize}}(\textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00028}00028\ \ \ \ \ \mbox{\hyperlink{classmm_1_1FindBalancedSupport_a64955e7c5d13e49a3216f1190e1214cb}{max\_support}}\ =\ size;\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00029}00029\ \}}
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{FindBalancedSupport_8cpp_source_l00031}00031\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCode}

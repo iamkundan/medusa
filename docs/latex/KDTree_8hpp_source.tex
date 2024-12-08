@@ -1,0 +1,52 @@
+\doxysection{KDTree.\+hpp}
+\hypertarget{KDTree_8hpp_source}{}\label{KDTree_8hpp_source}\index{include/medusa/bits/spatial\_search/KDTree.hpp@{include/medusa/bits/spatial\_search/KDTree.hpp}}
+\mbox{\hyperlink{KDTree_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDTREE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDTREE\_HPP\_}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{KDTree__fwd_8hpp}{KDTree\_fwd.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{assert_8hpp}{medusa/bits/utils/assert.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{memutils_8hpp}{medusa/bits/utils/memutils.hpp}}>}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00013}00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00015}00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00016}\mbox{\hyperlink{classmm_1_1KDTree_aa2daca38fbf0a5cc3c7f253a5a50c131}{00016}}\ std::pair<Range<int>,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<typename\ vec\_t::scalar\_t>}}>\ \mbox{\hyperlink{classmm_1_1KDTree_aa2daca38fbf0a5cc3c7f253a5a50c131}{KDTree<vec\_t>::query}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point,}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(point.array().isFinite().prod()\ ==\ 1,\ \textcolor{stringliteral}{"{}Invalid\ point."{}});}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00019}00019\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{ret\_index}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00020}00020\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{out\_dist\_sqr}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00021}00021\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_k}}\ =\ tree.knnSearch(point.data(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}},\ \&\mbox{\hyperlink{classmm_1_1Gaussian}{ret\_index}}[0],\ \&\mbox{\hyperlink{classmm_1_1Gaussian}{out\_dist\_sqr}}[0]);}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00022}00022\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(\mbox{\hyperlink{classmm_1_1Gaussian}{actual\_k}}\ ==\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}},\ \textcolor{stringliteral}{"{}There\ were\ not\ enough\ points\ in\ the\ tree,\ you\ requested\ \%d\ "{}}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}points,\ the\ tree\ only\ contains\ \%d\ points."{}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{actual\_k}});}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{ret\_index}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{out\_dist\_sqr}}\};}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00027}00027\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ vec\_t>}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00028}\mbox{\hyperlink{classmm_1_1KDTree_a042437c4902cdfc84d405273324813b5}{00028}}\ std::pair<Range<int>,\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<typename\ vec\_t::scalar\_t>}}>\ \mbox{\hyperlink{classmm_1_1KDTree_aa2daca38fbf0a5cc3c7f253a5a50c131}{KDTree<vec\_t>::query}}(}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{vec\_t}}\&\ point,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1KDTree_af485f00b51a7ec447658781f967e3c5f}{scalar\_t}}\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{radius\_squared}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00030}00030\ \ \ \ \ \mbox{\hyperlink{assert_8hpp_a67c64a8e3a60557627922c88b087d484}{assert\_msg}}(point.array().isFinite().prod()\ ==\ 1,\ \textcolor{stringliteral}{"{}Invalid\ point."{}});}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00031}00031\ \ \ \ \ std::vector<std::pair<int,\ scalar\_t>>\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx\_dist}};}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}}\ =\ tree.radiusSearch(point.data(),\ \mbox{\hyperlink{classmm_1_1Gaussian}{radius\_squared}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx\_dist}},\ nanoflann::SearchParams());}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<int>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});\ \mbox{\hyperlink{classmm_1_1Gaussian}{Range<scalar\_t>}}\ \mbox{\hyperlink{classmm_1_1Gaussian}{dists}}(\mbox{\hyperlink{classmm_1_1Gaussian}{k}});}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ =\ 0;\ \mbox{\hyperlink{classmm_1_1Gaussian}{i}}\ <\ \mbox{\hyperlink{classmm_1_1Gaussian}{k}};\ ++\mbox{\hyperlink{classmm_1_1Gaussian}{i}})\ \{}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00035}00035\ \ \ \ \ \ \ \ \ std::tie(\mbox{\hyperlink{classmm_1_1Gaussian}{idx}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}],\ \mbox{\hyperlink{classmm_1_1Gaussian}{dists}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}])\ =\ \mbox{\hyperlink{classmm_1_1Gaussian}{idx\_dist}}[\mbox{\hyperlink{classmm_1_1Gaussian}{i}}];}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classmm_1_1Gaussian}{idx}},\ \mbox{\hyperlink{classmm_1_1Gaussian}{dists}}\};}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00038}00038\ \}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00041}00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ V>}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00042}\mbox{\hyperlink{classmm_1_1KDTree_ae03ec8ec07138600f1d3746b61084532}{00042}}\ std::ostream\&\ \mbox{\hyperlink{namespacemm_a96b09189a7ce1d47ce01ff1194eb2483}{operator<<}}(std::ostream\&\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmm_1_1Gaussian}{KDTree<V>}}\&\ tree)\ \{}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmm_1_1Gaussian}{os}}\ <<\ \textcolor{stringliteral}{"{}KDTree:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ dimension:\ "{}}\ <<\ tree.dim\ <<\ \textcolor{charliteral}{'\(\backslash\)n'}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ num\ of\ points:\ "{}}\ <<\ tree.size()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ first\ point:\ "{}}\ <<\ tree.get(0)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ \ \ \ last\ point:\ "{}}\ <<\ tree.get(tree.size()\ -\/\ 1)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00050}00050\ \}\ \ \textcolor{comment}{//\ namespace\ mm}}
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{KDTree_8hpp_source_l00052}00052\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MEDUSA\_BITS\_SPATIAL\_SEARCH\_KDTREE\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,58 @@
+\doxysection{include/medusa/bits/approximations/\+Weight\+Function\+\_\+fwd.hpp File Reference}
+\hypertarget{WeightFunction__fwd_8hpp}{}\label{WeightFunction__fwd_8hpp}\index{include/medusa/bits/approximations/WeightFunction\_fwd.hpp@{include/medusa/bits/approximations/WeightFunction\_fwd.hpp}}
+
+
+\doxysubsection{Detailed Description}
+Declarations of weight functions. 
+
+
+
+Definition in file \mbox{\hyperlink{WeightFunction__fwd_8hpp_source}{Weight\+Function\+\_\+fwd.\+hpp}}.
+
+{\ttfamily \#include $<$medusa/\+Config.\+hpp$>$}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$iosfwd$>$}\newline
+Include dependency graph for Weight\+Function\+\_\+fwd.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{WeightFunction__fwd_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{WeightFunction__fwd_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmm_1_1NoWeight}{mm\+::\+No\+Weight$<$ vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Class representing no weight function, i.\+e. a constant 1. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmm_1_1RBFWeight}{mm\+::\+RBFWeight$<$ RBFType, vec\+\_\+t $>$}}
+\begin{DoxyCompactList}\small\item\em Represents a weight function constructed from a Radial Basis function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemm}{mm}}
+\begin{DoxyCompactList}\small\item\em Root namespace for the whole library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a4ed869b3bf89300f208bf7f0013e54c8}{mm\+::\+Gaussian\+Weight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{Gaussian}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1Gaussian}{Gaussian} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a88dc351475468bd33170f2770f7192e9}{mm\+::\+MQWeight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Multiquadric}{Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1Multiquadric}{Multiquadric} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a47f1ebff211c189b81b5c18ce8c7ba2f}{mm\+::\+IMQWeight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1InverseMultiquadric}{Inverse\+Multiquadric} RBF. Defined for convenience. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\\mbox{\hyperlink{classmm_1_1Gaussian}{using}} \mbox{\hyperlink{namespacemm_a82d814a67d4cab3a5612075ea3bc5b73}{mm\+::\+PHWeight}} = \mbox{\hyperlink{classmm_1_1RBFWeight}{RBFWeight}}$<$ \mbox{\hyperlink{classmm_1_1Polyharmonic}{Polyharmonic}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{typename}} V\+::scalar\+\_\+t, -\/1 $>$, \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$
+\begin{DoxyCompactList}\small\item\em RBF weight function using \doxylink{classmm_1_1Polyharmonic}{Polyharmonic} RBF. Defined for convenience. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{classmm_1_1Gaussian}{typename}} \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespacemm_a70bcb2267ff9f5b9701a7c3dc5714164}{mm\+::operator$<$$<$}} (std\+::ostream \&\mbox{\hyperlink{classmm_1_1Gaussian}{os}}, \mbox{\hyperlink{classmm_1_1Gaussian}{const}} \mbox{\hyperlink{classmm_1_1NoWeight}{No\+Weight}}$<$ \mbox{\hyperlink{classmm_1_1Gaussian}{V}} $>$ \&\mbox{\hyperlink{classmm_1_1Gaussian}{m}})
+\begin{DoxyCompactList}\small\item\em Output basic info about given weight function. \end{DoxyCompactList}\end{DoxyCompactItemize}

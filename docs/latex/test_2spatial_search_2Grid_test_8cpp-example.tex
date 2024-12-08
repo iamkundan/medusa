@@ -1,0 +1,70 @@
+\doxysection{test/spatial\+\_\+search/\+Grid\+\_\+test.\+cpp}
+\hypertarget{test_2spatial_search_2Grid_test_8cpp-example}{}\label{test_2spatial_search_2Grid_test_8cpp-example}
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{Grid_8hpp}{medusa/bits/spatial\_search/Grid.hpp}}>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}gtest/gtest.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemm}{mm}}\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Grid,\ 3D)\ \{}
+\DoxyCodeLine{\ \ \ \ Grid<int,\ 3>\ grid(\{2,\ 3,\ 4\},\ -\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ grid.size(0);\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ grid.size(1);\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ grid.size(2);\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid(\{i,\ j,\ k\})\ =\ c++;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ test\ setting,\ getting\ and\ row\ major\ storage}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ grid.size(0);\ ++i)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ grid.size(1);\ ++j)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ 0;\ k\ <\ grid.size(2);\ ++k)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ASSERT\_EQ(grid.linearIndex(\{i,\ j,\ k\}),\ grid(\{i,\ j,\ k\}));}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Grid,\ 1D)\ \{}
+\DoxyCodeLine{\ \ \ \ Grid<double,\ 1>\ grid(\{10\});}
+\DoxyCodeLine{\ \ \ \ grid(\{0\})\ =\ -\/3;}
+\DoxyCodeLine{\ \ \ \ grid(\{3\})\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ grid(\{0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ grid(\{1\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ grid(\{2\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ grid(\{3\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ grid(\{4\}));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Grid,\ Index3D)\ \{}
+\DoxyCodeLine{\ \ \ \ Grid<double,\ 3>\ grid(\{3,\ 4,\ 5\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(0,\ grid.linearIndex(\{0,\ 0,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(4,\ grid.linearIndex(\{0,\ 0,\ 4\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(19,\ grid.linearIndex(\{0,\ 3,\ 4\}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((std::array<int,\ 3>(\{\{0,\ 0,\ 0\}\})),\ grid.multiIndex(0));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((std::array<int,\ 3>(\{\{0,\ 0,\ 4\}\})),\ grid.multiIndex(4));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((std::array<int,\ 3>(\{\{0,\ 3,\ 4\}\})),\ grid.multiIndex(19));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{TEST(Grid,\ Usage\_4D)\ \{}
+\DoxyCodeLine{\ \ \ \ Grid<double,\ 4>\ grid(\{2,\ 2,\ 2,\ 2\});}
+\DoxyCodeLine{\ \ \ \ grid(\{0,\ 1,\ 0,\ 0\})\ =\ -\/3;}
+\DoxyCodeLine{\ \ \ \ grid(\{0,\ 0,\ 1,\ 0\})\ =\ 2;}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2*2*2*2,\ grid.size());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ((std::array<int,\ 4>(\{2,\ 2,\ 2,\ 2\})),\ grid.sizes());}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ grid.size(2));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(-\/3,\ grid(\{0,\ 1,\ 0,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ EXPECT\_EQ(2,\ grid(\{0,\ 0,\ 1,\ 0\}));}
+\DoxyCodeLine{\ \ \ \ std::cout\ <<\ grid\ <<\ std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \ \textcolor{comment}{//\ namespace\ mm}}
+
+\end{DoxyCodeInclude}
+ 
